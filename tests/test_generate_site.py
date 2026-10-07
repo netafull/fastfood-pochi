@@ -98,10 +98,20 @@ class TestItemPage(unittest.TestCase):
             self.assertNotIn("product_images", src)
 
     def test_no_adsense_when_unset(self):
-        self.assertEqual(g.CONFIG["adsense_client_id"], "")
-        h = g.render_item_page(item())
+        # 本物のconfigに依存しない(GA4のIDを入れるとこのテストが落ちていた)。
+        # 空にした状態を明示的に作って、何も出ないことを確かめる
+        from unittest import mock
+        with mock.patch.dict(g.CONFIG, {"adsense_client_id": "", "adsense_ad_slot": "",
+                                         "ga_measurement_id": ""}):
+            h = g.render_item_page(item())
         self.assertNotIn("adsbygoogle", h)
-        self.assertNotIn("googletagmanager", h)  # GA4も空の間は何も出さない
+        self.assertNotIn("googletagmanager", h)
+
+    def test_ga4_tag_present_when_set(self):
+        from unittest import mock
+        with mock.patch.dict(g.CONFIG, {"ga_measurement_id": "G-TEST123"}):
+            h = g.render_item_page(item())
+        self.assertIn("googletagmanager.com/gtag/js?id=G-TEST123", h)
 
 
 class TestTop(unittest.TestCase):
