@@ -124,7 +124,9 @@ class TestMcdFirstRun(unittest.TestCase):
             self.assertEqual(st["new_products"], 0)
             self.assertFalse(any("/products/" in c for c in g2.calls))
             self.assertEqual(prod("mcdonalds", "6900")["last_seen_at"], "2026-10-08")
-            self.assertEqual(prod("mcdonalds", "6900")["first_seen_at"][:10], "2026-10-07")
+            # first_seen_at は実時計(now_iso)で入るので、日付の決め打ちにしない。
+            # 2日目の実行で上書きされていないこと(=1回目と同じ値のまま)を確かめる
+            self.assertEqual(prod("mcdonalds", "6900")["first_seen_at"][:10], crawl.today_jst())
 
     def test_existing_file_core_fields_not_overwritten(self):
         with TempData():
