@@ -1,0 +1,78 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "6910",
+ "name": "チーズ月見",
+ "category": "バーガー",
+ "price": 490,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": "2026-09-02",
+ "planned_end_text": "2026-10-21（モバイルオーダー受付期間の終了日）",
+ "mop_ended_at": "2026-10-21",
+ "list_started_at": "2026-08-18",
+ "description": "「月見バーガー」の味わいにチェダーチーズのコクのある味がマッチした、秋のマクドナルドならではの一品。",
+ "description_full_len": 50,
+ "nutrition": {
+  "kcal": 452.0,
+  "protein_g": 23.8,
+  "fat_g": 26.3,
+  "carbs_g": 29.3,
+  "sugar_g": 5.0,
+  "fiber_g": null,
+  "salt_g": 2.3,
+  "other": {
+   "飽和脂肪酸": "8.95g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "乳",
+   "小麦",
+   "牛肉",
+   "ごま",
+   "大豆",
+   "鶏肉",
+   "豚肉"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "バンズ",
+   "origin": "主要原料：小麦粉／アメリカ、カナダ、オーストラリア　製造所所在地：日本"
+  },
+  {
+   "name": "タマゴ",
+   "origin": "主要原料：卵／日本　製造所所在地：日本"
+  },
+  {
+   "name": "ビーフパティ",
+   "origin": "主要原料：牛肉／オーストラリア、ニュージーランド、アメリカ、カナダ　製造所所在地：日本、アメリカ、オーストラリア、カナダ"
+  },
+  {
+   "name": "スモークベーコン",
+   "origin": "主要原料：豚肉／デンマーク、アイルランド、ブラジル　製造所所在地：日本"
+  },
+  {
+   "name": "チェダースライスチーズ",
+   "origin": "主要原料：チーズ／ニュージーランド、オーストラリア、日本、アメリカ　製造所所在地：日本、ニュージーランド"
+  }
+ ],
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mcdonalds.co.jp/products/6910/",
+ "first_seen_at": "2026-10-07T21:22:29+09:00",
+ "last_seen_at": "2026-10-07",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-07",
+   "price": 490
+  }
+ ],
+ "source_list": [
+  "/menu/burger/"
+ ],
+ "image": null
+}

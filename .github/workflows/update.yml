@@ -1,0 +1,87 @@
+name: update
+
+on:
+  # 姉妹サイト(林檎ポチ・コンビニポチ等)と同じく、定期実行はGitHubのscheduleを使わず
+  # Google Cloud Schedulerからworkflow_dispatch APIを叩く前提にする(scheduleも
+  # pushトリガーも付けない)。理由: GitHub側のscheduleは公称間隔に対し最長12時間超の
+  # 欠測が実測されており、workflow_dispatchはその間引きの対象外のため。
+  #
+  # 発火元: Cloud Schedulerのジョブ(運営者の確認後に作成する予定。名前は
+  #   fastfood-pochi-update、毎朝1回を想定)。
+  #   公式サイトの限定メニュー掲載は日次で十分なので1日1回。
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    # ubuntu-latest は2026-10-19からUbuntu 26に切り替わる(GitHubの予告、実行ログに
+    # 出ていた)。Pythonなどの実行環境が変わって動かなくなるのを避けるため、現在の
+    # Ubuntu 24.04に固定している。切り替えるときは動作を確認してから変えること
+    runs-on: ubuntu-24.04
+    # 各社3秒間隔で、一覧ページ十数件+新メニューの詳細ページを取得する。
+    # 通常は数分で終わるが、時間には余裕を持たせる
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5.3.0
+        with:
+          python-version: "3.12"
+
+      - name: メニューを取得
+        run: python3 scripts/crawl.py
+
+      - name: ネタフルのレビュー記事を取得・照合
+        # ネタフル側の失敗はサイト更新全体を止めない(スクリプト内でエラーを
+        # 記録するだけで常に正常終了する)
+        run: python3 scripts/fetch_netaful_reviews.py
+
+      - name: サイトを生成
+        run: python3 scripts/generate_site.py
+
+      - name: コミットしてプッシュ
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # 新メニューは新規ファイルとして増えるので、git diff ではなく untracked も見る
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "変更なし"
+            exit 0
+          fi
+          git add -A
+          # コンフリクトマーカーが混入したままコミットされる事故が既存サイトで
+          # 起きているため、push前に必ず確認する
+          if git grep -qE '^(<<<<<<<|>>>>>>>)' -- data/ docs/; then
+            echo "::error::コンフリクトマーカーを検出したため中止します"
+            exit 1
+          fi
+          git commit -m "限定メニュー情報を更新 ($(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M'))"
+          # 衝突しうるのは docs/ の生成物だけ(data/ は1商品1ファイルで、同時実行は
+          # concurrency で防いでいる)。-X theirs は rebase 中は「自分のコミット側」を
+          # 優先する指定。取り込んだあとサイトを再生成して、生成物をデータと必ず一致させる
+          git pull --rebase -X theirs origin main
+          python3 scripts/generate_site.py
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "サイトを再生成 ($(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M'))"
+          fi
+          git push origin HEAD:main
+
+      - name: 新メニュー・終了を通知
+        if: success()
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python3 scripts/notify.py --summary
+
+      - name: 失敗を通知
+        if: failure()
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python3 scripts/notify.py --failure

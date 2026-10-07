@@ -1,0 +1,55 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "6970",
+ "name": "黄金のたまごタルタルソース",
+ "category": "サイド",
+ "price": 50,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": "2026-09-02",
+ "planned_end_text": "2026-10-21（モバイルオーダー受付期間の終了日）",
+ "mop_ended_at": "2026-10-21",
+ "list_started_at": "2026-08-18",
+ "description": "たまごのコクが特長の月をイメージした色合いのタルタルソースです。",
+ "description_full_len": 60,
+ "nutrition": {
+  "kcal": 87.0,
+  "protein_g": 0.2,
+  "fat_g": 8.9,
+  "carbs_g": 1.4,
+  "sugar_g": 1.0,
+  "fiber_g": null,
+  "salt_g": 0.8,
+  "other": {
+   "飽和脂肪酸": "0.92g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "乳",
+   "小麦",
+   "大豆"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mcdonalds.co.jp/products/6970/",
+ "first_seen_at": "2026-10-07T21:22:29+09:00",
+ "last_seen_at": "2026-10-07",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-07",
+   "price": 50
+  }
+ ],
+ "source_list": [
+  "/menu/dinner/",
+  "/menu/morning/",
+  "/menu/side/"
+ ],
+ "image": null
+}

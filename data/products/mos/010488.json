@@ -1,0 +1,88 @@
+{
+ "chain": "mos",
+ "product_id": "010488",
+ "name": "月見フォカッチャ ～黄金(おうごん)チーズソース～",
+ "category": "ハンバーガー",
+ "price": 630,
+ "price_note": null,
+ "launch_date": "2026-09-09",
+ "planned_end_text": "2026年11月上旬頃まで",
+ "description": "ふんわりとしたフォカッチャと馬蹄型ソーセージにオリジナルのチーズソースを合わせた月見フォカッチャ。",
+ "description_full_len": 186,
+ "nutrition": {
+  "kcal": 520.0,
+  "protein_g": 16.7,
+  "fat_g": 31.7,
+  "carbs_g": 42.5,
+  "sugar_g": null,
+  "fiber_g": 1.7,
+  "salt_g": 3.7,
+  "other": {
+   "重量": "219.0g",
+   "コレステロール": "16mg",
+   "ナトリウム": "1445mg",
+   "カリウム": "220mg",
+   "カルシウム": "55mg",
+   "リン": "169mg",
+   "鉄": "0.6mg",
+   "ビタミンA": "6μg",
+   "ビタミンB1": "0.33mg",
+   "ビタミンB2": "0.14mg",
+   "ナイアシン": "2.7mg",
+   "ビタミンC": "68mg",
+   "ビタミンD": "0.2μg",
+   "ビタミンE": "1.6mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "りんご"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "フォカッチャ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、オーストラリア、その他"
+  },
+  {
+   "name": "フォカッチャ用ソーセージ：豚肉",
+   "origin": "アメリカ、チリ、その他"
+  },
+  {
+   "name": "鶏卵加工品：鶏卵",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：キャベツ",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=010488&c_id=26",
+ "first_seen_at": "2026-10-07T21:23:32+09:00",
+ "last_seen_at": "2026-10-07",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-07",
+   "price": 630
+  }
+ ],
+ "source_list": [
+  "menu_category/26"
+ ],
+ "image": null
+}

@@ -1,0 +1,74 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "6900",
+ "name": "月見バーガー",
+ "category": "バーガー",
+ "price": 460,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": "2026-09-02",
+ "planned_end_text": "2026-10-21（モバイルオーダー受付期間の終了日）",
+ "mop_ended_at": "2026-10-21",
+ "list_started_at": "2026-08-18",
+ "description": "月に見立てたたまご、ビーフパティにベーコン、クリーミーなトマトクリーミーソースが絶妙にマッチした、秋ならではの一品。",
+ "description_full_len": 58,
+ "nutrition": {
+  "kcal": 401.0,
+  "protein_g": 21.0,
+  "fat_g": 22.3,
+  "carbs_g": 28.5,
+  "sugar_g": 5.0,
+  "fiber_g": null,
+  "salt_g": 1.8,
+  "other": {
+   "飽和脂肪酸": "6.54g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "乳",
+   "小麦",
+   "牛肉",
+   "ごま",
+   "大豆",
+   "鶏肉",
+   "豚肉"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "バンズ",
+   "origin": "主要原料：小麦粉／アメリカ、カナダ、オーストラリア　製造所所在地：日本"
+  },
+  {
+   "name": "タマゴ",
+   "origin": "主要原料：卵／日本　製造所所在地：日本"
+  },
+  {
+   "name": "ビーフパティ",
+   "origin": "主要原料：牛肉／オーストラリア、ニュージーランド、アメリカ、カナダ　製造所所在地：日本、アメリカ、オーストラリア、カナダ"
+  },
+  {
+   "name": "スモークベーコン",
+   "origin": "主要原料：豚肉／デンマーク、アイルランド、ブラジル　製造所所在地：日本"
+  }
+ ],
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mcdonalds.co.jp/products/6900/",
+ "first_seen_at": "2026-10-07T21:22:29+09:00",
+ "last_seen_at": "2026-10-07",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-07",
+   "price": 460
+  }
+ ],
+ "source_list": [
+  "/menu/burger/"
+ ],
+ "image": null
+}

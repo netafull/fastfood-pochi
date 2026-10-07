@@ -1,0 +1,61 @@
+{
+ "chain": "mos",
+ "product_id": "483147",
+ "name": "オレンジ&パッションフルーツティー",
+ "category": "ドリンク／スープ",
+ "price": 610,
+ "price_note": null,
+ "launch_date": "2026-07-15",
+ "planned_end_text": "2026年11月上旬頃まで",
+ "description": "パッションフルーツ、オレンジ、ライチの３種類の果汁を使用したシロップと、色鮮やかなくし切りオレンジを合わせたフルーツティーです。",
+ "description_full_len": 129,
+ "nutrition": {
+  "kcal": 184.0,
+  "protein_g": 1.0,
+  "fat_g": 0.1,
+  "carbs_g": 45.1,
+  "sugar_g": null,
+  "fiber_g": 0.5,
+  "salt_g": 0.4,
+  "other": {
+   "重量": "367.5g",
+   "コレステロール": "0mg",
+   "ナトリウム": "155mg",
+   "カリウム": "118mg",
+   "カルシウム": "16mg",
+   "リン": "21mg",
+   "鉄": "0.2mg",
+   "ビタミンA": "7μg",
+   "ビタミンB1": "0.07mg",
+   "ビタミンB2": "0.04mg",
+   "ナイアシン": "0.5mg",
+   "ビタミンC": "28mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "0.3mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "オレンジ"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=483147&c_id=26",
+ "first_seen_at": "2026-10-07T21:23:32+09:00",
+ "last_seen_at": "2026-10-07",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-07",
+   "price": 610
+  }
+ ],
+ "source_list": [
+  "menu_category/26"
+ ],
+ "image": null
+}

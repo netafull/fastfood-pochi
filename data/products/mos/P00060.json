@@ -1,0 +1,37 @@
+{
+ "chain": "mos",
+ "product_id": "P00060",
+ "name": "まぜるシェイク 蜜（みつ）いも",
+ "category": "ドリンク／スープ",
+ "price": 410,
+ "price_note": null,
+ "launch_date": "2026-08-28",
+ "planned_end_text": "2026年11月上旬頃まで",
+ "description": "種子島産の安納芋をソースに使用した、甘くてクリーミーな「蜜いも」シェイクです。",
+ "description_full_len": 130,
+ "nutrition": null,
+ "allergens": {
+  "contains": [
+   "乳"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=P00060&c_id=26",
+ "first_seen_at": "2026-10-07T21:23:32+09:00",
+ "last_seen_at": "2026-10-07",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-07",
+   "price": 410
+  }
+ ],
+ "source_list": [
+  "menu_category/26"
+ ],
+ "image": null
+}

@@ -1,0 +1,120 @@
+{
+ "chain": "mos",
+ "product_id": "010685",
+ "name": "メンチカツチーズバーガー ～デミグラスソース～",
+ "category": "ハンバーガー",
+ "price": 510,
+ "price_note": null,
+ "launch_date": "2026-09-09",
+ "planned_end_text": "2026年11月上旬頃まで",
+ "description": "マッシュルームの旨みとバルサミコ酢のキレから生まれた濃厚で冷たいデミグラスソースが、メンチカツの肉汁もチーズのまろやかさも引き立てます。",
+ "description_full_len": 183,
+ "nutrition": {
+  "kcal": 499.0,
+  "protein_g": 16.2,
+  "fat_g": 26.8,
+  "carbs_g": 48.9,
+  "sugar_g": null,
+  "fiber_g": 2.6,
+  "salt_g": 2.9,
+  "other": {
+   "重量": "196.9g",
+   "コレステロール": "27mg",
+   "ナトリウム": "1135mg",
+   "カリウム": "235mg",
+   "カルシウム": "133mg",
+   "リン": "249mg",
+   "鉄": "1.2mg",
+   "ビタミンA": "42μg",
+   "ビタミンB1": "0.14mg",
+   "ビタミンB2": "0.16mg",
+   "ナイアシン": "2.2mg",
+   "ビタミンC": "12mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "1.4mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "りんご",
+   "ゼラチン",
+   "ごま"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "いか",
+    "mark": "△"
+   },
+   {
+    "name": "えび",
+    "mark": "△"
+   },
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "メンチカツ：牛肉",
+   "origin": "オーストラリア"
+  },
+  {
+   "name": "メンチカツ：豚肉",
+   "origin": "アメリカ、カナダ"
+  },
+  {
+   "name": "メンチカツ：オニオン",
+   "origin": "中国"
+  },
+  {
+   "name": "モスの生野菜：キャベツ",
+   "origin": "国産"
+  },
+  {
+   "name": "スライスチーズ：チーズ",
+   "origin": "ニュージーランド、オーストラリア、アメリカ、その他"
+  }
+ ],
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=010685&c_id=26",
+ "first_seen_at": "2026-10-07T21:23:32+09:00",
+ "last_seen_at": "2026-10-07",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-07",
+   "price": 510
+  }
+ ],
+ "source_list": [
+  "menu_category/26"
+ ],
+ "image": null
+}

@@ -1,0 +1,65 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "8610",
+ "name": "マックフルーリー® 明治アーモンドチョコレート",
+ "category": "デザート・シェイク",
+ "price": 370,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": "2026-09-16",
+ "planned_end_text": "2026-10-14（モバイルオーダー受付期間の終了日）",
+ "mop_ended_at": "2026-10-14",
+ "list_started_at": "2026-09-07",
+ "description": "香ばしいきざみアーモンドとチョコソースを使用し、「明治アーモンドチョコレート」の味わいを再現したマックフルーリー。",
+ "description_full_len": 57,
+ "nutrition": {
+  "kcal": 310.0,
+  "protein_g": 7.0,
+  "fat_g": 14.4,
+  "carbs_g": 38.0,
+  "sugar_g": 31.0,
+  "fiber_g": null,
+  "salt_g": 0.2,
+  "other": {
+   "飽和脂肪酸": "5.34g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "アーモンド",
+   "大豆"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "ソフトミックス",
+   "origin": "主要原料：乳製品、乳加工品／日本、欧州（フランス、フィンランド、ドイツ、オランダ、ベルギー、オーストリア、イタリアほか）、ニュージーランド、オーストラリア、アメリカ、アルゼンチン　製造所所在地：日本"
+  },
+  {
+   "name": "刻みアーモンド",
+   "origin": "主要原料：アーモンド／アメリカ　製造所所在地：日本"
+  },
+  {
+   "name": "マックフルーリー® 明治アーモンドチョコレート用ソース",
+   "origin": "主要原料：チョコソース／日本　製造所所在地：日本"
+  }
+ ],
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mcdonalds.co.jp/products/8610/",
+ "first_seen_at": "2026-10-07T21:22:29+09:00",
+ "last_seen_at": "2026-10-07",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-07",
+   "price": 370
+  }
+ ],
+ "source_list": [
+  "/menu/dessert/"
+ ],
+ "image": null
+}

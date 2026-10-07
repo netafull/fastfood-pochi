@@ -1,0 +1,61 @@
+{
+ "chain": "mos",
+ "product_id": "483208",
+ "name": "ティーミルク ～キャンディ茶葉使用～",
+ "category": "ドリンク／スープ",
+ "price": 420,
+ "price_note": null,
+ "launch_date": "2026-05-20",
+ "planned_end_text": "2026年11月上旬頃まで",
+ "description": "モスのキャンディ茶葉をゆっくりと煮出し、少量のレモン果汁を加えたオリジナルシロップとアイスティーを合わせた、香り豊かなミルクティーです。",
+ "description_full_len": 133,
+ "nutrition": {
+  "kcal": 145.0,
+  "protein_g": 3.7,
+  "fat_g": 4.2,
+  "carbs_g": 24.6,
+  "sugar_g": null,
+  "fiber_g": 0.0,
+  "salt_g": 0.1,
+  "other": {
+   "重量": "250.0g",
+   "コレステロール": "13mg",
+   "ナトリウム": "46mg",
+   "カリウム": "173mg",
+   "カルシウム": "122mg",
+   "リン": "104mg",
+   "鉄": "0.0mg",
+   "ビタミンA": "42μg",
+   "ビタミンB1": "0.04mg",
+   "ビタミンB2": "0.18mg",
+   "ナイアシン": "0.2mg",
+   "ビタミンC": "1mg",
+   "ビタミンD": "0.3μg",
+   "ビタミンE": "0.1mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=483208&c_id=26",
+ "first_seen_at": "2026-10-07T21:23:32+09:00",
+ "last_seen_at": "2026-10-07",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-07",
+   "price": 420
+  }
+ ],
+ "source_list": [
+  "menu_category/26"
+ ],
+ "image": null
+}

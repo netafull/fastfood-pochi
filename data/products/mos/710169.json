@@ -1,0 +1,99 @@
+{
+ "chain": "mos",
+ "product_id": "710169",
+ "name": "【テイクアウト限定】＜冷凍＞香る醤油のローストチキン 〜鹿児島県産 若鶏〜",
+ "category": "サイドメニュー",
+ "price": 690,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "鹿児島県産の骨付きモモ肉を香ばしく焼き上げたローストチキンです。",
+ "description_full_len": 375,
+ "nutrition": {
+  "kcal": 208.0,
+  "protein_g": 20.3,
+  "fat_g": 12.9,
+  "carbs_g": 2.6,
+  "sugar_g": null,
+  "fiber_g": 0.0,
+  "salt_g": 1.9,
+  "other": {
+   "重量": "100.0g",
+   "コレステロール": "76mg",
+   "ナトリウム": "750mg",
+   "カリウム": "268mg",
+   "カルシウム": "6mg",
+   "リン": "153mg",
+   "鉄": "0.6mg",
+   "ビタミンA": "34μg",
+   "ビタミンB1": "0.09mg",
+   "ビタミンB2": "0.13mg",
+   "ナイアシン": "4.2mg",
+   "ビタミンC": "3mg",
+   "ビタミンD": "0.3μg",
+   "ビタミンE": "0.0mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "大豆",
+   "鶏肉"
+  ],
+  "partial": [
+   {
+    "name": "さば",
+    "mark": "◇"
+   },
+   {
+    "name": "豚肉",
+    "mark": "◇"
+   },
+   {
+    "name": "やまいも",
+    "mark": "◇"
+   },
+   {
+    "name": "りんご",
+    "mark": "◇"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "◇"
+   },
+   {
+    "name": "魚介類",
+    "mark": "◇"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ローストチキン：鶏肉",
+   "origin": "国産（鹿児島県）"
+  }
+ ],
+ "limited_kind": "数量限定",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=710169&c_id=26",
+ "first_seen_at": "2026-10-07T21:23:32+09:00",
+ "last_seen_at": "2026-10-07",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-07",
+   "price": 690
+  }
+ ],
+ "source_list": [
+  "menu_category/26"
+ ],
+ "image": null
+}

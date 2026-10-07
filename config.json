@@ -1,0 +1,295 @@
+{
+  "site_title": "ファストフードポチ",
+  "site_tagline": "マクド・モスの限定メニューを記録して残す",
+  "site_description": "マクドナルドとモスバーガーの期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています",
+  "site_url": "https://fastfood.netaful.jp/",
+  "ga_measurement_id": "",
+  "adsense_client_id": "",
+  "adsense_ad_slot": "",
+  "chains": [
+    {
+      "slug": "mcdonalds",
+      "name": "マクドナルド",
+      "base_url": "https://www.mcdonalds.co.jp",
+      "color": "#DA291C"
+    },
+    {
+      "slug": "mos",
+      "name": "モスバーガー",
+      "base_url": "https://www.mos.jp",
+      "color": "#B3262D"
+    }
+  ],
+  "request_interval_seconds": {
+    "mcdonalds": 3,
+    "mos": 3
+  },
+  "max_requests_per_run": {
+    "mcdonalds": 60,
+    "mos": 30
+  },
+  "user_agent": "FastfoodPochi/1.0 (+https://fastfood.netaful.jp/)",
+  "mcdonalds_pages": [
+    {
+      "path": "/menu/",
+      "label": null
+    },
+    {
+      "path": "/menu/burger/",
+      "label": "バーガー"
+    },
+    {
+      "path": "/menu/dessert/",
+      "label": "デザート・シェイク"
+    },
+    {
+      "path": "/menu/side/",
+      "label": "サイド"
+    },
+    {
+      "path": "/menu/drink/",
+      "label": "ドリンク"
+    },
+    {
+      "path": "/menu/mccafe/",
+      "label": "マックカフェ"
+    },
+    {
+      "path": "/menu/morning/",
+      "label": "朝マック"
+    },
+    {
+      "path": "/menu/dinner/",
+      "label": "夜マック"
+    }
+  ],
+  "mcdonalds_fallback_disallow": [
+    "/private/",
+    "/mop/",
+    "/order/",
+    "/mcdelivery/order/",
+    "/coupon-",
+    "/rewards-down-announcement/"
+  ],
+  "mos_category_ids_fallback": [
+    26,
+    27,
+    1,
+    35,
+    30,
+    33,
+    7,
+    34,
+    9,
+    11,
+    32,
+    12
+  ],
+  "netaful_tags": {
+    "mcdonalds": 735,
+    "mos": 882
+  },
+  "netaful_title_filters": {
+    "mos": [
+      "モスバーガー",
+      "モス"
+    ]
+  },
+  "related_sites": [
+    {
+      "name": "電書ポチ",
+      "desc": "Kindle本セール",
+      "url": "https://book.netaful.jp/"
+    },
+    {
+      "name": "家電ポチ",
+      "desc": "ガジェット・家電セール",
+      "url": "https://kaden.netaful.jp/"
+    },
+    {
+      "name": "林檎ポチ",
+      "desc": "Apple整備済製品",
+      "url": "https://apple.netaful.jp/"
+    },
+    {
+      "name": "漫画ポチ",
+      "desc": "Webマンガ横断検索",
+      "url": "https://manga.netaful.jp/"
+    },
+    {
+      "name": "コンビニポチ",
+      "desc": "コンビニ新商品アーカイブ",
+      "url": "https://conbini.netaful.jp/"
+    }
+  ],
+  "related_keywords": [
+    {
+      "label": "月見",
+      "words": [
+        "月見"
+      ]
+    },
+    {
+      "label": "てりやき",
+      "words": [
+        "てりやき",
+        "テリヤキ",
+        "照り焼き",
+        "照焼"
+      ]
+    },
+    {
+      "label": "チキン",
+      "words": [
+        "チキン"
+      ]
+    },
+    {
+      "label": "ナゲット",
+      "words": [
+        "ナゲット",
+        "ポテナゲ"
+      ]
+    },
+    {
+      "label": "ポテト",
+      "words": [
+        "ポテト"
+      ],
+      "exclude": [
+        "ポテナゲ"
+      ]
+    },
+    {
+      "label": "シェイク",
+      "words": [
+        "シェイク"
+      ]
+    },
+    {
+      "label": "パイ",
+      "words": [
+        "パイ"
+      ],
+      "exclude": [
+        "パイナップル",
+        "パイプ",
+        "パイン"
+      ]
+    },
+    {
+      "label": "マフィン",
+      "words": [
+        "マフィン"
+      ]
+    },
+    {
+      "label": "フィレオ",
+      "words": [
+        "フィレオ"
+      ]
+    },
+    {
+      "label": "ビッグマック",
+      "words": [
+        "ビッグマック"
+      ]
+    },
+    {
+      "label": "チーズ",
+      "words": [
+        "チーズ"
+      ]
+    },
+    {
+      "label": "エビ",
+      "words": [
+        "エビ",
+        "えび",
+        "海老"
+      ]
+    },
+    {
+      "label": "タルタル",
+      "words": [
+        "タルタル"
+      ]
+    },
+    {
+      "label": "ベーコン",
+      "words": [
+        "ベーコン"
+      ]
+    },
+    {
+      "label": "辛口・スパイス",
+      "words": [
+        "辛口",
+        "スパイス",
+        "スパイシー",
+        "ホットチリ"
+      ]
+    },
+    {
+      "label": "フォカッチャ",
+      "words": [
+        "フォカッチャ"
+      ]
+    },
+    {
+      "label": "ライスバーガー",
+      "words": [
+        "ライスバーガー"
+      ]
+    },
+    {
+      "label": "ホットドッグ",
+      "words": [
+        "ホットドッグ"
+      ]
+    },
+    {
+      "label": "朝マック・朝モス",
+      "words": [
+        "朝マック",
+        "朝モス"
+      ]
+    },
+    {
+      "label": "ハッピーセット",
+      "words": [
+        "ハッピーセット"
+      ]
+    },
+    {
+      "label": "たまご",
+      "words": [
+        "たまご",
+        "卵",
+        "エッグ"
+      ]
+    },
+    {
+      "label": "チョコ",
+      "words": [
+        "チョコ"
+      ]
+    },
+    {
+      "label": "コーヒー",
+      "words": [
+        "コーヒー",
+        "カフェラテ",
+        "ラテ"
+      ]
+    }
+  ],
+  "policy_url": "https://netaful.jp/policy.html",
+  "about": [
+    "マクドナルドとモスバーガーの公式サイトを1日1回チェックし、期間限定・季節限定・地域限定・数量限定のメニューと、新しく登場したメニューの情報を記録し続けているアーカイブです。公式サイトは販売が終わったメニューのページを消してしまうので、「いつからいつまで売っていたか」「いくらで、何キロカロリーだったか」を後から調べられることを目的にしています。",
+    "販売終了の判定は、公式サイトの一覧から消えたことを連続で確認したときだけ行います。そのため終了日は「消えたことを観測した日」で、公式が発表した最終販売日とは数日ずれることがあります。",
+    "商品説明は公式サイトの冒頭の1文だけを、出典を明記して引用しています。価格・栄養成分・アレルゲン・原産地は事実情報として掲載しています。商品画像は掲載していません。",
+    "価格・販売状況は取得時点のものです。最新の状況は必ず各社の公式サイトでご確認ください。当サイトはマクドナルド、モスバーガー各社とは関係のない非公式サイトです。運営はブログ「{{ネタフル}}」のコグレです。{{ネタフル}}ではコンビニやファストフードのごはんを「ファスト飯」と呼んで食べ歩いています。ケンタッキーなど、ほかのチェーンは今のところ対象外です。",
+    "姉妹サイトに電書ポチ・家電ポチ・林檎ポチ・漫画ポチ・コンビニポチがあります。"
+  ]
+}

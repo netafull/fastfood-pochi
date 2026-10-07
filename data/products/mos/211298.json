@@ -1,0 +1,108 @@
+{
+ "chain": "mos",
+ "product_id": "211298",
+ "name": "【金曜日限定】オニオンフライデーパック",
+ "category": "サイドメニュー",
+ "price": 1600,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "オニオンフライ5袋分がはいった、毎週金曜日限定のお得なパックです。",
+ "description_full_len": 66,
+ "nutrition": {
+  "kcal": 1096.0,
+  "protein_g": 17.5,
+  "fat_g": 63.4,
+  "carbs_g": 113.8,
+  "sugar_g": null,
+  "fiber_g": 6.7,
+  "salt_g": 5.7,
+  "other": {
+   "重量": "352.3g",
+   "コレステロール": "0mg",
+   "ナトリウム": "2208mg",
+   "カリウム": "331mg",
+   "カルシウム": "490mg",
+   "リン": "231mg",
+   "鉄": "1.8mg",
+   "ビタミンA": "0μg",
+   "ビタミンB1": "0.14mg",
+   "ビタミンB2": "1.75mg",
+   "ナイアシン": "2.1mg",
+   "ビタミンC": "7mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "12.3mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "小麦",
+   "大豆"
+  ],
+  "partial": [
+   {
+    "name": "乳",
+    "mark": "△◇"
+   },
+   {
+    "name": "卵",
+    "mark": "△◇"
+   },
+   {
+    "name": "いか",
+    "mark": "△"
+   },
+   {
+    "name": "えび",
+    "mark": "△"
+   },
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "牛肉",
+    "mark": "△"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "オニオンフライ：オニオン",
+   "origin": "中国"
+  }
+ ],
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=211298&c_id=26",
+ "first_seen_at": "2026-10-07T21:23:32+09:00",
+ "last_seen_at": "2026-10-07",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-07",
+   "price": 1600
+  }
+ ],
+ "source_list": [
+  "menu_category/26"
+ ],
+ "image": null
+}

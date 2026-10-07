@@ -1,0 +1,108 @@
+{
+ "chain": "mos",
+ "product_id": "123003",
+ "name": "朝モスプレート",
+ "category": "朝モス",
+ "price": 460,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "管理栄養士が監修したプレートです。",
+ "description_full_len": 153,
+ "nutrition": {
+  "kcal": 420.0,
+  "protein_g": 15.1,
+  "fat_g": 24.6,
+  "carbs_g": 34.6,
+  "sugar_g": null,
+  "fiber_g": 3.7,
+  "salt_g": 1.9,
+  "other": {
+   "重量": "212.5g",
+   "コレステロール": "207mg",
+   "ナトリウム": "687mg",
+   "カリウム": "256mg",
+   "カルシウム": "59mg",
+   "リン": "150mg",
+   "鉄": "1.2mg",
+   "ビタミンA": "158μg",
+   "ビタミンB1": "0.09mg",
+   "ビタミンB2": "0.23mg",
+   "ナイアシン": "1.0mg",
+   "ビタミンC": "13mg",
+   "ビタミンD": "2.0μg",
+   "ビタミンE": "2.7mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "大豆",
+   "豚肉",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "牛肉",
+    "mark": "▽"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "▽"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "鶏卵：鶏卵",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：キャベツ",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：レタス",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：トマト",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "店舗限定",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=123003&c_id=12",
+ "first_seen_at": "2026-10-07T21:23:32+09:00",
+ "last_seen_at": "2026-10-07",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-07",
+   "price": 460
+  }
+ ],
+ "source_list": [
+  "menu_category/12"
+ ],
+ "image": null
+}

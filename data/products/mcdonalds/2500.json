@@ -1,0 +1,60 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "2500",
+ "name": "プリプリエビプリオ 5ピース",
+ "category": "サイド",
+ "price": 290,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": "2026-09-16",
+ "planned_end_text": "2026-10-21（モバイルオーダー受付期間の終了日）",
+ "mop_ended_at": "2026-10-21",
+ "list_started_at": "2026-09-07",
+ "description": "プリプリのエビを塩胡椒とガーリックでやみつきの味わいに！ 5ピース入りの期間限定メニューです。",
+ "description_full_len": 60,
+ "nutrition": {
+  "kcal": 164.0,
+  "protein_g": 5.4,
+  "fat_g": 7.2,
+  "carbs_g": 20.0,
+  "sugar_g": 1.0,
+  "fiber_g": null,
+  "salt_g": 1.1,
+  "other": {
+   "飽和脂肪酸": "2.35g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "小麦",
+   "えび",
+   "大豆"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "プリプリエビプリオ",
+   "origin": "主要原料：えび／タイ | にんにく／タイ、中国　製造所所在地：タイ"
+  }
+ ],
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mcdonalds.co.jp/products/2500/",
+ "first_seen_at": "2026-10-07T21:22:29+09:00",
+ "last_seen_at": "2026-10-07",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-07",
+   "price": 290
+  }
+ ],
+ "source_list": [
+  "/menu/",
+  "/menu/morning/",
+  "/menu/side/"
+ ],
+ "image": null
+}

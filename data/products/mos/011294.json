@@ -1,0 +1,122 @@
+{
+ "chain": "mos",
+ "product_id": "011294",
+ "name": "【時間限定】トリプルモスチーズバーガー ＜15時から販売＞",
+ "category": "ハンバーガー",
+ "price": 850,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "モスチーズバーガーのパティをトリプルにした、贅沢で食べ応えがあるバーガーです。",
+ "description_full_len": 39,
+ "nutrition": {
+  "kcal": 733.0,
+  "protein_g": 34.8,
+  "fat_g": 43.7,
+  "carbs_g": 50.4,
+  "sugar_g": null,
+  "fiber_g": 5.5,
+  "salt_g": 4.8,
+  "other": {
+   "重量": "346.8g",
+   "コレステロール": "93mg",
+   "ナトリウム": "1880mg",
+   "カリウム": "577mg",
+   "カルシウム": "159mg",
+   "リン": "492mg",
+   "鉄": "3.0mg",
+   "ビタミンA": "88μg",
+   "ビタミンB1": "0.17mg",
+   "ビタミンB2": "0.24mg",
+   "ナイアシン": "5.6mg",
+   "ビタミンC": "12mg",
+   "ビタミンD": "0.6μg",
+   "ビタミンE": "1.4mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "ハンバーガーパティ：牛肉",
+   "origin": "オーストラリア、アメリカ、カナダ"
+  },
+  {
+   "name": "モスの生野菜：トマト",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  },
+  {
+   "name": "スライスチーズ：チーズ",
+   "origin": "ニュージーランド、オーストラリア、アメリカ、その他"
+  },
+  {
+   "name": "ミートソース：オニオン",
+   "origin": "国産、ニュージーランド、カナダ、その他"
+  },
+  {
+   "name": "ミートソース：トマトおよびその加工品",
+   "origin": "オーストラリア、チリ、ポルトガル、その他"
+  },
+  {
+   "name": "ミートソース：牛肉",
+   "origin": "オーストラリア、その他"
+  },
+  {
+   "name": "ミートソース：豚肉",
+   "origin": "カナダ、その他"
+  }
+ ],
+ "limited_kind": "限定メニュー",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=011294&c_id=26",
+ "first_seen_at": "2026-10-07T21:23:32+09:00",
+ "last_seen_at": "2026-10-07",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-07",
+   "price": 850
+  }
+ ],
+ "source_list": [
+  "menu_category/26"
+ ],
+ "image": null
+}

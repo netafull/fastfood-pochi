@@ -1,0 +1,60 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "2520",
+ "name": "三角チョコパイ 黒",
+ "category": "デザート・シェイク",
+ "price": 180,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": "2026-10-07",
+ "planned_end_text": "2026-12-30（モバイルオーダー受付期間の終了日）",
+ "mop_ended_at": "2026-12-30",
+ "list_started_at": "2026-09-29",
+ "description": "アーモンドをより香ばしくした濃厚な味わいのとろ～りチョコクリームを、サクサクのパイ生地で包んだ秋の定番スイーツ。",
+ "description_full_len": 56,
+ "nutrition": {
+  "kcal": 323.0,
+  "protein_g": 4.3,
+  "fat_g": 19.9,
+  "carbs_g": 31.8,
+  "sugar_g": 9.0,
+  "fiber_g": null,
+  "salt_g": 0.4,
+  "other": {
+   "飽和脂肪酸": "6.94g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "乳",
+   "小麦",
+   "アーモンド",
+   "大豆"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "三角チョコパイ 黒",
+   "origin": "主要原料：チョコレート／日本、中国 | アーモンド／アメリカ、中国　製造所所在地：日本、中国"
+  }
+ ],
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mcdonalds.co.jp/products/2520/",
+ "first_seen_at": "2026-10-07T21:22:29+09:00",
+ "last_seen_at": "2026-10-07",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-07",
+   "price": 180
+  }
+ ],
+ "source_list": [
+  "/menu/",
+  "/menu/dessert/"
+ ],
+ "image": null
+}

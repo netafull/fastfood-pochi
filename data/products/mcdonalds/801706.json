@@ -1,0 +1,36 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "801706",
+ "name": "食べくらべポテナゲ特大",
+ "category": "サイド",
+ "price": 990,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": "2026-09-16",
+ "planned_end_text": "2026-10-21（モバイルオーダー受付期間の終了日）",
+ "mop_ended_at": "2026-10-21",
+ "list_started_at": "2026-09-07",
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mcdonalds.co.jp/products/801706/",
+ "first_seen_at": "2026-10-07T21:22:29+09:00",
+ "last_seen_at": "2026-10-07",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-07",
+   "price": 990
+  }
+ ],
+ "source_list": [
+  "/menu/",
+  "/menu/dinner/",
+  "/menu/side/"
+ ],
+ "image": null
+}

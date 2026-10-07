@@ -1,0 +1,59 @@
+{
+ "chain": "mos",
+ "product_id": "120395",
+ "name": "ストロベリージャム",
+ "category": "朝モス",
+ "price": 30,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "いちごの味と香り、適度な甘さのオーソドックスなジャムです。",
+ "description_full_len": 29,
+ "nutrition": {
+  "kcal": 27.0,
+  "protein_g": 0.1,
+  "fat_g": 0.0,
+  "carbs_g": 6.7,
+  "sugar_g": null,
+  "fiber_g": 0.1,
+  "salt_g": 0.0,
+  "other": {
+   "重量": "15.0g",
+   "コレステロール": "0mg",
+   "ナトリウム": "2mg",
+   "カリウム": "12mg",
+   "カルシウム": "1mg",
+   "リン": "2mg",
+   "鉄": "0.0mg",
+   "ビタミンA": "0μg",
+   "ビタミンB1": "0.00mg",
+   "ビタミンB2": "0.00mg",
+   "ナイアシン": "0.0mg",
+   "ビタミンC": "5mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "0.0mg"
+  }
+ },
+ "allergens": {
+  "contains": [],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "店舗限定",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=120395&c_id=12",
+ "first_seen_at": "2026-10-07T21:23:32+09:00",
+ "last_seen_at": "2026-10-07",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-07",
+   "price": 30
+  }
+ ],
+ "source_list": [
+  "menu_category/12"
+ ],
+ "image": null
+}

@@ -1,0 +1,129 @@
+{
+ "chain": "mos",
+ "product_id": "211324",
+ "name": "熱々（あつあつ）おさつボール ～紫いも～ 3個入り",
+ "category": "デザート",
+ "price": 290,
+ "price_note": null,
+ "launch_date": "2026-08-28",
+ "planned_end_text": "2026年11月上旬頃まで",
+ "description": "皮はもっちり、中はほくほく。",
+ "description_full_len": 175,
+ "nutrition": {
+  "kcal": 153.0,
+  "protein_g": 1.8,
+  "fat_g": 4.5,
+  "carbs_g": 26.4,
+  "sugar_g": null,
+  "fiber_g": 1.1,
+  "salt_g": 0.3,
+  "other": {
+   "重量": "48.9g",
+   "コレステロール": "6mg",
+   "ナトリウム": "127mg",
+   "カリウム": "31mg",
+   "カルシウム": "19mg",
+   "リン": "48mg",
+   "鉄": "0.3mg",
+   "ビタミンA": "1μg",
+   "ビタミンB1": "0.01mg",
+   "ビタミンB2": "0.00mg",
+   "ナイアシン": "0.1mg",
+   "ビタミンC": "0mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "0.7mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "大豆"
+  ],
+  "partial": [
+   {
+    "name": "いか",
+    "mark": "△"
+   },
+   {
+    "name": "えび",
+    "mark": "△"
+   },
+   {
+    "name": "オレンジ",
+    "mark": "◇"
+   },
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "キウイフルーツ",
+    "mark": "◇"
+   },
+   {
+    "name": "牛肉",
+    "mark": "△◇"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "△◇"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△◇"
+   },
+   {
+    "name": "もも",
+    "mark": "◇"
+   },
+   {
+    "name": "りんご",
+    "mark": "◇"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△◇"
+   },
+   {
+    "name": "バナナ",
+    "mark": "◇"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   },
+   {
+    "name": "アーモンド",
+    "mark": "◇"
+   },
+   {
+    "name": "マカダミアナッツ",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=211324&c_id=26",
+ "first_seen_at": "2026-10-07T21:23:32+09:00",
+ "last_seen_at": "2026-10-07",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-07",
+   "price": 290
+  }
+ ],
+ "source_list": [
+  "menu_category/26"
+ ],
+ "image": null
+}

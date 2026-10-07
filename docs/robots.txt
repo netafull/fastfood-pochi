@@ -1,0 +1,17 @@
+User-agent: GPTBot
+User-agent: CCBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: anthropic-ai
+User-agent: ClaudeBot
+User-agent: Bytespider
+User-agent: meta-externalagent
+User-agent: cohere-training-data-crawler
+User-agent: Diffbot
+User-agent: Omgilibot
+Disallow: /
+
+User-agent: *
+Allow: /
+
+Sitemap: https://fastfood.netaful.jp/sitemap.xml

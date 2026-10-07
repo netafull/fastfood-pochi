@@ -1,0 +1,81 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "6930",
+ "name": "北海道産じゃがペッパー月見",
+ "category": "バーガー",
+ "price": 570,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": "2026-09-24",
+ "planned_end_text": "2026-10-21（モバイルオーダー受付期間の終了日）",
+ "mop_ended_at": "2026-10-21",
+ "list_started_at": "2026-08-18",
+ "description": "「月見バーガー」の味わいに加え、ゴロっとしたじゃがペッパーフィリングとふわもち食感のバンズを楽しめる、この秋限定の一品。",
+ "description_full_len": 60,
+ "nutrition": {
+  "kcal": 490.0,
+  "protein_g": 25.3,
+  "fat_g": 28.6,
+  "carbs_g": 32.4,
+  "sugar_g": 4.0,
+  "fiber_g": null,
+  "salt_g": 3.0,
+  "other": {
+   "飽和脂肪酸": "9.29g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "乳",
+   "小麦",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "豚肉"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "バンズ",
+   "origin": "主要原料：小麦粉／アメリカ、カナダ、オーストラリア　製造所所在地：日本"
+  },
+  {
+   "name": "タマゴ",
+   "origin": "主要原料：卵／日本　製造所所在地：日本"
+  },
+  {
+   "name": "ビーフパティ",
+   "origin": "主要原料：牛肉／オーストラリア、ニュージーランド、アメリカ、カナダ　製造所所在地：日本、アメリカ、オーストラリア、カナダ"
+  },
+  {
+   "name": "スモークベーコン",
+   "origin": "主要原料：豚肉／デンマーク、アイルランド、ブラジル　製造所所在地：日本"
+  },
+  {
+   "name": "チェダースライスチーズ",
+   "origin": "主要原料：チーズ／ニュージーランド、オーストラリア、日本、アメリカ　製造所所在地：日本、ニュージーランド"
+  },
+  {
+   "name": "じゃがペッパーフィリング",
+   "origin": "主要原料：じゃがいも／日本 | ブラックペッパー／インドネシア、マレーシア　製造所所在地：日本"
+  }
+ ],
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mcdonalds.co.jp/products/6930/",
+ "first_seen_at": "2026-10-07T21:22:29+09:00",
+ "last_seen_at": "2026-10-07",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-07",
+   "price": 570
+  }
+ ],
+ "source_list": [
+  "/menu/burger/"
+ ],
+ "image": null
+}

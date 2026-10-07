@@ -1,0 +1,73 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "6950",
+ "name": "月見マフィン",
+ "category": "バーガー",
+ "price": 420,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": "2026-09-02",
+ "planned_end_text": "2026-10-21（モバイルオーダー受付期間の終了日）",
+ "mop_ended_at": "2026-10-21",
+ "list_started_at": "2026-08-18",
+ "description": "月に見立てたたまご、ソーセージパティとベーコン、トマトクリーミーソースを、イングリッシュマフィンでサンドした一品。",
+ "description_full_len": 57,
+ "nutrition": {
+  "kcal": 501.0,
+  "protein_g": 21.0,
+  "fat_g": 33.3,
+  "carbs_g": 28.0,
+  "sugar_g": 3.0,
+  "fiber_g": null,
+  "salt_g": 2.0,
+  "other": {
+   "飽和脂肪酸": "9.59g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "乳",
+   "小麦",
+   "大豆",
+   "鶏肉",
+   "豚肉"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "イングリッシュマフィン",
+   "origin": "主要原料：小麦粉／アメリカ、カナダ、オーストラリア　製造所所在地：日本"
+  },
+  {
+   "name": "タマゴ",
+   "origin": "主要原料：卵／日本　製造所所在地：日本"
+  },
+  {
+   "name": "ソーセージパティ",
+   "origin": "主要原料：豚肉／アメリカ　製造所所在地：アメリカ"
+  },
+  {
+   "name": "スモークベーコン",
+   "origin": "主要原料：豚肉／デンマーク、アイルランド、ブラジル　製造所所在地：日本"
+  }
+ ],
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mcdonalds.co.jp/products/6950/",
+ "first_seen_at": "2026-10-07T21:22:29+09:00",
+ "last_seen_at": "2026-10-07",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-07",
+   "price": 420
+  }
+ ],
+ "source_list": [
+  "/menu/burger/",
+  "/menu/morning/"
+ ],
+ "image": null
+}

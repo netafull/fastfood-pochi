@@ -1,0 +1,25 @@
+User-agent: *
+Disallow: /private/
+Disallow: /sales/menu_h_f.html
+Disallow: /sales/cmlib_h_f.html
+Disallow: /company/history/mchistory/mchistory.html
+Disallow: /mop/
+Disallow: /order/
+Disallow: /mcdelivery/order/
+Disallow: /media_library/36524/file.pdf
+Disallow: /media_library/36615/file.pdf
+Disallow: /coupon-tab-flow/
+Disallow: /coupon-details/
+Disallow: /coupon-sok01/
+Disallow: /coupon-sok02/
+Disallow: /coupon-sok03/
+Disallow: /coupon-sok04/
+Disallow: /coupon-sok05/
+Disallow: /coupon-details01/
+Disallow: /coupon-details02/
+Disallow: /coupon-details03/
+Disallow: /coupon-details04/
+Disallow: /coupon-details05/
+Disallow: /rewards-down-announcement/
+
+Sitemap: https://www.mcdonalds.co.jp/sitemap.xml

@@ -1,0 +1,116 @@
+{
+ "chain": "mos",
+ "product_id": "011576",
+ "name": "ブラックアンガスバーガー",
+ "category": "ハンバーガー",
+ "price": 730,
+ "price_note": null,
+ "launch_date": "2026-07-15",
+ "planned_end_text": "数量限定(なくなり次第終了)",
+ "description": "パティに赤身の深いコクと旨みが特長のブラックアンガス牛を使用。",
+ "description_full_len": 129,
+ "nutrition": {
+  "kcal": 494.0,
+  "protein_g": 22.4,
+  "fat_g": 26.8,
+  "carbs_g": 41.4,
+  "sugar_g": null,
+  "fiber_g": 2.2,
+  "salt_g": 3.1,
+  "other": {
+   "重量": "215.7g",
+   "コレステロール": "52mg",
+   "ナトリウム": "1209mg",
+   "カリウム": "340mg",
+   "カルシウム": "97mg",
+   "リン": "248mg",
+   "鉄": "1.6mg",
+   "ビタミンA": "75μg",
+   "ビタミンB1": "0.12mg",
+   "ビタミンB2": "0.17mg",
+   "ナイアシン": "3.6mg",
+   "ビタミンC": "9mg",
+   "ビタミンD": "0.2μg",
+   "ビタミンE": "1.4mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "牛肉",
+   "大豆",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "▽"
+   },
+   {
+    "name": "豚肉",
+    "mark": "▽"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "アンガスパティ：牛肉",
+   "origin": "オーストラリア"
+  },
+  {
+   "name": "モスの生野菜：トマト",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：グリーンリーフ",
+   "origin": "国産"
+  },
+  {
+   "name": "キャンペーン用チーズ：チーズ",
+   "origin": "ニュージーランド、国産、アイルランド、アメリカ"
+  }
+ ],
+ "limited_kind": "数量限定",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=011576&c_id=26",
+ "first_seen_at": "2026-10-07T21:23:32+09:00",
+ "last_seen_at": "2026-10-07",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-07",
+   "price": 730
+  }
+ ],
+ "source_list": [
+  "menu_category/26"
+ ],
+ "image": null
+}

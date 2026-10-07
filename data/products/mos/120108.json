@@ -1,0 +1,80 @@
+{
+ "chain": "mos",
+ "product_id": "120108",
+ "name": "トースト",
+ "category": "朝モス",
+ "price": 250,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "朝といえば、トースト！バターを添えてご提供します。",
+ "description_full_len": 38,
+ "nutrition": {
+  "kcal": 201.0,
+  "protein_g": 5.7,
+  "fat_g": 6.9,
+  "carbs_g": 28.9,
+  "sugar_g": null,
+  "fiber_g": 2.6,
+  "salt_g": 0.9,
+  "other": {
+   "重量": "68.0g",
+   "コレステロール": "11mg",
+   "ナトリウム": "318mg",
+   "カリウム": "55mg",
+   "カルシウム": "15mg",
+   "リン": "43mg",
+   "鉄": "0.3mg",
+   "ビタミンA": "39μg",
+   "ビタミンB1": "0.04mg",
+   "ビタミンB2": "0.03mg",
+   "ナイアシン": "0.7mg",
+   "ビタミンC": "0mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "0.3mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "大豆"
+  ],
+  "partial": [
+   {
+    "name": "卵",
+    "mark": "▽◇"
+   },
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "りんご",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "店舗限定",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=120108&c_id=12",
+ "first_seen_at": "2026-10-07T21:23:32+09:00",
+ "last_seen_at": "2026-10-07",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-07",
+   "price": 250
+  }
+ ],
+ "source_list": [
+  "menu_category/12"
+ ],
+ "image": null
+}
