@@ -34,6 +34,13 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: PDF読み取りの依存をインストール
+        # 吉野家・すき家の栄養成分は公式PDFから読み取る(pdfminer.six。標準ライブラリだけという方針の例外)。
+        # pipが失敗(PyPIの障害など)しても巡回全体は止めない: 入っていなければ crawl.py が警告を出して
+        # PDFの読み取りだけを飛ばし、栄養は次回の実行で取り込まれる
+        continue-on-error: true
+        run: pip install -r requirements-pdf.txt
+
       - name: メニューを取得
         run: python3 scripts/crawl.py
 

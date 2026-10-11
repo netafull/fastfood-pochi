@@ -809,8 +809,17 @@ def _nutrition_rows(nut: dict) -> tuple[list[tuple[str, str]], dict]:
     return rows, (nut.get("other") or {})
 
 
+def pdf_source_html(src: dict | None) -> str:
+    """公式PDFから読み取った値の出典(PDFへのリンクと、PDFの版)。"""
+    if not src or not src.get("url"):
+        return ""
+    label = src.get("label") or "公式PDF"
+    ver = f"（{esc(src['version_text'])}）" if src.get("version_text") else ""
+    return (f"出典：公式PDF <a href=\"{esc(src['url'])}\" target=\"_blank\" rel=\"noopener\">「{esc(label)}」</a>{ver}")
+
+
 def nutrition_footnote(item: dict) -> str:
-    """松屋: 栄養成分の基準日と、公式の注記(みそ汁・福神漬を含む等)。"""
+    """松屋: 栄養成分の基準日と、公式の注記(みそ汁・福神漬を含む等)。吉野家・すき家: 公式PDFの版と注記。"""
     bits = []
     if item.get("nutrition_as_of"):
         try:
@@ -820,13 +829,23 @@ def nutrition_footnote(item: dict) -> str:
             pass
     if item.get("nutrition_note"):
         bits.append(f"公式の注記：{item['nutrition_note'].lstrip('※').rstrip('。')}")
-    return f"<p class='note'>{esc('。'.join(bits))}。</p>" if bits else ""
+    out = f"<p class='note'>{esc('。'.join(bits))}。</p>" if bits else ""
+    src = pdf_source_html(item.get("nutrition_source"))
+    if src:
+        out += f"<p class='note'>{src}。</p>"
+    return out
 
 
 def render_nutrition(item: dict) -> str:
     nut = item.get("nutrition")
+    if not nut and item.get("allergen_pdf_url") and item.get("allergens") is not None:
+        # すき家: アレルゲンだけがPDFから取れ、栄養成分は取れなかった(PDFに載っていない商品)
+        nl = item.get("nutrition_pdf_label") or "栄養成分一覧"
+        return ("<h3>栄養成分</h3><p class='note'>栄養成分は公式PDF"
+                f"（{esc(nl)}）をご覧ください。この商品は当サイトでは取り込めていません。</p>"
+                f"<p><a href=\"{esc(item['nutrition_pdf_url'])}\" target=\"_blank\" rel=\"noopener\">{esc(nl)}（公式PDF）</a></p>")
     if not nut and item.get("allergen_pdf_url"):
-        # すき家: 栄養成分とアレルゲンは別々の公式PDF。取り込まずリンクで案内する
+        # すき家: 栄養成分とアレルゲンは別々の公式PDF。取り込めなかった商品はリンクで案内する
         nl = item.get("nutrition_pdf_label") or "栄養成分一覧"
         al = item.get("allergen_pdf_label") or "アレルゲン一覧"
         return ("<h3>栄養成分・アレルギー情報</h3><p class='note'>栄養成分・アレルギー情報は公式PDF"
@@ -889,6 +908,11 @@ def render_nutrition(item: dict) -> str:
 def render_allergens(item: dict) -> str:
     a = item.get("allergens")
     if a is None:
+        if item.get("nutrition") and item.get("allergen_pdf_url"):
+            # すき家: 栄養は取れたがアレルゲンの表に見つからなかった商品。PDFへ案内する
+            al = item.get("allergen_pdf_label") or "アレルゲン一覧"
+            return (f"<p class='note'>アレルギー情報は公式PDF（<a href=\"{esc(item['allergen_pdf_url'])}\" "
+                    f"target=\"_blank\" rel=\"noopener\">{esc(al)}</a>）をご覧ください。この商品は当サイトでは取り込めていません。</p>")
         return ""
     contains = a.get("contains") or []
     text = "、".join(contains) if contains else "表示対象の品目は含まれていません"
@@ -896,8 +920,14 @@ def render_allergens(item: dict) -> str:
     partial = a.get("partial") or []
     if partial:
         ptxt = "、".join(f"{p['name']}{p['mark']}" for p in partial)
-        html_ += (f"<p class='note'>条件つきの表示：{esc(ptxt)}"
-                  "（記号の意味は公式サイトの凡例でご確認ください）</p>")
+        meaning = (item.get("allergens_conditional") or {}).get("meaning")
+        mark = (item.get("allergens_conditional") or {}).get("mark") or partial[0]["mark"]
+        legend = (f"（{esc(mark)}：{esc(meaning.rstrip('。'))}）" if meaning
+                  else "（記号の意味は公式サイトの凡例でご確認ください）")
+        html_ += f"<p class='note'>条件つきの表示：{esc(ptxt)}{legend}</p>"
+    src = pdf_source_html(item.get("allergen_source"))
+    if src:
+        html_ += f"<p class='note'>{src}。</p>"
     return html_
 
 

@@ -1,0 +1,7 @@
+# 吉野家・すき家の栄養成分・アレルゲンを公式PDFから読み取るための依存(scripts/pdf_nutrition.py)。
+# このリポジトリは基本的にPython標準ライブラリだけで動くが、PDFの読み取りだけはこの例外。
+# バージョンは固定する(手元の Python 3.9 と CI の Python 3.12 で同じ結果にするため)。
+# pdfminer.six 20251107 は Python>=3.9 対応(PyPIのメタデータで確認)。
+pdfminer.six==20251107
+charset-normalizer==3.5.2
+cryptography==50.0.2

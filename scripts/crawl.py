@@ -28,7 +28,8 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import parsers  # noqa: E402
-from fetch import BlockedError, NotFoundError, fetch  # noqa: E402
+from fetch import BlockedError, NotFoundError, fetch, fetch_binary  # noqa: E402
+import pdf_update  # noqa: E402
 
 CONFIG = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
 DATA = ROOT / "data"
@@ -36,6 +37,7 @@ PRODUCTS = DATA / "products"
 PENDING_PATH = DATA / "pending.json"
 BASELINE_PATH = DATA / "baseline_ids.json"
 RUN_SUMMARY = DATA / "run_summary.json"
+PDF_STATE_PATH = DATA / "pdf_state.json"  # 吉野家・すき家の公式PDFの版・指紋(PDFの内容は入れない)
 JST = datetime.timezone(datetime.timedelta(hours=9))
 
 UA = CONFIG.get("user_agent", "FastfoodPochi/1.0 (+https://fastfood.netaful.jp/)")
@@ -118,13 +120,25 @@ class Getter:
         self.throttle = Throttle()
         self.counts: dict[str, int] = {}
 
-    def __call__(self, chain: str, url: str) -> str:
+    def _tick(self, chain: str) -> None:
         limit = MAX_REQUESTS.get(chain)
         if limit is not None and self.counts.get(chain, 0) >= limit:
             raise RuntimeError(f"{chain}: 1回の実行あたりのリクエスト上限({limit})に達しました")
         self.throttle.wait(chain)
         self.counts[chain] = self.counts.get(chain, 0) + 1
+
+    def __call__(self, chain: str, url: str) -> str:
+        self._tick(chain)
         return fetch(url, UA)
+
+    # 公式PDF(吉野家・すき家の栄養成分)用。HEAD(版の確認)とGET(本体)。どちらも同じ間隔・上限・カウントに従う
+    def pdf_head(self, chain: str, url: str) -> dict:
+        self._tick(chain)
+        return fetch_binary(url, UA, method="HEAD")[1]
+
+    def pdf_get(self, chain: str, url: str) -> bytes:
+        self._tick(chain)
+        return fetch_binary(url, UA)[0]
 
 
 # ---------------------------------------------------------------------------
@@ -863,8 +877,9 @@ def crawl_matsuya_family(chain: str, getter, pending: dict, stats: dict, today: 
 #  ・サイト規約 /sitepolicy/ は営利・非営利を問わず複製・転用を禁じ、営利目的の行為を禁じている
 #    (自動取得への言及なし)。→ 記録するのは事実情報(価格・日付・販売状況)だけ。説明文・画像は
 #    保存も表示もしない。広告は入れない。
-#  ・栄養成分・アレルゲンは別PDF(/pdf/allergy/)で、ここでは取得も解析もしない(リンクを出すだけ。
-#    PDFからの栄養表の抽出は第2段階)。お知らせの見出しのリンクもPDFだが同じく取得しない
+#  ・栄養成分・アレルゲンは別PDF(/pdf/allergy/)。巡回のあと run_pdf_step() が pdf_update.py 経由で、
+#    更新があったときだけ取得して読み取る(ここの crawl_yoshinoya では取得しない)。
+#    お知らせの見出しのリンクもPDFだが同じく取得しない
 #    (見出しの文言だけを読む)。
 #  ・記録するのは (a) 「期間限定」一覧(/menu/gentei/)に載った商品、(b) baseline(初回巡回の全メニュー)に
 #    無く後から現れた商品。定番の既存メニューは詳細を取らない。
@@ -1221,8 +1236,9 @@ def crawl_yoshinoya(getter, pending: dict, stats: dict, today: str | None = None
 #  ・サイト規約 /aboutsite.html は「文書による許諾なく使用および転載を禁止」と他社より強い。
 #    → 記録するのは事実情報(価格・日付・販売状況)だけ。説明文・画像は保存も表示もしない。広告は入れない。
 #    お知らせは見出し(出典表示)とPDFへのリンクだけ。
-#  ・栄養成分・アレルゲンは別PDF(images.zensho.co.jp)で、ここでは取得も解析もしない(リンクを出すだけ。
-#    PDFからの栄養表の抽出は第2段階)。お知らせのPDFも取得しない(見出しの文言だけを読む)。
+#  ・栄養成分・アレルゲンは別PDF(images.zensho.co.jp。robots.txtは403だがPDF本体は200)。巡回のあと
+#    run_pdf_step() が pdf_update.py 経由で、更新があったときだけ取得して読み取る(ここの crawl_sukiya では
+#    取得しない)。お知らせのPDFは取得しない(見出しの文言だけを読む)。
 #  ・ページのリンクは、そのページ自身のホスト(www.sukiya.jp)で解決する。相対リンクを news.sukiya.jp と取り違えない。
 #  ・限定だけの一覧HTMLは無い。カテゴリ一覧(13個)の各商品に公式の「New」「期間限定」アイコンが付くので、
 #    記録するのは (a) 「期間限定」または「New」のアイコンが付いた商品、(b) 直近90日のプレスリリース
@@ -1552,6 +1568,37 @@ def crawl_sukiya(getter, pending: dict, stats: dict, today: str | None = None) -
 # 実行
 # ---------------------------------------------------------------------------
 
+def run_pdf_step(chain: str, getter, pending: dict, stats: dict) -> dict | None:
+    """吉野家・すき家の公式PDFから栄養・アレルゲンを取り込む(巡回のあとに1回)。
+
+    PDFを読めない(pdfminer未導入・取得失敗・構造変更の疑い)ときも、警告とpending.jsonへの記録だけで
+    クロール全体は止めない。取得器がPDF用のメソッドを持たないとき(テスト)・一覧の取得でブロックされた
+    ときは何もしない。
+    """
+    st = stats.get(chain)
+    if st is None or st.get("blocked") or not hasattr(getter, "pdf_head"):
+        return None
+    cfg = CONFIG.get(f"{chain}_pdf") or {}
+    if not cfg.get("nutrition"):
+        return None
+    labels = {"nutrition": cfg.get("nutrition_label") or "", "allergen": cfg.get("allergen_label") or ""}
+    state = load_json(PDF_STATE_PATH, {})
+    products = load_chain_products(chain)
+    try:
+        report = pdf_update.update_chain(chain, products, getter, state, pending, cfg, labels,
+                                         today_jst(), now_iso())
+    except Exception as e:  # noqa: BLE001  PDFの失敗でクロール全体を止めない
+        print(f"[warn] {chain} のPDF取り込みで例外: {type(e).__name__}: {e}", file=sys.stderr)
+        return None
+    for p in report["changed_products"]:
+        save_product(chain, p)
+    save_json(PDF_STATE_PATH, state, sort_keys=True)
+    st["pdf"] = {k: report[k] for k in ("head_requests", "get_requests", "matched", "unmatched", "aborted",
+                                        "skipped", "blocked")}
+    st["pdf"]["changed"] = len(report["changed"])
+    return report
+
+
 def save_run_summary(stats: dict[str, dict]) -> None:
     """この実行で新規に記録した商品数・終了を観測した商品数を書き出す。notify.py が読む。
 
@@ -1590,6 +1637,9 @@ def main(argv: list[str] | None = None) -> int:
             fn(getter, pending, stats)
         except Exception as e:  # noqa: BLE001
             print(f"[error] {fn.__name__} で例外: {e}", file=sys.stderr)
+        chain = {v: k for k, v in CRAWLERS.items()}.get(fn)
+        if chain in ("yoshinoya", "sukiya"):
+            run_pdf_step(chain, getter, pending, stats)
 
     save_json(PENDING_PATH, pending, sort_keys=True)
     save_run_summary(stats)
@@ -1603,6 +1653,11 @@ def main(argv: list[str] | None = None) -> int:
             f"/ 一覧取得={'全部成功' if s.get('list_ok') else '一部失敗'} "
             f"/ ブロック={'あり' if s.get('blocked') else 'なし'}"
         )
+        if s.get("pdf"):
+            print(f"  公式PDF: HEAD{s['pdf']['head_requests']}件・GET{s['pdf']['get_requests']}件 / "
+                  f"照合{s['pdf']['matched']}件・更新{s['pdf']['changed']}件 / 栄養が入らなかった商品{len(s['pdf']['unmatched'])}件"
+                  + (f" / 中止: {s['pdf']['aborted']}" if s['pdf']['aborted'] else "")
+                  + (f" / 飛ばした: {s['pdf']['skipped']}" if s['pdf']['skipped'] else ""))
     print(f"所要時間: {time.monotonic() - started:.0f}秒")
     return 0
 
