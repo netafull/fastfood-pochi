@@ -254,7 +254,9 @@ CSS = """
 }
 @media (prefers-color-scheme: dark) {
   :root { --bg: #14151a; --card: #1e2027; --text: #e8e8e6; --muted: #9a9a96;
-    --line: #2c2e36; --accent: #26a69a; }
+    --line: #2c2e36; --accent: #26a69a;
+    /* 暗い背景でも見出しの下線・バッジが沈まないよう、松屋・松のやだけ少し明るくする */
+    --matsuya: #b85a00; --matsunoya: #a83a82; }
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--bg); color: var(--text);
