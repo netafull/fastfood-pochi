@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""マクドナルドとモスバーガーの限定メニュー・新メニューを巡回し、
-data/products/{mcdonalds|mos}/{id}.json に1商品1ファイルで蓄積する。
+"""マクドナルド・モスバーガー・松屋の限定メニュー・新メニューを巡回し、
+data/products/{mcdonalds|mos|matsuya}/{id}.json に1商品1ファイルで蓄積する。
 
 このサイトの核は「販売状況の追跡」。公式サイトは販売が終わると商品を消すので、
 一覧に居た商品が消えたら終了とみなして記録を残す。
@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import datetime
 import json
+import re
 import sys
 import time
 import urllib.robotparser
@@ -42,6 +43,7 @@ INTERVALS = CONFIG.get("request_interval_seconds", {})
 MAX_REQUESTS = CONFIG.get("max_requests_per_run", {})
 MCD_BASE = parsers.MCD_BASE
 MOS_BASE = parsers.MOS_BASE
+MATSUYA_BASE = parsers.MATSUYA_BASE
 # 連続何回(別の日)見つからなければ終了扱いにするか
 MISSES_TO_END = 2
 
@@ -518,6 +520,326 @@ def crawl_mos(getter, pending: dict, stats: dict, today: str | None = None) -> N
 
 
 # ---------------------------------------------------------------------------
+# 松屋
+# ---------------------------------------------------------------------------
+# 松屋には「期間限定」「NEW」の公式ラベルも販売期間も無い。記録の対象は
+#  (a) 「おすすめ」一覧(/matsuya/menu/limited/)に載ったことがある商品
+#  (b) baseline(初回巡回時の全メニューID)に無く、後から現れた商品
+# 終了判定は「おすすめ」ではなく全カテゴリの一覧からの消失で行う。
+# 発売日と説明文はニュースJSON(whatsnew.json)の category=menu の記事から取る。
+
+# 見出しに商品名が無いとき、記事本文を探しに行くニュース記事の最大数(1回の実行あたり)。
+# 「ネオカシミール」のように1本の記事が複数商品をまとめて紹介することがあり、
+# 見出しには代表名しか出ないため
+MATSUYA_FALLBACK_ARTICLE_FETCHES = 4
+
+
+def matsuya_category_labels() -> dict[str, str | None]:
+    return {c["slug"]: c.get("label") for c in CONFIG.get("matsuya_categories", [])}
+
+
+class MatsuyaNews:
+    """ニュースJSONと記事ページの取得・照合。新規商品があるときだけ取りに行き、
+    同じ記事は1回の実行で1回しか取らない。"""
+
+    def __init__(self, getter, st: dict):
+        self.getter = getter
+        self.st = st
+        self.news: list[dict] | None = None
+        self.news_failed = False
+        self.articles: dict[str, dict | None] = {}
+        self.fallback_fetches = 0
+
+    def _get(self, url: str) -> str:
+        text = self.getter("matsuya", url)
+        self.st["detail_requests"] += 1
+        return text
+
+    def load(self) -> list[dict]:
+        if self.news is None and not self.news_failed:
+            try:
+                self.news = parsers.parse_matsuya_news(self._get(MATSUYA_BASE + parsers.MATSUYA_NEWS_JSON))
+            except BlockedError:
+                raise
+            except Exception as e:  # noqa: BLE001
+                print(f"[warn] matsuya whatsnew.json 取得失敗: {e}", file=sys.stderr)
+                self.news_failed = True
+        return self.news or []
+
+    def article(self, url: str) -> dict | None:
+        if url not in self.articles:
+            try:
+                self.articles[url] = parsers.parse_matsuya_article(self._get(url))
+            except BlockedError:
+                raise
+            except Exception as e:  # noqa: BLE001
+                print(f"[warn] matsuya 記事取得失敗 {url}: {e}", file=sys.stderr)
+                self.articles[url] = None
+        return self.articles[url]
+
+    def resolve(self, name: str, product_id: str, today: str) -> dict | None:
+        """商品に対応するニュース記事を探す。戻り値は
+        {"news": {...}, "article": {...}|None, "how": "title"|"body"} または None。"""
+        news = self.load()
+        if not news:
+            return None
+        center = parsers.matsuya_slug_date(product_id) or today
+        hit = parsers.match_matsuya_news_title(name, news, center)
+        if hit:
+            return {"news": hit, "article": self.article(hit["url"]), "how": "title"}
+        # 見出しに無い: 掲載日付近のニュース記事の本文に商品名があるか調べる
+        try:
+            c = datetime.date.fromisoformat(center)
+        except ValueError:
+            return None
+        lo, hi = c - datetime.timedelta(days=14), c + datetime.timedelta(days=7)
+        cands = parsers.matsuya_name_variants(name)
+        for a in news:
+            try:
+                d = datetime.date.fromisoformat(a["date"])
+            except ValueError:
+                continue
+            if not (lo <= d <= hi) or not parsers.matsuya_news_launch_words(a["title"]):
+                continue
+            if a["url"] not in self.articles:
+                if self.fallback_fetches >= MATSUYA_FALLBACK_ARTICLE_FETCHES:
+                    continue
+                self.fallback_fetches += 1
+            art = self.article(a["url"])
+            if art and any(cn in parsers.normalize_for_match(art["text"]) for cn in cands):
+                return {"news": a, "article": art, "how": "body"}
+        return None
+
+
+def build_matsuya_product(entry: dict, detail: dict, sources: list[str], in_limited: bool,
+                          resolved: dict | None, same_name: list[str], today: str, now: str) -> dict:
+    labels = matsuya_category_labels()
+    note = detail.get("nutrition_note")
+    prices = parsers.matsuya_variant_labels(detail.get("prices") or [], note)
+    nutr = parsers.matsuya_variant_labels(detail.get("nutrition_variants") or [], note)
+    primary_price = parsers.matsuya_pick_primary(prices)
+    primary_nut = parsers.matsuya_pick_primary(nutr)
+    price = primary_price["price"] if primary_price else entry.get("price")
+
+    news = resolved["news"] if resolved else None
+    article = resolved.get("article") if resolved else None
+    launch = article.get("launch_date") if article else None
+    if news is None:
+        launch_source = "not_found"
+        kind = "おすすめ掲載" if in_limited else "新規掲載"
+    else:
+        launch_source = ("news_article" if resolved["how"] == "title" else "news_article_body") if launch \
+            else "news_without_date"
+        kind = "新メニュー" if parsers.matsuya_news_launch_words(news["title"]) else (
+            "おすすめ掲載" if in_limited else "新規掲載")
+    short, full_len = parsers.shorten_description(article.get("description_src") if article else None)
+
+    # 複数の価格(セット/単品、小盛/並盛/大盛)の内訳は price_variants に持ち、ページでは表にする。
+    # 表示する price は ラベル無し(セット等)→並盛→先頭 の順で選んだもの
+    price_note = "税込。"
+    if len(prices) > 1 and primary_price["label"]:
+        price_note += f"表示は「{primary_price['label']}」の価格。"
+    price_note += "店舗により価格・取り扱いが異なる場合があります。"
+
+    category = next((labels.get(c) for c in sources if c != parsers.MATSUYA_LIMITED_CATEGORY and labels.get(c)), None)
+    product = {
+        "chain": "matsuya",
+        "product_id": entry["product_id"],
+        "name": entry["name"] or detail.get("name"),
+        "category": category,
+        "price": price,
+        "price_note": price_note,
+        "price_variants": prices if len(prices) > 1 else None,
+        "launch_date": launch,
+        "launch_date_source": launch_source,
+        "planned_end_text": None,
+        "news_url": news["url"] if news else None,
+        "news_title": news["title"] if news else None,
+        "news_date": news["date"] if news else None,
+        "description": short,
+        "description_full_len": full_len,
+        "nutrition": primary_nut["nutrition"] if primary_nut else None,
+        "nutrition_variants": ([{"label": v["label"], "nutrition": v["nutrition"]} for v in nutr]
+                               if len(nutr) > 1 else None),
+        "nutrition_as_of": detail.get("nutrition_as_of"),
+        "nutrition_note": note,
+        "allergens": detail.get("allergens"),
+        "origin": None,
+        "limited_kind": kind,
+        "in_recommended": in_limited,
+        "official_url": MATSUYA_BASE + entry["detail_path"],
+        "first_seen_at": now,
+        "last_seen_at": today,
+        "status": "on_sale",
+        "ended_observed_at": None,
+        "missed_runs": 0,
+        "price_history": [{"date": today, "price": price}] if price is not None else [],
+        "source_list": sorted(set(sources)),
+        "image": None,
+    }
+    if same_name:
+        # 同じ名前の商品が別のslugで再登場した(slug末尾の日付は更新で変わりうる)。別レコードとして扱う
+        product["same_name_as"] = same_name
+    return product
+
+
+def matsuya_discover_categories(index_html: str) -> list[str]:
+    slugs = []
+    for m in re.finditer(r'href="/matsuya/menu/([a-z0-9_]+)/index\.html"', index_html):
+        if m.group(1) not in slugs:
+            slugs.append(m.group(1))
+    return slugs
+
+
+def crawl_matsuya(getter, pending: dict, stats: dict, today: str | None = None) -> None:
+    chain = "matsuya"
+    today = today or today_jst()
+    now = now_iso()
+    pending.setdefault(chain, {})
+    stats.setdefault(chain, new_stats())
+    st = stats[chain]
+    all_ok = True
+
+    # robots.txt(1リクエスト)。Disallowのパスには行かない(2026-10-11時点は全許可)
+    robots_text = None
+    try:
+        robots_text = getter(chain, MATSUYA_BASE + "/robots.txt")
+        st["list_requests"] += 1
+    except BlockedError as e:
+        st["blocked"] = True
+        print(f"[blocked] matsuya robots.txt: {e}", file=sys.stderr)
+        return
+    except Exception as e:  # noqa: BLE001
+        print(f"[warn] matsuya robots.txt 取得失敗(全許可として続行): {e}", file=sys.stderr)
+    rp = urllib.robotparser.RobotFileParser()
+    rp.parse((robots_text or "User-agent: *\nAllow: /").splitlines())
+
+    def allowed(path: str) -> bool:
+        return rp.can_fetch(UA, MATSUYA_BASE + path)
+
+    # カテゴリの入口。新しいカテゴリが増えても拾えるよう毎回取る
+    config_cats = [c["slug"] for c in CONFIG["matsuya_categories"]]
+    cats: list[str] = []
+    try:
+        idx = getter(chain, MATSUYA_BASE + parsers.MATSUYA_MENU_ROOT)
+        st["list_requests"] += 1
+        cats = matsuya_discover_categories(idx)
+    except BlockedError as e:
+        st["blocked"] = True
+        print(f"[blocked] matsuya menu index: {e}", file=sys.stderr)
+        return
+    except Exception as e:  # noqa: BLE001
+        print(f"[warn] matsuya メニュー入口 取得失敗(設定の固定リストで代替): {e}", file=sys.stderr)
+    if not cats:
+        cats = list(config_cats)
+        all_ok = False
+    cats = sorted(cats, key=lambda c: c != parsers.MATSUYA_LIMITED_CATEGORY)  # おすすめを先頭に(安定ソート)
+
+    entries: dict[str, dict] = {}
+    sources: dict[str, list[str]] = {}
+    for cat in cats:
+        path = f"{parsers.MATSUYA_MENU_ROOT}{cat}/index.html"
+        if not allowed(path):
+            print(f"[skip] robots.txtでDisallow: {path}", file=sys.stderr)
+            all_ok = False
+            continue
+        try:
+            html = getter(chain, MATSUYA_BASE + path)
+            st["list_requests"] += 1
+        except BlockedError as e:
+            st["blocked"] = True
+            print(f"[blocked] matsuya list {path}: {e}", file=sys.stderr)
+            return
+        except Exception as e:  # noqa: BLE001
+            print(f"[warn] matsuya list {path} 取得失敗: {e}", file=sys.stderr)
+            all_ok = False
+            continue
+        page_entries = parsers.parse_matsuya_list(html)
+        if not page_entries:
+            print(f"[warn] matsuya list {path}: 商品が0件(構造変更の疑い)", file=sys.stderr)
+            all_ok = False
+            continue
+        for e in page_entries:
+            sources.setdefault(e["product_id"], []).append(cat)
+            if e["product_id"] not in entries:
+                entries[e["product_id"]] = e
+            elif entries[e["product_id"]].get("price") is None:
+                entries[e["product_id"]]["price"] = e.get("price")
+    st["list_ok"] = all_ok and bool(entries)
+
+    singles = {pid: e for pid, e in entries.items() if not e["option"]}
+    st["limited_seen"] = sum(1 for pid in singles if parsers.MATSUYA_LIMITED_CATEGORY in sources[pid])
+
+    baseline = baseline_for(chain)
+    news = MatsuyaNews(getter, st)
+    existing_all = None  # 同名商品の検出用(新規に記録するときだけ読む)
+    try:
+        for pid, e in singles.items():
+            existing = load_product(chain, pid)
+            if existing is not None:
+                if touch_seen(existing, e.get("price"), today, now):
+                    existing["source_list"] = sorted(set(existing.get("source_list") or []) | set(sources[pid]))
+                    if parsers.MATSUYA_LIMITED_CATEGORY in sources[pid]:
+                        existing["in_recommended"] = True
+                    save_product(chain, existing)
+                pending[chain].pop(pid, None)
+                continue
+            in_limited = parsers.MATSUYA_LIMITED_CATEGORY in sources[pid]
+            only_unrecorded = all(c in parsers.MATSUYA_NO_RECORD_CATEGORIES for c in sources[pid])
+            is_new_menu = baseline is not None and pid not in baseline
+            if not (in_limited or (is_new_menu and not only_unrecorded)):
+                continue  # 定番の既存メニュー、トッピング・セット類は記録しない(baselineに入るだけ)
+            detail_path = e["detail_path"]
+            if not allowed(detail_path):
+                print(f"[skip] robots.txtでDisallow: {detail_path}", file=sys.stderr)
+                continue
+            try:
+                html = getter(chain, MATSUYA_BASE + detail_path)
+                st["detail_requests"] += 1
+            except NotFoundError:
+                st["failed"] += 1
+                pending[chain][pid] = {"url": detail_path, "reason": "404", "checked_at": now}
+                continue
+            except BlockedError:
+                raise
+            except Exception as ex:  # noqa: BLE001
+                st["failed"] += 1
+                pending[chain][pid] = {"url": detail_path, "reason": f"fetch_error: {ex}", "checked_at": now}
+                continue
+            detail = parsers.parse_matsuya_detail(html)
+            if detail is None:
+                st["failed"] += 1
+                pending[chain][pid] = {"url": detail_path, "reason": "empty_detail", "checked_at": now}
+                continue
+            name = e["name"] or detail["name"]
+            resolved = news.resolve(name, pid, today)
+            if existing_all is None:
+                existing_all = load_chain_products(chain)
+            norm = parsers.normalize_for_match(name)
+            same = [p["product_id"] for p in existing_all
+                    if p["product_id"] != pid and parsers.normalize_for_match(p.get("name")) == norm]
+            product = build_matsuya_product(e, detail, sources[pid], in_limited, resolved, same, today, now)
+            save_product(chain, product)
+            existing_all.append(product)
+            st["new_products"] += 1
+            if resolved is None:
+                st["news_unmatched"] = st.get("news_unmatched", 0) + 1
+            else:
+                st["news_matched"] = st.get("news_matched", 0) + 1
+            pending[chain].pop(pid, None)
+    except BlockedError as ex:
+        st["blocked"] = True
+        print(f"[blocked] matsuya: {ex}", file=sys.stderr)
+        return
+
+    # 一覧取得が全部成功した回だけ、baseline作成と終了判定を行う
+    if st["list_ok"]:
+        if baseline is None:
+            save_baseline(chain, set(entries))
+        apply_missing(chain, set(entries), today, st)
+
+
+# ---------------------------------------------------------------------------
 # 実行
 # ---------------------------------------------------------------------------
 
@@ -536,13 +858,24 @@ def save_run_summary(stats: dict[str, dict]) -> None:
     RUN_SUMMARY.write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
 
 
-def main() -> int:
+CRAWLERS = {"mcdonalds": crawl_mcdonalds, "mos": crawl_mos, "matsuya": crawl_matsuya}
+
+
+def main(argv: list[str] | None = None) -> int:
+    # 引数でチェーンを指定すると、そのチェーンだけ巡回する(例: crawl.py matsuya)。
+    # 引数なしは全チェーン(Actionsの定期実行)
+    argv = sys.argv[1:] if argv is None else argv
+    unknown = [a for a in argv if a not in CRAWLERS]
+    if unknown:
+        print(f"不明なチェーン: {unknown} (指定できるのは {list(CRAWLERS)})", file=sys.stderr)
+        return 2
+    targets = [CRAWLERS[a] for a in argv] if argv else list(CRAWLERS.values())
     pending = load_json(PENDING_PATH, {})
     stats: dict[str, dict] = {}
     getter = Getter()
     started = time.monotonic()
 
-    for fn in (crawl_mcdonalds, crawl_mos):
+    for fn in targets:
         try:
             fn(getter, pending, stats)
         except Exception as e:  # noqa: BLE001

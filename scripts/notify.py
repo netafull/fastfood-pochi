@@ -31,7 +31,7 @@ from pathlib import Path
 SITE_NAME = "ファストフードポチ"
 ROOT = Path(__file__).resolve().parent.parent
 RUN_SUMMARY = ROOT / "data" / "run_summary.json"
-CHAIN_LABEL = {"mcdonalds": "マクドナルド", "mos": "モスバーガー"}
+CHAIN_LABEL = {"mcdonalds": "マクドナルド", "mos": "モスバーガー", "matsuya": "松屋"}
 
 
 def send(topic: str, title: str, message: str, click: str = "") -> None:

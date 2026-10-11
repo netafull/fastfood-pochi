@@ -35,6 +35,22 @@ MCD_PAGES = {
 }
 
 
+MATSUYA_MENU_CATS = ["limited", "gyumeshi", "curry", "don", "teishoku", "morning", "lunch",
+                     "currylunch", "okosama", "sidemenu", "topping", "drink"]
+MATSUYA_PAGES = {
+    "/robots.txt": "matsuya/robots.txt",
+    "/matsuya/menu/": "matsuya/menu.html",
+    "/matsuya/menu/curry/kashmir_hp_261006.html": "matsuya/p_curry-kashmir_hp_261006.html",
+    "/matsuya/menu/don/don_gyuyaki_hp_260811.html": "matsuya/p_don-don_gyuyaki_hp_260811.html",
+    "/matsuya/whatsnew/data/whatsnew.json": "matsuya/whatsnew_full.json",
+    "/matsuya/whatsnew/menu/178231.html": "matsuya/n_178231.html",
+    "/matsuya/whatsnew/menu/177082.html": "matsuya/n_177082.html",
+    "/matsuya/whatsnew/menu/167268.html": "matsuya/n_167268.html",
+}
+for _c in MATSUYA_MENU_CATS:
+    MATSUYA_PAGES[f"/matsuya/menu/{_c}/index.html"] = f"matsuya/cat_{_c}.html"
+
+
 class FakeGetter:
     """URLからフィクスチャを返す。呼ばれたURLを記録する。
 
@@ -61,6 +77,17 @@ class FakeGetter:
                 return fx(MCD_PAGES[path])
             if path.startswith("/products/") and self.fallback_detail:
                 return fx("mcdonalds/p_6900.html")
+            raise OSError(f"no fixture: {path}")
+        if chain == "matsuya":
+            path = url.replace(crawl.MATSUYA_BASE, "")
+            if path in self.fail:
+                raise OSError("simulated failure")
+            if path in self.overrides:
+                return self.overrides[path]
+            if path in MATSUYA_PAGES:
+                return fx(MATSUYA_PAGES[path])
+            if path.startswith("/matsuya/menu/") and self.fallback_detail:
+                return fx("matsuya/p_curry-kashmir_hp_261006.html")
             raise OSError(f"no fixture: {path}")
         path = url.replace(crawl.MOS_BASE, "")
         if path in self.fail:

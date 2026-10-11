@@ -1,5 +1,3043 @@
 {
  "articles": {
+  "matsuya": [
+   {
+    "date": "2026-10-07T12:30:00",
+    "id": 210463,
+    "link": "https://netaful.jp/fast-food/0210463.html",
+    "product_name": "ネオカシミールカレー",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/10/matsuya-kashimir-curry-004-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「ネオカシミールカレー」は黒くて辛い！辛さのあとに旨みがくる松屋流カシミールカレー"
+   },
+   {
+    "date": "2026-10-03T10:00:00",
+    "id": 210253,
+    "link": "https://netaful.jp/fast-food/0210253.html",
+    "product_name": "黒麻婆豆腐定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/10/matsuya-kuro-mabo-002-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「黒麻婆豆腐定食」店舗限定から全国へ！コクと痺れの本格麻婆でご飯が止まらない"
+   },
+   {
+    "date": "2026-09-22T14:00:00",
+    "id": 209660,
+    "link": "https://netaful.jp/fast-food/0209660.html",
+    "product_name": "ほうれん草とカッテージチーズのカレー",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/09/matsuya-hourensou-curry-002-1-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「ほうれん草とカッテージチーズのカレー」ほうれん草が主役の“パラックパニール”が絶品すぎる！！！"
+   },
+   {
+    "date": "2026-09-18T10:30:00",
+    "id": 209532,
+    "link": "https://netaful.jp/fast-food/0209532.html",
+    "product_name": "定番メニューとの豚汁セット",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/09/matsuya-tonjiru-set-003-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「定番メニューとの豚汁セット」で50円お得に「松屋の牛焼肉丼」を食べてみた"
+   },
+   {
+    "date": "2026-09-14T12:30:00",
+    "id": 209328,
+    "link": "https://netaful.jp/fast-food/0209328.html",
+    "product_name": "ミニカルビ",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/09/matsuya-nasumiso-031-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「ミニカルビ」約70g！3枚のサービス券を集めてもらって食べてみた"
+   },
+   {
+    "date": "2026-09-08T12:30:00",
+    "id": 208983,
+    "link": "https://netaful.jp/fast-food/0208983.html",
+    "product_name": "豚と茄子の辛味噌炒め定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/09/matsuya-nasumiso-002-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「豚と茄子の辛味噌炒め定食」主役はとろけるナス！辛味噌を吸った具材で特盛ライスが止まらない"
+   },
+   {
+    "date": "2026-09-03T12:10:00",
+    "id": 208740,
+    "link": "https://netaful.jp/fast-food/0208740.html",
+    "product_name": "牛ビビン丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/09/matsuya-bibingyu-005-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「牛ビビン丼」減塩醤油の新タレで塩味はどう変わった？実際に食べてみた"
+   },
+   {
+    "date": "2026-08-25T12:30:00",
+    "id": 208210,
+    "link": "https://netaful.jp/fast-food/0208210.html",
+    "product_name": "豚キムチ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/08/matsuya-butakimuchi-003-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「豚キムチ定食」どれくらい豚肉が入ってる？食べてみた"
+   },
+   {
+    "date": "2026-08-17T12:10:00",
+    "id": 207881,
+    "link": "https://netaful.jp/fast-food/0207881.html",
+    "product_name": "Wで選べる玉子かけごはん",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/08/matsuya-morning-wegg-001-1-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】350円「Wで選べる玉子かけごはん」ミニ牛めしにしたら朝から大満足！"
+   },
+   {
+    "date": "2026-08-11T15:30:00",
+    "id": 207632,
+    "link": "https://netaful.jp/fast-food/0207632.html",
+    "product_name": "牛カルビホルモン丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/08/matsuya-horumon-don-004-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「牛カルビホルモン丼」ホルモンがプリプリで旨い！990円は高い？"
+   },
+   {
+    "date": "2026-07-28T12:30:00",
+    "id": 207128,
+    "link": "https://netaful.jp/fast-food/0207128.html",
+    "product_name": "松屋オリジナルソースローストビーフ",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/07/matsuya-roastbeef-003-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「松屋オリジナルソースローストビーフ」厚めのローストビーフが主役！テイクアウトは少し惜しい"
+   },
+   {
+    "date": "2026-07-16T08:30:00",
+    "id": 206684,
+    "link": "https://netaful.jp/fast-food/0206684.html",
+    "product_name": "豆乳ぷりん",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/07/matsuya-pudding-008-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「豆乳ぷりん」150円でこの満足感！黒蜜ときな粉で楽しむ和スイーツ"
+   },
+   {
+    "date": "2026-07-15T09:00:00",
+    "id": 206650,
+    "link": "https://netaful.jp/fast-food/0206650.html",
+    "product_name": "回鍋肉定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/07/matsuya-hoikoro-003-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「回鍋肉定食」野菜1/2日分＆600g超え！豚肉もたっぷりで大満足"
+   },
+   {
+    "date": "2026-07-11T12:30:00",
+    "id": 206483,
+    "link": "https://netaful.jp/fast-food/0206483.html",
+    "product_name": "生姜焼き定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/07/matsuya-shougayaki-006-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「生姜焼き定食」復活！ニンニクがガツンと効いた定番メニューはパンチありまくり！"
+   },
+   {
+    "date": "2026-07-09T10:00:00",
+    "id": 206332,
+    "link": "https://netaful.jp/fast-food/0206332.html",
+    "product_name": "やたら牛めし",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/07/matsuya-yatara-003-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「やたら牛めし」信州の郷土料理をアレンジ！刻み野菜でさっぱり味わう夏の牛めし"
+   },
+   {
+    "date": "2026-07-05T10:00:00",
+    "id": 206150,
+    "link": "https://netaful.jp/fast-food/0206150.html",
+    "product_name": "黒麻婆豆腐定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/07/matsuya-kuro-mabo-004-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「黒麻婆豆腐定食」コク深い黒麻婆でライスが止まらない店舗限定メニュー"
+   },
+   {
+    "date": "2026-07-02T12:30:00",
+    "id": 206028,
+    "link": "https://netaful.jp/fast-food/0206028.html",
+    "product_name": "牛肉ときくらげの野菜炒め",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/07/matsuya-gyuniku-kikurage-006-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「牛肉ときくらげの野菜炒め」960円も納得！牛肉たっぷりの店舗限定メニュー"
+   },
+   {
+    "date": "2026-07-01T09:00:00",
+    "id": 205972,
+    "link": "https://netaful.jp/fast-food/0205972.html",
+    "product_name": "ブラウンソースハンバーグ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/06/matsuya-brown-humburg-004-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「ブラウンソースハンバーグ定食」約7か月ぶりに復活！マッシュルームたっぷりの洋食味"
+   },
+   {
+    "date": "2026-06-09T12:30:00",
+    "id": 205157,
+    "link": "https://netaful.jp/fast-food/0205157.html",
+    "product_name": "ネオトマトごろごろチキンカレー",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/06/matsuya-tomato-curry-002-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「ネオトマトごろごろチキンカレー」 トマトの酸味がクセになる！かなり好みだったトマチキカレー"
+   },
+   {
+    "date": "2026-06-03T12:30:00",
+    "id": 204937,
+    "link": "https://netaful.jp/fast-food/0204937.html",
+    "product_name": "溢れる3種の濃厚チーズINハンバーグ",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/06/matsuya-cheese-humburg-001-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「溢れる3種の濃厚チーズINハンバーグ」中からチーズがどっさり！デミソースでご飯が止まらない！"
+   },
+   {
+    "date": "2026-05-21T10:00:00",
+    "id": 204552,
+    "link": "https://netaful.jp/fast-food/0204552.html",
+    "product_name": "チミチュリソース厚切りポークグリル定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/05/matsuya-chimichuri-002-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「チミチュリソース厚切りポークグリル定食」    厚さ1cm級の豚肉にバジル香るチミチュリ！"
+   },
+   {
+    "date": "2026-05-12T12:30:00",
+    "id": 204264,
+    "link": "https://netaful.jp/fast-food/0204264.html",
+    "product_name": "バターチキンカレー",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/05/matsuya-butter-chicken-curry-002-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「バターチキンカレー」チキン6〜7個入り！？もはや“ごろチキ”級だった！"
+   },
+   {
+    "date": "2026-04-30T10:00:00",
+    "id": 203913,
+    "link": "https://netaful.jp/fast-food/0203913.html",
+    "product_name": "トンテキ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/04/matsuya-tonteki-005-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「トンテキ定食」特盛ライスで総重量500g超！濃厚タレ×厚切り肉で満腹確定"
+   },
+   {
+    "date": "2026-04-21T11:30:00",
+    "id": 201928,
+    "link": "https://netaful.jp/fast-food/0201928.html",
+    "product_name": "豚ロースグリル定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/04/matsuya-buta-grill-004-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「豚ロースグリル定食」厚み1cm級！？やわらか厚切り肉でご飯が止まらない！"
+   },
+   {
+    "date": "2026-04-14T11:30:00",
+    "id": 201591,
+    "link": "https://netaful.jp/fast-food/0201591.html",
+    "product_name": "ごろごろ煮込みチキンカレー",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/04/matsuya-gorochiki-002-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「ごろごろ煮込みチキンカレー」“ごろチキ”帰還！やっぱり最強だった！"
+   },
+   {
+    "date": "2026-04-07T11:30:00",
+    "id": 193946,
+    "link": "https://netaful.jp/fast-food/0193946.html",
+    "product_name": "うまトマチーズ牛めし",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/04/matsuya-umatoma-gyudon-004-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「うまトマチーズ牛めし」“うまトマ×牛めし”が完成形！？並盛690円を食べてみた"
+   },
+   {
+    "date": "2026-03-15T16:00:00",
+    "id": 193037,
+    "link": "https://netaful.jp/fast-food/0193037.html",
+    "product_name": "サムギョプサル風焼肉定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/03/matsuya-samgyoposal-027-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「サムギョプサル風焼肉定食」極厚豚カルビ15枚！肉だらけ"
+   },
+   {
+    "date": "2026-03-08T12:00:00",
+    "id": 192773,
+    "link": "https://netaful.jp/fast-food/0192773.html",
+    "product_name": "炙りマヨ辣鶏めし",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/03/matsuya-mara-005-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「炙りマヨ辣鶏めし」背徳感すごい‥‥マヨ×ラー油の禁断丼"
+   },
+   {
+    "date": "2026-02-24T11:30:00",
+    "id": 192174,
+    "link": "https://netaful.jp/fast-food/0192174.html",
+    "product_name": "牛肉と牡蠣のオイスターソース炒め",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/02/matsuya-kakigyu-003-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「牛肉と牡蠣のオイスターソース炒め」牛肉マシマシ！牡蠣5個で890円はアリ？"
+   },
+   {
+    "date": "2026-02-17T18:00:00",
+    "id": 191069,
+    "link": "https://netaful.jp/fast-food/0191069.html",
+    "product_name": "松屋 ちいかわの鬼辛カレー",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/02/matsuya-chikawa-curry-002-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「松屋 ちいかわの鬼辛カレー」どれくらい辛い？実際に食べてみた"
+   },
+   {
+    "date": "2026-02-16T10:30:00",
+    "id": 191048,
+    "link": "https://netaful.jp/fast-food/0191048.html",
+    "product_name": "Wで選べる玉子かけごはん",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/02/matsuya-morning-3x-017-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「Wで選べる玉子かけごはん」350円の最安朝食をさらにポイント3倍で食べてみた！"
+   },
+   {
+    "date": "2026-02-13T10:30:00",
+    "id": 190144,
+    "link": "https://netaful.jp/fast-food/0190144.html",
+    "product_name": "プルコギ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/02/matsuya-purukogi-006-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】牛肉50%増量した「プルコギ定食」を食べてみた！何グラム？"
+   },
+   {
+    "date": "2026-02-10T12:30:00",
+    "id": 190007,
+    "link": "https://netaful.jp/fast-food/0190007.html",
+    "product_name": "カルビ焼肉定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/02/matsuya-kalbi-33plus-005-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】牛肉33%増量した「カルビ焼肉定食」を食べてみた！何グラム？"
+   },
+   {
+    "date": "2026-02-03T12:15:00",
+    "id": 189756,
+    "link": "https://netaful.jp/fast-food/0189756.html",
+    "product_name": "牛焼肉定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/02/matsuya-100off-gyuyakiniku-002-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「牛焼肉定食」100円引きキャンペーン＋ポイント1.5倍増量で食べられる！"
+   },
+   {
+    "date": "2026-01-27T12:15:00",
+    "id": 189271,
+    "link": "https://netaful.jp/fast-food/0189271.html",
+    "product_name": "鶏のどて煮風鍋",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/01/matsuya-doteni-002-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「鶏のどて煮風鍋」ピリ辛味噌でご飯が止まらない！松屋流の名古屋メシ"
+   },
+   {
+    "date": "2026-01-25T14:00:00",
+    "id": 189194,
+    "link": "https://netaful.jp/fast-food/0189194.html",
+    "product_name": "北海道産鮭の粗ほぐし玉子かけごはん",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/01/matsuya-morning-sake-011-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】新朝食メニュー「北海道産鮭の粗ほぐし玉子かけごはん」食べてみた"
+   },
+   {
+    "date": "2026-01-06T12:15:00",
+    "id": 187741,
+    "link": "https://netaful.jp/fast-food/0187741.html",
+    "product_name": "元祖ネギ塩厚切り豚カルビ丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/01/matsuya-100off-atsugiri-buta-003-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「元祖ネギ塩厚切り豚カルビ丼」100ポイントプレゼントで実質590円で食べた！"
+   },
+   {
+    "date": "2025-12-23T12:10:00",
+    "id": 187298,
+    "link": "https://netaful.jp/fast-food/0187298.html",
+    "product_name": "煮込みビーフシチューハンバーグ",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/12/matsuya-beef-stew-002-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「煮込みビーフシチューハンバーグ」ごろっと牛肉×濃厚ソースでご飯が止まらない！"
+   },
+   {
+    "date": "2025-12-20T14:00:00",
+    "id": 187176,
+    "link": "https://netaful.jp/fast-food/0187176.html",
+    "product_name": "カルビと特選ブリスケット肉の合い盛り丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/12/matsuya-brisket-003-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「カルビと特選ブリスケット肉の合い盛り丼」牛カルビだけじゃない。想像以上に“肉”だった！"
+   },
+   {
+    "date": "2025-12-09T14:00:00",
+    "id": 186680,
+    "link": "https://netaful.jp/fast-food/0186680.html",
+    "product_name": "炙りマヨサーモン丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/12/sukiya-aburi-salmon-001-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「炙りマヨサーモン丼」790円ならお得！とろける炙りサーモン×マヨの相性が最高だった実食レポ"
+   },
+   {
+    "date": "2025-12-06T13:30:00",
+    "id": 186555,
+    "link": "https://netaful.jp/fast-food/0186555.html",
+    "product_name": "牡蠣入り牛豆腐キムチチゲ",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/12/matsuya-kaki-004-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「牡蠣入り牛豆腐キムチチゲ」旨辛チゲに牡蠣が加わったので食べてみた"
+   },
+   {
+    "date": "2025-11-26T12:30:00",
+    "id": 186050,
+    "link": "https://netaful.jp/fast-food/0186050.html",
+    "product_name": "マッサマンカレー",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/11/matsuya-massaman-curry-004-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「マッサマンカレー」初期より25%値上げ、それでも美味い。食べて再確認。"
+   },
+   {
+    "date": "2025-11-24T18:00:00",
+    "id": 185947,
+    "link": "https://netaful.jp/fast-food/0185947.html",
+    "product_name": "ポイント3倍キャンペーン",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/11/matsunoya-3x-004-485x364.jpeg",
+     "width": 485
+    },
+    "title": "松屋モバイルオーダー「ポイント3倍キャンペーン」開催！実際にロースかつ定食を食べてみた"
+   },
+   {
+    "date": "2025-11-18T14:30:00",
+    "id": 185596,
+    "link": "https://netaful.jp/fast-food/0185596.html",
+    "product_name": "西条てっぱんナポリタンハンバーグ",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/11/matsuya-napoli-humburg-015-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「西条てっぱんナポリタンハンバーグ」食べて驚いた。ナポリタンの存在感が強すぎる！"
+   },
+   {
+    "date": "2025-11-14T13:30:00",
+    "id": 185431,
+    "link": "https://netaful.jp/fast-food/0185431.html",
+    "product_name": "炙り十勝豚丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/11/matsuya-tokachi-016-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】「炙り十勝豚丼」復刻2位の本気！肉もタレも優勝してた"
+   },
+   {
+    "date": "2025-11-06T20:30:00",
+    "id": 185124,
+    "link": "https://netaful.jp/fast-food/0185124.html",
+    "product_name": "牛豆腐キムチチゲ",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/11/matsuya-chige-ramen-002-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】「牛豆腐キムチチゲ」は麺にも合う！旨辛スープで作るチゲラーメンが最高"
+   },
+   {
+    "date": "2025-10-28T13:30:00",
+    "id": 184635,
+    "link": "https://netaful.jp/fast-food/0184635.html",
+    "product_name": "牛豆腐キムチチゲ",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/10/matsuya-gyuchige-015-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】「牛豆腐キムチチゲ」今年も登場！海鮮だし×牛肉の旨みご飯止まらん！"
+   },
+   {
+    "date": "2025-10-21T13:00:00",
+    "id": 184313,
+    "link": "https://netaful.jp/fast-food/0184313.html",
+    "product_name": "肉吸い",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/10/matsuya-nikusui-023-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】「肉吸い」具だくさんでご飯も進む癒し系メニュー"
+   },
+   {
+    "date": "2025-10-09T14:00:00",
+    "id": 183698,
+    "link": "https://netaful.jp/fast-food/0183698.html",
+    "product_name": "旨辛玉子ソーセージ丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/10/matsuya-morning-umakara-004-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】「旨辛玉子ソーセージ丼」松屋の朝丼がじわじわハマる味だった"
+   },
+   {
+    "date": "2025-09-24T16:30:00",
+    "id": 182972,
+    "link": "https://netaful.jp/fast-food/0182972.html",
+    "product_name": "牛焼肉定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/09/matsuya-100off-coupon-004-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】「牛焼肉定食」100円引きキャンペーンで790円で食べられる！"
+   },
+   {
+    "date": "2025-09-18T16:00:00",
+    "id": 182752,
+    "link": "https://netaful.jp/fast-food/0182752.html",
+    "product_name": "ジャークチキン",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/09/matsuya-jerkchicken-004-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】「ジャークチキン」香ばしチキンとチーズマッシュポテト‥‥ジャークチキンが想像以上！"
+   },
+   {
+    "date": "2025-09-04T12:30:00",
+    "id": 181948,
+    "link": "https://netaful.jp/fast-food/0181948.html",
+    "product_name": "シビ辛麻辣トンテキ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/09/matsuya-tonteki-027-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】「シビ辛麻辣トンテキ定食」200gの極厚肉を豪快に特盛で食べてみた！"
+   },
+   {
+    "date": "2025-08-13T15:30:00",
+    "id": 180904,
+    "link": "https://netaful.jp/fast-food/0180904.html",
+    "product_name": "カルビホルモン丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/08/matsuya-karbi-hormon-003-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】「カルビホルモン丼」ホルモンの脂が甘くて美味しいけど今年も980円はお高く感じる？"
+   },
+   {
+    "date": "2025-07-26T14:30:00",
+    "id": 179996,
+    "link": "https://netaful.jp/fast-food/0179996.html",
+    "product_name": "炙りチーズペペロンチーノチキン",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/07/matsuya-peperon-012-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】「炙りチーズペペロンチーノチキン」超ニンニクのピリ辛チキンにチーズでもう白米が止まらない！【188店舗限定】"
+   },
+   {
+    "date": "2025-07-16T12:30:00",
+    "id": 179548,
+    "link": "https://netaful.jp/fast-food/0179548.html",
+    "product_name": "松屋ポイントジャンボ2025",
+    "thumb": {
+     "height": 243,
+     "url": "https://netaful.jp/wp-content/uploads/2025/07/matsuya-jumbo-point-485x243.jpg",
+     "width": 485
+    },
+    "title": "「松屋ポイントジャンボ2025」最大45,000ポイントが貰えるキャンペーンを実施中（7/28まで）"
+   },
+   {
+    "date": "2025-07-16T11:30:00",
+    "id": 179541,
+    "link": "https://netaful.jp/fast-food/0179541.html",
+    "product_name": "回鍋肉定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/07/matsuya-hoikoro-003-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】「回鍋肉定食」野菜たっぷり、肉たっぷり、夏のコク旨メニューを食べた！"
+   },
+   {
+    "date": "2025-07-08T14:00:00",
+    "id": 179128,
+    "link": "https://netaful.jp/fast-food/0179128.html",
+    "product_name": "デビルチキン",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/07/matsuya-devil-chicken-005-1-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】「デビルチキン」スリランカの定番料理のチリ辛いチキンが良すぎる！"
+   },
+   {
+    "date": "2025-06-24T15:00:00",
+    "id": 178415,
+    "link": "https://netaful.jp/fast-food/0178415.html",
+    "product_name": "欧風牛タンカレー",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/06/matsuya-tan-curry-006-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】「欧風牛タンカレー」とろける牛タンにフォンドボー仕立てのコク深いカレーが旨いんだぜ‥‥！"
+   },
+   {
+    "date": "2025-06-16T11:00:00",
+    "id": 178005,
+    "link": "https://netaful.jp/fast-food/0178005.html",
+    "product_name": "創業ビーフカレー",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/06/matsuya-sougyou-beef-katsu-curry-007-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋・松のや】「創業ビーフカレー」のカツカレー「創業ビーフロースかつカレー」を食べてみた"
+   },
+   {
+    "date": "2025-06-03T17:00:00",
+    "id": 177324,
+    "link": "https://netaful.jp/fast-food/0177324.html",
+    "product_name": "うまトマハンバーグ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/06/matsuya-umatoma-010-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】祝レギュラーメニュー化！「うまトマハンバーグ定食」食べたら塩っぱくなくなってる！"
+   },
+   {
+    "date": "2025-05-27T13:00:00",
+    "id": 176999,
+    "link": "https://netaful.jp/fast-food/0176999.html",
+    "product_name": "旨辛豆腐牛バラ焼定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/05/matsuya-gyubara-002-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】「旨辛豆腐牛バラ焼定食」鉄鍋で焼くから最後まで熱々でうれしい美味しいクーポン使って安い！"
+   },
+   {
+    "date": "2025-05-20T14:00:00",
+    "id": 176621,
+    "link": "https://netaful.jp/fast-food/0176621.html",
+    "product_name": "チキンケバブ丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/05/matsuya-kebab-003-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】「チキンケバブ丼」ジューシーなごろチキがスパイシーに旨辛！野菜とピクルスとのバランスも抜群"
+   },
+   {
+    "date": "2025-05-13T12:30:00",
+    "id": 176327,
+    "link": "https://netaful.jp/fast-food/0176327.html",
+    "product_name": "本格四川風麻婆豆腐",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/05/matsuya-mabodofu-003-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】「本格四川風麻婆豆腐」唐辛子と山椒の良きシビ辛に味噌のコクでご飯が止まらなくなる！"
+   },
+   {
+    "date": "2025-05-09T14:00:00",
+    "id": 176156,
+    "link": "https://netaful.jp/fast-food/0176156.html",
+    "product_name": "ネギ塩とんタン丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/05/matsuya-tontan-limited-008-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】「ネギ塩とんタン丼」20店舗限定メニューを食べてみた【レビュー】"
+   },
+   {
+    "date": "2025-04-23T20:00:00",
+    "id": 175351,
+    "link": "https://netaful.jp/fast-food/0175351.html",
+    "product_name": "チーズバーガー丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/04/matsuya-cheese-burger-don-001-1-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】「チーズバーガー丼」本当に美味しいの〜？と思って食べたけど本当に美味しかったです。松屋のハンバーグはソースなしが旨いのでは説"
+   },
+   {
+    "date": "2025-04-15T12:30:00",
+    "id": 174879,
+    "link": "https://netaful.jp/fast-food/0174879.html",
+    "product_name": "牛焼肉ピリ辛炒め",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/04/matsuya-gyuyakiniku-pirikara-003-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】「牛焼肉ピリ辛炒め」松屋の焼肉新定番メニューはラー油の香りと旨辛ビビンダレ！"
+   },
+   {
+    "date": "2025-04-01T12:30:00",
+    "id": 174245,
+    "link": "https://netaful.jp/fast-food/0174245.html",
+    "product_name": "マフェ",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/04/matsuya-mafe-004-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】セネガルの家庭料理「マフェ」を食べたらスパイス料理って感じで驚いたし旨い"
+   },
+   {
+    "date": "2025-03-24T13:00:00",
+    "id": 173792,
+    "link": "https://netaful.jp/fast-food/0173792.html",
+    "product_name": "“炙り”焼鮭朝定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/03/matsuya-asagohan-sake-002-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】「“炙り”焼鮭朝定食」680円の朝食を食べてみた"
+   },
+   {
+    "date": "2025-03-21T15:30:00",
+    "id": 173600,
+    "link": "https://netaful.jp/fast-food/0173600.html",
+    "product_name": "得朝チキンかつ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/03/matsunoya-morning-chicken-katsu-000-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松のや】「得朝チキンかつ定食」590円はお得すぎる！松屋併設店で朝メニューが注文可能に"
+   },
+   {
+    "date": "2025-03-18T13:00:00",
+    "id": 173451,
+    "link": "https://netaful.jp/fast-food/0173451.html",
+    "product_name": "豆乳ぷりん",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/03/matsuya-tonyu-pdding-001-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】50店舗限定「豆乳ぷりん」黒蜜きな粉でとけろる美味しさ！"
+   },
+   {
+    "date": "2025-03-18T12:00:00",
+    "id": 173442,
+    "link": "https://netaful.jp/fast-food/0173442.html",
+    "product_name": "たっぷり海老のニューバーグソース",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/03/matsuya-newburg-004-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】「たっぷり海老のニューバーグソース」海老の旨味全開！フランス発祥の濃厚ソースがたまらない！"
+   },
+   {
+    "date": "2025-03-06T14:00:00",
+    "id": 172934,
+    "link": "https://netaful.jp/fast-food/0172934.html",
+    "product_name": "得朝ロースかつ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/03/matsunoya-morning-tonkatsu-001-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松のや】「得朝ロースかつ定食」550円はお得すぎる！松屋併設店で朝メニューが注文可能に"
+   },
+   {
+    "date": "2025-02-10T14:00:00",
+    "id": 169312,
+    "link": "https://netaful.jp/fast-food/0169312.html",
+    "product_name": "とろっとたまごソーセージ丼豚汁朝ごはん",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2025/02/matsuya-tamago-700-003-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「とろっとたまごソーセージ丼豚汁朝ごはん」700円の朝食を食べてみた"
+   },
+   {
+    "date": "2025-02-04T12:30:00",
+    "id": 167110,
+    "link": "https://netaful.jp/fast-food/0167110.html",
+    "product_name": "ネギゆず旨塩厚切り豚カルビ丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2025/02/matsuya-yuzu-buta-003-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「ネギゆず旨塩厚切り豚カルビ丼」柚子塩で酸っぱ美味しいナイス690円"
+   },
+   {
+    "date": "2025-01-25T15:30:00",
+    "id": 166722,
+    "link": "https://netaful.jp/fast-food/0166722.html",
+    "product_name": "得朝牛皿定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2025/01/matsuya-asatoku-003-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「得朝牛皿定食」390円の朝食を食べてみた"
+   },
+   {
+    "date": "2025-01-23T12:10:00",
+    "id": 166603,
+    "link": "https://netaful.jp/fast-food/0166603.html",
+    "product_name": "Wで選べる玉子かけごはん",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2025/01/matsuya-tamagokake-gohan-003-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「Wで選べる玉子かけごはん」330円の朝食を食べてみた"
+   },
+   {
+    "date": "2025-01-13T17:30:00",
+    "id": 166156,
+    "link": "https://netaful.jp/fast-food/0166156.html",
+    "product_name": "ごろごろ煮込みチキンカレー",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2025/01/matsuya-gorochiki-004-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】意外に安い“ごろチキ”こと「ごろごろ煮込みチキンカレー」はレギュラーメニューになったのでいつでも食べられる"
+   },
+   {
+    "date": "2025-01-11T18:30:00",
+    "id": 166089,
+    "link": "https://netaful.jp/fast-food/0166089.html",
+    "product_name": null,
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/12/matsuya-gyu-kimuchi-chige-009-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】ライス並盛・大盛・特盛の重さは何gなのかメモ"
+   },
+   {
+    "date": "2025-01-08T13:00:00",
+    "id": 165929,
+    "link": "https://netaful.jp/fast-food/0165929.html",
+    "product_name": "とろっとたまごソーセージ丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2025/01/matsuya-tamago-gohan-003-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】朝食新メニュー「とろっとたまごソーセージ丼」はチーズオムレツ？"
+   },
+   {
+    "date": "2025-01-07T14:00:00",
+    "id": 165877,
+    "link": "https://netaful.jp/fast-food/0165877.html",
+    "product_name": "水煮牛肉",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2025/01/matsuya-gekikara-010-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】唐辛子の量がガチ！四川風牛肉唐辛子煮込み「水煮牛肉」激辛だが旨い"
+   },
+   {
+    "date": "2025-01-06T09:00:00",
+    "id": 165816,
+    "link": "https://netaful.jp/fast-food/0165816.html",
+    "product_name": null,
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2025/01/matsuya-katsu-curry-005-300x225.jpg",
+     "width": 300
+    },
+    "title": "カツカレーを食べたくなると松屋に行く 〜しかも松屋のカツカレーは意外に安い"
+   },
+   {
+    "date": "2024-12-24T14:00:00",
+    "id": 165325,
+    "link": "https://netaful.jp/fast-food/0165325.html",
+    "product_name": "3種ソースのグラタンハンバーグ",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/12/matsuya-guratan-humburg-001-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「3種ソースのグラタンハンバーグ」ホワイト＋ボロネーゼ＋チーズにガーリックで松屋らしさ爆発の2024年ラスト新商品！"
+   },
+   {
+    "date": "2024-12-17T14:30:00",
+    "id": 165102,
+    "link": "https://netaful.jp/fast-food/0165102.html",
+    "product_name": "いくら丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/12/matsuya-ikura-don-015-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「いくら丼」を食べてプチプチに溺れる"
+   },
+   {
+    "date": "2024-12-10T17:00:00",
+    "id": 164797,
+    "link": "https://netaful.jp/fast-food/0164797.html",
+    "product_name": "カットヒレステーキ丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/12/matsuya-cut-hire-steak-002-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「カットヒレステーキ丼」ヒレ肉120gは本当に120gなのか量って食べてみた"
+   },
+   {
+    "date": "2024-12-03T13:30:00",
+    "id": 164454,
+    "link": "https://netaful.jp/fast-food/0164454.html",
+    "product_name": "牛豆腐キムチチゲ",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/12/matsuya-gyu-kimuchi-chige-004-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「牛豆腐キムチチゲ」今年も旨辛で美味しかった‥‥麺を入れてみたくなるな！？"
+   },
+   {
+    "date": "2024-11-26T12:30:00",
+    "id": 164107,
+    "link": "https://netaful.jp/fast-food/0164107.html",
+    "product_name": "煮込みビーフシチュー",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/11/matsuya-beef-stew-007-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「煮込みビーフシチュー」スプーンでほぐれる柔らかい牛肉がゴロゴロ＆トロトロ"
+   },
+   {
+    "date": "2024-11-19T12:15:00",
+    "id": 163751,
+    "link": "https://netaful.jp/fast-food/0163751.html",
+    "product_name": "炙り十勝豚丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/11/matsuya-butadon-021-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「炙り十勝豚丼」とにかく豚肉が多いから何枚か数えてみた【2回目】"
+   },
+   {
+    "date": "2024-11-15T14:00:00",
+    "id": 163505,
+    "link": "https://netaful.jp/fast-food/0163505.html",
+    "product_name": "ねぎマヨ辣牛めし",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/11/matsuya-gyudon-mayora-004-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「ねぎマヨ辣牛めし」予想より遥かに美味しかったので謝罪します"
+   },
+   {
+    "date": "2024-11-13T12:15:00",
+    "id": 163403,
+    "link": "https://netaful.jp/fast-food/0163403.html",
+    "product_name": "厚切り豚カルビと茄子の辛味噌炒め丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/11/matsuya-atsugiri-nasu-003-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「厚切り豚カルビと茄子の辛味噌炒め丼」豚肉が厚切りになったので今年2度目の茄子の辛味噌炒めを食べた"
+   },
+   {
+    "date": "2024-11-12T12:30:00",
+    "id": 163360,
+    "link": "https://netaful.jp/fast-food/0163360.html",
+    "product_name": "クジェナパプリツェ",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/11/matsuya-czech-008-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「クジェナパプリツェ」59店舗限定のチェコ料理がスパイシーで旨い！"
+   },
+   {
+    "date": "2024-11-05T13:00:00",
+    "id": 162071,
+    "link": "https://netaful.jp/fast-food/0162071.html",
+    "product_name": "鶏豆腐キムチチゲ",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/11/matsuya-chige-tori-003-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「鶏豆腐キムチチゲ」思わぬ総重量で満腹度が高すぎる！"
+   },
+   {
+    "date": "2024-10-30T13:30:00",
+    "id": 161829,
+    "link": "https://netaful.jp/fast-food/0161829.html",
+    "product_name": "オリジナルカレー",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/10/matsuya-original-curry-014-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「オリジナルカレー」レギュラーメニューとして復活したので食べて量ってみた"
+   },
+   {
+    "date": "2024-10-23T19:00:00",
+    "id": 161620,
+    "link": "https://netaful.jp/fast-food/0161620.html",
+    "product_name": "リトアニア風ホワイトソースハンバーグ",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/10/matsuya-white-humburg-000-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「リトアニア風ホワイトソースハンバーグ」テイクアウトしたら丼ぶりにするに限る"
+   },
+   {
+    "date": "2024-10-15T13:30:00",
+    "id": 160917,
+    "link": "https://netaful.jp/fast-food/0160917.html",
+    "product_name": "厚切り豚カルビ",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/10/matsuya-atsugiri-butayakiniku-001-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】豚カルビが厚切りにリニューアル「厚切り豚カルビ」食べてみた"
+   },
+   {
+    "date": "2024-10-08T12:30:00",
+    "id": 160630,
+    "link": "https://netaful.jp/fast-food/0160630.html",
+    "product_name": "豚と茄子の辛味噌炒め",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/10/matsuya-nasumiso-003-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「豚と茄子の辛味噌炒め」旨辛の茄子＆豚肉たっぷりで旨味！"
+   },
+   {
+    "date": "2024-10-07T15:00:00",
+    "id": 160570,
+    "link": "https://netaful.jp/fast-food/0160570.html",
+    "product_name": "キャベツとベーコンのペペロンチーノ牛めし",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/10/matsuya-peperon-003-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「キャベツとベーコンのペペロンチーノ牛めし」唐辛子多めの特製ペペロンチーノソースが牛肉に合いまくるのでは！？"
+   },
+   {
+    "date": "2024-10-02T13:30:00",
+    "id": 158558,
+    "link": "https://netaful.jp/fast-food/0158558.html",
+    "product_name": "ニンニク野菜 牛めし",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/10/matsuya-jiro-028-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】二郎系インスパイア牛めし“松郎”こと「ニンニク野菜 牛めし」食べてみた（マシマシで）【68店舗限定】"
+   },
+   {
+    "date": "2024-09-24T12:30:00",
+    "id": 156995,
+    "link": "https://netaful.jp/fast-food/0156995.html",
+    "product_name": "ごろごろチキンのバターチキンカレー",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/09/matsuya-butter-chicken-curry-002-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「ごろごろチキンのバターチキンカレー」食べ応えあるけどバタチキカレーは何グラムあるのだろう？"
+   },
+   {
+    "date": "2024-09-19T11:30:00",
+    "id": 156818,
+    "link": "https://netaful.jp/fast-food/0156818.html",
+    "product_name": "てりやきエッグハンバーグ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/09/matsuya-teriyaki-egg-003-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「てりやきエッグハンバーグ定食」テイクアウトして丼ぶりにして食べたら“つゆだく”で最後まで美味い！"
+   },
+   {
+    "date": "2024-09-10T14:00:00",
+    "id": 156309,
+    "link": "https://netaful.jp/fast-food/0156309.html",
+    "product_name": "親子丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/09/matsuya-oyakodon-013-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「親子丼」鉄板で焼いたジューシーチキンで旨い"
+   },
+   {
+    "date": "2024-09-03T15:00:00",
+    "id": 156014,
+    "link": "https://netaful.jp/fast-food/0156014.html",
+    "product_name": "高菜明太マヨ牛めし",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/09/matsuya-takana-mayo-009-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「高菜明太マヨ牛めし」テイクアウトして食べてみたら"
+   },
+   {
+    "date": "2024-08-30T17:00:00",
+    "id": 155856,
+    "link": "https://netaful.jp/fast-food/0155856.html",
+    "product_name": "リトアニア風ホワイトソースハンバーグ",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/08/matsuya-lithuania-012-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】44店舗限定「リトアニア風ホワイトソースハンバーグ」食べてみた"
+   },
+   {
+    "date": "2024-08-28T15:30:00",
+    "id": 155738,
+    "link": "https://netaful.jp/fast-food/0155738.html",
+    "product_name": "鶏のバター醤油炒め定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/08/matsuya-chicken-butter-020-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「鶏のバター醤油炒め定食」の美味しい食べ方を紹介します"
+   },
+   {
+    "date": "2024-08-25T10:30:00",
+    "id": 155564,
+    "link": "https://netaful.jp/fast-food/0155564.html",
+    "product_name": "牛ビビン丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/08/matsuya-bibin-don-012-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「牛ビビン丼」今さら3週間前の新商品を食べたけどこれは良いな？"
+   },
+   {
+    "date": "2024-08-14T17:00:00",
+    "id": 155075,
+    "link": "https://netaful.jp/fast-food/0155075.html",
+    "product_name": "柔厚炙りチャーシューエッグ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/08/matsuya-chashu-egg-012-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】1,390円は高いのか高くないのか「柔厚炙りチャーシューエッグ定食」食べてみた"
+   },
+   {
+    "date": "2024-08-10T12:10:00",
+    "id": 154859,
+    "link": "https://netaful.jp/fast-food/0154859.html",
+    "product_name": "2種盛牛焼肉丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/08/matsuya-2-yakiniku-004-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「2種盛牛焼肉丼」焼肉が2種類ついて780円なら“コスパ良し”なのでは？"
+   },
+   {
+    "date": "2024-08-09T13:00:00",
+    "id": 154805,
+    "link": "https://netaful.jp/fast-food/0154805.html",
+    "product_name": "シャリアピンソースのエッグハンバーグ丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/08/matsuya-humburg-egg-000-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「シャリアピンソースのエッグハンバーグ丼」ニンニクの利いた玉ねぎソースが松屋らしい味で旨い！"
+   },
+   {
+    "date": "2024-07-30T12:30:00",
+    "id": 154264,
+    "link": "https://netaful.jp/fast-food/0154264.html",
+    "product_name": "うまトマハンバーグ",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/07/matsuya-umatoma-017-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「うまトマハンバーグ」絶妙な美味しさに進化した気がするのだが！？"
+   },
+   {
+    "date": "2024-07-23T13:30:00",
+    "id": 153901,
+    "link": "https://netaful.jp/fast-food/0153901.html",
+    "product_name": "山形だしわさびとろろ牛めし",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/07/matsuya-tororo-003-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「山形だしわさびとろろ牛めし」気温38度を歩いて食べに行く"
+   },
+   {
+    "date": "2024-07-19T14:30:00",
+    "id": 153733,
+    "link": "https://netaful.jp/fast-food/0153733.html",
+    "product_name": "オリジナルチキンカレー",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/07/matsuya-katsu-curry-006-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】新レギュラー「オリジナルチキンカレー」にロースかつをトッピングせざるを得ない"
+   },
+   {
+    "date": "2024-07-18T12:30:00",
+    "id": 153689,
+    "link": "https://netaful.jp/fast-food/0153689.html",
+    "product_name": "回鍋肉定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/07/matsuya-hoikoro-018-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「回鍋肉定食」野菜たっぷり夏を感じる旨辛町中華メニューが今年も！"
+   },
+   {
+    "date": "2024-07-10T12:30:00",
+    "id": 153280,
+    "link": "https://netaful.jp/fast-food/0153280.html",
+    "product_name": "スタミナ豚バラ炒め",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/07/matsuya-stamina-buta-005-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「スタミナ豚バラ炒め」食べてみた！ニンニクききまくりの新レギュラーはどう？"
+   },
+   {
+    "date": "2024-07-09T13:30:00",
+    "id": 153216,
+    "link": "https://netaful.jp/fast-food/0153216.html",
+    "product_name": "エッグハンバーグ丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/07/matsuya-humburg-don-007-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「エッグハンバーグ丼」特製ソースが美味しい大人のハンバーグ丼"
+   },
+   {
+    "date": "2024-06-25T12:10:00",
+    "id": 152517,
+    "link": "https://netaful.jp/fast-food/0152517.html",
+    "product_name": "カルビホルモン丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/06/matsuya-horumon-003-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「カルビホルモン丼」ホルモンの脂が甘くて美味しいけど980円はお高く感じる？"
+   },
+   {
+    "date": "2024-06-11T14:30:00",
+    "id": 151864,
+    "link": "https://netaful.jp/fast-food/0151864.html",
+    "product_name": "極厚200gトンテキ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/06/matsuya-tonteki-003-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「極厚200gトンテキ定食」強めのにんにくソースでペロッと食べてしまった！ペロッと！"
+   },
+   {
+    "date": "2024-05-28T12:30:00",
+    "id": 151151,
+    "link": "https://netaful.jp/fast-food/0151151.html",
+    "product_name": "ごろごろチキンの和風タルタル定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/05/matsuya-tartar-002-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「ごろごろチキンの和風タルタル定食」ミツカンとコラボした3種のお酢の南蛮ダレでさっぱり美味しい！"
+   },
+   {
+    "date": "2024-05-21T14:00:00",
+    "id": 150776,
+    "link": "https://netaful.jp/fast-food/0150776.html",
+    "product_name": "チミチュリソースハンバーグ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/05/matsuya-chimichuri-009-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「チミチュリソースハンバーグ定食」食べた 〜魔法のソースは不思議なソース。辛いのかい？塩っぱいのかい？どっちなんだい！？"
+   },
+   {
+    "date": "2024-05-14T13:30:00",
+    "id": 150415,
+    "link": "https://netaful.jp/fast-food/0150415.html",
+    "product_name": "ねぎだく塩だれ豚カルビ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/05/matsuya-negi-lemon-003-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「ねぎだく塩だれ豚カルビ定食」たっぷりネギ塩ダレの隣にトロロ"
+   },
+   {
+    "date": "2024-05-07T12:30:00",
+    "id": 150030,
+    "link": "https://netaful.jp/fast-food/0150030.html",
+    "product_name": "元祖旨辛焼き牛めし",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/05/matsuya-gyu-samugetan-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】ほんのり旨辛の「元祖旨辛焼き牛めし」と意外な美味しさの「参鶏湯風スープ」を食べた"
+   },
+   {
+    "date": "2024-05-03T18:00:00",
+    "id": 149857,
+    "link": "https://netaful.jp/fast-food/0149857.html",
+    "product_name": "ねぎ納豆オリジナルビーフカレー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/05/matsuya-original-beef-curry-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】カレーにネギと納豆！？33店舗限定「ねぎ納豆オリジナルビーフカレー」食べてみた"
+   },
+   {
+    "date": "2024-04-23T12:15:00",
+    "id": 149385,
+    "link": "https://netaful.jp/fast-food/0149385.html",
+    "product_name": "ポーランド風ミエロニィハンバーグ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/04/matsuya-Mielony-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「ポーランド風ミエロニィハンバーグ」ポーランドの家庭の味を食べた（ミエロニィはメンチカツのことらしい）"
+   },
+   {
+    "date": "2024-04-16T12:30:00",
+    "id": 148997,
+    "link": "https://netaful.jp/fast-food/0148997.html",
+    "product_name": "ごろごろ煮込みチキンカレー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/04/matsuya-goro-chicken-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「ごろごろ煮込みチキンカレー」チキンはどのくらい“ごろごろ”しているのか重量を計ってみた"
+   },
+   {
+    "date": "2024-04-09T12:00:00",
+    "id": 148612,
+    "link": "https://netaful.jp/fast-food/0148612.html",
+    "product_name": "ネギたっぷり牛肉のエスニック炒め定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/04/matsuya-peru-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】ペルー料理“ロモサルタード”の松屋風アレンジ「ネギたっぷり牛肉のエスニック炒め定食」スパイスでご飯がススム！"
+   },
+   {
+    "date": "2024-03-26T12:30:00",
+    "id": 147940,
+    "link": "https://netaful.jp/fast-food/0147940.html",
+    "product_name": "マレーシア風牛肉煮込み～ルンダン～",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/03/matsuya-rendang-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「マレーシア風牛肉煮込み～ルンダン～」肉塊の重量や大きさを計測してみた"
+   },
+   {
+    "date": "2024-03-20T12:30:00",
+    "id": 147619,
+    "link": "https://netaful.jp/fast-food/0147619.html",
+    "product_name": "チミチュリソースハンバーグ定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/03/chimichuri-matsuya-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「チミチュリソースハンバーグ定食」アルゼンチン発祥の肉用ソースはピリ旨辛【70店舗限定】"
+   },
+   {
+    "date": "2024-03-12T12:30:00",
+    "id": 147121,
+    "link": "https://netaful.jp/fast-food/0147121.html",
+    "product_name": "胡麻と野菜のドレッシング",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/03/matsuya-dressing-003-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】テスト導入している「胡麻と野菜のドレッシング」が一番美味しい！"
+   },
+   {
+    "date": "2024-03-12T12:00:00",
+    "id": 147115,
+    "link": "https://netaful.jp/fast-food/0147115.html",
+    "product_name": "たっぷり明太タルタルチキン定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/03/matsuya-mentai-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「たっぷり明太タルタルチキン定食」2回目を食べる美味しさ"
+   },
+   {
+    "date": "2024-03-05T12:10:00",
+    "id": 146710,
+    "link": "https://netaful.jp/fast-food/0146710.html",
+    "product_name": "チキンマサラカレー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/03/matsuya-masara-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「チキンマサラカレー」松屋スパイスカレーの新境地、これは旨い。"
+   },
+   {
+    "date": "2024-03-03T14:00:00",
+    "id": 146637,
+    "link": "https://netaful.jp/fast-food/0146637.html",
+    "product_name": "チキングリル定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/03/matsuya-chicken-grill-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「チキングリル定食」刻んだニンニク醤油漬けが刺激的すぎる！【190店舗限定】"
+   },
+   {
+    "date": "2024-02-20T15:30:00",
+    "id": 145674,
+    "link": "https://netaful.jp/fast-food/0145674.html",
+    "product_name": "シャリアピンソースハンバーグ定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/02/matsuya-shari-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「シャリアピンソースハンバーグ定食」たっぷりソースでハンバーグが行方不明になる"
+   },
+   {
+    "date": "2024-02-06T12:30:00",
+    "id": 144929,
+    "link": "https://netaful.jp/fast-food/0144929.html",
+    "product_name": "シュクメルリ鍋",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/02/matsuya-shukumelri-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】3年ぶり復活「シュクメルリ鍋」クセになる味変を発見"
+   },
+   {
+    "date": "2024-02-05T12:30:00",
+    "id": 144881,
+    "link": "https://netaful.jp/fast-food/0144881.html",
+    "product_name": "たっぷり明太タルタルチキン定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/02/matsuya-mentai-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】桜色の「たっぷり明太タルタルチキン定食」食べてみた【55店舗限定】"
+   },
+   {
+    "date": "2024-01-25T12:05:00",
+    "id": 144400,
+    "link": "https://netaful.jp/fast-food/0144400.html",
+    "product_name": "カットステーキのハッシュドビーフ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/01/matsuya-hashed-beef-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「カットステーキのハッシュドビーフ」食べた！カットステーキと薄切り肉のダブルビーフだけでなくマッシュルームが大きくて良い！"
+   },
+   {
+    "date": "2024-01-09T12:00:00",
+    "id": 143727,
+    "link": "https://netaful.jp/fast-food/0143727.html",
+    "product_name": "炙り十勝豚丼",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/01/matsuya-butadon-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「炙り十勝豚丼」とにかく豚肉が多いから何枚か数えてみた"
+   },
+   {
+    "date": "2023-12-27T12:00:00",
+    "id": 143095,
+    "link": "https://netaful.jp/fast-food/0143095.html",
+    "product_name": null,
+    "thumb": {
+     "height": 300,
+     "url": "https://netaful.jp/wp-content/uploads/2023/12/mat-2023-300x300.jpg",
+     "width": 300
+    },
+    "title": "【松屋】2023年に食べた46食まとめ＆ベスト5【松のや】"
+   },
+   {
+    "date": "2023-12-26T12:00:00",
+    "id": 143076,
+    "link": "https://netaful.jp/fast-food/0143076.html",
+    "product_name": "ブラウンソースハンバーグ定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/12/brown-matsuya-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「ブラウンソースハンバーグ定食」やっぱり美味しい！ブラウンソースハンバーグ人気にも驚いた話"
+   },
+   {
+    "date": "2023-12-20T12:00:00",
+    "id": 142743,
+    "link": "https://netaful.jp/fast-food/0142743.html",
+    "product_name": "カットステーキのハッシュドビーフ",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2023/12/matsunoya-hash-007-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「カットステーキのハッシュドビーフ」濃厚ソースが美味いやつを食べました。"
+   },
+   {
+    "date": "2023-12-19T12:00:00",
+    "id": 142706,
+    "link": "https://netaful.jp/fast-food/0142706.html",
+    "product_name": "ビーフシチュー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/12/matsuya-beef-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「ビーフシチュー」ゴロッと牛肉にトロッと野菜が美味しい"
+   },
+   {
+    "date": "2023-12-18T12:00:00",
+    "id": 142558,
+    "link": "https://netaful.jp/fast-food/0142558.html",
+    "product_name": "マレーシア風牛肉煮込み ルンダン",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/12/matsuya-rendang-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「マレーシア風牛肉煮込み ルンダン」世界一美味しい料理に納得した！！"
+   },
+   {
+    "date": "2023-12-08T12:00:00",
+    "id": 142095,
+    "link": "https://netaful.jp/fast-food/0142095.html",
+    "product_name": null,
+    "thumb": {
+     "height": 647,
+     "url": "https://netaful.jp/wp-content/uploads/2023/12/matsuya-cashless-001-1-485x647.jpg",
+     "width": 485
+    },
+    "title": "【松屋】タッチパネル式の券売機（キャッシュレス専用機）は使いやすい？使いにくい？"
+   },
+   {
+    "date": "2023-12-05T17:00:00",
+    "id": 141879,
+    "link": "https://netaful.jp/fast-food/0141879.html",
+    "product_name": "チーズうまトマチキン定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/12/umatoma-matsuya-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「チーズうまトマチキン定食」“うまトマ”ソースは松屋らしい超ニンニク味だった！"
+   },
+   {
+    "date": "2023-11-29T19:00:00",
+    "id": 141449,
+    "link": "https://netaful.jp/fast-food/0141449.html",
+    "product_name": "ビーフ100%ハンバーグ定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/11/matsuya-beef-100-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「ビーフ100%ハンバーグ定食」重量200gの粗挽きハンバーグは肉々しさ満点！"
+   },
+   {
+    "date": "2023-11-22T10:00:00",
+    "id": 141118,
+    "link": "https://netaful.jp/fast-food/0141118.html",
+    "product_name": "牛豆腐キムチチゲ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/11/matsuya-chige-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「牛豆腐キムチチゲ」旨辛で絶品！飲んだ後の〆にもピッタリ"
+   },
+   {
+    "date": "2023-11-21T12:30:00",
+    "id": 141065,
+    "link": "https://netaful.jp/fast-food/0141065.html",
+    "product_name": "カルビ焼肉定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/11/matsuya-gyu-33-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】終売4時間前に33%増量「カルビ焼肉定食」を滑り込みで食べてきた"
+   },
+   {
+    "date": "2023-10-24T12:00:00",
+    "id": 139442,
+    "link": "https://netaful.jp/fast-food/0139442.html",
+    "product_name": "マッサマンカレー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/10/matsuya-massa-curry-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「マッサマンカレー」ココナッツミルクにポテトが美味い！世界で最も美味しい料理の松屋版"
+   },
+   {
+    "date": "2023-10-17T11:30:00",
+    "id": 139128,
+    "link": "https://netaful.jp/fast-food/0139128.html",
+    "product_name": "魯肉飯（ルーローハン）",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/10/matsuya-ruro-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「魯肉飯（ルーローハン）」豚バラ肉の台湾飯を食べた！モバイルクーポンで50円オフの630円"
+   },
+   {
+    "date": "2023-10-10T11:30:00",
+    "id": 138833,
+    "link": "https://netaful.jp/fast-food/0138833.html",
+    "product_name": "牛生姜焼定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/10/matsuya-gyu-shoga-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「牛生姜焼定食」ありそうでなかった牛肉の生姜焼きが旨い！"
+   },
+   {
+    "date": "2023-10-03T11:30:00",
+    "id": 138373,
+    "link": "https://netaful.jp/fast-food/0138373.html",
+    "product_name": "豚カルビ焼肉定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/10/matsuya-buta-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「豚カルビ焼肉定食」リニューアルした豚焼肉定食！バーベキューソースで素晴らしい“松屋味”に"
+   },
+   {
+    "date": "2023-09-26T11:30:00",
+    "id": 137978,
+    "link": "https://netaful.jp/fast-food/0137978.html",
+    "product_name": "豚と茄子の辛味噌炒め定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/09/matsuya-miso-itame-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「豚と茄子の辛味噌炒め定食」食べた！辛味噌ダレに豚肉＆とろとろ茄子が旨味"
+   },
+   {
+    "date": "2023-09-21T12:00:00",
+    "id": 137706,
+    "link": "https://netaful.jp/fast-food/0137706.html",
+    "product_name": "ネギ塩牛焼肉丼",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/09/matsuya-negisio-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「ネギ塩牛焼肉丼」ネギたっぷりにごま油と塩で美味しくないわけがない！"
+   },
+   {
+    "date": "2023-09-12T11:30:00",
+    "id": 137273,
+    "link": "https://netaful.jp/fast-food/0137273.html",
+    "product_name": "鶏のバター醤油炒め定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/09/matsuya-butter-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「鶏のバター醤油炒め定食」にんにくバター醤油のタレまで余すことなく食べきりたい → そうだ！丼だ！"
+   },
+   {
+    "date": "2023-09-05T11:30:00",
+    "id": 136903,
+    "link": "https://netaful.jp/fast-food/0136903.html",
+    "product_name": "鶏肉飯（ジーローハン）",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/09/jirohan-matsuya-022-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「鶏肉飯（ジーローハン）」細切り鶏むね肉にネギ醤油ソースがニンニキーな台湾飯"
+   },
+   {
+    "date": "2023-08-29T15:00:00",
+    "id": 136146,
+    "link": "https://netaful.jp/fast-food/0136146.html",
+    "product_name": "ビーフカレー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/08/matsuya-curry-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】新しくなった「ビーフカレー」を食べてみた。店舗限定のカツカレーで。"
+   },
+   {
+    "date": "2023-08-22T12:00:00",
+    "id": 135670,
+    "link": "https://netaful.jp/fast-food/0135670.html",
+    "product_name": "プルコギ定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/08/matsuya-purukogi-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「プルコギ定食」シャキシャキのニンニクの芽にニンニクソースが美味い！"
+   },
+   {
+    "date": "2023-08-15T12:00:00",
+    "id": 135378,
+    "link": "https://netaful.jp/fast-food/0135378.html",
+    "product_name": "ガパオライス",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/08/matsuya-gapao-014-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「ガパオライス」を食べて「ガパオってなんだっけ？」と考えたけどスパイシーで美味しいから、ま、いっか！"
+   },
+   {
+    "date": "2023-08-08T12:30:00",
+    "id": 135118,
+    "link": "https://netaful.jp/fast-food/0135118.html",
+    "product_name": "うまトマハンバーグ定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/08/matsuya-umatoma-title-300x169.jpeg",
+     "width": 300
+    },
+    "title": "【松屋】「うまトマハンバーグ定食」ニンニキーな特製トマトソースはちょっとしょっぱいけどハンバーグと半熟玉子でバランスが良くなる"
+   },
+   {
+    "date": "2023-08-01T10:30:00",
+    "id": 134790,
+    "link": "https://netaful.jp/neta-eat/0134790.html",
+    "product_name": "第3回松屋復刻メニュー総選挙",
+    "thumb": {
+     "height": 150,
+     "url": "https://netaful.jp/wp-content/uploads/2023/08/matsuya-senkyo-000--300x150.jpg",
+     "width": 300
+    },
+    "title": "【松屋】過去10年のメニューが対象「第3回松屋復刻メニュー総選挙」開催中（8/14まで）"
+   },
+   {
+    "date": "2023-07-25T12:00:00",
+    "id": 134546,
+    "link": "https://netaful.jp/fast-food/0134546.html",
+    "product_name": "回鍋肉定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/07/matsuya-hoikoro-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「回鍋肉定食」野菜たっぷりだからライス大盛りでも心が軽い町中華メニューを食べてきた"
+   },
+   {
+    "date": "2023-07-18T13:30:00",
+    "id": 133404,
+    "link": "https://netaful.jp/fast-food/0133404.html",
+    "product_name": "ごろごろ煮込みチキンカレー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/07/goro-chicken-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「ごろごろ煮込みチキンカレー」が復活したので1/80万食を食べてきた！"
+   },
+   {
+    "date": "2023-06-20T12:00:00",
+    "id": 131544,
+    "link": "https://netaful.jp/fast-food/0131544.html",
+    "product_name": "“松屋風”ロモサルタード",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/06/matsuya-lomo-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「“松屋風”ロモサルタード」を食べたら南米の味がした。気がする。"
+   },
+   {
+    "date": "2023-06-13T12:00:00",
+    "id": 130982,
+    "link": "https://netaful.jp/fast-food/0130982.html",
+    "product_name": "チキン定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/06/matsuya-chicken-teishoku-014-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「チキン定食」1980年のメニューが復活！鶏チャーシュー的な薄切り肉に松屋らしいニンニク味"
+   },
+   {
+    "date": "2023-05-30T12:00:00",
+    "id": 129981,
+    "link": "https://netaful.jp/fast-food/0129981.html",
+    "product_name": "トンテキ定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/05/matsuya-tonteki-014-30-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「トンテキ定食」濃厚トンテキソースに分厚い豚肉が美味い！豚肉は最大4枚まで増量可能"
+   },
+   {
+    "date": "2023-05-23T12:30:00",
+    "id": 129689,
+    "link": "https://netaful.jp/fast-food/0129689.html",
+    "product_name": "肉厚豚焼肉定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/05/matsuya-buta-yakiniku-014-23-300x169.jpg",
+     "width": 300
+    },
+    "title": "肉厚3倍で復活した「肉厚豚焼肉定食」松屋の本気に豚肉3枚盛り（+200円）＆ライス大盛（無料）という破天荒なことをしてしまった！（自分比）"
+   },
+   {
+    "date": "2023-05-09T13:00:00",
+    "id": 128717,
+    "link": "https://netaful.jp/fast-food/0128717.html",
+    "product_name": "ねぎたっぷりスパイスカレー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/05/matsuya-negi-curry-013-09-300x169.jpg",
+     "width": 300
+    },
+    "title": "カレーにねぎだく！？賛否両論を生みそうな「ねぎたっぷりスパイスカレー」が松屋で爆誕したので食べてみた"
+   },
+   {
+    "date": "2023-05-02T15:00:00",
+    "id": 128559,
+    "link": "https://netaful.jp/fast-food/0128559.html",
+    "product_name": "ホワイトソースハンバーグ定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/05/matsuya-whitesouce-burg-012-02-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】牛乳廃棄問題に取り組む「ホワイトソースハンバーグ定食」を食べたらミルキーというよりはニンニキーでやっぱりここは松屋だと思った"
+   },
+   {
+    "date": "2023-04-25T11:30:00",
+    "id": 128327,
+    "link": "https://netaful.jp/fast-food/0128327.html",
+    "product_name": "デミグラスハンバーグ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/04/matsuya-demi-017-25-300x169.jpg",
+     "width": 300
+    },
+    "title": "新しくなった松屋のハンバーグ「デミグラスハンバーグ」は美味しい？まずい？"
+   },
+   {
+    "date": "2023-04-20T12:00:00",
+    "id": 128134,
+    "link": "https://netaful.jp/fast-food/0128134.html",
+    "product_name": "ブラウンソースハンバーグ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/04/matsuya-brownsauce-000-20-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】さらば！「ブラウンソースハンバーグ」が終売するというので最後に食べてきた → カロリーカットしたハンバーグに交代"
+   },
+   {
+    "date": "2023-03-28T12:00:00",
+    "id": 127338,
+    "link": "https://netaful.jp/fast-food/0127338.html",
+    "product_name": "プーパッポンカレー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/03/matsuya-pupapon-000-28-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】蟹の香りが食欲をそそる！ココナッツミルクが美味しいタイのカレー「プーパッポンカレー」を1年ぶりに食べた"
+   },
+   {
+    "date": "2023-03-14T18:00:00",
+    "id": 126690,
+    "link": "https://netaful.jp/fast-food/0126690.html",
+    "product_name": "富士山豆腐の本格麻婆",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/03/matsuya-mabo-009-14-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】豆腐まるごと一丁に山椒の香り漂う麻婆が食欲をそそる「富士山豆腐の本格麻婆」食べた"
+   },
+   {
+    "date": "2023-02-21T18:00:00",
+    "id": 125748,
+    "link": "https://netaful.jp/fast-food/0125748.html",
+    "product_name": "牛焼肉定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/02/matsuya-yakiniku-teishoku-000-21-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】薬味が選べるようにリニューアルした「牛焼肉定食」をネギダレで食べたものの‥‥カラシポン酢が美味しいんじゃない！？"
+   },
+   {
+    "date": "2023-02-07T13:00:00",
+    "id": 125232,
+    "link": "https://netaful.jp/fast-food/0125232.html",
+    "product_name": "台湾風まぜ牛めし",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/02/taiwanfuu-maze-gyu-meshi-000-07-300x169.jpg",
+     "width": 300
+    },
+    "title": "台湾風なのかどうか分からないけど具だくさんの玉子かけご飯みたいでなんだか美味しい松屋の「台湾風まぜ牛めし」"
+   },
+   {
+    "date": "2023-02-01T07:30:00",
+    "id": 125041,
+    "link": "https://netaful.jp/fast-food/0125041.html",
+    "product_name": "松屋",
+    "thumb": {
+     "height": 240,
+     "url": "https://netaful.jp/wp-content/uploads/2023/01/matsuya-katsu-kami-005-314-300x240.jpg",
+     "width": 300
+    },
+    "title": "「松屋」にソース焼きかつ丼がやってきた。【ダイゴマン】"
+   },
+   {
+    "date": "2023-01-24T14:30:00",
+    "id": 124817,
+    "link": "https://netaful.jp/fast-food/0124817.html",
+    "product_name": "ボロネーゼソースハンバーグ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/01/bolo-matsuya-000-24-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「ボロネーゼソースハンバーグ」食べてみた！特製ソースで“肉on肉”にとろ〜り目玉焼きが絶品の松屋風イタリアン"
+   },
+   {
+    "date": "2023-01-13T07:30:00",
+    "id": 124526,
+    "link": "https://netaful.jp/fast-food/0124526.html",
+    "product_name": "ごろごろチキンの濃厚カルボナーラ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/01/matsuya-calbo-12000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「ごろごろチキンの濃厚カルボナーラ」食べたら超ニンニクだった！コク旨のカルボナーラはライスが進みまくる濃すぎる飯泥棒ソース"
+   },
+   {
+    "date": "2023-01-05T12:00:00",
+    "id": 124286,
+    "link": "https://netaful.jp/fast-food/0124286.html",
+    "product_name": "松屋ビーフカレー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/01/matsuya-beefcurry-05000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】驚いた！牛バラ肉をまるごと煮込んだ「松屋ビーフカレー」を食べたら本当に創業ビーフカレーより旨味マシマシのパワーアップを果たしていた！オリジナルカレーは終売へ"
+   },
+   {
+    "date": "2023-01-05T08:00:00",
+    "id": 124274,
+    "link": "https://netaful.jp/fast-food/0124274.html",
+    "product_name": "海鮮豆腐キムチチゲ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/01/kaisen-chige-05000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】15年ぶりに復活したイカ・エビ・アサリなど海鮮ゴロゴロの「海鮮豆腐キムチチゲ」が美味しいので冬の間に食べておくべき！牛肉もたっぷり！"
+   },
+   {
+    "date": "2022-12-20T16:00:00",
+    "id": 123793,
+    "link": "https://netaful.jp/fast-food/0123793.html",
+    "product_name": "カットステーキのビーフストロガノフ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/12/matsuya-beef-goro-20000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】ごろごろのカットステーキと牛バラ肉のWビーフがたっぷり入った「カットステーキのビーフストロガノフ」が発売されたので食べてきた"
+   },
+   {
+    "date": "2022-11-15T15:00:00",
+    "id": 122296,
+    "link": "https://netaful.jp/fast-food/0122296.html",
+    "product_name": "富士山豆腐の麻婆めし",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/11/matsuya-mabo-meshi-15000-300x169.jpg",
+     "width": 300
+    },
+    "title": "定番メニュー化を切望！豆腐丸ごと一丁に“シビ辛”麻婆ダレぶっかけの松屋「富士山豆腐の麻婆めし」が旨辛くて美味い！"
+   },
+   {
+    "date": "2022-11-04T07:30:00",
+    "id": 121842,
+    "link": "https://netaful.jp/fast-food/0121842.html",
+    "product_name": "ごろごろチキンのバターチキンカレー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/11/matsuya-gorochiki-03000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】お久しぶりです！1年以上ぶりに復活した「ごろごろチキンのバターチキンカレー」はやっぱり美味しいけど100円近く値上がり"
+   },
+   {
+    "date": "2022-10-26T07:30:00",
+    "id": 121590,
+    "link": "https://netaful.jp/fast-food/0121590.html",
+    "product_name": "親子丼",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/10/matsuya-oyakodon-25000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】追い玉子でTKG！ごろごろの鶏もも肉を玉子でふんわりとじた「親子丼」の満足感が高い"
+   },
+   {
+    "date": "2022-10-13T07:30:00",
+    "id": 121087,
+    "link": "https://netaful.jp/fast-food/0121087.html",
+    "product_name": "豚と茄子の辛味噌炒め",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/10/matsuya-nasumiso-12000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】旨辛味噌をまとうトロトロ茄子と豚肉でノンストップ・ライス「豚と茄子の辛味噌炒め」食べてきた！"
+   },
+   {
+    "date": "2022-09-13T17:00:00",
+    "id": 119758,
+    "link": "https://netaful.jp/fast-food/0119758.html",
+    "product_name": "魯肉飯",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/09/matsuya-rulo-han-13000-300x169.jpg",
+     "width": 300
+    },
+    "title": "豚バラ肉を煮込んだ松屋風アレンジの台湾飯「魯肉飯」が発売されたので食べてきた！"
+   },
+   {
+    "date": "2022-07-27T17:30:00",
+    "id": 115680,
+    "link": "https://netaful.jp/fast-food/0115680.html",
+    "product_name": "回鍋肉定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/07/matsuya-hoikoro-27000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「回鍋肉定食」食べてきた！ピリ辛味噌ダレでご飯が止まらない上に野菜もたっぷり摂れて健康的な町中華な定食である"
+   },
+   {
+    "date": "2022-06-28T15:30:00",
+    "id": 114485,
+    "link": "https://netaful.jp/fast-food/0114485.html",
+    "product_name": "海鮮ごろごろシーフードカレー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/06/matsuya-seafood-28010-300x169.jpg",
+     "width": 300
+    },
+    "title": "“ごろごろ”の期待値を下げて行ったらかなり美味しいシーフードカレーだと気づいた松屋の「海鮮ごろごろシーフードカレー」"
+   },
+   {
+    "date": "2022-05-27T16:30:00",
+    "id": 112920,
+    "link": "https://netaful.jp/fast-food/0112920.html",
+    "product_name": "プーパッポンカレー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/05/matsuya-pupappon-27000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】蟹の旨味にココナッツミルクのコク！ピリ辛でほのかに甘い「プーパッポンカレー」が旨い！でもちょっとしょっぱい！"
+   },
+   {
+    "date": "2022-05-17T18:00:00",
+    "id": 112602,
+    "link": "https://netaful.jp/fast-food/0112602.html",
+    "product_name": "洋風ガーリックポークステーキ丼",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/05/matsuya-garipodon-17000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】ニンニクまみれの焼いた厚切り豚肉が美味しい「洋風ガーリックポークステーキ丼」久しぶりに超ニンニクを感じる！"
+   },
+   {
+    "date": "2022-04-26T12:00:00",
+    "id": 111953,
+    "link": "https://netaful.jp/fast-food/0111953.html",
+    "product_name": "カットステーキのハッシュドビーフ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/04/matsuya-cut-stake-26000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】ごろごろカットステーキに濃厚ソースでライスが止まらない「カットステーキのハッシュドビーフ」発売日に食べてきたよ！"
+   },
+   {
+    "date": "2022-04-19T16:00:00",
+    "id": 111746,
+    "link": "https://netaful.jp/fast-food/0111746.html",
+    "product_name": "豚ビビン丼",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/04/matsuya-bibin-don-19000-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】復活した「豚ビビン丼」をテイクアウトしてシルバー会員になって炙りチーズまでのっけて食べてみた！"
+   },
+   {
+    "date": "2022-04-06T12:00:00",
+    "id": 111340,
+    "link": "https://netaful.jp/fast-food/0111340.html",
+    "product_name": "ごろごろ煮込みチキンカレー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/04/matsuya-gorochicken-06000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「ごろごろ煮込みチキンカレー」復活したので食べてきた【2022】"
+   },
+   {
+    "date": "2022-03-29T16:30:00",
+    "id": 111104,
+    "link": "https://netaful.jp/fast-food/0111104.html",
+    "product_name": "豚角煮コンボ牛めし",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/03/gyu-buta-matsuya-29000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】半熟玉子TKGにトロトロ豚角煮で飲むように食べる「豚角煮コンボ牛めし」"
+   },
+   {
+    "date": "2022-03-16T09:00:00",
+    "id": 110674,
+    "link": "https://netaful.jp/fast-food/0110674.html",
+    "product_name": "たっぷりシャリアピンソースのポークソテー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/03/matsuya-shari-pork-16000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】ニンニクたっぷりで煮詰めた味の濃い玉ねぎソースが完全に主役「たっぷりシャリアピンソースのポークソテー」"
+   },
+   {
+    "date": "2022-02-22T12:30:00",
+    "id": 109806,
+    "link": "https://netaful.jp/fast-food/0109806.html",
+    "product_name": "カルボナーラハンバーグ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/02/calbo-humburg-22014-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】ニンニクの利いたクリーミーでコク旨なカルボソースとチーズ＆半熟玉子でジューシー肉厚の「カルボナーラハンバーグ」を食べる！"
+   },
+   {
+    "date": "2022-02-15T12:30:00",
+    "id": 109530,
+    "link": "https://netaful.jp/fast-food/0109530.html",
+    "product_name": "豚キムチ丼",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/02/matsunoya-butakimuchi-don-15000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】やはり松屋キムチは美味い！うまいうまい！タッカルビダレで食べる旨辛丼「豚キムチ丼」"
+   },
+   {
+    "date": "2022-02-09T11:30:00",
+    "id": 109310,
+    "link": "https://netaful.jp/fast-food/0109310.html",
+    "product_name": "豆腐キムチチゲ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/02/matsuya-tofu-09000-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】魚介にキムチの旨辛いスープにスプーンが止まらない！松屋製豆腐＆キムチの「豆腐キムチチゲ」に謝るしかなくなりました"
+   },
+   {
+    "date": "2022-02-01T16:00:00",
+    "id": 108947,
+    "link": "https://netaful.jp/fast-food/0108947.html",
+    "product_name": "豚めし",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/02/matsuya-buta-meshi-01000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】10年前の人気メニューがリニューアルして復活「豚めし」350円は安い"
+   },
+   {
+    "date": "2022-01-28T19:00:00",
+    "id": 108841,
+    "link": "https://netaful.jp/fast-food/0108841.html",
+    "product_name": "牛めし（並盛）",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/01/matsuya-25-plus-28009-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「牛めし（並盛）」牛肉の25%増量キャンペーンと熱い豚汁の記憶"
+   },
+   {
+    "date": "2022-01-18T17:30:00",
+    "id": 108498,
+    "link": "https://netaful.jp/fast-food/0108498.html",
+    "product_name": "焼キムチ牛めし",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/01/yaki-kimuchi-gyumeshi-18000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】富士山麓の松屋キムチとタッカルビダレで「焼キムチ牛めし」の旨辛がすぎる！"
+   },
+   {
+    "date": "2021-12-09T16:00:00",
+    "id": 107179,
+    "link": "https://netaful.jp/fast-food/0107179.html",
+    "product_name": null,
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2021/12/matsuya-25-buta-09000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】厚切り豚焼肉25%増量は何グラム？新しくなったバーベキューソースもチェック！"
+   },
+   {
+    "date": "2021-11-16T15:00:00",
+    "id": 106303,
+    "link": "https://netaful.jp/fast-food/0106303.html",
+    "product_name": "ビーフ牛プレめし",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2021/11/beef-gyu-pla-meshi-16000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】牛めしにビーフシチューを絡めてワンプレートで食べる「ビーフ牛プレめし」が想定外の美味しさで驚いたのであった‥‥"
+   },
+   {
+    "date": "2021-11-09T15:00:00",
+    "id": 106023,
+    "link": "https://netaful.jp/fast-food/0106023.html",
+    "product_name": "ビーフシチューハンバーグ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2021/11/matsuya-beef-hamb-09000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】牛バラをとろとろに煮込んだ特製ソースの「ビーフシチューハンバーグ」を発売直後に食べてきた！"
+   },
+   {
+    "date": "2021-11-02T16:00:00",
+    "id": 105796,
+    "link": "https://netaful.jp/fast-food/0105796.html",
+    "product_name": "チキンコンボ牛めし",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2021/11/matsuya-combo-02000-300x169.jpg",
+     "width": 300
+    },
+    "title": "松屋で牛丼を食べない人にオススメしたい2種類の味が楽しめる「チキンコンボ牛めし」"
+   },
+   {
+    "date": "2021-10-27T17:30:00",
+    "id": 105579,
+    "link": "https://netaful.jp/fast-food/0105579.html",
+    "product_name": "ごろっと野菜のスープカレー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2021/10/matsuya-soup-curry-27008-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】ビーフ or チキン？「ごろっと野菜のスープカレー」思ってた以上のスパイシーさでライスが進む！"
+   },
+   {
+    "date": "2021-10-05T13:30:00",
+    "id": 104783,
+    "link": "https://netaful.jp/fast-food/0104783.html",
+    "product_name": "ボロネーゼ＆マスカルポーネ風Wソースのハンバーグ定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2021/10/matsuy-w-humburg-05010-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】肉々しさに旨味ぎゅっ「ボロネーゼ＆マスカルポーネ風Wソースのハンバーグ定食」発売日に即食べてみたらこれは美味い！"
+   },
+   {
+    "date": "2021-09-21T13:00:00",
+    "id": 104285,
+    "link": "https://netaful.jp/fast-food/0104285.html",
+    "product_name": "マッサマンカレー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2021/09/matsuya-massaran-21000-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】復活の「マッサマンカレー」世界一美味しいと言われるタイ料理を発売から1時間後に食べてきた！"
+   },
+   {
+    "date": "2021-09-14T16:00:00",
+    "id": 103972,
+    "link": "https://netaful.jp/fast-food/0103972.html",
+    "product_name": "ビフテキ丼",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2021/09/matsuya-beef-steak-japone-14006-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】玉ねぎたっぷりの香味ジャポネソースが美味しい「ビフテキ丼」第2弾を食べた！さっぱり食べられてこっちの方が好きだ！"
+   },
+   {
+    "date": "2021-09-07T16:00:00",
+    "id": 103671,
+    "link": "https://netaful.jp/fast-food/0103671.html",
+    "product_name": "ビフテキ丼",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2021/09/matsuya-beef-steak-don-07007-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】ごま風味たっぷり＆さっぱり醤油ダレが美味しい「ビフテキ丼」を発売日に食べた！肉も厚めで良かった！"
+   },
+   {
+    "date": "2021-08-17T20:30:00",
+    "id": 103015,
+    "link": "https://netaful.jp/fast-food/0103015.html",
+    "product_name": "海鮮ごろごろシーフードカレー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2021/08/matsuya-seafood-curry-01-04-1-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】ちょっとごろごろが物足りないかもしれない！？「海鮮ごろごろシーフードカレー」"
+   },
+   {
+    "date": "2021-07-06T15:30:00",
+    "id": 101601,
+    "link": "https://netaful.jp/fast-food/0101601.html",
+    "product_name": "ごろごろチキンのバターチキンカレー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2021/07/matsuya-gorogoro-13-04-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】バター風味アップして復活のバタチキ「ごろごろチキンのバターチキンカレー」食べたら確かにアップ！"
+   },
+   {
+    "date": "2021-06-15T17:00:00",
+    "id": 100763,
+    "link": "https://netaful.jp/fast-food/0100763.html",
+    "product_name": "黒毛和牛100%ハンバーグ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2021/06/100beef-humburg-matsuya-01-04-title-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】肉々しいこだわりのドーナツハンバーグ！数量限定の「黒毛和牛100%ハンバーグ定食」食べた"
+   },
+   {
+    "date": "2021-06-11T17:00:00",
+    "id": 100639,
+    "link": "https://netaful.jp/fast-food/0100639.html",
+    "product_name": "“とろけるチーズの”旨辛ごろごろチキン定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2021/06/matsuya-umakara-gorochicken-04-04-title-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】えっ、ガーリックじゃなかったの！？食べて驚愕した1週間限定販売「“とろけるチーズの”旨辛ごろごろチキン定食」"
+   },
+   {
+    "date": "2021-05-18T17:00:00",
+    "id": 99807,
+    "link": "https://netaful.jp/fast-food/099807.html",
+    "product_name": "ごろごろチキンのトマトカレー",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2021/05/tomato-chicken-03-04-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】チーズたっぷりで夏野菜が美味しい「ごろごろチキンのトマトカレー」3年ぶりに復刻した日に食べた！"
+   },
+   {
+    "date": "2021-04-29T11:20:00",
+    "id": 99264,
+    "link": "https://netaful.jp/fast-food/099264.html",
+    "product_name": "ごろごろ煮込みチキンカレー",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2021/04/matsuya-curry-03-04-title-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】復活しすぎじゃない！？と思いながら「ごろごろ煮込みチキンカレー」を食べてきた"
+   },
+   {
+    "date": "2021-04-02T19:00:00",
+    "id": 98061,
+    "link": "https://netaful.jp/fast-food/098061.html",
+    "product_name": "オマール海老ソースのクリームカレー",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2021/04/matsuya-ebi-curry-001-202103-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】ごろごろエビたっぷりの「オマール海老ソースのクリームカレー」食べてみた"
+   },
+   {
+    "date": "2021-03-09T15:00:00",
+    "id": 64897,
+    "link": "https://netaful.jp/fast-food/064897.html",
+    "product_name": "鶏のじゃがバター炒め定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2021/03/matsuya-tori-jaga-202103-01-title-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】ニンニクたっぷり大人のじゃがバター「鶏のじゃがバター炒め定食」はライスが進む！"
+   },
+   {
+    "date": "2021-03-03T10:00:00",
+    "id": 64858,
+    "link": "https://netaful.jp/fast-food/064858.html",
+    "product_name": "旨辛牛焼ビビン丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2021/03/matsuya-umakara-202103-03-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】定番メニューとなった「旨辛牛焼ビビン丼」を食べてみた"
+   },
+   {
+    "date": "2021-02-25T09:00:00",
+    "id": 64813,
+    "link": "https://netaful.jp/fast-food/064813.html",
+    "product_name": "厚切り豚焼肉定食",
+    "thumb": {
+     "height": 960,
+     "url": "https://netaful.jp/wp-content/uploads/2021/02/matsuya-buta-202102-1-title-1.jpg",
+     "width": 1280
+    },
+    "title": "【松屋】リニューアルして厚切りになった「厚切り豚焼肉定食」を食べてみた"
+   },
+   {
+    "date": "2021-02-02T14:00:00",
+    "id": 64679,
+    "link": "https://netaful.jp/fast-food/064679.html",
+    "product_name": "マッサマンカレー",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2021/02/matsuya-massaman-curry-202102-4-titile-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】世界一美味しい料理と言われるタイ料理「マッサマンカレー」が美味い！香りからしてタイで最高‥‥"
+   },
+   {
+    "date": "2021-01-19T11:00:00",
+    "id": 64587,
+    "link": "https://netaful.jp/fast-food/064587.html",
+    "product_name": "シュクメルリ鍋",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2021/01/matsuya-shukumeruri-202101-16-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】復活した「シュクメルリ鍋」ニンニクチーズにさらに追いチーズ！最後の一口まで美味すぎた！"
+   },
+   {
+    "date": "2021-01-06T14:00:00",
+    "id": 64491,
+    "link": "https://netaful.jp/fast-food/064491.html",
+    "product_name": "お肉たっぷり焼き牛めし 元祖旨辛ダレ",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2021/01/matsuya-umakara-202101-01-title-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「お肉たっぷり焼き牛めし 元祖旨辛ダレ」半熟玉子が入っていなかったのでとりあえず食べた報告で！"
+   },
+   {
+    "date": "2020-12-22T21:00:00",
+    "id": 64413,
+    "link": "https://netaful.jp/fast-food/064413.html",
+    "product_name": "濃厚オマール海老ソースのチキンフリカッセ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/12/matsuya-omal-202012-1-titile-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】オマール海老ソースは良いのだが‥‥またもやガーリック！？「濃厚オマール海老ソースのチキンフリカッセ定食」美味しい？まずい！？"
+   },
+   {
+    "date": "2020-12-19T09:00:00",
+    "id": 64382,
+    "link": "https://netaful.jp/fast-food/064382.html",
+    "product_name": "ごろごろチキンのバターチキンカレー",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/12/matsuya-goro-chicken-202012-title-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】2020年夏に最も売れたカレー「ごろごろチキンのバターチキンカレー」が復活！チキン8個は食べごたえありすぎ！"
+   },
+   {
+    "date": "2020-12-08T12:00:00",
+    "id": 64313,
+    "link": "https://netaful.jp/fast-food/064313.html",
+    "product_name": "ビーフシチュー",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/12/matsuya-beef-202012-title-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】高いと思っててゴメン。美味しかったよ、とろとろ牛肉の「ビーフシチュー」"
+   },
+   {
+    "date": "2020-11-24T11:00:00",
+    "id": 64213,
+    "link": "https://netaful.jp/fast-food/064213.html",
+    "product_name": "牛リブロースのカットステーキ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/11/matsuya-rib-202011-13-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】肉は何グラム！？ステーキ肉をカットした「牛リブロースのカットステーキ定食」食べてみた！"
+   },
+   {
+    "date": "2020-11-12T12:00:00",
+    "id": 64155,
+    "link": "https://netaful.jp/fast-food/064155.html",
+    "product_name": "牛キムチチゲ膳",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/11/matsuya-chige-202011-01-title-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】肉1.8倍増し＆自社製富士山キムチの「牛キムチチゲ膳」食べてみた"
+   },
+   {
+    "date": "2020-10-27T12:30:00",
+    "id": 64072,
+    "link": "https://netaful.jp/fast-food/064072.html",
+    "product_name": "黒トリュフソースのビーフハンバーグ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/10/slproImg_202010271200090-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】トリュフにガーリックに粗挽き肉！ソースもハンバーグも全て美味い「黒トリュフソースのビーフハンバーグ定食」"
+   },
+   {
+    "date": "2020-10-06T14:00:00",
+    "id": 63933,
+    "link": "https://netaful.jp/fast-food/063933.html",
+    "product_name": "牛ステーキ丼",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2020/10/slproImg_202010061548120-1-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】ソースが選べてはみ出るボリュームの「牛ステーキ丼」松屋オリジナル“洋風ガーリックソース”を選んだら予想通りのニンニクたっぷりステーキだった！旨し！"
+   },
+   {
+    "date": "2020-09-16T16:00:00",
+    "id": 63779,
+    "link": "https://netaful.jp/fast-food/063779.html",
+    "product_name": null,
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/09/slproImg_202009161603060-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】カルビ焼肉33%増量は何グラム？テイクアウトならではの調味料味変を楽しむ！"
+   },
+   {
+    "date": "2020-09-08T11:00:00",
+    "id": 63708,
+    "link": "https://netaful.jp/fast-food/063708.html",
+    "product_name": "味噌漬けトンテキ丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/09/slproImg_202009081115500-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「味噌漬けトンテキ丼」豚肉のカーペットや〜！特製味噌ダレの豚ロース2枚のせ！"
+   },
+   {
+    "date": "2020-08-25T13:00:00",
+    "id": 63581,
+    "link": "https://netaful.jp/fast-food/063581.html",
+    "product_name": "豚キムチ丼",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2020/08/slproImg_202008251256220-1-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松屋】自社製キムチとニンニクの芽に特製ダレを絡めた「豚キムチ丼」辛めの味付けでご飯が進む夏の終わりの丼！【食べてみた】"
+   },
+   {
+    "date": "2020-08-20T22:00:00",
+    "id": 63545,
+    "link": "https://netaful.jp/fast-food/063545.html",
+    "product_name": "海老チリ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/08/slproImg_202008202214482-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】店舗限定メニュー！ぷりっぷりの海老がごろごろ入った「海老チリ定食」を食べてみた"
+   },
+   {
+    "date": "2020-08-04T13:00:00",
+    "id": 63429,
+    "link": "https://netaful.jp/fast-food/063429.html",
+    "product_name": "山形だしの三色丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/08/slproImg_202008041432230-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】暑い日にさっぱりと美味い！茎わさび＆とろろ「山形だしの三色丼」食べてみた"
+   },
+   {
+    "date": "2020-07-21T14:00:00",
+    "id": 63333,
+    "link": "https://netaful.jp/fast-food/063333.html",
+    "product_name": "ごろごろチキンのバターチキンカレー",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/07/slproImg_202007211400175-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】復活の「ごろごろチキンのバターチキンカレー」早速テイクアウトで食べたけどやはり美味い！しかし今年はザクザクの玉ねぎはなし？"
+   },
+   {
+    "date": "2020-05-26T14:00:00",
+    "id": 62950,
+    "link": "https://netaful.jp/fast-food/062950.html",
+    "product_name": "ごろごろ創業ビーフカレー",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/05/slproImg_202005261527078-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】ごろごろトロトロ大っきなビーフが美味い「ごろごろ創業ビーフカレー」"
+   },
+   {
+    "date": "2020-04-09T13:00:00",
+    "id": 62652,
+    "link": "https://netaful.jp/fast-food/062652.html",
+    "product_name": "チキン南蛮焼き定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/04/slproImg_202004091507473-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】たっぷりタルタルの店舗限定メニュー「チキン南蛮焼き定食」食べてみた"
+   },
+   {
+    "date": "2020-04-08T07:00:00",
+    "id": 62639,
+    "link": "https://netaful.jp/fast-food/062639.html",
+    "product_name": "ごろごろ煮込みチキンカレー",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/04/slproImg_2020040719041011-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「ごろごろ煮込みチキンカレー」をテイクアウトして食べてみた！【限定復活】"
+   },
+   {
+    "date": "2020-03-10T12:00:00",
+    "id": 62501,
+    "link": "https://netaful.jp/fast-food/062501.html",
+    "product_name": "ガリたま牛めし",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/03/slproImg_202003101151570-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】たっぷりニンニクにこりこりザーサイが旨味！復活した「ガリたま牛めし」食べた"
+   },
+   {
+    "date": "2020-03-07T22:00:00",
+    "id": 62483,
+    "link": "https://netaful.jp/fast-food/062483.html",
+    "product_name": null,
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/03/slproImg_202003051753040-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋の朝ごはん】朝食の食べ比べレビュー"
+   },
+   {
+    "date": "2020-02-25T13:00:00",
+    "id": 62408,
+    "link": "https://netaful.jp/fast-food/062408.html",
+    "product_name": "ビーフハンバーグステーキ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/02/slproImg_202002251325400-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】超粗挽き「ビーフハンバーグステーキ定食」食べてみた → 200gでたっぷり肉堪能"
+   },
+   {
+    "date": "2020-02-19T22:00:00",
+    "id": 62387,
+    "link": "https://netaful.jp/fast-food/062387.html",
+    "product_name": "カチャトーラ",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/02/slproImg_202002192155015-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「カチャトーラ」松屋世界紀行の第2弾は猟師風のイタリア料理"
+   },
+   {
+    "date": "2020-02-15T16:00:00",
+    "id": 62363,
+    "link": "https://netaful.jp/fast-food/062363.html",
+    "product_name": null,
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/02/slproImg_202002151545390-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】プルコギ定食に謝らなければならないことがあります→生玉子ですき焼き風にして食べるとすこぶる美味い！"
+   },
+   {
+    "date": "2020-01-14T12:00:00",
+    "id": 62190,
+    "link": "https://netaful.jp/fast-food/062190.html",
+    "product_name": "シュクメルリ鍋",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/01/slproImg_202001141134311-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「シュクメルリ鍋」トロトロのニンニクチーズと鶏もも肉が美味すぎるジョージア料理"
+   },
+   {
+    "date": "2020-01-07T11:00:00",
+    "id": 62150,
+    "link": "https://netaful.jp/fast-food/062150.html",
+    "product_name": "うまとろ豚たま牛めし",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/01/slproImg_202001071117030-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「うまとろ豚たま牛めし」山椒たっぷりがオススメ！豚と牛と鶏をガッツリ食べる"
+   },
+   {
+    "date": "2019-12-03T10:00:00",
+    "id": 61995,
+    "link": "https://netaful.jp/fast-food/061995.html",
+    "product_name": "創業ビーフカレー",
+    "thumb": null,
+    "title": "【松屋】オリジナルカレーからバトンタッチした「創業ビーフカレー」を食べてみた"
+   },
+   {
+    "date": "2019-11-19T12:00:00",
+    "id": 61892,
+    "link": "https://netaful.jp/fast-food/061892.html",
+    "product_name": "厚切り豚テキ定食",
+    "thumb": null,
+    "title": "【松屋】「厚切り豚テキ定食」分厚い豚肉を特製にんにくタレでガッツリ食す！"
+   },
+   {
+    "date": "2019-11-03T12:00:00",
+    "id": 61771,
+    "link": "https://netaful.jp/fast-food/061771.html",
+    "product_name": "牛焼肉と茄子のにんにく味噌定食",
+    "thumb": null,
+    "title": "【松屋】「牛焼肉と茄子のにんにく味噌定食」果てしなく続く永遠のニンニク味"
+   },
+   {
+    "date": "2019-10-25T15:00:00",
+    "id": 61714,
+    "link": "https://netaful.jp/fast-food/061714.html",
+    "product_name": "ごろごろ煮込みチキンカレー",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2019/10/slproImg_201910251525100-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「ごろごろ煮込みチキンカレー」1週間限定で復活したから食べてきた！"
+   },
+   {
+    "date": "2019-09-29T16:00:00",
+    "id": 61521,
+    "link": "https://netaful.jp/gourmet/061521.html",
+    "product_name": "松屋",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2019/09/slproImg_201909291711520-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "「松屋」で場末感のあるちょい呑みしてきた【せんべろ】"
+   },
+   {
+    "date": "2019-09-17T09:00:00",
+    "id": 61461,
+    "link": "https://netaful.jp/fast-food/061461.html",
+    "product_name": "牛と味玉の豚角煮丼",
+    "thumb": {
+     "height": 960,
+     "url": "https://netaful.jp/wp-content/uploads/2019/09/slproImg_201909161003380-1.jpg",
+     "width": 1280
+    },
+    "title": "【松屋】「牛と味玉の豚角煮丼」沖縄ラフテー風豚角煮が美味い！"
+   },
+   {
+    "date": "2019-08-15T08:00:00",
+    "id": 61237,
+    "link": "https://netaful.jp/fast-food/061237.html",
+    "product_name": "ごろごろチキンのバターチキンカレー",
+    "thumb": {
+     "height": 960,
+     "url": "https://netaful.jp/wp-content/uploads/2019/08/slproImg_201908141901060-1.jpg",
+     "width": 1280
+    },
+    "title": "【松屋】旨いと話題のカレーを食べてきた「ごろごろチキンのバターチキンカレー」"
+   },
+   {
+    "date": "2019-07-17T13:00:00",
+    "id": 61057,
+    "link": "https://netaful.jp/fast-food/061057.html",
+    "product_name": "玉子で食べる四川風 麻婆豆腐定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2019/07/slproImg_201907171409150-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「玉子で食べる四川風 麻婆豆腐定食」シビ辛が旨辛い"
+   },
+   {
+    "date": "2019-05-13T16:00:00",
+    "id": 60586,
+    "link": "https://netaful.jp/fast-food/060586.html",
+    "product_name": "豚ビビン丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2019/05/slproImg_201905131711240-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】豚と牛がレギュラー争い！「豚ビビン丼」食べてみた"
+   },
+   {
+    "date": "2019-04-22T11:30:00",
+    "id": 60431,
+    "link": "https://netaful.jp/fast-food/060431.html",
+    "product_name": "ごろごろ煮込みチキンカレー",
+    "thumb": {
+     "height": 960,
+     "url": "https://netaful.jp/wp-content/uploads/2019/04/slproImg_201904221127018-1.jpg",
+     "width": 1280
+    },
+    "title": "【松屋】復活した「ごろごろ煮込みチキンカレー」をLINE Payで食べてきた"
+   },
+   {
+    "date": "2019-01-14T16:00:00",
+    "id": 59679,
+    "link": "https://netaful.jp/fast-food/059679.html",
+    "product_name": "四川風麻婆鍋膳",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2019/01/slproImg_201901141717079-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松屋】「四川風麻婆鍋膳」リピ確定の旨辛鍋"
+   },
+   {
+    "date": "2018-04-08T14:00:00",
+    "id": 57453,
+    "link": "https://netaful.jp/fast-food/057453.html",
+    "product_name": "ごろごろ煮込みチキンカレー",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2018/04/slproImg_201804081407390-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【美味】松屋の「ごろごろ煮込みチキンカレー」はザクザク玉ねぎカレーでもあるのだ！"
+   }
+  ],
   "mcdonalds": [
    {
     "date": "2026-05-25T09:00:00",
@@ -3094,6 +6132,13 @@
   ]
  },
  "errors": [],
- "fetched_at": "2026-10-11T07:31:23+09:00",
- "matches": {}
+ "fetched_at": "2026-10-11T12:11:20+09:00",
+ "matches": {
+  "matsuya-curry-kashmir_hp_261006": [
+   210463
+  ],
+  "matsuya-teishoku-tei_kuromabo_hp_260929": [
+   210253
+  ]
+ }
 }

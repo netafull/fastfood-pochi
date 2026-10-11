@@ -26,7 +26,7 @@ JST = datetime.timezone(datetime.timedelta(hours=9))
 CHAINS = CONFIG["chains"]
 CHAIN_NAME = {c["slug"]: c["name"] for c in CHAINS}
 # 説明文の引用元の表記(出典：○○公式サイト)
-CHAIN_SOURCE = {"mcdonalds": "マクドナルド公式サイト", "mos": "モスバーガー公式サイト"}
+CHAIN_SOURCE = {"mcdonalds": "マクドナルド公式サイト", "mos": "モスバーガー公式サイト", "matsuya": "松屋公式サイト"}
 # 「終了日」の注意書き。公式発表の最終販売日ではなく、一覧から消えたことの観測日
 ENDED_NOTE = "公式サイトの一覧から消えたことを確認した日"
 
@@ -241,7 +241,7 @@ CSS = """
 :root {
   --bg: #fafaf7; --card: #ffffff; --text: #1a1a1a; --muted: #6b6b6b;
   --accent: #00897b; --line: #e5e2dc;
-  --mcdonalds: #da291c; --mos: #1b7f3b;
+  --mcdonalds: #da291c; --mos: #1b7f3b; --matsuya: #a34a00;
 }
 @media (prefers-color-scheme: dark) {
   :root { --bg: #14151a; --card: #1e2027; --text: #e8e8e6; --muted: #9a9a96;
@@ -271,6 +271,7 @@ h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); 
 .chain-group h3 { font-size: 15px; margin: 18px 0 8px; padding-left: 8px; border-left: 4px solid var(--line); }
 .chain-group[data-chain="mcdonalds"] h3 { border-color: var(--mcdonalds); }
 .chain-group[data-chain="mos"] h3 { border-color: var(--mos); }
+.chain-group[data-chain="matsuya"] h3 { border-color: var(--matsuya); }
 .grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
 .item { display: block; background: var(--card); border: 1px solid var(--line);
   border-radius: 10px; padding: 12px; text-decoration: none; }
@@ -279,6 +280,7 @@ h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); 
   border-radius: 4px; padding: 1px 6px; margin-bottom: 6px; }
 .item[data-chain="mcdonalds"] .badge { background: var(--mcdonalds); }
 .item[data-chain="mos"] .badge { background: var(--mos); }
+.item[data-chain="matsuya"] .badge { background: var(--matsuya); }
 .item .st { display: inline-block; font-size: 10px; border-radius: 4px; padding: 0 6px; margin-left: 6px;
   border: 1px solid var(--line); color: var(--muted); }
 .item .st-on { color: var(--accent); border-color: var(--accent); }
@@ -305,6 +307,10 @@ h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); 
 .detail table th, .detail table td { border-bottom: 1px solid var(--line); text-align: left;
   padding: 6px 4px; }
 .detail table th { color: var(--muted); font-weight: 500; width: 40%; }
+.detail .tablewrap { overflow-x: auto; }
+.detail table.multi th, .detail table.multi td { width: auto; text-align: right; white-space: nowrap; }
+.detail table.multi th:first-child { text-align: left; }
+.detail table.pv { max-width: 320px; }
 .detail h3 { margin-top: 16px; font-size: 14px; }
 .detail details { margin-top: 10px; font-size: 13px; }
 .detail details summary { cursor: pointer; color: var(--accent); }
@@ -464,8 +470,8 @@ def page_shell(title: str, description: str, body: str, canonical: str, extra_he
 </main>
 <footer>
 価格・販売期間・販売状況は取得時点のものです。最新の状況は各社公式サイトでご確認ください。
-当サイトはマクドナルド、モスバーガー各社とは関係のない非公式サイトです。
-公式サイト： <a href="https://www.mcdonalds.co.jp/">マクドナルド</a> ／ <a href="https://www.mos.jp/">モスバーガー</a>
+当サイトはマクドナルド、モスバーガー、松屋各社とは関係のない非公式サイトです。
+公式サイト： <a href="https://www.mcdonalds.co.jp/">マクドナルド</a> ／ <a href="https://www.mos.jp/">モスバーガー</a> ／ <a href="https://www.matsuyafoods.co.jp/matsuya/">松屋</a>
 {policy_link}｜ <a href="/rss.xml">RSS</a> ｜ <a href="/archive/">終了した限定メニュー</a>
 {related_html}
 </footer>
@@ -736,14 +742,14 @@ def render_archive_index(items: list[dict]) -> str:
 <div class="monthlist">
 {rows}
 </div>"""
-    return page_shell("終了した限定メニュー", "販売が終わったマクドナルド・モスバーガーの限定メニューを、販売開始月ごとにまとめたアーカイブ",
+    return page_shell("終了した限定メニュー", "販売が終わったマクドナルド・モスバーガー・松屋の限定メニューを、販売開始月ごとにまとめたアーカイブ",
                        body, CONFIG.get("site_url", "") + "archive/")
 
 
 def render_chains_top() -> str:
     links = "\n".join(f'<a href="/chains/{c["slug"]}/">{esc(c["name"])}</a>' for c in CHAINS)
     body = f'<h2>チェーン一覧</h2><div class="chainlist">{links}</div>'
-    return page_shell("チェーン一覧", "マクドナルド・モスバーガーの限定メニュー一覧", body,
+    return page_shell("チェーン一覧", "マクドナルド・モスバーガー・松屋の限定メニュー一覧", body,
                        CONFIG.get("site_url", "") + "chains/")
 
 
@@ -757,11 +763,53 @@ NUTRITION_LABELS = [
 OTHER_INLINE_MAX = 3
 
 
+def _nutrition_rows(nut: dict) -> tuple[list[tuple[str, str]], dict]:
+    rows = []
+    for key, label, unit in NUTRITION_LABELS:
+        v = nut.get(key)
+        if v is not None:
+            rows.append((label, f"{v:g}{unit}"))
+    return rows, (nut.get("other") or {})
+
+
+def nutrition_footnote(item: dict) -> str:
+    """松屋: 栄養成分の基準日と、公式の注記(みそ汁・福神漬を含む等)。"""
+    bits = []
+    if item.get("nutrition_as_of"):
+        try:
+            d = datetime.date.fromisoformat(item["nutrition_as_of"])
+            bits.append(f"公式サイトの表示は{d.year}年{d.month}月{d.day}日現在")
+        except ValueError:
+            pass
+    if item.get("nutrition_note"):
+        bits.append(f"公式の注記：{item['nutrition_note'].lstrip('※').rstrip('。')}")
+    return f"<p class='note'>{esc('。'.join(bits))}。</p>" if bits else ""
+
+
 def render_nutrition(item: dict) -> str:
     nut = item.get("nutrition")
     if not nut:
         return ("<h3>栄養成分</h3><p class='note'>栄養成分は公式サイトに掲載がありませんでした"
                 "（セット商品や一部の限定商品は載らないことがあります）。</p>")
+    variants = item.get("nutrition_variants") or []
+    if len(variants) > 1:
+        # 松屋: セットと単品、または小盛/並盛/大盛の値を列で並べる
+        parsed = [(v.get("label") or "", _nutrition_rows(v["nutrition"])[0]) for v in variants]
+        row_labels = []
+        for _, rows in parsed:
+            for lb, _v in rows:
+                if lb not in row_labels:
+                    row_labels.append(lb)
+        head = "<tr><th></th>" + "".join(f"<th>{esc(lb or '標準')}</th>" for lb, _ in parsed) + "</tr>"
+        body_rows = ""
+        for rl in row_labels:
+            cells = ""
+            for _, rows in parsed:
+                d = dict(rows)
+                cells += f"<td>{esc(d.get(rl, '－'))}</td>"
+            body_rows += f"<tr><th>{esc(rl)}</th>{cells}</tr>"
+        return (f"<h3>栄養成分</h3><div class='tablewrap'><table class='multi'>{head}{body_rows}</table></div>"
+                f"{nutrition_footnote(item)}")
     trs = []
     for key, label, unit in NUTRITION_LABELS:
         v = nut.get(key)
@@ -781,7 +829,7 @@ def render_nutrition(item: dict) -> str:
     if not trs and not inline_rows and not details:
         return ""
     table = f"<table>{''.join(trs)}{inline_rows}</table>" if (trs or inline_rows) else ""
-    return f"<h3>栄養成分</h3>{table}{details}"
+    return f"<h3>栄養成分</h3>{table}{details}{nutrition_footnote(item)}"
 
 
 def render_allergens(item: dict) -> str:
@@ -807,6 +855,15 @@ def render_origin(item: dict) -> str:
     return f"<details><summary>原産地・製造所の情報（{len(origin)}件）を見る</summary><table>{rows}</table></details>"
 
 
+def render_price_variants(item: dict) -> str:
+    """松屋: セットと単品、小盛/並盛/大盛など、複数の価格があるとき内訳を表にする。"""
+    pv = item.get("price_variants") or []
+    if len(pv) < 2:
+        return ""
+    rows = "".join(f"<tr><th>{esc(v.get('label') or '標準')}</th><td>{v['price']:g}円（税込）</td></tr>" for v in pv)
+    return f"<table class='pv'>{rows}</table>"
+
+
 def render_price_history(item: dict) -> str:
     hist = item.get("price_history") or []
     if len(hist) <= 1:
@@ -825,7 +882,7 @@ def seo_title(item: dict) -> str:
 def seo_description(item: dict) -> str:
     chain_name = CHAIN_NAME.get(item["chain"], item["chain"])
     nut = item.get("nutrition") or {}
-    bits = [f"{chain_name}の限定メニュー「{item['name']}」"]
+    bits = [f"{chain_name}の{'メニュー' if item.get('chain') == 'matsuya' else '限定メニュー'}「{item['name']}」"]
     if nut.get("kcal") is not None:
         bits.append(f"{nut['kcal']:g}kcal")
     if item.get("price") is not None:
@@ -841,9 +898,17 @@ def render_item_page(item: dict) -> str:
     quote_html = ""
     if item.get("description"):
         fetched = (item.get("first_seen_at") or "")[:10]
-        quote_html = f"""<blockquote cite="{esc(official_url)}">{esc(item['description'])}</blockquote>
-<p class="source">出典：{esc(CHAIN_SOURCE.get(item['chain'], chain_name + '公式サイト'))}（{esc(fetched)}取得時点） ・
-<a href="{esc(official_url)}" target="_blank" rel="noopener">公式ページを見る</a></p>
+        # 松屋の説明文は商品ページではなくニュース記事(発売のお知らせ)から引用している
+        cite_url = item.get("news_url") or official_url
+        source_label = CHAIN_SOURCE.get(item['chain'], chain_name + '公式サイト')
+        if item.get("news_url"):
+            source_label += "のニュース"
+        link_label = "公式ニュースを見る" if item.get("news_url") else "公式ページを見る"
+        extra_link = (f' ・ <a href="{esc(official_url)}" target="_blank" rel="noopener">商品ページ</a>'
+                      if item.get("news_url") and official_url else "")
+        quote_html = f"""<blockquote cite="{esc(cite_url)}">{esc(item['description'])}</blockquote>
+<p class="source">出典：{esc(source_label)}（{esc(fetched)}取得時点） ・
+<a href="{esc(cite_url)}" target="_blank" rel="noopener">{link_label}</a>{extra_link}</p>
 <p class="warn">※現在は公式ページが削除されている場合があります。</p>"""
     elif official_url:
         quote_html = (f'<p class="source"><a href="{esc(official_url)}" target="_blank" rel="noopener">'
@@ -900,6 +965,12 @@ def render_item_page(item: dict) -> str:
         mop_note = ("<p class='note'>マクドナルドは公式の終了予定日を載せていないため、"
                     "公式ページのモバイルオーダー受付期間の終了日を「終了予定」として表示しています。</p>")
 
+    matsuya_note = ""
+    if item.get("chain") == "matsuya":
+        matsuya_note = ("<p class='note'>松屋は公式サイトに「期間限定」の表示も販売期間も載せていません。"
+                        "「おすすめ」に載ったメニューと、記録を始めてから新しく加わったメニューを記録しています。"
+                        + ("発売日は公式ニュースの記載です。" if item.get("launch_date_source", "").startswith("news_article") else "")
+                        + "</p>")
     body = f"""<nav class="crumbs"><a href="/">トップ</a> &gt; <a href="/chains/{esc(item['chain'])}/">{esc(chain_name)}</a></nav>
 <div class="detail">
 <div class="badge" style="display:inline-block;font-size:11px;font-weight:700;color:#fff;
@@ -907,8 +978,10 @@ border-radius:4px;padding:2px 8px;background:var(--{esc(item['chain'])})">{esc(c
 <h1>{esc(item['name'])}</h1>
 {kind_html}
 <p class="price">{esc(price)}{price_note}</p>
+{render_price_variants(item)}
 <p><strong>販売期間：</strong>{esc(period_text(item, detailed=True))}</p>
 {mop_note}
+{matsuya_note}
 {relaunch}
 {('<p><strong>カテゴリ：</strong>' + esc(item['category']) + '</p>') if item.get('category') else ''}
 {quote_html}
@@ -1020,7 +1093,7 @@ def main() -> int:
         mdir.mkdir(parents=True, exist_ok=True)
         label = f"{m[:4]}年{int(m[5:7])}月に始まった限定メニュー"
         page = render_grid_page(
-            label, f"{m[:4]}年{int(m[5:7])}月に販売が始まり、すでに終了したマクドナルド・モスバーガーの限定メニュー一覧",
+            label, f"{m[:4]}年{int(m[5:7])}月に販売が始まり、すでに終了したマクドナルド・モスバーガー・松屋の限定メニュー一覧",
             month_items, CONFIG.get("site_url", "") + f"archive/{m}/", show_filters=True,
         )
         (mdir / "index.html").write_text(page, encoding="utf-8")
@@ -1040,7 +1113,8 @@ def main() -> int:
             key=lambda it: effective_date(it) or "", reverse=True,
         )
         page = render_grid_page(
-            f"{c['name']}の限定メニュー", f"{c['name']}の期間限定・新登場メニューの一覧。販売中と販売終了の記録", chain_items,
+            f"{c['name']}の限定メニュー", (f"{c['name']}の「おすすめ」に載ったメニューと新登場メニューの一覧。販売中と販売終了の記録"
+             if c["slug"] == "matsuya" else f"{c['name']}の期間限定・新登場メニューの一覧。販売中と販売終了の記録"), chain_items,
             CONFIG.get("site_url", "") + f"chains/{c['slug']}/",
             review_chain=c["slug"], status_filter=True, default_status="all",
             empty_text="まだ記録がありません。",

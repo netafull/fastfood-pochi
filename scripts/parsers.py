@@ -358,3 +358,310 @@ def mos_origin(entry: dict) -> list[dict] | None:
         label = f"{group}：{name}" if group and name else (group or name)
         out.append({"name": label, "origin": clean_text(p.get("origin"))})
     return out or None
+
+
+# ---------------------------------------------------------------------------
+# 松屋 (静的HTML + ニュースJSON)
+# ---------------------------------------------------------------------------
+
+MATSUYA_BASE = "https://www.matsuyafoods.co.jp"
+MATSUYA_MENU_ROOT = "/matsuya/menu/"
+MATSUYA_NEWS_JSON = "/matsuya/whatsnew/data/whatsnew.json"
+# 「おすすめ」一覧。公式の「NEW」「期間限定」ラベルは無く、運営の編集枠
+MATSUYA_LIMITED_CATEGORY = "limited"
+# 新メニューとして記録しない(セットの組み合わせ・トッピング)カテゴリ。
+# 終了判定のための一覧取得には含める
+MATSUYA_NO_RECORD_CATEGORIES = ("topping",)
+# 「生玉子＜選べるサイド＞」のようなランチ・朝定食の選択肢は商品として記録しない
+MATSUYA_OPTION_RE = re.compile(r"＜選べる")
+
+
+def _strip_html_comments(page: str) -> str:
+    return re.sub(r"<!--.*?-->", "", page, flags=re.S)
+
+
+def matsuya_normalize_path(href: str, base_url: str = MATSUYA_BASE + MATSUYA_MENU_ROOT) -> str:
+    """詳細リンクを「/matsuya/menu/…」のパスにする。実物は
+    `https://www.matsuyafoods.co.jp/menu/../matsuya/menu/curry/x.html` のように `/menu/../`
+    を含む(2026-10-11に確認)ので、`..` を解決する。"""
+    import posixpath
+    from urllib.parse import urljoin, urlparse
+    path = urlparse(urljoin(base_url, href)).path
+    return posixpath.normpath(path)
+
+
+def matsuya_product_id(path: str) -> str | None:
+    """`/matsuya/menu/curry/kashmir_hp_261006.html` → `curry-kashmir_hp_261006`。
+    末尾の6桁は掲載日(YYMMDD)のことが多く、同じ商品でも更新でslugが変わりうる。"""
+    if not path.startswith(MATSUYA_MENU_ROOT):
+        return None
+    rest = path[len(MATSUYA_MENU_ROOT):]
+    rest = re.sub(r"\.html?$", "", rest)
+    if not rest or rest.endswith("index"):
+        return None
+    pid = re.sub(r"[^0-9A-Za-z_\-]+", "-", rest.replace("/", "-")).strip("-")
+    return pid or None
+
+
+def matsuya_slug_date(product_id: str) -> str | None:
+    """slug末尾の `_YYMMDD` を日付にする(取れなければ None)。"""
+    m = re.search(r"_(\d{2})(\d{2})(\d{2})$", product_id)
+    if not m:
+        return None
+    yy, mm, dd = int(m.group(1)), int(m.group(2)), int(m.group(3))
+    if not (1 <= mm <= 12 and 1 <= dd <= 31):
+        return None
+    return f"{2000 + yy:04d}-{mm:02d}-{dd:02d}"
+
+
+def parse_matsuya_list(page: str) -> list[dict]:
+    """カテゴリ一覧の `<li class="item">` を返す。価格が無い項目(選べるサイド等)は price=None。"""
+    entries = []
+    for block in re.findall(r'<li class="item">(.*?)<!-- //\.item -->', page, re.S):
+        hm = re.search(r'href="([^"]+)"', block)
+        if not hm:
+            continue
+        path = matsuya_normalize_path(hm.group(1))
+        pid = matsuya_product_id(path)
+        if not pid:
+            continue
+        nm = re.search(r'<span class="txt">(.*?)</span>', block, re.S)
+        name = clean_text(nm.group(1)) if nm else ""
+        if not name:
+            am = re.search(r'alt="([^"]*)"', block)
+            name = clean_text(am.group(1)) if am else ""
+        pm = re.search(r'class="price">\s*([\d,]+)\s*円', block)
+        no = re.search(r"<!--\s*(\d+)\s*-->", block)
+        entries.append({
+            "product_id": pid,
+            "name": name,
+            "price": int(pm.group(1).replace(",", "")) if pm else None,
+            "detail_path": path,
+            "product_no": no.group(1) if no else None,
+            "option": bool(MATSUYA_OPTION_RE.search(name)),
+        })
+    return entries
+
+
+def _matsuya_variant_label(raw: str | None) -> str:
+    return clean_text(raw).replace("\n", "") if raw else ""
+
+
+def parse_matsuya_detail(page: str) -> dict | None:
+    """商品詳細から名前・価格(複数)・栄養(複数)・アレルゲン・基準日・注記を取る。
+    h1 が無ければ None。
+
+    価格と栄養は「ラベルつきの複数」になる: セット(ラベル無し)と「単品」、または
+    「小盛／並盛／大盛」。ラベルの無いものは空文字のラベルで返す。
+    """
+    page = _strip_html_comments(page)
+    h1 = re.search(r'<h1 class="ttl">(.*?)</h1>', page, re.S)
+    if not h1:
+        return None
+    name = clean_text(h1.group(1))
+
+    prices = []
+    pb = re.search(r'<ul class="ul-text">(.*?)</ul>', page, re.S)
+    if pb:
+        for li in re.findall(r"<li>(.*?)</li>", pb.group(1), re.S):
+            tm = re.search(r'<p class="th">(.*?)</p>', li, re.S)
+            vm = re.search(r'<span class="clr">\s*([\d,]+)\s*</span>', li)
+            if vm:
+                prices.append({
+                    "label": _matsuya_variant_label(tm.group(1)) if tm else "",
+                    "price": int(vm.group(1).replace(",", "")),
+                })
+
+    nutrition_variants = []
+    nb = re.search(r'<div class="nourishment">(.*?)</ul>', page, re.S)
+    if nb:
+        for li in re.findall(r"<li>(.*?)</li>", nb.group(1), re.S):
+            lm = re.search(r'<h3 class="txt">(.*?)</h3>', li, re.S)
+            pm = re.search(r"<p>(.*?)</p>", li, re.S)
+            if not pm:
+                continue
+            rows = []
+            for part in re.split(r"<br\s*/?>", pm.group(1)):
+                part = clean_text(part)
+                if "／" not in part:
+                    continue
+                label, qty = part.split("／", 1)
+                label = "熱量" if label.strip() == "カロリー" else label.strip()
+                rows.append((label, qty.strip()))
+            nut = build_nutrition(rows)
+            if nut is not None:
+                nutrition_variants.append({
+                    "label": _matsuya_variant_label(lm.group(1)) if lm else "",
+                    "nutrition": nut,
+                })
+
+    contains, partial = [], []
+    seen_any = False
+    ab = re.search(r'<ul class="ul-data[^"]*">(.*?)</ul>', page, re.S)
+    if ab:
+        for li in re.findall(r"<li>(.*?)</li>", ab.group(1), re.S):
+            tm = re.search(r'<p class="th"><span>(.*?)</span></p>', li, re.S)
+            dm = re.search(r'<p class="td">(.*?)</p>', li, re.S)
+            if not tm or not dm:
+                continue
+            seen_any = True
+            label = clean_text(tm.group(1)).replace("\n", "")
+            mark = clean_text(dm.group(1))
+            if mark == "○":
+                contains.append(label)
+            elif mark and mark not in ("－", "-", "ー"):
+                partial.append({"name": label, "mark": mark})
+    allergens = {"contains": contains, "partial": partial} if seen_any else None
+
+    as_of = None
+    am = re.search(r"栄養成分は\s*(\d{4})年\s*(\d{1,2})月\s*(\d{1,2})日現在", page)
+    if am:
+        as_of = f"{int(am.group(1)):04d}-{int(am.group(2)):02d}-{int(am.group(3)):02d}"
+    note = None
+    nm = re.search(r"<li>※?\s*(特定原材料・栄養成分の数値には[^<]*)</li>", page)
+    if nm:
+        note = clean_text(nm.group(1))
+
+    return {
+        "name": name,
+        "prices": prices,
+        "nutrition_variants": nutrition_variants,
+        "allergens": allergens,
+        "nutrition_as_of": as_of,
+        "nutrition_note": note,
+    }
+
+
+def matsuya_pick_primary(variants: list[dict]) -> dict | None:
+    """表示に使う代表のバリエーション: ラベル無し(セット等)→「並盛」→先頭。
+    一覧ページの価格(ラベル無し、または並盛)と一致する。"""
+    if not variants:
+        return None
+    for v in variants:
+        if not v["label"]:
+            return v
+    for v in variants:
+        if v["label"] == "並盛":
+            return v
+    return variants[0]
+
+
+def matsuya_variant_labels(variants: list[dict], note: str | None) -> list[dict]:
+    """ラベル無しのバリエーションに表示用のラベルを付ける。「単品」と並ぶときは「セット」
+    (注記に「みそ汁・福神漬も含まれ」とあればその旨も)。単独のときは空のまま。"""
+    out = []
+    has_single = any(v["label"] == "単品" for v in variants)
+    inc = None
+    if note:
+        m = re.search(r"数値には、?(.+?)も含まれ", note)
+        inc = m.group(1) if m else None
+    for v in variants:
+        v = dict(v)
+        if not v["label"]:
+            if has_single:
+                v["label"] = "セット" + (f"（{inc}を含む）" if inc else "")
+            else:
+                v["label"] = ""
+        out.append(v)
+    return out
+
+
+def normalize_for_match(s: str | None) -> str:
+    """ニュース見出しと商品名の照合用: NFKC・空白と記号(「」・"など)を除く。"""
+    s = unicodedata.normalize("NFKC", s or "")
+    return re.sub(r"[\s「」『』\"“”'’・＜＞<>()（）【】]+", "", s).lower()
+
+
+def parse_matsuya_news(text: str) -> list[dict]:
+    """whatsnew.json から category=menu の記事だけを、新しい順で返す。"""
+    data = json.loads(text)
+    out = []
+    for x in data.get("list_whatsnew") or []:
+        if x.get("category") != "menu":
+            continue
+        try:
+            date = f"{int(x['year']):04d}-{int(x['month']):02d}-{int(x['day']):02d}"
+        except (KeyError, ValueError, TypeError):
+            continue
+        out.append({"date": date, "title": clean_text(x.get("title")), "url": x.get("permalink") or ""})
+    out.sort(key=lambda a: a["date"], reverse=True)
+    return out
+
+
+def matsuya_name_variants(name: str) -> list[str]:
+    """見出しとの照合に使う名前の候補。「松屋の」始まりは見出しで省かれることがある。"""
+    n = normalize_for_match(name)
+    cands = [n]
+    if n.startswith("松屋の") and len(n) > 6:
+        cands.append(n[3:])
+    return [c for c in cands if len(c) >= 4]
+
+
+# 見出しとの照合で、商品の掲載日(slug末尾の日付、無ければ今日)から見て、この範囲のニュースだけ採用する。
+# 「新牛めし」のように短い名前が、何年も前の別商品の見出しに偶然含まれる誤爆を避けるため
+MATSUYA_NEWS_WINDOW_BEFORE_DAYS = 120
+MATSUYA_NEWS_WINDOW_AFTER_DAYS = 14
+
+
+def match_matsuya_news_title(name: str, news: list[dict], ref: str | None = None) -> dict | None:
+    """商品名(正規化)を見出しに部分一致で含む最新の記事。ref(ISO日付)を渡すと、その前後の
+    範囲(MATSUYA_NEWS_WINDOW_*)の記事だけを対象にする。"""
+    import datetime
+    lo = hi = None
+    if ref:
+        try:
+            c = datetime.date.fromisoformat(ref)
+            lo = c - datetime.timedelta(days=MATSUYA_NEWS_WINDOW_BEFORE_DAYS)
+            hi = c + datetime.timedelta(days=MATSUYA_NEWS_WINDOW_AFTER_DAYS)
+        except ValueError:
+            pass
+    cands = matsuya_name_variants(name)
+    for a in news:
+        if lo is not None:
+            try:
+                d = datetime.date.fromisoformat(a["date"])
+            except ValueError:
+                continue
+            if not (lo <= d <= hi):
+                continue
+        t = normalize_for_match(a["title"])
+        if any(c in t for c in cands):
+            return a
+    return None
+
+
+def matsuya_news_launch_words(title: str) -> bool:
+    return bool(re.search(r"発売|販売|登場|新", title or ""))
+
+
+def parse_matsuya_article(page: str) -> dict:
+    """ニュース記事ページから (本文の平文, 発売日, 説明文の元) を取る。
+
+    発売日は「【発売日】2026年10月6日（火）…」。説明文の元は、記事冒頭の見出し(h4の太字、
+    商品の特徴を1〜2行で書いたもの)。無ければ「このたび…」以外の最初の段落。
+    """
+    page = _strip_html_comments(page)
+    a = page.find('class="article-main"')
+    b = page.find("</article>", a)
+    body = page[a:b] if a >= 0 else page
+    text = clean_text(re.sub(r"<(?:script|style)[^>]*>.*?</(?:script|style)>", "", body, flags=re.S))
+
+    launch = None
+    m = re.search(r"(?:発売日|販売開始日|販売日)[】\]\s:：]*?(\d{4})年\s*(\d{1,2})月\s*(\d{1,2})日", text)
+    if m:
+        launch = f"{int(m.group(1)):04d}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
+
+    desc_src = None
+    for h in re.findall(r"<h4[^>]*>\s*<strong[^>]*>(.*?)</strong>\s*</h4>", body, re.S):
+        h = clean_text(h)
+        if h and not h.startswith("【"):
+            # 見出しは <br> で折り返されている。文の途中(読点で終わる行)なら次の行とつなぐ
+            desc_src = "".join(ln.strip() for ln in h.split("\n") if ln.strip())
+            break
+    if desc_src is None:
+        for p in re.findall(r"<p[^>]*>(.*?)</p>", body, re.S):
+            p = clean_text(p)
+            if p and not p.startswith("このたび") and not p.startswith("※"):
+                desc_src = p
+                break
+    return {"text": text, "launch_date": launch, "description_src": desc_src}

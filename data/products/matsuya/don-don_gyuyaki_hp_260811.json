@@ -1,0 +1,122 @@
+{
+ "chain": "matsuya",
+ "product_id": "don-don_gyuyaki_hp_260811",
+ "name": "松屋の牛焼肉丼",
+ "category": "丼",
+ "price": 630,
+ "price_note": "税込。表示は「並盛」の価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "小盛",
+   "price": 600
+  },
+  {
+   "label": "並盛",
+   "price": 630
+  },
+  {
+   "label": "大盛",
+   "price": 850
+  }
+ ],
+ "launch_date": "2026-08-11",
+ "launch_date_source": "news_article",
+ "planned_end_text": null,
+ "news_url": "https://www.matsuyafoods.co.jp/matsuya/whatsnew/menu/167268.html",
+ "news_title": "鉄板で焼き上げた、牛肉\"ド直球\"の2品「牛カルビホルモン丼」「松屋の牛焼肉丼」発売",
+ "news_date": "2026-08-06",
+ "description": "ぷりぷり牛ホルモンと旨味溢れる牛カルビを合わせた、スタミナ満点の一杯と、新たな\"極上のタレ\"で味わう、香ばしい牛焼肉丼も登場。",
+ "description_full_len": 63,
+ "nutrition": {
+  "kcal": 757.0,
+  "protein_g": 20.6,
+  "fat_g": 32.9,
+  "carbs_g": 93.3,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 4.2,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "小盛",
+   "nutrition": {
+    "kcal": 633.0,
+    "protein_g": 18.5,
+    "fat_g": 32.4,
+    "carbs_g": 66.8,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 3.5,
+    "other": {}
+   }
+  },
+  {
+   "label": "並盛",
+   "nutrition": {
+    "kcal": 757.0,
+    "protein_g": 20.6,
+    "fat_g": 32.9,
+    "carbs_g": 93.3,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 4.2,
+    "other": {}
+   }
+  },
+  {
+   "label": "大盛",
+   "nutrition": {
+    "kcal": 1039.0,
+    "protein_g": 27.3,
+    "fat_g": 43.3,
+    "carbs_g": 132.8,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 4.8,
+    "other": {}
+   }
+  }
+ ],
+ "nutrition_as_of": "2026-10-06",
+ "nutrition_note": "特定原材料・栄養成分の数値には、みそ汁も含まれております。",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "牛肉",
+   "大豆",
+   "りんご",
+   "ごま"
+  ],
+  "partial": [
+   {
+    "name": "鶏肉",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "新メニュー",
+ "in_recommended": true,
+ "official_url": "https://www.matsuyafoods.co.jp/matsuya/menu/don/don_gyuyaki_hp_260811.html",
+ "first_seen_at": "2026-10-11T12:09:31+09:00",
+ "last_seen_at": "2026-10-11",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-11",
+   "price": 630
+  }
+ ],
+ "source_list": [
+  "don",
+  "limited"
+ ],
+ "image": null
+}

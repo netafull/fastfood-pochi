@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""ネタフル(WordPress)の公開REST APIから、マクドナルド・モスバーガーの記事を取得し、
+"""ネタフル(WordPress)の公開REST APIから、マクドナルド・モスバーガー・松屋の記事を取得し、
 ファストフードポチの商品(data/products/)とひも付けてキャッシュする。
 
 認証不要のREST API (https://netaful.jp/wp-json/wp/v2/posts?tags=...) を使う。
-タグID(config.json の netaful_tags): マクドナルド=735(208件)、モスバーガー=882(3件)。
+タグID(config.json の netaful_tags): マクドナルド=735(208件)、モスバーガー=882(3件)、松屋=729(254件)。
 モスバーガーのタグは記事が3件しか付いておらず、実際にはタグ無しの記事が多いので、
 モスだけは記事の全文検索(search=モスバーガー)の結果も使い、タイトルに
 config.json の netaful_title_filters の語を含む記事だけを採用する。
@@ -329,10 +329,12 @@ def main() -> int:
     errors: list[str] = []  # 今回の実行で起きた失敗だけ。前回分は引き継がない
 
     for chain in TAGS:
-        new_articles = fetch_articles_for_chain(chain, backfill, errors)
+        # キャッシュにまだ1件も無いチェーン(新しく追加したチェーン)は、そのチェーンだけ全件取得する
+        chain_backfill = backfill or not cache["articles"].get(chain)
+        new_articles = fetch_articles_for_chain(chain, chain_backfill, errors)
         if chain in SEARCH_TERMS:
             time.sleep(REQUEST_INTERVAL)
-            new_articles += fetch_articles_for_chain(chain, backfill, errors, SEARCH_TERMS[chain])
+            new_articles += fetch_articles_for_chain(chain, chain_backfill, errors, SEARCH_TERMS[chain])
         if not new_articles:
             continue
         existing = {a["id"]: a for a in cache["articles"].get(chain, [])}
