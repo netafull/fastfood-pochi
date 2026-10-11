@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""マクドナルド・モスバーガー・松屋・松のやの限定メニュー・新メニューを巡回し、
-data/products/{mcdonalds|mos|matsuya|matsunoya}/{id}.json に1商品1ファイルで蓄積する。
+"""マクドナルド・モスバーガー・松屋・松のや・吉野家の限定メニュー・新メニューを巡回し、
+data/products/{mcdonalds|mos|matsuya|matsunoya|yoshinoya}/{id}.json に1商品1ファイルで蓄積する。
 
 このサイトの核は「販売状況の追跡」。公式サイトは販売が終わると商品を消すので、
 一覧に居た商品が消えたら終了とみなして記録を残す。
@@ -855,6 +855,365 @@ def crawl_matsuya_family(chain: str, getter, pending: dict, stats: dict, today: 
 
 
 # ---------------------------------------------------------------------------
+# 吉野家 (www.yoshinoya.com)
+# ---------------------------------------------------------------------------
+# 調査・方針(2026-10-11):
+#  ・robots.txt はステータス404だが、本文は全許可(Yoast形式の「User-agent: * / Disallow:」空)。
+#    404のときは全許可として扱い、取得できて本文があればその Disallow に従う。ボット対策なし(nginx)。
+#  ・サイト規約 /sitepolicy/ は営利・非営利を問わず複製・転用を禁じ、営利目的の行為を禁じている
+#    (自動取得への言及なし)。→ 記録するのは事実情報(価格・日付・販売状況)だけ。説明文・画像は
+#    保存も表示もしない。広告は入れない。
+#  ・栄養成分・アレルゲンは別PDF(/pdf/allergy/)で、ここでは取得も解析もしない(リンクを出すだけ。
+#    PDFからの栄養表の抽出は第2段階)。お知らせの見出しのリンクもPDFだが同じく取得しない
+#    (見出しの文言だけを読む)。
+#  ・記録するのは (a) 「期間限定」一覧(/menu/gentei/)に載った商品、(b) baseline(初回巡回の全メニュー)に
+#    無く後から現れた商品。定番の既存メニューは詳細を取らない。
+#  ・商品IDは「カテゴリ-slug」。季節商品(月見牛とじ丼など)は年をまたいで同じslug・URLで再登場するので、
+#    終了後に同じIDが一覧に戻ったら relaunches に記録して on_sale に戻し、昨季は seasons に残す。
+
+YOSHINOYA_BASE = parsers.YOSHINOYA_BASE
+
+
+def yoshinoya_category_labels(index_cats: list[dict] | None = None) -> dict[str, str | None]:
+    labels = {c["slug"]: c.get("label") for c in CONFIG.get("yoshinoya_categories", [])}
+    for c in index_cats or []:
+        if c.get("label"):
+            labels[c["slug"]] = c["label"]
+    return labels
+
+
+class YoshinoyaNews:
+    """お知らせ一覧 /news/{年}/ の取得。年別ページなので、必要な年だけ、1回の実行で1回ずつ取る。
+    見出しの文言だけを読み、リンク先のPDFは取得しない。"""
+
+    def __init__(self, getter, st: dict):
+        self.getter = getter
+        self.st = st
+        self.years: dict[int, list[dict]] = {}
+
+    def ensure(self, lo: str, hi: str, today: str) -> None:
+        """lo〜hi(ISO日付)にかかる年(今年まで)のお知らせを揃える。"""
+        try:
+            y0 = datetime.date.fromisoformat(lo).year
+            y1 = min(datetime.date.fromisoformat(hi).year, datetime.date.fromisoformat(today).year)
+        except ValueError:
+            return
+        for y in range(y0, y1 + 1):
+            if y in self.years:
+                continue
+            self.years[y] = []
+            try:
+                text = self.getter("yoshinoya", f"{YOSHINOYA_BASE}/news/{y}/")
+                self.st["detail_requests"] += 1
+                self.years[y] = parsers.parse_yoshinoya_news(text)
+                if not self.years[y]:
+                    print(f"[warn] yoshinoya お知らせ {y}: 0件(構造変更の疑い)", file=sys.stderr)
+            except BlockedError:
+                raise
+            except Exception as e:  # noqa: BLE001
+                print(f"[warn] yoshinoya お知らせ {y} 取得失敗: {e}", file=sys.stderr)
+
+    def all(self) -> list[dict]:
+        merged = [a for y in sorted(self.years) for a in self.years[y]]
+        merged.sort(key=lambda a: a["date"], reverse=True)
+        return merged
+
+
+def yoshinoya_season_ref(product: dict) -> str:
+    """その季の観測の起点日。再登場していれば再登場を確認した日、なければ初回に見つけた日。"""
+    rel = product.get("relaunches") or []
+    if rel and rel[-1].get("reappeared_at"):
+        return rel[-1]["reappeared_at"]
+    return (product.get("first_seen_at") or "")[:10]
+
+
+def yoshinoya_apply_news(product: dict, news: YoshinoyaNews, today: str) -> bool:
+    """発売日が未確定の商品はお知らせの見出しから探し直し、終了告知(早期販売終了など)があれば付記する。
+    お知らせはすでに取得した分だけを使うので、追加のリクエストは年またぎ(1〜4月は前年分)のときだけ。変更があれば True。"""
+    ref = yoshinoya_season_ref(product)
+    if not ref:
+        return False
+    changed = False
+    name = product.get("name") or ""
+    if product.get("launch_date") is None:
+        c = datetime.date.fromisoformat(ref)
+        lo = (c - datetime.timedelta(days=parsers.YOSHINOYA_NEWS_WINDOW_BEFORE_DAYS)).isoformat()
+        hi = (c + datetime.timedelta(days=parsers.YOSHINOYA_NEWS_WINDOW_AFTER_DAYS)).isoformat()
+        news.ensure(lo, hi, today)
+        hit = parsers.match_yoshinoya_launch(name, news.all(), ref)
+        if hit:
+            product["launch_date"] = hit["launch_date"]
+            product["launch_date_source"] = "news_headline"
+            product["news_url"] = hit["news"]["url"]
+            product["news_title"] = hit["news"]["title"]
+            product["news_date"] = hit["news"]["date"]
+            changed = True
+    if not product.get("early_end_notice"):
+        since = product.get("launch_date") or ref
+        news.ensure(since, today, today)
+        hit = parsers.match_yoshinoya_end_notice(name, news.all(), since, today)
+        if hit:
+            product["early_end_notice"] = {"date": hit["date"], "title": hit["title"], "url": hit["url"]}
+            changed = True
+    return changed
+
+
+def yoshinoya_start_new_season(product: dict, old_ended: str | None, today: str) -> None:
+    """終了後に同じIDが一覧へ戻ってきた(季節商品の再登場)。昨季の期間を seasons に残し、
+    今季の発売日は未確定に戻す(お知らせの見出しから探し直す)。"""
+    product.setdefault("seasons", []).append({
+        "launch_date": product.get("launch_date"),
+        "launch_date_source": product.get("launch_date_source"),
+        "ended_observed_at": old_ended,
+        "news_url": product.get("news_url"),
+        "news_title": product.get("news_title"),
+        "early_end_notice": product.get("early_end_notice"),
+    })
+    product["launch_date"] = None
+    product["launch_date_source"] = "not_found"
+    for k in ("news_url", "news_title", "news_date", "early_end_notice"):
+        product[k] = None
+    hist = product.setdefault("price_history", [])
+    price = product.get("price")
+    if price is not None and not (hist and hist[-1].get("date") == today):
+        hist.append({"date": today, "price": price, "relaunch": True})
+
+
+def build_yoshinoya_product(entry: dict, detail: dict, sources: list[str], flags: dict,
+                            same_name: list[str], labels: dict, today: str, now: str) -> dict:
+    variants = parsers.yoshinoya_price_variants(detail)
+    primary = parsers.yoshinoya_pick_primary(detail)
+    price = entry.get("price") if entry.get("price") is not None else primary["price"]
+    limited = flags["limited"] or detail.get("is_limited")
+    is_new = flags["new"] or detail.get("is_new")
+    kind = "期間限定" if limited else ("新メニュー" if is_new else "新規掲載")
+
+    note = "税込・店内の価格。"
+    if len(detail["eatin"]) > 1 and primary["label"]:
+        note += f"表示は「{primary['label']}」の価格。"
+    if detail["takeout_prices"]:
+        note += "テイクアウトは税率が違うため税込額が異なる場合があります（内訳は下の表）。"
+    if detail["takeout"] is False:
+        note += "テイクアウトはできません。"
+    note += "店舗により価格・取り扱いが異なる場合があります。"
+
+    cat_slug = entry["category"]
+    category = next((labels.get(c) for c in sources if c != parsers.YOSHINOYA_LIMITED_CATEGORY and labels.get(c)), None)
+    if category is None and cat_slug != parsers.YOSHINOYA_LIMITED_CATEGORY:
+        category = labels.get(cat_slug)
+    pdf = CONFIG.get("yoshinoya_pdf", {})
+    product = {
+        "chain": "yoshinoya",
+        "product_id": entry["product_id"],
+        "name": entry["name"] or detail["name"],
+        "category": category,
+        "price": price,
+        "price_note": note,
+        "price_variants": variants if len(variants) > 1 else None,
+        "takeout": detail["takeout"],
+        "launch_date": None,
+        "launch_date_source": "not_found",
+        "planned_end_text": None,
+        "news_url": None,
+        "news_title": None,
+        "news_date": None,
+        "description": None,
+        "description_full_len": 0,
+        "nutrition": None,
+        "nutrition_variants": None,
+        "nutrition_pdf_url": pdf.get("nutrition"),
+        "nutrition_pdf_label": pdf.get("nutrition_label"),
+        "origin_pdf_url": pdf.get("origin"),
+        "allergens": None,
+        "origin": None,
+        "limited_kind": kind,
+        "badges": [b for b, on in (("NEW", is_new), ("期間限定", limited)) if on],
+        "in_limited_list": parsers.YOSHINOYA_LIMITED_CATEGORY in sources,
+        "official_url": YOSHINOYA_BASE + entry["detail_path"],
+        "first_seen_at": now,
+        "last_seen_at": today,
+        "status": "on_sale",
+        "ended_observed_at": None,
+        "missed_runs": 0,
+        "price_history": [{"date": today, "price": price}] if price is not None else [],
+        "source_list": sorted(set(sources)),
+        "image": None,
+    }
+    if same_name:
+        product["same_name_as"] = same_name
+    return product
+
+
+def crawl_yoshinoya(getter, pending: dict, stats: dict, today: str | None = None) -> None:
+    chain = "yoshinoya"
+    limited_cat = parsers.YOSHINOYA_LIMITED_CATEGORY
+    # 日付を指定した実行(テスト)では、初回観測の時刻もその日にそろえる(お知らせの照合の起点になるため)
+    now = now_iso() if today is None else f"{today}T07:00:00+09:00"
+    today = today or today_jst()
+    pending.setdefault(chain, {})
+    stats.setdefault(chain, new_stats())
+    st = stats[chain]
+    all_ok = True
+
+    # robots.txt(1リクエスト)。404は「無い」ではなく本文付きの全許可なので、全許可として続行する
+    robots_text = None
+    try:
+        robots_text = getter(chain, YOSHINOYA_BASE + "/robots.txt")
+        st["list_requests"] += 1
+    except NotFoundError:
+        st["list_requests"] += 1
+    except BlockedError as e:
+        st["blocked"] = True
+        print(f"[blocked] {chain} robots.txt: {e}", file=sys.stderr)
+        return
+    except Exception as e:  # noqa: BLE001
+        print(f"[warn] {chain} robots.txt 取得失敗(全許可として続行): {e}", file=sys.stderr)
+    rp = urllib.robotparser.RobotFileParser()
+    rp.parse((robots_text or "User-agent: *\nAllow: /").splitlines())
+
+    def allowed(path: str) -> bool:
+        return rp.can_fetch(UA, YOSHINOYA_BASE + path)
+
+    # カテゴリの入口。リンクをたどって特定する(推測でURLを作らない)。取れなければ設定の固定リストで代替
+    index_cats: list[dict] = []
+    try:
+        idx = getter(chain, YOSHINOYA_BASE + parsers.YOSHINOYA_MENU_ROOT)
+        st["list_requests"] += 1
+        index_cats = parsers.parse_yoshinoya_index(idx)
+    except BlockedError as e:
+        st["blocked"] = True
+        print(f"[blocked] {chain} menu index: {e}", file=sys.stderr)
+        return
+    except Exception as e:  # noqa: BLE001
+        print(f"[warn] {chain} メニュー入口 取得失敗(設定の固定リストで代替): {e}", file=sys.stderr)
+    cats = [c["slug"] for c in index_cats]
+    if not cats:
+        cats = [c["slug"] for c in CONFIG["yoshinoya_categories"]]
+        all_ok = False
+    cats = sorted(cats, key=lambda c: c != limited_cat)  # 期間限定を先頭に(安定ソート)
+    labels = yoshinoya_category_labels(index_cats)
+
+    entries: dict[str, dict] = {}
+    sources: dict[str, list[str]] = {}
+    flags: dict[str, dict] = {}
+    for cat in cats:
+        path = f"{parsers.YOSHINOYA_MENU_ROOT}{cat}/"
+        if not allowed(path):
+            print(f"[skip] robots.txtでDisallow: {path}", file=sys.stderr)
+            all_ok = False
+            continue
+        try:
+            html = getter(chain, YOSHINOYA_BASE + path)
+            st["list_requests"] += 1
+        except BlockedError as e:
+            st["blocked"] = True
+            print(f"[blocked] {chain} list {path}: {e}", file=sys.stderr)
+            return
+        except Exception as e:  # noqa: BLE001
+            print(f"[warn] {chain} list {path} 取得失敗: {e}", file=sys.stderr)
+            all_ok = False
+            continue
+        page_entries = parsers.parse_yoshinoya_list(html)
+        if not page_entries:
+            print(f"[warn] {chain} list {path}: 商品が0件(構造変更の疑い)", file=sys.stderr)
+            all_ok = False
+            continue
+        for e in page_entries:
+            if e["price"] is None:
+                continue  # 「温め直し方」などの案内。料理ではないので商品として扱わない
+            pid = e["product_id"]
+            sources.setdefault(pid, [])
+            if cat not in sources[pid]:
+                sources[pid].append(cat)
+            f = flags.setdefault(pid, {"new": False, "limited": False})
+            f["new"] = f["new"] or e["is_new"]
+            f["limited"] = f["limited"] or e["is_limited"]
+            entries.setdefault(pid, e)
+    st["list_ok"] = all_ok and bool(entries)
+    st["limited_seen"] = sum(1 for pid in entries if limited_cat in sources[pid])
+
+    baseline = baseline_for(chain)
+    news = YoshinoyaNews(getter, st)
+    existing_all = None
+    try:
+        for pid, e in entries.items():
+            existing = load_product(chain, pid)
+            if existing is not None:
+                was_ended = existing.get("status") == "ended"
+                old_ended = existing.get("ended_observed_at")
+                touch_seen(existing, e.get("price"), today, now)
+                if was_ended:
+                    yoshinoya_start_new_season(existing, old_ended, today)
+                    st["relaunched"] = st.get("relaunched", 0) + 1
+                existing["source_list"] = sorted(set(existing.get("source_list") or []) | set(sources[pid]))
+                if limited_cat in sources[pid]:
+                    existing["in_limited_list"] = True
+                if flags[pid]["limited"] and existing.get("limited_kind") != "期間限定":
+                    existing["limited_kind"] = "期間限定"
+                badges = set(existing.get("badges") or [])
+                badges |= {b for b, on in (("NEW", flags[pid]["new"]), ("期間限定", flags[pid]["limited"])) if on}
+                existing["badges"] = [b for b in ("NEW", "期間限定") if b in badges]
+                save_product(chain, existing)
+                pending[chain].pop(pid, None)
+                continue
+            in_limited = limited_cat in sources[pid]
+            is_new_menu = baseline is not None and pid not in baseline
+            if not (in_limited or is_new_menu):
+                continue  # 定番の既存メニューは記録しない(baselineに入るだけ)
+            detail_path = e["detail_path"]
+            if not allowed(detail_path):
+                print(f"[skip] robots.txtでDisallow: {detail_path}", file=sys.stderr)
+                continue
+            try:
+                html = getter(chain, YOSHINOYA_BASE + detail_path)
+                st["detail_requests"] += 1
+            except NotFoundError:
+                st["failed"] += 1
+                pending[chain][pid] = {"url": detail_path, "reason": "404", "checked_at": now}
+                continue
+            except BlockedError:
+                raise
+            except Exception as ex:  # noqa: BLE001
+                st["failed"] += 1
+                pending[chain][pid] = {"url": detail_path, "reason": f"fetch_error: {ex}", "checked_at": now}
+                continue
+            detail = parsers.parse_yoshinoya_detail(html)
+            if detail is None:
+                st["failed"] += 1
+                pending[chain][pid] = {"url": detail_path, "reason": "empty_detail", "checked_at": now}
+                continue
+            if existing_all is None:
+                existing_all = load_chain_products(chain)
+            norm = parsers.normalize_for_match(e["name"] or detail["name"])
+            same = [p["product_id"] for p in existing_all
+                    if p["product_id"] != pid and parsers.normalize_for_match(p.get("name")) == norm]
+            product = build_yoshinoya_product(e, detail, sources[pid], flags[pid], same, labels, today, now)
+            save_product(chain, product)
+            existing_all.append(product)
+            st["new_products"] += 1
+            pending[chain].pop(pid, None)
+
+        # 発売日の確定・終了告知の付記(お知らせ見出し)。一覧の更新と終了判定のあとに行う
+        if st["list_ok"]:
+            if baseline is None:
+                save_baseline(chain, set(entries))
+            apply_missing(chain, set(entries), today, st)
+        cutoff = (datetime.date.fromisoformat(today) - datetime.timedelta(days=14)).isoformat()
+        for p in load_chain_products(chain):
+            if p.get("status") == "ended" and (p.get("ended_observed_at") or "") < cutoff:
+                continue  # 終わって久しい商品はお知らせを探し直さない
+            if yoshinoya_apply_news(p, news, today):
+                save_product(chain, p)
+        recorded = load_chain_products(chain)
+        st["news_matched"] = sum(1 for p in recorded if p.get("launch_date"))
+        st["news_unmatched"] = sum(1 for p in recorded if not p.get("launch_date"))
+    except BlockedError as ex:
+        st["blocked"] = True
+        print(f"[blocked] {chain}: {ex}", file=sys.stderr)
+        return
+
+
+# ---------------------------------------------------------------------------
 # 実行
 # ---------------------------------------------------------------------------
 
@@ -874,7 +1233,7 @@ def save_run_summary(stats: dict[str, dict]) -> None:
 
 
 CRAWLERS = {"mcdonalds": crawl_mcdonalds, "mos": crawl_mos, "matsuya": crawl_matsuya,
-            "matsunoya": crawl_matsunoya}
+            "matsunoya": crawl_matsunoya, "yoshinoya": crawl_yoshinoya}
 
 
 def main(argv: list[str] | None = None) -> int:

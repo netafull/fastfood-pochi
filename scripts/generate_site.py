@@ -27,7 +27,9 @@ CHAINS = CONFIG["chains"]
 CHAIN_NAME = {c["slug"]: c["name"] for c in CHAINS}
 # 説明文の引用元の表記(出典：○○公式サイト)
 CHAIN_SOURCE = {"mcdonalds": "マクドナルド公式サイト", "mos": "モスバーガー公式サイト", "matsuya": "松屋公式サイト",
-                "matsunoya": "松のや公式サイト"}
+                "matsunoya": "松のや公式サイト", "yoshinoya": "吉野家公式サイト"}
+# 全チェーン名の並び(ページの説明文用): 「マクドナルド・モスバーガー・松屋・松のや・吉野家」
+CHAIN_LIST_TEXT = "・".join(c["name"] for c in CHAINS)
 # 「終了日」の注意書き。公式発表の最終販売日ではなく、一覧から消えたことの観測日
 ENDED_NOTE = "公式サイトの一覧から消えたことを確認した日"
 
@@ -168,6 +170,16 @@ def is_matsuya_family(chain: str | None) -> bool:
     return chain in MATSUYA_FAMILY
 
 
+def is_limited_listed(item: dict) -> bool:
+    """説明文で「限定メニュー」と呼んでよい商品か。松屋・松のやは公式に限定の表示が無いので呼ばない。
+    吉野家は公式が「期間限定」と表示したものだけ。"""
+    if is_matsuya_family(item.get("chain")):
+        return False
+    if item.get("chain") == "yoshinoya":
+        return item.get("limited_kind") == "期間限定"
+    return True
+
+
 def esc(s) -> str:
     return html.escape(s or "", quote=True)
 
@@ -190,9 +202,17 @@ def load_all_products() -> list[dict]:
     return items
 
 
+def season_observed_start(item: dict) -> str:
+    """発売日が分からないときの「記録上の開始日」。再登場した商品は、再登場を確認した日(今季の起点)。"""
+    rel = item.get("relaunches") or []
+    if rel and rel[-1].get("reappeared_at"):
+        return rel[-1]["reappeared_at"]
+    return (item.get("first_seen_at") or "")[:10]
+
+
 def effective_date(item: dict) -> str | None:
     """販売開始日。取れなかった商品は初回に見つけた日で代替する。"""
-    return item.get("launch_date") or (item.get("first_seen_at") or "")[:10] or None
+    return item.get("launch_date") or season_observed_start(item) or None
 
 
 def is_ended(item: dict) -> bool:
@@ -214,7 +234,7 @@ def fmt_price(item: dict) -> str:
 def period_text(item: dict, detailed: bool = False) -> str:
     """「いつからいつまで売っていたか」。終了前は「販売中」と終了予定の原文。"""
     start = item.get("launch_date")
-    first = (item.get("first_seen_at") or "")[:10]
+    first = season_observed_start(item)
     head = start or f"{first}（記録開始日）"
     if is_ended(item):
         s = f"{head}〜{item.get('ended_observed_at') or ''}"
@@ -250,13 +270,13 @@ CSS = """
 :root {
   --bg: #fafaf7; --card: #ffffff; --text: #1a1a1a; --muted: #6b6b6b;
   --accent: #00897b; --line: #e5e2dc;
-  --mcdonalds: #da291c; --mos: #1b7f3b; --matsuya: #a34a00; --matsunoya: #7a1f5c;
+  --mcdonalds: #da291c; --mos: #1b7f3b; --matsuya: #a34a00; --matsunoya: #7a1f5c; --yoshinoya: #1f5fad;
 }
 @media (prefers-color-scheme: dark) {
   :root { --bg: #14151a; --card: #1e2027; --text: #e8e8e6; --muted: #9a9a96;
     --line: #2c2e36; --accent: #26a69a;
-    /* 暗い背景でも見出しの下線・バッジが沈まないよう、松屋・松のやだけ少し明るくする */
-    --matsuya: #b85a00; --matsunoya: #a83a82; }
+    /* 暗い背景でも見出しの下線・バッジが沈まないよう、松屋・松のや・吉野家だけ少し明るくする */
+    --matsuya: #b85a00; --matsunoya: #a83a82; --yoshinoya: #3a7bd0; }
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--bg); color: var(--text);
@@ -284,6 +304,7 @@ h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); 
 .chain-group[data-chain="mos"] h3 { border-color: var(--mos); }
 .chain-group[data-chain="matsuya"] h3 { border-color: var(--matsuya); }
 .chain-group[data-chain="matsunoya"] h3 { border-color: var(--matsunoya); }
+.chain-group[data-chain="yoshinoya"] h3 { border-color: var(--yoshinoya); }
 .grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
 .item { display: block; background: var(--card); border: 1px solid var(--line);
   border-radius: 10px; padding: 12px; text-decoration: none; }
@@ -294,6 +315,7 @@ h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); 
 .item[data-chain="mos"] .badge { background: var(--mos); }
 .item[data-chain="matsuya"] .badge { background: var(--matsuya); }
 .item[data-chain="matsunoya"] .badge { background: var(--matsunoya); }
+.item[data-chain="yoshinoya"] .badge { background: var(--yoshinoya); }
 .item .st { display: inline-block; font-size: 10px; border-radius: 4px; padding: 0 6px; margin-left: 6px;
   border: 1px solid var(--line); color: var(--muted); }
 .item .st-on { color: var(--accent); border-color: var(--accent); }
@@ -483,8 +505,8 @@ def page_shell(title: str, description: str, body: str, canonical: str, extra_he
 </main>
 <footer>
 価格・販売期間・販売状況は取得時点のものです。最新の状況は各社公式サイトでご確認ください。
-当サイトはマクドナルド、モスバーガー、松屋、松のや各社とは関係のない非公式サイトです。
-公式サイト： <a href="https://www.mcdonalds.co.jp/">マクドナルド</a> ／ <a href="https://www.mos.jp/">モスバーガー</a> ／ <a href="https://www.matsuyafoods.co.jp/matsuya/">松屋</a> ／ <a href="https://www.matsuyafoods.co.jp/matsunoya/">松のや</a>
+当サイトはマクドナルド、モスバーガー、松屋、松のや、吉野家各社とは関係のない非公式サイトです。
+公式サイト： <a href="https://www.mcdonalds.co.jp/">マクドナルド</a> ／ <a href="https://www.mos.jp/">モスバーガー</a> ／ <a href="https://www.matsuyafoods.co.jp/matsuya/">松屋</a> ／ <a href="https://www.matsuyafoods.co.jp/matsunoya/">松のや</a> ／ <a href="https://www.yoshinoya.com/">吉野家</a>
 {policy_link}｜ <a href="/rss.xml">RSS</a> ｜ <a href="/archive/">終了した限定メニュー</a>
 {related_html}
 </footer>
@@ -755,14 +777,14 @@ def render_archive_index(items: list[dict]) -> str:
 <div class="monthlist">
 {rows}
 </div>"""
-    return page_shell("終了した限定メニュー", "販売が終わったマクドナルド・モスバーガー・松屋・松のやの限定メニューを、販売開始月ごとにまとめたアーカイブ",
+    return page_shell("終了した限定メニュー", f"販売が終わった{CHAIN_LIST_TEXT}の限定メニューを、販売開始月ごとにまとめたアーカイブ",
                        body, CONFIG.get("site_url", "") + "archive/")
 
 
 def render_chains_top() -> str:
     links = "\n".join(f'<a href="/chains/{c["slug"]}/">{esc(c["name"])}</a>' for c in CHAINS)
     body = f'<h2>チェーン一覧</h2><div class="chainlist">{links}</div>'
-    return page_shell("チェーン一覧", "マクドナルド・モスバーガー・松屋・松のやの限定メニュー一覧", body,
+    return page_shell("チェーン一覧", f"{CHAIN_LIST_TEXT}の限定メニュー一覧", body,
                        CONFIG.get("site_url", "") + "chains/")
 
 
@@ -801,6 +823,15 @@ def nutrition_footnote(item: dict) -> str:
 
 def render_nutrition(item: dict) -> str:
     nut = item.get("nutrition")
+    if not nut and item.get("nutrition_pdf_url"):
+        # 吉野家: 栄養成分・アレルゲンは商品ページに無く、公式の「吉野家メニュー情報」PDFにある。取り込まずリンクで案内する
+        label = item.get("nutrition_pdf_label") or "メニュー情報"
+        origin = (f" ／ <a href=\"{esc(item['origin_pdf_url'])}\" target=\"_blank\" rel=\"noopener\">食材の原産地情報（PDF）</a>"
+                  if item.get("origin_pdf_url") else "")
+        return ("<h3>栄養成分・アレルギー情報</h3><p class='note'>栄養成分・アレルギー情報は公式の"
+                f"「{esc(label)}」PDFをご覧ください。当サイトでは取り込んでいません。</p>"
+                f"<p><a href=\"{esc(item['nutrition_pdf_url'])}\" target=\"_blank\" rel=\"noopener\">"
+                f"{esc(label)}（公式PDF）</a>{origin}</p>")
     if not nut:
         return ("<h3>栄養成分</h3><p class='note'>栄養成分は公式サイトに掲載がありませんでした"
                 "（セット商品や一部の限定商品は載らないことがあります）。</p>")
@@ -881,7 +912,8 @@ def render_price_history(item: dict) -> str:
     hist = item.get("price_history") or []
     if len(hist) <= 1:
         return ""
-    rows = "".join(f"<tr><th>{esc(h['date'])}〜</th><td>{h['price']:g}円</td></tr>" for h in hist)
+    rows = "".join(f"<tr><th>{esc(h['date'])}〜</th><td>{h['price']:g}円{'（再登場時）' if h.get('relaunch') else ''}</td></tr>"
+                   for h in hist)
     return f"<h3>価格の履歴</h3><table>{rows}</table><p class='note'>公式サイトの一覧に出ていた価格を、変わった日に記録しています。</p>"
 
 
@@ -895,13 +927,40 @@ def seo_title(item: dict) -> str:
 def seo_description(item: dict) -> str:
     chain_name = CHAIN_NAME.get(item["chain"], item["chain"])
     nut = item.get("nutrition") or {}
-    bits = [f"{chain_name}の{'メニュー' if is_matsuya_family(item.get('chain')) else '限定メニュー'}「{item['name']}」"]
+    bits = [f"{chain_name}の{'限定メニュー' if is_limited_listed(item) else 'メニュー'}「{item['name']}」"]
     if nut.get("kcal") is not None:
         bits.append(f"{nut['kcal']:g}kcal")
     if item.get("price") is not None:
         bits.append(f"{item['price']:g}円（税込）")
     bits.append(period_text(item))
     return ("、".join(bits) + "。" + (item.get("description") or ""))[:200]
+
+
+def render_yoshinoya_notes(item: dict) -> str:
+    """吉野家: 発売日の出どころ、早期販売終了のお知らせ、昨季の販売期間。"""
+    notes = []
+    kind = item.get("limited_kind")
+    if kind == "期間限定":
+        notes.append("公式サイトの「期間限定」表示のあるメニューです。販売期間は公式サイトに載っていないため、終了日は一覧から消えたのを確認した日です。")
+    else:
+        notes.append(f"公式サイトの「{kind or '新規掲載'}」として記録したメニューです。販売期間は公式サイトに載っていません。")
+    if item.get("launch_date_source") == "news_headline" and item.get("news_title"):
+        link = item.get("news_url") or ""
+        title = esc(item["news_title"])
+        title_html = (f'<a href="{esc(link)}" target="_blank" rel="noopener">{title}</a>' if link else title)
+        notes.append(f"発売日は公式のお知らせ（{esc(item.get('news_date') or '')}）の見出しによります：{title_html}")
+    e = item.get("early_end_notice")
+    if e:
+        link = e.get("url") or ""
+        title = esc(e.get("title") or "")
+        title_html = (f'<a href="{esc(link)}" target="_blank" rel="noopener">{title}</a>' if link else title)
+        notes.append(f"販売終了に関する公式のお知らせが出ています（{esc(e.get('date') or '')}）：{title_html}")
+    for s_ in item.get("seasons") or []:
+        start = s_.get("launch_date") or "開始日不明"
+        notes.append(f"昨季の販売：{esc(start)}〜{esc(s_.get('ended_observed_at') or '')}（終了日は{ENDED_NOTE}）")
+    if item.get("takeout") is False:
+        notes.append("テイクアウトはできません（公式ページの注記）。")
+    return "".join(f"<p class='note'>{n}</p>" for n in notes)
 
 
 def render_item_page(item: dict) -> str:
@@ -984,6 +1043,7 @@ def render_item_page(item: dict) -> str:
                         "「おすすめ」に載ったメニューと、記録を始めてから新しく加わったメニューを記録しています。"
                         + ("発売日は公式ニュースの記載です。" if item.get("launch_date_source", "").startswith("news_article") else "")
                         + "</p>")
+    yoshinoya_note = render_yoshinoya_notes(item) if item.get("chain") == "yoshinoya" else ""
     body = f"""<nav class="crumbs"><a href="/">トップ</a> &gt; <a href="/chains/{esc(item['chain'])}/">{esc(chain_name)}</a></nav>
 <div class="detail">
 <div class="badge" style="display:inline-block;font-size:11px;font-weight:700;color:#fff;
@@ -995,6 +1055,7 @@ border-radius:4px;padding:2px 8px;background:var(--{esc(item['chain'])})">{esc(c
 <p><strong>販売期間：</strong>{esc(period_text(item, detailed=True))}</p>
 {mop_note}
 {matsuya_note}
+{yoshinoya_note}
 {relaunch}
 {('<p><strong>カテゴリ：</strong>' + esc(item['category']) + '</p>') if item.get('category') else ''}
 {quote_html}
@@ -1106,7 +1167,7 @@ def main() -> int:
         mdir.mkdir(parents=True, exist_ok=True)
         label = f"{m[:4]}年{int(m[5:7])}月に始まった限定メニュー"
         page = render_grid_page(
-            label, f"{m[:4]}年{int(m[5:7])}月に販売が始まり、すでに終了したマクドナルド・モスバーガー・松屋・松のやの限定メニュー一覧",
+            label, f"{m[:4]}年{int(m[5:7])}月に販売が始まり、すでに終了した{CHAIN_LIST_TEXT}の限定メニュー一覧",
             month_items, CONFIG.get("site_url", "") + f"archive/{m}/", show_filters=True,
         )
         (mdir / "index.html").write_text(page, encoding="utf-8")

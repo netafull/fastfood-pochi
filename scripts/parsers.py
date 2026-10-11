@@ -686,3 +686,294 @@ def parse_matsuya_article(page: str) -> dict:
                 desc_src = p
                 break
     return {"text": text, "launch_date": launch, "description_src": desc_src}
+
+
+# ---------------------------------------------------------------------------
+# 吉野家 (www.yoshinoya.com)
+# ---------------------------------------------------------------------------
+# 静的HTML。限定一覧 /menu/gentei/ と、入口 /menu/ からたどる全カテゴリの一覧、詳細ページ、
+# お知らせ一覧 /news/{年}/ を読む。栄養成分・アレルゲンは別PDFで、このコードはPDFを取得・解析しない
+# (config.json の yoshinoya_pdf にあるURLへリンクを出すだけ)。
+# 規約(/sitepolicy/)は複製・転用と営利目的の行為を禁じているため、記録するのは事実情報
+# (価格・日付・販売状況)だけで、説明文・画像は保存しない。
+
+YOSHINOYA_BASE = "https://www.yoshinoya.com"
+YOSHINOYA_HOST = "www.yoshinoya.com"
+YOSHINOYA_MENU_ROOT = "/menu/"
+YOSHINOYA_LIMITED_CATEGORY = "gentei"
+
+_YOSHI_UNIT_SPLIT = '<div class="menu__unit'
+
+
+def yoshinoya_normalize_path(href: str, base_url: str = YOSHINOYA_BASE + "/") -> str | None:
+    """リンクを、そのページ自身のホストで解決して /menu/... のパス(末尾スラッシュつき)にする。
+    別ホスト(stores.yoshinoya.com 等)・メニュー以外は None。"""
+    import urllib.parse
+    u = urllib.parse.urlsplit(urllib.parse.urljoin(base_url, href.strip()))
+    if u.netloc and u.netloc != YOSHINOYA_HOST:
+        return None
+    path = u.path
+    if not path.endswith("/"):
+        path += "/"
+    return path if path.startswith(YOSHINOYA_MENU_ROOT) else None
+
+
+def yoshinoya_product_id(path: str) -> str | None:
+    """/menu/{カテゴリ}/{slug}/ → 'カテゴリ-slug'。2階層でないものは商品ではない。"""
+    m = re.fullmatch(r"/menu/([A-Za-z0-9_]+)/([A-Za-z0-9_\-]+)/", path)
+    return f"{m.group(1)}-{m.group(2)}" if m else None
+
+
+def _yoshi_int(s: str | None) -> int | None:
+    if not s:
+        return None
+    try:
+        return int(s.replace(",", ""))
+    except ValueError:
+        return None
+
+
+def parse_yoshinoya_index(page: str) -> list[dict]:
+    """入口 /menu/ のカテゴリ一覧([{slug, label}]、出現順)。
+    リンクは末尾スラッシュ無しの絶対URL(https://www.yoshinoya.com/menu/gyudon)で書かれている。"""
+    out, seen = [], set()
+    for chunk in page.split(_YOSHI_UNIT_SPLIT)[1:]:
+        m = re.search(r'href="([^"]+)"', chunk)
+        if not m:
+            continue
+        path = yoshinoya_normalize_path(m.group(1))
+        mm = re.fullmatch(r"/menu/([A-Za-z0-9_]+)/", path or "")
+        if not mm or mm.group(1) in seen:
+            continue
+        t = re.search(r'menu__title">(.*?)<', chunk, re.S)
+        seen.add(mm.group(1))
+        out.append({"slug": mm.group(1), "label": clean_text(t.group(1)) if t else None})
+    return out
+
+
+def parse_yoshinoya_list(page: str) -> list[dict]:
+    """カテゴリ一覧ページの商品。price(税込・店内)が None のものは料理ではない案内(「温め直し方」等)。
+
+    同じ商品が複数のカテゴリ一覧に載る(定食が /set/ と /karaage/ の両方に等)が、リンク先URLは
+    どこでも同じなので、商品IDはURLから決まる。"""
+    out = []
+    for chunk in page.split(_YOSHI_UNIT_SPLIT)[1:]:
+        m = re.search(r'href="([^"]+)"', chunk)
+        if not m:
+            continue
+        path = yoshinoya_normalize_path(m.group(1))
+        pid = yoshinoya_product_id(path) if path else None
+        if not pid:
+            continue
+        t = re.search(r'menu__title">(.*?)<span class="icon__arrow"', chunk, re.S)
+        name = clean_text(t.group(1)) if t else ""
+        price_block = re.search(r'<div class="menu__price">(.*?)</div>', chunk, re.S)
+        ex = incl = None
+        label = ""
+        if price_block:
+            pb = price_block.group(1)
+            pm = re.search(r'priceNum">([\d,]+)</span>円', pb)
+            im = re.search(r'priceCap">[^<]*<span>([\d,]+)</span>', pb)
+            ex = _yoshi_int(pm.group(1)) if pm else None
+            incl = _yoshi_int(im.group(1)) if im else None
+            lm = re.match(r"\s*([^<\s][^<]*?)\s*<span", pb)
+            label = clean_text(lm.group(1)) if lm else ""
+        badges = re.findall(r'<span class="budge(?:__new)?"><span>([^<]*)</span>', chunk)
+        out.append({
+            "product_id": pid,
+            "category": pid.split("-", 1)[0],
+            "name": name,
+            "detail_path": path,
+            "price": incl,
+            "price_ex_tax": ex,
+            "price_label": label,
+            "is_new": "NEW" in badges,
+            "is_limited": "期間限定" in badges,
+            "takeout_icon": "menu__icon__takeout" in chunk,
+        })
+    return out
+
+
+def _yoshi_price_rows(block: str) -> list[dict]:
+    rows = []
+    for li in re.findall(r"<li>(.*?)</li>", block, re.S):
+        tm = re.search(r'menu__price__taxin">([\d,]+)</span>', li)
+        xm = re.search(r'menu__price__taxout">([\d,]+)</span>', li)
+        if not tm:
+            continue
+        lm = re.search(r'menu__label">(.*?)</div>', li, re.S)
+        rows.append({"label": clean_text(lm.group(1)) if lm else "",
+                     "price": _yoshi_int(tm.group(1)),
+                     "price_ex_tax": _yoshi_int(xm.group(1)) if xm else None})
+    return rows
+
+
+def parse_yoshinoya_detail(page: str) -> dict | None:
+    """詳細ページから 名前・店内の税込価格(サイズ別)・テイクアウト価格・バッジ・テイクアウト可否。
+    説明文・画像・栄養は読まない(栄養はPDFで、ページには載っていない)。"""
+    h1 = re.search(r"<h1>(.*?)</h1>", page, re.S)
+    eat = re.search(r'tab__contents__eatin[^"]*"[^>]*>(.*?)(?=tab__contents__takeout|menu__caption|menu__btn__pdf|$)',
+                    page, re.S)
+    take = re.search(r'tab__contents__takeout[^"]*"[^>]*>(.*?)(?=menu__caption|menu__btn__pdf|$)', page, re.S)
+    eat_rows = _yoshi_price_rows(eat.group(1)) if eat else []
+    if not h1 or not eat_rows:
+        return None
+    take_rows = _yoshi_price_rows(take.group(1)) if take else []
+    cap = re.search(r'<div class="menu__caption">(.*?)</div>', page, re.S)
+    caption = clean_text(cap.group(1)) if cap else ""
+    # 本文のバッジは .menu__unit の中(おすすめ欄の他商品のバッジを拾わないよう、h1より後の最初の商品欄だけを見る)
+    unit = re.search(r'<div class="menu__unit">(.*?)<div class="menu__photo__cap"', page, re.S)
+    badges = re.findall(r'<span class="budge(?:__new)?"><span>([^<]*)</span>', unit.group(1)) if unit else []
+    if take_rows or "tab__menu__takeout" in page or 'id="tab__menu__takeout"' in page:
+        takeout = True
+    elif "テイクアウトできません" in caption:
+        takeout = False
+    else:
+        takeout = None
+    return {
+        "name": clean_text(h1.group(1)),
+        "eatin": eat_rows,
+        "takeout_prices": take_rows,
+        "takeout": takeout,
+        "is_new": "NEW" in badges,
+        "is_limited": "期間限定" in badges,
+        "caption": caption,
+    }
+
+
+def yoshinoya_price_variants(detail: dict) -> list[dict]:
+    """店内の税込価格(サイズ別)に、店内と税込額が違うテイクアウト価格(消費税率の違いで差が出る)を足す。"""
+    out = [{"label": r["label"], "price": r["price"]} for r in detail["eatin"]]
+    eat_by_label = {r["label"]: r["price"] for r in detail["eatin"]}
+    for r in detail["takeout_prices"]:
+        if eat_by_label.get(r["label"]) != r["price"]:
+            out.append({"label": f"{r['label']}・テイクアウト" if r["label"] else "テイクアウト", "price": r["price"]})
+    return out
+
+
+def yoshinoya_pick_primary(detail: dict) -> dict | None:
+    """代表の価格: 店内の「並盛」→ 先頭(一覧に出る価格と一致する)。"""
+    rows = detail["eatin"]
+    for r in rows:
+        if r["label"] == "並盛":
+            return r
+    return rows[0] if rows else None
+
+
+# --- お知らせ(見出しだけを読む。リンク先のPDFは取得しない) ---
+
+def parse_yoshinoya_news(page: str) -> list[dict]:
+    """お知らせ一覧 /news/{年}/ を、新しい順(ページの並びのまま)の
+    [{date(ISO), title, url, category}] にする。日付は「2026.10.7」の形(ゼロ埋めなし)。"""
+    out = []
+    for u in page.split('<div class="news__unit">')[1:]:
+        d = re.search(r'news__date">\s*(\d{4})\.(\d{1,2})\.(\d{1,2})', u)
+        a = re.search(r'<p class="news__title">\s*<a href="([^"]*)"[^>]*>(.*?)</a>', u, re.S)
+        if not d or not a:
+            continue
+        inner = re.sub(r'<span class="budge__new"><span>NEW</span></span>', "", a.group(2))
+        inner = re.sub(r'<span class="icon__pdf"></span>', "", inner)
+        c = re.search(r'news__cat"><a[^>]*>\s*([^<]*)', u)
+        out.append({
+            "date": f"{int(d.group(1)):04d}-{int(d.group(2)):02d}-{int(d.group(3)):02d}",
+            "title": clean_text(inner).replace("\n", " "),
+            "url": a.group(1),
+            "category": clean_text(c.group(1)) if c else "",
+        })
+    out.sort(key=lambda x: x["date"], reverse=True)
+    return out
+
+
+_YOSHI_START_RE = re.compile(
+    r"(?:(本日)|(\d{1,2})月(\d{1,2})日)(?:[（(][^）)]{1,3}[）)])?(?:\s*\d{1,2}時(?:\d{1,2}分)?)?\s*(?:より|から)")
+# 「登場」「開始」だけでは TVCM の放映開始などに当たってしまうため、販売・発売の語を要求する
+_YOSHI_LAUNCH_WORDS = re.compile(r"販売|発売")
+# 公式通販ショップ(冷凍商品・ギフト)のお知らせは店舗のメニューではないので照合から外す
+_YOSHI_ECOMMERCE_RE = re.compile(r"通販|ショップ|ギフト")
+
+
+def yoshinoya_start_date(title: str, news_date: str) -> str | None:
+    """見出しの「10月8日より…販売」「本日より販売開始」から発売日(ISO)を取る。
+    年は書かれていないのでお知らせの日付から補う(12月のお知らせの「1月5日より」は翌年)。"""
+    import datetime
+    if not _YOSHI_LAUNCH_WORDS.search(title or ""):
+        return None
+    try:
+        nd = datetime.date.fromisoformat(news_date)
+    except ValueError:
+        return None
+    m = _YOSHI_START_RE.search(title)
+    if not m:
+        return None
+    if m.group(1):
+        return nd.isoformat()
+    try:
+        d = datetime.date(nd.year, int(m.group(2)), int(m.group(3)))
+    except ValueError:
+        return None
+    if (nd - d).days > 200:
+        d = d.replace(year=d.year + 1)
+    elif (d - nd).days > 200:
+        d = d.replace(year=d.year - 1)
+    return d.isoformat()
+
+
+def yoshinoya_title_matches(name: str, title: str) -> bool:
+    """商品名が見出しの商品として載っているか。見出しに「」『』があれば、その中身と
+    完全一致するときだけ(「さんま定食」が「牛さんま定食」の見出しに部分一致する誤爆を避ける)。
+    括弧が無い見出しだけ、正規化した部分一致(4文字以上)。"""
+    n = normalize_for_match(name)
+    if len(n) < 3:
+        return False
+    quoted = [normalize_for_match(q) for q in re.findall(r"[「『](.*?)[」』]", title or "")]
+    if quoted:
+        return n in quoted
+    return len(n) >= 4 and n in normalize_for_match(title)
+
+
+YOSHINOYA_NEWS_WINDOW_BEFORE_DAYS = 120
+YOSHINOYA_NEWS_WINDOW_AFTER_DAYS = 14
+# 商品に関係しないお知らせの種類(新規開店)。見出しの照合から外す
+YOSHINOYA_NEWS_SKIP_CATEGORIES = ("店舗情報",)
+
+
+def match_yoshinoya_launch(name: str, news: list[dict], ref: str,
+                           before: int = YOSHINOYA_NEWS_WINDOW_BEFORE_DAYS,
+                           after: int = YOSHINOYA_NEWS_WINDOW_AFTER_DAYS) -> dict | None:
+    """商品名を含み、発売日(「○月○日より販売」)が読める最新のお知らせ。
+    ref(その季の初観測日)の前 before 日〜後 after 日のお知らせだけを対象にする。
+    戻り値は {"news": {...}, "launch_date": ISO}。"""
+    import datetime
+    try:
+        c = datetime.date.fromisoformat(ref)
+    except ValueError:
+        return None
+    lo, hi = c - datetime.timedelta(days=before), c + datetime.timedelta(days=after)
+    for a in news:
+        if a.get("category") in YOSHINOYA_NEWS_SKIP_CATEGORIES:
+            continue
+        try:
+            d = datetime.date.fromisoformat(a["date"])
+        except ValueError:
+            continue
+        if not (lo <= d <= hi) or not yoshinoya_title_matches(name, a["title"]):
+            continue
+        if re.search(r"終了", a["title"]) or _YOSHI_ECOMMERCE_RE.search(a["title"]):
+            continue
+        ld = yoshinoya_start_date(a["title"], a["date"])
+        if ld:
+            return {"news": a, "launch_date": ld}
+    return None
+
+
+def match_yoshinoya_end_notice(name: str, news: list[dict], since: str, until: str) -> dict | None:
+    """「早期販売終了のお知らせ」など、商品名つきの終了告知の見出し(since〜until の日付のもの)。"""
+    for a in news:
+        if a.get("category") in YOSHINOYA_NEWS_SKIP_CATEGORIES:
+            continue
+        if not (since <= a["date"] <= until):
+            continue
+        if (re.search(r"終了", a["title"]) and not _YOSHI_ECOMMERCE_RE.search(a["title"])
+                and yoshinoya_title_matches(name, a["title"])):
+            return a
+    return None

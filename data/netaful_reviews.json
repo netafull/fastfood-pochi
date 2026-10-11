@@ -6899,16 +6899,677 @@
     "thumb": null,
     "title": "モスから魚肉ハンバーガー「KATSUO」"
    }
+  ],
+  "yoshinoya": [
+   {
+    "date": "2026-10-11T13:30:00",
+    "id": 210715,
+    "link": "https://netaful.jp/fast-food/0210715.html",
+    "product_name": "牛さんま定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/10/yoshinoya-sanma-012-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【吉野家】「牛さんま定食」は美味しい？ 魚定食シリーズ第3弾、北海道産さんまを食べてみた"
+   },
+   {
+    "date": "2026-08-06T12:30:00",
+    "id": 207454,
+    "link": "https://netaful.jp/fast-food/0207454.html",
+    "product_name": "極旨牛鉄板ステーキ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/08/yoshinoya-cut-steak-eat-001-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【吉野家】「極旨牛鉄板ステーキ定食」牛肉の旨みを堪能！1,498円の鉄板ステーキ定食を食べてみた"
+   },
+   {
+    "date": "2026-07-31T12:15:00",
+    "id": 207252,
+    "link": "https://netaful.jp/fast-food/0207252.html",
+    "product_name": "牛金目鯛の煮付け定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/07/yoshinoya-kinmedai-001-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【吉野家】「牛金目鯛の煮付け定食」899円で金目鯛も牛肉も楽しめる期間限定メニュー"
+   },
+   {
+    "date": "2026-07-20T14:30:00",
+    "id": 206840,
+    "link": "https://netaful.jp/fast-food/0206840.html",
+    "product_name": "牛スタミナ焼肉丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/07/yoshinoya-yakigyu-003-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【吉野家】「牛スタミナ焼肉丼」並盛でも満足！ニンニクだれでご飯が進みまくる！"
+   },
+   {
+    "date": "2026-05-16T11:00:00",
+    "id": 204406,
+    "link": "https://netaful.jp/fast-food/0204406.html",
+    "product_name": "牛ほっけ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/05/yoshinoya-hokke-004-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【吉野家】「牛ほっけ定食」思った以上に“ご飯泥棒”な定食だった！"
+   },
+   {
+    "date": "2026-04-06T11:30:00",
+    "id": 193897,
+    "link": "https://netaful.jp/fast-food/0193897.html",
+    "product_name": "牛焼肉丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/04/yoshinoya-gyuyakiniku-004-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【吉野家】「牛焼肉丼」牛丼とは違う満足感！390gで軽めに食べられる一杯"
+   },
+   {
+    "date": "2026-03-19T18:00:00",
+    "id": 193187,
+    "link": "https://netaful.jp/fast-food/0193187.html",
+    "product_name": "焦がしねぎ焼き鳥丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/03/yoshinoya-yakitoridon-005-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【吉野家】「焦がしねぎ焼き鳥丼」香ばしい長ねぎ×にんにくダレでご飯が進みまくる！"
+   },
+   {
+    "date": "2026-03-03T10:00:00",
+    "id": 192464,
+    "link": "https://netaful.jp/fast-food/0192464.html",
+    "product_name": "肉味噌ねぎ牛丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/03/yoshinoya-nikumiso-rayu-001-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【吉野家】「肉味噌ねぎ牛丼」肉＆肉で攻める！にんにく香るやみつき系"
+   },
+   {
+    "date": "2026-02-21T13:00:00",
+    "id": 191250,
+    "link": "https://netaful.jp/fast-food/0191250.html",
+    "product_name": "牛プルコギ丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/02/yoshinoya-purukogi-005-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【吉野家】「牛プルコギ丼」牛丼より好きかも？甘辛コチュジャンだれが決め手"
+   },
+   {
+    "date": "2025-11-28T15:30:00",
+    "id": 186160,
+    "link": "https://netaful.jp/fast-food/0186160.html",
+    "product_name": "牛肉玉ラーメン鍋膳",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/11/yoshinoya-gyunabe-ramen-026-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【吉野家】「牛肉玉ラーメン鍋膳」ラーメン、つけ麺、鍋、雑炊！吉野の“家系ラーメン”を食べてみた"
+   },
+   {
+    "date": "2025-11-05T16:30:00",
+    "id": 185033,
+    "link": "https://netaful.jp/fast-food/0185033.html",
+    "product_name": "牛オムハヤシライス",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/11/yoshinoya-hayashi-omu-006-485x364.jpg",
+     "width": 485
+    },
+    "title": "【吉野家】「牛オムハヤシライス」とろふわ玉子が主役！？満足度の高い新メニュー"
+   },
+   {
+    "date": "2025-10-17T15:00:00",
+    "id": 184162,
+    "link": "https://netaful.jp/fast-food/0184162.html",
+    "product_name": "とんこつ醤油牛鍋膳",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/10/yoshinoya-gyunabe-010-485x364.jpg",
+     "width": 485
+    },
+    "title": "【吉野家】「とんこつ醤油牛鍋膳」にんにくマシマシで覚醒！想像以上の完成度！"
+   },
+   {
+    "date": "2025-10-03T14:30:00",
+    "id": 183398,
+    "link": "https://netaful.jp/fast-food/0183398.html",
+    "product_name": "肉だく祭",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/10/yoshinoya-nikudaku-016-485x364.jpg",
+     "width": 485
+    },
+    "title": "【吉野家】肉だく追加で牛丼を食べた‥‥「肉だく祭」で100円引きだからね！"
+   },
+   {
+    "date": "2025-09-19T13:30:00",
+    "id": 182813,
+    "link": "https://netaful.jp/fast-food/0182813.html",
+    "product_name": "鬼おろしわさび牛丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/09/yoshinoya-oroshi-wasabi-012-485x364.jpg",
+     "width": 485
+    },
+    "title": "【吉野家】「鬼おろしわさび牛丼」わさび好き必見！新作トッピングは爽やか刺激系"
+   },
+   {
+    "date": "2025-09-13T14:30:00",
+    "id": 182500,
+    "link": "https://netaful.jp/fast-food/0182500.html",
+    "product_name": "月見牛とじ丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/09/yoshinoya-tsukimi-gyudon-014-485x364.jpg",
+     "width": 485
+    },
+    "title": "【吉野家】「月見牛とじ丼」玉子と牛肉の黄金コンビ！美味しすぎてリピ確定"
+   },
+   {
+    "date": "2025-09-06T14:30:00",
+    "id": 182058,
+    "link": "https://netaful.jp/fast-food/0182058.html",
+    "product_name": "牛魯珈カレー",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/09/yoshinoya-roka-002-485x364.jpg",
+     "width": 485
+    },
+    "title": "【吉野家】「牛魯珈カレー」にはから揚げトッピングがオススメだ！"
+   },
+   {
+    "date": "2025-09-03T12:15:00",
+    "id": 181884,
+    "link": "https://netaful.jp/fast-food/0181884.html",
+    "product_name": "牛魯肉飯",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/09/yoshinoya-ruro-022-485x364.jpg",
+     "width": 485
+    },
+    "title": "【吉野家】「牛魯肉飯」有名店監修の吉野家流ルーローハンを食べてみた"
+   },
+   {
+    "date": "2025-08-03T14:30:00",
+    "id": 180396,
+    "link": "https://netaful.jp/fast-food/0180396.html",
+    "product_name": "厚切り豚角煮定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/08/yoshinoya-buta-kakuni-008-485x364.jpg",
+     "width": 485
+    },
+    "title": "【吉野家】「厚切り豚角煮定食」半年ぶりに極厚3cm・重さ170gの豚肉塊を食べてニッコリ"
+   },
+   {
+    "date": "2025-07-06T12:20:00",
+    "id": 179048,
+    "link": "https://netaful.jp/fast-food/0179048.html",
+    "product_name": "ピリ辛青ねぎから揚げ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/07/yoshinoya-aonegi-karaage-002-485x364.jpg",
+     "width": 485
+    },
+    "title": "【吉野家】「ピリ辛青ねぎから揚げ定食」青ネギたっぷりでクセになる美味しさだ！"
+   },
+   {
+    "date": "2025-07-04T15:00:00",
+    "id": 178954,
+    "link": "https://netaful.jp/fast-food/0178954.html",
+    "product_name": "牛玉スタミナまぜそば",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/07/yoshinoya-mazesoba-008-485x364.jpg",
+     "width": 485
+    },
+    "title": "【吉野家】「牛玉スタミナまぜそば」にんにくマシマシだれでガツンと味変を推奨！"
+   },
+   {
+    "date": "2025-06-20T15:30:00",
+    "id": 178254,
+    "link": "https://netaful.jp/fast-food/0178254.html",
+    "product_name": "ハニーマスタードから揚げ丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/06/yoshinoya-karaage-100-002-485x364.jpg",
+     "width": 485
+    },
+    "title": "【吉野家】「ハニーマスタードから揚げ丼」甘酸っぱいソースで食べるから揚げが旨い"
+   },
+   {
+    "date": "2025-06-05T14:30:00",
+    "id": 177422,
+    "link": "https://netaful.jp/fast-food/0177422.html",
+    "product_name": "牛たん麦とろ御膳",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/06/yoshinoya-gyutan-mugitoro-005-485x364.jpg",
+     "width": 485
+    },
+    "title": "【吉野家】「牛たん麦とろ御膳」10周年の麦とろも食べられる御膳メニューはメシ友だらけでおかわり必至！"
+   },
+   {
+    "date": "2025-06-04T14:00:00",
+    "id": 177373,
+    "link": "https://netaful.jp/fast-food/0177373.html",
+    "product_name": "肉だく祭",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/06/yoshinoya-nikudaku-001-485x364.jpg",
+     "width": 485
+    },
+    "title": "【吉野家】肉だくが100円オフ「肉だく祭」でおトクに“肉だく牛丼”してきた！"
+   },
+   {
+    "date": "2025-04-24T14:00:00",
+    "id": 175391,
+    "link": "https://netaful.jp/fast-food/0175391.html",
+    "product_name": "から揚げ丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/04/yoshinoya-karaage-001-485x364.jpg",
+     "width": 485
+    },
+    "title": "【吉野家】「から揚げ丼」生姜のきいたジューシーから揚げが旨い"
+   },
+   {
+    "date": "2025-04-12T18:00:00",
+    "id": 174767,
+    "link": "https://netaful.jp/fast-food/0174767.html",
+    "product_name": "から揚げ親子丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/04/yoshinoya-karaage-oyako-001-485x364.jpg",
+     "width": 485
+    },
+    "title": "【吉野家】「から揚げ親子丼」生姜がきいた揚げがジューシーで美味しいのね！"
+   },
+   {
+    "date": "2025-04-07T15:00:00",
+    "id": 174564,
+    "link": "https://netaful.jp/fast-food/0174564.html",
+    "product_name": "バタービーフカレー",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/04/yoshinoya-butter-beef-curry-002-485x364.jpg",
+     "width": 485
+    },
+    "title": "【吉野家】店舗限定「バタービーフカレー」食べてみた"
+   },
+   {
+    "date": "2025-03-25T12:10:00",
+    "id": 173856,
+    "link": "https://netaful.jp/fast-food/0173856.html",
+    "product_name": "Wハムエッグ牛小鉢定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/03/yoshinoya-w-ham-egg-001-485x364.jpg",
+     "width": 485
+    },
+    "title": "【吉野家】「Wハムエッグ牛小鉢定食」666円の朝食を食べてみた"
+   },
+   {
+    "date": "2025-02-28T12:30:00",
+    "id": 171669,
+    "link": "https://netaful.jp/fast-food/0171669.html",
+    "product_name": "ハンバーグ弁当",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/02/yoshinoya-humburg-003-485x364.jpg",
+     "width": 485
+    },
+    "title": "【吉野家】店舗限定「ハンバーグ弁当」食べてみた"
+   },
+   {
+    "date": "2025-02-20T15:00:00",
+    "id": 170887,
+    "link": "https://netaful.jp/fast-food/0170887.html",
+    "product_name": "厚切り豚角煮定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2025/02/yoshinoya-butakakuni-041-300x225.jpg",
+     "width": 300
+    },
+    "title": "【吉野家】極厚3cm！店舗限定「厚切り豚角煮定食」食べてみた"
+   },
+   {
+    "date": "2025-02-14T12:30:00",
+    "id": 170521,
+    "link": "https://netaful.jp/fast-food/0170521.html",
+    "product_name": "焼魚牛小鉢定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2025/02/yoshinoya-morning-sake-001-300x225.jpg",
+     "width": 300
+    },
+    "title": "【吉野家】「焼魚牛小鉢定食」666円の朝食を食べてみた"
+   },
+   {
+    "date": "2025-02-12T12:30:00",
+    "id": 169674,
+    "link": "https://netaful.jp/fast-food/0169674.html",
+    "product_name": "塩さば牛小鉢定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2025/02/yoshinoya-yakizakana-gyu-kobachi-007-300x225.jpg",
+     "width": 300
+    },
+    "title": "【吉野家】「塩さば牛小鉢定食」666円の朝食を食べてみた"
+   },
+   {
+    "date": "2025-02-03T12:30:00",
+    "id": 167078,
+    "link": "https://netaful.jp/fast-food/0167078.html",
+    "product_name": "納豆定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2025/02/yoshinoya-natto-teishoku-005-300x225.jpg",
+     "width": 300
+    },
+    "title": "【吉野家】「納豆定食」430円の朝食を食べてみた"
+   },
+   {
+    "date": "2025-01-17T12:10:00",
+    "id": 166301,
+    "link": "https://netaful.jp/fast-food/0166301.html",
+    "product_name": "牛魯珈カレー",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2025/01/yoshinoya-roka-003-300x225.jpg",
+     "width": 300
+    },
+    "title": "【吉野家】魯珈監修「牛魯珈カレー」かなりのスパイシーさに驚いて目が覚めた！"
+   },
+   {
+    "date": "2024-12-01T16:00:00",
+    "id": 164378,
+    "link": "https://netaful.jp/fast-food/0164378.html",
+    "product_name": "牛すき鍋膳",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/12/yoshinoya-gyusuki-005-300x225.jpg",
+     "width": 300
+    },
+    "title": "【吉野家】「牛すき鍋膳」注文する人が多くて驚いた"
+   },
+   {
+    "date": "2024-07-27T12:10:00",
+    "id": 154112,
+    "link": "https://netaful.jp/fast-food/0154112.html",
+    "product_name": "厚切り豚角煮・牛定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/07/yoshinoya-kakuni-003-300x225.jpg",
+     "width": 300
+    },
+    "title": "【吉野家】「厚切り豚角煮・牛定食」箸でホロホロに崩れる分厚い豚角煮が15店舗限定で食べられる！"
+   },
+   {
+    "date": "2024-07-26T13:30:00",
+    "id": 154055,
+    "link": "https://netaful.jp/fast-food/0154055.html",
+    "product_name": "牛重～リブロース～",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/07/yoshinoya-gyuju-011-300x225.jpg",
+     "width": 300
+    },
+    "title": "【吉野家】「牛重～リブロース～」15店舗でしか食べられない希少部位マキの焼肉は濃厚でジューシーでした"
+   },
+   {
+    "date": "2024-07-25T13:00:00",
+    "id": 154005,
+    "link": "https://netaful.jp/fast-food/0154005.html",
+    "product_name": "牛たん・牛皿御膳",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/07/yoshinoya-gyutan-001-300x225.jpg",
+     "width": 300
+    },
+    "title": "【吉野家】「牛たん・牛皿御膳」ウシノコノコノコギュウタンタン♪ウマイ♪"
+   },
+   {
+    "date": "2024-06-06T12:30:00",
+    "id": 151651,
+    "link": "https://netaful.jp/fast-food/0151651.html",
+    "product_name": "牛麦とろ丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/06/yoshinoya-mugitoro-005-300x225.jpg",
+     "width": 300
+    },
+    "title": "【吉野家】「牛麦とろ丼」麦飯にとろろとオクラが最高に旨い！"
+   },
+   {
+    "date": "2024-05-04T11:30:00",
+    "id": 149891,
+    "link": "https://netaful.jp/fast-food/0149891.html",
+    "product_name": "バターチキンカレー",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/05/yoshinoya-butter-chicken-005-300x225.jpg",
+     "width": 300
+    },
+    "title": "【吉野家】「バターチキンカレー」食べてみたらマイルドなバタチキだった！"
+   },
+   {
+    "date": "2023-11-12T08:30:00",
+    "id": 140508,
+    "link": "https://netaful.jp/fast-food/0140508.html",
+    "product_name": null,
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2023/11/yoshinoya-asakatsu-200-000-300x225.jpg",
+     "width": 300
+    },
+    "title": "【吉野家】朝食を食べて昼食か夕食が200円オフになる朝活クーポンを貰った！"
+   },
+   {
+    "date": "2023-03-01T17:30:00",
+    "id": 126053,
+    "link": "https://netaful.jp/fast-food/0126053.html",
+    "product_name": "肉だく牛スパイシーカレー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/03/yoshinoya-curry-004-01-300x169.jpg",
+     "width": 300
+    },
+    "title": "【吉野家】3月1日より復活販売した27種類のスパイス使用の「肉だく牛スパイシーカレー」を食べてみた"
+   },
+   {
+    "date": "2022-10-15T11:00:00",
+    "id": 121248,
+    "link": "https://netaful.jp/fast-food/0121248.html",
+    "product_name": "牛カレー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/10/yoshinoya-curry-gyu-14000-300x169.jpg",
+     "width": 300
+    },
+    "title": "吉野家のカレー史上過去最多となる2.5倍の玉ねぎを使用した「牛カレー」を半額祭中の“肉だく”で食べてみた"
+   },
+   {
+    "date": "2022-07-26T12:00:00",
+    "id": 115589,
+    "link": "https://netaful.jp/fast-food/0115589.html",
+    "product_name": "ライザップ辛牛サラダ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/07/yoshinoya-rizap-26000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【吉野家】糖質制限ダイエット中につき「ライザップ辛牛サラダ」を食べてみたら普通に美味しかった"
+   },
+   {
+    "date": "2022-06-23T18:00:00",
+    "id": 114283,
+    "link": "https://netaful.jp/neta-eat/0114283.html",
+    "product_name": "親子丼",
+    "thumb": {
+     "height": 167,
+     "url": "https://netaful.jp/wp-content/uploads/2022/06/yoshinoya-oyakodon-end-300x167.jpg",
+     "width": 300
+    },
+    "title": "【吉野家】10年かけて開発した「親子丼」発売から約2ヶ月で終売へ"
+   },
+   {
+    "date": "2021-06-06T16:30:00",
+    "id": 100503,
+    "link": "https://netaful.jp/fast-food/0100503.html",
+    "product_name": "ねぎ塩豚定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2021/06/yoshinoya-shio-buta-03-04-300x225.jpg",
+     "width": 300
+    },
+    "title": "【吉野家】かぼす胡椒で美味しい「ねぎ塩豚定食」"
+   },
+   {
+    "date": "2021-04-02T10:30:00",
+    "id": 98021,
+    "link": "https://netaful.jp/fast-food/098021.html",
+    "product_name": "ねぎ山椒牛丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2021/04/yoshinoya-sansho-008-202103-300x225.jpg",
+     "width": 300
+    },
+    "title": "【吉野家】牛丼に山椒のひと味が旨い「ねぎ山椒牛丼」"
+   },
+   {
+    "date": "2020-04-30T14:00:00",
+    "id": 62774,
+    "link": "https://netaful.jp/fast-food/062774.html",
+    "product_name": "スタミナ超特盛丼",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2020/04/slproImg_202004301413070-1-300x169.jpg",
+     "width": 300
+    },
+    "title": "「スタミナ超特盛丼」牛・豚・鶏の肉3種盛で1,700kcalオーバー！吉野家史上最大ボリュームは覚悟して食べよう！"
+   },
+   {
+    "date": "2020-01-08T13:00:00",
+    "id": 62160,
+    "link": "https://netaful.jp/fast-food/062160.html",
+    "product_name": "ねぎだく牛丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/01/slproImg_202001081427270-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【吉野家】玉ねぎシャクシャク！築地店の特殊注文だった「ねぎだく牛丼」食べてみた"
+   },
+   {
+    "date": "2019-11-26T09:00:00",
+    "id": 61945,
+    "link": "https://netaful.jp/fast-food/061945.html",
+    "product_name": "吉野家",
+    "thumb": null,
+    "title": "牛丼の「吉野家」の注文がタブレットでタッチパネルになっていた"
+   },
+   {
+    "date": "2019-05-28T14:00:00",
+    "id": 60697,
+    "link": "https://netaful.jp/gourmet/060697.html",
+    "product_name": "吉呑み",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2019/05/slproImg_201905271647080-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【吉野家】ちょい呑み「吉呑み」がせんべろ的でなかなか良かった"
+   },
+   {
+    "date": "2019-01-24T16:00:00",
+    "id": 59782,
+    "link": "https://netaful.jp/fast-food/059782.html",
+    "product_name": null,
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2019/01/slproImg_201901241621284-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【吉野家】アタマ120％に増量した牛丼並盛を食べた【1/24限定】"
+   },
+   {
+    "date": "2018-11-30T11:00:00",
+    "id": 59389,
+    "link": "https://netaful.jp/fast-food/059389.html",
+    "product_name": null,
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2018/11/slproImg_201811301542572-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "吉野家でSuica"
+   },
+   {
+    "date": "2018-10-07T10:00:00",
+    "id": 59000,
+    "link": "https://netaful.jp/fast-food/059000.html",
+    "product_name": "鯖みそ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2018/10/slproImg_201810071206110-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【吉野家】「鯖みそ定食」骨に気づかず食べられるほど柔らかくて美味い"
+   },
+   {
+    "date": "2016-10-31T15:30:00",
+    "id": 54120,
+    "link": "https://netaful.jp/fast-food/054120.html",
+    "product_name": "吉野家 成田国際空港第2ターミナルサテライト店",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2016/10/narita-airport-yoshinoya-0387-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "「吉野家 成田国際空港第2ターミナルサテライト店」で牛丼セットを食べた！海外の吉野家のようだった"
+   },
+   {
+    "date": "2015-04-21T11:30:00",
+    "id": 49944,
+    "link": "https://netaful.jp/fast-food/049944.html",
+    "product_name": "吉呑み",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2015/04/yoshinoya-1005-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "「吉呑み」吉野家の“ちょい飲み”が拡大へ"
+   }
   ]
  },
  "errors": [],
- "fetched_at": "2026-10-11T12:28:27+09:00",
+ "fetched_at": "2026-10-11T14:21:03+09:00",
  "matches": {
   "matsuya-curry-kashmir_hp_261006": [
    210463
   ],
   "matsuya-teishoku-tei_kuromabo_hp_260929": [
    210253
+  ],
+  "yoshinoya-gentei-gyusanma-tei": [
+   210715
   ]
  }
 }

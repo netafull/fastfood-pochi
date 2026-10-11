@@ -26,13 +26,13 @@
 :root {
   --bg: #fafaf7; --card: #ffffff; --text: #1a1a1a; --muted: #6b6b6b;
   --accent: #00897b; --line: #e5e2dc;
-  --mcdonalds: #da291c; --mos: #1b7f3b; --matsuya: #a34a00; --matsunoya: #7a1f5c;
+  --mcdonalds: #da291c; --mos: #1b7f3b; --matsuya: #a34a00; --matsunoya: #7a1f5c; --yoshinoya: #1f5fad;
 }
 @media (prefers-color-scheme: dark) {
   :root { --bg: #14151a; --card: #1e2027; --text: #e8e8e6; --muted: #9a9a96;
     --line: #2c2e36; --accent: #26a69a;
-    /* 暗い背景でも見出しの下線・バッジが沈まないよう、松屋・松のやだけ少し明るくする */
-    --matsuya: #b85a00; --matsunoya: #a83a82; }
+    /* 暗い背景でも見出しの下線・バッジが沈まないよう、松屋・松のや・吉野家だけ少し明るくする */
+    --matsuya: #b85a00; --matsunoya: #a83a82; --yoshinoya: #3a7bd0; }
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--bg); color: var(--text);
@@ -60,6 +60,7 @@ h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); 
 .chain-group[data-chain="mos"] h3 { border-color: var(--mos); }
 .chain-group[data-chain="matsuya"] h3 { border-color: var(--matsuya); }
 .chain-group[data-chain="matsunoya"] h3 { border-color: var(--matsunoya); }
+.chain-group[data-chain="yoshinoya"] h3 { border-color: var(--yoshinoya); }
 .grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
 .item { display: block; background: var(--card); border: 1px solid var(--line);
   border-radius: 10px; padding: 12px; text-decoration: none; }
@@ -70,6 +71,7 @@ h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); 
 .item[data-chain="mos"] .badge { background: var(--mos); }
 .item[data-chain="matsuya"] .badge { background: var(--matsuya); }
 .item[data-chain="matsunoya"] .badge { background: var(--matsunoya); }
+.item[data-chain="yoshinoya"] .badge { background: var(--yoshinoya); }
 .item .st { display: inline-block; font-size: 10px; border-radius: 4px; padding: 0 6px; margin-left: 6px;
   border: 1px solid var(--line); color: var(--muted); }
 .item .st-on { color: var(--accent); border-color: var(--accent); }
@@ -149,7 +151,7 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <body>
 <header>
 <h1><a href="/"><img src="/assets/logo.png" alt="" width="32" height="32">ファストフードポチ</a></h1>
-<p>マクドナルド・モスバーガー・松屋・松のやの期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</p>
+<p>マクドナルド・モスバーガー・松屋・松のや・吉野家の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</p>
 <nav class="sites"><span class="lbl">関連サイト</span>
 <a href="https://book.netaful.jp/">電書ポチ<span class="lbl"> Kindle本セール</span></a>
 <a href="https://kaden.netaful.jp/">家電ポチ<span class="lbl"> ガジェット・家電セール</span></a>
@@ -170,6 +172,7 @@ border-radius:4px;padding:2px 8px;background:var(--mcdonalds)">マクドナル�
 
 <p><strong>販売期間：</strong>2026-09-02〜 販売中（終了予定：2026-10-14（モバイルオーダー受付期間の終了日））</p>
 <p class='note'>マクドナルドは公式の終了予定日を載せていないため、公式ページのモバイルオーダー受付期間の終了日を「終了予定」として表示しています。</p>
+
 
 
 <p><strong>カテゴリ：</strong>デザート・シェイク</p>
@@ -219,8 +222,8 @@ border-radius:4px;padding:2px 8px;background:var(--mcdonalds)">マクドナル�
 </main>
 <footer>
 価格・販売期間・販売状況は取得時点のものです。最新の状況は各社公式サイトでご確認ください。
-当サイトはマクドナルド、モスバーガー、松屋、松のや各社とは関係のない非公式サイトです。
-公式サイト： <a href="https://www.mcdonalds.co.jp/">マクドナルド</a> ／ <a href="https://www.mos.jp/">モスバーガー</a> ／ <a href="https://www.matsuyafoods.co.jp/matsuya/">松屋</a> ／ <a href="https://www.matsuyafoods.co.jp/matsunoya/">松のや</a>
+当サイトはマクドナルド、モスバーガー、松屋、松のや、吉野家各社とは関係のない非公式サイトです。
+公式サイト： <a href="https://www.mcdonalds.co.jp/">マクドナルド</a> ／ <a href="https://www.mos.jp/">モスバーガー</a> ／ <a href="https://www.matsuyafoods.co.jp/matsuya/">松屋</a> ／ <a href="https://www.matsuyafoods.co.jp/matsunoya/">松のや</a> ／ <a href="https://www.yoshinoya.com/">吉野家</a>
 ｜ <a href="https://netaful.jp/policy.html">メディアポリシー</a>
 ｜ <a href="/rss.xml">RSS</a> ｜ <a href="/archive/">終了した限定メニュー</a>
 <nav class="sites"><span class="lbl">関連サイト</span>

@@ -61,6 +61,16 @@ MATSUNOYA_PAGES = {
     "/matsunoya/whatsnew/data/whatsnew.json": "matsunoya/whatsnew_full.json",
     "/matsunoya/whatsnew/menu/175938.html": "matsunoya/n_175938.html",
 }
+YOSHINOYA_CATS = ["gentei", "gyudon", "menset", "yoshinoyanodon", "karaage", "set", "yoshinomi", "curry",
+                  "unajyu", "morningset", "kids", "sidemenu"]
+YOSHINOYA_PAGES = {
+    "/menu/": "yoshinoya/menu_index.html",
+    "/menu/gentei/gyusanma-tei/": "yoshinoya/detail_gyusanma_tei.html",
+    "/menu/yoshinoyanodon/tsukimi_gyutoji_don/": "yoshinoya/detail_tsukimi_gyutoji_don.html",
+    "/news/2026/": "yoshinoya/news_2026.html",
+}
+for _c in YOSHINOYA_CATS:
+    YOSHINOYA_PAGES[f"/menu/{_c}/"] = f"yoshinoya/list_{_c}.html"
 BLOCK_RE = re.compile(r'<li class="item">.*?<!-- //\.item -->', re.S)
 
 
@@ -130,6 +140,19 @@ class FakeGetter:
                 return matsunoya_category_page(m.group(1))
             if path.startswith("/matsunoya/menu/") and self.fallback_detail:
                 return fx("matsunoya/p_teishoku-tei_kaki5_hp_260916.html")
+            raise OSError(f"no fixture: {path}")
+        if chain == "yoshinoya":
+            path = url.replace(crawl.YOSHINOYA_BASE, "")
+            if path in self.fail:
+                raise OSError("simulated failure")
+            if path in self.overrides:
+                return self.overrides[path]
+            if path == "/robots.txt":
+                raise crawl.NotFoundError("HTTP 404: robots.txt")  # 実物と同じ: 404 だが本文は全許可
+            if path in YOSHINOYA_PAGES:
+                return fx(YOSHINOYA_PAGES[path])
+            if path.startswith("/menu/") and self.fallback_detail:
+                return fx("yoshinoya/detail_gyusanma_tei.html")
             raise OSError(f"no fixture: {path}")
         path = url.replace(crawl.MOS_BASE, "")
         if path in self.fail:
