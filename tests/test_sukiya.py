@@ -558,7 +558,9 @@ class TestSite(unittest.TestCase):
         self.assertEqual(g.CHAIN_NAME["sukiya"], "すき家")
         self.assertIn("すき家", g.CONFIG["site_description"])
         self.assertIn("すき家", g.CONFIG["site_tagline"])
-        self.assertTrue(any("すき家" in p and "公式に限定メニューの一覧がない" in p for p in g.CONFIG["about"]))
+        # aboutは短く保つ方針(2026-10-11)。チェーン別の細かい説明は書かず、全チェーン名が入っていることだけ確かめる
+        self.assertTrue(any("すき家" in p for p in g.CONFIG["about"]))
+        self.assertLess(sum(len(p) for p in g.CONFIG["about"]), 700)
         self.assertIn("--sukiya:", g.CSS)
         self.assertIn('data-chain="sukiya"', g.CSS)
         colors = {c["slug"]: c["color"].lower() for c in g.CHAINS}

@@ -171,7 +171,7 @@ class TestTop(unittest.TestCase):
         self.assertIn("ファスト飯", h)
         self.assertIn('<a href="https://netaful.jp/">ネタフル</a>', h)
         self.assertIn("非公式サイト", h)
-        self.assertIn("ケンタッキー", h)  # 対象外であることの1文
+        # 「ケンタッキーなど対象外」の1文は、aboutを短くするため2026-10-11に削除した
 
 
 class TestArchive(unittest.TestCase):
