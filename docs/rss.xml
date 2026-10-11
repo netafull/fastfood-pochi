@@ -3,8 +3,239 @@
 <channel>
 <title>ファストフードポチ</title>
 <link>https://fastfood.netaful.jp/</link>
-<description>マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</description>
-<lastBuildDate>Sun, 11 Oct 2026 06:59:05 +0000</lastBuildDate>
+<description>マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやまの期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</description>
+<lastBuildDate>Sun, 11 Oct 2026 08:15:57 +0000</lastBuildDate>
+<item>
+<title>【からやま】黒胡椒とり天のレモンステーキ定食</title>
+<link>https://fastfood.netaful.jp/items/karayama-19096.html</link>
+<guid isPermaLink="false">karayama-19096</guid>
+<category>からやま</category>
+<pubDate>Sun, 11 Oct 2026 17:14:57 +0900</pubDate>
+</item>
+<item>
+<title>【からやま】黒胡椒とり天合盛り定食</title>
+<link>https://fastfood.netaful.jp/items/karayama-19097.html</link>
+<guid isPermaLink="false">karayama-19097</guid>
+<category>からやま</category>
+<pubDate>Sun, 11 Oct 2026 17:14:57 +0900</pubDate>
+</item>
+<item>
+<title>【からやま】黒胡椒とり天4個</title>
+<link>https://fastfood.netaful.jp/items/karayama-19099.html</link>
+<guid isPermaLink="false">karayama-19099</guid>
+<category>からやま</category>
+<pubDate>Sun, 11 Oct 2026 17:14:57 +0900</pubDate>
+</item>
+<item>
+<title>【からやま】黒胡椒とり天のレモンステーキ弁当</title>
+<link>https://fastfood.netaful.jp/items/karayama-19100.html</link>
+<guid isPermaLink="false">karayama-19100</guid>
+<category>からやま</category>
+<pubDate>Sun, 11 Oct 2026 17:14:57 +0900</pubDate>
+</item>
+<item>
+<title>【からやま】黒胡椒とり天合盛り弁当</title>
+<link>https://fastfood.netaful.jp/items/karayama-19101.html</link>
+<guid isPermaLink="false">karayama-19101</guid>
+<category>からやま</category>
+<pubDate>Sun, 11 Oct 2026 17:14:57 +0900</pubDate>
+</item>
+<item>
+<title>【からやま】黒胡椒とり天4個</title>
+<link>https://fastfood.netaful.jp/items/karayama-19103.html</link>
+<guid isPermaLink="false">karayama-19103</guid>
+<category>からやま</category>
+<pubDate>Sun, 11 Oct 2026 17:14:57 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】海老トリプル丼</title>
+<link>https://fastfood.netaful.jp/items/katsuya-22442.html</link>
+<guid isPermaLink="false">katsuya-22442</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】海老トリプル定食</title>
+<link>https://fastfood.netaful.jp/items/katsuya-22443.html</link>
+<guid isPermaLink="false">katsuya-22443</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】海老トリプル丼弁当</title>
+<link>https://fastfood.netaful.jp/items/katsuya-22444.html</link>
+<guid isPermaLink="false">katsuya-22444</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】海老トリプル弁当</title>
+<link>https://fastfood.netaful.jp/items/katsuya-22445.html</link>
+<guid isPermaLink="false">katsuya-22445</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】カツ丼ライト</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607001.html</link>
+<guid isPermaLink="false">katsuya-2607001</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】ソースカツ丼ライト</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607002.html</link>
+<guid isPermaLink="false">katsuya-2607002</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】ねぎタルチキンカツ丼ライト</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607003.html</link>
+<guid isPermaLink="false">katsuya-2607003</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】豚丼</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607004.html</link>
+<guid isPermaLink="false">katsuya-2607004</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】豚丼とロースカツの合い盛り丼</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607005.html</link>
+<guid isPermaLink="false">katsuya-2607005</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】豚焼肉定食</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607006.html</link>
+<guid isPermaLink="false">katsuya-2607006</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】豚焼肉とロースカツの合い盛り定食</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607007.html</link>
+<guid isPermaLink="false">katsuya-2607007</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】タルたまミックスポーク丼</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607008.html</link>
+<guid isPermaLink="false">katsuya-2607008</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】タルたまミックスフライ丼</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607009.html</link>
+<guid isPermaLink="false">katsuya-2607009</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】タルタルミックスヘビー定食</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607010.html</link>
+<guid isPermaLink="false">katsuya-2607010</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】ミックスかつや定食</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607011.html</link>
+<guid isPermaLink="false">katsuya-2607011</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】とん汁定食(からあげ)</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607012.html</link>
+<guid isPermaLink="false">katsuya-2607012</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】カツ丼弁当ライト</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607021.html</link>
+<guid isPermaLink="false">katsuya-2607021</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】ソースカツ丼弁当ライト</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607022.html</link>
+<guid isPermaLink="false">katsuya-2607022</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】ねぎタルチキンカツ丼弁当ライト</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607023.html</link>
+<guid isPermaLink="false">katsuya-2607023</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】豚丼弁当</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607024.html</link>
+<guid isPermaLink="false">katsuya-2607024</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】豚丼とロースカツの合い盛り丼弁当</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607025.html</link>
+<guid isPermaLink="false">katsuya-2607025</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】豚焼肉弁当</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607026.html</link>
+<guid isPermaLink="false">katsuya-2607026</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】豚焼肉とロースカツの合い盛り弁当</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607027.html</link>
+<guid isPermaLink="false">katsuya-2607027</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】タルたまミックスポーク丼弁当</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607028.html</link>
+<guid isPermaLink="false">katsuya-2607028</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】タルたまミックスフライ丼弁当</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607029.html</link>
+<guid isPermaLink="false">katsuya-2607029</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】タルタルミックスヘビー定食弁当</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607030.html</link>
+<guid isPermaLink="false">katsuya-2607030</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
+<item>
+<title>【かつや】ミックスかつや定食弁当</title>
+<link>https://fastfood.netaful.jp/items/katsuya-2607031.html</link>
+<guid isPermaLink="false">katsuya-2607031</guid>
+<category>かつや</category>
+<pubDate>Sun, 11 Oct 2026 17:14:48 +0900</pubDate>
+</item>
 <item>
 <title>【すき家】ビーフカレー</title>
 <link>https://fastfood.netaful.jp/items/sukiya-curry-314800.html</link>
@@ -473,223 +704,6 @@
 <guid isPermaLink="false">matsuya-curry-kashmir_rosu_hp_261006</guid>
 <category>松屋</category>
 <pubDate>Sun, 11 Oct 2026 12:09:31 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】松屋の牛焼肉丼</title>
-<link>https://fastfood.netaful.jp/items/matsuya-don-don_gyuyaki_hp_260811.html</link>
-<guid isPermaLink="false">matsuya-don-don_gyuyaki_hp_260811</guid>
-<category>松屋</category>
-<pubDate>Sun, 11 Oct 2026 12:09:31 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】黒麻婆豆腐定食</title>
-<link>https://fastfood.netaful.jp/items/matsuya-teishoku-tei_kuromabo_hp_260929.html</link>
-<guid isPermaLink="false">matsuya-teishoku-tei_kuromabo_hp_260929</guid>
-<category>松屋</category>
-<pubDate>Sun, 11 Oct 2026 12:09:31 +0900</pubDate>
-</item>
-<item>
-<title>【モスバーガー】月見フォカッチャ ～黄金(おうごん)チーズソース～</title>
-<link>https://fastfood.netaful.jp/items/mos-010488.html</link>
-<guid isPermaLink="false">mos-010488</guid>
-<category>モスバーガー</category>
-<pubDate>Wed, 07 Oct 2026 21:23:32 +0900</pubDate>
-</item>
-<item>
-<title>【モスバーガー】黄金(おうごん)チーズソースのフォカッチャ</title>
-<link>https://fastfood.netaful.jp/items/mos-010489.html</link>
-<guid isPermaLink="false">mos-010489</guid>
-<category>モスバーガー</category>
-<pubDate>Wed, 07 Oct 2026 21:23:32 +0900</pubDate>
-</item>
-<item>
-<title>【モスバーガー】メンチカツチーズバーガー ～デミグラスソース～</title>
-<link>https://fastfood.netaful.jp/items/mos-010685.html</link>
-<guid isPermaLink="false">mos-010685</guid>
-<category>モスバーガー</category>
-<pubDate>Wed, 07 Oct 2026 21:23:32 +0900</pubDate>
-</item>
-<item>
-<title>【モスバーガー】【時間限定】トリプルモスバーガー ＜15時から販売＞</title>
-<link>https://fastfood.netaful.jp/items/mos-011293.html</link>
-<guid isPermaLink="false">mos-011293</guid>
-<category>モスバーガー</category>
-<pubDate>Wed, 07 Oct 2026 21:23:32 +0900</pubDate>
-</item>
-<item>
-<title>【モスバーガー】【時間限定】トリプルモスチーズバーガー ＜15時から販売＞</title>
-<link>https://fastfood.netaful.jp/items/mos-011294.html</link>
-<guid isPermaLink="false">mos-011294</guid>
-<category>モスバーガー</category>
-<pubDate>Wed, 07 Oct 2026 21:23:32 +0900</pubDate>
-</item>
-<item>
-<title>【モスバーガー】ブラックアンガスバーガー</title>
-<link>https://fastfood.netaful.jp/items/mos-011576.html</link>
-<guid isPermaLink="false">mos-011576</guid>
-<category>モスバーガー</category>
-<pubDate>Wed, 07 Oct 2026 21:23:32 +0900</pubDate>
-</item>
-<item>
-<title>【モスバーガー】トースト</title>
-<link>https://fastfood.netaful.jp/items/mos-120108.html</link>
-<guid isPermaLink="false">mos-120108</guid>
-<category>モスバーガー</category>
-<pubDate>Wed, 07 Oct 2026 21:23:32 +0900</pubDate>
-</item>
-<item>
-<title>【モスバーガー】ストロベリージャム</title>
-<link>https://fastfood.netaful.jp/items/mos-120395.html</link>
-<guid isPermaLink="false">mos-120395</guid>
-<category>モスバーガー</category>
-<pubDate>Wed, 07 Oct 2026 21:23:32 +0900</pubDate>
-</item>
-<item>
-<title>【モスバーガー】朝モスプレート</title>
-<link>https://fastfood.netaful.jp/items/mos-123003.html</link>
-<guid isPermaLink="false">mos-123003</guid>
-<category>モスバーガー</category>
-<pubDate>Wed, 07 Oct 2026 21:23:32 +0900</pubDate>
-</item>
-<item>
-<title>【モスバーガー】【金曜日限定】オニオンフライデーパック</title>
-<link>https://fastfood.netaful.jp/items/mos-211298.html</link>
-<guid isPermaLink="false">mos-211298</guid>
-<category>モスバーガー</category>
-<pubDate>Wed, 07 Oct 2026 21:23:32 +0900</pubDate>
-</item>
-<item>
-<title>【モスバーガー】熱々（あつあつ）おさつボール ～紫いも～ 3個入り</title>
-<link>https://fastfood.netaful.jp/items/mos-211324.html</link>
-<guid isPermaLink="false">mos-211324</guid>
-<category>モスバーガー</category>
-<pubDate>Wed, 07 Oct 2026 21:23:32 +0900</pubDate>
-</item>
-<item>
-<title>【モスバーガー】熱々（あつあつ）おさつボール ～紫いも～ 5個入り</title>
-<link>https://fastfood.netaful.jp/items/mos-211325.html</link>
-<guid isPermaLink="false">mos-211325</guid>
-<category>モスバーガー</category>
-<pubDate>Wed, 07 Oct 2026 21:23:32 +0900</pubDate>
-</item>
-<item>
-<title>【モスバーガー】オレンジ&amp;パッションフルーツティー</title>
-<link>https://fastfood.netaful.jp/items/mos-483147.html</link>
-<guid isPermaLink="false">mos-483147</guid>
-<category>モスバーガー</category>
-<pubDate>Wed, 07 Oct 2026 21:23:32 +0900</pubDate>
-</item>
-<item>
-<title>【モスバーガー】ティーミルク ～キャンディ茶葉使用～</title>
-<link>https://fastfood.netaful.jp/items/mos-483208.html</link>
-<guid isPermaLink="false">mos-483208</guid>
-<category>モスバーガー</category>
-<pubDate>Wed, 07 Oct 2026 21:23:32 +0900</pubDate>
-</item>
-<item>
-<title>【モスバーガー】【テイクアウト限定】＜冷凍＞香る醤油のローストチキン 〜鹿児島県産 若鶏〜</title>
-<link>https://fastfood.netaful.jp/items/mos-710169.html</link>
-<guid isPermaLink="false">mos-710169</guid>
-<category>モスバーガー</category>
-<pubDate>Wed, 07 Oct 2026 21:23:32 +0900</pubDate>
-</item>
-<item>
-<title>【モスバーガー】まぜるシェイク 蜜（みつ）いも</title>
-<link>https://fastfood.netaful.jp/items/mos-P00060.html</link>
-<guid isPermaLink="false">mos-P00060</guid>
-<category>モスバーガー</category>
-<pubDate>Wed, 07 Oct 2026 21:23:32 +0900</pubDate>
-</item>
-<item>
-<title>【マクドナルド】プリプリエビプリオ 5ピース</title>
-<link>https://fastfood.netaful.jp/items/mcdonalds-2500.html</link>
-<guid isPermaLink="false">mcdonalds-2500</guid>
-<category>マクドナルド</category>
-<pubDate>Wed, 07 Oct 2026 21:22:29 +0900</pubDate>
-</item>
-<item>
-<title>【マクドナルド】三角チョコパイ 黒</title>
-<link>https://fastfood.netaful.jp/items/mcdonalds-2520.html</link>
-<guid isPermaLink="false">mcdonalds-2520</guid>
-<category>マクドナルド</category>
-<pubDate>Wed, 07 Oct 2026 21:22:29 +0900</pubDate>
-</item>
-<item>
-<title>【マクドナルド】三角チョコパイ クッキー&amp;クリーム いちご味</title>
-<link>https://fastfood.netaful.jp/items/mcdonalds-2530.html</link>
-<guid isPermaLink="false">mcdonalds-2530</guid>
-<category>マクドナルド</category>
-<pubDate>Wed, 07 Oct 2026 21:22:29 +0900</pubDate>
-</item>
-<item>
-<title>【マクドナルド】月見バーガー</title>
-<link>https://fastfood.netaful.jp/items/mcdonalds-6900.html</link>
-<guid isPermaLink="false">mcdonalds-6900</guid>
-<category>マクドナルド</category>
-<pubDate>Wed, 07 Oct 2026 21:22:29 +0900</pubDate>
-</item>
-<item>
-<title>【マクドナルド】チーズ月見</title>
-<link>https://fastfood.netaful.jp/items/mcdonalds-6910.html</link>
-<guid isPermaLink="false">mcdonalds-6910</guid>
-<category>マクドナルド</category>
-<pubDate>Wed, 07 Oct 2026 21:22:29 +0900</pubDate>
-</item>
-<item>
-<title>【マクドナルド】北海道産じゃがペッパー月見</title>
-<link>https://fastfood.netaful.jp/items/mcdonalds-6930.html</link>
-<guid isPermaLink="false">mcdonalds-6930</guid>
-<category>マクドナルド</category>
-<pubDate>Wed, 07 Oct 2026 21:22:29 +0900</pubDate>
-</item>
-<item>
-<title>【マクドナルド】チーズチーズ倍月見</title>
-<link>https://fastfood.netaful.jp/items/mcdonalds-6940.html</link>
-<guid isPermaLink="false">mcdonalds-6940</guid>
-<category>マクドナルド</category>
-<pubDate>Wed, 07 Oct 2026 21:22:29 +0900</pubDate>
-</item>
-<item>
-<title>【マクドナルド】月見マフィン</title>
-<link>https://fastfood.netaful.jp/items/mcdonalds-6950.html</link>
-<guid isPermaLink="false">mcdonalds-6950</guid>
-<category>マクドナルド</category>
-<pubDate>Wed, 07 Oct 2026 21:22:29 +0900</pubDate>
-</item>
-<item>
-<title>【マクドナルド】黄金のたまごタルタルソース</title>
-<link>https://fastfood.netaful.jp/items/mcdonalds-6970.html</link>
-<guid isPermaLink="false">mcdonalds-6970</guid>
-<category>マクドナルド</category>
-<pubDate>Wed, 07 Oct 2026 21:22:29 +0900</pubDate>
-</item>
-<item>
-<title>【マクドナルド】月見 マックシェイク® 長野県産シャインマスカット</title>
-<link>https://fastfood.netaful.jp/items/mcdonalds-6980.html</link>
-<guid isPermaLink="false">mcdonalds-6980</guid>
-<category>マクドナルド</category>
-<pubDate>Wed, 07 Oct 2026 21:22:29 +0900</pubDate>
-</item>
-<item>
-<title>【マクドナルド】食べくらべポテナゲ大</title>
-<link>https://fastfood.netaful.jp/items/mcdonalds-801705.html</link>
-<guid isPermaLink="false">mcdonalds-801705</guid>
-<category>マクドナルド</category>
-<pubDate>Wed, 07 Oct 2026 21:22:29 +0900</pubDate>
-</item>
-<item>
-<title>【マクドナルド】食べくらべポテナゲ特大</title>
-<link>https://fastfood.netaful.jp/items/mcdonalds-801706.html</link>
-<guid isPermaLink="false">mcdonalds-801706</guid>
-<category>マクドナルド</category>
-<pubDate>Wed, 07 Oct 2026 21:22:29 +0900</pubDate>
-</item>
-<item>
-<title>【マクドナルド】マックフルーリー® 明治アーモンドチョコレート</title>
-<link>https://fastfood.netaful.jp/items/mcdonalds-8610.html</link>
-<guid isPermaLink="false">mcdonalds-8610</guid>
-<category>マクドナルド</category>
-<pubDate>Wed, 07 Oct 2026 21:22:29 +0900</pubDate>
 </item>
 </channel>
 </rss>

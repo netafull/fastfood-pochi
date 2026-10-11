@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家の限定メニュー・新メニューを巡回し、
-data/products/{mcdonalds|mos|matsuya|matsunoya|yoshinoya|sukiya}/{id}.json に1商品1ファイルで蓄積する。
+"""マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやまの限定メニュー・新メニューを巡回し、
+data/products/{mcdonalds|mos|matsuya|matsunoya|yoshinoya|sukiya|katsuya|karayama}/{id}.json に1商品1ファイルで蓄積する。
 
 このサイトの核は「販売状況の追跡」。公式サイトは販売が終わると商品を消すので、
 一覧に居た商品が消えたら終了とみなして記録を残す。
@@ -1565,6 +1565,252 @@ def crawl_sukiya(getter, pending: dict, stats: dict, today: str | None = None) -
 
 
 # ---------------------------------------------------------------------------
+# かつや・からやま (www.arclandservice.co.jp。アークランドサービスホールディングスの共通テンプレート)
+# ---------------------------------------------------------------------------
+# 調査・方針(2026-10-11)。パーサ側(parsers.py の同名の節)にも経緯がある。
+#  ・ホストは www.arclandservice.co.jp だけ。robots.txt は200で Disallow は /cms/wp-admin/ のみ。ボット対策なし。
+#  ・メニュー一覧 /{brand}/menu/ は1ページに全商品(カテゴリ別ページは無い)。名前・税込価格・公式アイコン・URLが
+#    一覧だけで揃うので、商品の詳細ページは取らない。アレルゲン一覧PDFのリンクも一覧ページにある(月ごとにURLが変わる
+#    ため、販売中の商品には毎回最新のリンクを反映する。PDF自体は取得しない)。
+#  ・お知らせ /{brand}/information/ も1ページ。見出しの文言・日付・リンク先URLだけを使い、リンク先(PR TIMES)は取得しない。
+#  ・1回の巡回は、robots.txt + メニュー一覧 + お知らせ一覧の3リクエスト(1ブランドあたり)。
+#  ・栄養成分は公式サイトのHTMLにもPDFにも載っていない。扱わない。
+#  ・終了判定は1ページの一覧からの消失で行う。一覧が空・構造変更、または項目数が前回の半分未満(ページの欠落の疑い)の回は、
+#    消えた商品を数えない(ARCLAND_MIN_RATIO)。その回の項目数は data/arcland_state.json に残す。
+#  ・同名の商品が別の番号で並ぶ(店内用とテイクアウト用、期間限定と通常の再掲載)ので same_name_as を残す。
+ARCLAND_BASE = parsers.ARCLAND_BASE
+ARCLAND_MIN_RATIO = 0.5
+ARCLAND_NAMES = {"katsuya": "かつや", "karayama": "からやま"}
+
+
+def arcland_state_path() -> Path:
+    return DATA / "arcland_state.json"
+
+
+def arcland_price_note(entry: dict) -> str:
+    note = "税込。公式サイトの一覧に表示された価格。"
+    if entry.get("category") == "テイクアウト":
+        note += "テイクアウト用の商品です。"
+    note += "店舗により価格・取り扱いが異なる場合があります。"
+    return note
+
+
+def arcland_apply_news(product: dict, news: list[dict]) -> bool:
+    """発売日が未確定の商品をお知らせの見出しから探し直す(取得済みの一覧を使うので追加のリクエストは無い)。
+    見つかれば announced_at / news_* / 発売日(見出しに「○月○日」があるとき)を埋める。変更があれば True。"""
+    if product.get("launch_date") is not None:
+        return False
+    ref = (product.get("first_seen_at") or "")[:10]
+    rel = product.get("relaunches") or []
+    if rel and rel[-1].get("reappeared_at"):
+        ref = rel[-1]["reappeared_at"]
+    if not ref:
+        return False
+    hit = parsers.match_arcland_launch(product.get("name") or "", news, ref)
+    if not hit:
+        return False
+    a = hit["news"]
+    changed = (product.get("news_url") != a["url"] or product.get("launch_date") != hit["launch_date"])
+    product["announced_at"] = a["date"]
+    product["news_url"] = a["url"]
+    product["news_title"] = a["title"]
+    product["news_date"] = a["date"]
+    product["launch_date"] = hit["launch_date"]
+    product["launch_date_source"] = "news_headline" if hit["launch_date"] else "news_without_date"
+    if product.get("limited_kind") in (None, "新規掲載"):
+        product["limited_kind"] = "新メニュー"  # 照合は販売・発売を告げる見出しに限るので、公式の印が無ければ「新メニュー」
+    return changed
+
+
+def build_arcland_product(chain: str, entry: dict, allergen_pdf: str | None, same_name: list[str],
+                          today: str, now: str) -> dict:
+    kind = "期間限定" if entry["is_limited"] else ("新メニュー" if entry["is_new"] else "新規掲載")
+    price = entry.get("price")
+    product = {
+        "chain": chain,
+        "product_id": entry["product_id"],
+        "name": entry["name"],
+        "category": entry.get("category"),
+        "price": price,
+        "price_note": arcland_price_note(entry),
+        "price_variants": None,
+        "launch_date": None,
+        "launch_date_source": "not_found",
+        "announced_at": None,
+        "planned_end_text": None,
+        "news_url": None,
+        "news_title": None,
+        "news_date": None,
+        "description": None,
+        "description_full_len": 0,
+        "nutrition": None,
+        "nutrition_variants": None,
+        "allergen_pdf_url": allergen_pdf,
+        "allergen_pdf_label": "アレルゲン一覧",
+        "allergens": None,
+        "origin": None,
+        "limited_kind": kind,
+        "badges": [b for b in ("NEW", "期間限定") if b in entry["badges"]],
+        "official_url": entry["official_url"],
+        "first_seen_at": now,
+        "last_seen_at": today,
+        "status": "on_sale",
+        "ended_observed_at": None,
+        "missed_runs": 0,
+        "price_history": [{"date": today, "price": price}] if price is not None else [],
+        "source_list": ["menu"],
+        "image": None,
+    }
+    if same_name:
+        product["same_name_as"] = same_name
+    return product
+
+
+def crawl_katsuya(getter, pending: dict, stats: dict, today: str | None = None) -> None:
+    crawl_arcland_family("katsuya", getter, pending, stats, today)
+
+
+def crawl_karayama(getter, pending: dict, stats: dict, today: str | None = None) -> None:
+    crawl_arcland_family("karayama", getter, pending, stats, today)
+
+
+def crawl_arcland_family(chain: str, getter, pending: dict, stats: dict, today: str | None = None) -> None:
+    # 日付を指定した実行(テスト)では、初回観測の時刻もその日にそろえる(お知らせの照合の起点になるため)
+    now = now_iso() if today is None else f"{today}T07:00:00+09:00"
+    today = today or today_jst()
+    pending.setdefault(chain, {})
+    stats.setdefault(chain, new_stats())
+    st = stats[chain]
+    all_ok = True
+    menu_path = parsers.arcland_menu_path(chain)
+    news_path = parsers.arcland_news_path(chain)
+
+    robots_text = None
+    try:
+        robots_text = getter(chain, ARCLAND_BASE + "/robots.txt")
+        st["list_requests"] += 1
+    except NotFoundError:
+        st["list_requests"] += 1
+    except BlockedError as e:
+        st["blocked"] = True
+        print(f"[blocked] {chain} robots.txt: {e}", file=sys.stderr)
+        return
+    except Exception as e:  # noqa: BLE001
+        print(f"[warn] {chain} robots.txt 取得失敗(全許可として続行): {e}", file=sys.stderr)
+    rp = urllib.robotparser.RobotFileParser()
+    rp.parse((robots_text or "User-agent: *\nAllow: /").splitlines())
+
+    def allowed(path: str) -> bool:
+        return rp.can_fetch(UA, ARCLAND_BASE + path)
+
+    # メニュー一覧(1リクエスト)。取れなければ何も更新しない
+    entries: dict[str, dict] = {}
+    allergen_pdf = None
+    if not allowed(menu_path):
+        print(f"[skip] robots.txtでDisallow: {menu_path}", file=sys.stderr)
+        all_ok = False
+    else:
+        try:
+            page = getter(chain, ARCLAND_BASE + menu_path)
+            st["list_requests"] += 1
+            parsed = parsers.parse_arcland_menu(page, chain)
+            allergen_pdf = parsed["allergen_pdf_url"]
+            entries = {e["product_id"]: e for e in parsed["items"]}
+            if not entries:
+                print(f"[warn] {chain} メニュー一覧: 商品が0件(構造変更の疑い)", file=sys.stderr)
+                all_ok = False
+        except BlockedError as e:
+            st["blocked"] = True
+            print(f"[blocked] {chain} menu: {e}", file=sys.stderr)
+            return
+        except Exception as e:  # noqa: BLE001
+            print(f"[warn] {chain} メニュー一覧 取得失敗: {e}", file=sys.stderr)
+            all_ok = False
+    state = load_json(arcland_state_path(), {})
+    prev_count = (state.get(chain) or {}).get("menu_count")
+    if entries and prev_count and len(entries) < prev_count * ARCLAND_MIN_RATIO:
+        print(f"[warn] {chain} メニュー一覧が極端に少ない({len(entries)}件。前回{prev_count}件)。"
+              "消えた商品の判定は行わない", file=sys.stderr)
+        all_ok = False
+    st["list_ok"] = all_ok and bool(entries)
+    st["limited_seen"] = sum(1 for e in entries.values() if e["is_limited"])
+
+    # お知らせ一覧(1リクエスト)。見出しの文言・日付・リンク先URLだけを読み、リンク先は取得しない
+    news: list[dict] = []
+    if allowed(news_path):
+        try:
+            news = parsers.parse_arcland_news(getter(chain, ARCLAND_BASE + news_path), chain)
+            st["detail_requests"] += 1
+            if not news:
+                print(f"[warn] {chain} お知らせ: 0件(構造変更の疑い)", file=sys.stderr)
+        except BlockedError as e:
+            st["blocked"] = True
+            print(f"[blocked] {chain} news: {e}", file=sys.stderr)
+            return
+        except Exception as e:  # noqa: BLE001
+            print(f"[warn] {chain} お知らせ 取得失敗: {e}", file=sys.stderr)
+    else:
+        print(f"[skip] robots.txtでDisallow: {news_path}", file=sys.stderr)
+
+    baseline = baseline_for(chain)
+    existing_all = None
+    for pid, e in entries.items():
+        existing = load_product(chain, pid)
+        if existing is not None:
+            was_ended = existing.get("status") == "ended"
+            old_ended = existing.get("ended_observed_at")
+            touch_seen(existing, e.get("price"), today, now)
+            if was_ended:
+                yoshinoya_start_new_season(existing, old_ended, today)
+                existing["announced_at"] = None
+                st["relaunched"] = st.get("relaunched", 0) + 1
+            if e["is_limited"] and existing.get("limited_kind") != "期間限定":
+                existing["limited_kind"] = "期間限定"
+            badges = set(existing.get("badges") or [])
+            badges |= {b for b in ("NEW", "期間限定") if b in e["badges"]}
+            existing["badges"] = [b for b in ("NEW", "期間限定") if b in badges]
+            if allergen_pdf:
+                existing["allergen_pdf_url"] = allergen_pdf  # 月ごとに変わる最新のリンク
+            save_product(chain, existing)
+            pending[chain].pop(pid, None)
+            continue
+        in_news = bool(news) and parsers.match_arcland_launch(
+            e["name"], news, today, before=parsers.ARCLAND_NEWS_RECORD_DAYS) is not None
+        is_new_menu = baseline is not None and pid not in baseline
+        if not (e["is_limited"] or e["is_new"] or in_news or is_new_menu):
+            continue  # 定番の既存メニューは記録しない(baselineに入るだけ)
+        if existing_all is None:
+            existing_all = load_chain_products(chain)
+        norm = parsers.normalize_for_match(e["name"])
+        same = [p["product_id"] for p in existing_all
+                if p["product_id"] != pid and parsers.normalize_for_match(p.get("name")) == norm]
+        product = build_arcland_product(chain, e, allergen_pdf, same, today, now)
+        arcland_apply_news(product, news)
+        save_product(chain, product)
+        existing_all.append(product)
+        st["new_products"] += 1
+        pending[chain].pop(pid, None)
+
+    if st["list_ok"]:
+        if baseline is None:
+            save_baseline(chain, set(entries))
+        apply_missing(chain, set(entries), today, st)
+        state[chain] = {"menu_count": len(entries), "checked_at": today}
+        save_json(arcland_state_path(), state, sort_keys=True)
+
+    # 発売日の確定(お知らせ見出し)。一覧の更新と終了判定のあとに行う。追加のリクエストは無い
+    cutoff = (datetime.date.fromisoformat(today) - datetime.timedelta(days=14)).isoformat()
+    for p in load_chain_products(chain):
+        if p.get("status") == "ended" and (p.get("ended_observed_at") or "") < cutoff:
+            continue  # 終わって久しい商品は探し直さない
+        if news and arcland_apply_news(p, news):
+            save_product(chain, p)
+    recorded = load_chain_products(chain)
+    st["news_matched"] = sum(1 for p in recorded if p.get("news_url"))
+    st["news_unmatched"] = sum(1 for p in recorded if not p.get("news_url"))
+
+
+# ---------------------------------------------------------------------------
 # 実行
 # ---------------------------------------------------------------------------
 
@@ -1615,7 +1861,8 @@ def save_run_summary(stats: dict[str, dict]) -> None:
 
 
 CRAWLERS = {"mcdonalds": crawl_mcdonalds, "mos": crawl_mos, "matsuya": crawl_matsuya,
-            "matsunoya": crawl_matsunoya, "yoshinoya": crawl_yoshinoya, "sukiya": crawl_sukiya}
+            "matsunoya": crawl_matsunoya, "yoshinoya": crawl_yoshinoya, "sukiya": crawl_sukiya,
+            "katsuya": crawl_katsuya, "karayama": crawl_karayama}
 
 
 def main(argv: list[str] | None = None) -> int:

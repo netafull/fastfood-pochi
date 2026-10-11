@@ -1,0 +1,44 @@
+{
+ "chain": "katsuya",
+ "product_id": "22442",
+ "name": "海老トリプル丼",
+ "category": null,
+ "price": 979,
+ "price_note": "税込。公式サイトの一覧に表示された価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "launch_date": "2026-10-09",
+ "launch_date_source": "news_headline",
+ "announced_at": "2026-10-06",
+ "planned_end_text": null,
+ "news_url": "https://prtimes.jp/main/html/rd/p/000001357.000032350.html",
+ "news_title": "【期間限定】10月9日(金)～期間限定で「海老トリプル丼」販売開始！",
+ "news_date": "2026-10-06",
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "nutrition_variants": null,
+ "allergen_pdf_url": "https://www.arclandservice.co.jp/katsuya/wp-content/uploads/sites/2/2026/09/20260904_allergy.pdf",
+ "allergen_pdf_label": "アレルゲン一覧",
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "期間限定",
+ "badges": [
+  "期間限定"
+ ],
+ "official_url": "https://www.arclandservice.co.jp/katsuya/menu/22442/",
+ "first_seen_at": "2026-10-11T17:14:48+09:00",
+ "last_seen_at": "2026-10-11",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-11",
+   "price": 979
+  }
+ ],
+ "source_list": [
+  "menu"
+ ],
+ "image": null
+}

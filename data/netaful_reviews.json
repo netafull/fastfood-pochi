@@ -1,5 +1,1101 @@
 {
  "articles": {
+  "karayama": [
+   {
+    "date": "2026-09-28T09:00:00",
+    "id": 209971,
+    "link": "https://netaful.jp/fast-food/0209971.html",
+    "product_name": "黒胡椒とり天のレモンステーキ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/09/karayama-toriten-lemon-steak-005-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【からやま】「黒胡椒とり天のレモンステーキ定食」焼きレモンを絞ってバターを絡めたら旨すぎた！"
+   },
+   {
+    "date": "2026-09-21T12:10:00",
+    "id": 209619,
+    "link": "https://netaful.jp/fast-food/0209619.html",
+    "product_name": "5種盛り定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/09/karayama-5-silver-003-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【からやま】シルバーウィーク限定「5種盛り定食」！ご飯大盛にして量ってみた"
+   },
+   {
+    "date": "2026-09-07T10:00:00",
+    "id": 208906,
+    "link": "https://netaful.jp/fast-food/0208906.html",
+    "product_name": "旨辛にんにくからあげの鉄板麻婆定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/09/karayama-mabo-karaage-003-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【からやま】「旨辛にんにくからあげの鉄板麻婆定食」花椒の利いたシビ辛の麻婆が良い！"
+   },
+   {
+    "date": "2026-08-24T11:30:00",
+    "id": 208147,
+    "link": "https://netaful.jp/fast-food/0208147.html",
+    "product_name": "とり天定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/08/karayama-toriten-003-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【からやま】「とり天定食」がレギュラー化！とり天7個を思う存分食べてきた"
+   },
+   {
+    "date": "2026-08-10T10:30:00",
+    "id": 207579,
+    "link": "https://netaful.jp/fast-food/0207579.html",
+    "product_name": "鉄板ワイルドからテキ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/08/karayama-wild-steak-003-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【からやま】「鉄板ワイルドからテキ定食」1,078円！ステーキのようなからあげを食べてみた"
+   },
+   {
+    "date": "2026-06-19T19:00:00",
+    "id": 205545,
+    "link": "https://netaful.jp/fast-food/0205545.html",
+    "product_name": "塩にんにくからあげと豚しゃぶ盛り定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/06/karayama-butashabu-004-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【からやま】「塩にんにくからあげと豚しゃぶ盛り定食」豚しゃぶも唐揚げも主役級だった！特に唐揚げは過去イチ好み！"
+   },
+   {
+    "date": "2026-04-25T12:00:00",
+    "id": 202918,
+    "link": "https://netaful.jp/fast-food/0202918.html",
+    "product_name": "豚メンチからあげ盛り",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/04/kkarayama-mench-004-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【からやま】「豚メンチからあげ盛り」550g級の衝撃！おかず多すぎでご飯が足りない"
+   },
+   {
+    "date": "2026-03-28T12:20:00",
+    "id": 193544,
+    "link": "https://netaful.jp/fast-food/0193544.html",
+    "product_name": "ねぎおろしからあげ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/03/karayama-150off-001-1-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【からやま】期間限定で150円オフ「ねぎおろしからあげ定食」おろしたっぷりさっぱりで美味しい！"
+   },
+   {
+    "date": "2026-03-24T10:00:00",
+    "id": 193328,
+    "link": "https://netaful.jp/fast-food/0193328.html",
+    "product_name": "とり天合盛り定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/03/karayama-toriten-001-1-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【からやま】「とり天合盛り定食」とり天4個＋からあげ2個で大満足！"
+   },
+   {
+    "date": "2026-02-20T12:20:00",
+    "id": 191199,
+    "link": "https://netaful.jp/fast-food/0191199.html",
+    "product_name": "にんにくからあげと肉野菜炒め定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/02/karayama-yasai-itame-003-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【からやま】「にんにくからあげと肉野菜炒め定食」は当たり回！？ダブル主役の合盛りをテイクアウト実食"
+   },
+   {
+    "date": "2025-10-25T15:00:00",
+    "id": 184501,
+    "link": "https://netaful.jp/fast-food/0184501.html",
+    "product_name": "とり天合盛り定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/10/karayama-toriten-001-485x364.jpg",
+     "width": 485
+    },
+    "title": "【からやま】「とり天合盛り定食」テイクアウトでもうまっ！だけど"
+   },
+   {
+    "date": "2025-08-22T14:00:00",
+    "id": 181417,
+    "link": "https://netaful.jp/fast-food/0181417.html",
+    "product_name": "マグロ天合盛り定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/08/karayama-maguroten-009-485x364.jpg",
+     "width": 485
+    },
+    "title": "【からやま】「マグロ天合盛り定食」テイクアウトしていろいろ重さを量ってみた"
+   },
+   {
+    "date": "2025-07-27T14:00:00",
+    "id": 180042,
+    "link": "https://netaful.jp/fast-food/0180042.html",
+    "product_name": "チキン南蛮定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/07/karayama-150-off-001-485x364.jpg",
+     "width": 485
+    },
+    "title": "【からやま】期間限定で150円オフ「チキン南蛮定食」たっぷりタルタルが濃厚で美味しい！"
+   },
+   {
+    "date": "2025-07-11T16:30:00",
+    "id": 179297,
+    "link": "https://netaful.jp/fast-food/0179297.html",
+    "product_name": "カリっとたまご",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/07/karayama-tsukekara-012-485x364.jpg",
+     "width": 485
+    },
+    "title": "【からやま】「カリっとたまご」半熟玉子を唐揚げにしてしまいました。これ1つでご飯1杯いけるやつ！"
+   },
+   {
+    "date": "2025-07-11T14:30:00",
+    "id": 179288,
+    "link": "https://netaful.jp/fast-food/0179288.html",
+    "product_name": "濃厚つけから定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/07/karayama-tsukekara-005-485x364.jpg",
+     "width": 485
+    },
+    "title": "【からやま】「濃厚つけから定食」濃いつけ汁で食べる特選醤油からあげのなんと美味しいことよ！"
+   },
+   {
+    "date": "2025-06-13T15:30:00",
+    "id": 177918,
+    "link": "https://netaful.jp/fast-food/0177918.html",
+    "product_name": "カレーからあげとカレー南蛮丼セット",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/06/karayama-curry-nanban-003-485x364.jpg",
+     "width": 485
+    },
+    "title": "【からやま】「カレーからあげとカレー南蛮丼セット」豚肉たっぷり蕎麦屋のカレーにカレーからあげをイン！"
+   },
+   {
+    "date": "2025-04-30T15:00:00",
+    "id": 175626,
+    "link": "https://netaful.jp/fast-food/0175626.html",
+    "product_name": "からやま定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/04/karayama-karaage-teishoku-002-485x364.jpg",
+     "width": 485
+    },
+    "title": "【からやま】「からやま定食」極ダレと甘辛ダレにカリッと美味しいから揚げ3個の定食は715円"
+   },
+   {
+    "date": "2025-04-03T10:00:00",
+    "id": 174324,
+    "link": "https://netaful.jp/fast-food/0174324.html",
+    "product_name": "油淋鶏定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/04/karayama-yurinchin-007-485x364.jpg",
+     "width": 485
+    },
+    "title": "【からやま】期間限定で150円オフ「油淋鶏定食」ネギたっぷりで美味しい！"
+   },
+   {
+    "date": "2025-03-16T12:10:00",
+    "id": 173364,
+    "link": "https://netaful.jp/fast-food/0173364.html",
+    "product_name": "とり天合盛り定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/03/karayama-toriten-004-485x364.jpg",
+     "width": 485
+    },
+    "title": "【からやま】「とり天合盛り定食」かぼすの酢醤油と具材たっぷりタルタルソースで食べるとり天は絶品！"
+   },
+   {
+    "date": "2024-11-04T18:30:00",
+    "id": 162020,
+    "link": "https://netaful.jp/fast-food/0162020.html",
+    "product_name": "濃厚つけから定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/11/karayama-tsukekara-004-300x225.jpg",
+     "width": 300
+    },
+    "title": "【からやま】「濃厚つけから定食」思わず二度見する魚介豚骨つけ麺のようなから揚げを2023年版と食べ比べ"
+   },
+   {
+    "date": "2024-09-20T14:00:00",
+    "id": 156894,
+    "link": "https://netaful.jp/fast-food/0156894.html",
+    "product_name": "まぐろ天 合盛り定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/09/karayama-maguro-003-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【からやま】「まぐろ天 合盛り定食」気持ちは8個、身体は4個！"
+   },
+   {
+    "date": "2024-08-24T18:00:00",
+    "id": 155528,
+    "link": "https://netaful.jp/fast-food/0155528.html",
+    "product_name": "ネギだく塩ポン酢つけから定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/08/karayama-negidaku-005-300x225.jpg",
+     "width": 300
+    },
+    "title": "【からやま】「ネギだく塩ポン酢つけから定食」これでもか！という山盛りのネギが最高すぎて夢中で食べました"
+   },
+   {
+    "date": "2024-06-21T12:30:00",
+    "id": 152307,
+    "link": "https://netaful.jp/fast-food/0152307.html",
+    "product_name": "タルタルガパオ盛り定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/06/karayama-gapao-007-300x225.jpg",
+     "width": 300
+    },
+    "title": "【からやま】「タルタルガパオ盛り定食」なぜ、からあげ専門店でガパオなのか？"
+   },
+   {
+    "date": "2024-05-24T21:00:00",
+    "id": 150933,
+    "link": "https://netaful.jp/fast-food/0150933.html",
+    "product_name": "とり天合盛り定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/05/karayama-toriten-005-300x225.jpg",
+     "width": 300
+    },
+    "title": "【からやま】「とり天合盛り定食」とり天を倍盛8個にして思う存分食べて大満足です！"
+   },
+   {
+    "date": "2024-04-19T15:00:00",
+    "id": 149210,
+    "link": "https://netaful.jp/fast-food/0149210.html",
+    "product_name": "コンソメからあげの洋食盛り定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/04/karayama-yoshoku-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【からやま】「コンソメからあげの洋食盛り定食」からあげ専門店のザ・洋食メニューは昭和を懐かしむ味"
+   },
+   {
+    "date": "2024-03-22T14:30:00",
+    "id": 147725,
+    "link": "https://netaful.jp/fast-food/0147725.html",
+    "product_name": "梅おろしからあげ定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/03/karayama-ume-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【からやま】「梅おろしからあげ定食」春色ピンクの梅風味おろしで食べる唐揚げ"
+   },
+   {
+    "date": "2024-02-22T13:00:00",
+    "id": 145837,
+    "link": "https://netaful.jp/fast-food/0145837.html",
+    "product_name": "にんにくニラ玉定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/02/karayama-niratama-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【からやま】「にんにくニラ玉定食」過去イチの美味しさだと思った組み合わせ"
+   },
+   {
+    "date": "2024-01-26T12:15:00",
+    "id": 144474,
+    "link": "https://netaful.jp/fast-food/0144474.html",
+    "product_name": "カレーうどん定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/01/karayama-curry-udon-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【からやま】からあげ専門店で「カレーうどん定食」食べたら“味変の王者”だった"
+   },
+   {
+    "date": "2023-12-28T12:00:00",
+    "id": 143140,
+    "link": "https://netaful.jp/fast-food/0143140.html",
+    "product_name": null,
+    "thumb": {
+     "height": 300,
+     "url": "https://netaful.jp/wp-content/uploads/2023/12/ka-2023-300x300.jpg",
+     "width": 300
+    },
+    "title": "【かつや】2023年に食べた19食まとめ＆ベスト1【からやま】"
+   },
+   {
+    "date": "2023-12-22T12:30:00",
+    "id": 142891,
+    "link": "https://netaful.jp/fast-food/0142891.html",
+    "product_name": "チーズ盛り定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/12/karayama-cheese-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【からやま】からあげと大量のフライドポテトがボロネーゼソースとふわふわチーズをまとう「チーズ盛り定食」食べた"
+   },
+   {
+    "date": "2023-11-22T16:00:00",
+    "id": 141145,
+    "link": "https://netaful.jp/fast-food/0141145.html",
+    "product_name": "すきやき盛り定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/11/karayama-sukiyaki-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【からやま】「すきやき盛り定食」からあげ専門店が大量のフライドポテトですき焼き商戦に参戦"
+   },
+   {
+    "date": "2023-10-27T13:00:00",
+    "id": 139654,
+    "link": "https://netaful.jp/fast-food/0139654.html",
+    "product_name": "濃厚つけから定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/10/karayama-tsukekara-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【からやま】「濃厚つけから定食」つけ麺の濃厚つけだれで食べる唐揚げが猛烈に美味かったんだなこれが！"
+   },
+   {
+    "date": "2023-09-22T12:00:00",
+    "id": 137811,
+    "link": "https://netaful.jp/fast-food/0137811.html",
+    "product_name": "とり天合盛り定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/09/karayama-toriten-eat-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【からやま】「とり天合盛り定食」からし酢醤油で食べるとり天が旨すぎる！"
+   },
+   {
+    "date": "2023-08-25T12:30:00",
+    "id": 135850,
+    "link": "https://netaful.jp/fast-food/0135850.html",
+    "product_name": "赤カリ麻婆飯定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/08/akakari-karayama-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【からやま】「赤カリ麻婆飯定食」年子の小さい子供3人を公園に連れて行ったらそれぞれがバラバラの方向へ走り出して驚いたようなランチ"
+   },
+   {
+    "date": "2023-07-21T14:00:00",
+    "id": 133544,
+    "link": "https://netaful.jp/fast-food/0133544.html",
+    "product_name": "テキサス盛り定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/07/karayama-texas-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【レビュー】からやま「テキサス盛り定食」鶏肉にガリバタ醤油ダレが美味い！大量のフライドポテトはイカの塩辛で味変が最高！"
+   },
+   {
+    "date": "2023-06-17T09:00:00",
+    "id": 131163,
+    "link": "https://netaful.jp/fast-food/0131163.html",
+    "product_name": "出汁カレーからあげ定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/06/curry-karaage-000-titile-300x169.jpg",
+     "width": 300
+    },
+    "title": "【からやま】「出汁カレーからあげ定食」スパイシーな出汁カレーソースで蕎麦屋にワープ"
+   },
+   {
+    "date": "2023-05-13T09:00:00",
+    "id": 129014,
+    "link": "https://netaful.jp/fast-food/0129014.html",
+    "product_name": "よだれ鶏からあげ定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/05/karayama-yodaredori-013-12-300x169.jpg",
+     "width": 300
+    },
+    "title": "【からやま】「よだれ鶏からあげ定食」生姜と葱の香味野菜のタレで食べる唐揚げが美味い！"
+   },
+   {
+    "date": "2023-01-30T15:00:00",
+    "id": 124965,
+    "link": "https://netaful.jp/fast-food/0124965.html",
+    "product_name": "からやま",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/01/ra-zu-chi-karayama-000-30-300x169.jpg",
+     "width": 300
+    },
+    "title": "「からやま」が豆板醬と山椒で漬け込んだ唐揚げを唐辛子で炒めた辣子鶏（ラーズーチー）で本格中華になった日"
+   },
+   {
+    "date": "2022-12-27T10:00:00",
+    "id": 124058,
+    "link": "https://netaful.jp/fast-food/0124058.html",
+    "product_name": "からやま",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/12/karayama-demikara-27000-300x169.jpg",
+     "width": 300
+    },
+    "title": "からあげ専門店「からやま」で濃厚なデミグラスソースをかけた唐揚げ「デミからあげ」を食べてきた！"
+   },
+   {
+    "date": "2022-11-18T17:00:00",
+    "id": 122506,
+    "link": "https://netaful.jp/fast-food/0122506.html",
+    "product_name": "鉄板にんにくからあげ定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/11/teppan-ninniku-karaage-18000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【からやま】こってり背脂＆濃厚にんにく＆野菜もりもりの二郎系からあげ「鉄板にんにくからあげ定食」を食べてきた！"
+   },
+   {
+    "date": "2018-08-15T15:00:00",
+    "id": 58513,
+    "link": "https://netaful.jp/urawa-gourmet/058513.html",
+    "product_name": "からやま",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2018/08/slproImg_201808150549367-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "「からやま」塩辛食べ放題のからあげ専門店"
+   }
+  ],
+  "katsuya": [
+   {
+    "date": "2026-09-26T10:00:00",
+    "id": 209861,
+    "link": "https://netaful.jp/fast-food/0209861.html",
+    "product_name": "牡蠣と大海老の海鮮フライ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/09/katsuya-kaisen-3-003-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【かつや】「牡蠣と大海老の海鮮フライ定食」大海老は何g？実際に食べて量ってみた"
+   },
+   {
+    "date": "2026-08-07T19:00:00",
+    "id": 207491,
+    "link": "https://netaful.jp/fast-food/0207491.html",
+    "product_name": "カツ丼（竹）",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/08/katsuya-kansha-katsudon-2026summer-003-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【かつや】期間限定で150円オフ「カツ丼（竹）」120gロースかつの定番メニューは約560gで食べ応えあり！"
+   },
+   {
+    "date": "2026-07-04T15:00:00",
+    "id": 206134,
+    "link": "https://netaful.jp/fast-food/0206134.html",
+    "product_name": "大判豚の生姜焼きとチキンカツの合い盛り丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/07/katsuya-shogayaki-005-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【かつや】「大判豚の生姜焼きとチキンカツの合い盛り丼」生姜焼きダブルでご飯が止まらない！"
+   },
+   {
+    "date": "2026-06-28T12:30:00",
+    "id": 205885,
+    "link": "https://netaful.jp/fast-food/0205885.html",
+    "product_name": "海鮮三種とロースの醬油カツ丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/06/katsuya-kaisen3-004-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【かつや】「海鮮三種とロースの醬油カツ丼」海老・鮭・イカ・ロースカツを一度に楽しめる期間限定丼"
+   },
+   {
+    "date": "2026-06-06T12:10:00",
+    "id": 205041,
+    "link": "https://netaful.jp/fast-food/0205041.html",
+    "product_name": "モツ野菜炒めとチキンカツの合い盛り丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/06/katsuya-chicken-motsu-003-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【かつや】「モツ野菜炒めとチキンカツの合い盛り丼」なぜ両方のせた！？モツ炒めとチキンカツの欲望ど真ん中"
+   },
+   {
+    "date": "2026-05-29T09:00:00",
+    "id": 204792,
+    "link": "https://netaful.jp/fast-food/0204792.html",
+    "product_name": "カツカレー（竹）",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/05/katsuya-150off-curry-002-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【かつや】20cmロースかつがドーン！150円オフの「カツカレー（竹）」が重量級だった"
+   },
+   {
+    "date": "2026-05-03T10:30:00",
+    "id": 204041,
+    "link": "https://netaful.jp/fast-food/0204041.html",
+    "product_name": "出汁醤油ロースカツ in the 親子丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/05/katsuya-katsu-oyako-003-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【かつや】「出汁醤油ロースカツ in the 親子丼」ふわとろ親子の下にロースかつが隠れてた！623gの食べごたえ"
+   },
+   {
+    "date": "2026-04-10T12:10:00",
+    "id": 197212,
+    "link": "https://netaful.jp/fast-food/0197212.html",
+    "product_name": "肉あんかけロースカツ丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/04/katsuya-ankake-katsu-003-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【かつや】「肉あんかけロースカツ丼」ロースカツが見えない！？肉味噌あんが主役の590gガッツリ丼"
+   },
+   {
+    "date": "2026-03-14T12:10:00",
+    "id": 192999,
+    "link": "https://netaful.jp/fast-food/0192999.html",
+    "product_name": "ウルトラエッグカツ丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/03/katsuya-chabeso-004-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【かつや】「ウルトラエッグカツ丼」チャーシュー・ベーコン・ソーセージ・ロースカツの肉だらけ丼"
+   },
+   {
+    "date": "2026-02-26T12:10:00",
+    "id": 192279,
+    "link": "https://netaful.jp/fast-food/0192279.html",
+    "product_name": "タルタル盛り揚げ丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/02/katsuya-tartar-moriage-004-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【かつや】「タルタル盛り揚げ丼」鯖フライが主役級！4種の揚げ物で満腹必至の1杯"
+   },
+   {
+    "date": "2026-01-16T12:10:00",
+    "id": 188825,
+    "link": "https://netaful.jp/fast-food/0188825.html",
+    "product_name": "出汁醤油ロースカツ on the 親子丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/01/katsuya-katsu-on-the-oyako-004-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【かつや】「出汁醤油ロースカツ on the 親子丼」カツ丼と親子丼を一緒に味わう“欲張り丼”を食べてみた"
+   },
+   {
+    "date": "2025-12-11T14:30:00",
+    "id": 186793,
+    "link": "https://netaful.jp/fast-food/0186793.html",
+    "product_name": "カツカレー",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/12/katsuya-katsu-curry-002-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【かつや】「カツカレー」671gの巨大カツカレーが200円オフ！"
+   },
+   {
+    "date": "2025-11-22T16:30:00",
+    "id": 185845,
+    "link": "https://netaful.jp/fast-food/0185845.html",
+    "product_name": "肉ライス",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/11/katsuya-niku-rice-004-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【かつや】「肉ライス」正直ナメてた‥‥肉on肉の説得力がすごい！"
+   },
+   {
+    "date": "2025-09-12T13:30:00",
+    "id": 182436,
+    "link": "https://netaful.jp/fast-food/0182436.html",
+    "product_name": "秋の海鮮フライ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/09/katsuya-kaisen-002-485x364.jpg",
+     "width": 485
+    },
+    "title": "【かつや】「秋の海鮮フライ定食」牡蠣・海老・さば・唐揚げまで贅沢な4種盛り合わせ"
+   },
+   {
+    "date": "2025-08-18T13:30:00",
+    "id": 181195,
+    "link": "https://netaful.jp/fast-food/0181195.html",
+    "product_name": "赤辛カツ丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/08/katsuya-akakarakatsudon-002-485x364.jpg",
+     "width": 485
+    },
+    "title": "【かつや】「赤辛カツ丼」カツ丼はピリ辛にしても美味しかったんだ！（重さも量った）"
+   },
+   {
+    "date": "2025-08-08T14:30:00",
+    "id": 180606,
+    "link": "https://netaful.jp/fast-food/0180606.html",
+    "product_name": "カツ丼（竹）",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/08/katsuya-katsudon-150off-003-485x364.jpg",
+     "width": 485
+    },
+    "title": "【かつや】期間限定で150円オフ「カツ丼（竹）」120gロースかつの定番メニューは食べ応えあり！"
+   },
+   {
+    "date": "2025-07-18T18:00:00",
+    "id": 179669,
+    "link": "https://netaful.jp/fast-food/0179669.html",
+    "product_name": "トンテキとチキンカツの合い盛り",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/07/katsuya-tonteki-001-1-485x364.jpg",
+     "width": 485
+    },
+    "title": "【かつや】「トンテキとチキンカツの合い盛り」にんにくソース＆にんにくチップたっぷりのがっつり飯を食べてみた！"
+   },
+   {
+    "date": "2025-05-25T13:30:00",
+    "id": 176872,
+    "link": "https://netaful.jp/fast-food/0176872.html",
+    "product_name": "カツ丼（竹）",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/05/katsuya-200off-006-485x364.jpg",
+     "width": 485
+    },
+    "title": "【かつや】「カツ丼（竹）」200円オフで120gロースのカツ丼を食べた"
+   },
+   {
+    "date": "2025-04-25T14:00:00",
+    "id": 175442,
+    "link": "https://netaful.jp/fast-food/0175442.html",
+    "product_name": "かつやの中華ざんまい丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/04/katsuya-chuka-zanmai-008-485x364.jpg",
+     "width": 485
+    },
+    "title": "【かつや】「かつやの中華ざんまい丼」やっちまった！？とんかつ専門店で中華料理3種を食べまくった"
+   },
+   {
+    "date": "2024-12-13T20:00:00",
+    "id": 164931,
+    "link": "https://netaful.jp/fast-food/0164931.html",
+    "product_name": "さばとロースの味噌たまカツ丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/12/katsuya-sabakatsu-005-300x225.jpg",
+     "width": 300
+    },
+    "title": "【かつや】「さばとロースの味噌たまカツ丼」ふっくら“さばカツ”が美味い！"
+   },
+   {
+    "date": "2024-11-23T12:15:00",
+    "id": 163966,
+    "link": "https://netaful.jp/fast-food/0163966.html",
+    "product_name": "ど真ん中ベーコンエッグソースカツ丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/11/katsuya-bacon-egg-006-300x225.jpg",
+     "width": 300
+    },
+    "title": "【かつや】「ど真ん中ベーコンエッグソースカツ丼」食べてベーコンエッグを探した"
+   },
+   {
+    "date": "2024-11-08T12:30:00",
+    "id": 162326,
+    "link": "https://netaful.jp/fast-food/0162326.html",
+    "product_name": "タレカツ",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/11/katsuya-tarekatsu-003-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【かつや】「タレカツ」“サクジュワ”で美味しいけど3種盛りはボリュームありすぎる！"
+   },
+   {
+    "date": "2024-10-18T15:30:00",
+    "id": 161304,
+    "link": "https://netaful.jp/fast-food/0161304.html",
+    "product_name": "牛焼肉とロースカツの合い盛り丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/10/katsuya-yakiniki-katsu-002-300x225.jpg",
+     "width": 300
+    },
+    "title": "【かつや】「牛焼肉とロースカツの合い盛り丼」これぞ全力飯だった！"
+   },
+   {
+    "date": "2024-09-25T12:30:00",
+    "id": 157267,
+    "link": "https://netaful.jp/fast-food/0157267.html",
+    "product_name": "おろしカツ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/09/katsuya-oroshikatsu-000-300x225.jpg",
+     "width": 300
+    },
+    "title": "【かつや】120gロースの「おろしカツ定食」食べてみた"
+   },
+   {
+    "date": "2024-09-13T12:30:00",
+    "id": 156437,
+    "link": "https://netaful.jp/fast-food/0156437.html",
+    "product_name": "秋の海鮮フライ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/09/katsuya-kaisen-fry-006-300x225.jpg",
+     "width": 300
+    },
+    "title": "【かつや】「秋の海鮮フライ定食」海老フライ2本・ほたてフライ1個・広島産カキフライ2個は食べごたえありまくり！"
+   },
+   {
+    "date": "2024-08-16T12:30:00",
+    "id": 155167,
+    "link": "https://netaful.jp/fast-food/0155167.html",
+    "product_name": "おろしつけカツ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/08/katsuya-tsukekatsu-005-300x225.jpg",
+     "width": 300
+    },
+    "title": "【かつや】「おろしつけカツ定食」かつお風味の汁を“かける”ではなく“つける”これが美味しい"
+   },
+   {
+    "date": "2024-07-05T13:30:00",
+    "id": 153040,
+    "link": "https://netaful.jp/fast-food/0153040.html",
+    "product_name": "海鮮たまごチキンカツ丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/07/katsuya-kaisen-chicken-004-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【かつや】「海鮮たまごチキンカツ丼」食べてみたら中華料理だな、これは！"
+   },
+   {
+    "date": "2024-06-07T16:30:00",
+    "id": 151703,
+    "link": "https://netaful.jp/fast-food/0151703.html",
+    "product_name": "まぐろカツとささみカツの合い盛り",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/06/katsuya-maguro-005-300x225.jpg",
+     "width": 300
+    },
+    "title": "【かつや】カツカツカツ！まぐろカツ！「まぐろカツとささみカツの合い盛り」自分が食べてきたかつや史上最高に美味しいのでは！？"
+   },
+   {
+    "date": "2024-05-10T13:30:00",
+    "id": 150201,
+    "link": "https://netaful.jp/fast-food/0150201.html",
+    "product_name": "フル盛りプレート",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/05/katsuya-fullmori-007-300x225.jpg",
+     "width": 300
+    },
+    "title": "【かつや】本格的に盛り過ぎだった「フル盛りプレート」の内訳はハンバーグカツ＋ベーコンエッグ＋エビフライ＋から揚げ＋カレー"
+   },
+   {
+    "date": "2024-04-26T13:00:00",
+    "id": 149575,
+    "link": "https://netaful.jp/fast-food/0149575.html",
+    "product_name": "ねぎ味噌ロースカツ丼",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/04/katsuya-negi-miso-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【かつや】「ねぎ味噌ロースカツ丼」ネギがグッジョブ！"
+   },
+   {
+    "date": "2024-04-05T13:00:00",
+    "id": 148438,
+    "link": "https://netaful.jp/fast-food/0148438.html",
+    "product_name": "トンテキとチキンカツの合い盛り",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/04/katsuya-tonteki-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【かつや】「トンテキとチキンカツの合い盛り」濃厚なニンニク醤油でご飯がススム君！"
+   },
+   {
+    "date": "2024-03-08T12:30:00",
+    "id": 146902,
+    "link": "https://netaful.jp/fast-food/0146902.html",
+    "product_name": "ホル玉とロースカツの合い盛り",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/03/katsuya-horutama-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【かつや】「ホル玉とロースカツの合い盛り」ホルモンの甘い脂に半熟の黄身がとろりと絡んで美味い"
+   },
+   {
+    "date": "2024-02-09T12:05:00",
+    "id": 145149,
+    "link": "https://netaful.jp/fast-food/0145149.html",
+    "product_name": "海老マヨとチキンカツの合い盛り",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/02/katsuya-ebimayo-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【かつや】エビフライがマヨ旨「海老マヨとチキンカツの合い盛り」食べてみた"
+   },
+   {
+    "date": "2024-01-12T12:30:00",
+    "id": 143880,
+    "link": "https://netaful.jp/fast-food/0143880.html",
+    "product_name": "かつやのトリプルカツ丼",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/01/katsuya-nikudon-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【かつや】「かつやのトリプルカツ丼」カツ丼・牛丼・親子丼が1つになった欲張り丼を食べてみた"
+   },
+   {
+    "date": "2023-12-28T12:00:00",
+    "id": 143140,
+    "link": "https://netaful.jp/fast-food/0143140.html",
+    "product_name": null,
+    "thumb": {
+     "height": 300,
+     "url": "https://netaful.jp/wp-content/uploads/2023/12/ka-2023-300x300.jpg",
+     "width": 300
+    },
+    "title": "【かつや】2023年に食べた19食まとめ＆ベスト1【からやま】"
+   },
+   {
+    "date": "2023-12-13T15:30:00",
+    "id": 142338,
+    "link": "https://netaful.jp/fast-food/0142338.html",
+    "product_name": "味噌チキンカツ丼",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/12/katsuya-miso-chicken-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【かつや】「味噌チキンカツ丼」味噌ダレたっぷりすぎて黒い"
+   },
+   {
+    "date": "2023-11-18T12:00:00",
+    "id": 140933,
+    "link": "https://netaful.jp/fast-food/0140933.html",
+    "product_name": "タレカツ定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/11/katsuya-tarekatsu-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【かつや】「タレカツ定食」“サクジュワ”で美味しい3種盛りはボリュームたっぷり！"
+   },
+   {
+    "date": "2023-09-15T12:30:00",
+    "id": 137514,
+    "link": "https://netaful.jp/fast-food/0137514.html",
+    "product_name": "秋の海鮮フライ定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/09/katsuya-kaisen-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【かつや】「秋の海鮮フライ定食」いつになく正統派なメニュー！？海老フライ、イカフライ、牡蠣フライの3種盛り合わせ【60万食限定】"
+   },
+   {
+    "date": "2023-08-18T14:00:00",
+    "id": 135529,
+    "link": "https://netaful.jp/fast-food/0135529.html",
+    "product_name": "ネギねぎラー油のロースカツ丼",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/08/katsuya-negi-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【かつや】「ネギねぎラー油のロースカツ丼」ネギたっぷりの旨辛がっつりメニューを食べてみた"
+   },
+   {
+    "date": "2023-07-07T18:30:00",
+    "id": 132420,
+    "link": "https://netaful.jp/fast-food/0132420.html",
+    "product_name": "とんこつチキンカツ丼",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/07/katsuya-tonkotsu-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "見た目はラーメン、中身は丼！？かつや「とんこつチキンカツ丼」は濃厚とんこつタレで米まで美味い"
+   },
+   {
+    "date": "2023-06-09T15:30:00",
+    "id": 130750,
+    "link": "https://netaful.jp/fast-food/0130750.html",
+    "product_name": "豚カルビ焼肉とチキンカツの合い盛り",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/06/katsuya-atsugiri-buta-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【かつや】「豚カルビ焼肉とチキンカツの合い盛り」梅雨空を吹き飛ばすパワフルメニューを食べた！"
+   },
+   {
+    "date": "2023-05-10T12:00:00",
+    "id": 128818,
+    "link": "https://netaful.jp/fast-food/0128818.html",
+    "product_name": "かつやの海苔弁",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/05/noriben-katsuya-019-10-300x169.jpg",
+     "width": 300
+    },
+    "title": "「かつやの海苔弁」大量の揚げ物で規格外だけど海苔とご飯も存在感あって“のり弁”のアイデンティティーもしっかり保っていると思いました"
+   },
+   {
+    "date": "2023-03-10T13:30:00",
+    "id": 126523,
+    "link": "https://netaful.jp/fast-food/0126523.html",
+    "product_name": "鶏だんごとチキンカツの合い盛り",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/03/katsuya-meatball-012-10-300x169.jpg",
+     "width": 300
+    },
+    "title": "【かつや】「鶏だんごとチキンカツの合い盛り」でっかい鶏団子3つにチキンカツ1枚は揚げ物の量が多すぎる（褒め言葉）"
+   },
+   {
+    "date": "2023-02-11T07:30:00",
+    "id": 125361,
+    "link": "https://netaful.jp/fast-food/0125361.html",
+    "product_name": "牛すき焼きとチキンカツの合い盛り",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/02/sukiyaki-chicken-000-10-300x169.jpg",
+     "width": 300
+    },
+    "title": "【かつや】牛と鶏を一度に食べる！牛肉20%増量の「牛すき焼きとチキンカツの合い盛り」を発売日に食べました！"
+   },
+   {
+    "date": "2023-01-13T16:00:00",
+    "id": 124549,
+    "link": "https://netaful.jp/fast-food/0124549.html",
+    "product_name": "ふわたま白カツ丼（竹）",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/01/katsuya-shirokatsudon-13000_result-300x169.jpg",
+     "width": 300
+    },
+    "title": "【かつや】とじないカツ丼ってなに！？白だし、白ねぎ、牡蠣醤油「ふわたま白カツ丼（竹）」を食べてみた"
+   },
+   {
+    "date": "2022-10-23T14:30:00",
+    "id": 121444,
+    "link": "https://netaful.jp/fast-food/0121444.html",
+    "product_name": "秋の海鮮フライ定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/10/katsuya-oyster-22000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【かつや】牡蠣x牡蠣x海老x海老！発売して1週間「秋の海鮮フライ定食」が販売終了になりつつあるほど人気に！？えへへ、食べましたよ"
+   },
+   {
+    "date": "2022-05-12T15:30:00",
+    "id": 112455,
+    "link": "https://netaful.jp/fast-food/0112455.html",
+    "product_name": "大人様ランチ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/05/katsuya-otona-lunch-12000-300x169.jpg",
+     "width": 300
+    },
+    "title": "かつやが発売した大人のためのお子様ランチ「大人様ランチ」の満足度が異常に高かったから元気が出た"
+   },
+   {
+    "date": "2021-09-23T17:00:00",
+    "id": 104382,
+    "link": "https://netaful.jp/fast-food/0104382.html",
+    "product_name": "塩カツ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2021/09/salt-katsu-23005-300x225.jpg",
+     "width": 300
+    },
+    "title": "【かつや】まさにラストチャンス「塩カツ定食」を終売する間際に食べた"
+   },
+   {
+    "date": "2020-07-17T14:00:00",
+    "id": 63312,
+    "link": "https://netaful.jp/fast-food/063312.html",
+    "product_name": "黒胡椒から揚げとチキンカツの合い盛り定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/07/slproImg_202007171538090-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【かつや】夏メニュー「黒胡椒から揚げとチキンカツの合い盛り定食」黒胡椒がピリリと旨い！ボリュームも満点！"
+   },
+   {
+    "date": "2019-02-11T01:00:00",
+    "id": 59921,
+    "link": "https://netaful.jp/fast-food/059921.html",
+    "product_name": "麻婆チキンカツ定食・麻婆チキンカツ丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2019/02/slproImg_201902101725190-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【かつや】辛くて痺れる麻婆に手加減なし「麻婆チキンカツ定食・麻婆チキンカツ丼」"
+   }
+  ],
   "matsunoya": [
    {
     "date": "2026-08-30T13:00:00",
@@ -8498,8 +9594,11 @@
   ]
  },
  "errors": [],
- "fetched_at": "2026-10-11T14:59:54+09:00",
+ "fetched_at": "2026-10-11T17:15:52+09:00",
  "matches": {
+  "karayama-19096": [
+   209971
+  ],
   "matsuya-curry-kashmir_hp_261006": [
    210463
   ],

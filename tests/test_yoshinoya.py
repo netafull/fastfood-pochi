@@ -512,14 +512,14 @@ class TestSite(unittest.TestCase):
         self.assertIn('data-chain="yoshinoya"', g.CSS)
         colors = {c["slug"]: c["color"].lower() for c in g.CHAINS}
         self.assertEqual(len(set(colors.values())), len(colors))
-        self.assertEqual(g.CHAIN_LIST_TEXT, "マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家")
+        self.assertEqual(g.CHAIN_LIST_TEXT, "マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま")
 
     def test_chain_list_footer_and_sections(self):
         self.assertIn("/chains/yoshinoya/", g.render_chains_top())
         self.assertIn("吉野家", g.render_chains_top())
         h = g.page_shell("x", "d", "<p>b</p>", "https://fastfood.netaful.jp/")
         self.assertIn("https://www.yoshinoya.com/", h)
-        self.assertIn("吉野家、すき家各社", h)
+        self.assertIn("吉野家、すき家、かつや、からやま各社", h)
 
     def test_card_and_grouping(self):
         it = yoshi_item()

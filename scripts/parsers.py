@@ -1189,3 +1189,183 @@ def match_sukiya_launch(name: str, news: list[dict], ref: str,
         if yoshinoya_title_matches(name, t):
             return {"news": a, "launch_date": sukiya_start_date(t, a["date"])}
     return None
+
+
+# ---------------------------------------------------------------------------
+# かつや・からやま (www.arclandservice.co.jp。アークランドサービスホールディングスの共通テンプレート)
+# ---------------------------------------------------------------------------
+# 調査(2026-10-11):
+#  ・メニュー一覧 /{brand}/menu/ は静的HTMLの1ページに全商品(カテゴリ別ページは無い)。商品名・税抜/税込価格・
+#    公式アイコン(「期間限定」「NEW」「おすすめ」)・詳細URL(…/menu/{番号}/?identifier=)が一覧だけで揃うので、
+#    商品の詳細ページは取らない。アレルゲン一覧PDFへのリンクも一覧ページの上部にある(PDF自体は取得しない)。
+#  ・お知らせ /{brand}/information/ も1ページに全件。各見出しは prtimes.jp などへの外部リンク(リンク先は取得しない)。
+#  ・栄養成分は公式サイトのHTMLにもPDFにも載っていない。
+#  ・ページのリンクは、そのページ自身のホスト(www.arclandservice.co.jp)で解決する。別のホストを推測しない。
+#  ・著作権表記(KATSUYA CO.,LTD. / EVER ACTION CO.,LTD.)があるので、記録は事実情報(価格・日付・販売状況)と
+#    見出しの出典表示、公式ページへのリンクだけ。説明文・画像は保存も表示もしない。
+ARCLAND_BASE = "https://www.arclandservice.co.jp"
+ARCLAND_HOST = "www.arclandservice.co.jp"
+ARCLAND_BRANDS = ("katsuya", "karayama")
+ARCLAND_NEWS_WINDOW_BEFORE_DAYS = 120
+ARCLAND_NEWS_WINDOW_AFTER_DAYS = 14
+ARCLAND_NEWS_RECORD_DAYS = 90  # 一覧に載った商品を「お知らせに出た」として記録する対象の期間(直近何日)
+ARCLAND_LIMITED_SECTION = "期間限定"
+
+
+def arcland_menu_path(brand: str) -> str:
+    return f"/{brand}/menu/"
+
+
+def arcland_news_path(brand: str) -> str:
+    return f"/{brand}/information/"
+
+
+def _arcland_yen(s: str | None) -> int | None:
+    m = re.search(r"(\d[\d,]*)", s or "")
+    return int(m.group(1).replace(",", "")) if m else None
+
+
+def parse_arcland_menu(page: str, brand: str = "katsuya") -> dict:
+    """メニュー一覧を {"items": [...], "allergen_pdf_url": str|None} にする。
+    items: product_id(URLの番号)・name・price(税込)・price_ex_tax・category(セクション名。「期間限定」セクションは None)・
+    badges(公式アイコンの文字列)・is_limited・is_new・official_url(?identifier= を除いた絶対URL)。
+    同じ商品が複数のセクションに出たらアイコンをまとめる。構造が変わって商品が取れなければ items は空。"""
+    import urllib.parse
+    page = _strip_html_comments(page)
+    base = f"{ARCLAND_BASE}{arcland_menu_path(brand)}"
+    allergen = None
+    for m in re.finditer(r'<a href="([^"]*)"[^>]*class="menu-list-nav__search"[^>]*>(.*?)</a>', page, re.S):
+        if "アレルゲン" in clean_text(m.group(2)):
+            allergen = urllib.parse.urljoin(base, m.group(1).strip())
+            break
+    items: dict[str, dict] = {}
+    for sec in page.split('<section class="menu-list__section')[1:]:
+        t = re.search(r'menu-list__ttl">\s*([^<]*)', sec)
+        title = clean_text(t.group(1)) if t else ""
+        category = None if title == ARCLAND_LIMITED_SECTION else (title or None)
+        for li in sec.split('<li class="menu-list__item">')[1:]:
+            a = re.search(r'<a href="([^"]*/menu/(\d+)/[^"]*)"', li)
+            n = re.search(r'menu-list__name">(.*?)</h3>', li, re.S)
+            if not a or not n:
+                continue
+            pid = a.group(2)
+            badges = [clean_text(x) for x in re.findall(r'menu-icon__txt">(.*?)</span>', li, re.S)]
+            pn = re.search(r'menu-price__number[^"]*">([^<]*)', li)
+            pt = re.search(r'menu-price__tax">([^<]*)', li)
+            entry = {
+                "product_id": pid,
+                "name": clean_text(n.group(1)),
+                "price": _arcland_yen(pt.group(1)) if pt else None,
+                "price_ex_tax": _arcland_yen(pn.group(1)) if pn else None,
+                "category": category,
+                "badges": badges,
+                "official_url": urllib.parse.urljoin(base, a.group(1).split("?")[0]),
+            }
+            if pid in items:
+                prev = items[pid]
+                prev["badges"] = prev["badges"] + [b for b in badges if b not in prev["badges"]]
+                prev["category"] = prev["category"] or category
+                continue
+            items[pid] = entry
+    out = list(items.values())
+    for e in out:
+        e["is_limited"] = "期間限定" in e["badges"]
+        e["is_new"] = "NEW" in e["badges"]
+    return {"items": out, "allergen_pdf_url": allergen}
+
+
+def parse_arcland_news(page: str, brand: str = "katsuya") -> list[dict]:
+    """お知らせ一覧を、新しい順の [{date(ISO), title, url(絶対), category}] にする(categoryは常に空)。"""
+    import urllib.parse
+    base = f"{ARCLAND_BASE}{arcland_news_path(brand)}"
+    out, seen = [], set()
+    for li in _strip_html_comments(page).split('<li class="information__item">')[1:]:
+        a = re.search(r'<a href="([^"]*)"', li)  # 古いお知らせにはリンクが無いものがある(url は空)
+        d = re.search(r'information__date"[^>]*>\s*(\d{4})\.(\d{1,2})\.(\d{1,2})', li)
+        t = re.search(r'information__txt[^"]*">(.*?)</span>', li, re.S)
+        if not d or not t:
+            continue
+        date = f"{int(d.group(1)):04d}-{int(d.group(2)):02d}-{int(d.group(3)):02d}"
+        url = urllib.parse.urljoin(base, a.group(1).strip()) if a else ""
+        title = clean_text(t.group(1)).replace("\n", " ")
+        if (date, url, title) in seen:
+            continue
+        seen.add((date, url, title))
+        out.append({"date": date, "title": title, "url": url, "category": ""})
+    out.sort(key=lambda x: x["date"], reverse=True)
+    return out
+
+
+_ARCLAND_DATE_RE = re.compile(r"(\d{1,2})月(\d{1,2})日|(?<![\d/])(\d{1,2})/(\d{1,2})(?=[（(])")
+_ARCLAND_LAUNCH_WORDS = re.compile(r"販売|発売")
+_ARCLAND_NOT_LAUNCH = re.compile(r"終了|改定|値上げ|引き|無料|クーポン")
+
+
+def arcland_start_date(title: str, news_date: str) -> str | None:
+    """見出し「10月9日(金)～期間限定で「…」販売開始！」「新メニューを7月27日(月)販売開始！」の発売日(ISO)。
+    最初の「販売/発売」より前にある最初の日付を取る。年は書かれていないのでお知らせの日付から補う
+    (12月のお知らせの「1月8日」は翌年)。読めなければ None。"""
+    import datetime
+    t = title or ""
+    w = _ARCLAND_LAUNCH_WORDS.search(t)
+    if not w:
+        return None
+    try:
+        nd = datetime.date.fromisoformat(news_date)
+    except ValueError:
+        return None
+    m = _ARCLAND_DATE_RE.search(t[:w.start()])
+    if not m:
+        return None
+    mo, dy = (m.group(1), m.group(2)) if m.group(1) else (m.group(3), m.group(4))
+    try:
+        d = datetime.date(nd.year, int(mo), int(dy))
+    except ValueError:
+        return None
+    if (nd - d).days > 200:
+        d = d.replace(year=d.year + 1)
+    elif (d - nd).days > 200:
+        d = d.replace(year=d.year - 1)
+    return d.isoformat()
+
+
+def arcland_title_matches(name: str, title: str) -> bool:
+    """商品名が見出しの「」『』の中身と完全一致するか(正規化後)。「A・B」のように中黒で並べた商品名は、
+    全体と各項目のどちらとも照合する。括弧が無い見出しは、正規化した部分一致(4文字以上)。"""
+    n = normalize_for_match(name)
+    if len(n) < 2:
+        return False  # 「豚丼」のような2文字の商品名もあるので、完全一致なら2文字から認める
+    quotes = re.findall(r"[「『](.*?)[」』]", title or "")
+    if not quotes:
+        return len(n) >= 4 and n in normalize_for_match(title)
+    cands = set()
+    for q in quotes:
+        cands.add(normalize_for_match(q))
+        cands.update(normalize_for_match(p) for p in q.split("・"))
+    return n in cands
+
+
+def match_arcland_launch(name: str, news: list[dict], ref: str,
+                         before: int = ARCLAND_NEWS_WINDOW_BEFORE_DAYS,
+                         after: int = ARCLAND_NEWS_WINDOW_AFTER_DAYS) -> dict | None:
+    """商品名を見出しの「」と完全一致で含み、販売・発売を告げる最新のお知らせ(ref の前 before 日〜後 after 日)。
+    戻り値は {"news": {...}, "launch_date": ISO または None}。"""
+    import datetime
+    try:
+        c = datetime.date.fromisoformat(ref)
+    except ValueError:
+        return None
+    lo, hi = c - datetime.timedelta(days=before), c + datetime.timedelta(days=after)
+    for a in news:
+        try:
+            d = datetime.date.fromisoformat(a["date"])
+        except ValueError:
+            continue
+        if not (lo <= d <= hi):
+            continue
+        t = a["title"]
+        if not _ARCLAND_LAUNCH_WORDS.search(t) or _ARCLAND_NOT_LAUNCH.search(t):
+            continue
+        if arcland_title_matches(name, t):
+            return {"news": a, "launch_date": arcland_start_date(t, a["date"])}
+    return None

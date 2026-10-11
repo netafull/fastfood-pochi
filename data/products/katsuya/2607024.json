@@ -1,0 +1,44 @@
+{
+ "chain": "katsuya",
+ "product_id": "2607024",
+ "name": "豚丼弁当",
+ "category": "テイクアウト",
+ "price": 961,
+ "price_note": "税込。公式サイトの一覧に表示された価格。テイクアウト用の商品です。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "nutrition_variants": null,
+ "allergen_pdf_url": "https://www.arclandservice.co.jp/katsuya/wp-content/uploads/sites/2/2026/09/20260904_allergy.pdf",
+ "allergen_pdf_label": "アレルゲン一覧",
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "新メニュー",
+ "badges": [
+  "NEW"
+ ],
+ "official_url": "https://www.arclandservice.co.jp/katsuya/menu/2607024/",
+ "first_seen_at": "2026-10-11T17:14:48+09:00",
+ "last_seen_at": "2026-10-11",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-11",
+   "price": 961
+  }
+ ],
+ "source_list": [
+  "menu"
+ ],
+ "image": null
+}

@@ -1,0 +1,44 @@
+{
+ "chain": "karayama",
+ "product_id": "19096",
+ "name": "黒胡椒とり天のレモンステーキ定食",
+ "category": null,
+ "price": 1089,
+ "price_note": "税込。公式サイトの一覧に表示された価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "launch_date": "2026-09-25",
+ "launch_date_source": "news_headline",
+ "announced_at": "2026-09-24",
+ "planned_end_text": null,
+ "news_url": "https://prtimes.jp/main/html/rd/p/000001343.000032350.html",
+ "news_title": "【期間限定】9月25日(金)～期間限定で「黒胡椒とり天のレモンステーキ定食」販売開始！",
+ "news_date": "2026-09-24",
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "nutrition_variants": null,
+ "allergen_pdf_url": "https://www.arclandservice.co.jp/karayama/wp-content/uploads/sites/12/2026/08/allergy-260828.pdf",
+ "allergen_pdf_label": "アレルゲン一覧",
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "期間限定",
+ "badges": [
+  "期間限定"
+ ],
+ "official_url": "https://www.arclandservice.co.jp/karayama/menu/19096/",
+ "first_seen_at": "2026-10-11T17:14:57+09:00",
+ "last_seen_at": "2026-10-11",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-11",
+   "price": 1089
+  }
+ ],
+ "source_list": [
+  "menu"
+ ],
+ "image": null
+}
