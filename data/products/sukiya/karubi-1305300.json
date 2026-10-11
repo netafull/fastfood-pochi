@@ -35,7 +35,45 @@
  "nutrition_pdf_label": "栄養成分一覧",
  "allergen_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
  "allergen_pdf_label": "アレルゲン一覧",
- "allergens": null,
+ "allergens": {
+  "contains": [
+   "小麦",
+   "牛肉",
+   "大豆",
+   "りんご",
+   "ごま"
+  ],
+  "partial": [
+   {
+    "name": "卵",
+    "mark": "△"
+   },
+   {
+    "name": "乳",
+    "mark": "△"
+   },
+   {
+    "name": "落花生（ピーナッツ）",
+    "mark": "△"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△"
+   }
+  ]
+ },
  "origin": null,
  "limited_kind": "期間限定",
  "badges": [
@@ -57,5 +95,17 @@
  "source_list": [
   "karubi"
  ],
- "image": null
+ "image": null,
+ "allergens_conditional": {
+  "mark": "△",
+  "meaning": "原材料由来および原材料の製造工場において、そのアレルゲン物質を含む製品を同じライン等で製造しております"
+ },
+ "allergen_source": {
+  "url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
+  "label": "アレルゲン一覧",
+  "version": "2026-09-29",
+  "version_text": "2026年9月29日更新",
+  "fetched_at": "2026-10-11T15:58:20+09:00"
+ },
+ "pdf_tried": "2026-09-29|2026-09-29"
 }

@@ -15,12 +15,36 @@
  "news_date": null,
  "description": null,
  "description_full_len": 0,
- "nutrition": null,
+ "nutrition": {
+  "kcal": 507.0,
+  "protein_g": 23.1,
+  "fat_g": 8.5,
+  "carbs_g": 87.7,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 3.5,
+  "other": {}
+ },
  "nutrition_variants": null,
  "nutrition_pdf_url": "https://www.yoshinoya.com/pdf/allergy/",
  "nutrition_pdf_label": "吉野家メニュー情報",
  "origin_pdf_url": "https://www.yoshinoya.com/pdf/producing_area/",
- "allergens": null,
+ "allergens": {
+  "contains": [
+   "小麦",
+   "大豆"
+  ],
+  "partial": [
+   {
+    "name": "えび",
+    "mark": "▲"
+   },
+   {
+    "name": "かに",
+    "mark": "▲"
+   }
+  ]
+ },
  "origin": null,
  "limited_kind": "期間限定",
  "badges": [
@@ -44,5 +68,18 @@
   "gentei",
   "set"
  ],
- "image": null
+ "image": null,
+ "nutrition_source": {
+  "url": "https://www.yoshinoya.com/pdf/allergy/",
+  "label": "吉野家メニュー情報",
+  "version": "262|2026-10-08",
+  "version_text": "262号・2026年10月8日現在",
+  "fetched_at": "2026-10-11T15:57:05+09:00",
+  "issue": 262
+ },
+ "nutrition_note": "栄養成分の数値は配合に基づく推定値で、お好みでお使いいただく調味料類は含まれていません。",
+ "allergens_conditional": {
+  "mark": "▲",
+  "meaning": "原材料「あさり」には『かに』が共生しています。 原材料「あおさ」は『えび』『かに』が混ざる漁法で採取されています。"
+ }
 }

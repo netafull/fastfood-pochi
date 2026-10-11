@@ -25,13 +25,100 @@
  "news_date": "2026-09-28",
  "description": null,
  "description_full_len": 0,
- "nutrition": null,
- "nutrition_variants": null,
+ "nutrition": {
+  "kcal": 165.0,
+  "protein_g": 2.6,
+  "fat_g": 3.5,
+  "carbs_g": 30.9,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 0.3,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "M",
+   "nutrition": {
+    "kcal": 165.0,
+    "protein_g": 2.6,
+    "fat_g": 3.5,
+    "carbs_g": 30.9,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 0.3,
+    "other": {}
+   }
+  },
+  {
+   "label": "L",
+   "nutrition": {
+    "kcal": 259.0,
+    "protein_g": 5.1,
+    "fat_g": 7.0,
+    "carbs_g": 44.1,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 0.5,
+    "other": {}
+   }
+  }
+ ],
  "nutrition_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
  "nutrition_pdf_label": "栄養成分一覧",
  "allergen_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
  "allergen_pdf_label": "アレルゲン一覧",
- "allergens": null,
+ "allergens": {
+  "contains": [
+   "卵",
+   "乳"
+  ],
+  "partial": [
+   {
+    "name": "小麦",
+    "mark": "△"
+   },
+   {
+    "name": "えび",
+    "mark": "△"
+   },
+   {
+    "name": "オレンジ",
+    "mark": "△"
+   },
+   {
+    "name": "牛肉",
+    "mark": "△"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   },
+   {
+    "name": "大豆",
+    "mark": "△"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   },
+   {
+    "name": "りんご",
+    "mark": "△"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△"
+   },
+   {
+    "name": "ごま",
+    "mark": "△"
+   }
+  ]
+ },
  "origin": null,
  "limited_kind": "期間限定",
  "badges": [
@@ -53,5 +140,24 @@
  "source_list": [
   "drink"
  ],
- "image": null
+ "image": null,
+ "nutrition_source": {
+  "url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
+  "label": "栄養成分一覧",
+  "version": "2026-09-29",
+  "version_text": "2026年9月29日更新",
+  "fetched_at": "2026-10-11T15:58:20+09:00"
+ },
+ "nutrition_note": "表示した数値には、お好みでお使いいただく調味料（紅生姜・醤油・ドレッシング・七味・カルビ追いダレなど）は含まれていません。",
+ "allergens_conditional": {
+  "mark": "△",
+  "meaning": "原材料由来および原材料の製造工場において、そのアレルゲン物質を含む製品を同じライン等で製造しております"
+ },
+ "allergen_source": {
+  "url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
+  "label": "アレルゲン一覧",
+  "version": "2026-09-29",
+  "version_text": "2026年9月29日更新",
+  "fetched_at": "2026-10-11T15:58:20+09:00"
+ }
 }

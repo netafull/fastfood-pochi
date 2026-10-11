@@ -29,13 +29,110 @@
  "news_date": null,
  "description": null,
  "description_full_len": 0,
- "nutrition": null,
- "nutrition_variants": null,
+ "nutrition": {
+  "kcal": 1015.0,
+  "protein_g": 35.0,
+  "fat_g": 45.6,
+  "carbs_g": 116.8,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 3.7,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "並盛",
+   "nutrition": {
+    "kcal": 1015.0,
+    "protein_g": 35.0,
+    "fat_g": 45.6,
+    "carbs_g": 116.8,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 3.7,
+    "other": {}
+   }
+  },
+  {
+   "label": "ごはん少なめ",
+   "nutrition": {
+    "kcal": 946.0,
+    "protein_g": 33.8,
+    "fat_g": 45.3,
+    "carbs_g": 101.2,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 3.7,
+    "other": {}
+   }
+  },
+  {
+   "label": "大盛",
+   "nutrition": {
+    "kcal": 1153.0,
+    "protein_g": 37.3,
+    "fat_g": 46.1,
+    "carbs_g": 148.1,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 3.7,
+    "other": {}
+   }
+  },
+  {
+   "label": "特盛",
+   "nutrition": {
+    "kcal": 1638.0,
+    "protein_g": 56.9,
+    "fat_g": 83.1,
+    "carbs_g": 166.4,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 6.2,
+    "other": {}
+   }
+  }
+ ],
  "nutrition_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
  "nutrition_pdf_label": "栄養成分一覧",
  "allergen_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
  "allergen_pdf_label": "アレルゲン一覧",
- "allergens": null,
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "牛肉",
+   "大豆",
+   "りんご",
+   "ごま"
+  ],
+  "partial": [
+   {
+    "name": "乳",
+    "mark": "△"
+   },
+   {
+    "name": "落花生（ピーナッツ）",
+    "mark": "△"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△"
+   }
+  ]
+ },
  "origin": null,
  "limited_kind": "期間限定",
  "badges": [
@@ -57,5 +154,24 @@
  "source_list": [
   "karubi"
  ],
- "image": null
+ "image": null,
+ "nutrition_source": {
+  "url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
+  "label": "栄養成分一覧",
+  "version": "2026-09-29",
+  "version_text": "2026年9月29日更新",
+  "fetched_at": "2026-10-11T15:58:20+09:00"
+ },
+ "nutrition_note": "表示した数値には、お好みでお使いいただく調味料（紅生姜・醤油・ドレッシング・七味・カルビ追いダレなど）は含まれていません。",
+ "allergens_conditional": {
+  "mark": "△",
+  "meaning": "原材料由来および原材料の製造工場において、そのアレルゲン物質を含む製品を同じライン等で製造しております"
+ },
+ "allergen_source": {
+  "url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
+  "label": "アレルゲン一覧",
+  "version": "2026-09-29",
+  "version_text": "2026年9月29日更新",
+  "fetched_at": "2026-10-11T15:58:20+09:00"
+ }
 }

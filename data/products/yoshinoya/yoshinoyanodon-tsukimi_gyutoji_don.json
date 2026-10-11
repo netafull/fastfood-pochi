@@ -32,12 +32,59 @@
  "news_date": "2026-08-27",
  "description": null,
  "description_full_len": 0,
- "nutrition": null,
- "nutrition_variants": null,
+ "nutrition": {
+  "kcal": 841.0,
+  "protein_g": 32.9,
+  "fat_g": 35.5,
+  "carbs_g": 98.5,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 4.0,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "並盛",
+   "nutrition": {
+    "kcal": 841.0,
+    "protein_g": 32.9,
+    "fat_g": 35.5,
+    "carbs_g": 98.5,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 4.0,
+    "other": {}
+   }
+  },
+  {
+   "label": "大盛",
+   "nutrition": {
+    "kcal": 1026.0,
+    "protein_g": 37.8,
+    "fat_g": 40.9,
+    "carbs_g": 128.6,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 4.2,
+    "other": {}
+   }
+  }
+ ],
  "nutrition_pdf_url": "https://www.yoshinoya.com/pdf/allergy/",
  "nutrition_pdf_label": "吉野家メニュー情報",
  "origin_pdf_url": "https://www.yoshinoya.com/pdf/producing_area/",
- "allergens": null,
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "牛肉",
+   "大豆",
+   "豚肉",
+   "りんご",
+   "ゼラチン"
+  ],
+  "partial": []
+ },
  "origin": null,
  "limited_kind": "期間限定",
  "badges": [
@@ -60,5 +107,18 @@
   "gentei",
   "yoshinoyanodon"
  ],
- "image": null
+ "image": null,
+ "nutrition_source": {
+  "url": "https://www.yoshinoya.com/pdf/allergy/",
+  "label": "吉野家メニュー情報",
+  "version": "262|2026-10-08",
+  "version_text": "262号・2026年10月8日現在",
+  "fetched_at": "2026-10-11T15:57:05+09:00",
+  "issue": 262
+ },
+ "nutrition_note": "栄養成分の数値は配合に基づく推定値で、お好みでお使いいただく調味料類は含まれていません。",
+ "allergens_conditional": {
+  "mark": "▲",
+  "meaning": "原材料「あさり」には『かに』が共生しています。 原材料「あおさ」は『えび』『かに』が混ざる漁法で採取されています。"
+ }
 }

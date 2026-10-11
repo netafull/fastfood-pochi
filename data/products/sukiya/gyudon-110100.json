@@ -41,13 +41,143 @@
  "news_date": null,
  "description": null,
  "description_full_len": 0,
- "nutrition": null,
- "nutrition_variants": null,
+ "nutrition": {
+  "kcal": 811.0,
+  "protein_g": 28.0,
+  "fat_g": 26.8,
+  "carbs_g": 115.7,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 4.9,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "並盛",
+   "nutrition": {
+    "kcal": 811.0,
+    "protein_g": 28.0,
+    "fat_g": 26.8,
+    "carbs_g": 115.7,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 4.9,
+    "other": {}
+   }
+  },
+  {
+   "label": "ミニ",
+   "nutrition": {
+    "kcal": 580.0,
+    "protein_g": 21.1,
+    "fat_g": 19.4,
+    "carbs_g": 81.6,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 4.1,
+    "other": {}
+   }
+  },
+  {
+   "label": "中盛",
+   "nutrition": {
+    "kcal": 868.0,
+    "protein_g": 32.9,
+    "fat_g": 36.8,
+    "carbs_g": 102.4,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 5.3,
+    "other": {}
+   }
+  },
+  {
+   "label": "大盛",
+   "nutrition": {
+    "kcal": 1024.0,
+    "protein_g": 34.7,
+    "fat_g": 34.1,
+    "carbs_g": 146.0,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 5.6,
+    "other": {}
+   }
+  },
+  {
+   "label": "特盛",
+   "nutrition": {
+    "kcal": 1216.0,
+    "protein_g": 44.1,
+    "fat_g": 49.0,
+    "carbs_g": 150.8,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 6.7,
+    "other": {}
+   }
+  },
+  {
+   "label": "メガ",
+   "nutrition": {
+    "kcal": 1481.0,
+    "protein_g": 57.1,
+    "fat_g": 69.7,
+    "carbs_g": 157.5,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 8.1,
+    "other": {}
+   }
+  }
+ ],
  "nutrition_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
  "nutrition_pdf_label": "栄養成分一覧",
  "allergen_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
  "allergen_pdf_label": "アレルゲン一覧",
- "allergens": null,
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "乳",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "りんご",
+   "ゼラチン"
+  ],
+  "partial": [
+   {
+    "name": "落花生（ピーナッツ）",
+    "mark": "△"
+   },
+   {
+    "name": "えび",
+    "mark": "△"
+   },
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "オレンジ",
+    "mark": "△"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   },
+   {
+    "name": "バナナ",
+    "mark": "△"
+   },
+   {
+    "name": "ごま",
+    "mark": "△"
+   }
+  ]
+ },
  "origin": null,
  "limited_kind": "期間限定",
  "badges": [
@@ -69,5 +199,24 @@
  "source_list": [
   "gyudon"
  ],
- "image": null
+ "image": null,
+ "nutrition_source": {
+  "url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
+  "label": "栄養成分一覧",
+  "version": "2026-09-29",
+  "version_text": "2026年9月29日更新",
+  "fetched_at": "2026-10-11T15:58:20+09:00"
+ },
+ "nutrition_note": "表示した数値には、お好みでお使いいただく調味料（紅生姜・醤油・ドレッシング・七味・カルビ追いダレなど）は含まれていません。",
+ "allergens_conditional": {
+  "mark": "△",
+  "meaning": "原材料由来および原材料の製造工場において、そのアレルゲン物質を含む製品を同じライン等で製造しております"
+ },
+ "allergen_source": {
+  "url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
+  "label": "アレルゲン一覧",
+  "version": "2026-09-29",
+  "version_text": "2026年9月29日更新",
+  "fetched_at": "2026-10-11T15:58:20+09:00"
+ }
 }
