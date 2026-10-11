@@ -7,7 +7,7 @@ import generate_site as g
 
 class TestTags(unittest.TestCase):
     def test_tag_ids_from_config(self):
-        self.assertEqual(nr.TAGS, {"mcdonalds": 735, "mos": 882, "matsuya": 729, "matsunoya": 937, "yoshinoya": 765})
+        self.assertEqual(nr.TAGS, {"mcdonalds": 735, "mos": 882, "matsuya": 729, "matsunoya": 937, "yoshinoya": 765, "sukiya": 869})
 
     def test_mos_uses_title_filter(self):
         self.assertTrue(nr.title_passes_filter("mos", "【モスバーガー】月見フォカッチャ"))

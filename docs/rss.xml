@@ -3,8 +3,239 @@
 <channel>
 <title>ファストフードポチ</title>
 <link>https://fastfood.netaful.jp/</link>
-<description>マクドナルド・モスバーガー・松屋・松のや・吉野家の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</description>
-<lastBuildDate>Sun, 11 Oct 2026 05:21:48 +0000</lastBuildDate>
+<description>マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</description>
+<lastBuildDate>Sun, 11 Oct 2026 05:59:54 +0000</lastBuildDate>
+<item>
+<title>【すき家】ビーフカレー</title>
+<link>https://fastfood.netaful.jp/items/sukiya-curry-314800.html</link>
+<guid isPermaLink="false">sukiya-curry-314800</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】牛あいがけビーフカレー</title>
+<link>https://fastfood.netaful.jp/items/sukiya-curry-314900.html</link>
+<guid isPermaLink="false">sukiya-curry-314900</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】ソーセージビーフカレー</title>
+<link>https://fastfood.netaful.jp/items/sukiya-curry-315000.html</link>
+<guid isPermaLink="false">sukiya-curry-315000</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】黒糖ゼリーほうじ茶ラテ</title>
+<link>https://fastfood.netaful.jp/items/sukiya-drink-808000.html</link>
+<guid isPermaLink="false">sukiya-drink-808000</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】Sukiシェイクマスカット</title>
+<link>https://fastfood.netaful.jp/items/sukiya-drink-810300.html</link>
+<guid isPermaLink="false">sukiya-drink-810300</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】Sukiシェイク焼き芋</title>
+<link>https://fastfood.netaful.jp/items/sukiya-drink-810500.html</link>
+<guid isPermaLink="false">sukiya-drink-810500</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】すきやき牛丼</title>
+<link>https://fastfood.netaful.jp/items/sukiya-gyudon-110100.html</link>
+<guid isPermaLink="false">sukiya-gyudon-110100</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】辛旨すきやき牛丼</title>
+<link>https://fastfood.netaful.jp/items/sukiya-gyudon-110200.html</link>
+<guid isPermaLink="false">sukiya-gyudon-110200</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】月見すきやき牛丼</title>
+<link>https://fastfood.netaful.jp/items/sukiya-gyudon-112700.html</link>
+<guid isPermaLink="false">sukiya-gyudon-112700</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】月見辛旨すきやき牛丼</title>
+<link>https://fastfood.netaful.jp/items/sukiya-gyudon-112800.html</link>
+<guid isPermaLink="false">sukiya-gyudon-112800</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】シビ辛麻婆茄子牛丼</title>
+<link>https://fastfood.netaful.jp/items/sukiya-gyudon-117500.html</link>
+<guid isPermaLink="false">sukiya-gyudon-117500</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】おんたまシビ辛麻婆茄子牛丼</title>
+<link>https://fastfood.netaful.jp/items/sukiya-gyudon-117600.html</link>
+<guid isPermaLink="false">sukiya-gyudon-117600</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】牛カルビ焼肉丼</title>
+<link>https://fastfood.netaful.jp/items/sukiya-karubi-1305300.html</link>
+<guid isPermaLink="false">sukiya-karubi-1305300</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】キムチ牛カルビ焼肉丼</title>
+<link>https://fastfood.netaful.jp/items/sukiya-karubi-1305400.html</link>
+<guid isPermaLink="false">sukiya-karubi-1305400</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】ねぎ玉牛カルビ焼肉丼</title>
+<link>https://fastfood.netaful.jp/items/sukiya-karubi-1305500.html</link>
+<guid isPermaLink="false">sukiya-karubi-1305500</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】とろ〜り3種のチーズ牛カルビ焼肉丼</title>
+<link>https://fastfood.netaful.jp/items/sukiya-karubi-1305600.html</link>
+<guid isPermaLink="false">sukiya-karubi-1305600</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】にんにく牛カルビ焼肉丼</title>
+<link>https://fastfood.netaful.jp/items/sukiya-karubi-1305700.html</link>
+<guid isPermaLink="false">sukiya-karubi-1305700</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】季節の小鉢</title>
+<link>https://fastfood.netaful.jp/items/sukiya-side-7004000.html</link>
+<guid isPermaLink="false">sukiya-side-7004000</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】とん汁みそらーめん</title>
+<link>https://fastfood.netaful.jp/items/sukiya-side-7010400.html</link>
+<guid isPermaLink="false">sukiya-side-7010400</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】牛とん汁みそらーめん</title>
+<link>https://fastfood.netaful.jp/items/sukiya-side-7010500.html</link>
+<guid isPermaLink="false">sukiya-side-7010500</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】辛ねぎとん汁みそらーめん</title>
+<link>https://fastfood.netaful.jp/items/sukiya-side-7010600.html</link>
+<guid isPermaLink="false">sukiya-side-7010600</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】うな皿</title>
+<link>https://fastfood.netaful.jp/items/sukiya-unagi-704800.html</link>
+<guid isPermaLink="false">sukiya-unagi-704800</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】特うな皿</title>
+<link>https://fastfood.netaful.jp/items/sukiya-unagi-707600.html</link>
+<guid isPermaLink="false">sukiya-unagi-707600</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】うな丼</title>
+<link>https://fastfood.netaful.jp/items/sukiya-unagi-900100.html</link>
+<guid isPermaLink="false">sukiya-unagi-900100</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】うな牛</title>
+<link>https://fastfood.netaful.jp/items/sukiya-unagi-900200.html</link>
+<guid isPermaLink="false">sukiya-unagi-900200</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】特うな丼</title>
+<link>https://fastfood.netaful.jp/items/sukiya-unagi-900500.html</link>
+<guid isPermaLink="false">sukiya-unagi-900500</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】うな牛皿</title>
+<link>https://fastfood.netaful.jp/items/sukiya-unagi-902100.html</link>
+<guid isPermaLink="false">sukiya-unagi-902100</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】特うな牛皿</title>
+<link>https://fastfood.netaful.jp/items/sukiya-unagi-902200.html</link>
+<guid isPermaLink="false">sukiya-unagi-902200</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】おんたまうな丼</title>
+<link>https://fastfood.netaful.jp/items/sukiya-unagi-902300.html</link>
+<guid isPermaLink="false">sukiya-unagi-902300</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】おんたまうな牛</title>
+<link>https://fastfood.netaful.jp/items/sukiya-unagi-902400.html</link>
+<guid isPermaLink="false">sukiya-unagi-902400</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】山かけうな丼</title>
+<link>https://fastfood.netaful.jp/items/sukiya-unagi-902500.html</link>
+<guid isPermaLink="false">sukiya-unagi-902500</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】山かけうな牛</title>
+<link>https://fastfood.netaful.jp/items/sukiya-unagi-902600.html</link>
+<guid isPermaLink="false">sukiya-unagi-902600</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】特うな牛</title>
+<link>https://fastfood.netaful.jp/items/sukiya-unagi-902700.html</link>
+<guid isPermaLink="false">sukiya-unagi-902700</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
 <item>
 <title>【吉野家】牛さんま定食</title>
 <link>https://fastfood.netaful.jp/items/yoshinoya-gentei-gyusanma-tei.html</link>

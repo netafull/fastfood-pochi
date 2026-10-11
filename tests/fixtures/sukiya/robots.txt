@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /news/2020/10/nabe.html
+Disallow: /news/2020/10/nabe2020.html
+Disallow: /sp/news/2020/10/nabe.html
+Disallow: /sp/news/2020/10/nabe2020.html

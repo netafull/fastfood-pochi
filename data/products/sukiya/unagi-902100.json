@@ -1,0 +1,47 @@
+{
+ "chain": "sukiya",
+ "product_id": "unagi-902100",
+ "name": "うな牛皿",
+ "category": "うなぎ",
+ "price": 1090,
+ "price_note": "税込・店内の価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "price_checked_at": "2026-10-11",
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "nutrition_variants": null,
+ "nutrition_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
+ "nutrition_pdf_label": "栄養成分一覧",
+ "allergen_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
+ "allergen_pdf_label": "アレルゲン一覧",
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "期間限定",
+ "badges": [
+  "期間限定"
+ ],
+ "official_url": "https://www.sukiya.jp/menu/in/unagi/902100/index.html",
+ "first_seen_at": "2026-10-11T14:57:03+09:00",
+ "last_seen_at": "2026-10-11",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-11",
+   "price": 1090
+  }
+ ],
+ "source_list": [
+  "unagi"
+ ],
+ "image": null
+}

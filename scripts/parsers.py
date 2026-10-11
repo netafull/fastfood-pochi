@@ -977,3 +977,215 @@ def match_yoshinoya_end_notice(name: str, news: list[dict], since: str, until: s
                 and yoshinoya_title_matches(name, a["title"])):
             return a
     return None
+
+
+# ---------------------------------------------------------------------------
+# すき家 (www.sukiya.jp)
+# ---------------------------------------------------------------------------
+# 静的HTML。入口 /menu/ → 通常メニューのカテゴリ一覧 /menu/in/{カテゴリ}/ → 詳細
+# /menu/in/{カテゴリ}/{数字}/index.html、お知らせ一覧 /news/ を読む。
+# 限定だけの一覧HTMLは無い(「LIMITED MENU」バナーは画像とリンクだけ)。カテゴリ一覧の各商品に
+# 公式の「New」「期間限定」「店舗限定」「おすすめ」アイコンが付くので、それを読む。一覧に価格は無く詳細にある。
+# 栄養成分・アレルゲンは別PDFで、このコードはPDFを取得・解析しない(config.json の sukiya_pdf のURLへリンクを出すだけ)。
+# 規約(/aboutsite.html)は「文書による許諾なく…使用および転載…禁止」と他社より強いため、
+# 記録するのは事実情報(価格・日付・販売状況)だけで、説明文・画像は保存も表示もしない。
+# ページのリンクは、そのページ自身のホスト(www.sukiya.jp)で解決する(news.sukiya.jp 等を推測しない)。
+
+SUKIYA_BASE = "https://www.sukiya.jp"
+SUKIYA_HOST = "www.sukiya.jp"
+SUKIYA_MENU_ROOT = "/menu/"
+SUKIYA_NEWS_PATH = "/news/"
+SUKIYA_NEWS_WINDOW_BEFORE_DAYS = 90
+SUKIYA_NEWS_WINDOW_AFTER_DAYS = 14
+
+
+def _sukiya_strip_comments(page: str) -> str:
+    return re.sub(r"<!--.*?-->", "", page or "", flags=re.S)
+
+
+def sukiya_normalize_path(href: str, base_url: str = SUKIYA_BASE + "/") -> str | None:
+    """リンクを、そのページ自身のホストで解決したパスにする。別ホスト(news.sukiya.jp 等)は None。"""
+    import urllib.parse
+    u = urllib.parse.urlsplit(urllib.parse.urljoin(base_url, (href or "").strip()))
+    if u.netloc and u.netloc != SUKIYA_HOST:
+        return None
+    return u.path or None
+
+
+def sukiya_product_id(path: str) -> str | None:
+    """/menu/in/{カテゴリ}/{数字}/index.html → 'カテゴリ-数字'。"""
+    m = re.fullmatch(r"/menu/in/([A-Za-z0-9_]+)/(\d+)/index\.html", path or "")
+    return f"{m.group(1)}-{m.group(2)}" if m else None
+
+
+def parse_sukiya_index(page: str) -> list[dict]:
+    """入口 /menu/ の通常メニューのカテゴリ([{slug, label}]、出現順)。
+    HTMLコメントの中の旧カテゴリ(鍋・うどん等)は読まない。ラベルは画像の alt。"""
+    out, seen = [], set()
+    for chunk in _sukiya_strip_comments(page).split('<li class="menu_list_li')[1:]:
+        m = re.search(r'href="([^"]+)"', chunk)
+        if not m:
+            continue
+        path = sukiya_normalize_path(m.group(1))
+        mm = re.fullmatch(r"/menu/in/([A-Za-z0-9_]+)/", path or "")
+        if not mm or mm.group(1) in seen:
+            continue
+        a = re.search(r'<h3[^>]*>\s*<img[^>]*alt="([^"]*)"', chunk)
+        seen.add(mm.group(1))
+        out.append({"slug": mm.group(1), "label": clean_text(a.group(1)) if a else None})
+    return out
+
+
+_SUKIYA_ICON_FLAGS = {"new": "is_new", "limited": "is_limited", "store_limited": "is_store_limited",
+                      "recommend": "is_recommend"}
+
+
+def parse_sukiya_list(page: str) -> list[dict]:
+    """カテゴリ一覧の商品(価格は載っていない)。公式のアイコン(New/期間限定/店舗限定/おすすめ)を読む。
+    同じ数字のIDが別カテゴリに出ることはなく(2026-10-11に全13カテゴリ174件で確認)、同名の別商品
+    (サラダ・季節の小鉢等が朝食とおかずの両方)は別IDなので、商品IDは『カテゴリ-数字』。"""
+    out = []
+    for chunk in _sukiya_strip_comments(page).split('<li class="page_menu_list_li">')[1:]:
+        m = re.search(r'href="([^"]+)"', chunk)
+        if not m:
+            continue
+        path = sukiya_normalize_path(m.group(1))
+        pid = sukiya_product_id(path) if path else None
+        if not pid:
+            continue
+        t = re.search(r'<div class="pro_name">(.*?)</div>', chunk, re.S)
+        name = clean_text((t.group(1) if t else "").replace("<br>", "")).replace("\n", "")
+        icons = re.search(r'<ul class="icn_list">(.*?)</ul>', chunk, re.S)
+        classes = re.findall(r'<li class="icn_list_li (\w+)"', icons.group(1)) if icons else []
+        e = {"product_id": pid, "category": pid.split("-", 1)[0], "name": name, "detail_path": path,
+             "price": None, "is_new": False, "is_limited": False, "is_store_limited": False,
+             "is_recommend": False}
+        for c in classes:
+            if c in _SUKIYA_ICON_FLAGS:
+                e[_SUKIYA_ICON_FLAGS[c]] = True
+        out.append(e)
+    return out
+
+
+def parse_sukiya_detail(page: str) -> dict | None:
+    """詳細ページから 名前・店内の税込価格(サイズ/組み合わせ別)。説明文・画像・栄養は読まない
+    (栄養はPDFで、ページには載っていない)。お持ち帰りの価格は別の読み込みで、ここには無い。"""
+    body = _sukiya_strip_comments(page)
+    h = re.search(r'<h2 class="pro_page_title media_pc">(.*?)</h2>', body, re.S)
+    if not h:
+        h = re.search(r"<title>(.*?)\s*\|", body, re.S)
+    end = body.find("about_calory_wrap")
+    main = body[:end] if end > 0 else body
+    rows = []
+    for li in re.findall(r'<li class="pro_page_size_li[^"]*">(.*?)</li>', main, re.S):
+        pm = re.search(r"<span>([\d,]+)</span>\s*円", li)
+        if not pm:
+            continue
+        sm = re.search(r'<div class="size">(.*?)</div>', li, re.S)
+        rows.append({"label": clean_text(sm.group(1)).replace("\n", "") if sm else "",
+                     "price": int(pm.group(1).replace(",", ""))})
+    if not h or not rows:
+        return None
+    return {"name": clean_text((h.group(1)).replace("<br>", "")).replace("\n", ""), "prices": rows}
+
+
+def sukiya_price_variants(detail: dict) -> list[dict]:
+    return [{"label": r["label"], "price": r["price"]} for r in detail["prices"]]
+
+
+def sukiya_pick_primary(detail_or_rows) -> dict | None:
+    """代表の価格: ラベルに「並盛」を含む行 → 先頭(多くは単品の最小サイズ)。"""
+    rows = detail_or_rows["prices"] if isinstance(detail_or_rows, dict) else detail_or_rows
+    for r in rows:
+        if "並盛" in (r.get("label") or ""):
+            return r
+    return rows[0] if rows else None
+
+
+# --- お知らせ(見出しだけを読む。リンク先のPDFは取得しない) ---
+
+def parse_sukiya_news(page: str) -> list[dict]:
+    """お知らせ一覧 /news/ を、新しい順の [{date(ISO), title, url(絶対), category, kind}] にする。
+    同じ内容が「新着」と「全件」の2か所に出るので、(日付, URL)で重複を除く。日付は「2026年10月08日」の形。"""
+    out, seen = [], set()
+    for m in re.finditer(r'<div class="news_list (\w+)">\s*<time>(.*?)</time>\s*<a href="([^"]*)"[^>]*>(.*?)</a>',
+                         _sukiya_strip_comments(page), re.S):
+        kind, tm, href, inner = m.groups()
+        d = re.search(r"(\d{4})年(\d{1,2})月(\d{1,2})日", tm)
+        if not d:
+            continue
+        date = f"{int(d.group(1)):04d}-{int(d.group(2)):02d}-{int(d.group(3)):02d}"
+        if (date, href) in seen:
+            continue
+        seen.add((date, href))
+        c = re.search(r'<span class="cate">(.*?)</span>', inner, re.S)
+        title = clean_text(re.sub(r'<span class="cate">.*?</span>', "", inner, flags=re.S)).replace("\n", " ")
+        import urllib.parse
+        url = urllib.parse.urljoin(SUKIYA_BASE + SUKIYA_NEWS_PATH, href.strip())
+        out.append({"date": date, "title": title, "url": url,
+                    "category": clean_text(c.group(1)) if c else "", "kind": kind})
+    out.sort(key=lambda x: x["date"], reverse=True)
+    return out
+
+
+_SUKIYA_LAUNCH_WORDS = re.compile(r"販売|発売|登場|復活")
+_SUKIYA_START_RE = re.compile(r"(\d{1,2})月(\d{1,2})日")
+
+
+def sukiya_is_menu_press(a: dict) -> bool:
+    """新メニューの発表(プレスリリースのPDF /news/Press_sukiya_*.pdf)か。"""
+    return "/news/Press_sukiya_" in (a.get("url") or "")
+
+
+def sukiya_start_date(title: str, news_date: str) -> str | None:
+    """見出し「10月14日（水）朝9:00より『…』販売開始！」の発売日(ISO)。日付は商品名(『』)より前に書かれる。
+    年は書かれていないのでお知らせの日付から補う。発売日が読めなければ None。"""
+    import datetime
+    if not _SUKIYA_LAUNCH_WORDS.search(title or ""):
+        return None
+    try:
+        nd = datetime.date.fromisoformat(news_date)
+    except ValueError:
+        return None
+    head = re.split(r"[「『]", title, maxsplit=1)[0]
+    m = _SUKIYA_START_RE.search(head)
+    if not m:
+        return None
+    try:
+        d = datetime.date(nd.year, int(m.group(1)), int(m.group(2)))
+    except ValueError:
+        return None
+    if (nd - d).days > 200:
+        d = d.replace(year=d.year + 1)
+    elif (d - nd).days > 200:
+        d = d.replace(year=d.year - 1)
+    return d.isoformat()
+
+
+def match_sukiya_launch(name: str, news: list[dict], ref: str,
+                        before: int = SUKIYA_NEWS_WINDOW_BEFORE_DAYS,
+                        after: int = SUKIYA_NEWS_WINDOW_AFTER_DAYS) -> dict | None:
+    """商品名を『』の中身と完全一致で含む(括弧が無い見出しだけ4文字以上の部分一致)、発売・登場を告げる
+    プレスリリースのうち、ref の前 before 日〜後 after 日にあるもので最新のもの。
+    戻り値は {"news": {...}, "launch_date": ISO または None}。"""
+    import datetime
+    try:
+        c = datetime.date.fromisoformat(ref)
+    except ValueError:
+        return None
+    lo, hi = c - datetime.timedelta(days=before), c + datetime.timedelta(days=after)
+    for a in news:
+        if not sukiya_is_menu_press(a):
+            continue
+        try:
+            d = datetime.date.fromisoformat(a["date"])
+        except ValueError:
+            continue
+        if not (lo <= d <= hi):
+            continue
+        t = a["title"]
+        if not _SUKIYA_LAUNCH_WORDS.search(t) or re.search(r"終了|改定", t):
+            continue
+        if yoshinoya_title_matches(name, t):
+            return {"news": a, "launch_date": sukiya_start_date(t, a["date"])}
+    return None

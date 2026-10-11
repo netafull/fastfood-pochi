@@ -27,8 +27,8 @@ CHAINS = CONFIG["chains"]
 CHAIN_NAME = {c["slug"]: c["name"] for c in CHAINS}
 # 説明文の引用元の表記(出典：○○公式サイト)
 CHAIN_SOURCE = {"mcdonalds": "マクドナルド公式サイト", "mos": "モスバーガー公式サイト", "matsuya": "松屋公式サイト",
-                "matsunoya": "松のや公式サイト", "yoshinoya": "吉野家公式サイト"}
-# 全チェーン名の並び(ページの説明文用): 「マクドナルド・モスバーガー・松屋・松のや・吉野家」
+                "matsunoya": "松のや公式サイト", "yoshinoya": "吉野家公式サイト", "sukiya": "すき家公式サイト"}
+# 全チェーン名の並び(ページの説明文用): 「マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家」
 CHAIN_LIST_TEXT = "・".join(c["name"] for c in CHAINS)
 # 「終了日」の注意書き。公式発表の最終販売日ではなく、一覧から消えたことの観測日
 ENDED_NOTE = "公式サイトの一覧から消えたことを確認した日"
@@ -175,7 +175,7 @@ def is_limited_listed(item: dict) -> bool:
     吉野家は公式が「期間限定」と表示したものだけ。"""
     if is_matsuya_family(item.get("chain")):
         return False
-    if item.get("chain") == "yoshinoya":
+    if item.get("chain") in ("yoshinoya", "sukiya"):
         return item.get("limited_kind") == "期間限定"
     return True
 
@@ -270,13 +270,13 @@ CSS = """
 :root {
   --bg: #fafaf7; --card: #ffffff; --text: #1a1a1a; --muted: #6b6b6b;
   --accent: #00897b; --line: #e5e2dc;
-  --mcdonalds: #da291c; --mos: #1b7f3b; --matsuya: #a34a00; --matsunoya: #7a1f5c; --yoshinoya: #1f5fad;
+  --mcdonalds: #da291c; --mos: #1b7f3b; --matsuya: #a34a00; --matsunoya: #7a1f5c; --yoshinoya: #1f5fad; --sukiya: #8a6a00;
 }
 @media (prefers-color-scheme: dark) {
   :root { --bg: #14151a; --card: #1e2027; --text: #e8e8e6; --muted: #9a9a96;
     --line: #2c2e36; --accent: #26a69a;
-    /* 暗い背景でも見出しの下線・バッジが沈まないよう、松屋・松のや・吉野家だけ少し明るくする */
-    --matsuya: #b85a00; --matsunoya: #a83a82; --yoshinoya: #3a7bd0; }
+    /* 暗い背景でも見出しの下線・バッジが沈まないよう、松屋・松のや・吉野家・すき家だけ少し明るくする */
+    --matsuya: #b85a00; --matsunoya: #a83a82; --yoshinoya: #3a7bd0; --sukiya: #b8921a; }
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--bg); color: var(--text);
@@ -305,6 +305,7 @@ h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); 
 .chain-group[data-chain="matsuya"] h3 { border-color: var(--matsuya); }
 .chain-group[data-chain="matsunoya"] h3 { border-color: var(--matsunoya); }
 .chain-group[data-chain="yoshinoya"] h3 { border-color: var(--yoshinoya); }
+.chain-group[data-chain="sukiya"] h3 { border-color: var(--sukiya); }
 .grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
 .item { display: block; background: var(--card); border: 1px solid var(--line);
   border-radius: 10px; padding: 12px; text-decoration: none; }
@@ -316,6 +317,7 @@ h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); 
 .item[data-chain="matsuya"] .badge { background: var(--matsuya); }
 .item[data-chain="matsunoya"] .badge { background: var(--matsunoya); }
 .item[data-chain="yoshinoya"] .badge { background: var(--yoshinoya); }
+.item[data-chain="sukiya"] .badge { background: var(--sukiya); }
 .item .st { display: inline-block; font-size: 10px; border-radius: 4px; padding: 0 6px; margin-left: 6px;
   border: 1px solid var(--line); color: var(--muted); }
 .item .st-on { color: var(--accent); border-color: var(--accent); }
@@ -505,8 +507,8 @@ def page_shell(title: str, description: str, body: str, canonical: str, extra_he
 </main>
 <footer>
 価格・販売期間・販売状況は取得時点のものです。最新の状況は各社公式サイトでご確認ください。
-当サイトはマクドナルド、モスバーガー、松屋、松のや、吉野家各社とは関係のない非公式サイトです。
-公式サイト： <a href="https://www.mcdonalds.co.jp/">マクドナルド</a> ／ <a href="https://www.mos.jp/">モスバーガー</a> ／ <a href="https://www.matsuyafoods.co.jp/matsuya/">松屋</a> ／ <a href="https://www.matsuyafoods.co.jp/matsunoya/">松のや</a> ／ <a href="https://www.yoshinoya.com/">吉野家</a>
+当サイトはマクドナルド、モスバーガー、松屋、松のや、吉野家、すき家各社とは関係のない非公式サイトです。
+公式サイト： <a href="https://www.mcdonalds.co.jp/">マクドナルド</a> ／ <a href="https://www.mos.jp/">モスバーガー</a> ／ <a href="https://www.matsuyafoods.co.jp/matsuya/">松屋</a> ／ <a href="https://www.matsuyafoods.co.jp/matsunoya/">松のや</a> ／ <a href="https://www.yoshinoya.com/">吉野家</a> ／ <a href="https://www.sukiya.jp/">すき家</a>
 {policy_link}｜ <a href="/rss.xml">RSS</a> ｜ <a href="/archive/">終了した限定メニュー</a>
 {related_html}
 </footer>
@@ -823,6 +825,14 @@ def nutrition_footnote(item: dict) -> str:
 
 def render_nutrition(item: dict) -> str:
     nut = item.get("nutrition")
+    if not nut and item.get("allergen_pdf_url"):
+        # すき家: 栄養成分とアレルゲンは別々の公式PDF。取り込まずリンクで案内する
+        nl = item.get("nutrition_pdf_label") or "栄養成分一覧"
+        al = item.get("allergen_pdf_label") or "アレルゲン一覧"
+        return ("<h3>栄養成分・アレルギー情報</h3><p class='note'>栄養成分・アレルギー情報は公式PDF"
+                f"（{esc(nl)}／{esc(al)}）をご覧ください。当サイトでは取り込んでいません。</p>"
+                f"<p><a href=\"{esc(item['nutrition_pdf_url'])}\" target=\"_blank\" rel=\"noopener\">{esc(nl)}（公式PDF）</a>"
+                f" ／ <a href=\"{esc(item['allergen_pdf_url'])}\" target=\"_blank\" rel=\"noopener\">{esc(al)}（公式PDF）</a></p>")
     if not nut and item.get("nutrition_pdf_url"):
         # 吉野家: 栄養成分・アレルゲンは商品ページに無く、公式の「吉野家メニュー情報」PDFにある。取り込まずリンクで案内する
         label = item.get("nutrition_pdf_label") or "メニュー情報"
@@ -963,6 +973,34 @@ def render_yoshinoya_notes(item: dict) -> str:
     return "".join(f"<p class='note'>{n}</p>" for n in notes)
 
 
+def render_sukiya_notes(item: dict) -> str:
+    """すき家: 記録の理由、発売日・お知らせ日の出どころ、昨季の販売期間。"""
+    notes = []
+    kind = item.get("limited_kind")
+    if kind == "期間限定":
+        notes.append("公式サイトの「期間限定」表示のあるメニューです。")
+    elif kind == "新メニュー":
+        notes.append("公式サイトの「New」表示、または新メニューのお知らせに載ったメニューです。")
+    else:
+        notes.append("記録を始めたあとにメニューへ加わったメニューです。")
+    notes.append("販売期間は公式サイトに載っていないため、終了日は一覧から消えたのを確認した日です。")
+    title = item.get("news_title")
+    if title:
+        link = item.get("news_url") or ""
+        title_html = (f'<a href="{esc(link)}" target="_blank" rel="noopener">{esc(title)}</a>' if link else esc(title))
+        if item.get("launch_date"):
+            notes.append(f"発売日は公式のお知らせ（{esc(item.get('announced_at') or item.get('news_date') or '')}）の見出しによります：{title_html}")
+        else:
+            notes.append(f"お知らせ日：{esc(item.get('announced_at') or item.get('news_date') or '')}"
+                         f"（発売日は公式のお知らせPDFに記載）：{title_html}")
+    for s_ in item.get("seasons") or []:
+        start = s_.get("launch_date") or "開始日不明"
+        notes.append(f"昨季の販売：{esc(start)}〜{esc(s_.get('ended_observed_at') or '')}（終了日は{ENDED_NOTE}）")
+    if len(item.get("price_variants") or []) > 1:
+        notes.append("価格はサイズや組み合わせにより異なります。")
+    return "".join(f"<p class='note'>{n}</p>" for n in notes)
+
+
 def render_item_page(item: dict) -> str:
     chain_name = CHAIN_NAME.get(item["chain"], item["chain"])
     official_url = item.get("official_url") or ""
@@ -1044,6 +1082,8 @@ def render_item_page(item: dict) -> str:
                         + ("発売日は公式ニュースの記載です。" if item.get("launch_date_source", "").startswith("news_article") else "")
                         + "</p>")
     yoshinoya_note = render_yoshinoya_notes(item) if item.get("chain") == "yoshinoya" else ""
+    if item.get("chain") == "sukiya":
+        yoshinoya_note = render_sukiya_notes(item)
     body = f"""<nav class="crumbs"><a href="/">トップ</a> &gt; <a href="/chains/{esc(item['chain'])}/">{esc(chain_name)}</a></nav>
 <div class="detail">
 <div class="badge" style="display:inline-block;font-size:11px;font-weight:700;color:#fff;
@@ -1188,7 +1228,8 @@ def main() -> int:
         )
         page = render_grid_page(
             f"{c['name']}の限定メニュー", (f"{c['name']}の「おすすめ」に載ったメニューと新登場メニューの一覧。販売中と販売終了の記録"
-             if is_matsuya_family(c["slug"]) else f"{c['name']}の期間限定・新登場メニューの一覧。販売中と販売終了の記録"), chain_items,
+             if is_matsuya_family(c["slug"]) else f"{c['name']}の期間限定・New表示・新メニューのお知らせに載ったメニューの一覧。販売中と販売終了の記録"
+             if c["slug"] == "sukiya" else f"{c['name']}の期間限定・新登場メニューの一覧。販売中と販売終了の記録"), chain_items,
             CONFIG.get("site_url", "") + f"chains/{c['slug']}/",
             review_chain=c["slug"], status_filter=True, default_status="all",
             empty_text="まだ記録がありません。",

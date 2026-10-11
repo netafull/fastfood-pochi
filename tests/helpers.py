@@ -71,6 +71,18 @@ YOSHINOYA_PAGES = {
 }
 for _c in YOSHINOYA_CATS:
     YOSHINOYA_PAGES[f"/menu/{_c}/"] = f"yoshinoya/list_{_c}.html"
+SUKIYA_CATS = ["gyudon", "unagi", "curry", "karubi", "don", "morning", "dinner", "special", "oshokujisalad",
+               "kids", "side", "drink", "beer"]
+SUKIYA_PAGES = {
+    "/robots.txt": "sukiya/robots.txt",
+    "/menu/": "sukiya/menu_index.html",
+    "/news/": "sukiya/news.html",
+    "/menu/in/special/400100/index.html": "sukiya/detail_special-400100.html",
+    "/menu/in/gyudon/112700/index.html": "sukiya/detail_gyudon-112700.html",
+    "/menu/in/drink/810500/index.html": "sukiya/detail_drink-810500.html",
+}
+for _c in SUKIYA_CATS:
+    SUKIYA_PAGES[f"/menu/in/{_c}/"] = f"sukiya/list_{_c}.html"
 BLOCK_RE = re.compile(r'<li class="item">.*?<!-- //\.item -->', re.S)
 
 
@@ -153,6 +165,17 @@ class FakeGetter:
                 return fx(YOSHINOYA_PAGES[path])
             if path.startswith("/menu/") and self.fallback_detail:
                 return fx("yoshinoya/detail_gyusanma_tei.html")
+            raise OSError(f"no fixture: {path}")
+        if chain == "sukiya":
+            path = url.replace(crawl.SUKIYA_BASE, "")
+            if path in self.fail:
+                raise OSError("simulated failure")
+            if path in self.overrides:
+                return self.overrides[path]
+            if path in SUKIYA_PAGES:
+                return fx(SUKIYA_PAGES[path])
+            if path.startswith("/menu/in/") and self.fallback_detail:
+                return fx("sukiya/detail_gyudon-112700.html")  # 取得していない詳細は、価格の複数表示がある実物で代用
             raise OSError(f"no fixture: {path}")
         path = url.replace(crawl.MOS_BASE, "")
         if path in self.fail:

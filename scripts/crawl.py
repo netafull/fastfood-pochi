@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""マクドナルド・モスバーガー・松屋・松のや・吉野家の限定メニュー・新メニューを巡回し、
-data/products/{mcdonalds|mos|matsuya|matsunoya|yoshinoya}/{id}.json に1商品1ファイルで蓄積する。
+"""マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家の限定メニュー・新メニューを巡回し、
+data/products/{mcdonalds|mos|matsuya|matsunoya|yoshinoya|sukiya}/{id}.json に1商品1ファイルで蓄積する。
 
 このサイトの核は「販売状況の追跡」。公式サイトは販売が終わると商品を消すので、
 一覧に居た商品が消えたら終了とみなして記録を残す。
@@ -1214,6 +1214,341 @@ def crawl_yoshinoya(getter, pending: dict, stats: dict, today: str | None = None
 
 
 # ---------------------------------------------------------------------------
+# すき家 (www.sukiya.jp)
+# ---------------------------------------------------------------------------
+# 調査・方針(2026-10-11):
+#  ・robots.txt は200で、古い /news/2020/10/nabe.html など数ページの Disallow だけ。ボット対策なし。
+#  ・サイト規約 /aboutsite.html は「文書による許諾なく使用および転載を禁止」と他社より強い。
+#    → 記録するのは事実情報(価格・日付・販売状況)だけ。説明文・画像は保存も表示もしない。広告は入れない。
+#    お知らせは見出し(出典表示)とPDFへのリンクだけ。
+#  ・栄養成分・アレルゲンは別PDF(images.zensho.co.jp)で、ここでは取得も解析もしない(リンクを出すだけ。
+#    PDFからの栄養表の抽出は第2段階)。お知らせのPDFも取得しない(見出しの文言だけを読む)。
+#  ・ページのリンクは、そのページ自身のホスト(www.sukiya.jp)で解決する。相対リンクを news.sukiya.jp と取り違えない。
+#  ・限定だけの一覧HTMLは無い。カテゴリ一覧(13個)の各商品に公式の「New」「期間限定」アイコンが付くので、
+#    記録するのは (a) 「期間限定」または「New」のアイコンが付いた商品、(b) 直近90日のプレスリリース
+#    (/news/Press_sukiya_*.pdf)の見出しに商品名が出る商品、(c) baseline(初回巡回の全メニュー)に無く後から
+#    現れた商品。定番の既存メニューは詳細を取らない。発売前の告知(まだメニューに載らない商品)は記録しない。
+#  ・一覧に価格は無く詳細にある。詳細URLの数字は商品ごとに一意(別カテゴリに同じ数字は出ない)で、og:url は
+#    全ページ共通の /menu/gyudon/index.html を指す(canonical は無い)ので、商品IDは「カテゴリ-数字」にする。
+#  ・価格が変わったかは詳細を取り直さないと分からないので、記録済みの販売中商品を古い順に
+#    SUKIYA_PRICE_RECHECK_MAX 件まで、SUKIYA_PRICE_RECHECK_DAYS 日ごとに取り直す。
+#  ・終了日は公式が「販売終了時期は未定」とするため、一覧から消えたのを確認した日。
+
+SUKIYA_BASE = parsers.SUKIYA_BASE
+SUKIYA_PRICE_RECHECK_DAYS = 7
+SUKIYA_PRICE_RECHECK_MAX = 10
+
+
+def sukiya_category_labels(index_cats: list[dict] | None = None) -> dict[str, str | None]:
+    labels = {c["slug"]: c.get("label") for c in index_cats or [] if c.get("label")}
+    labels.update({c["slug"]: c.get("label") for c in CONFIG.get("sukiya_categories", [])})
+    return labels
+
+
+def sukiya_price_note(variants: list[dict], primary: dict | None) -> str:
+    note = "税込・店内の価格。"
+    if len(variants) > 1:
+        note += "サイズや組み合わせにより価格が異なります（内訳は下の表）。"
+        if primary and primary.get("label"):
+            note += f"表示は「{primary['label']}」の価格。"
+    note += "店舗により価格・取り扱いが異なる場合があります。"
+    return note
+
+
+def sukiya_apply_news(product: dict, news: list[dict]) -> bool:
+    """お知らせに載っていないか、発売日が未確定の商品を探し直す(取得済みの一覧を使うので追加のリクエストは無い)。
+    見つかれば announced_at / news_* / 発売日(見出しに「○月○日」があるとき)を埋める。変更があれば True。"""
+    if product.get("launch_date") is not None:
+        return False
+    ref = (product.get("first_seen_at") or "")[:10]
+    rel = product.get("relaunches") or []
+    if rel and rel[-1].get("reappeared_at"):
+        ref = rel[-1]["reappeared_at"]
+    if not ref:
+        return False
+    hit = parsers.match_sukiya_launch(product.get("name") or "", news, ref)
+    if not hit:
+        return False
+    a = hit["news"]
+    changed = (product.get("news_url") != a["url"] or product.get("launch_date") != hit["launch_date"])
+    product["announced_at"] = a["date"]
+    product["news_url"] = a["url"]
+    product["news_title"] = a["title"]
+    product["news_date"] = a["date"]
+    product["launch_date"] = hit["launch_date"]
+    product["launch_date_source"] = "news_headline" if hit["launch_date"] else "news_without_date"
+    if product.get("limited_kind") in (None, "新規掲載"):
+        product["limited_kind"] = "新メニュー"  # 照合は発売・登場・復活を告げる見出しに限るので、常に「新メニュー」
+    return changed
+
+
+def build_sukiya_product(entry: dict, detail: dict, source: str, same_name: list[str],
+                         labels: dict, today: str, now: str) -> dict:
+    variants = parsers.sukiya_price_variants(detail)
+    primary = parsers.sukiya_pick_primary(detail)
+    price = primary["price"]
+    badges = [b for b, on in (("NEW", entry["is_new"]), ("期間限定", entry["is_limited"]),
+                              ("店舗限定", entry["is_store_limited"])) if on]
+    if entry["is_limited"]:
+        kind = "期間限定"
+    elif entry["is_new"]:
+        kind = "新メニュー"
+    else:
+        kind = "新規掲載"
+    pdf = CONFIG.get("sukiya_pdf", {})
+    product = {
+        "chain": "sukiya",
+        "product_id": entry["product_id"],
+        "name": entry["name"] or detail["name"],
+        "category": labels.get(source),
+        "price": price,
+        "price_note": sukiya_price_note(variants, primary),
+        "price_variants": variants if len(variants) > 1 else None,
+        "price_checked_at": today,
+        "launch_date": None,
+        "launch_date_source": "not_found",
+        "announced_at": None,
+        "planned_end_text": None,
+        "news_url": None,
+        "news_title": None,
+        "news_date": None,
+        "description": None,
+        "description_full_len": 0,
+        "nutrition": None,
+        "nutrition_variants": None,
+        "nutrition_pdf_url": pdf.get("nutrition"),
+        "nutrition_pdf_label": pdf.get("nutrition_label"),
+        "allergen_pdf_url": pdf.get("allergen"),
+        "allergen_pdf_label": pdf.get("allergen_label"),
+        "allergens": None,
+        "origin": None,
+        "limited_kind": kind,
+        "badges": badges,
+        "official_url": SUKIYA_BASE + entry["detail_path"],
+        "first_seen_at": now,
+        "last_seen_at": today,
+        "status": "on_sale",
+        "ended_observed_at": None,
+        "missed_runs": 0,
+        "price_history": [{"date": today, "price": price}],
+        "source_list": [source],
+        "image": None,
+    }
+    if same_name:
+        product["same_name_as"] = same_name
+    return product
+
+
+def sukiya_recheck_price(product: dict, detail: dict, today: str) -> bool:
+    """詳細を取り直した価格を反映する。価格(代表または内訳)が変われば price_history に追記する。"""
+    variants = parsers.sukiya_price_variants(detail)
+    primary = parsers.sukiya_pick_primary(detail)
+    product["price_checked_at"] = today
+    new_pv = variants if len(variants) > 1 else None
+    changed = (product.get("price") != primary["price"]) or (product.get("price_variants") != new_pv)
+    if changed:
+        product["price_variants"] = new_pv
+        product["price_note"] = sukiya_price_note(variants, primary)
+        if product.get("price") != primary["price"]:
+            product["price"] = primary["price"]
+            product.setdefault("price_history", []).append({"date": today, "price": primary["price"]})
+    return True
+
+
+def crawl_sukiya(getter, pending: dict, stats: dict, today: str | None = None) -> None:
+    chain = "sukiya"
+    # 日付を指定した実行(テスト)では、初回観測の時刻もその日にそろえる(お知らせの照合の起点になるため)
+    now = now_iso() if today is None else f"{today}T07:00:00+09:00"
+    today = today or today_jst()
+    pending.setdefault(chain, {})
+    stats.setdefault(chain, new_stats())
+    st = stats[chain]
+    all_ok = True
+
+    robots_text = None
+    try:
+        robots_text = getter(chain, SUKIYA_BASE + "/robots.txt")
+        st["list_requests"] += 1
+    except NotFoundError:
+        st["list_requests"] += 1
+    except BlockedError as e:
+        st["blocked"] = True
+        print(f"[blocked] {chain} robots.txt: {e}", file=sys.stderr)
+        return
+    except Exception as e:  # noqa: BLE001
+        print(f"[warn] {chain} robots.txt 取得失敗(全許可として続行): {e}", file=sys.stderr)
+    rp = urllib.robotparser.RobotFileParser()
+    rp.parse((robots_text or "User-agent: *\nAllow: /").splitlines())
+
+    def allowed(path: str) -> bool:
+        return rp.can_fetch(UA, SUKIYA_BASE + path)
+
+    # カテゴリの入口。リンクをたどって特定する(推測でURLを作らない)。取れなければ設定の固定リストで代替
+    index_cats: list[dict] = []
+    try:
+        idx = getter(chain, SUKIYA_BASE + parsers.SUKIYA_MENU_ROOT)
+        st["list_requests"] += 1
+        index_cats = parsers.parse_sukiya_index(idx)
+    except BlockedError as e:
+        st["blocked"] = True
+        print(f"[blocked] {chain} menu index: {e}", file=sys.stderr)
+        return
+    except Exception as e:  # noqa: BLE001
+        print(f"[warn] {chain} メニュー入口 取得失敗(設定の固定リストで代替): {e}", file=sys.stderr)
+    cats = [c["slug"] for c in index_cats]
+    if not cats:
+        cats = [c["slug"] for c in CONFIG["sukiya_categories"]]
+        all_ok = False
+    labels = sukiya_category_labels(index_cats)
+
+    entries: dict[str, dict] = {}
+    source_of: dict[str, str] = {}
+    for cat in cats:
+        path = f"{parsers.SUKIYA_MENU_ROOT}in/{cat}/"
+        if not allowed(path):
+            print(f"[skip] robots.txtでDisallow: {path}", file=sys.stderr)
+            all_ok = False
+            continue
+        try:
+            html = getter(chain, SUKIYA_BASE + path)
+            st["list_requests"] += 1
+        except BlockedError as e:
+            st["blocked"] = True
+            print(f"[blocked] {chain} list {path}: {e}", file=sys.stderr)
+            return
+        except Exception as e:  # noqa: BLE001
+            print(f"[warn] {chain} list {path} 取得失敗: {e}", file=sys.stderr)
+            all_ok = False
+            continue
+        page_entries = parsers.parse_sukiya_list(html)
+        if not page_entries:
+            print(f"[warn] {chain} list {path}: 商品が0件(構造変更の疑い)", file=sys.stderr)
+            all_ok = False
+            continue
+        for e in page_entries:
+            pid = e["product_id"]
+            if pid in entries:  # 商品IDは「カテゴリ-数字」なので、通常は重複しない
+                for k in ("is_new", "is_limited", "is_store_limited", "is_recommend"):
+                    entries[pid][k] = entries[pid][k] or e[k]
+                continue
+            entries[pid] = e
+            source_of[pid] = cat
+    st["list_ok"] = all_ok and bool(entries)
+    st["limited_seen"] = sum(1 for e in entries.values() if e["is_limited"])
+
+    # お知らせ一覧(1リクエスト)。見出しの文言だけを読み、リンク先のPDFは取得しない
+    news: list[dict] = []
+    try:
+        news = parsers.parse_sukiya_news(getter(chain, SUKIYA_BASE + parsers.SUKIYA_NEWS_PATH))
+        st["detail_requests"] += 1
+        if not news:
+            print(f"[warn] {chain} お知らせ: 0件(構造変更の疑い)", file=sys.stderr)
+    except BlockedError as e:
+        st["blocked"] = True
+        print(f"[blocked] {chain} news: {e}", file=sys.stderr)
+        return
+    except Exception as e:  # noqa: BLE001
+        print(f"[warn] {chain} お知らせ 取得失敗: {e}", file=sys.stderr)
+
+    baseline = baseline_for(chain)
+    existing_all = None
+
+    def fetch_detail(pid: str, detail_path: str):
+        """詳細を取得して解析する。失敗は pending に記録して None。"""
+        if not allowed(detail_path):
+            print(f"[skip] robots.txtでDisallow: {detail_path}", file=sys.stderr)
+            return None
+        try:
+            html = getter(chain, SUKIYA_BASE + detail_path)
+            st["detail_requests"] += 1
+        except NotFoundError:
+            st["failed"] += 1
+            pending[chain][pid] = {"url": detail_path, "reason": "404", "checked_at": now}
+            return None
+        except BlockedError:
+            raise
+        except Exception as ex:  # noqa: BLE001
+            st["failed"] += 1
+            pending[chain][pid] = {"url": detail_path, "reason": f"fetch_error: {ex}", "checked_at": now}
+            return None
+        detail = parsers.parse_sukiya_detail(html)
+        if detail is None:
+            st["failed"] += 1
+            pending[chain][pid] = {"url": detail_path, "reason": "empty_detail", "checked_at": now}
+        return detail
+
+    try:
+        for pid, e in entries.items():
+            existing = load_product(chain, pid)
+            if existing is not None:
+                was_ended = existing.get("status") == "ended"
+                old_ended = existing.get("ended_observed_at")
+                touch_seen(existing, None, today, now)
+                if was_ended:
+                    yoshinoya_start_new_season(existing, old_ended, today)
+                    st["relaunched"] = st.get("relaunched", 0) + 1
+                if e["is_limited"] and existing.get("limited_kind") != "期間限定":
+                    existing["limited_kind"] = "期間限定"
+                badges = set(existing.get("badges") or [])
+                badges |= {b for b, on in (("NEW", e["is_new"]), ("期間限定", e["is_limited"]),
+                                           ("店舗限定", e["is_store_limited"])) if on}
+                existing["badges"] = [b for b in ("NEW", "期間限定", "店舗限定") if b in badges]
+                save_product(chain, existing)
+                pending[chain].pop(pid, None)
+                continue
+            in_news = bool(news) and parsers.match_sukiya_launch(e["name"], news, today) is not None
+            is_new_menu = baseline is not None and pid not in baseline
+            if not (e["is_limited"] or e["is_new"] or in_news or is_new_menu):
+                continue  # 定番の既存メニューは記録しない(baselineに入るだけ)
+            detail = fetch_detail(pid, e["detail_path"])
+            if detail is None:
+                continue
+            if existing_all is None:
+                existing_all = load_chain_products(chain)
+            norm = parsers.normalize_for_match(e["name"] or detail["name"])
+            same = [p["product_id"] for p in existing_all
+                    if p["product_id"] != pid and parsers.normalize_for_match(p.get("name")) == norm]
+            product = build_sukiya_product(e, detail, source_of[pid], same, labels, today, now)
+            sukiya_apply_news(product, news)
+            save_product(chain, product)
+            existing_all.append(product)
+            st["new_products"] += 1
+            pending[chain].pop(pid, None)
+
+        # 記録済みの販売中商品の価格を、古い順に少数だけ取り直す(価格改定の追跡)
+        if st["list_ok"]:
+            if baseline is None:
+                save_baseline(chain, set(entries))
+            apply_missing(chain, set(entries), today, st)
+            cutoff_price = (datetime.date.fromisoformat(today)
+                            - datetime.timedelta(days=SUKIYA_PRICE_RECHECK_DAYS)).isoformat()
+            due = sorted((p for p in load_chain_products(chain)
+                          if p.get("status") == "on_sale" and p["product_id"] in entries
+                          and (p.get("price_checked_at") or "") <= cutoff_price),
+                         key=lambda p: p.get("price_checked_at") or "")
+            for p in due[:SUKIYA_PRICE_RECHECK_MAX]:
+                detail = fetch_detail(p["product_id"], entries[p["product_id"]]["detail_path"])
+                if detail is not None:
+                    sukiya_recheck_price(p, detail, today)
+                    save_product(chain, p)
+
+        # 発売日の確定(お知らせ見出し)。一覧の更新と終了判定のあとに行う。追加のリクエストは無い
+        cutoff = (datetime.date.fromisoformat(today) - datetime.timedelta(days=14)).isoformat()
+        for p in load_chain_products(chain):
+            if p.get("status") == "ended" and (p.get("ended_observed_at") or "") < cutoff:
+                continue  # 終わって久しい商品は探し直さない
+            if news and sukiya_apply_news(p, news):
+                save_product(chain, p)
+        recorded = load_chain_products(chain)
+        st["news_matched"] = sum(1 for p in recorded if p.get("news_url"))
+        st["news_unmatched"] = sum(1 for p in recorded if not p.get("news_url"))
+    except BlockedError as ex:
+        st["blocked"] = True
+        print(f"[blocked] {chain}: {ex}", file=sys.stderr)
+        return
+
+
+# ---------------------------------------------------------------------------
 # 実行
 # ---------------------------------------------------------------------------
 
@@ -1233,7 +1568,7 @@ def save_run_summary(stats: dict[str, dict]) -> None:
 
 
 CRAWLERS = {"mcdonalds": crawl_mcdonalds, "mos": crawl_mos, "matsuya": crawl_matsuya,
-            "matsunoya": crawl_matsunoya, "yoshinoya": crawl_yoshinoya}
+            "matsunoya": crawl_matsunoya, "yoshinoya": crawl_yoshinoya, "sukiya": crawl_sukiya}
 
 
 def main(argv: list[str] | None = None) -> int:
