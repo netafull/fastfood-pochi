@@ -1,0 +1,71 @@
+{
+ "chain": "matsunoya",
+ "product_id": "teishoku-tei_ginger_w_fpork_hp_261002",
+ "name": "背脂生姜タレのダブルロースポークフライドステーキ定食",
+ "category": "定食",
+ "price": 1090,
+ "price_note": "税込。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 1301.0,
+  "protein_g": 45.6,
+  "fat_g": 77.0,
+  "carbs_g": 111.2,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 6.9,
+  "other": {}
+ },
+ "nutrition_variants": null,
+ "nutrition_as_of": "2026-10-07",
+ "nutrition_note": "特定原材料・栄養成分の数値には、みそ汁も含まれております。",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "乳",
+   "大豆",
+   "豚肉",
+   "りんご",
+   "バナナ"
+  ],
+  "partial": [
+   {
+    "name": "牛肉",
+    "mark": "△"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "おすすめ掲載",
+ "in_recommended": true,
+ "official_url": "https://www.matsuyafoods.co.jp/matsunoya/menu/teishoku/tei_ginger_w_fpork_hp_261002.html",
+ "first_seen_at": "2026-10-11T12:25:53+09:00",
+ "last_seen_at": "2026-10-11",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-11",
+   "price": 1090
+  }
+ ],
+ "source_list": [
+  "osusume",
+  "teishoku"
+ ],
+ "image": null
+}

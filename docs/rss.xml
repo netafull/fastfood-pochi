@@ -3,8 +3,169 @@
 <channel>
 <title>ファストフードポチ</title>
 <link>https://fastfood.netaful.jp/</link>
-<description>マクドナルド・モスバーガー・松屋の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</description>
-<lastBuildDate>Sun, 11 Oct 2026 03:11:57 +0000</lastBuildDate>
+<description>マクドナルド・モスバーガー・松屋・松のやの期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</description>
+<lastBuildDate>Sun, 11 Oct 2026 03:28:27 +0000</lastBuildDate>
+<item>
+<title>【松のや】カキフライとじ丼</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-donburi-don_kaki_hp_260916.html</link>
+<guid isPermaLink="false">matsunoya-donburi-don_kaki_hp_260916</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】背脂生姜タレのポークフライドステーキ＆本格唐揚げ(３個)定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-moriawase-mori_ginger_fpork_karaage_hp_260930.html</link>
+<guid isPermaLink="false">matsunoya-moriawase-mori_ginger_fpork_karaage_hp_260930</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】背脂生姜タレのポークフライドステーキ＆ロースかつ定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-moriawase-mori_ginger_fpork_rosu_hp_260930.html</link>
+<guid isPermaLink="false">matsunoya-moriawase-mori_ginger_fpork_rosu_hp_260930</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】海鮮盛合せ定食（カキ2個・アジ１枚・海老１尾）</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-moriawase-mori_kaisen_ebi1_hp_260916.html</link>
+<guid isPermaLink="false">matsunoya-moriawase-mori_kaisen_ebi1_hp_260916</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】海鮮盛合せ定食（イカ・白身魚・海老）</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-moriawase-mori_kaisen_ikashiromiebi_hp_260701.html</link>
+<guid isPermaLink="false">matsunoya-moriawase-mori_kaisen_ikashiromiebi_hp_260701</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】超厚切りリブロースかつ＆アジフライ（1枚）定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-moriawase-mori_ribu_aji_hp_260916.html</link>
+<guid isPermaLink="false">matsunoya-moriawase-mori_ribu_aji_hp_260916</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】超厚切りリブロースかつ＆カキフライ（2個）定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-moriawase-mori_ribu_kaki2_hp_260916.html</link>
+<guid isPermaLink="false">matsunoya-moriawase-mori_ribu_kaki2_hp_260916</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】ロースかつ＆アジフライ（1枚）定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-moriawase-mori_rosu_aji_hp_260916.html</link>
+<guid isPermaLink="false">matsunoya-moriawase-mori_rosu_aji_hp_260916</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】ロースかつ＆イカフライ定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-moriawase-mori_rosu_ika_hp_260701.html</link>
+<guid isPermaLink="false">matsunoya-moriawase-mori_rosu_ika_hp_260701</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】ロースかつ＆カキフライ（2個）定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-moriawase-mori_rosu_kaki_hp_260916.html</link>
+<guid isPermaLink="false">matsunoya-moriawase-mori_rosu_kaki_hp_260916</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】ロースかつ＆白身魚フライ定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-moriawase-mori_rosu_shiromi_hp_260701.html</link>
+<guid isPermaLink="false">matsunoya-moriawase-mori_rosu_shiromi_hp_260701</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】【惣菜セット】アジフライ１枚＋カキフライ２個＋海老フライ１尾＋ハーフ皮付きポテト</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-souzai-souzai_set_nebiki_aji1_kaki2_ebi1_hp_261007.html</link>
+<guid isPermaLink="false">matsunoya-souzai-souzai_set_nebiki_aji1_kaki2_ebi1_hp_261007</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】【惣菜セット】倍盛）ロースかつ２枚＋海老フライ２尾＋ハーフ皮付きポテト</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-souzai-souzai_set_nebiki_baimori_rosu2_ebi2_hp_261007.html</link>
+<guid isPermaLink="false">matsunoya-souzai-souzai_set_nebiki_baimori_rosu2_ebi2_hp_261007</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】【惣菜セット】倍盛）ロースかつ２枚＋本格唐揚げ６個＋ハーフ皮付きポテト</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-souzai-souzai_set_nebiki_baimori_rosu2_kara6_hp_261007.html</link>
+<guid isPermaLink="false">matsunoya-souzai-souzai_set_nebiki_baimori_rosu2_kara6_hp_261007</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】【惣菜セット】ロースかつ１枚＋アジフライ１枚＋ハーフ皮付きポテト</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-souzai-souzai_set_nebiki_rosu1_aji1_hp_261007.html</link>
+<guid isPermaLink="false">matsunoya-souzai-souzai_set_nebiki_rosu1_aji1_hp_261007</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】【惣菜セット】ロースかつ１枚＋海老フライ１尾＋ハーフ皮付きポテト</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-souzai-souzai_set_nebiki_rosu1_ebi1_hp_261007.html</link>
+<guid isPermaLink="false">matsunoya-souzai-souzai_set_nebiki_rosu1_ebi1_hp_261007</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】【惣菜セット】ロースかつ１枚＋カキフライ２個＋ハーフ皮付きポテト</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-souzai-souzai_set_nebiki_rosu1_kaki2_hp_261007.html</link>
+<guid isPermaLink="false">matsunoya-souzai-souzai_set_nebiki_rosu1_kaki2_hp_261007</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】【惣菜セット】ロースかつ１枚＋本格唐揚げ３個＋ハーフ皮付きポテト</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-souzai-souzai_set_nebiki_rosu1_kara3_hp_261007.html</link>
+<guid isPermaLink="false">matsunoya-souzai-souzai_set_nebiki_rosu1_kara3_hp_261007</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】アジフライ（2枚）定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-teishoku-tei_aji_hp_260916.html</link>
+<guid isPermaLink="false">matsunoya-teishoku-tei_aji_hp_260916</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】背脂生姜タレの“リブ”ロースポークフライドステーキ定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-teishoku-tei_ginger_ribu_fpork_hp_260930.html</link>
+<guid isPermaLink="false">matsunoya-teishoku-tei_ginger_ribu_fpork_hp_260930</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】背脂生姜タレのダブルロースポークフライドステーキ定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-teishoku-tei_ginger_w_fpork_hp_261002.html</link>
+<guid isPermaLink="false">matsunoya-teishoku-tei_ginger_w_fpork_hp_261002</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】カキフライ（5個）定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-teishoku-tei_kaki5_hp_260916.html</link>
+<guid isPermaLink="false">matsunoya-teishoku-tei_kaki5_hp_260916</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】たっぷりカキフライ（7個）定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-teishoku-tei_kaki7_hp_260916.html</link>
+<guid isPermaLink="false">matsunoya-teishoku-tei_kaki7_hp_260916</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
 <item>
 <title>【松屋】ネオカシミールチーズカレー</title>
 <link>https://fastfood.netaful.jp/items/matsuya-curry-kashmir_cheese_hp_261006.html</link>

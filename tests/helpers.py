@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 import tempfile
 from pathlib import Path
@@ -51,6 +52,33 @@ for _c in MATSUYA_MENU_CATS:
     MATSUYA_PAGES[f"/matsuya/menu/{_c}/index.html"] = f"matsuya/cat_{_c}.html"
 
 
+MATSUNOYA_MENU_CATS = ["osusume", "teishoku", "moriawase", "donburi", "okosama", "morning", "souzai", "side_menu"]
+MATSUNOYA_PAGES = {
+    "/robots.txt": "matsunoya/robots.txt",
+    "/matsunoya/menu/": "matsunoya/menu.html",
+    "/matsunoya/menu/teishoku/tei_kaki5_hp_260916.html": "matsunoya/p_teishoku-tei_kaki5_hp_260916.html",
+    "/matsunoya/menu/donburi/don_kaki_hp_260916.html": "matsunoya/p_donburi-don_kaki_hp_260916.html",
+    "/matsunoya/whatsnew/data/whatsnew.json": "matsunoya/whatsnew_full.json",
+    "/matsunoya/whatsnew/menu/175938.html": "matsunoya/n_175938.html",
+}
+BLOCK_RE = re.compile(r'<li class="item">.*?<!-- //\.item -->', re.S)
+
+
+def matsunoya_category_page(cat: str) -> str:
+    """取得済みのosusume・teishokuは実物。ほかのカテゴリは、osusumeの実物のブロックのうち
+    そのカテゴリのものを抜き出して作る(無いカテゴリは1件を複製して作った合成ページ)。"""
+    if cat in ("osusume", "teishoku"):
+        return fx(f"matsunoya/cat_{cat}.html")
+    page = fx("matsunoya/cat_osusume.html")
+    blocks = BLOCK_RE.findall(page)
+    mine = [b for b in blocks if f"/matsunoya/menu/{cat}/" in b]
+    if not mine:
+        mine = [blocks[0].replace("/souzai/", f"/{cat}/").replace("souzai_set_nebiki_rosu1_kaki2_hp_261007",
+                                                                   f"{cat}_synthetic_hp_261001")]
+    head = page[:page.index(blocks[0])]
+    return head + "\n".join(mine) + "\n</ul></body></html>"
+
+
 class FakeGetter:
     """URLからフィクスチャを返す。呼ばれたURLを記録する。
 
@@ -88,6 +116,20 @@ class FakeGetter:
                 return fx(MATSUYA_PAGES[path])
             if path.startswith("/matsuya/menu/") and self.fallback_detail:
                 return fx("matsuya/p_curry-kashmir_hp_261006.html")
+            raise OSError(f"no fixture: {path}")
+        if chain == "matsunoya":
+            path = url.replace(crawl.MATSUYA_BASE, "")
+            if path in self.fail:
+                raise OSError("simulated failure")
+            if path in self.overrides:
+                return self.overrides[path]
+            if path in MATSUNOYA_PAGES:
+                return fx(MATSUNOYA_PAGES[path])
+            m = re.fullmatch(r"/matsunoya/menu/([a-z_]+)/index\.html", path)
+            if m and m.group(1) in MATSUNOYA_MENU_CATS:
+                return matsunoya_category_page(m.group(1))
+            if path.startswith("/matsunoya/menu/") and self.fallback_detail:
+                return fx("matsunoya/p_teishoku-tei_kaki5_hp_260916.html")
             raise OSError(f"no fixture: {path}")
         path = url.replace(crawl.MOS_BASE, "")
         if path in self.fail:

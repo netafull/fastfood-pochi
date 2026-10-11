@@ -1,5 +1,823 @@
 {
  "articles": {
+  "matsunoya": [
+   {
+    "date": "2026-08-30T13:00:00",
+    "id": 208495,
+    "link": "https://netaful.jp/fast-food/0208495.html",
+    "product_name": "油淋鶏定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/08/matsunoya-yurinchin-005-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松のや】「油淋鶏定食」ニンニク×レモンの香味ダレが旨すぎた！"
+   },
+   {
+    "date": "2026-08-21T12:30:00",
+    "id": 208029,
+    "link": "https://netaful.jp/fast-food/0208029.html",
+    "product_name": "得朝ロースかつ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/08/matsunoya-tokuasa-002-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松のや】550円「得朝ロースかつ定食」朝から揚げたてロースかつを食べてみた"
+   },
+   {
+    "date": "2026-08-03T11:30:00",
+    "id": 207332,
+    "link": "https://netaful.jp/fast-food/0207332.html",
+    "product_name": "“超厚”リブロース and 玉子のタレかつ丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/08/matsunoya-gokuatsu-katsu-003-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松のや】「“超厚”リブロース and 玉子のタレかつ丼」厚さ2.5cmに驚き！肉を味わう重量級カツ丼"
+   },
+   {
+    "date": "2026-06-16T12:10:00",
+    "id": 205444,
+    "link": "https://netaful.jp/fast-food/0205444.html",
+    "product_name": "シュクメルリロースかつ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/06/matsunoya-shukumeruri-003-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松のや】「シュクメルリロースかつ定食」松屋の人気メニューがロースかつと合体！"
+   },
+   {
+    "date": "2026-06-12T12:05:00",
+    "id": 205297,
+    "link": "https://netaful.jp/fast-food/0205297.html",
+    "product_name": "ロースかつ＆大判唐揚げ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/06/matsunoya-ooban-karaage-001-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松のや】「ロースかつ＆大判唐揚げ定食」740円で622g！揚げ物ダブルの満腹定食"
+   },
+   {
+    "date": "2026-05-27T11:30:00",
+    "id": 204720,
+    "link": "https://netaful.jp/fast-food/0204720.html",
+    "product_name": "ロースかつ＆海老フライ（2尾）定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/05/matsunoya-ebi-katsu-002-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松のや】「ロースかつ＆海老フライ（2尾）定食」33%オフの830円で食べてみた"
+   },
+   {
+    "date": "2026-05-07T16:30:00",
+    "id": 204112,
+    "link": "https://netaful.jp/fast-food/0204112.html",
+    "product_name": "国産雪国育ちロースかつ",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/05/matsunoya-yukiguni-katsu-002-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松のや】「国産雪国育ちロースかつ」厚みしっかり、紅塩で引き立つ脂の甘み！"
+   },
+   {
+    "date": "2026-05-04T16:30:00",
+    "id": 204055,
+    "link": "https://netaful.jp/fast-food/0204055.html",
+    "product_name": "大麦豚ロースかつ",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/05/matsunoya-oomugi-lose-001-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松のや】ポイント2倍でお得！「大麦豚ロースかつ」が実質526円に"
+   },
+   {
+    "date": "2026-04-24T10:30:00",
+    "id": 202441,
+    "link": "https://netaful.jp/fast-food/0202441.html",
+    "product_name": "超厚切りロースかつ",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/04/matsunoya-atsu-rusu-006-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松のや】「超厚切りロースかつ」約3cmの衝撃！200g級で満腹確定"
+   },
+   {
+    "date": "2026-04-05T13:30:00",
+    "id": 193873,
+    "link": "https://netaful.jp/fast-food/0193873.html",
+    "product_name": "大麦豚ロースかつ",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/04/matsunoya-canada-katsu-001-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松のや】「大麦豚ロースかつ」25%増量で100g！750円でこの満足感は強すぎる！"
+   },
+   {
+    "date": "2026-01-28T10:00:00",
+    "id": 189528,
+    "link": "https://netaful.jp/fast-food/0189528.html",
+    "product_name": "超厚切りリブロースかつ",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/01/matsunoya-lib-005-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松のや】「超厚切りリブロースかつ」160gリブロースが990円はお得すぎる！"
+   },
+   {
+    "date": "2026-01-11T14:00:00",
+    "id": 188004,
+    "link": "https://netaful.jp/fast-food/0188004.html",
+    "product_name": "タルタルチキンかつ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/01/matsunoya-tartar-chicken-004-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松のや】「タルタルチキンかつ定食」サクッと衣にジュワッと鶏もも、タルタルで満足度が跳ね上がる！しかも200円オフ！"
+   },
+   {
+    "date": "2025-10-24T14:00:00",
+    "id": 184446,
+    "link": "https://netaful.jp/fast-food/0184446.html",
+    "product_name": "背脂生姜タレのポークフライドステーキ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/10/matsunoya-fried-pork-005-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松のや】「背脂生姜タレのポークフライドステーキ定食」濃厚背脂と生姜のパンチでご飯が止まらないスタミナ飯を食べてみた"
+   },
+   {
+    "date": "2025-10-11T12:00:00",
+    "id": 183799,
+    "link": "https://netaful.jp/fast-food/0183799.html",
+    "product_name": "うまトマロースかつ",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/10/matsunoya-umatoma-002-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松のや】「うまトマロースかつ」これはニンニクばっちりの“松のやイタリアン”や！"
+   },
+   {
+    "date": "2025-08-26T12:30:00",
+    "id": 181614,
+    "link": "https://netaful.jp/fast-food/0181614.html",
+    "product_name": "ささみかつ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/08/matsuya-sasamikatsu-500-004-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松のや】定期券で「ささみかつ定食」を550円で食べた"
+   },
+   {
+    "date": "2025-08-23T14:30:00",
+    "id": 181474,
+    "link": "https://netaful.jp/fast-food/0181474.html",
+    "product_name": "タルタルチキンかつ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/08/matsunoya-tartar-chicken-003-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松のや】定期券で「タルタルチキンかつ定食」を550円で食べた"
+   },
+   {
+    "date": "2025-08-21T17:30:00",
+    "id": 181358,
+    "link": "https://netaful.jp/fast-food/0181358.html",
+    "product_name": "ロースかつ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/08/matsunoya-teikiken-misokatsu-003-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松のや】定期券で「ロースかつ定食」を550円で食べた"
+   },
+   {
+    "date": "2025-08-20T14:00:00",
+    "id": 181295,
+    "link": "https://netaful.jp/fast-food/0181295.html",
+    "product_name": "チキンかつ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/08/matsunoya-onioroshi-ponzu-chicken-katsu-012-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松のや】定期券で「チキンかつ定食」を550円で食べた"
+   },
+   {
+    "date": "2025-08-14T12:30:00",
+    "id": 180985,
+    "link": "https://netaful.jp/fast-food/0180985.html",
+    "product_name": "ロースかつ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/08/matsunoya-katsu-teishoku-007-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松のや】「ロースかつ定食」特盛は何g？実質468円で食べた"
+   },
+   {
+    "date": "2025-07-08T17:30:00",
+    "id": 179141,
+    "link": "https://netaful.jp/fast-food/0179141.html",
+    "product_name": "‟レモン風味”のねぎ塩ささみかつ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/07/matsunoya-negishio-sasamikatsu-003-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松のや】「‟レモン風味”のねぎ塩ささみかつ定食」レモン風味のねぎ塩ダレは夏向けトッピング！"
+   },
+   {
+    "date": "2025-06-16T11:00:00",
+    "id": 178005,
+    "link": "https://netaful.jp/fast-food/0178005.html",
+    "product_name": "創業ビーフカレー",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/06/matsuya-sougyou-beef-katsu-curry-007-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋・松のや】「創業ビーフカレー」のカツカレー「創業ビーフロースかつカレー」を食べてみた"
+   },
+   {
+    "date": "2025-05-26T12:30:00",
+    "id": 176919,
+    "link": "https://netaful.jp/fast-food/0176919.html",
+    "product_name": "チキンかつ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/05/matsunoya-chicken-katsu-190off-004-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松のや】定番メニュー「チキンかつ定食」食べてみた"
+   },
+   {
+    "date": "2025-05-23T13:30:00",
+    "id": 176746,
+    "link": "https://netaful.jp/fast-food/0176746.html",
+    "product_name": "鬼おろしポン酢ロースかつ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/05/matsunoya-tonkatsu-500-003-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松のや】定番メニュー「鬼おろしポン酢ロースかつ定食」食べてみた"
+   },
+   {
+    "date": "2025-03-21T15:30:00",
+    "id": 173600,
+    "link": "https://netaful.jp/fast-food/0173600.html",
+    "product_name": "得朝チキンかつ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/03/matsunoya-morning-chicken-katsu-000-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松のや】「得朝チキンかつ定食」590円はお得すぎる！松屋併設店で朝メニューが注文可能に"
+   },
+   {
+    "date": "2025-03-06T14:00:00",
+    "id": 172934,
+    "link": "https://netaful.jp/fast-food/0172934.html",
+    "product_name": "得朝ロースかつ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2025/03/matsunoya-morning-tonkatsu-001-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松のや】「得朝ロースかつ定食」550円はお得すぎる！松屋併設店で朝メニューが注文可能に"
+   },
+   {
+    "date": "2024-11-28T15:00:00",
+    "id": 164205,
+    "link": "https://netaful.jp/fast-food/0164205.html",
+    "product_name": "丸太ヒレかつ",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/11/matsunoya-hirekatsu-002-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松のや】グレードアップした一本揚げ「丸太ヒレかつ」を味わう"
+   },
+   {
+    "date": "2024-11-21T17:30:00",
+    "id": 163876,
+    "link": "https://netaful.jp/fast-food/0163876.html",
+    "product_name": "極厚ロースかつ",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/11/gokuatsu-katsu-008-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松のや】通常2.5倍の厚さは何cm？200g「極厚ロースかつ」食べてみた！"
+   },
+   {
+    "date": "2024-11-10T20:30:00",
+    "id": 163279,
+    "link": "https://netaful.jp/fast-food/0163279.html",
+    "product_name": "角煮かつ",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/11/matsunoya-kakuni-katsu-002-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「角煮かつ」2度目の味はいかに！？"
+   },
+   {
+    "date": "2024-10-30T17:30:00",
+    "id": 161837,
+    "link": "https://netaful.jp/fast-food/0161837.html",
+    "product_name": "ポークフライドステーキ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/10/matsunoya-pork-fried-steak-000-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松のや】豚の素揚げステーキ「ポークフライドステーキ定食」オニオンバターソースで食べてみた"
+   },
+   {
+    "date": "2024-10-17T17:00:00",
+    "id": 161247,
+    "link": "https://netaful.jp/fast-food/0161247.html",
+    "product_name": "国産 黒毛和牛入りメンチかつ",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/10/matsunoya-mench-001-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「国産 黒毛和牛入りメンチかつ」メンチかつは1つ何グラム？"
+   },
+   {
+    "date": "2024-10-05T12:30:00",
+    "id": 160528,
+    "link": "https://netaful.jp/fast-food/0160528.html",
+    "product_name": "麦小町ロースかつ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/10/matsunoya-mugikomachi-002-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「麦小町ロースかつ定食」塩で脂が旨い200gオーバーの国産豚のロースかつでした！"
+   },
+   {
+    "date": "2024-08-29T14:30:00",
+    "id": 155809,
+    "link": "https://netaful.jp/fast-food/0155809.html",
+    "product_name": "油淋鶏定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/08/matsunoya-yurinchin-019-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「油淋鶏定食」ライスにぶっかけて弁当みたいにして食べるとアジア飯な感じでこれが旨い！"
+   },
+   {
+    "date": "2024-08-22T12:30:00",
+    "id": 155437,
+    "link": "https://netaful.jp/fast-food/0155437.html",
+    "product_name": "ラムかつ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/08/matsunoya-lamb-001-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「ラムかつ定食」テイクアウトして“ラムかつ”の重量を計測してみた"
+   },
+   {
+    "date": "2024-08-19T12:30:00",
+    "id": 155283,
+    "link": "https://netaful.jp/fast-food/0155283.html",
+    "product_name": "レモンおろしささみかつ",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/08/matsunoya-lemon-sasami-002-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「レモンおろしささみかつ」大根おろしとレモンの組み合わせは絶旨"
+   },
+   {
+    "date": "2024-08-01T15:30:00",
+    "id": 154424,
+    "link": "https://netaful.jp/fast-food/0154424.html",
+    "product_name": "カナダ大麦豚厚切りロースかつ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/08/matsunoya-mugi-pork-005-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「カナダ大麦豚厚切りロースかつ定食」塩で旨いカナダ豚の140gロースかつでした！"
+   },
+   {
+    "date": "2024-06-27T12:10:00",
+    "id": 152661,
+    "link": "https://netaful.jp/fast-food/0152661.html",
+    "product_name": "牛かつ",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/06/matsunoya-gyukatsu-006-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「牛かつ」復活したので食べてみたけど2022年に食べた時とほぼ同じ感想でした"
+   },
+   {
+    "date": "2024-06-14T14:30:00",
+    "id": 152037,
+    "link": "https://netaful.jp/fast-food/0152037.html",
+    "product_name": "チキンかつ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/06/matsuya-chicken-katsu-003-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「チキンかつ定食」鶏もも肉110gを香草たっぷりのタルタルソースで！"
+   },
+   {
+    "date": "2024-05-23T12:30:00",
+    "id": 150882,
+    "link": "https://netaful.jp/fast-food/0150882.html",
+    "product_name": "超厚切りロースかつ丼",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/05/matsunoya-tonkatsu-006-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松のや】160gの分厚いとんかつ「超厚切りロースかつ丼」食べてみた！"
+   },
+   {
+    "date": "2024-05-17T12:30:00",
+    "id": 150553,
+    "link": "https://netaful.jp/fast-food/0150553.html",
+    "product_name": "チキンむねかつ",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/05/matsunoya-mune-002-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「チキンむねかつ」サクッと揚げた鶏むね肉は“ガリバタときどき塩”がオススメ！"
+   },
+   {
+    "date": "2024-05-09T14:30:00",
+    "id": 150151,
+    "link": "https://netaful.jp/fast-food/0150151.html",
+    "product_name": "海鮮盛合せ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2024/05/matsunoya-kaisen-009-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「海鮮盛合せ定食」特製タルタルソースに3種の海鮮トリオが食べごたえあり！"
+   },
+   {
+    "date": "2024-05-02T13:30:00",
+    "id": 149800,
+    "link": "https://netaful.jp/fast-food/0149800.html",
+    "product_name": "有頭大海老フライ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/05/matsunoya-ooebi-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松のや】総延長40cmに及ぶ本当に大きい「有頭大海老フライ」を再び食べた"
+   },
+   {
+    "date": "2024-04-24T19:00:00",
+    "id": 149454,
+    "link": "https://netaful.jp/fast-food/0149454.html",
+    "product_name": "国産雪国育ちロースかつ定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/04/matsunoya-katsu-kokusan-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「国産雪国育ちロースかつ定食」塩で旨い国産豚のロースかつでした！"
+   },
+   {
+    "date": "2024-04-17T17:30:00",
+    "id": 149068,
+    "link": "https://netaful.jp/fast-food/0149068.html",
+    "product_name": "黒カレー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/04/matsunoya-black-curry-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「黒カレー」キレのあるブラックカレーがロースかつと相乗効果を生んで旨い！"
+   },
+   {
+    "date": "2024-04-12T12:00:00",
+    "id": 148764,
+    "link": "https://netaful.jp/fast-food/0148764.html",
+    "product_name": "ムートート丼",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/04/matsunoya-mutoto-don-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「ムートート丼」タイ風豚バラ唐揚げをダブルにんにくで食べる！"
+   },
+   {
+    "date": "2024-03-29T17:00:00",
+    "id": 148064,
+    "link": "https://netaful.jp/fast-food/0148064.html",
+    "product_name": "ムートート",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/03/matsunoya-mutoto-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「ムートート」タイ風豚バラ唐揚げのチリソース味変が美味しい！"
+   },
+   {
+    "date": "2024-03-14T12:30:00",
+    "id": 147271,
+    "link": "https://netaful.jp/fast-food/0147271.html",
+    "product_name": "中華風あんかけロースかつ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/03/matsunoya-ankake-ttitle-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「中華風あんかけロースかつ」まるで町中華のメニュー！ふわとろ玉子と出汁のあんかけが美味しくて驚いた"
+   },
+   {
+    "date": "2024-02-28T18:00:00",
+    "id": 146445,
+    "link": "https://netaful.jp/fast-food/0146445.html",
+    "product_name": "ポークフライドステーキ定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/02/matsunoya-poke-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松のや】豚の素揚げステーキ「ポークフライドステーキ定食」食べてみた"
+   },
+   {
+    "date": "2024-02-08T16:30:00",
+    "id": 145100,
+    "link": "https://netaful.jp/fast-food/0145100.html",
+    "product_name": "ささみかつカレー",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/02/matsunoya-sasami-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松のや】マイカリー食堂のカレー使用「ささみかつカレー」食べたらココナツミルク風味が美味しくて驚いた"
+   },
+   {
+    "date": "2024-01-31T17:30:00",
+    "id": 144677,
+    "link": "https://netaful.jp/fast-food/0144677.html",
+    "product_name": "超厚切りロース焼きかつ丼",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/01/yakikatsu-matsunoya-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「超厚切りロース焼きかつ丼」食べてみた！玉子でとじないロースかつ160gは食べごたえ抜群"
+   },
+   {
+    "date": "2024-01-10T17:30:00",
+    "id": 143786,
+    "link": "https://netaful.jp/fast-food/0143786.html",
+    "product_name": "ロースミルフィーユかつ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/01/matsunoya-mill-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「ロースミルフィーユかつ」ガリバタソースは罪な味すぎて反則！"
+   },
+   {
+    "date": "2024-01-02T15:00:00",
+    "id": 143358,
+    "link": "https://netaful.jp/fast-food/0143358.html",
+    "product_name": "有頭大海老フライ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2024/01/matsunoya-ebi-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松のや】総延長40cmに及ぶ「有頭大海老フライ」を食べた"
+   },
+   {
+    "date": "2023-12-27T12:00:00",
+    "id": 143095,
+    "link": "https://netaful.jp/fast-food/0143095.html",
+    "product_name": null,
+    "thumb": {
+     "height": 300,
+     "url": "https://netaful.jp/wp-content/uploads/2023/12/mat-2023-300x300.jpg",
+     "width": 300
+    },
+    "title": "【松屋】2023年に食べた46食まとめ＆ベスト5【松のや】"
+   },
+   {
+    "date": "2023-12-20T18:00:00",
+    "id": 142805,
+    "link": "https://netaful.jp/fast-food/0142805.html",
+    "product_name": "超厚切りロースかつ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/12/matsunoya-atsu-ton-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「超厚切りロースかつ」総重量160gは食べごたえ十分！"
+   },
+   {
+    "date": "2023-12-07T12:00:00",
+    "id": 142031,
+    "link": "https://netaful.jp/fast-food/0142031.html",
+    "product_name": "チキン南蛮定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/12/tarutaru-matsunoya-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「チキン南蛮定食」たっぷりタルタルソースの海に溺れた！"
+   },
+   {
+    "date": "2023-11-28T12:00:00",
+    "id": 141422,
+    "link": "https://netaful.jp/fast-food/0141422.html",
+    "product_name": "大判ヒレかつ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/11/matsunoya-hire-dai-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「大判ヒレかつ」が本当に大判なのかチェックしてきた"
+   },
+   {
+    "date": "2023-11-02T15:00:00",
+    "id": 139947,
+    "link": "https://netaful.jp/fast-food/0139947.html",
+    "product_name": "チーズトマトささみかつ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/11/matsunoya-tomato-chicken-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「チーズトマトささみかつ」トマトの酸味に濃厚チーズで旨味"
+   },
+   {
+    "date": "2023-10-26T15:30:00",
+    "id": 139592,
+    "link": "https://netaful.jp/fast-food/0139592.html",
+    "product_name": "角煮かつ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/10/matsunoya-kakunikatsu-title-1-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松のや】豚角煮の新感覚かつ「角煮かつ」食べてみたけれど"
+   },
+   {
+    "date": "2023-09-25T14:00:00",
+    "id": 137935,
+    "link": "https://netaful.jp/fast-food/0137935.html",
+    "product_name": "アジフライ定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/09/matsunoya-aji-oomori-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「アジフライ定食」食べました！ホクホクの揚げたてアジフライは旨いしタルタルソースもイイ！"
+   },
+   {
+    "date": "2023-08-23T17:00:00",
+    "id": 135744,
+    "link": "https://netaful.jp/fast-food/0135744.html",
+    "product_name": "ラムかつ定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/08/lamb-matsunoya-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "松のや「ラムかつ定食」食べた！塩で食べればほんのりラムの香り"
+   },
+   {
+    "date": "2023-07-14T11:30:00",
+    "id": 132700,
+    "link": "https://netaful.jp/fast-food/0132700.html",
+    "product_name": "アフリカンチキンかつ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/07/matsunoya-african-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【レビュー】マカオ料理を日本風にアレンジ！？松のや「アフリカンチキンかつ」食べてみた"
+   },
+   {
+    "date": "2023-06-28T20:00:00",
+    "id": 132107,
+    "link": "https://netaful.jp/fast-food/0132107.html",
+    "product_name": "3種野菜の鶏むね肉巻きかつ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/06/matsunoya-makikatsu-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松のや】野菜を巻いた新商品がとてもかわいい「3種野菜の鶏むね肉巻きかつ」食べてみました"
+   },
+   {
+    "date": "2022-12-27T17:00:00",
+    "id": 124080,
+    "link": "https://netaful.jp/fast-food/0124080.html",
+    "product_name": "上ロースかつ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/12/matsunoya-jo-27000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松のや】分厚くボリュームアップした「上ロースかつ」を食べてみた！塩が欲しくなる肉々しくて悪くないとんかつでしたよ"
+   },
+   {
+    "date": "2022-11-11T07:30:00",
+    "id": 122108,
+    "link": "https://netaful.jp/fast-food/0122108.html",
+    "product_name": "明太チーズささみかつ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/11/matsunoya-sasami-cheese-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "明太子チーズに大葉ソースが美味くないわけがない！松のや「明太チーズささみかつ」を食べてきた"
+   },
+   {
+    "date": "2022-08-25T18:00:00",
+    "id": 118788,
+    "link": "https://netaful.jp/fast-food/0118788.html",
+    "product_name": "牛かつ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/08/matsunoya-gyukatsu-25000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松のや】西洋わさびが大好きなのでレフォールソースが気になりすぎる「牛かつ」を食べてみたのだけれど"
+   },
+   {
+    "date": "2022-08-01T11:30:00",
+    "id": 115885,
+    "link": "https://netaful.jp/fast-food/0115885.html",
+    "product_name": "油淋鶏定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/08/matsunoya-yurinchin-30000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松のや】酸っぱジューシーでウマウマ！パリっと唐揚げの「油淋鶏定食」"
+   },
+   {
+    "date": "2022-02-18T11:30:00",
+    "id": 109680,
+    "link": "https://netaful.jp/fast-food/0109680.html",
+    "product_name": "ポルチーニ香るフォアグラ入りクリームコロッケ",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/02/matsunoya-cream-crocket-18000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【松のや】「ポルチーニ香るフォアグラ入りクリームコロッケ」完全に町の洋食屋さんで食べるクリームコロッケみたいで美味しく食べごたえもある！"
+   },
+   {
+    "date": "2022-02-04T17:30:00",
+    "id": 109084,
+    "link": "https://netaful.jp/fast-food/0109084.html",
+    "product_name": "鶏肉で包んだハムチーズ巻きかつ定食",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/02/chicken-coldon-blue-04000-title-300x169.jpg",
+     "width": 300
+    },
+    "title": "フランスの定番家庭料理チキン・コルドンブルーの松のや版「鶏肉で包んだハムチーズ巻きかつ定食」を食べてみたら"
+   },
+   {
+    "date": "2020-12-05T08:00:00",
+    "id": 64292,
+    "link": "https://netaful.jp/fast-food/064292.html",
+    "product_name": "カキフライ定食",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2020/12/matsunoya-oyster-202012-8-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【松のや】期間限定でカキが5個から7個に増量している「カキフライ定食」を食べてきちゃいましたよ！ライス大盛で！"
+   }
+  ],
   "matsuya": [
    {
     "date": "2026-10-07T12:30:00",
@@ -698,18 +1516,6 @@
     "title": "【松屋】「欧風牛タンカレー」とろける牛タンにフォンドボー仕立てのコク深いカレーが旨いんだぜ‥‥！"
    },
    {
-    "date": "2025-06-16T11:00:00",
-    "id": 178005,
-    "link": "https://netaful.jp/fast-food/0178005.html",
-    "product_name": "創業ビーフカレー",
-    "thumb": {
-     "height": 364,
-     "url": "https://netaful.jp/wp-content/uploads/2025/06/matsuya-sougyou-beef-katsu-curry-007-485x364.jpg",
-     "width": 485
-    },
-    "title": "【松屋・松のや】「創業ビーフカレー」のカツカレー「創業ビーフロースかつカレー」を食べてみた"
-   },
-   {
     "date": "2025-06-03T17:00:00",
     "id": 177324,
     "link": "https://netaful.jp/fast-food/0177324.html",
@@ -818,18 +1624,6 @@
     "title": "【松屋】「“炙り”焼鮭朝定食」680円の朝食を食べてみた"
    },
    {
-    "date": "2025-03-21T15:30:00",
-    "id": 173600,
-    "link": "https://netaful.jp/fast-food/0173600.html",
-    "product_name": "得朝チキンかつ定食",
-    "thumb": {
-     "height": 364,
-     "url": "https://netaful.jp/wp-content/uploads/2025/03/matsunoya-morning-chicken-katsu-000-485x364.jpg",
-     "width": 485
-    },
-    "title": "【松のや】「得朝チキンかつ定食」590円はお得すぎる！松屋併設店で朝メニューが注文可能に"
-   },
-   {
     "date": "2025-03-18T13:00:00",
     "id": 173451,
     "link": "https://netaful.jp/fast-food/0173451.html",
@@ -852,18 +1646,6 @@
      "width": 485
     },
     "title": "【松屋】「たっぷり海老のニューバーグソース」海老の旨味全開！フランス発祥の濃厚ソースがたまらない！"
-   },
-   {
-    "date": "2025-03-06T14:00:00",
-    "id": 172934,
-    "link": "https://netaful.jp/fast-food/0172934.html",
-    "product_name": "得朝ロースかつ定食",
-    "thumb": {
-     "height": 364,
-     "url": "https://netaful.jp/wp-content/uploads/2025/03/matsunoya-morning-tonkatsu-001-485x364.jpg",
-     "width": 485
-    },
-    "title": "【松のや】「得朝ロースかつ定食」550円はお得すぎる！松屋併設店で朝メニューが注文可能に"
    },
    {
     "date": "2025-02-10T14:00:00",
@@ -1608,18 +2390,6 @@
      "width": 300
     },
     "title": "【松屋】「炙り十勝豚丼」とにかく豚肉が多いから何枚か数えてみた"
-   },
-   {
-    "date": "2023-12-27T12:00:00",
-    "id": 143095,
-    "link": "https://netaful.jp/fast-food/0143095.html",
-    "product_name": null,
-    "thumb": {
-     "height": 300,
-     "url": "https://netaful.jp/wp-content/uploads/2023/12/mat-2023-300x300.jpg",
-     "width": 300
-    },
-    "title": "【松屋】2023年に食べた46食まとめ＆ベスト5【松のや】"
    },
    {
     "date": "2023-12-26T12:00:00",
@@ -6132,7 +6902,7 @@
   ]
  },
  "errors": [],
- "fetched_at": "2026-10-11T12:11:20+09:00",
+ "fetched_at": "2026-10-11T12:28:27+09:00",
  "matches": {
   "matsuya-curry-kashmir_hp_261006": [
    210463

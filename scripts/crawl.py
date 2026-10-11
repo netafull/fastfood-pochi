@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""マクドナルド・モスバーガー・松屋の限定メニュー・新メニューを巡回し、
-data/products/{mcdonalds|mos|matsuya}/{id}.json に1商品1ファイルで蓄積する。
+"""マクドナルド・モスバーガー・松屋・松のやの限定メニュー・新メニューを巡回し、
+data/products/{mcdonalds|mos|matsuya|matsunoya}/{id}.json に1商品1ファイルで蓄積する。
 
 このサイトの核は「販売状況の追跡」。公式サイトは販売が終わると商品を消すので、
 一覧に居た商品が消えたら終了とみなして記録を残す。
@@ -534,35 +534,36 @@ def crawl_mos(getter, pending: dict, stats: dict, today: str | None = None) -> N
 MATSUYA_FALLBACK_ARTICLE_FETCHES = 4
 
 
-def matsuya_category_labels() -> dict[str, str | None]:
-    return {c["slug"]: c.get("label") for c in CONFIG.get("matsuya_categories", [])}
+def matsuya_category_labels(chain: str = "matsuya") -> dict[str, str | None]:
+    return {c["slug"]: c.get("label") for c in CONFIG.get(f"{chain}_categories", [])}
 
 
 class MatsuyaNews:
     """ニュースJSONと記事ページの取得・照合。新規商品があるときだけ取りに行き、
     同じ記事は1回の実行で1回しか取らない。"""
 
-    def __init__(self, getter, st: dict):
+    def __init__(self, getter, st: dict, chain: str = "matsuya"):
         self.getter = getter
         self.st = st
+        self.chain = chain
         self.news: list[dict] | None = None
         self.news_failed = False
         self.articles: dict[str, dict | None] = {}
         self.fallback_fetches = 0
 
     def _get(self, url: str) -> str:
-        text = self.getter("matsuya", url)
+        text = self.getter(self.chain, url)
         self.st["detail_requests"] += 1
         return text
 
     def load(self) -> list[dict]:
         if self.news is None and not self.news_failed:
             try:
-                self.news = parsers.parse_matsuya_news(self._get(MATSUYA_BASE + parsers.MATSUYA_NEWS_JSON))
+                self.news = parsers.parse_matsuya_news(self._get(MATSUYA_BASE + parsers.matsuya_news_json_path(self.chain)))
             except BlockedError:
                 raise
             except Exception as e:  # noqa: BLE001
-                print(f"[warn] matsuya whatsnew.json 取得失敗: {e}", file=sys.stderr)
+                print(f"[warn] {self.chain} whatsnew.json 取得失敗: {e}", file=sys.stderr)
                 self.news_failed = True
         return self.news or []
 
@@ -573,7 +574,7 @@ class MatsuyaNews:
             except BlockedError:
                 raise
             except Exception as e:  # noqa: BLE001
-                print(f"[warn] matsuya 記事取得失敗 {url}: {e}", file=sys.stderr)
+                print(f"[warn] {self.chain} 記事取得失敗 {url}: {e}", file=sys.stderr)
                 self.articles[url] = None
         return self.articles[url]
 
@@ -584,7 +585,7 @@ class MatsuyaNews:
         if not news:
             return None
         center = parsers.matsuya_slug_date(product_id) or today
-        hit = parsers.match_matsuya_news_title(name, news, center)
+        hit = parsers.match_matsuya_news_title(name, news, center, self.chain)
         if hit:
             return {"news": hit, "article": self.article(hit["url"]), "how": "title"}
         # 見出しに無い: 掲載日付近のニュース記事の本文に商品名があるか調べる
@@ -593,7 +594,7 @@ class MatsuyaNews:
         except ValueError:
             return None
         lo, hi = c - datetime.timedelta(days=14), c + datetime.timedelta(days=7)
-        cands = parsers.matsuya_name_variants(name)
+        cands = parsers.matsuya_name_variants(name, self.chain)
         for a in news:
             try:
                 d = datetime.date.fromisoformat(a["date"])
@@ -612,8 +613,10 @@ class MatsuyaNews:
 
 
 def build_matsuya_product(entry: dict, detail: dict, sources: list[str], in_limited: bool,
-                          resolved: dict | None, same_name: list[str], today: str, now: str) -> dict:
-    labels = matsuya_category_labels()
+                          resolved: dict | None, same_name: list[str], today: str, now: str,
+                          chain: str = "matsuya") -> dict:
+    labels = matsuya_category_labels(chain)
+    limited_cat = parsers.MATSUYA_FAMILY[chain]["limited"]
     note = detail.get("nutrition_note")
     prices = parsers.matsuya_variant_labels(detail.get("prices") or [], note)
     nutr = parsers.matsuya_variant_labels(detail.get("nutrition_variants") or [], note)
@@ -641,9 +644,9 @@ def build_matsuya_product(entry: dict, detail: dict, sources: list[str], in_limi
         price_note += f"表示は「{primary_price['label']}」の価格。"
     price_note += "店舗により価格・取り扱いが異なる場合があります。"
 
-    category = next((labels.get(c) for c in sources if c != parsers.MATSUYA_LIMITED_CATEGORY and labels.get(c)), None)
+    category = next((labels.get(c) for c in sources if c != limited_cat and labels.get(c)), None)
     product = {
-        "chain": "matsuya",
+        "chain": chain,
         "product_id": entry["product_id"],
         "name": entry["name"] or detail.get("name"),
         "category": category,
@@ -683,16 +686,28 @@ def build_matsuya_product(entry: dict, detail: dict, sources: list[str], in_limi
     return product
 
 
-def matsuya_discover_categories(index_html: str) -> list[str]:
+def matsuya_discover_categories(index_html: str, chain: str = "matsuya") -> list[str]:
     slugs = []
-    for m in re.finditer(r'href="/matsuya/menu/([a-z0-9_]+)/index\.html"', index_html):
+    for m in re.finditer(rf'href="/{chain}/menu/([a-z0-9_]+)/index\.html"', index_html):
         if m.group(1) not in slugs:
             slugs.append(m.group(1))
     return slugs
 
 
 def crawl_matsuya(getter, pending: dict, stats: dict, today: str | None = None) -> None:
-    chain = "matsuya"
+    crawl_matsuya_family("matsuya", getter, pending, stats, today)
+
+
+def crawl_matsunoya(getter, pending: dict, stats: dict, today: str | None = None) -> None:
+    crawl_matsuya_family("matsunoya", getter, pending, stats, today)
+
+
+def crawl_matsuya_family(chain: str, getter, pending: dict, stats: dict, today: str | None = None) -> None:
+    """松屋フーズ系(松屋・松のや)の巡回。構造は同じで、チェーンごとに接頭辞・おすすめカテゴリが違う。"""
+    fam = parsers.MATSUYA_FAMILY[chain]
+    limited_cat = fam["limited"]
+    no_record = fam["no_record"]
+    menu_root = parsers.matsuya_menu_root(chain)
     today = today or today_jst()
     now = now_iso()
     pending.setdefault(chain, {})
@@ -707,10 +722,10 @@ def crawl_matsuya(getter, pending: dict, stats: dict, today: str | None = None) 
         st["list_requests"] += 1
     except BlockedError as e:
         st["blocked"] = True
-        print(f"[blocked] matsuya robots.txt: {e}", file=sys.stderr)
+        print(f"[blocked] {chain} robots.txt: {e}", file=sys.stderr)
         return
     except Exception as e:  # noqa: BLE001
-        print(f"[warn] matsuya robots.txt 取得失敗(全許可として続行): {e}", file=sys.stderr)
+        print(f"[warn] {chain} robots.txt 取得失敗(全許可として続行): {e}", file=sys.stderr)
     rp = urllib.robotparser.RobotFileParser()
     rp.parse((robots_text or "User-agent: *\nAllow: /").splitlines())
 
@@ -718,27 +733,27 @@ def crawl_matsuya(getter, pending: dict, stats: dict, today: str | None = None) 
         return rp.can_fetch(UA, MATSUYA_BASE + path)
 
     # カテゴリの入口。新しいカテゴリが増えても拾えるよう毎回取る
-    config_cats = [c["slug"] for c in CONFIG["matsuya_categories"]]
+    config_cats = [c["slug"] for c in CONFIG[f"{chain}_categories"]]
     cats: list[str] = []
     try:
-        idx = getter(chain, MATSUYA_BASE + parsers.MATSUYA_MENU_ROOT)
+        idx = getter(chain, MATSUYA_BASE + menu_root)
         st["list_requests"] += 1
-        cats = matsuya_discover_categories(idx)
+        cats = matsuya_discover_categories(idx, chain)
     except BlockedError as e:
         st["blocked"] = True
-        print(f"[blocked] matsuya menu index: {e}", file=sys.stderr)
+        print(f"[blocked] {chain} menu index: {e}", file=sys.stderr)
         return
     except Exception as e:  # noqa: BLE001
-        print(f"[warn] matsuya メニュー入口 取得失敗(設定の固定リストで代替): {e}", file=sys.stderr)
+        print(f"[warn] {chain} メニュー入口 取得失敗(設定の固定リストで代替): {e}", file=sys.stderr)
     if not cats:
         cats = list(config_cats)
         all_ok = False
-    cats = sorted(cats, key=lambda c: c != parsers.MATSUYA_LIMITED_CATEGORY)  # おすすめを先頭に(安定ソート)
+    cats = sorted(cats, key=lambda c: c != limited_cat)  # おすすめを先頭に(安定ソート)
 
     entries: dict[str, dict] = {}
     sources: dict[str, list[str]] = {}
     for cat in cats:
-        path = f"{parsers.MATSUYA_MENU_ROOT}{cat}/index.html"
+        path = f"{menu_root}{cat}/index.html"
         if not allowed(path):
             print(f"[skip] robots.txtでDisallow: {path}", file=sys.stderr)
             all_ok = False
@@ -748,15 +763,15 @@ def crawl_matsuya(getter, pending: dict, stats: dict, today: str | None = None) 
             st["list_requests"] += 1
         except BlockedError as e:
             st["blocked"] = True
-            print(f"[blocked] matsuya list {path}: {e}", file=sys.stderr)
+            print(f"[blocked] {chain} list {path}: {e}", file=sys.stderr)
             return
         except Exception as e:  # noqa: BLE001
-            print(f"[warn] matsuya list {path} 取得失敗: {e}", file=sys.stderr)
+            print(f"[warn] {chain} list {path} 取得失敗: {e}", file=sys.stderr)
             all_ok = False
             continue
-        page_entries = parsers.parse_matsuya_list(html)
+        page_entries = parsers.parse_matsuya_list(html, chain)
         if not page_entries:
-            print(f"[warn] matsuya list {path}: 商品が0件(構造変更の疑い)", file=sys.stderr)
+            print(f"[warn] {chain} list {path}: 商品が0件(構造変更の疑い)", file=sys.stderr)
             all_ok = False
             continue
         for e in page_entries:
@@ -768,10 +783,10 @@ def crawl_matsuya(getter, pending: dict, stats: dict, today: str | None = None) 
     st["list_ok"] = all_ok and bool(entries)
 
     singles = {pid: e for pid, e in entries.items() if not e["option"]}
-    st["limited_seen"] = sum(1 for pid in singles if parsers.MATSUYA_LIMITED_CATEGORY in sources[pid])
+    st["limited_seen"] = sum(1 for pid in singles if limited_cat in sources[pid])
 
     baseline = baseline_for(chain)
-    news = MatsuyaNews(getter, st)
+    news = MatsuyaNews(getter, st, chain)
     existing_all = None  # 同名商品の検出用(新規に記録するときだけ読む)
     try:
         for pid, e in singles.items():
@@ -779,13 +794,13 @@ def crawl_matsuya(getter, pending: dict, stats: dict, today: str | None = None) 
             if existing is not None:
                 if touch_seen(existing, e.get("price"), today, now):
                     existing["source_list"] = sorted(set(existing.get("source_list") or []) | set(sources[pid]))
-                    if parsers.MATSUYA_LIMITED_CATEGORY in sources[pid]:
+                    if limited_cat in sources[pid]:
                         existing["in_recommended"] = True
                     save_product(chain, existing)
                 pending[chain].pop(pid, None)
                 continue
-            in_limited = parsers.MATSUYA_LIMITED_CATEGORY in sources[pid]
-            only_unrecorded = all(c in parsers.MATSUYA_NO_RECORD_CATEGORIES for c in sources[pid])
+            in_limited = limited_cat in sources[pid]
+            only_unrecorded = all(c in no_record for c in sources[pid])
             is_new_menu = baseline is not None and pid not in baseline
             if not (in_limited or (is_new_menu and not only_unrecorded)):
                 continue  # 定番の既存メニュー、トッピング・セット類は記録しない(baselineに入るだけ)
@@ -818,7 +833,7 @@ def crawl_matsuya(getter, pending: dict, stats: dict, today: str | None = None) 
             norm = parsers.normalize_for_match(name)
             same = [p["product_id"] for p in existing_all
                     if p["product_id"] != pid and parsers.normalize_for_match(p.get("name")) == norm]
-            product = build_matsuya_product(e, detail, sources[pid], in_limited, resolved, same, today, now)
+            product = build_matsuya_product(e, detail, sources[pid], in_limited, resolved, same, today, now, chain)
             save_product(chain, product)
             existing_all.append(product)
             st["new_products"] += 1
@@ -829,7 +844,7 @@ def crawl_matsuya(getter, pending: dict, stats: dict, today: str | None = None) 
             pending[chain].pop(pid, None)
     except BlockedError as ex:
         st["blocked"] = True
-        print(f"[blocked] matsuya: {ex}", file=sys.stderr)
+        print(f"[blocked] {chain}: {ex}", file=sys.stderr)
         return
 
     # 一覧取得が全部成功した回だけ、baseline作成と終了判定を行う
@@ -858,7 +873,8 @@ def save_run_summary(stats: dict[str, dict]) -> None:
     RUN_SUMMARY.write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
 
 
-CRAWLERS = {"mcdonalds": crawl_mcdonalds, "mos": crawl_mos, "matsuya": crawl_matsuya}
+CRAWLERS = {"mcdonalds": crawl_mcdonalds, "mos": crawl_mos, "matsuya": crawl_matsuya,
+            "matsunoya": crawl_matsunoya}
 
 
 def main(argv: list[str] | None = None) -> int:

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ファストフードポチ</title>
-<meta name="description" content="マクドナルド・モスバーガー・松屋の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています">
+<meta name="description" content="マクドナルド・モスバーガー・松屋・松のやの期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています">
 <link rel="canonical" href="https://fastfood.netaful.jp/">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-464GWH2ZGQ"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-464GWH2ZGQ');</script>
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ファストフードポチ">
-<meta property="og:description" content="マクドナルド・モスバーガー・松屋の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています">
+<meta property="og:description" content="マクドナルド・モスバーガー・松屋・松のやの期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています">
 <meta property="og:url" content="https://fastfood.netaful.jp/">
 <meta property="og:site_name" content="ファストフードポチ">
 <meta property="og:locale" content="ja_JP">
@@ -26,7 +26,7 @@
 :root {
   --bg: #fafaf7; --card: #ffffff; --text: #1a1a1a; --muted: #6b6b6b;
   --accent: #00897b; --line: #e5e2dc;
-  --mcdonalds: #da291c; --mos: #1b7f3b; --matsuya: #a34a00;
+  --mcdonalds: #da291c; --mos: #1b7f3b; --matsuya: #a34a00; --matsunoya: #7a1f5c;
 }
 @media (prefers-color-scheme: dark) {
   :root { --bg: #14151a; --card: #1e2027; --text: #e8e8e6; --muted: #9a9a96;
@@ -57,6 +57,7 @@ h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); 
 .chain-group[data-chain="mcdonalds"] h3 { border-color: var(--mcdonalds); }
 .chain-group[data-chain="mos"] h3 { border-color: var(--mos); }
 .chain-group[data-chain="matsuya"] h3 { border-color: var(--matsuya); }
+.chain-group[data-chain="matsunoya"] h3 { border-color: var(--matsunoya); }
 .grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
 .item { display: block; background: var(--card); border: 1px solid var(--line);
   border-radius: 10px; padding: 12px; text-decoration: none; }
@@ -66,6 +67,7 @@ h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); 
 .item[data-chain="mcdonalds"] .badge { background: var(--mcdonalds); }
 .item[data-chain="mos"] .badge { background: var(--mos); }
 .item[data-chain="matsuya"] .badge { background: var(--matsuya); }
+.item[data-chain="matsunoya"] .badge { background: var(--matsunoya); }
 .item .st { display: inline-block; font-size: 10px; border-radius: 4px; padding: 0 6px; margin-left: 6px;
   border: 1px solid var(--line); color: var(--muted); }
 .item .st-on { color: var(--accent); border-color: var(--accent); }
@@ -145,7 +147,7 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <body>
 <header>
 <h1><a href="/"><img src="/assets/logo.png" alt="" width="32" height="32">ファストフードポチ</a></h1>
-<p>マクドナルド・モスバーガー・松屋の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</p>
+<p>マクドナルド・モスバーガー・松屋・松のやの期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</p>
 <nav class="sites"><span class="lbl">関連サイト</span>
 <a href="https://book.netaful.jp/">電書ポチ<span class="lbl"> Kindle本セール</span></a>
 <a href="https://kaden.netaful.jp/">家電ポチ<span class="lbl"> ガジェット・家電セール</span></a>
@@ -160,6 +162,7 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <a href="/chains/mcdonalds/">マクドナルド</a>
 <a href="/chains/mos/">モスバーガー</a>
 <a href="/chains/matsuya/">松屋</a>
+<a href="/chains/matsunoya/">松のや</a>
 </div>
 <h2>メニュー名で検索</h2>
 <div class="searchbox"><input id="search-input" type="search"
@@ -239,12 +242,12 @@ placeholder="メニュー名で検索（例: 月見、てりやき、フォカ�
 </div>
 </a>
 </div>
-<h2>販売中の限定メニュー (37件)</h2>
+<h2>販売中の限定メニュー (60件)</h2>
 <div class="sort-bar">
 <label>並び替え: <select id="sort-select"><option value="date">開始日順</option>
 <option value="kcal">カロリー順</option></select></label>
 <label>販売状況: <select id="status-filter"><option value="on_sale" selected>販売中</option><option value="ended">終了</option><option value="all">すべて</option></select></label>
-<label>絞り込み: <select id="chain-filter"><option value="all">すべて</option><option value="mcdonalds">マクドナルド</option><option value="mos">モスバーガー</option><option value="matsuya">松屋</option></select></label>
+<label>絞り込み: <select id="chain-filter"><option value="all">すべて</option><option value="mcdonalds">マクドナルド</option><option value="mos">モスバーガー</option><option value="matsuya">松屋</option><option value="matsunoya">松のや</option></select></label>
 </div>
 <section class="chain-group" data-chain="mcdonalds">
 <h3>マクドナルド (<span class="cnt">13</span>件)</h3>
@@ -560,6 +563,196 @@ placeholder="メニュー名で検索（例: 月見、てりやき、フォカ�
 </div>
 
 </section>
+<section class="chain-group" data-chain="matsunoya">
+<h3>松のや (<span class="cnt">23</span>件)</h3>
+<div class="grid" data-sortable>
+<a class="item" href="items/matsunoya-moriawase-mori_ginger_fpork_karaage_hp_260930.html" data-kcal="1195.0"
+   data-date="2026-10-11" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">背脂生姜タレのポークフライドステーキ＆本格唐揚げ(３個)定食</div>
+  <div class="price">1090円（税込）<span class="kcal">1195kcal</span></div>
+  <div class="meta">2026-10-11（記録開始日）〜 販売中・おすすめ掲載</div>
+  
+</a>
+<a class="item" href="items/matsunoya-moriawase-mori_ginger_fpork_rosu_hp_260930.html" data-kcal="1356.0"
+   data-date="2026-10-11" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">背脂生姜タレのポークフライドステーキ＆ロースかつ定食</div>
+  <div class="price">1090円（税込）<span class="kcal">1356kcal</span></div>
+  <div class="meta">2026-10-11（記録開始日）〜 販売中・おすすめ掲載</div>
+  
+</a>
+<a class="item" href="items/matsunoya-moriawase-mori_kaisen_ebi1_hp_260916.html" data-kcal="1042.0"
+   data-date="2026-10-11" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">海鮮盛合せ定食（カキ2個・アジ１枚・海老１尾）</div>
+  <div class="price">1030円（税込）<span class="kcal">1042kcal</span></div>
+  <div class="meta">2026-10-11（記録開始日）〜 販売中・おすすめ掲載</div>
+  
+</a>
+<a class="item" href="items/matsunoya-moriawase-mori_kaisen_ikashiromiebi_hp_260701.html" data-kcal="1084.3"
+   data-date="2026-10-11" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">海鮮盛合せ定食（イカ・白身魚・海老）</div>
+  <div class="price">1190円（税込）<span class="kcal">1084.3kcal</span></div>
+  <div class="meta">2026-10-11（記録開始日）〜 販売中・おすすめ掲載</div>
+  
+</a>
+<a class="item" href="items/matsunoya-moriawase-mori_rosu_ika_hp_260701.html" data-kcal="1006.7"
+   data-date="2026-10-11" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">ロースかつ＆イカフライ定食</div>
+  <div class="price">990円（税込）<span class="kcal">1006.7kcal</span></div>
+  <div class="meta">2026-10-11（記録開始日）〜 販売中・おすすめ掲載</div>
+  
+</a>
+<a class="item" href="items/matsunoya-moriawase-mori_rosu_shiromi_hp_260701.html" data-kcal="1127.4"
+   data-date="2026-10-11" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">ロースかつ＆白身魚フライ定食</div>
+  <div class="price">990円（税込）<span class="kcal">1127.4kcal</span></div>
+  <div class="meta">2026-10-11（記録開始日）〜 販売中・おすすめ掲載</div>
+  
+</a>
+<a class="item" href="items/matsunoya-souzai-souzai_set_nebiki_aji1_kaki2_ebi1_hp_261007.html" data-kcal="744.0"
+   data-date="2026-10-11" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">【惣菜セット】アジフライ１枚＋カキフライ２個＋海老フライ１尾＋ハーフ皮付きポテト</div>
+  <div class="price">490円（税込）<span class="kcal">744kcal</span></div>
+  <div class="meta">2026-10-11（記録開始日）〜 販売中・おすすめ掲載</div>
+  
+</a>
+<a class="item" href="items/matsunoya-souzai-souzai_set_nebiki_baimori_rosu2_ebi2_hp_261007.html" data-kcal="1392.0"
+   data-date="2026-10-11" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">【惣菜セット】倍盛）ロースかつ２枚＋海老フライ２尾＋ハーフ皮付きポテト</div>
+  <div class="price">890円（税込）<span class="kcal">1392kcal</span></div>
+  <div class="meta">2026-10-11（記録開始日）〜 販売中・おすすめ掲載</div>
+  
+</a>
+<a class="item" href="items/matsunoya-souzai-souzai_set_nebiki_baimori_rosu2_kara6_hp_261007.html" data-kcal="1601.0"
+   data-date="2026-10-11" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">【惣菜セット】倍盛）ロースかつ２枚＋本格唐揚げ６個＋ハーフ皮付きポテト</div>
+  <div class="price">890円（税込）<span class="kcal">1601kcal</span></div>
+  <div class="meta">2026-10-11（記録開始日）〜 販売中・おすすめ掲載</div>
+  
+</a>
+<a class="item" href="items/matsunoya-souzai-souzai_set_nebiki_rosu1_aji1_hp_261007.html" data-kcal="833.0"
+   data-date="2026-10-11" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">【惣菜セット】ロースかつ１枚＋アジフライ１枚＋ハーフ皮付きポテト</div>
+  <div class="price">490円（税込）<span class="kcal">833kcal</span></div>
+  <div class="meta">2026-10-11（記録開始日）〜 販売中・おすすめ掲載</div>
+  
+</a>
+<a class="item" href="items/matsunoya-souzai-souzai_set_nebiki_rosu1_ebi1_hp_261007.html" data-kcal="773.0"
+   data-date="2026-10-11" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">【惣菜セット】ロースかつ１枚＋海老フライ１尾＋ハーフ皮付きポテト</div>
+  <div class="price">490円（税込）<span class="kcal">773kcal</span></div>
+  <div class="meta">2026-10-11（記録開始日）〜 販売中・おすすめ掲載</div>
+  
+</a>
+<a class="item" href="items/matsunoya-souzai-souzai_set_nebiki_rosu1_kaki2_hp_261007.html" data-kcal="774.0"
+   data-date="2026-10-11" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">【惣菜セット】ロースかつ１枚＋カキフライ２個＋ハーフ皮付きポテト</div>
+  <div class="price">490円（税込）<span class="kcal">774kcal</span></div>
+  <div class="meta">2026-10-11（記録開始日）〜 販売中・おすすめ掲載</div>
+  
+</a>
+<a class="item" href="items/matsunoya-souzai-souzai_set_nebiki_rosu1_kara3_hp_261007.html" data-kcal="878.0"
+   data-date="2026-10-11" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">【惣菜セット】ロースかつ１枚＋本格唐揚げ３個＋ハーフ皮付きポテト</div>
+  <div class="price">490円（税込）<span class="kcal">878kcal</span></div>
+  <div class="meta">2026-10-11（記録開始日）〜 販売中・おすすめ掲載</div>
+  
+</a>
+<a class="item" href="items/matsunoya-teishoku-tei_ginger_w_fpork_hp_261002.html" data-kcal="1301.0"
+   data-date="2026-10-11" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">背脂生姜タレのダブルロースポークフライドステーキ定食</div>
+  <div class="price">1090円（税込）<span class="kcal">1301kcal</span></div>
+  <div class="meta">2026-10-11（記録開始日）〜 販売中・おすすめ掲載</div>
+  
+</a>
+<a class="item" href="items/matsunoya-teishoku-tei_ginger_ribu_fpork_hp_260930.html" data-kcal="1325.0"
+   data-date="2026-09-30" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">背脂生姜タレの“リブ”ロースポークフライドステーキ定食</div>
+  <div class="price">1090円（税込）<span class="kcal">1325kcal</span></div>
+  <div class="meta">2026-09-30〜 販売中・新メニュー</div>
+  
+</a>
+<a class="item" href="items/matsunoya-donburi-don_kaki_hp_260916.html" data-kcal="922.0"
+   data-date="2026-09-16" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">カキフライとじ丼</div>
+  <div class="price">930円（税込）<span class="kcal">922kcal</span></div>
+  <div class="meta">2026-09-16〜 販売中・新メニュー</div>
+  
+</a>
+<a class="item" href="items/matsunoya-moriawase-mori_ribu_aji_hp_260916.html" data-kcal="1483.0"
+   data-date="2026-09-16" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">超厚切りリブロースかつ＆アジフライ（1枚）定食</div>
+  <div class="price">1290円（税込）<span class="kcal">1483kcal</span></div>
+  <div class="meta">2026-09-16〜 販売中・新メニュー</div>
+  
+</a>
+<a class="item" href="items/matsunoya-moriawase-mori_ribu_kaki2_hp_260916.html" data-kcal="1423.0"
+   data-date="2026-09-16" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">超厚切りリブロースかつ＆カキフライ（2個）定食</div>
+  <div class="price">1290円（税込）<span class="kcal">1423kcal</span></div>
+  <div class="meta">2026-09-16〜 販売中・新メニュー</div>
+  
+</a>
+<a class="item" href="items/matsunoya-moriawase-mori_rosu_aji_hp_260916.html" data-kcal="1131.0"
+   data-date="2026-09-16" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">ロースかつ＆アジフライ（1枚）定食</div>
+  <div class="price">1030円（税込）<span class="kcal">1131kcal</span></div>
+  <div class="meta">2026-09-16〜 販売中・新メニュー</div>
+  
+</a>
+<a class="item" href="items/matsunoya-moriawase-mori_rosu_kaki_hp_260916.html" data-kcal="1072.0"
+   data-date="2026-09-16" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">ロースかつ＆カキフライ（2個）定食</div>
+  <div class="price">1030円（税込）<span class="kcal">1072kcal</span></div>
+  <div class="meta">2026-09-16〜 販売中・新メニュー</div>
+  
+</a>
+<a class="item" href="items/matsunoya-teishoku-tei_aji_hp_260916.html" data-kcal="925.0"
+   data-date="2026-09-16" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">アジフライ（2枚）定食</div>
+  <div class="price">930円（税込）<span class="kcal">925kcal</span></div>
+  <div class="meta">2026-09-16〜 販売中・新メニュー</div>
+  
+</a>
+<a class="item" href="items/matsunoya-teishoku-tei_kaki5_hp_260916.html" data-kcal="894.0"
+   data-date="2026-09-16" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">カキフライ（5個）定食</div>
+  <div class="price">1030円（税込）<span class="kcal">894kcal</span></div>
+  <div class="meta">2026-09-16〜 販売中・新メニュー</div>
+  
+</a>
+<a class="item" href="items/matsunoya-teishoku-tei_kaki7_hp_260916.html" data-kcal="1071.0"
+   data-date="2026-09-16" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">たっぷりカキフライ（7個）定食</div>
+  <div class="price">1290円（税込）<span class="kcal">1071kcal</span></div>
+  <div class="meta">2026-09-16〜 販売中・新メニュー</div>
+  
+</a>
+</div>
+
+</section>
 
 <script>
 (function () {
@@ -606,17 +799,17 @@ placeholder="メニュー名で検索（例: 月見、てりやき、フォカ�
 
 
 <section class="about"><h2>ファストフードポチについて</h2>
-<p>マクドナルド・モスバーガー・松屋の公式サイトを1日1回チェックし、期間限定・季節限定・地域限定・数量限定のメニューと、新しく登場したメニューを記録し続けているアーカイブです。公式サイトは販売が終わったメニューのページを消してしまうので、「いつからいつまで売っていたか」「いくらで、何キロカロリーだったか」を後から調べられるようにしています。</p>
-<p>販売終了の判定は、公式サイトの一覧から2日続けて消えていたときだけ行います。そのため終了日は「一覧から消えたのを確認した日」で、公式が発表する最終販売日とずれることがあります。松屋は公式に「期間限定」の表示がないため、「おすすめ」に載ったメニューと、記録を始めてから新しく加わったメニューを記録しています。</p>
+<p>マクドナルド・モスバーガー・松屋・松のやの公式サイトを1日1回チェックし、期間限定・季節限定・地域限定・数量限定のメニューと、新しく登場したメニューを記録し続けているアーカイブです。公式サイトは販売が終わったメニューのページを消してしまうので、「いつからいつまで売っていたか」「いくらで、何キロカロリーだったか」を後から調べられるようにしています。</p>
+<p>販売終了の判定は、公式サイトの一覧から2日続けて消えていたときだけ行います。そのため終了日は「一覧から消えたのを確認した日」で、公式が発表する最終販売日とずれることがあります。松屋と松のやは公式に「期間限定」の表示がないため、「おすすめ」に載ったメニューと、記録を始めてから新しく加わったメニューを記録しています。</p>
 <p>商品説明は、公式サイトの冒頭部分だけを出典つきで引用しています。価格・栄養成分・アレルゲン・原産地は、公式サイトの情報をそのまま載せています。商品画像は載せていません。</p>
-<p>価格や販売状況は取得した時点のものです。最新の情報は各社の公式サイトで確認してください。当サイトはマクドナルド、モスバーガー、松屋とは関係のない非公式サイトです。ケンタッキーなど、ほかのチェーンは今のところ載せていません。</p>
+<p>価格や販売状況は取得した時点のものです。最新の情報は各社の公式サイトで確認してください。当サイトはマクドナルド、モスバーガー、松屋、松のやとは関係のない非公式サイトです。ケンタッキーなど、ほかのチェーンは今のところ載せていません。</p>
 <p>運営はブログ「<a href="https://netaful.jp/">ネタフル</a>」のコグレです。ネタフルでは、コンビニやファストフードのごはんをまとめて「ファスト飯」と呼んでいます。姉妹サイトに電書ポチ・家電ポチ・林檎ポチ・漫画ポチ・コンビニポチがあります。</p>
 </section>
 </main>
 <footer>
 価格・販売期間・販売状況は取得時点のものです。最新の状況は各社公式サイトでご確認ください。
-当サイトはマクドナルド、モスバーガー、松屋各社とは関係のない非公式サイトです。
-公式サイト： <a href="https://www.mcdonalds.co.jp/">マクドナルド</a> ／ <a href="https://www.mos.jp/">モスバーガー</a> ／ <a href="https://www.matsuyafoods.co.jp/matsuya/">松屋</a>
+当サイトはマクドナルド、モスバーガー、松屋、松のや各社とは関係のない非公式サイトです。
+公式サイト： <a href="https://www.mcdonalds.co.jp/">マクドナルド</a> ／ <a href="https://www.mos.jp/">モスバーガー</a> ／ <a href="https://www.matsuyafoods.co.jp/matsuya/">松屋</a> ／ <a href="https://www.matsuyafoods.co.jp/matsunoya/">松のや</a>
 ｜ <a href="https://netaful.jp/policy.html">メディアポリシー</a>
 ｜ <a href="/rss.xml">RSS</a> ｜ <a href="/archive/">終了した限定メニュー</a>
 <nav class="sites"><span class="lbl">関連サイト</span>

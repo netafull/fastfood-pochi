@@ -372,6 +372,23 @@ MATSUYA_LIMITED_CATEGORY = "limited"
 # 新メニューとして記録しない(セットの組み合わせ・トッピング)カテゴリ。
 # 終了判定のための一覧取得には含める
 MATSUYA_NO_RECORD_CATEGORIES = ("topping",)
+
+# 松屋フーズ系のチェーン。サイト構造(メニュー一覧・詳細・ニュースJSON・記事)は同じで、
+# URLの接頭辞(/{slug}/menu/ ・ /{slug}/whatsnew/…)、「おすすめ」カテゴリのslug、
+# 記録しないカテゴリ、ニュース見出しで省かれる接頭辞(「松屋の」「松のやの」)だけが違う。
+# チェーンのslugはURLの接頭辞と一致させる。
+MATSUYA_FAMILY = {
+    "matsuya": {"ja": "松屋", "limited": "limited", "no_record": ("topping",)},
+    "matsunoya": {"ja": "松のや", "limited": "osusume", "no_record": ()},
+}
+
+
+def matsuya_menu_root(brand: str = "matsuya") -> str:
+    return f"/{brand}/menu/"
+
+
+def matsuya_news_json_path(brand: str = "matsuya") -> str:
+    return f"/{brand}/whatsnew/data/whatsnew.json"
 # 「生玉子＜選べるサイド＞」のようなランチ・朝定食の選択肢は商品として記録しない
 MATSUYA_OPTION_RE = re.compile(r"＜選べる")
 
@@ -380,22 +397,24 @@ def _strip_html_comments(page: str) -> str:
     return re.sub(r"<!--.*?-->", "", page, flags=re.S)
 
 
-def matsuya_normalize_path(href: str, base_url: str = MATSUYA_BASE + MATSUYA_MENU_ROOT) -> str:
+def matsuya_normalize_path(href: str, base_url: str | None = None, brand: str = "matsuya") -> str:
     """詳細リンクを「/matsuya/menu/…」のパスにする。実物は
     `https://www.matsuyafoods.co.jp/menu/../matsuya/menu/curry/x.html` のように `/menu/../`
     を含む(2026-10-11に確認)ので、`..` を解決する。"""
     import posixpath
     from urllib.parse import urljoin, urlparse
+    base_url = base_url or MATSUYA_BASE + matsuya_menu_root(brand)
     path = urlparse(urljoin(base_url, href)).path
     return posixpath.normpath(path)
 
 
-def matsuya_product_id(path: str) -> str | None:
+def matsuya_product_id(path: str, brand: str = "matsuya") -> str | None:
     """`/matsuya/menu/curry/kashmir_hp_261006.html` → `curry-kashmir_hp_261006`。
     末尾の6桁は掲載日(YYMMDD)のことが多く、同じ商品でも更新でslugが変わりうる。"""
-    if not path.startswith(MATSUYA_MENU_ROOT):
+    root = matsuya_menu_root(brand)
+    if not path.startswith(root):
         return None
-    rest = path[len(MATSUYA_MENU_ROOT):]
+    rest = path[len(root):]
     rest = re.sub(r"\.html?$", "", rest)
     if not rest or rest.endswith("index"):
         return None
@@ -414,15 +433,15 @@ def matsuya_slug_date(product_id: str) -> str | None:
     return f"{2000 + yy:04d}-{mm:02d}-{dd:02d}"
 
 
-def parse_matsuya_list(page: str) -> list[dict]:
+def parse_matsuya_list(page: str, brand: str = "matsuya") -> list[dict]:
     """カテゴリ一覧の `<li class="item">` を返す。価格が無い項目(選べるサイド等)は price=None。"""
     entries = []
     for block in re.findall(r'<li class="item">(.*?)<!-- //\.item -->', page, re.S):
         hm = re.search(r'href="([^"]+)"', block)
         if not hm:
             continue
-        path = matsuya_normalize_path(hm.group(1))
-        pid = matsuya_product_id(path)
+        path = matsuya_normalize_path(hm.group(1), brand=brand)
+        pid = matsuya_product_id(path, brand)
         if not pid:
             continue
         nm = re.search(r'<span class="txt">(.*?)</span>', block, re.S)
@@ -588,12 +607,13 @@ def parse_matsuya_news(text: str) -> list[dict]:
     return out
 
 
-def matsuya_name_variants(name: str) -> list[str]:
-    """見出しとの照合に使う名前の候補。「松屋の」始まりは見出しで省かれることがある。"""
+def matsuya_name_variants(name: str, brand: str = "matsuya") -> list[str]:
+    """見出しとの照合に使う名前の候補。「松屋の」「松のやの」始まりは見出しで省かれることがある。"""
     n = normalize_for_match(name)
     cands = [n]
-    if n.startswith("松屋の") and len(n) > 6:
-        cands.append(n[3:])
+    prefix = MATSUYA_FAMILY[brand]["ja"] + "の"
+    if n.startswith(prefix) and len(n) > len(prefix) + 3:
+        cands.append(n[len(prefix):])
     return [c for c in cands if len(c) >= 4]
 
 
@@ -603,7 +623,8 @@ MATSUYA_NEWS_WINDOW_BEFORE_DAYS = 120
 MATSUYA_NEWS_WINDOW_AFTER_DAYS = 14
 
 
-def match_matsuya_news_title(name: str, news: list[dict], ref: str | None = None) -> dict | None:
+def match_matsuya_news_title(name: str, news: list[dict], ref: str | None = None,
+                             brand: str = "matsuya") -> dict | None:
     """商品名(正規化)を見出しに部分一致で含む最新の記事。ref(ISO日付)を渡すと、その前後の
     範囲(MATSUYA_NEWS_WINDOW_*)の記事だけを対象にする。"""
     import datetime
@@ -615,7 +636,7 @@ def match_matsuya_news_title(name: str, news: list[dict], ref: str | None = None
             hi = c + datetime.timedelta(days=MATSUYA_NEWS_WINDOW_AFTER_DAYS)
         except ValueError:
             pass
-    cands = matsuya_name_variants(name)
+    cands = matsuya_name_variants(name, brand)
     for a in news:
         if lo is not None:
             try:

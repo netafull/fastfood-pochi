@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""ネタフル(WordPress)の公開REST APIから、マクドナルド・モスバーガー・松屋の記事を取得し、
+"""ネタフル(WordPress)の公開REST APIから、マクドナルド・モスバーガー・松屋・松のやの記事を取得し、
 ファストフードポチの商品(data/products/)とひも付けてキャッシュする。
 
 認証不要のREST API (https://netaful.jp/wp-json/wp/v2/posts?tags=...) を使う。
-タグID(config.json の netaful_tags): マクドナルド=735(208件)、モスバーガー=882(3件)、松屋=729(254件)。
+タグID(config.json の netaful_tags): マクドナルド=735(208件)、モスバーガー=882(3件)、松屋=729(254件)、松のや=937(70件)。
 モスバーガーのタグは記事が3件しか付いておらず、実際にはタグ無しの記事が多いので、
 モスだけは記事の全文検索(search=モスバーガー)の結果も使い、タイトルに
 config.json の netaful_title_filters の語を含む記事だけを採用する。
@@ -57,6 +57,12 @@ TAGS = {k: int(v) for k, v in CONFIG["netaful_tags"].items()}
 # タグの付け漏れが多いチェーンだけ、全文検索の結果も使う(タイトルに語を含むものだけ採用)
 TITLE_FILTERS: dict[str, list[str]] = CONFIG.get("netaful_title_filters", {})
 SEARCH_TERMS = {"mos": "モスバーガー"}
+# 松屋(タグ729)には松のやの記事が混ざる(タイトルに「松のや」を含む)。松のや(タグ937)は
+# 松乃家など無関係の記事も付くため、タイトルに「松のや」を含むものだけ採用する。
+# 松のやを含むタイトルは松のや側だけに出し、松屋側には出さない(重複して両方に出さない)。
+# 下記のチェーンは、タグ取得の結果にも常にタイトル判定をかける
+TITLE_EXCLUDES: dict[str, list[str]] = CONFIG.get("netaful_title_excludes", {})
+TITLE_ALWAYS: set[str] = set(CONFIG.get("netaful_title_always", []))
 
 TITLE_NAME_RE = re.compile(r"「(.*?)」")
 
@@ -189,6 +195,8 @@ def save_cache(cache: dict) -> None:
 
 
 def title_passes_filter(chain: str, title: str) -> bool:
+    if any(w in title for w in TITLE_EXCLUDES.get(chain, [])):
+        return False
     words = TITLE_FILTERS.get(chain)
     return True if not words else any(w in title for w in words)
 
@@ -214,7 +222,7 @@ def fetch_articles_for_chain(chain: str, backfill: bool, errors: list[str],
             errors.append(f"{chain} tag={tag_id} page={page}: JSON解析失敗 {e}")
             break
         found = [extract_article(p) for p in posts]
-        if search:
+        if search or chain in TITLE_ALWAYS:
             found = [a for a in found if title_passes_filter(chain, a["title"])]
         articles.extend(found)
         if not backfill:
@@ -271,6 +279,8 @@ def rematch(cache: dict) -> tuple[dict, list[tuple[str, dict, dict]], list[tuple
         prod_norms = [
             (p, normalize_name(p.get("name")), product_effective_date(p)) for p in chain_products
         ]
+        if chain in TITLE_ALWAYS:  # キャッシュ済みの記事にも判定をかける(松屋に混ざった松のやの記事を外す)
+            articles = [a for a in articles if title_passes_filter(chain, a.get("title") or "")]
         for art in articles:
             art_name = art.get("product_name")
             if not art_name:
@@ -342,6 +352,11 @@ def main() -> int:
             existing[a["id"]] = a
         cache["articles"][chain] = sorted(existing.values(), key=lambda a: a.get("date") or "", reverse=True)
         time.sleep(REQUEST_INTERVAL)
+
+    for chain in TITLE_ALWAYS:  # 松屋のキャッシュに混ざった松のやの記事などを外す
+        if chain in cache["articles"]:
+            cache["articles"][chain] = [a for a in cache["articles"][chain]
+                                        if title_passes_filter(chain, a.get("title") or "")]
 
     matches, matched_examples, near_misses = rematch(cache)
     cache["matches"] = matches

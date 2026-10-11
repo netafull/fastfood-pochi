@@ -26,7 +26,8 @@ JST = datetime.timezone(datetime.timedelta(hours=9))
 CHAINS = CONFIG["chains"]
 CHAIN_NAME = {c["slug"]: c["name"] for c in CHAINS}
 # 説明文の引用元の表記(出典：○○公式サイト)
-CHAIN_SOURCE = {"mcdonalds": "マクドナルド公式サイト", "mos": "モスバーガー公式サイト", "matsuya": "松屋公式サイト"}
+CHAIN_SOURCE = {"mcdonalds": "マクドナルド公式サイト", "mos": "モスバーガー公式サイト", "matsuya": "松屋公式サイト",
+                "matsunoya": "松のや公式サイト"}
 # 「終了日」の注意書き。公式発表の最終販売日ではなく、一覧から消えたことの観測日
 ENDED_NOTE = "公式サイトの一覧から消えたことを確認した日"
 
@@ -159,6 +160,14 @@ def select_related_articles(
     return kw["label"], candidates[:limit]
 
 
+# 公式に「期間限定」の表示が無く、「おすすめ」掲載と新規掲載を記録するチェーン(松屋フーズ系)
+MATSUYA_FAMILY = ("matsuya", "matsunoya")
+
+
+def is_matsuya_family(chain: str | None) -> bool:
+    return chain in MATSUYA_FAMILY
+
+
 def esc(s) -> str:
     return html.escape(s or "", quote=True)
 
@@ -241,7 +250,7 @@ CSS = """
 :root {
   --bg: #fafaf7; --card: #ffffff; --text: #1a1a1a; --muted: #6b6b6b;
   --accent: #00897b; --line: #e5e2dc;
-  --mcdonalds: #da291c; --mos: #1b7f3b; --matsuya: #a34a00;
+  --mcdonalds: #da291c; --mos: #1b7f3b; --matsuya: #a34a00; --matsunoya: #7a1f5c;
 }
 @media (prefers-color-scheme: dark) {
   :root { --bg: #14151a; --card: #1e2027; --text: #e8e8e6; --muted: #9a9a96;
@@ -272,6 +281,7 @@ h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); 
 .chain-group[data-chain="mcdonalds"] h3 { border-color: var(--mcdonalds); }
 .chain-group[data-chain="mos"] h3 { border-color: var(--mos); }
 .chain-group[data-chain="matsuya"] h3 { border-color: var(--matsuya); }
+.chain-group[data-chain="matsunoya"] h3 { border-color: var(--matsunoya); }
 .grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
 .item { display: block; background: var(--card); border: 1px solid var(--line);
   border-radius: 10px; padding: 12px; text-decoration: none; }
@@ -281,6 +291,7 @@ h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); 
 .item[data-chain="mcdonalds"] .badge { background: var(--mcdonalds); }
 .item[data-chain="mos"] .badge { background: var(--mos); }
 .item[data-chain="matsuya"] .badge { background: var(--matsuya); }
+.item[data-chain="matsunoya"] .badge { background: var(--matsunoya); }
 .item .st { display: inline-block; font-size: 10px; border-radius: 4px; padding: 0 6px; margin-left: 6px;
   border: 1px solid var(--line); color: var(--muted); }
 .item .st-on { color: var(--accent); border-color: var(--accent); }
@@ -470,8 +481,8 @@ def page_shell(title: str, description: str, body: str, canonical: str, extra_he
 </main>
 <footer>
 価格・販売期間・販売状況は取得時点のものです。最新の状況は各社公式サイトでご確認ください。
-当サイトはマクドナルド、モスバーガー、松屋各社とは関係のない非公式サイトです。
-公式サイト： <a href="https://www.mcdonalds.co.jp/">マクドナルド</a> ／ <a href="https://www.mos.jp/">モスバーガー</a> ／ <a href="https://www.matsuyafoods.co.jp/matsuya/">松屋</a>
+当サイトはマクドナルド、モスバーガー、松屋、松のや各社とは関係のない非公式サイトです。
+公式サイト： <a href="https://www.mcdonalds.co.jp/">マクドナルド</a> ／ <a href="https://www.mos.jp/">モスバーガー</a> ／ <a href="https://www.matsuyafoods.co.jp/matsuya/">松屋</a> ／ <a href="https://www.matsuyafoods.co.jp/matsunoya/">松のや</a>
 {policy_link}｜ <a href="/rss.xml">RSS</a> ｜ <a href="/archive/">終了した限定メニュー</a>
 {related_html}
 </footer>
@@ -742,14 +753,14 @@ def render_archive_index(items: list[dict]) -> str:
 <div class="monthlist">
 {rows}
 </div>"""
-    return page_shell("終了した限定メニュー", "販売が終わったマクドナルド・モスバーガー・松屋の限定メニューを、販売開始月ごとにまとめたアーカイブ",
+    return page_shell("終了した限定メニュー", "販売が終わったマクドナルド・モスバーガー・松屋・松のやの限定メニューを、販売開始月ごとにまとめたアーカイブ",
                        body, CONFIG.get("site_url", "") + "archive/")
 
 
 def render_chains_top() -> str:
     links = "\n".join(f'<a href="/chains/{c["slug"]}/">{esc(c["name"])}</a>' for c in CHAINS)
     body = f'<h2>チェーン一覧</h2><div class="chainlist">{links}</div>'
-    return page_shell("チェーン一覧", "マクドナルド・モスバーガー・松屋の限定メニュー一覧", body,
+    return page_shell("チェーン一覧", "マクドナルド・モスバーガー・松屋・松のやの限定メニュー一覧", body,
                        CONFIG.get("site_url", "") + "chains/")
 
 
@@ -882,7 +893,7 @@ def seo_title(item: dict) -> str:
 def seo_description(item: dict) -> str:
     chain_name = CHAIN_NAME.get(item["chain"], item["chain"])
     nut = item.get("nutrition") or {}
-    bits = [f"{chain_name}の{'メニュー' if item.get('chain') == 'matsuya' else '限定メニュー'}「{item['name']}」"]
+    bits = [f"{chain_name}の{'メニュー' if is_matsuya_family(item.get('chain')) else '限定メニュー'}「{item['name']}」"]
     if nut.get("kcal") is not None:
         bits.append(f"{nut['kcal']:g}kcal")
     if item.get("price") is not None:
@@ -966,8 +977,8 @@ def render_item_page(item: dict) -> str:
                     "公式ページのモバイルオーダー受付期間の終了日を「終了予定」として表示しています。</p>")
 
     matsuya_note = ""
-    if item.get("chain") == "matsuya":
-        matsuya_note = ("<p class='note'>松屋は公式サイトに「期間限定」の表示も販売期間も載せていません。"
+    if is_matsuya_family(item.get("chain")):
+        matsuya_note = (f"<p class='note'>{esc(chain_name)}は公式サイトに「期間限定」の表示も販売期間も載せていません。"
                         "「おすすめ」に載ったメニューと、記録を始めてから新しく加わったメニューを記録しています。"
                         + ("発売日は公式ニュースの記載です。" if item.get("launch_date_source", "").startswith("news_article") else "")
                         + "</p>")
@@ -1093,7 +1104,7 @@ def main() -> int:
         mdir.mkdir(parents=True, exist_ok=True)
         label = f"{m[:4]}年{int(m[5:7])}月に始まった限定メニュー"
         page = render_grid_page(
-            label, f"{m[:4]}年{int(m[5:7])}月に販売が始まり、すでに終了したマクドナルド・モスバーガー・松屋の限定メニュー一覧",
+            label, f"{m[:4]}年{int(m[5:7])}月に販売が始まり、すでに終了したマクドナルド・モスバーガー・松屋・松のやの限定メニュー一覧",
             month_items, CONFIG.get("site_url", "") + f"archive/{m}/", show_filters=True,
         )
         (mdir / "index.html").write_text(page, encoding="utf-8")
@@ -1114,7 +1125,7 @@ def main() -> int:
         )
         page = render_grid_page(
             f"{c['name']}の限定メニュー", (f"{c['name']}の「おすすめ」に載ったメニューと新登場メニューの一覧。販売中と販売終了の記録"
-             if c["slug"] == "matsuya" else f"{c['name']}の期間限定・新登場メニューの一覧。販売中と販売終了の記録"), chain_items,
+             if is_matsuya_family(c["slug"]) else f"{c['name']}の期間限定・新登場メニューの一覧。販売中と販売終了の記録"), chain_items,
             CONFIG.get("site_url", "") + f"chains/{c['slug']}/",
             review_chain=c["slug"], status_filter=True, default_status="all",
             empty_text="まだ記録がありません。",
