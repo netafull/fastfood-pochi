@@ -4,3 +4,5 @@ __pycache__/
 data/run_summary.json
 .venv/
 .cache/
+# 公式ページのスナップショット(規約対策でリポジトリに入れない。tests/fixtures_manifest.txt 参照)
+tests/fixtures/

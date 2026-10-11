@@ -158,6 +158,7 @@ class TestNews(unittest.TestCase):
         self.assertIsNone(a["launch_date"])
 
 
+@helpers.needs_fixtures
 class TestCrawl(unittest.TestCase):
     def test_first_run_records_recommended_and_makes_baseline(self):
         with TempData():

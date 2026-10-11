@@ -210,6 +210,7 @@ class TestNewsHeadings(unittest.TestCase):
         self.assertEqual(hit["news"]["date"], "2026-10-10")
 
 
+@helpers.needs_fixtures
 class TestCrawl(unittest.TestCase):
     def test_first_run_records_icons_and_news_and_makes_baseline(self):
         with TempData():

@@ -6,6 +6,7 @@ import json
 import re
 import sys
 import tempfile
+import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -17,7 +18,23 @@ FIX = ROOT / "tests" / "fixtures"
 
 
 def fx(path: str) -> str:
-    return (FIX / path).read_text(encoding="utf-8")
+    """公式ページのスナップショットを読む。リポジトリには入れていない(規約対策。tests/fixtures_manifest.txt
+    を参照)ので、無ければそのテストをスキップする。"""
+    f = FIX / path
+    if not f.exists():
+        raise unittest.SkipTest(f"フィクスチャが無い: {path}(公式ページのコピーはリポジトリに入れていない)")
+    return f.read_text(encoding="utf-8")
+
+
+def fixtures_present() -> bool:
+    return FIX.is_dir() and any(FIX.iterdir())
+
+
+# 公式ページのスナップショットを使うクラス用。巡回処理はエラーを握りつぶすので、fx() の SkipTest
+# だけでは「スキップ」にならずエラーになる。クラス単位で先にスキップを判定する
+needs_fixtures = unittest.skipUnless(
+    fixtures_present(), "公式ページのスナップショット(tests/fixtures/)が無い。リポジトリには入れていない"
+)
 
 
 MCD_PAGES = {

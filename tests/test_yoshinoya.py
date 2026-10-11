@@ -200,6 +200,7 @@ class TestNewsHeadings(unittest.TestCase):
         self.assertIsNone(P.match_yoshinoya_end_notice("厚切り豚角煮定食", self.news, "2026-01-01", "2026-10-11"))
 
 
+@helpers.needs_fixtures
 class TestCrawl(unittest.TestCase):
     def test_first_run_records_limited_list_only_and_makes_baseline(self):
         with TempData():

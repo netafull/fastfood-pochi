@@ -108,6 +108,7 @@ class TestNews(unittest.TestCase):
         self.assertLessEqual(len(short), 100)
 
 
+@helpers.needs_fixtures
 class TestCrawl(unittest.TestCase):
     def test_first_run_records_recommended_and_makes_baseline(self):
         with TempData():

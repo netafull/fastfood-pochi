@@ -80,6 +80,7 @@ class TestRobots(unittest.TestCase):
         self.assertGreaterEqual(min(crawl.INTERVALS.values()), 3)
 
 
+@helpers.needs_fixtures
 class TestMcdFirstRun(unittest.TestCase):
     def test_records_limited_singles_only_and_saves_baseline(self):
         with TempData() as base:
@@ -138,6 +139,7 @@ class TestMcdFirstRun(unittest.TestCase):
             self.assertEqual(prod("mcdonalds", "6900")["description"], "手で書き換えた説明")
 
 
+@helpers.needs_fixtures
 class TestMcdTracking(unittest.TestCase):
     def setUp(self):
         self.ctx = TempData()
@@ -266,6 +268,7 @@ class TestMcdTracking(unittest.TestCase):
         self.assertEqual(prod("mcdonalds", "2000")["status"], "on_sale")
 
 
+@helpers.needs_fixtures
 class TestMos(unittest.TestCase):
     def test_first_run(self):
         with TempData() as base:
