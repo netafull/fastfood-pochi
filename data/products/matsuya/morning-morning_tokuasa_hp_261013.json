@@ -1,0 +1,75 @@
+{
+ "chain": "matsuya",
+ "product_id": "morning-morning_tokuasa_hp_261013",
+ "name": "得朝牛皿定食",
+ "category": "モーニング",
+ "price": 430,
+ "price_note": "税込。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 559.0,
+  "protein_g": 14.4,
+  "fat_g": 15.5,
+  "carbs_g": 88.6,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 3.1,
+  "other": {}
+ },
+ "nutrition_variants": null,
+ "nutrition_as_of": "2026-10-13",
+ "nutrition_note": "特定原材料・栄養成分の数値には、みそ汁も含まれております。",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "牛肉",
+   "大豆",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "えび",
+    "mark": "△"
+   },
+   {
+    "name": "カニ",
+    "mark": "△"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "新規掲載",
+ "in_recommended": false,
+ "official_url": "https://www.matsuyafoods.co.jp/matsuya/menu/morning/morning_tokuasa_hp_261013.html",
+ "first_seen_at": "2026-10-14T07:31:19+09:00",
+ "last_seen_at": "2026-10-14",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-14",
+   "price": 430
+  }
+ ],
+ "source_list": [
+  "morning"
+ ],
+ "image": null
+}

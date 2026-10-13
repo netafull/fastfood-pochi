@@ -1,0 +1,67 @@
+{
+ "chain": "matsuya",
+ "product_id": "morning-morning_sausage_egg_hp_261013",
+ "name": "ソーセージエッグ定食",
+ "category": "モーニング",
+ "price": 540,
+ "price_note": "税込。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 564.0,
+  "protein_g": 17.5,
+  "fat_g": 14.1,
+  "carbs_g": 86.6,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 3.1,
+  "other": {}
+ },
+ "nutrition_variants": null,
+ "nutrition_as_of": "2026-10-13",
+ "nutrition_note": "特定原材料・栄養成分の数値には、みそ汁も含まれております。選べる小鉢は含まれておりません。",
+ "allergens": {
+  "contains": [
+   "卵",
+   "大豆",
+   "豚肉",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "えび",
+    "mark": "△"
+   },
+   {
+    "name": "カニ",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "新規掲載",
+ "in_recommended": false,
+ "official_url": "https://www.matsuyafoods.co.jp/matsuya/menu/morning/morning_sausage_egg_hp_261013.html",
+ "first_seen_at": "2026-10-14T07:31:19+09:00",
+ "last_seen_at": "2026-10-14",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-14",
+   "price": 540
+  }
+ ],
+ "source_list": [
+  "morning"
+ ],
+ "image": null
+}

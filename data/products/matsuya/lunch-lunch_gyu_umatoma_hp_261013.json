@@ -1,0 +1,149 @@
+{
+ "chain": "matsuya",
+ "product_id": "lunch-lunch_gyu_umatoma_hp_261013",
+ "name": "うまトマチーズ牛めしランチセット",
+ "category": "牛めしランチ",
+ "price": 780,
+ "price_note": "税込。表示は「並盛」の価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "小盛",
+   "price": 750
+  },
+  {
+   "label": "並盛",
+   "price": 780
+  },
+  {
+   "label": "あたま大盛",
+   "price": 950
+  },
+  {
+   "label": "大盛",
+   "price": 1000
+  },
+  {
+   "label": "特盛",
+   "price": 1180
+  }
+ ],
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 916.0,
+  "protein_g": 30.4,
+  "fat_g": 46.2,
+  "carbs_g": 92.7,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 5.0,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "小盛",
+   "nutrition": {
+    "kcal": 741.0,
+    "protein_g": 26.1,
+    "fat_g": 40.5,
+    "carbs_g": 66.8,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 4.6,
+    "other": {}
+   }
+  },
+  {
+   "label": "並盛",
+   "nutrition": {
+    "kcal": 916.0,
+    "protein_g": 30.4,
+    "fat_g": 46.2,
+    "carbs_g": 92.7,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 5.0,
+    "other": {}
+   }
+  },
+  {
+   "label": "あたま大盛",
+   "nutrition": {
+    "kcal": 989.0,
+    "protein_g": 33.4,
+    "fat_g": 52.5,
+    "carbs_g": 94.3,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 5.4,
+    "other": {}
+   }
+  },
+  {
+   "label": "大盛",
+   "nutrition": {
+    "kcal": 1157.0,
+    "protein_g": 35.9,
+    "fat_g": 52.8,
+    "carbs_g": 131.4,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 5.5,
+    "other": {}
+   }
+  },
+  {
+   "label": "特盛",
+   "nutrition": {
+    "kcal": 1449.0,
+    "protein_g": 46.0,
+    "fat_g": 71.9,
+    "carbs_g": 152.6,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 6.4,
+    "other": {}
+   }
+  }
+ ],
+ "nutrition_as_of": "2026-10-13",
+ "nutrition_note": "特定原材料・栄養成分の数値には、みそ汁も含まれております。選べるサイドは含まれておりません。",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "乳",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "ゼラチン",
+   "ごま"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "新規掲載",
+ "in_recommended": false,
+ "official_url": "https://www.matsuyafoods.co.jp/matsuya/menu/lunch/lunch_gyu_umatoma_hp_261013.html",
+ "first_seen_at": "2026-10-14T07:31:19+09:00",
+ "last_seen_at": "2026-10-14",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-14",
+   "price": 780
+  }
+ ],
+ "source_list": [
+  "lunch"
+ ],
+ "image": null
+}

@@ -1,0 +1,155 @@
+{
+ "chain": "matsuya",
+ "product_id": "gyumeshi-gyu_onioroshi_hp_261013",
+ "name": "鬼おろしポン酢牛めし",
+ "category": "牛めし",
+ "price": 580,
+ "price_note": "税込。表示は「並盛」の価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "小盛",
+   "price": 550
+  },
+  {
+   "label": "並盛",
+   "price": 580
+  },
+  {
+   "label": "あたま大盛",
+   "price": 750
+  },
+  {
+   "label": "大盛",
+   "price": 800
+  },
+  {
+   "label": "特盛",
+   "price": 980
+  }
+ ],
+ "launch_date": "2026-09-02",
+ "launch_date_source": "news_article",
+ "planned_end_text": null,
+ "news_url": "https://www.matsuyafoods.co.jp/matsuya/whatsnew/menu/173512.html",
+ "news_title": "【松屋PREMIUM銀座店】神戸牛牛めしシリーズから新メニュー「神戸牛の鬼おろしポン酢牛めし」発売",
+ "news_date": "2026-09-01",
+ "description": "松屋のレギュラーメニューとして長年愛され続けている「鬼おろしポン酢牛めし」を、松屋PREMIUMが誇る贅沢極まる逸品へと仕立てました。",
+ "description_full_len": 209,
+ "nutrition": {
+  "kcal": 697.0,
+  "protein_g": 20.0,
+  "fat_g": 27.4,
+  "carbs_g": 91.2,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 4.5,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "小盛",
+   "nutrition": {
+    "kcal": 521.0,
+    "protein_g": 15.7,
+    "fat_g": 21.7,
+    "carbs_g": 65.2,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 4.0,
+    "other": {}
+   }
+  },
+  {
+   "label": "並盛",
+   "nutrition": {
+    "kcal": 697.0,
+    "protein_g": 20.0,
+    "fat_g": 27.4,
+    "carbs_g": 91.2,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 4.5,
+    "other": {}
+   }
+  },
+  {
+   "label": "あたま大盛",
+   "nutrition": {
+    "kcal": 770.0,
+    "protein_g": 23.0,
+    "fat_g": 33.7,
+    "carbs_g": 92.8,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 4.9,
+    "other": {}
+   }
+  },
+  {
+   "label": "大盛",
+   "nutrition": {
+    "kcal": 938.0,
+    "protein_g": 25.5,
+    "fat_g": 34.0,
+    "carbs_g": 129.9,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 4.9,
+    "other": {}
+   }
+  },
+  {
+   "label": "特盛",
+   "nutrition": {
+    "kcal": 1230.0,
+    "protein_g": 35.6,
+    "fat_g": 53.1,
+    "carbs_g": 151.1,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 5.9,
+    "other": {}
+   }
+  }
+ ],
+ "nutrition_as_of": "2026-10-13",
+ "nutrition_note": "特定原材料・栄養成分の数値には、みそ汁も含まれております。",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "牛肉",
+   "大豆",
+   "りんご",
+   "ごま"
+  ],
+  "partial": [
+   {
+    "name": "鶏肉",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "新メニュー",
+ "in_recommended": false,
+ "official_url": "https://www.matsuyafoods.co.jp/matsuya/menu/gyumeshi/gyu_onioroshi_hp_261013.html",
+ "first_seen_at": "2026-10-14T07:31:19+09:00",
+ "last_seen_at": "2026-10-14",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-14",
+   "price": 580
+  }
+ ],
+ "source_list": [
+  "gyumeshi"
+ ],
+ "image": null
+}

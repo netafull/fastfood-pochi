@@ -1,0 +1,102 @@
+{
+ "chain": "matsuya",
+ "product_id": "sidemenu-mdel_gyuu_hp_261013",
+ "name": "牛皿",
+ "category": "サイドメニュー",
+ "price": 370,
+ "price_note": "税込。表示は「並盛」の価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "並盛",
+   "price": 370
+  },
+  {
+   "label": "大盛",
+   "price": 480
+  }
+ ],
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 284.0,
+  "protein_g": 11.8,
+  "fat_g": 25.3,
+  "carbs_g": 5.1,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 1.1,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "並盛",
+   "nutrition": {
+    "kcal": 284.0,
+    "protein_g": 11.8,
+    "fat_g": 25.3,
+    "carbs_g": 5.1,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 1.1,
+    "other": {}
+   }
+  },
+  {
+   "label": "大盛",
+   "nutrition": {
+    "kcal": 357.0,
+    "protein_g": 14.8,
+    "fat_g": 31.6,
+    "carbs_g": 6.7,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 1.5,
+    "other": {}
+   }
+  }
+ ],
+ "nutrition_as_of": "2026-10-13",
+ "nutrition_note": null,
+ "allergens": {
+  "contains": [
+   "小麦",
+   "牛肉",
+   "大豆"
+  ],
+  "partial": [
+   {
+    "name": "鶏肉",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "新規掲載",
+ "in_recommended": false,
+ "official_url": "https://www.matsuyafoods.co.jp/matsuya/menu/sidemenu/mdel_gyuu_hp_261013.html",
+ "first_seen_at": "2026-10-14T07:31:19+09:00",
+ "last_seen_at": "2026-10-14",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-14",
+   "price": 370
+  }
+ ],
+ "source_list": [
+  "sidemenu"
+ ],
+ "image": null
+}

@@ -1,0 +1,87 @@
+{
+ "chain": "matsuya",
+ "product_id": "hp-gyu3_hp_261013",
+ "name": "牛めし弁当3個セット",
+ "category": "牛めし",
+ "price": 1320,
+ "price_note": "税込。表示は「並盛」の価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "小盛",
+   "price": 1230
+  },
+  {
+   "label": "並盛",
+   "price": 1320
+  },
+  {
+   "label": "あたま大盛",
+   "price": 1830
+  },
+  {
+   "label": "大盛",
+   "price": 1980
+  },
+  {
+   "label": "特盛",
+   "price": 2520
+  }
+ ],
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 1903.0,
+  "protein_g": 51.2,
+  "fat_g": 77.7,
+  "carbs_g": 246.7,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 4.3,
+  "other": {}
+ },
+ "nutrition_variants": null,
+ "nutrition_as_of": "2026-10-13",
+ "nutrition_note": null,
+ "allergens": {
+  "contains": [
+   "小麦",
+   "牛肉",
+   "大豆"
+  ],
+  "partial": [
+   {
+    "name": "鶏肉",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "新規掲載",
+ "in_recommended": false,
+ "official_url": "https://www.matsuyafoods.co.jp/matsuya/menu/hp/gyu3_hp_261013.html",
+ "first_seen_at": "2026-10-14T07:31:19+09:00",
+ "last_seen_at": "2026-10-14",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-14",
+   "price": 1320
+  }
+ ],
+ "source_list": [
+  "gyumeshi"
+ ],
+ "image": null
+}
