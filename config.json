@@ -76,6 +76,8 @@
     "katsuya": 10,
     "karayama": 10
   },
+  "new_burst_min": 10,
+  "new_burst_ratio": 0.25,
   "user_agent": "FastfoodPochi/1.0 (+https://fastfood.netaful.jp/)",
   "mcdonalds_pages": [
     {

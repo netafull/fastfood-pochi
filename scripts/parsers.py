@@ -408,9 +408,13 @@ def matsuya_normalize_path(href: str, base_url: str | None = None, brand: str = 
     return posixpath.normpath(path)
 
 
-def matsuya_product_id(path: str, brand: str = "matsuya") -> str | None:
-    """`/matsuya/menu/curry/kashmir_hp_261006.html` → `curry-kashmir_hp_261006`。
-    末尾の6桁は掲載日(YYMMDD)のことが多く、同じ商品でも更新でslugが変わりうる。"""
+MATSUYA_DATE_SUFFIX_RE = re.compile(r"_\d{6}$")
+
+
+def matsuya_slug_id(path: str, brand: str = "matsuya") -> str | None:
+    """`/matsuya/menu/curry/kashmir_hp_261006.html` → `curry-kashmir_hp_261006`(日付つきの現在のslug)。
+    末尾の6桁は掲載日(YYMMDD)で、公式が一斉に更新することがある(2026-10-13に松屋のほぼ全商品が
+    `_261013` になった)。商品の識別には使わず、official_url・current_slug・発売日の手がかりにだけ使う。"""
     root = matsuya_menu_root(brand)
     if not path.startswith(root):
         return None
@@ -420,6 +424,19 @@ def matsuya_product_id(path: str, brand: str = "matsuya") -> str | None:
         return None
     pid = re.sub(r"[^0-9A-Za-z_\-]+", "-", rest.replace("/", "-")).strip("-")
     return pid or None
+
+
+def matsuya_base_key(slug_id: str) -> str:
+    """日付つきslugから末尾の `_YYMMDD`(6桁)だけを取り除いた基本キー。
+    `curry-kashmir_gyuu_hp_261013` → `curry-kashmir_gyuu_hp`。日付が無ければそのまま。
+    カテゴリが違えば別商品(カテゴリはキーの先頭に残る)。"""
+    return MATSUYA_DATE_SUFFIX_RE.sub("", slug_id) or slug_id
+
+
+def matsuya_product_id(path: str, brand: str = "matsuya") -> str | None:
+    """商品ID(基本キー)。ID生成はここ1箇所。"""
+    sid = matsuya_slug_id(path, brand)
+    return matsuya_base_key(sid) if sid else None
 
 
 def matsuya_slug_date(product_id: str) -> str | None:
@@ -441,7 +458,8 @@ def parse_matsuya_list(page: str, brand: str = "matsuya") -> list[dict]:
         if not hm:
             continue
         path = matsuya_normalize_path(hm.group(1), brand=brand)
-        pid = matsuya_product_id(path, brand)
+        slug = matsuya_slug_id(path, brand)
+        pid = matsuya_base_key(slug) if slug else None
         if not pid:
             continue
         nm = re.search(r'<span class="txt">(.*?)</span>', block, re.S)
@@ -453,6 +471,7 @@ def parse_matsuya_list(page: str, brand: str = "matsuya") -> list[dict]:
         no = re.search(r"<!--\s*(\d+)\s*-->", block)
         entries.append({
             "product_id": pid,
+            "current_slug": slug,
             "name": name,
             "price": int(pm.group(1).replace(",", "")) if pm else None,
             "detail_path": path,

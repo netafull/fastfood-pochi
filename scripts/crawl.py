@@ -217,6 +217,61 @@ def save_baseline(chain: str, ids: set[str]) -> None:
 
 
 # ---------------------------------------------------------------------------
+# 歯止め: 1回で「新規候補」が極端に多いときは、公式のページ構造・ID体系の変更とみなして記録しない
+# ---------------------------------------------------------------------------
+# 2026-10-13 に松屋が商品URLの日付(_YYMMDD)を一斉に更新し、定番メニューまで37件が「新規」になった。
+# 識別キーを日付抜きにして根本は直したが、同種の事故(IDの付け替え・ページ構造の変更)を他チェーンでも
+# 自動で止めるため、新規候補(baselineにも既存レコードにも無い項目)が max(new_burst_min, 一覧の項目数×new_burst_ratio)
+# を超えたら、その回はそのチェーンの新規を記録せず、終了判定もしない。
+# 初回(baselineがまだ無い)は対象外。保留は翌日以降に候補が閾値以下に戻れば自然に再開する。
+
+BURST_KEY = "_suspected_restructure"
+BURST_ESCALATE_DAYS = 3
+
+
+def burst_threshold(list_size: int) -> int:
+    lo = int(CONFIG.get("new_burst_min", 10))
+    ratio = float(CONFIG.get("new_burst_ratio", 0.25))
+    return max(lo, int(list_size * ratio))
+
+
+def burst_filter(chain: str, items: dict, baseline: set[str] | None, pending: dict, stats: dict,
+                 today: str) -> dict:
+    """items({商品ID: 一覧の項目})を受け取り、歯止めが働かなければそのまま返す。
+    働いたら、既存レコードのある項目だけを返し(最終確認日の更新だけは続ける)、
+    stats[chain]["list_ok"]=False(baseline作成・終了判定を止める)と、保留の記録を残す。"""
+    st = stats[chain]
+    chain_pending = pending.setdefault(chain, {})
+    if baseline is None:  # 初回は対象外
+        chain_pending.pop(BURST_KEY, None)
+        return items
+    candidates = [pid for pid in items if pid not in baseline and load_product(chain, pid) is None]
+    limit = burst_threshold(len(items))
+    if len(candidates) <= limit:
+        chain_pending.pop(BURST_KEY, None)
+        return items
+    prev = chain_pending.get(BURST_KEY) or {}
+    if prev.get("date") == today:
+        days = int(prev.get("consecutive_days") or 1)
+    else:
+        days = int(prev.get("consecutive_days") or 0) + 1
+    chain_pending[BURST_KEY] = {
+        "reason": "suspected_restructure", "count": len(candidates), "threshold": limit,
+        "list_size": len(items), "date": today, "consecutive_days": days,
+        "first_date": prev.get("first_date") or today,
+        "sample": sorted(candidates)[:5],
+    }
+    st["suspected_restructure"] = {"count": len(candidates), "threshold": limit, "consecutive_days": days}
+    st["list_ok"] = False
+    msg = (f"[WARNING] {chain}: 新規候補が一度に{len(candidates)}件(閾値{limit}件・一覧{len(items)}件)。"
+           "公式のサイト構造変更の疑い。この回は新規を記録せず、終了判定も行わない")
+    if days >= BURST_ESCALATE_DAYS:
+        msg += f" [{days}日連続で保留中。運営者の判断が必要]"
+    print(msg, file=sys.stderr)
+    return {pid: e for pid, e in items.items() if load_product(chain, pid) is not None}
+
+
+# ---------------------------------------------------------------------------
 # マクドナルド
 # ---------------------------------------------------------------------------
 
@@ -339,6 +394,8 @@ def crawl_mcdonalds(getter, pending: dict, stats: dict, today: str | None = None
     st["limited_seen"] = sum(1 for e in singles.values() if e["limited"])
 
     baseline = baseline_for(chain)
+    singles = burst_filter(chain, singles, baseline, pending, stats, today)
+    all_ok = all_ok and st["list_ok"]
     for pid, e in singles.items():
         existing = load_product(chain, pid)
         if existing is not None:
@@ -493,6 +550,8 @@ def crawl_mos(getter, pending: dict, stats: dict, today: str | None = None) -> N
     st["list_ok"] = all_ok
 
     baseline = baseline_for(chain)
+    entries = burst_filter(chain, entries, baseline, pending, stats, today)
+    all_ok = all_ok and st["list_ok"]
     allergy_map: dict[str, str] | None = None
     for pid, e in entries.items():
         cats = categories[pid]
@@ -685,6 +744,7 @@ def build_matsuya_product(entry: dict, detail: dict, sources: list[str], in_limi
         "limited_kind": kind,
         "in_recommended": in_limited,
         "official_url": MATSUYA_BASE + entry["detail_path"],
+        "current_slug": entry.get("current_slug"),
         "first_seen_at": now,
         "last_seen_at": today,
         "status": "on_sale",
@@ -792,25 +852,42 @@ def crawl_matsuya_family(chain: str, getter, pending: dict, stats: dict, today: 
             sources.setdefault(e["product_id"], []).append(cat)
             if e["product_id"] not in entries:
                 entries[e["product_id"]] = e
-            elif entries[e["product_id"]].get("price") is None:
-                entries[e["product_id"]]["price"] = e.get("price")
+            else:
+                cur = entries[e["product_id"]]
+                # 日付違いのslugが同時に載っている場合は、新しいほうのURLを現在のものとする
+                if (parsers.matsuya_slug_date(e["current_slug"]) or "") > (parsers.matsuya_slug_date(cur["current_slug"]) or ""):
+                    cur["current_slug"] = e["current_slug"]
+                    cur["detail_path"] = e["detail_path"]
+                if cur.get("price") is None:
+                    cur["price"] = e.get("price")
     st["list_ok"] = all_ok and bool(entries)
 
     singles = {pid: e for pid, e in entries.items() if not e["option"]}
     st["limited_seen"] = sum(1 for pid in singles if limited_cat in sources[pid])
 
     baseline = baseline_for(chain)
+    singles = burst_filter(chain, singles, baseline, pending, stats, today)
     news = MatsuyaNews(getter, st, chain)
     existing_all = None  # 同名商品の検出用(新規に記録するときだけ読む)
     try:
         for pid, e in singles.items():
             existing = load_product(chain, pid)
             if existing is not None:
-                if touch_seen(existing, e.get("price"), today, now):
-                    existing["source_list"] = sorted(set(existing.get("source_list") or []) | set(sources[pid]))
-                    if limited_cat in sources[pid]:
-                        existing["in_recommended"] = True
-                    save_product(chain, existing)
+                was_ended = existing.get("status") == "ended"
+                old_ended = existing.get("ended_observed_at")
+                touch_seen(existing, e.get("price"), today, now)
+                if was_ended:
+                    # 日付抜きの基本キーなので、本当に終了した商品の再登場は同じレコードに戻ってくる。
+                    # 昨季の期間は seasons に残し(relaunches は touch_seen が記録済み)、今季の発売日は未確定に戻す
+                    yoshinoya_start_new_season(existing, old_ended, today)
+                    st["relaunched"] = st.get("relaunched", 0) + 1
+                existing["source_list"] = sorted(set(existing.get("source_list") or []) | set(sources[pid]))
+                if limited_cat in sources[pid]:
+                    existing["in_recommended"] = True
+                # 公式の日付つきURLは更新で変わる。リンクは常に最新に保つ(識別は日付抜きの基本キー)
+                existing["current_slug"] = e["current_slug"]
+                existing["official_url"] = MATSUYA_BASE + e["detail_path"]
+                save_product(chain, existing)
                 pending[chain].pop(pid, None)
                 continue
             in_limited = limited_cat in sources[pid]
@@ -841,7 +918,7 @@ def crawl_matsuya_family(chain: str, getter, pending: dict, stats: dict, today: 
                 pending[chain][pid] = {"url": detail_path, "reason": "empty_detail", "checked_at": now}
                 continue
             name = e["name"] or detail["name"]
-            resolved = news.resolve(name, pid, today)
+            resolved = news.resolve(name, e["current_slug"], today)
             if existing_all is None:
                 existing_all = load_chain_products(chain)
             norm = parsers.normalize_for_match(name)
@@ -1148,6 +1225,7 @@ def crawl_yoshinoya(getter, pending: dict, stats: dict, today: str | None = None
     st["limited_seen"] = sum(1 for pid in entries if limited_cat in sources[pid])
 
     baseline = baseline_for(chain)
+    entries = burst_filter(chain, entries, baseline, pending, stats, today)
     news = YoshinoyaNews(getter, st)
     existing_all = None
     try:
@@ -1467,6 +1545,7 @@ def crawl_sukiya(getter, pending: dict, stats: dict, today: str | None = None) -
         print(f"[warn] {chain} お知らせ 取得失敗: {e}", file=sys.stderr)
 
     baseline = baseline_for(chain)
+    entries = burst_filter(chain, entries, baseline, pending, stats, today)
     existing_all = None
 
     def fetch_detail(pid: str, detail_path: str):
@@ -1753,6 +1832,7 @@ def crawl_arcland_family(chain: str, getter, pending: dict, stats: dict, today: 
         print(f"[skip] robots.txtでDisallow: {news_path}", file=sys.stderr)
 
     baseline = baseline_for(chain)
+    entries = burst_filter(chain, entries, baseline, pending, stats, today)
     existing_all = None
     for pid, e in entries.items():
         existing = load_product(chain, pid)
@@ -1855,6 +1935,8 @@ def save_run_summary(stats: dict[str, dict]) -> None:
     out = {
         "new": {chain: s.get("new_products", 0) for chain, s in stats.items()},
         "ended": {chain: s.get("ended", 0) for chain, s in stats.items()},
+        "suspected": {chain: s["suspected_restructure"] for chain, s in stats.items()
+                      if s.get("suspected_restructure")},
     }
     RUN_SUMMARY.parent.mkdir(parents=True, exist_ok=True)
     RUN_SUMMARY.write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")

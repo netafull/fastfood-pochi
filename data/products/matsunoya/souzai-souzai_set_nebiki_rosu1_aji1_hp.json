@@ -1,0 +1,103 @@
+{
+ "chain": "matsunoya",
+ "product_id": "souzai-souzai_set_nebiki_rosu1_aji1_hp",
+ "name": "【惣菜セット】ロースかつ１枚＋アジフライ１枚＋ハーフ皮付きポテト",
+ "category": "惣菜",
+ "price": 490,
+ "price_note": "税込。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 833.0,
+  "protein_g": 31.4,
+  "fat_g": 54.7,
+  "carbs_g": 57.0,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 1.6,
+  "other": {}
+ },
+ "nutrition_variants": null,
+ "nutrition_as_of": "2026-10-07",
+ "nutrition_note": null,
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "乳",
+   "オレンジ",
+   "大豆",
+   "豚肉"
+  ],
+  "partial": [
+   {
+    "name": "えび",
+    "mark": "△"
+   },
+   {
+    "name": "いか",
+    "mark": "△"
+   },
+   {
+    "name": "牛肉",
+    "mark": "△"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "△"
+   },
+   {
+    "name": "やまいも",
+    "mark": "△"
+   },
+   {
+    "name": "りんご",
+    "mark": "△"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△"
+   },
+   {
+    "name": "ごま",
+    "mark": "△"
+   },
+   {
+    "name": "アーモンド",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "おすすめ掲載",
+ "in_recommended": true,
+ "official_url": "https://www.matsuyafoods.co.jp/matsunoya/menu/souzai/souzai_set_nebiki_rosu1_aji1_hp_261007.html",
+ "first_seen_at": "2026-10-11T12:25:53+09:00",
+ "last_seen_at": "2026-10-14",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-11",
+   "price": 490
+  }
+ ],
+ "source_list": [
+  "osusume",
+  "souzai"
+ ],
+ "image": null,
+ "current_slug": "souzai-souzai_set_nebiki_rosu1_aji1_hp_261007"
+}

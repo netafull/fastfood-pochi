@@ -4,7 +4,7 @@
 <title>ファストフードポチ</title>
 <link>https://fastfood.netaful.jp/</link>
 <description>マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやまの期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</description>
-<lastBuildDate>Tue, 13 Oct 2026 22:37:06 +0000</lastBuildDate>
+<lastBuildDate>Wed, 14 Oct 2026 07:14:58 +0000</lastBuildDate>
 <item>
 <title>【吉野家】牛すき鍋（単品）</title>
 <link>https://fastfood.netaful.jp/items/yoshinoya-set-gyusuki-nabe-zen-single.html</link>
@@ -27,261 +27,44 @@
 <pubDate>Wed, 14 Oct 2026 07:34:37 +0900</pubDate>
 </item>
 <item>
-<title>【松屋】創業ビーフカレギュウ</title>
-<link>https://fastfood.netaful.jp/items/matsuya-curry-beef_gyu_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-curry-beef_gyu_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】ハンバーグ創業ビーフカレー</title>
-<link>https://fastfood.netaful.jp/items/matsuya-curry-beef_hb_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-curry-beef_hb_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】ネオカシミールカレギュウ</title>
-<link>https://fastfood.netaful.jp/items/matsuya-curry-kashmir_gyuu_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-curry-kashmir_gyuu_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】牛ビビン丼</title>
-<link>https://fastfood.netaful.jp/items/matsuya-don-don_gyu_bibin_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-don-don_gyu_bibin_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】チーズ牛めし</title>
-<link>https://fastfood.netaful.jp/items/matsuya-gyumeshi-gyu_cheese_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-gyumeshi-gyu_cheese_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】キムチ牛めし</title>
-<link>https://fastfood.netaful.jp/items/matsuya-gyumeshi-gyu_kimuchi_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-gyumeshi-gyu_kimuchi_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】ネギたっぷり旨辛ネギたま牛めし</title>
-<link>https://fastfood.netaful.jp/items/matsuya-gyumeshi-gyu_negitama_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-gyumeshi-gyu_negitama_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】鬼おろしポン酢牛めし</title>
-<link>https://fastfood.netaful.jp/items/matsuya-gyumeshi-gyu_onioroshi_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-gyumeshi-gyu_onioroshi_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】うまトマチーズ牛めし</title>
-<link>https://fastfood.netaful.jp/items/matsuya-gyumeshi-gyu_umatoma_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-gyumeshi-gyu_umatoma_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】牛めし</title>
-<link>https://fastfood.netaful.jp/items/matsuya-gyumeshi-gyumeshi_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-gyumeshi-gyumeshi_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】牛めし弁当2個セット</title>
-<link>https://fastfood.netaful.jp/items/matsuya-hp-gyu2_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-hp-gyu2_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】牛めし弁当3個セット</title>
-<link>https://fastfood.netaful.jp/items/matsuya-hp-gyu3_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-hp-gyu3_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
 <title>【松屋】たっぷり牛皿定食</title>
-<link>https://fastfood.netaful.jp/items/matsuya-limited-tei_gyuusara_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-limited-tei_gyuusara_hp_261013</guid>
+<link>https://fastfood.netaful.jp/items/matsuya-limited-tei_gyuusara_hp.html</link>
+<guid isPermaLink="false">matsuya-limited-tei_gyuusara_hp</guid>
 <category>松屋</category>
 <pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
 </item>
 <item>
 <title>【松屋】たっぷりネギたま牛皿定食</title>
-<link>https://fastfood.netaful.jp/items/matsuya-limited-tei_negitamagyuusara_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-limited-tei_negitamagyuusara_hp_261013</guid>
+<link>https://fastfood.netaful.jp/items/matsuya-limited-tei_negitamagyuusara_hp.html</link>
+<guid isPermaLink="false">matsuya-limited-tei_negitamagyuusara_hp</guid>
 <category>松屋</category>
 <pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
 </item>
 <item>
 <title>【松屋】たっぷり鬼おろしポン酢牛皿定食</title>
-<link>https://fastfood.netaful.jp/items/matsuya-limited-tei_orogyuusara_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-limited-tei_orogyuusara_hp_261013</guid>
+<link>https://fastfood.netaful.jp/items/matsuya-limited-tei_orogyuusara_hp.html</link>
+<guid isPermaLink="false">matsuya-limited-tei_orogyuusara_hp</guid>
 <category>松屋</category>
 <pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
 </item>
 <item>
 <title>【松屋】特盛牛皿定食</title>
-<link>https://fastfood.netaful.jp/items/matsuya-limited-tei_tokugyuusara_w_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-limited-tei_tokugyuusara_w_hp_261013</guid>
+<link>https://fastfood.netaful.jp/items/matsuya-limited-tei_tokugyuusara_w_hp.html</link>
+<guid isPermaLink="false">matsuya-limited-tei_tokugyuusara_w_hp</guid>
 <category>松屋</category>
 <pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
 </item>
 <item>
 <title>【松屋】特盛鬼おろしポン酢牛皿定食</title>
-<link>https://fastfood.netaful.jp/items/matsuya-limited-tei_tokuorogyuusara_w_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-limited-tei_tokuorogyuusara_w_hp_261013</guid>
+<link>https://fastfood.netaful.jp/items/matsuya-limited-tei_tokuorogyuusara_w_hp.html</link>
+<guid isPermaLink="false">matsuya-limited-tei_tokuorogyuusara_w_hp</guid>
 <category>松屋</category>
 <pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
 </item>
 <item>
 <title>【松屋】特盛ネギたま牛皿定食</title>
-<link>https://fastfood.netaful.jp/items/matsuya-limited-tokunegitamagyuusara_w_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-limited-tokunegitamagyuusara_w_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】チーズ牛めしランチセット</title>
-<link>https://fastfood.netaful.jp/items/matsuya-lunch-lunch_gyu_cheese_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-lunch-lunch_gyu_cheese_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】牛めしランチセット</title>
-<link>https://fastfood.netaful.jp/items/matsuya-lunch-lunch_gyu_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-lunch-lunch_gyu_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】キムチ牛めしランチセット</title>
-<link>https://fastfood.netaful.jp/items/matsuya-lunch-lunch_gyu_kimuchi_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-lunch-lunch_gyu_kimuchi_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】ネギたっぷり旨辛ネギたま牛めしランチセット</title>
-<link>https://fastfood.netaful.jp/items/matsuya-lunch-lunch_gyu_negitama_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-lunch-lunch_gyu_negitama_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】鬼おろしポン酢牛めしランチセット</title>
-<link>https://fastfood.netaful.jp/items/matsuya-lunch-lunch_gyu_onioroshi_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-lunch-lunch_gyu_onioroshi_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】うまトマチーズ牛めしランチセット</title>
-<link>https://fastfood.netaful.jp/items/matsuya-lunch-lunch_gyu_umatoma_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-lunch-lunch_gyu_umatoma_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】ソーセージエッグ定食</title>
-<link>https://fastfood.netaful.jp/items/matsuya-morning-morning_sausage_egg_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-morning-morning_sausage_egg_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】ソーセージエッグW定食</title>
-<link>https://fastfood.netaful.jp/items/matsuya-morning-morning_sausage_egg_w_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-morning-morning_sausage_egg_w_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】Wで選べる玉子かけごはん</title>
-<link>https://fastfood.netaful.jp/items/matsuya-morning-morning_tkg_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-morning-morning_tkg_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】得朝牛皿定食</title>
-<link>https://fastfood.netaful.jp/items/matsuya-morning-morning_tokuasa_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-morning-morning_tokuasa_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】おこさまカレーわくわくセット</title>
-<link>https://fastfood.netaful.jp/items/matsuya-okosama-okosama_goods_curry_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-okosama-okosama_goods_curry_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】おこさま牛めしわくわくセット</title>
-<link>https://fastfood.netaful.jp/items/matsuya-okosama-okosama_goods_gyu_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-okosama-okosama_goods_gyu_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】チーズ牛皿</title>
-<link>https://fastfood.netaful.jp/items/matsuya-sidemenu-mdel_gyuu_cheese_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-sidemenu-mdel_gyuu_cheese_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】牛皿</title>
-<link>https://fastfood.netaful.jp/items/matsuya-sidemenu-mdel_gyuu_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-sidemenu-mdel_gyuu_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】キムチ牛皿</title>
-<link>https://fastfood.netaful.jp/items/matsuya-sidemenu-mdel_gyuu_kimchi_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-sidemenu-mdel_gyuu_kimchi_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】ネギたま牛皿</title>
-<link>https://fastfood.netaful.jp/items/matsuya-sidemenu-mdel_gyuu_negitama_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-sidemenu-mdel_gyuu_negitama_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】鬼おろしポン酢牛皿</title>
-<link>https://fastfood.netaful.jp/items/matsuya-sidemenu-mdel_gyuu_oroshi_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-sidemenu-mdel_gyuu_oroshi_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】うまトマチーズ牛皿</title>
-<link>https://fastfood.netaful.jp/items/matsuya-sidemenu-mdel_gyuu_umatoma_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-sidemenu-mdel_gyuu_umatoma_hp_261013</guid>
-<category>松屋</category>
-<pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
-</item>
-<item>
-<title>【松屋】“炙り”焼鮭定食</title>
-<link>https://fastfood.netaful.jp/items/matsuya-teishoku-tei_aburi_sake_hp_261013.html</link>
-<guid isPermaLink="false">matsuya-teishoku-tei_aburi_sake_hp_261013</guid>
+<link>https://fastfood.netaful.jp/items/matsuya-limited-tokunegitamagyuusara_w_hp.html</link>
+<guid isPermaLink="false">matsuya-limited-tokunegitamagyuusara_w_hp</guid>
 <category>松屋</category>
 <pubDate>Wed, 14 Oct 2026 07:31:19 +0900</pubDate>
 </item>
@@ -704,6 +487,223 @@
 <guid isPermaLink="false">sukiya-unagi-902100</guid>
 <category>すき家</category>
 <pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】特うな牛皿</title>
+<link>https://fastfood.netaful.jp/items/sukiya-unagi-902200.html</link>
+<guid isPermaLink="false">sukiya-unagi-902200</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】おんたまうな丼</title>
+<link>https://fastfood.netaful.jp/items/sukiya-unagi-902300.html</link>
+<guid isPermaLink="false">sukiya-unagi-902300</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】おんたまうな牛</title>
+<link>https://fastfood.netaful.jp/items/sukiya-unagi-902400.html</link>
+<guid isPermaLink="false">sukiya-unagi-902400</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】山かけうな丼</title>
+<link>https://fastfood.netaful.jp/items/sukiya-unagi-902500.html</link>
+<guid isPermaLink="false">sukiya-unagi-902500</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】山かけうな牛</title>
+<link>https://fastfood.netaful.jp/items/sukiya-unagi-902600.html</link>
+<guid isPermaLink="false">sukiya-unagi-902600</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【すき家】特うな牛</title>
+<link>https://fastfood.netaful.jp/items/sukiya-unagi-902700.html</link>
+<guid isPermaLink="false">sukiya-unagi-902700</guid>
+<category>すき家</category>
+<pubDate>Sun, 11 Oct 2026 14:57:03 +0900</pubDate>
+</item>
+<item>
+<title>【吉野家】牛さんま定食</title>
+<link>https://fastfood.netaful.jp/items/yoshinoya-gentei-gyusanma-tei.html</link>
+<guid isPermaLink="false">yoshinoya-gentei-gyusanma-tei</guid>
+<category>吉野家</category>
+<pubDate>Sun, 11 Oct 2026 14:19:47 +0900</pubDate>
+</item>
+<item>
+<title>【吉野家】さんま定食</title>
+<link>https://fastfood.netaful.jp/items/yoshinoya-gentei-sanma-tei.html</link>
+<guid isPermaLink="false">yoshinoya-gentei-sanma-tei</guid>
+<category>吉野家</category>
+<pubDate>Sun, 11 Oct 2026 14:19:47 +0900</pubDate>
+</item>
+<item>
+<title>【吉野家】さんま（単品）</title>
+<link>https://fastfood.netaful.jp/items/yoshinoya-gentei-sanma.html</link>
+<guid isPermaLink="false">yoshinoya-gentei-sanma</guid>
+<category>吉野家</category>
+<pubDate>Sun, 11 Oct 2026 14:19:47 +0900</pubDate>
+</item>
+<item>
+<title>【吉野家】月見牛とじ御膳</title>
+<link>https://fastfood.netaful.jp/items/yoshinoya-set-tsukimi_gyutoji_tei.html</link>
+<guid isPermaLink="false">yoshinoya-set-tsukimi_gyutoji_tei</guid>
+<category>吉野家</category>
+<pubDate>Sun, 11 Oct 2026 14:19:47 +0900</pubDate>
+</item>
+<item>
+<title>【吉野家】月見牛とじ丼</title>
+<link>https://fastfood.netaful.jp/items/yoshinoya-yoshinoyanodon-tsukimi_gyutoji_don.html</link>
+<guid isPermaLink="false">yoshinoya-yoshinoyanodon-tsukimi_gyutoji_don</guid>
+<category>吉野家</category>
+<pubDate>Sun, 11 Oct 2026 14:19:47 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】カキフライとじ丼</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-donburi-don_kaki_hp.html</link>
+<guid isPermaLink="false">matsunoya-donburi-don_kaki_hp</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】背脂生姜タレのポークフライドステーキ＆本格唐揚げ(３個)定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-moriawase-mori_ginger_fpork_karaage_hp.html</link>
+<guid isPermaLink="false">matsunoya-moriawase-mori_ginger_fpork_karaage_hp</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】背脂生姜タレのポークフライドステーキ＆ロースかつ定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-moriawase-mori_ginger_fpork_rosu_hp.html</link>
+<guid isPermaLink="false">matsunoya-moriawase-mori_ginger_fpork_rosu_hp</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】海鮮盛合せ定食（カキ2個・アジ１枚・海老１尾）</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-moriawase-mori_kaisen_ebi1_hp.html</link>
+<guid isPermaLink="false">matsunoya-moriawase-mori_kaisen_ebi1_hp</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】海鮮盛合せ定食（イカ・白身魚・海老）</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-moriawase-mori_kaisen_ikashiromiebi_hp.html</link>
+<guid isPermaLink="false">matsunoya-moriawase-mori_kaisen_ikashiromiebi_hp</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】超厚切りリブロースかつ＆アジフライ（1枚）定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-moriawase-mori_ribu_aji_hp.html</link>
+<guid isPermaLink="false">matsunoya-moriawase-mori_ribu_aji_hp</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】超厚切りリブロースかつ＆カキフライ（2個）定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-moriawase-mori_ribu_kaki2_hp.html</link>
+<guid isPermaLink="false">matsunoya-moriawase-mori_ribu_kaki2_hp</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】ロースかつ＆アジフライ（1枚）定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-moriawase-mori_rosu_aji_hp.html</link>
+<guid isPermaLink="false">matsunoya-moriawase-mori_rosu_aji_hp</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】ロースかつ＆イカフライ定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-moriawase-mori_rosu_ika_hp.html</link>
+<guid isPermaLink="false">matsunoya-moriawase-mori_rosu_ika_hp</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】ロースかつ＆カキフライ（2個）定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-moriawase-mori_rosu_kaki_hp.html</link>
+<guid isPermaLink="false">matsunoya-moriawase-mori_rosu_kaki_hp</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】ロースかつ＆白身魚フライ定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-moriawase-mori_rosu_shiromi_hp.html</link>
+<guid isPermaLink="false">matsunoya-moriawase-mori_rosu_shiromi_hp</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】【惣菜セット】アジフライ１枚＋カキフライ２個＋海老フライ１尾＋ハーフ皮付きポテト</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-souzai-souzai_set_nebiki_aji1_kaki2_ebi1_hp.html</link>
+<guid isPermaLink="false">matsunoya-souzai-souzai_set_nebiki_aji1_kaki2_ebi1_hp</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】【惣菜セット】倍盛）ロースかつ２枚＋海老フライ２尾＋ハーフ皮付きポテト</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-souzai-souzai_set_nebiki_baimori_rosu2_ebi2_hp.html</link>
+<guid isPermaLink="false">matsunoya-souzai-souzai_set_nebiki_baimori_rosu2_ebi2_hp</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】【惣菜セット】倍盛）ロースかつ２枚＋本格唐揚げ６個＋ハーフ皮付きポテト</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-souzai-souzai_set_nebiki_baimori_rosu2_kara6_hp.html</link>
+<guid isPermaLink="false">matsunoya-souzai-souzai_set_nebiki_baimori_rosu2_kara6_hp</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】【惣菜セット】ロースかつ１枚＋アジフライ１枚＋ハーフ皮付きポテト</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-souzai-souzai_set_nebiki_rosu1_aji1_hp.html</link>
+<guid isPermaLink="false">matsunoya-souzai-souzai_set_nebiki_rosu1_aji1_hp</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】【惣菜セット】ロースかつ１枚＋海老フライ１尾＋ハーフ皮付きポテト</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-souzai-souzai_set_nebiki_rosu1_ebi1_hp.html</link>
+<guid isPermaLink="false">matsunoya-souzai-souzai_set_nebiki_rosu1_ebi1_hp</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】【惣菜セット】ロースかつ１枚＋カキフライ２個＋ハーフ皮付きポテト</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-souzai-souzai_set_nebiki_rosu1_kaki2_hp.html</link>
+<guid isPermaLink="false">matsunoya-souzai-souzai_set_nebiki_rosu1_kaki2_hp</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】【惣菜セット】ロースかつ１枚＋本格唐揚げ３個＋ハーフ皮付きポテト</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-souzai-souzai_set_nebiki_rosu1_kara3_hp.html</link>
+<guid isPermaLink="false">matsunoya-souzai-souzai_set_nebiki_rosu1_kara3_hp</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】アジフライ（2枚）定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-teishoku-tei_aji_hp.html</link>
+<guid isPermaLink="false">matsunoya-teishoku-tei_aji_hp</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
+</item>
+<item>
+<title>【松のや】背脂生姜タレの“リブ”ロースポークフライドステーキ定食</title>
+<link>https://fastfood.netaful.jp/items/matsunoya-teishoku-tei_ginger_ribu_fpork_hp.html</link>
+<guid isPermaLink="false">matsunoya-teishoku-tei_ginger_ribu_fpork_hp</guid>
+<category>松のや</category>
+<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
 </item>
 </channel>
 </rss>

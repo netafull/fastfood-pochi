@@ -47,7 +47,7 @@ class TestListParser(unittest.TestCase):
         es = P.parse_matsuya_list(fx("matsuya/cat_limited.html"))
         self.assertEqual(len(es), 8)
         e = es[0]
-        self.assertEqual(e["product_id"], "curry-kashmir_hp_261006")
+        self.assertEqual(e["product_id"], "curry-kashmir_hp")
         self.assertEqual(e["name"], "ネオカシミールカレー")
         self.assertEqual(e["price"], 680)
         self.assertEqual(e["product_no"], "27050")
@@ -63,7 +63,7 @@ class TestListParser(unittest.TestCase):
     def test_normalize_path_and_id(self):
         p = P.matsuya_normalize_path("https://www.matsuyafoods.co.jp/menu/../matsuya/menu/hp/gyu3_hp_250422.html")
         self.assertEqual(p, "/matsuya/menu/hp/gyu3_hp_250422.html")
-        self.assertEqual(P.matsuya_product_id(p), "hp-gyu3_hp_250422")
+        self.assertEqual(P.matsuya_product_id(p), "hp-gyu3_hp")
         self.assertIsNone(P.matsuya_product_id("/matsuya/menu/curry/index.html"))
         self.assertIsNone(P.matsuya_product_id("/shop/premium/"))
         self.assertEqual(P.matsuya_slug_date("curry-kashmir_hp_261006"), "2026-10-06")
@@ -173,8 +173,8 @@ class TestCrawl(unittest.TestCase):
             baseline = crawl.baseline_for("matsuya")
             self.assertGreater(len(baseline), 60)
             # 選べるサイド(選択肢)はbaselineには入るが、商品としては記録しない
-            self.assertIn("lunch-lunch_side_tamago_nama_hp_260407", baseline)
-            self.assertIsNone(crawl.load_product("matsuya", "lunch-lunch_side_tamago_nama_hp_260407"))
+            self.assertIn("lunch-lunch_side_tamago_nama_hp", baseline)
+            self.assertIsNone(crawl.load_product("matsuya", "lunch-lunch_side_tamago_nama_hp"))
             self.assertEqual(sum(1 for u in g1.calls if u.endswith("whatsnew.json")), 1)
             arts = [u for u in g1.calls if "/whatsnew/menu/" in u]
             self.assertEqual(len(arts), len(set(arts)))
@@ -183,7 +183,7 @@ class TestCrawl(unittest.TestCase):
     def test_news_matching_and_fields(self):
         with TempData():
             run_matsuya(getter(), "2026-10-11")
-            p = crawl.load_product("matsuya", "curry-kashmir_hp_261006")
+            p = crawl.load_product("matsuya", "curry-kashmir_hp")
             self.assertEqual(p["launch_date"], "2026-10-06")
             self.assertEqual(p["launch_date_source"], "news_article")
             self.assertEqual(p["limited_kind"], "新メニュー")
@@ -201,19 +201,19 @@ class TestCrawl(unittest.TestCase):
                              ["セット（みそ汁・福神漬を含む）", "単品"])
             self.assertEqual(p["nutrition_as_of"], "2026-10-06")
             # 見出しに名前が無い兄弟商品は、同じ記事の本文から見つかる
-            s = crawl.load_product("matsuya", "curry-kashmir_chikin_hp_261006")
+            s = crawl.load_product("matsuya", "curry-kashmir_chikin_hp")
             self.assertEqual(s["launch_date"], "2026-10-06")
             self.assertEqual(s["launch_date_source"], "news_article_body")
-            m = crawl.load_product("matsuya", "teishoku-tei_kuromabo_hp_260929")
+            m = crawl.load_product("matsuya", "teishoku-tei_kuromabo_hp")
             self.assertEqual(m["launch_date"], "2026-09-29")
-            y = crawl.load_product("matsuya", "don-don_gyuyaki_hp_260811")
+            y = crawl.load_product("matsuya", "don-don_gyuyaki_hp")
             self.assertEqual(y["launch_date"], "2026-08-11")
 
     def test_unmatched_news_gives_null_launch(self):
         with TempData():
             g1 = getter(overrides={"/matsuya/whatsnew/data/whatsnew.json": '{"list_whatsnew": []}'})
             _, st = run_matsuya(g1, "2026-10-11")
-            p = crawl.load_product("matsuya", "curry-kashmir_hp_261006")
+            p = crawl.load_product("matsuya", "curry-kashmir_hp")
             self.assertIsNone(p["launch_date"])
             self.assertEqual(p["launch_date_source"], "not_found")
             self.assertEqual(p["limited_kind"], "おすすめ掲載")
@@ -239,7 +239,7 @@ class TestCrawl(unittest.TestCase):
                 "/matsuya/menu/teishoku/index.html": drop_item(fx("matsuya/cat_teishoku.html"), "tei_kuromabo")}
 
     def test_end_needs_two_misses_on_different_days(self):
-        pid = "teishoku-tei_kuromabo_hp_260929"
+        pid = "teishoku-tei_kuromabo_hp"
         with TempData():
             run_matsuya(getter(), "2026-10-11")
             ov = self._without_kuromabo()
@@ -252,7 +252,7 @@ class TestCrawl(unittest.TestCase):
             self.assertEqual(p["status"], "ended")
             self.assertEqual(p["ended_observed_at"], "2026-10-13")
             self.assertEqual(st["ended"], 1)
-            self.assertEqual(crawl.load_product("matsuya", "curry-kashmir_hp_261006")["status"], "on_sale")
+            self.assertEqual(crawl.load_product("matsuya", "curry-kashmir_hp")["status"], "on_sale")
             # 再登場したら販売中に戻り、relaunchesに記録される
             run_matsuya(getter(), "2026-10-20")
             p = crawl.load_product("matsuya", pid)
@@ -266,7 +266,7 @@ class TestCrawl(unittest.TestCase):
             ov = {"/matsuya/menu/limited/index.html": drop_item(fx("matsuya/cat_limited.html"), "tei_kuromabo")}
             for d in ("2026-10-12", "2026-10-13", "2026-10-14"):
                 run_matsuya(getter(overrides=ov), d)
-            p = crawl.load_product("matsuya", "teishoku-tei_kuromabo_hp_260929")
+            p = crawl.load_product("matsuya", "teishoku-tei_kuromabo_hp")
             self.assertEqual(p["status"], "on_sale")
 
     def test_failed_category_page_blocks_end_judgement(self):
@@ -276,7 +276,7 @@ class TestCrawl(unittest.TestCase):
             for d in ("2026-10-12", "2026-10-13", "2026-10-14"):
                 _, st = run_matsuya(getter(overrides=ov, fail={"/matsuya/menu/drink/index.html"}), d)
                 self.assertFalse(st["list_ok"])
-            p = crawl.load_product("matsuya", "teishoku-tei_kuromabo_hp_260929")
+            p = crawl.load_product("matsuya", "teishoku-tei_kuromabo_hp")
             self.assertEqual(p["status"], "on_sale")
             self.assertFalse(p.get("missed_runs"))
 
@@ -299,11 +299,11 @@ class TestCrawl(unittest.TestCase):
             }
             _, st = run_matsuya(getter(overrides=ov), "2026-10-21")
             self.assertEqual(st["new_products"], 1)
-            p = crawl.load_product("matsuya", "hp-gyu_new_hp_261020")
+            p = crawl.load_product("matsuya", "hp-gyu_new_hp")
             self.assertEqual(p["name"], "新牛めし")
             self.assertEqual(p["limited_kind"], "新規掲載")
             self.assertFalse(p["in_recommended"])
-            self.assertIsNone(crawl.load_product("matsuya", "topping-set_new_hp_261020"))
+            self.assertIsNone(crawl.load_product("matsuya", "topping-set_new_hp"))
 
     def test_same_name_with_new_slug_is_new_record_with_link(self):
         with TempData():
@@ -311,15 +311,15 @@ class TestCrawl(unittest.TestCase):
             ov = {"/matsuya/menu/gyumeshi/index.html": clone_item(
                 fx("matsuya/cat_gyumeshi.html"), "gyu3_hp_250422", "gyu_re_hp_261101", "ネオカシミールカレー")}
             run_matsuya(getter(overrides=ov), "2026-11-02")
-            p = crawl.load_product("matsuya", "hp-gyu_re_hp_261101")
-            self.assertEqual(p["same_name_as"], ["curry-kashmir_hp_261006"])
+            p = crawl.load_product("matsuya", "hp-gyu_re_hp")
+            self.assertEqual(p["same_name_as"], ["curry-kashmir_hp"])
 
     def test_price_change_is_logged(self):
         with TempData():
             run_matsuya(getter(), "2026-10-11")
             page = fx("matsuya/cat_limited.html").replace("680円", "700円")
             run_matsuya(getter(overrides={"/matsuya/menu/limited/index.html": page}), "2026-10-12")
-            p = crawl.load_product("matsuya", "curry-kashmir_hp_261006")
+            p = crawl.load_product("matsuya", "curry-kashmir_hp")
             self.assertEqual(p["price"], 700)
             self.assertEqual([h["price"] for h in p["price_history"]], [680, 700])
 
@@ -356,7 +356,7 @@ def matsuya_item(**kw):
     nut_one = {"kcal": 322.0, "protein_g": 5.4, "fat_g": 19.9, "carbs_g": 29.8, "sugar_g": None,
                "fiber_g": None, "salt_g": 4.3, "other": {}}
     base = {
-        "chain": "matsuya", "product_id": "curry-kashmir_hp_261006", "name": "ネオカシミールカレー",
+        "chain": "matsuya", "product_id": "curry-kashmir_hp", "name": "ネオカシミールカレー",
         "category": "カレー", "price": 680, "price_note": "税込。表示は「セット（みそ汁・福神漬を含む）」の価格。",
         "price_variants": [{"label": "セット（みそ汁・福神漬を含む）", "price": 680}, {"label": "単品", "price": 560}],
         "launch_date": "2026-10-06", "launch_date_source": "news_article", "planned_end_text": None,

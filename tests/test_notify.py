@@ -23,7 +23,7 @@ class TestNotify(unittest.TestCase):
             p = Path(t) / "run_summary.json"
             p.write_text(json.dumps({"new": {"mos": 4}, "ended": {}}), encoding="utf-8")
             self.assertEqual(notify.read_run_summary(p)["new"], {"mos": 4})
-            self.assertEqual(notify.read_run_summary(Path(t) / "missing.json"), {"new": {}, "ended": {}})
+            self.assertEqual(notify.read_run_summary(Path(t) / "missing.json"), {"new": {}, "ended": {}, "suspected": {}})
 
     def test_topic_not_in_code(self):
         src = (Path(notify.__file__)).read_text(encoding="utf-8")

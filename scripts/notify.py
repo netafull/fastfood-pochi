@@ -56,23 +56,46 @@ def _run_click() -> str:
     return f"{server}/{repo}/actions/runs/{run_id}" if repo and run_id else ""
 
 
-def read_run_summary(path: Path | None = None) -> dict[str, dict[str, int]]:
-    """直前の crawl.py 実行の {"new": {chain: n}, "ended": {chain: n}} を返す。"""
+def read_run_summary(path: Path | None = None) -> dict[str, dict]:
+    """直前の crawl.py 実行の {"new": {chain: n}, "ended": {chain: n}, "suspected": {chain: {...}}} を返す。
+    suspected は「新規候補が極端に多く、公式の構造変更の疑いで記録を保留した」チェーン。"""
     try:
         data = json.loads((path or RUN_SUMMARY).read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
-        return {"new": {}, "ended": {}}
+        return {"new": {}, "ended": {}, "suspected": {}}
     return {
         "new": {k: int(v) for k, v in (data.get("new") or {}).items()},
         "ended": {k: int(v) for k, v in (data.get("ended") or {}).items()},
+        "suspected": {k: dict(v) for k, v in (data.get("suspected") or {}).items() if isinstance(v, dict)},
     }
 
 
-def build_message(summary: dict[str, dict[str, int]]) -> tuple[str, str] | None:
-    """(タイトル, 本文)。新規も終了も0件なら None。"""
+ESCALATE_DAYS = 3
+
+
+def build_warnings(summary: dict) -> list[tuple[str, str]]:
+    """歯止めが働いたチェーンごとの警告通知 [(タイトル, 本文)]。要約とは別に送る。"""
+    out = []
+    for chain, info in (summary.get("suspected") or {}).items():
+        name = CHAIN_LABEL.get(chain, chain)
+        n = int(info.get("count", 0))
+        days = int(info.get("consecutive_days", 1))
+        body = (f"{name}で新規候補が一度に{n}件(閾値{info.get('threshold', '?')}件)。"
+                "公式のサイト構造変更の疑い。記録を保留(終了判定もしていません)。")
+        title = f"{SITE_NAME}: 【警告】{name}の記録を保留"
+        if days >= ESCALATE_DAYS:
+            title = f"{SITE_NAME}: 【要判断】{name}の保留が{days}日連続"
+            body += f" {days}日連続で保留しています。自動では再開しないので、運営者の判断が必要です。"
+        out.append((title, body))
+    return out
+
+
+def build_message(summary: dict) -> tuple[str, str] | None:
+    """(タイトル, 本文)。新規も終了も0件で、保留も無ければ None。"""
     n_new = sum(summary["new"].values())
     n_end = sum(summary["ended"].values())
-    if n_new == 0 and n_end == 0:
+    held = summary.get("suspected") or {}
+    if n_new == 0 and n_end == 0 and not held:
         return None
     parts = []
     if n_new:
@@ -86,6 +109,12 @@ def build_message(summary: dict[str, dict[str, int]]) -> tuple[str, str] | None:
         head.append(f"新メニュー {n_new}件")
     if n_end:
         head.append(f"終了 {n_end}件")
+    if held:
+        names = "・".join(CHAIN_LABEL.get(k, k) for k in held)
+        parts.append(f"保留あり: {names}は新規候補が多すぎるため、今回は新規0件として記録していません(別途警告を送っています)")
+        if n_new == 0:
+            head.insert(0, "新規0件")
+        head.append("保留あり")
     return f"{SITE_NAME}: " + "・".join(head), "今回の巡回の結果。" + "　".join(parts)
 
 
@@ -97,7 +126,14 @@ def main() -> int:
         return 0
 
     if "--summary" in args:
-        msg = build_message(read_run_summary())
+        summary = read_run_summary()
+        for title, body in build_warnings(summary):
+            try:
+                send(topic, title, body, _run_click())
+                print(f"警告を通知しました: {title}")
+            except (urllib.error.URLError, OSError) as e:
+                print(f"[warn] ntfy警告の通知に失敗しました: {e}", file=sys.stderr)
+        msg = build_message(summary)
         if msg is None:
             print("新規・終了とも0件のため通知はスキップします")
             return 0

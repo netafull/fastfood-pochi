@@ -1,0 +1,63 @@
+{
+ "chain": "matsunoya",
+ "product_id": "moriawase-mori_kaisen_ikashiromiebi_hp",
+ "name": "海鮮盛合せ定食（イカ・白身魚・海老）",
+ "category": "盛合せ",
+ "price": 1190,
+ "price_note": "税込。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 1084.3,
+  "protein_g": 32.4,
+  "fat_g": 50.9,
+  "carbs_g": 128.3,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 4.0,
+  "other": {}
+ },
+ "nutrition_variants": null,
+ "nutrition_as_of": "2026-10-07",
+ "nutrition_note": "特定原材料・栄養成分の数値には、みそ汁も含まれております。",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "乳",
+   "えび",
+   "いか",
+   "大豆",
+   "りんご"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "おすすめ掲載",
+ "in_recommended": true,
+ "official_url": "https://www.matsuyafoods.co.jp/matsunoya/menu/moriawase/mori_kaisen_ikashiromiebi_hp_260701.html",
+ "first_seen_at": "2026-10-11T12:25:53+09:00",
+ "last_seen_at": "2026-10-14",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-11",
+   "price": 1190
+  }
+ ],
+ "source_list": [
+  "moriawase",
+  "osusume"
+ ],
+ "image": null,
+ "current_slug": "moriawase-mori_kaisen_ikashiromiebi_hp_260701"
+}
