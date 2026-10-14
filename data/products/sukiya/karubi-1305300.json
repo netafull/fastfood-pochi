@@ -82,7 +82,7 @@
  ],
  "official_url": "https://www.sukiya.jp/menu/in/karubi/1305300/index.html",
  "first_seen_at": "2026-10-11T14:57:03+09:00",
- "last_seen_at": "2026-10-14",
+ "last_seen_at": "2026-10-15",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -103,9 +103,9 @@
  "allergen_source": {
   "url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
   "label": "アレルゲン一覧",
-  "version": "2026-09-29",
-  "version_text": "2026年9月29日更新",
-  "fetched_at": "2026-10-11T15:58:20+09:00"
+  "version": "2026-10-14",
+  "version_text": "2026年10月14日更新",
+  "fetched_at": "2026-10-15T07:34:25+09:00"
  },
- "pdf_tried": "2026-09-29|2026-09-29"
+ "pdf_tried": "2026-10-14|2026-10-14"
 }

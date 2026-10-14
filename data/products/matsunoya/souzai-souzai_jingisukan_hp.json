@@ -1,0 +1,61 @@
+{
+ "chain": "matsunoya",
+ "product_id": "souzai-souzai_jingisukan_hp",
+ "name": "単品ジンギスカン",
+ "category": "惣菜",
+ "price": 990,
+ "price_note": "税込。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "launch_date": "2026-10-14",
+ "launch_date_source": "news_article_body",
+ "planned_end_text": null,
+ "news_url": "https://www.matsuyafoods.co.jp/matsunoya/whatsnew/menu/185627.html",
+ "news_title": "とんかつ業態のこだわりが光る、羊肉と野菜のスタミナ飯！「ジンギスカン定食」新発売",
+ "news_date": "2026-10-09",
+ "description": "厳選オージー・シープミートと醤油ベースの特製ダレが絶妙に絡み合う。",
+ "description_full_len": 63,
+ "nutrition": {
+  "kcal": 443.0,
+  "protein_g": 19.7,
+  "fat_g": 31.1,
+  "carbs_g": 23.8,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 4.5,
+  "other": {}
+ },
+ "nutrition_variants": null,
+ "nutrition_as_of": "2026-10-14",
+ "nutrition_note": null,
+ "allergens": {
+  "contains": [
+   "小麦",
+   "大豆",
+   "りんご",
+   "ゼラチン",
+   "バナナ",
+   "ごま"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "新メニュー",
+ "in_recommended": false,
+ "official_url": "https://www.matsuyafoods.co.jp/matsunoya/menu/souzai/souzai_jingisukan_hp_261014.html",
+ "current_slug": "souzai-souzai_jingisukan_hp_261014",
+ "first_seen_at": "2026-10-15T07:31:59+09:00",
+ "last_seen_at": "2026-10-15",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-15",
+   "price": 990
+  }
+ ],
+ "source_list": [
+  "souzai"
+ ],
+ "image": null
+}

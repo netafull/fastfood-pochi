@@ -112,7 +112,7 @@
  ],
  "official_url": "https://www.sukiya.jp/menu/in/unagi/902500/index.html",
  "first_seen_at": "2026-10-11T14:57:03+09:00",
- "last_seen_at": "2026-10-14",
+ "last_seen_at": "2026-10-15",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -129,9 +129,9 @@
  "nutrition_source": {
   "url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
   "label": "栄養成分一覧",
-  "version": "2026-09-29",
-  "version_text": "2026年9月29日更新",
-  "fetched_at": "2026-10-11T15:58:20+09:00"
+  "version": "2026-10-14",
+  "version_text": "2026年10月14日更新",
+  "fetched_at": "2026-10-15T07:34:25+09:00"
  },
  "nutrition_note": "表示した数値には、お好みでお使いいただく調味料（紅生姜・醤油・ドレッシング・七味・カルビ追いダレなど）は含まれていません。",
  "allergens_conditional": {
@@ -141,8 +141,8 @@
  "allergen_source": {
   "url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
   "label": "アレルゲン一覧",
-  "version": "2026-09-29",
-  "version_text": "2026年9月29日更新",
-  "fetched_at": "2026-10-11T15:58:20+09:00"
+  "version": "2026-10-14",
+  "version_text": "2026年10月14日更新",
+  "fetched_at": "2026-10-15T07:34:25+09:00"
  }
 }

@@ -49,9 +49,9 @@
  "official_url": "https://www.mcdonalds.co.jp/products/8610/",
  "first_seen_at": "2026-10-07T21:22:29+09:00",
  "last_seen_at": "2026-10-13",
- "status": "on_sale",
- "ended_observed_at": null,
- "missed_runs": 1,
+ "status": "ended",
+ "ended_observed_at": "2026-10-15",
+ "missed_runs": 2,
  "price_history": [
   {
    "date": "2026-10-07",
@@ -62,5 +62,5 @@
   "/menu/dessert/"
  ],
  "image": null,
- "last_miss_date": "2026-10-14"
+ "last_miss_date": "2026-10-15"
 }

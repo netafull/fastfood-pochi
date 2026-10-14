@@ -8022,6 +8022,18 @@
   ],
   "sukiya": [
    {
+    "date": "2026-10-14T12:05:00",
+    "id": 210904,
+    "link": "https://netaful.jp/fast-food/0210904.html",
+    "product_name": "ローストポーク丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/10/sukiya-roast-pork-004-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【すき家】「ローストポーク丼」ロスポは8枚入り！低温調理のしっとりやわらかい豚肩ロースに、にんにく玉ねぎの醤油だれが旨い"
+   },
+   {
     "date": "2026-10-03T16:00:00",
     "id": 210293,
     "link": "https://netaful.jp/fast-food/0210293.html",
@@ -9618,7 +9630,7 @@
   ]
  },
  "errors": [],
- "fetched_at": "2026-10-14T07:37:04+09:00",
+ "fetched_at": "2026-10-15T07:35:23+09:00",
  "matches": {
   "karayama-19096": [
    209971
@@ -9629,10 +9641,10 @@
   "katsuya-22444": [
    210780
   ],
-  "matsuya-curry-kashmir_hp_261006": [
+  "matsuya-curry-kashmir_hp": [
    210463
   ],
-  "matsuya-teishoku-tei_kuromabo_hp_260929": [
+  "matsuya-teishoku-tei_kuromabo_hp": [
    210253
   ],
   "sukiya-curry-314800": [
@@ -9643,6 +9655,18 @@
   ],
   "sukiya-curry-315000": [
    210077
+  ],
+  "sukiya-don-212600": [
+   210904
+  ],
+  "sukiya-don-212700": [
+   210904
+  ],
+  "sukiya-don-212800": [
+   210904
+  ],
+  "sukiya-don-212900": [
+   210904
   ],
   "sukiya-side-7010400": [
    210293
