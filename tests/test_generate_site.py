@@ -245,5 +245,20 @@ class TestOutputs(unittest.TestCase):
                 g.PRODUCTS, g.DOCS = saved
 
 
+class TestUpdatedLabel(unittest.TestCase):
+    """トップだけに「最終更新: 2026年10月14日 07:37」(日本時間・電書/家電/林檎ポチと同じ書式)を出す。"""
+
+    def test_label_format_is_jst(self):
+        import datetime
+        utc = datetime.datetime(2026, 10, 13, 22, 37, tzinfo=datetime.timezone.utc)  # 日本時間 10/14 07:37
+        self.assertEqual(g.updated_label(utc.astimezone(g.JST)), "最終更新: 2026年10月14日 07:37")
+
+    def test_top_has_label_but_other_pages_do_not(self):
+        top = g.render_top([item()])
+        self.assertIn("最終更新: ", top)
+        shell = g.page_shell("x", "d", "<p>b</p>", "https://example.invalid/")
+        self.assertNotIn("最終更新", shell)  # 全ページに入れると毎日すべてのファイルが変わる
+
+
 if __name__ == "__main__":
     unittest.main()

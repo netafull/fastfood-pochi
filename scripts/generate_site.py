@@ -425,8 +425,15 @@ def render_ad_slot() -> str:
 </div>"""
 
 
+def updated_label(now: datetime.datetime | None = None) -> str:
+    """トップの「最終更新: 2026年10月14日 07:37」。電書・家電・林檎ポチと同じ書式(日本時間)。
+    トップページだけに出す(全ページに入れると、毎日すべてのページのファイルが変わってしまう)。"""
+    now = now or datetime.datetime.now(JST)
+    return f"最終更新: {now.strftime('%Y年%m月%d日 %H:%M')}"
+
+
 def page_shell(title: str, description: str, body: str, canonical: str, extra_head: str = "",
-               header_ad: bool = False) -> str:
+               header_ad: bool = False, header_note: str = "") -> str:
     site_url = CONFIG.get("site_url", "")
     page_title = f'{esc(title)}｜{esc(CONFIG["site_title"])}' if title != CONFIG["site_title"] else esc(title)
 
@@ -507,7 +514,7 @@ def page_shell(title: str, description: str, body: str, canonical: str, extra_he
 <body>
 <header>
 <h1><a href="/">{logo_img}{esc(CONFIG["site_title"])}</a></h1>
-<p>{esc(CONFIG["site_description"])}</p>
+<p>{esc(CONFIG["site_description"])}{(" ｜ " + esc(header_note)) if header_note else ""}</p>
 {related_html}
 </header>
 {header_ad_html}
@@ -755,6 +762,7 @@ placeholder="メニュー名で検索（例: 月見、てりやき、フォカ�
         CONFIG["site_title"], CONFIG["site_description"], body, site_url,
         extra_head=f'<script type="application/ld+json">{site_name_ld}</script>',
         header_ad=True,
+        header_note=updated_label(),
     )
 
 
