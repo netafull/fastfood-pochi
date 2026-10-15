@@ -403,15 +403,26 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 .ad-slot { width: 100%; max-width: 960px; margin: 16px auto; background: var(--card);
   border: 1px solid var(--line); border-radius: 10px; padding: 12px; text-align: center; }
 .ad-slot:has(ins[data-ad-status="unfilled"]) { display: none; }
+/* カード一覧(.grid)の中に差し込まれる枠は、全列をまたいで1行を使う */
+.grid > .ad-slot { grid-column: 1 / -1; max-width: none; margin: 4px 0; }
 """
+
+
+# カード一覧の中に差し込む広告枠の間隔と、1ページ全体での上限(ヘッダー下の1枠は別)。
+# SORT_JSがこの値を使うので、変えるとJSも変わる(コンビニポチと同じ仕組み)
+ADS_EVERY = 12
+ADS_MAX_PER_GRID = 3
 
 
 def render_ad_slot() -> str:
     """手動設置のディスプレイ広告ユニット。
 
-    adsense_client_id / adsense_ad_slot のどちらかが未設定なら何も出さない
-    (ファストフードポチは当面広告なし。2026-10-07 コグレ方針)。
-    置く場所は [data-sortable] のグリッドの外だけ(SORT_JSが並び替えで枠を壊すため)。
+    adsense_client_id / adsense_ad_slot のどちらかが未設定なら何も出さない。
+    サーバー側でHTMLに置くのはヘッダー下と商品ページの枠だけ。カード一覧(.grid)の
+    中の枠は、並び替え・絞り込みのたびに位置が変わるのでSORT_JSが差し込む
+    (render_ad_template参照)。push(読み込み)は枠ごとのインラインscriptではなく、
+    ページ下部のAD_JS(syncAds)がまとめて行う。
+    data-ad-formatはrectangle(autoだと縦長の広告が来る)
     """
     ad_slot = CONFIG.get("adsense_ad_slot", "")
     adsense_id = CONFIG.get("adsense_client_id", "")
@@ -424,8 +435,39 @@ def render_ad_slot() -> str:
      data-ad-slot="{esc(ad_slot)}"
      data-ad-format="rectangle"
      data-full-width-responsive="true"></ins>
-<script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
 </div>"""
+
+
+def render_ad_template() -> str:
+    """SORT_JSがカード一覧に差し込む広告枠の雛形。広告未設定なら空(=JSは何も差し込まない)。
+
+    <template>の中身はDOMに入らないので、これ自体はpushされない。
+    JS無効・検索エンジンにはカードだけが全件見える"""
+    ad = render_ad_slot()
+    return f'<template id="ad-template">{ad}</template>' if ad else ""
+
+
+# 広告のpush(AdSenseへ読み込みを依頼する)をまとめて行う。広告が設定されているページだけに入る。
+# 一度pushした<ins>は再利用できないので、印(dataset.pushed)を付けて二重pushを防ぐ。
+# 隠れている枠は幅0で失敗し、あとで表示しても二度と入らないので、adsbygoogleクラスを
+# 外してAdSenseの対象から除外しておく(次のsyncAdsで表示中なら戻してpushする)
+AD_JS = """
+<script>
+function syncAds() {
+  document.querySelectorAll("ins[data-ad-slot]").forEach(function (ins) {
+    if (ins.dataset.pushed) return;
+    if (ins.offsetParent === null) {
+      ins.classList.remove("adsbygoogle");
+      return;
+    }
+    ins.classList.add("adsbygoogle");
+    ins.dataset.pushed = "1";
+    (window.adsbygoogle = window.adsbygoogle || []).push({});
+  });
+}
+syncAds();
+</script>
+"""
 
 
 def updated_label(now: datetime.datetime | None = None) -> str:
@@ -456,6 +498,7 @@ def page_shell(title: str, description: str, body: str, canonical: str, extra_he
         if adsense_id else ""
     )
     header_ad_html = render_ad_slot() if header_ad else ""
+    ad_js = AD_JS if adsense_id and CONFIG.get("adsense_ad_slot") else ""
 
     # 見出しの左に置くポチシリーズ共通のアイコン。画像が置かれていなければ何も出さない
     logo_img = (
@@ -531,6 +574,7 @@ def page_shell(title: str, description: str, body: str, canonical: str, extra_he
 {policy_link}｜ <a href="/rss.xml">RSS</a> ｜ <a href="/archive/">終了した限定メニュー</a>
 {related_html}
 </footer>
+{ad_js}
 </body>
 </html>
 """
@@ -550,6 +594,34 @@ SORT_JS = """
   var select = document.getElementById('sort-select');
   var chainSel = document.getElementById('chain-filter');
   var statusSel = document.getElementById('status-filter');
+  // 広告枠。サーバー側はグリッドに枠を置かず、並び替え・絞り込みのたびにここで差し込み直す。
+  // 雛形(#ad-template)が無ければ(広告未設定・非対応ブラウザ)何もしない
+  var AD_EVERY = __ADS_EVERY__;
+  var AD_MAX = __ADS_MAX__;
+  var adTpl = document.getElementById('ad-template');
+  function placeAds() {
+    // 既存の枠は全部捨てる(pushした<ins>は再利用できないので、毎回新しく作る)
+    grids.forEach(function (grid) {
+      Array.prototype.slice.call(grid.querySelectorAll('.ad-slot')).forEach(function (a) {
+        a.parentNode.removeChild(a);
+      });
+    });
+    var proto = adTpl && adTpl.content && adTpl.content.firstElementChild;
+    if (!proto) return;
+    // 見えているグリッドの、見えているカード(販売状況で隠れたものは数えない)のAD_EVERY件おきに、
+    // ページ全体でAD_MAX枠まで。i < cards.length なので先頭にも末尾にも置かず、連続もしない
+    var left = AD_MAX;
+    grids.forEach(function (grid) {
+      if (left <= 0 || grid.offsetParent === null) return;
+      var cards = Array.prototype.filter.call(grid.querySelectorAll('.item'), function (el) {
+        return el.style.display !== 'none';
+      });
+      for (var i = AD_EVERY; i < cards.length && left > 0; i += AD_EVERY) {
+        grid.insertBefore(proto.cloneNode(true), cards[i]);
+        left--;
+      }
+    });
+  }
   function apply() {
     var mode = select ? select.value : 'date';
     var chain = chainSel ? chainSel.value : 'all';
@@ -577,6 +649,9 @@ SORT_JS = """
         if (cnt) cnt.textContent = visible;
       }
     });
+    placeAds();
+    // 初回はページ末尾のAD_JSがpushするので、まだ無ければ何もしない
+    if (window.syncAds) window.syncAds();
   }
   if (select) select.addEventListener('change', apply);
   if (chainSel) chainSel.addEventListener('change', apply);
@@ -584,13 +659,12 @@ SORT_JS = """
   apply();
 })();
 </script>
-"""
+""".replace("__ADS_EVERY__", str(ADS_EVERY)).replace("__ADS_MAX__", str(ADS_MAX_PER_GRID))
 
 
-def render_grouped(items: list[dict], sortable: bool = True, ads: bool = False) -> str:
+def render_grouped(items: list[dict], sortable: bool = True) -> str:
     """商品をチェーンごと(config.jsonのchains順)にまとめ、各チェーンの中は販売開始日の新しい順に並べる。"""
     attr = " data-sortable" if sortable else ""
-    ad_html = render_ad_slot() if ads else ""
     sections = []
     active = [c for c in CHAINS if any(it["chain"] == c["slug"] for it in items)]
     for c in active:
@@ -600,10 +674,8 @@ def render_grouped(items: list[dict], sortable: bool = True, ads: bool = False) 
         sections.append(
             f'<section class="chain-group" data-chain="{esc(c["slug"])}">\n'
             f'<h3>{esc(c["name"])} (<span class="cnt">{len(group)}</span>件)</h3>\n'
-            f'<div class="grid"{attr}>\n{cards}\n</div>\n'
-            # 広告はチェーングループの間(最後のグループの後ろには置かない)。
-            # [data-sortable]のグリッドの外に置くので並び替えで位置が壊れない
-            f'{ad_html if ads and c is not active[-1] else ""}\n</section>'
+            # 広告枠はここでは置かない(SORT_JSが見えているカードの間に差し込む)
+            f'<div class="grid"{attr}>\n{cards}\n</div>\n</section>'
         )
     return "\n".join(sections)
 
@@ -682,7 +754,8 @@ def render_grid_page(title: str, description: str, items: list[dict], canonical:
     count_text = f"{len(items)}件" if not status_filter else f"{len(items)}件（販売中{on}件）"
     body = f"""<h2>{esc(title)} ({count_text})</h2>
 {filters}
-{render_grouped(items, ads=True)}
+{render_grouped(items)}
+{render_ad_template() if show_filters else ""}
 {SORT_JS if show_filters else ""}
 {reviews_section}"""
     return page_shell(title, description, body, canonical, header_ad=True)
@@ -736,7 +809,8 @@ placeholder="メニュー名で検索（例: 月見、てりやき、フォカ�
     if shown:
         list_section = f"""<h2>販売中の限定メニュー ({len(on_sale)}件)</h2>
 {filter_bar(True, "on_sale")}
-{render_grouped(shown, ads=True)}
+{render_grouped(shown)}
+{render_ad_template()}
 {SORT_JS}"""
     else:
         list_section = "<h2>販売中の限定メニュー</h2><p class='empty'>まだ記録がありません。</p>"

@@ -114,6 +114,96 @@ class TestItemPage(unittest.TestCase):
         self.assertIn("googletagmanager.com/gtag/js?id=G-TEST123", h)
 
 
+class TestAdSlots(unittest.TestCase):
+    """広告(AdSense)。ヘッダー下1枠＋カード一覧の中(JSが差し込む。最大ADS_MAX_PER_GRID枠)、商品ページは1枠。"""
+
+    def setUp(self):
+        from unittest import mock
+        p = mock.patch.dict(g.CONFIG, {"adsense_client_id": "ca-pub-1", "adsense_ad_slot": "2"})
+        p.start()
+        self.addCleanup(p.stop)
+        self.items = [item(chain=c, product_id=f"{c}{i}") for c in ("mcdonalds", "mos", "matsuya") for i in range(3)]
+
+    def pages(self):
+        return {
+            "grid": g.render_grid_page("週", "d", self.items, "https://x/"),
+            "top": g.render_top(self.items),
+            "item": g.render_item_page(self.items[0]),
+        }
+
+    def test_config_has_adsense_values(self):
+        real = json.loads((Path(g.ROOT) / "config.json").read_text(encoding="utf-8"))
+        self.assertTrue(real["adsense_client_id"].startswith("ca-pub-"))
+        self.assertTrue(real["adsense_ad_slot"])
+
+    def test_head_script_and_vignette_opt_out(self):
+        for name, h in self.pages().items():
+            self.assertIn("adsbygoogle.js?client=ca-pub-1", h.split("</head>")[0], name)
+            self.assertNotIn("<a href", h, name)
+            self.assertNotIn("<a class", h, name)
+
+    def test_no_server_side_ad_inside_sortable_grid(self):
+        for name, h in self.pages().items():
+            for m in re.finditer(r'<div class="grid" data-sortable>(.*?)\n</div>\n', h, re.S):
+                self.assertNotIn("ad-slot", m.group(1), name)
+                self.assertNotIn("adsbygoogle", m.group(1), name)
+
+    def test_grid_pages_have_ad_js_template_and_constants(self):
+        for name in ("grid", "top"):
+            h = self.pages()[name]
+            self.assertIn("function syncAds()", h, name)
+            self.assertIn(f"var AD_EVERY = {g.ADS_EVERY};", h, name)
+            self.assertIn(f"var AD_MAX = {g.ADS_MAX_PER_GRID};", h, name)
+            self.assertEqual(h.count('<template id="ad-template">'), 1, name)
+            self.assertNotIn("__ADS_", h, name)
+            self.assertGreater(h.rindex("syncAds();"), h.index("var AD_EVERY"), name)
+            # ヘッダー下1枠 + 雛形1つ。実際の差し込み(最大3枠)はJS
+            self.assertEqual(h.split("<body>")[1].count('<ins class="adsbygoogle"'), 2, name)
+        self.assertEqual((g.ADS_EVERY, g.ADS_MAX_PER_GRID), (12, 3))
+
+    def test_item_page_has_one_ad(self):
+        h = self.pages()["item"]
+        self.assertEqual(h.split("<body>")[1].count('<ins class="adsbygoogle"'), 1)
+        self.assertNotIn("<template", h)
+        self.assertEqual(h.count("adsbygoogle || []).push"), 1)  # syncAdsの1回だけ(枠ごとのinline pushなし)
+        h2 = g.render_item_page(item(nutrition=None, allergens=None, price_history=[]))
+        self.assertEqual(h2.split("<body>")[1].count('<ins class="adsbygoogle"'), 1)
+
+    def test_nothing_when_unset(self):
+        from unittest import mock
+        with mock.patch.dict(g.CONFIG, {"adsense_client_id": "", "adsense_ad_slot": ""}):
+            for name, h in self.pages().items():
+                self.assertNotIn("adsbygoogle", h.replace(g.CSS, ""), name)
+                self.assertNotIn("function syncAds", h, name)
+                self.assertNotIn("<template", h, name)
+                self.assertNotIn('class="ad-slot"', h, name)
+                self.assertNotIn("data-google-vignette", h, name)
+
+    def test_one_side_unset_outputs_no_slot(self):
+        from unittest import mock
+        for key in ("adsense_client_id", "adsense_ad_slot"):
+            with mock.patch.dict(g.CONFIG, {key: ""}):
+                for name, h in self.pages().items():
+                    self.assertNotIn('class="ad-slot"', h, name)
+
+    def test_no_ads_on_empty_pages(self):
+        self.assertNotIn('class="ad-slot"', g.render_grid_page("週", "d", [], "https://x/"))
+
+    def test_scripts_are_valid_javascript(self):
+        import os, shutil, subprocess, tempfile
+        node = shutil.which("node") or "/opt/homebrew/opt/node@22/bin/node"
+        if not os.path.exists(node):
+            self.skipTest("node がない")
+        for m in re.finditer(r"<script>(.*?)</script>", self.pages()["top"], re.S):
+            with tempfile.NamedTemporaryFile("w", suffix=".js", delete=False, encoding="utf-8") as f:
+                f.write(m.group(1))
+            try:
+                r = subprocess.run([node, "--check", f.name], capture_output=True, text=True)
+                self.assertEqual(r.returncode, 0, r.stderr)
+            finally:
+                os.unlink(f.name)
+
+
 class TestTop(unittest.TestCase):
     def test_website_jsonld(self):
         h = g.render_top([item()])
@@ -143,7 +233,8 @@ class TestTop(unittest.TestCase):
         self.assertNotIn("社別", h)
 
     def test_sortable_grid_contains_only_cards(self):
-        h = g.render_top([item(), item(product_id="2")])
+        # 広告設定済みだと全<a>にdata-google-vignetteが付くので、外してから見る
+        h = g.render_top([item(), item(product_id="2")]).replace(' data-google-vignette="false"', "")
         for m in re.finditer(r'<div class="grid" data-sortable>\n(.*?)\n</div>\n', h, re.S):
             inner = m.group(1)
             self.assertNotIn("ad-slot", inner)
@@ -167,7 +258,7 @@ class TestTop(unittest.TestCase):
         self.assertNotIn("<h3>", h)
 
     def test_about_mentions_fast_meshi_with_link(self):
-        h = g.render_top([item()])
+        h = g.render_top([item()]).replace(' data-google-vignette="false"', "")
         self.assertIn("ファスト飯", h)
         self.assertIn('<a href="https://netaful.jp/">ネタフル</a>', h)
         self.assertIn("非公式サイト", h)

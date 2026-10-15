@@ -570,7 +570,8 @@ class TestSite(unittest.TestCase):
 
     def test_chain_list_footer_and_sections(self):
         self.assertIn("/chains/sukiya/", g.render_chains_top())
-        h = g.page_shell("x", "d", "<p>b</p>", "https://fastfood.netaful.jp/")
+        h = g.page_shell("x", "d", "<p>b</p>", "https://fastfood.netaful.jp/").replace(
+            ' data-google-vignette="false"', "")  # 広告設定済みだと全<a>に付く
         self.assertIn('<a href="https://www.sukiya.jp/">すき家</a>', h)
 
     def test_card_and_grouping(self):
