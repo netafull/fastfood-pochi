@@ -95,9 +95,9 @@
  "official_url": "https://www.yoshinoya.com/menu/set/tsukimi_gyutoji_tei/",
  "first_seen_at": "2026-10-11T14:19:47+09:00",
  "last_seen_at": "2026-10-14",
- "status": "on_sale",
- "ended_observed_at": null,
- "missed_runs": 1,
+ "status": "ended",
+ "ended_observed_at": "2026-10-16",
+ "missed_runs": 2,
  "price_history": [
   {
    "date": "2026-10-11",
@@ -122,5 +122,5 @@
   "mark": "▲",
   "meaning": "原材料「あさり」には『かに』が共生しています。 原材料「あおさ」は『えび』『かに』が混ざる漁法で採取されています。"
  },
- "last_miss_date": "2026-10-15"
+ "last_miss_date": "2026-10-16"
 }
