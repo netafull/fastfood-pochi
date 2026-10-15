@@ -403,8 +403,8 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 .ad-slot { width: 100%; max-width: 960px; margin: 16px auto; background: var(--card);
   border: 1px solid var(--line); border-radius: 10px; padding: 12px; text-align: center; }
 .ad-slot:has(ins[data-ad-status="unfilled"]) { display: none; }
-/* カード一覧(.grid)の中に差し込まれる枠は、全列をまたいで1行を使う */
-.grid > .ad-slot { grid-column: 1 / -1; max-width: none; margin: 4px 0; }
+/* カード一覧(.grid)の中に差し込まれる枠は、カード1枚ぶんのマス(列幅)を使う */
+.grid > .ad-slot { max-width: none; margin: 0; }
 """
 
 
@@ -610,15 +610,20 @@ SORT_JS = """
     if (!proto) return;
     // 見えているグリッドの、見えているカード(販売状況で隠れたものは数えない)のAD_EVERY件おきに、
     // ページ全体でAD_MAX枠まで。i < cards.length なので先頭にも末尾にも置かず、連続もしない
+    // 見えているグリッドが複数あるときは、先頭の社に偏らないよう1グリッドあたりの上限を割り振る
+    var visible = grids.filter(function (g) { return g.offsetParent !== null; }).length || 1;
+    var perGrid = Math.max(1, Math.floor(AD_MAX / visible));
     var left = AD_MAX;
     grids.forEach(function (grid) {
       if (left <= 0 || grid.offsetParent === null) return;
       var cards = Array.prototype.filter.call(grid.querySelectorAll('.item'), function (el) {
         return el.style.display !== 'none';
       });
-      for (var i = AD_EVERY; i < cards.length && left > 0; i += AD_EVERY) {
+      var placed = 0;
+      for (var i = AD_EVERY; i < cards.length && left > 0 && placed < perGrid; i += AD_EVERY) {
         grid.insertBefore(proto.cloneNode(true), cards[i]);
         left--;
+        placed++;
       }
     });
   }

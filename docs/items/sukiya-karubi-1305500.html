@@ -151,8 +151,8 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 .ad-slot { width: 100%; max-width: 960px; margin: 16px auto; background: var(--card);
   border: 1px solid var(--line); border-radius: 10px; padding: 12px; text-align: center; }
 .ad-slot:has(ins[data-ad-status="unfilled"]) { display: none; }
-/* カード一覧(.grid)の中に差し込まれる枠は、全列をまたいで1行を使う */
-.grid > .ad-slot { grid-column: 1 / -1; max-width: none; margin: 4px 0; }
+/* カード一覧(.grid)の中に差し込まれる枠は、カード1枚ぶんのマス(列幅)を使う */
+.grid > .ad-slot { max-width: none; margin: 0; }
 </style>
 
 </head>
