@@ -224,6 +224,9 @@ def is_ended(item: dict) -> bool:
     return item.get("status") == "ended"
 
 
+# 注意: item_url はサイトルートからの相対パス(先頭に / が無い)。**カードのhrefに使うときは先頭に "/" を付ける**。
+# 付け忘れると、/chains/xxx/ や /weeks/xxx/ のような階層のあるページで /chains/xxx/items/… を指して404になる
+# (2026-10-15に、ファストフードポチのチェーンページとコンビニポチのチェーン・週別ページで発覚)。
 def item_url(item: dict) -> str:
     return f"items/{item['chain']}-{item['product_id']}.html"
 
@@ -261,7 +264,7 @@ def render_card(item: dict) -> str:
     status = "ended" if is_ended(item) else "on_sale"
     status_html = '<span class="st st-ended">終了</span>' if is_ended(item) else '<span class="st st-on">販売中</span>'
     kind = item.get("limited_kind") or ""
-    return f"""<a class="item" href="{esc(item_url(item))}" data-kcal="{kcal if kcal is not None else ''}"
+    return f"""<a class="item" href="/{esc(item_url(item))}" data-kcal="{kcal if kcal is not None else ''}"
    data-date="{esc(date)}" data-chain="{esc(item['chain'])}" data-status="{status}">
   <div class="badge">{esc(chain_name)}</div>{status_html}
   <div class="t">{esc(item['name'])}</div>
