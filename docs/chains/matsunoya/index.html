@@ -401,6 +401,28 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 </div></template>
 
 <script>
+
+function computeAdPlan(counts, every, max) {
+  var eligible = [];
+  counts.forEach(function (n, i) { if (n > every) eligible.push(i); });
+  var chosen = eligible;
+  if (eligible.length > max) {
+    chosen = [];
+    for (var k = 0; k < max; k++) chosen.push(eligible[Math.floor(k * eligible.length / max)]);
+  }
+  var perGrid = Math.max(1, Math.floor(max / (chosen.length || 1)));
+  var left = max;
+  var plan = counts.map(function () { return []; });
+  chosen.forEach(function (gi) {
+    var placed = 0;
+    for (var i = every; i < counts[gi] && left > 0 && placed < perGrid; i += every) {
+      plan[gi].push(i);
+      left--;
+      placed++;
+    }
+  });
+  return plan;
+}
 (function () {
   // チェーンごとのグループ(.chain-group)内でだけ並び替える。絞り込みはカード単位・グループ単位で隠す
   var grids = Array.prototype.slice.call(document.querySelectorAll('[data-sortable]'));
@@ -414,43 +436,49 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
   var AD_MAX = 3;
   var adTpl = document.getElementById('ad-template');
   function placeAds() {
-    // 既存の枠は全部捨てる(pushした<ins>は再利用できないので、毎回新しく作る)
-    grids.forEach(function (grid) {
-      Array.prototype.slice.call(grid.querySelectorAll('.ad-slot')).forEach(function (a) {
-        a.parentNode.removeChild(a);
-      });
-    });
     var proto = adTpl && adTpl.content && adTpl.content.firstElementChild;
     if (!proto) return;
-    // 見えているグリッドの、見えているカード(販売状況で隠れたものは数えない)のAD_EVERY件おきに、
-    // ページ全体でAD_MAX枠まで。i < cards.length なので先頭にも末尾にも置かず、連続もしない
-    // AD_EVERY件おきに、ページ全体でAD_MAX枠まで。先頭にも末尾にも置かず、枠が連続もしない。
-    // 広告を置けるのは、見えていてAD_EVERY件を超えるグリッドだけ。
-    // 置ける社がAD_MAXより多いときは、先頭に偏らないよう等間隔に選ぶ
-    // 選んだ社の数でAD_MAXを割り、1グリッドあたりの上限にする
-    var getItems = function (g) {
-      return Array.prototype.filter.call(g.querySelectorAll('.item'), function (el) {
-        return el.style.display !== 'none';
-      });
+    // 広告枠(.ad-slot)は、表示済みの広告を読み込み直さないよう、DOMから外さない。
+    // 並べ替えで動かすのはカード(.item)だけ。枠をDOMから外すのは、下の「余った枠を捨てる」1か所だけ。
+    // 必要な枠数が今の枠数と同じなら枠はそのまま、足りない分だけ新規に作る(pushは新しい枠だけ)。
+    // 見えていないグリッドの枠は触らず残しておき、再表示されたら再利用する
+    var allItems = function (g) { return Array.prototype.slice.call(g.querySelectorAll('.item')); };
+    // 販売状況の絞り込みで隠れたカードは数えない
+    var visibleItems = function (g) {
+      return allItems(g).filter(function (el) { return el.style.display !== 'none'; });
     };
-    var eligible = grids.filter(function (g) {
-      return g.offsetParent !== null && getItems(g).length > AD_EVERY;
-    });
-    var chosen = eligible;
-    if (eligible.length > AD_MAX) {
-      chosen = [];
-      for (var k = 0; k < AD_MAX; k++) chosen.push(eligible[Math.floor(k * eligible.length / AD_MAX)]);
-    }
-    var perGrid = Math.max(1, Math.floor(AD_MAX / (chosen.length || 1)));
-    var left = AD_MAX;
-    chosen.forEach(function (grid) {
-      var cards = getItems(grid);
-      var placed = 0;
-      for (var i = AD_EVERY; i < cards.length && left > 0 && placed < perGrid; i += AD_EVERY) {
-        grid.insertBefore(proto.cloneNode(true), cards[i]);
-        left--;
-        placed++;
+    var shown = grids.map(function (g) { return g.offsetParent !== null; });
+    var counts = grids.map(function (g, i) { return shown[i] ? visibleItems(g).length : 0; });
+    var plan = computeAdPlan(counts, AD_EVERY, AD_MAX);
+    grids.forEach(function (grid, gi) {
+      if (!shown[gi]) return;
+      var pos = plan[gi];
+      var slots = Array.prototype.filter.call(grid.children, function (el) {
+        return el.classList.contains('ad-slot');
+      });
+      while (slots.length > pos.length) {
+        var extra = slots.pop();
+        extra.parentNode.removeChild(extra);
       }
+      while (slots.length < pos.length) {
+        var fresh = proto.cloneNode(true);
+        grid.appendChild(fresh);
+        slots.push(fresh);
+      }
+      if (!slots.length) return;
+      var put = function (el, ref) {
+        if (el.classList.contains('ad-slot')) return;
+        if (ref) grid.insertBefore(el, ref); else grid.appendChild(el);
+      };
+      var vis = visibleItems(grid);
+      var hidden = allItems(grid).filter(function (el) { return vis.indexOf(el) < 0; });
+      var from = 0;
+      pos.forEach(function (p, j) {
+        for (var k = from; k < p; k++) put(vis[k], slots[j]);
+        from = p;
+      });
+      for (var k = from; k < vis.length; k++) put(vis[k], null);
+      hidden.forEach(function (el) { put(el, null); });
     });
   }
   function apply() {

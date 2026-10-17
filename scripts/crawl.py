@@ -1953,6 +1953,8 @@ def build_marugame_product(entry: dict, detail: dict | None, category_name: str 
     product = {
         "chain": "marugame",
         "product_id": entry["product_id"],
+        "slug": entry.get("slug"),
+        "category_id": entry.get("category_id"),
         "name": entry["name"],
         "category": category_name,
         "price": price,
@@ -1987,6 +1989,92 @@ def build_marugame_product(entry: dict, detail: dict | None, category_name: str 
     if same_name:
         product["same_name_as"] = same_name
     return product
+
+
+def marugame_slug(product_id: str | None, slug: str | None = None) -> str | None:
+    """商品の slug。保存されていなければ「カテゴリ-slug」の最初の「-」以降から補う(2026-10-17の既存3件は slug を持たない)。"""
+    if slug:
+        return slug
+    if product_id and "-" in product_id:
+        return product_id.split("-", 1)[1] or None
+    return None
+
+
+def marugame_category_id(product: dict) -> str | None:
+    """記録済み商品の現在のカテゴリID。保存されていなければ product_id の先頭(最初に記録したときのカテゴリ)。"""
+    if product.get("category_id"):
+        return product["category_id"]
+    pid = product.get("product_id") or ""
+    return pid.split("-", 1)[0] if "-" in pid else None
+
+
+def marugame_resolve_moves(entries: dict, recorded: list[dict], baseline: set[str] | None):
+    """公式が商品を別カテゴリへ移したとき(商品ID「カテゴリ-slug」が変わる)に、新規と終了の二重記録を防ぐ。純粋関数。
+
+    entries: {今日の一覧の商品ID: 項目}。recorded: 記録済みの商品。baseline: 基準線のID集合(None可。書き換えない)。
+    今日の一覧に無い商品ID(記録済み or 基準線)と、同じ slug で今日の一覧に新しく現れた商品IDが
+    1対1で対応するときだけ「移動した」とみなす。同じ slug の記録済み商品が今日の一覧にも出ている(mentaiko のような
+    真の重複・移動元と移動先に同時に出る)ときは別商品として扱い、何も付け替えない。
+    戻り値: (キーを記録済みの商品IDに付け替えた entries, 付け替えた {今日のID: 記録済みID},
+             基準線の定番が移動したとみなす今日のID集合)。
+    """
+    baseline = baseline or set()
+    recorded_by_pid = {p["product_id"]: p for p in recorded}
+    # 今日の一覧に新しく現れた(記録済みでも基準線でもない)ID を slug ごとに
+    fresh: dict[str, list[str]] = {}
+    for pid, e in entries.items():
+        if pid in recorded_by_pid or pid in baseline:
+            continue
+        slug = marugame_slug(pid, e.get("slug"))
+        if slug:
+            fresh.setdefault(slug, []).append(pid)
+
+    def vanished(pids) -> dict[str, list[str]]:
+        out: dict[str, list[str]] = {}
+        for pid in pids:
+            if pid in entries:
+                continue
+            slug = marugame_slug(pid, (recorded_by_pid.get(pid) or {}).get("slug"))
+            if slug:
+                out.setdefault(slug, []).append(pid)
+        return out
+
+    renames: dict[str, str] = {}
+    gone_recorded = vanished(recorded_by_pid)
+    for slug, news in fresh.items():
+        if len(news) == 1 and len(gone_recorded.get(slug, [])) == 1:
+            renames[news[0]] = gone_recorded[slug][0]
+    # 記録済みに当たらなかったものは、基準線の定番が移動したのか見る
+    gone_baseline = vanished(p for p in baseline if p not in recorded_by_pid)
+    baseline_moved = set()
+    for slug, news in fresh.items():
+        news = [n for n in news if n not in renames]
+        if len(news) == 1 and len(gone_baseline.get(slug, [])) == 1 and len(fresh[slug]) == 1:
+            baseline_moved.add(news[0])
+    out = {}
+    for pid, e in entries.items():
+        if pid in renames:
+            out[renames[pid]] = dict(e, product_id=renames[pid], moved_from_pid=pid)
+        else:
+            out[pid] = e
+    return out, renames, baseline_moved
+
+
+def marugame_apply_move(existing: dict, e: dict, new_category_name: str | None, today: str) -> bool:
+    """記録済み商品のカテゴリが変わっていたら、カテゴリ・URLを更新して履歴を1件残す(IDは変えない)。変えたら True。"""
+    old = marugame_category_id(existing)
+    new = e.get("category_id")
+    if not new or new == old:
+        return False
+    existing.setdefault("category_history", []).append({
+        "date": today, "from_category_id": old, "to_category_id": new,
+        "from_category": existing.get("category"), "to_category": new_category_name,
+    })
+    existing["category_id"] = new
+    existing["slug"] = marugame_slug(existing.get("product_id"), e.get("slug") or existing.get("slug"))
+    if new_category_name:
+        existing["category"] = new_category_name
+    return True
 
 
 def crawl_marugame(getter, pending: dict, stats: dict, today: str | None = None) -> None:
@@ -2091,12 +2179,21 @@ def crawl_marugame(getter, pending: dict, stats: dict, today: str | None = None)
     st["limited_seen"] = sum(1 for e in entries.values() if e["is_limited"])
 
     baseline = baseline_for(chain)
+    # 商品が別カテゴリへ移ったときの付け替え。一覧5ページが全部読めた回だけ(読めないページに旧IDが
+    # 隠れていると、真の重複を移動と取り違えるため)。基準線のファイルは書き換えず、この回の判定にだけ足す
+    if all_ok and entries:
+        entries, moves, baseline_moved = marugame_resolve_moves(entries, load_chain_products(chain), baseline)
+        for new_pid, old_pid in moves.items():
+            print(f"[info] {chain} カテゴリ移動とみなす: {old_pid} -> {new_pid}", file=sys.stderr)
+        if baseline is not None:
+            baseline = baseline | baseline_moved
     entries = burst_filter(chain, entries, baseline, pending, stats, today)
     existing_all = None
     detail_block_streak = 0
     for pid, e in entries.items():
         existing = load_product(chain, pid)
         if existing is not None:
+            marugame_apply_move(existing, e, cat_names.get(e.get("category_id")), today)
             was_ended = existing.get("status") == "ended"
             old_ended = existing.get("ended_observed_at")
             ref = yoshinoya_season_ref(existing)

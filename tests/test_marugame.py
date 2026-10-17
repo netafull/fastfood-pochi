@@ -384,6 +384,113 @@ class TestTracking(unittest.TestCase):
             self.assertEqual(p["price_history"][-1], {"date": "2026-12-28", "price": 800, "relaunch": True})
 
 
+class TestCategoryMove(unittest.TestCase):
+    """公式が商品を別カテゴリへ移しても、新規と終了を二重に記録しない(商品IDは「カテゴリ-slug」のまま)。"""
+
+    @staticmethod
+    def E(cat, slug):
+        return {"product_id": f"{cat}-{slug}", "slug": slug, "category_id": cat}
+
+    @staticmethod
+    def rec(pid, **kw):
+        return dict({"product_id": pid}, **kw)
+
+    def test_recorded_item_moved_is_renamed_to_the_recorded_id(self):
+        entries = {"udon-kake": self.E("udon", "kake"), "tempura-nikuudon": self.E("tempura", "nikuudon")}
+        out, moves, bl = crawl.marugame_resolve_moves(entries, [self.rec("udon-nikuudon")], {"udon-kake"})
+        self.assertEqual(moves, {"tempura-nikuudon": "udon-nikuudon"})
+        self.assertEqual(list(out), ["udon-kake", "udon-nikuudon"])
+        self.assertEqual((out["udon-nikuudon"]["category_id"], out["udon-nikuudon"]["moved_from_pid"]),
+                         ("tempura", "tempura-nikuudon"))
+        self.assertEqual(bl, set())
+
+    def test_baseline_staple_moved_is_not_new(self):
+        entries = {"tempura-kake": self.E("tempura", "kake")}
+        out, moves, bl = crawl.marugame_resolve_moves(entries, [], {"udon-kake", "udon-kama"})
+        self.assertEqual((moves, bl), ({}, {"tempura-kake"}))
+        self.assertEqual(list(out), ["tempura-kake"])
+
+    def test_simultaneous_duplicate_slug_is_not_renamed(self):
+        # mentaiko がご飯ものとトッピングの両方にある(どちらも今日の一覧にある): 別商品
+        entries = {"gohanmono-mentaiko": self.E("gohanmono", "mentaiko"), "topping-mentaiko": self.E("topping", "mentaiko"),
+                   "tempura-mentaiko": self.E("tempura", "mentaiko")}
+        out, moves, bl = crawl.marugame_resolve_moves(entries, [self.rec("gohanmono-mentaiko")],
+                                                      {"gohanmono-mentaiko", "topping-mentaiko"})
+        self.assertEqual((moves, bl), ({}, set()))
+        self.assertEqual(out, entries)
+
+    def test_recorded_item_listed_at_both_old_and_new_place_is_not_renamed(self):
+        entries = {"udon-x": self.E("udon", "x"), "tempura-x": self.E("tempura", "x")}
+        out, moves, bl = crawl.marugame_resolve_moves(entries, [self.rec("udon-x")], {"udon-x"})
+        self.assertEqual((moves, bl), ({}, set()))
+        self.assertEqual(out, entries)
+
+    def test_ambiguous_candidates_are_left_alone(self):
+        # 消えた記録済みが同じ slug で2件、または新しく出たのが2件: 1対1でないので付け替えない
+        entries = {"tempura-x": self.E("tempura", "x")}
+        _, moves, _ = crawl.marugame_resolve_moves(entries, [self.rec("udon-x"), self.rec("topping-x")], set())
+        self.assertEqual(moves, {})
+        entries = {"tempura-x": self.E("tempura", "x"), "topping-x": self.E("topping", "x")}
+        _, moves, bl = crawl.marugame_resolve_moves(entries, [self.rec("udon-x")], {"udon-x"})
+        self.assertEqual((moves, bl), ({}, set()))
+
+    def test_slug_is_filled_from_product_id_when_missing(self):
+        self.assertEqual(crawl.marugame_slug("udon-nikukaramaze"), "nikukaramaze")
+        self.assertEqual(crawl.marugame_slug("udonbento-mentaitororoudonbento"), "mentaitororoudonbento")
+        self.assertEqual(crawl.marugame_slug("udon-a", "stored"), "stored")
+        self.assertIsNone(crawl.marugame_slug("noprefix"))
+        self.assertEqual(crawl.marugame_category_id({"product_id": "udon-a"}), "udon")
+        self.assertEqual(crawl.marugame_category_id({"product_id": "udon-a", "category_id": "tempura"}), "tempura")
+        # slug を持たない既存データ(旧形式)でも移動を検出できる
+        entries = {"tempura-nikukaramaze": self.E("tempura", "nikukaramaze")}
+        _, moves, _ = crawl.marugame_resolve_moves(entries, [self.rec("udon-nikukaramaze")], set())
+        self.assertEqual(moves, {"tempura-nikukaramaze": "udon-nikukaramaze"})
+
+    def _moved_pages(self, moved_slug):
+        pages = S.default_pages(drop=(moved_slug,))
+        if moved_slug == "genteiudon":
+            moved = S.entry("tempura", "genteiudon", "合成限定うどん", {"regular": 800}, ["期間限定（limited_time_item）"])
+        else:
+            moved = S.entry("tempura", moved_slug, "合成かけうどん", {"regular": 440})
+        tempura = [S.entry("tempura", "ebi", "合成えび天", {"piece": 200}), moved]
+        pages["/menu/tempura/"] = S.list_page("tempura", tempura, tempura)
+        return pages
+
+    def test_crawl_recorded_item_moved_keeps_id_and_updates_category(self):
+        with TempData():
+            run(FakeMaru(S.default_pages()), D1)
+            self.assertEqual(ids(), {"udon-genteiudon"})
+            g2 = FakeMaru(self._moved_pages("genteiudon"))
+            for day in (D2, D3, D4):
+                _, st = run(g2 if day == D2 else FakeMaru(self._moved_pages("genteiudon")), day)
+                self.assertEqual((st["new_products"], st["ended"]), (0, 0))
+            self.assertEqual(ids(), {"udon-genteiudon"})
+            p = prod("udon-genteiudon")
+            self.assertEqual((p["status"], p["missed_runs"], p["category_id"], p["slug"]), ("on_sale", 0, "tempura", "genteiudon"))
+            self.assertEqual(p["official_url"], f"{BASE}/menu/tempura/genteiudon/")
+            self.assertEqual(len(p["category_history"]), 1)
+            self.assertEqual((p["category_history"][0]["from_category_id"], p["category_history"][0]["to_category_id"]),
+                             ("udon", "tempura"))
+            self.assertNotIn(f"{BASE}/menu/tempura/genteiudon/", g2.calls)  # 詳細は取り直さない
+
+    def test_crawl_baseline_staple_moved_is_not_recorded_as_new(self):
+        with TempData():
+            run(FakeMaru(S.default_pages()), D1)
+            g2 = FakeMaru(self._moved_pages("kake"))
+            _, st = run(g2, D2)
+            self.assertEqual(st["new_products"], 0)
+            self.assertEqual(ids(), {"udon-genteiudon"})
+            self.assertNotIn("tempura-kake", crawl.baseline_for("marugame"))  # 基準線のファイルは書き換えない
+            self.assertTrue(st["list_ok"])
+
+    def test_no_move_resolution_when_a_list_page_failed(self):
+        with TempData():
+            run(FakeMaru(S.default_pages()), D1)
+            pages = self._moved_pages("genteiudon")
+            run(FakeMaru(pages, fail={"/menu/gohanmono/"}), D2)
+            self.assertNotIn("category_history", prod("udon-genteiudon"))
+
+
 class TestBurstGuard(unittest.TestCase):
     def extras(self, n):
         return [S.entry("udon", f"bulk{i}", f"合成大量{i}", {"regular": 500}) for i in range(n)]

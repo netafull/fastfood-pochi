@@ -203,6 +203,52 @@ class TestAdSlots(unittest.TestCase):
             finally:
                 os.unlink(f.name)
 
+    def _run_ad_plan(self, cases):
+        import json, os, shutil, subprocess
+        node = shutil.which("node") or "/opt/homebrew/opt/node@22/bin/node"
+        if not os.path.exists(node):
+            self.skipTest("node がない")
+        script = (
+            g.AD_PLAN_JS
+            + "\nconsole.log(JSON.stringify(%s.map(function (c) { return computeAdPlan(c, %d, %d); })));"
+            % (json.dumps(cases), g.ADS_EVERY, g.ADS_MAX_PER_GRID)
+        )
+        r = subprocess.run([node, "-e", script], capture_output=True, text=True)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        return json.loads(r.stdout)
+
+    def test_compute_ad_plan(self):
+        cases = [[0], [11], [12], [13], [30], [42, 65, 34, 11, 10],
+                 [13, 13, 13, 13, 13], [212], [], [13, 5, 20]]
+        got = self._run_ad_plan(cases)
+        self.assertEqual(got[0], [[]])
+        self.assertEqual(got[1], [[]])
+        self.assertEqual(got[2], [[]])          # ちょうどAD_EVERY件は置かない
+        self.assertEqual(got[3], [[12]])        # 13件: 末尾の1件手前
+        self.assertEqual(got[4], [[12, 24]])    # 30件: 36は範囲外
+        self.assertEqual(got[5], [[12], [12], [12], [], []])  # 置ける3社に1枠ずつ
+        # 13件以上が5社: 等間隔に3社(0,1,3番目)を選び1枠ずつ
+        self.assertEqual(got[6], [[12], [12], [], [12], []])
+        self.assertEqual(got[7], [[12, 24, 36]])  # 単一グリッドは3枠
+        self.assertEqual(got[8], [])
+        self.assertEqual(got[9], [[12], [], [12]])
+        for plan, counts in zip(got, cases):
+            self.assertLessEqual(sum(len(p) for p in plan), g.ADS_MAX_PER_GRID)
+            for p, n in zip(plan, counts):
+                self.assertEqual(p, sorted(set(p)))
+                for i in p:
+                    self.assertTrue(0 < i < n)
+
+    def test_place_ads_never_detaches_ad_slots(self):
+        # 枠をDOMから外してよいのは「余った枠を捨てる」1か所だけ。並べ替えは.itemしか動かさない
+        js = g.SORT_JS
+        self.assertEqual(js.count("removeChild("), 1)
+        self.assertIn("slots.pop()", js)
+        self.assertNotIn("innerHTML", js)
+        self.assertIn("el.classList.contains('ad-slot')", js)
+        self.assertNotIn("__AD_PLAN__", js)
+        self.assertIn("function computeAdPlan", js)
+
 
 class TestTop(unittest.TestCase):
     def test_website_jsonld(self):
