@@ -1,0 +1,59 @@
+{
+ "chain": "marugame",
+ "product_id": "topping-sudachi",
+ "name": "すだち",
+ "category": "薬味・トッピング",
+ "price": 90,
+ "price_note": "税込。店舗により販売メニューや価格が異なる場合があります。",
+ "price_variants": null,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "description": "香り豊かで果汁たっぷりの徳島県産のすだちを半分にカットしてご提供。",
+ "description_full_len": 134,
+ "nutrition": {
+  "kcal": 3.0,
+  "protein_g": 0.1,
+  "fat_g": 0.0,
+  "carbs_g": 0.8,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 0.0,
+  "other": {
+   "ナトリウム": "0mg"
+  }
+ },
+ "nutrition_variants": null,
+ "nutrition_note": "栄養成分値は商品のレシピに基づく推定値で、店内の手づくりのため実際の商品と差が出ることがあります",
+ "allergens": {
+  "contains": [],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "期間限定",
+ "badges": [
+  "期間限定"
+ ],
+ "channels": [
+  "店内",
+  "お持ち帰り"
+ ],
+ "takeout_only": false,
+ "official_url": "https://jp.marugame.com/menu/topping/sudachi/",
+ "first_seen_at": "2026-10-17T15:39:39+09:00",
+ "last_seen_at": "2026-10-17",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-17",
+   "price": 90
+  }
+ ],
+ "source_list": [
+  "menu/topping"
+ ],
+ "image": null
+}

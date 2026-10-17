@@ -3,8 +3,29 @@
 <channel>
 <title>ファストフードポチ</title>
 <link>https://fastfood.netaful.jp/</link>
-<description>マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやまの期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</description>
-<lastBuildDate>Sat, 17 Oct 2026 06:13:27 +0000</lastBuildDate>
+<description>マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</description>
+<lastBuildDate>Sat, 17 Oct 2026 06:43:41 +0000</lastBuildDate>
+<item>
+<title>【丸亀製麺】すだち</title>
+<link>https://fastfood.netaful.jp/items/marugame-topping-sudachi.html</link>
+<guid isPermaLink="false">marugame-topping-sudachi</guid>
+<category>丸亀製麺</category>
+<pubDate>Sat, 17 Oct 2026 15:39:39 +0900</pubDate>
+</item>
+<item>
+<title>【丸亀製麺】肉辛まぜうどん</title>
+<link>https://fastfood.netaful.jp/items/marugame-udon-nikukaramaze.html</link>
+<guid isPermaLink="false">marugame-udon-nikukaramaze</guid>
+<category>丸亀製麺</category>
+<pubDate>Sat, 17 Oct 2026 15:39:39 +0900</pubDate>
+</item>
+<item>
+<title>【丸亀製麺】明太とろろうどん弁当</title>
+<link>https://fastfood.netaful.jp/items/marugame-udonbento-mentaitororoudonbento.html</link>
+<guid isPermaLink="false">marugame-udonbento-mentaitororoudonbento</guid>
+<category>丸亀製麺</category>
+<pubDate>Sat, 17 Oct 2026 15:39:39 +0900</pubDate>
+</item>
 <item>
 <title>【すき家】ローストポーク丼</title>
 <link>https://fastfood.netaful.jp/items/sukiya-don-212600.html</link>
@@ -681,27 +702,6 @@
 <title>【松のや】ロースかつ＆カキフライ（2個）定食</title>
 <link>https://fastfood.netaful.jp/items/matsunoya-moriawase-mori_rosu_kaki_hp.html</link>
 <guid isPermaLink="false">matsunoya-moriawase-mori_rosu_kaki_hp</guid>
-<category>松のや</category>
-<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
-</item>
-<item>
-<title>【松のや】ロースかつ＆白身魚フライ定食</title>
-<link>https://fastfood.netaful.jp/items/matsunoya-moriawase-mori_rosu_shiromi_hp.html</link>
-<guid isPermaLink="false">matsunoya-moriawase-mori_rosu_shiromi_hp</guid>
-<category>松のや</category>
-<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
-</item>
-<item>
-<title>【松のや】【惣菜セット】アジフライ１枚＋カキフライ２個＋海老フライ１尾＋ハーフ皮付きポテト</title>
-<link>https://fastfood.netaful.jp/items/matsunoya-souzai-souzai_set_nebiki_aji1_kaki2_ebi1_hp.html</link>
-<guid isPermaLink="false">matsunoya-souzai-souzai_set_nebiki_aji1_kaki2_ebi1_hp</guid>
-<category>松のや</category>
-<pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
-</item>
-<item>
-<title>【松のや】【惣菜セット】倍盛）ロースかつ２枚＋海老フライ２尾＋ハーフ皮付きポテト</title>
-<link>https://fastfood.netaful.jp/items/matsunoya-souzai-souzai_set_nebiki_baimori_rosu2_ebi2_hp.html</link>
-<guid isPermaLink="false">matsunoya-souzai-souzai_set_nebiki_baimori_rosu2_ebi2_hp</guid>
 <category>松のや</category>
 <pubDate>Sun, 11 Oct 2026 12:25:53 +0900</pubDate>
 </item>

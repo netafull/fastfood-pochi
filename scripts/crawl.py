@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやまの限定メニュー・新メニューを巡回し、
-data/products/{mcdonalds|mos|matsuya|matsunoya|yoshinoya|sukiya|katsuya|karayama}/{id}.json に1商品1ファイルで蓄積する。
+"""マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺の限定メニュー・新メニューを巡回し、
+data/products/{mcdonalds|mos|matsuya|matsunoya|yoshinoya|sukiya|katsuya|karayama|marugame}/{id}.json に1商品1ファイルで蓄積する。
 
 このサイトの核は「販売状況の追跡」。公式サイトは販売が終わると商品を消すので、
 一覧に居た商品が消えたら終了とみなして記録を残す。
@@ -1891,6 +1891,286 @@ def crawl_arcland_family(chain: str, getter, pending: dict, stats: dict, today: 
 
 
 # ---------------------------------------------------------------------------
+# 丸亀製麺 (jp.marugame.com)
+# ---------------------------------------------------------------------------
+# 調査・方針(2026-10-17。実物の構造は parsers.py の「丸亀製麺」のコメントにまとめた):
+#  ・巡回は robots.txt + カテゴリ一覧5ページ(udon を入口に、そのナビから他のカテゴリを毎回拾う) + 新しく記録する商品の詳細ページ。
+#    一覧のJSON(__NEXT_DATA__)に名前・価格(サイズ別)・限定の印・冒頭の説明が入っているので、詳細ページは栄養とアレルゲンのためだけに取る。
+#  ・記録するのは (a) 期間限定の印(icon_select / attributes)のある商品、(b) baseline(初回巡回の全メニュー)に無く後から現れた商品。
+#    「新定番」(期間限定から定番に加わった印)は記録の対象にしない。記録済みの商品が新定番になっても記録は残す(badges に足すだけ)。
+#  ・商品IDは「カテゴリ-slug」(slug はカテゴリをまたいで重複する)。日付・連番は含まれない。
+#  ・発売日は公式に無いので launch_date は null のまま。「記録開始日」(初めて見つけた日)から表示する。CMSの更新日時は使わない。
+#  ・存在しないパスは HTTP 403 のソフト404。一覧ページの403はブロックとして止まるが、詳細ページの403は
+#    「取得できない」として pending に残して続行する(連続 MARUGAME_DETAIL_BLOCK_STREAK 回続いたらブロックとみなして止まる)。
+#  ・エネルギー検算(kcal ≈ 4P+9F+4C)は公式のJSON値には採用ゲートとして使わない。外れたら警告を出し、値は保存する。
+#  ・説明文は冒頭の1文だけ(公式の description の最初の1文。無ければ lead)。画像は保存も表示もしない。
+MARUGAME_BASE = parsers.MARUGAME_BASE
+MARUGAME_MIN_RATIO = 0.5
+MARUGAME_DETAIL_BLOCK_STREAK = 3
+MARUGAME_NUTRITION_NOTE = "栄養成分値は商品のレシピに基づく推定値で、店内の手づくりのため実際の商品と差が出ることがあります"
+
+
+def marugame_state_path() -> Path:
+    return DATA / "marugame_state.json"
+
+
+def marugame_price_note(entry: dict) -> str:
+    prices = entry.get("prices") or []
+    primary = parsers.marugame_pick_primary_price(prices)
+    note = "税込。"
+    if len(prices) > 1 and primary and primary["label"]:
+        note += f"表示は「{primary['label']}」の価格。"
+    note += "店舗により販売メニューや価格が異なる場合があります。"
+    return note
+
+
+def marugame_description(entry: dict) -> tuple[str | None, int]:
+    short, full_len = parsers.shorten_description(entry.get("description"))
+    if short is None:
+        short, full_len = parsers.shorten_description(entry.get("lead"))
+    return short, full_len
+
+
+def marugame_energy_mismatches(variants: list[dict]) -> list[str]:
+    bad = []
+    for v in variants:
+        n = v["nutrition"]
+        if None in (n.get("kcal"), n.get("protein_g"), n.get("fat_g"), n.get("carbs_g")):
+            continue
+        if not pdf_update.pn.energy_ok(n["kcal"], n["protein_g"], n["fat_g"], n["carbs_g"]):
+            bad.append(v["label"] or "標準")
+    return bad
+
+
+def build_marugame_product(entry: dict, detail: dict | None, category_name: str | None, same_name: list[str],
+                           today: str, now: str) -> dict:
+    kind = "期間限定" if entry["is_limited"] else "新規掲載"
+    variants = (detail or {}).get("nutrition_variants") or []
+    primary_nut = parsers.marugame_pick_primary_nutrition(variants)
+    short, full_len = marugame_description(entry)
+    price = entry.get("price")
+    prices = [{"label": p["label"], "price": p["price"]} for p in entry.get("prices") or []]
+    product = {
+        "chain": "marugame",
+        "product_id": entry["product_id"],
+        "name": entry["name"],
+        "category": category_name,
+        "price": price,
+        "price_note": marugame_price_note(entry),
+        "price_variants": prices if len(prices) > 1 else None,
+        "launch_date": None,
+        "launch_date_source": "not_found",
+        "announced_at": None,
+        "planned_end_text": None,
+        "description": short,
+        "description_full_len": full_len,
+        "nutrition": primary_nut["nutrition"] if primary_nut else None,
+        "nutrition_variants": ([{"label": v["label"], "nutrition": v["nutrition"]} for v in variants]
+                               if len(variants) > 1 else None),
+        "nutrition_note": MARUGAME_NUTRITION_NOTE if variants else None,
+        "allergens": (detail or {}).get("allergens"),
+        "origin": None,
+        "limited_kind": kind,
+        "badges": entry["badges"],
+        "channels": entry["channels"],
+        "takeout_only": entry["takeout_only"],
+        "official_url": entry["official_url"],
+        "first_seen_at": now,
+        "last_seen_at": today,
+        "status": "on_sale",
+        "ended_observed_at": None,
+        "missed_runs": 0,
+        "price_history": [{"date": today, "price": price}] if price is not None else [],
+        "source_list": [f"menu/{entry['category_id']}"],
+        "image": None,
+    }
+    if same_name:
+        product["same_name_as"] = same_name
+    return product
+
+
+def crawl_marugame(getter, pending: dict, stats: dict, today: str | None = None) -> None:
+    chain = "marugame"
+    # 日付を指定した実行(テスト)では、初回観測の時刻もその日にそろえる
+    now = now_iso() if today is None else f"{today}T07:00:00+09:00"
+    today = today or today_jst()
+    pending.setdefault(chain, {})
+    stats.setdefault(chain, new_stats())
+    st = stats[chain]
+    all_ok = True
+
+    robots_text = None
+    try:
+        robots_text = getter(chain, MARUGAME_BASE + "/robots.txt")
+        st["list_requests"] += 1
+    except NotFoundError:
+        st["list_requests"] += 1
+    except BlockedError as e:
+        st["blocked"] = True
+        print(f"[blocked] {chain} robots.txt: {e}", file=sys.stderr)
+        return
+    except Exception as e:  # noqa: BLE001
+        print(f"[warn] {chain} robots.txt 取得失敗(全許可として続行): {e}", file=sys.stderr)
+    rp = urllib.robotparser.RobotFileParser()
+    rp.parse((robots_text or "User-agent: *\nAllow: /").splitlines())
+
+    def allowed(path: str) -> bool:
+        return rp.can_fetch(UA, MARUGAME_BASE + path)
+
+    def get_list(cat: str) -> dict | None:
+        """カテゴリ一覧を1ページ取る。取れない・商品が0件(構造変更の疑い)のときは None(終了判定を止める)。"""
+        path = parsers.marugame_menu_path(cat)
+        if not allowed(path):
+            print(f"[skip] robots.txtでDisallow: {path}", file=sys.stderr)
+            return None
+        try:
+            page = getter(chain, MARUGAME_BASE + path)
+            st["list_requests"] += 1
+        except BlockedError:
+            raise
+        except Exception as e:  # noqa: BLE001
+            print(f"[warn] {chain} 一覧 {path} 取得失敗: {e}", file=sys.stderr)
+            return None
+        parsed = parsers.parse_marugame_list(page)
+        if not parsed["items"]:
+            print(f"[warn] {chain} 一覧 {path}: 商品が0件(構造変更の疑い)", file=sys.stderr)
+            return None
+        return parsed
+
+    # 入口(udon)のナビから他のカテゴリを拾う。新しいカテゴリが増えても拾える
+    pages: dict[str, dict] = {}
+    cat_names: dict[str, str] = {}
+    try:
+        entry_page = get_list(parsers.MARUGAME_ENTRY_CATEGORY)
+        cats = [parsers.MARUGAME_ENTRY_CATEGORY]
+        if entry_page is not None:
+            pages[parsers.MARUGAME_ENTRY_CATEGORY] = entry_page
+            cat_names.update({c["id"]: c["name"] for c in entry_page["nav"]})
+            if entry_page["category"]:
+                cat_names[entry_page["category"]["id"]] = entry_page["category"]["name"]
+            cats += [c["id"] for c in entry_page["nav"] if c["id"] != parsers.MARUGAME_ENTRY_CATEGORY]
+        else:
+            all_ok = False
+        if len(cats) == 1:  # ナビが読めなかった: 設定の固定リストで代替(この回は終了判定をしない)
+            cats += [c for c in CONFIG["marugame_categories"] if c != parsers.MARUGAME_ENTRY_CATEGORY]
+            all_ok = False
+        for cat in cats:
+            if cat in pages:
+                continue
+            parsed = get_list(cat)
+            if parsed is None:
+                all_ok = False
+                continue
+            pages[cat] = parsed
+    except BlockedError as e:
+        st["blocked"] = True
+        print(f"[blocked] {chain} list: {e}", file=sys.stderr)
+        return
+
+    entries: dict[str, dict] = {}
+    for cat, parsed in pages.items():
+        for e in parsed["items"]:
+            cur = entries.get(e["product_id"])
+            if cur is None:
+                entries[e["product_id"]] = e
+                continue
+            cur["is_limited"] = cur["is_limited"] or e["is_limited"]
+            cur["is_new_classic"] = cur["is_new_classic"] or e["is_new_classic"]
+            cur["badges"] += [b for b in e["badges"] if b not in cur["badges"]]
+            cur["channels"] = [c for c in ("店内", "お持ち帰り") if c in cur["channels"] or c in e["channels"]]
+            if cur["price"] is None:
+                cur["price"], cur["prices"] = e["price"], e["prices"]
+
+    state = load_json(marugame_state_path(), {})
+    prev_count = (state.get(chain) or {}).get("menu_count")
+    if entries and prev_count and len(entries) < prev_count * MARUGAME_MIN_RATIO:
+        print(f"[warn] {chain} メニューが極端に少ない({len(entries)}件。前回{prev_count}件)。"
+              "消えた商品の判定は行わない", file=sys.stderr)
+        all_ok = False
+    st["list_ok"] = all_ok and bool(entries)
+    st["limited_seen"] = sum(1 for e in entries.values() if e["is_limited"])
+
+    baseline = baseline_for(chain)
+    entries = burst_filter(chain, entries, baseline, pending, stats, today)
+    existing_all = None
+    detail_block_streak = 0
+    for pid, e in entries.items():
+        existing = load_product(chain, pid)
+        if existing is not None:
+            was_ended = existing.get("status") == "ended"
+            old_ended = existing.get("ended_observed_at")
+            ref = yoshinoya_season_ref(existing)
+            touch_seen(existing, e.get("price"), today, now)
+            if was_ended:
+                yoshinoya_start_new_season(existing, old_ended, today)
+                existing["seasons"][-1]["observed_start"] = ref  # 発売日が無いので、昨季は記録開始日で残す
+                st["relaunched"] = st.get("relaunched", 0) + 1
+            if e["is_limited"] and existing.get("limited_kind") != "期間限定":
+                existing["limited_kind"] = "期間限定"
+            existing["badges"] = list(dict.fromkeys((existing.get("badges") or []) + e["badges"]))
+            existing["channels"] = e["channels"]
+            existing["takeout_only"] = e["takeout_only"]
+            existing["official_url"] = e["official_url"]
+            save_product(chain, existing)
+            pending[chain].pop(pid, None)
+            continue
+        is_new_menu = baseline is not None and pid not in baseline
+        if not (e["is_limited"] or is_new_menu):
+            continue  # 定番の既存メニュー・新定番は記録しない(baselineに入るだけ)
+        if not allowed(e["href"]):
+            print(f"[skip] robots.txtでDisallow: {e['href']}", file=sys.stderr)
+            continue
+        try:
+            html = getter(chain, MARUGAME_BASE + e["href"])
+            st["detail_requests"] += 1
+            detail_block_streak = 0
+        except NotFoundError:
+            st["failed"] += 1
+            pending[chain][pid] = {"url": e["href"], "reason": "404", "checked_at": now}
+            continue
+        except BlockedError as ex:
+            # 存在しないパスは403を返す(ソフト404)。詳細1件の403は「取得できない」として続行し、連続したらブロックとみなす
+            st["failed"] += 1
+            detail_block_streak += 1
+            pending[chain][pid] = {"url": e["href"], "reason": f"unavailable: {ex}", "checked_at": now}
+            if detail_block_streak >= MARUGAME_DETAIL_BLOCK_STREAK:
+                st["blocked"] = True
+                print(f"[blocked] {chain} detail が{detail_block_streak}回連続で拒否: {ex}", file=sys.stderr)
+                break
+            continue
+        except Exception as ex:  # noqa: BLE001
+            st["failed"] += 1
+            pending[chain][pid] = {"url": e["href"], "reason": f"fetch_error: {ex}", "checked_at": now}
+            continue
+        detail = parsers.parse_marugame_detail(html)
+        if detail is None:
+            st["failed"] += 1
+            pending[chain][pid] = {"url": e["href"], "reason": "empty_detail", "checked_at": now}
+            continue
+        bad = marugame_energy_mismatches(detail["nutrition_variants"])
+        if bad:
+            st["energy_mismatch"] = st.get("energy_mismatch", 0) + 1
+            print(f"[warn] {chain} {pid}: エネルギーが 4P+9F+4C と合わない({'・'.join(bad)})。公式の値のまま保存", file=sys.stderr)
+        if existing_all is None:
+            existing_all = load_chain_products(chain)
+        norm = parsers.normalize_for_match(e["name"])
+        same = [p["product_id"] for p in existing_all
+                if p["product_id"] != pid and parsers.normalize_for_match(p.get("name")) == norm]
+        product = build_marugame_product(e, detail, cat_names.get(e["category_id"]), same, today, now)
+        save_product(chain, product)
+        existing_all.append(product)
+        st["new_products"] += 1
+        pending[chain].pop(pid, None)
+
+    if st["list_ok"] and not st["blocked"]:
+        if baseline is None:
+            save_baseline(chain, set(entries))
+        apply_missing(chain, set(entries), today, st)
+        state[chain] = {"menu_count": len(entries), "checked_at": today}
+        save_json(marugame_state_path(), state, sort_keys=True)
+
+
+# ---------------------------------------------------------------------------
 # 実行
 # ---------------------------------------------------------------------------
 
@@ -1944,7 +2224,8 @@ def save_run_summary(stats: dict[str, dict]) -> None:
 
 CRAWLERS = {"mcdonalds": crawl_mcdonalds, "mos": crawl_mos, "matsuya": crawl_matsuya,
             "matsunoya": crawl_matsunoya, "yoshinoya": crawl_yoshinoya, "sukiya": crawl_sukiya,
-            "katsuya": crawl_katsuya, "karayama": crawl_karayama}
+            "katsuya": crawl_katsuya, "karayama": crawl_karayama,
+            "marugame": crawl_marugame}
 
 
 def main(argv: list[str] | None = None) -> int:

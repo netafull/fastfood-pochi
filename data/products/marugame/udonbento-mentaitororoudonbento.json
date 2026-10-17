@@ -1,0 +1,105 @@
+{
+ "chain": "marugame",
+ "product_id": "udonbento-mentaitororoudonbento",
+ "name": "明太とろろうどん弁当",
+ "category": "うどん弁当",
+ "price": 450,
+ "price_note": "税込。表示は「並」の価格。店舗により販売メニューや価格が異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "並",
+   "price": 450
+  },
+  {
+   "label": "大",
+   "price": 640
+  }
+ ],
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "description": "打ち立てうどんに、おすすめトッピングの明太子と、とろろをのせたうどん弁当。",
+ "description_full_len": 148,
+ "nutrition": {
+  "kcal": 472.0,
+  "protein_g": 14.2,
+  "fat_g": 9.1,
+  "carbs_g": 83.5,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 6.2,
+  "other": {
+   "ナトリウム": "2427mg"
+  }
+ },
+ "nutrition_variants": [
+  {
+   "label": "冷・並",
+   "nutrition": {
+    "kcal": 472.0,
+    "protein_g": 14.2,
+    "fat_g": 9.1,
+    "carbs_g": 83.5,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 6.2,
+    "other": {
+     "ナトリウム": "2427mg"
+    }
+   }
+  },
+  {
+   "label": "冷・大",
+   "nutrition": {
+    "kcal": 610.0,
+    "protein_g": 18.2,
+    "fat_g": 9.7,
+    "carbs_g": 112.3,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 6.9,
+    "other": {
+     "ナトリウム": "2727mg"
+    }
+   }
+  }
+ ],
+ "nutrition_note": "栄養成分値は商品のレシピに基づく推定値で、店内の手づくりのため実際の商品と差が出ることがあります",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "さば",
+   "大豆",
+   "山芋",
+   "ごま"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "期間限定",
+ "badges": [
+  "期間限定"
+ ],
+ "channels": [
+  "お持ち帰り"
+ ],
+ "takeout_only": true,
+ "official_url": "https://jp.marugame.com/menu/udonbento/mentaitororoudonbento/",
+ "first_seen_at": "2026-10-17T15:39:39+09:00",
+ "last_seen_at": "2026-10-17",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-17",
+   "price": 450
+  }
+ ],
+ "source_list": [
+  "menu/udonbento"
+ ],
+ "image": null
+}

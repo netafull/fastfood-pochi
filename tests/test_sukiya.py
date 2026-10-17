@@ -566,7 +566,7 @@ class TestSite(unittest.TestCase):
         self.assertIn('data-chain="sukiya"', g.CSS)
         colors = {c["slug"]: c["color"].lower() for c in g.CHAINS}
         self.assertEqual(len(set(colors.values())), len(colors))
-        self.assertEqual(g.CHAIN_LIST_TEXT, "マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま")
+        self.assertEqual(g.CHAIN_LIST_TEXT, "マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺")
 
     def test_chain_list_footer_and_sections(self):
         self.assertIn("/chains/sukiya/", g.render_chains_top())

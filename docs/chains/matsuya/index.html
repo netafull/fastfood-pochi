@@ -26,13 +26,13 @@
 :root {
   --bg: #fafaf7; --card: #ffffff; --text: #1a1a1a; --muted: #6b6b6b;
   --accent: #00897b; --line: #e5e2dc;
-  --mcdonalds: #da291c; --mos: #1b7f3b; --matsuya: #a34a00; --matsunoya: #7a1f5c; --yoshinoya: #1f5fad; --sukiya: #8a6a00; --katsuya: #455a64; --karayama: #c2185b;
+  --mcdonalds: #da291c; --mos: #1b7f3b; --matsuya: #a34a00; --matsunoya: #7a1f5c; --yoshinoya: #1f5fad; --sukiya: #8a6a00; --katsuya: #455a64; --karayama: #c2185b; --marugame: #e65100;
 }
 @media (prefers-color-scheme: dark) {
   :root { --bg: #14151a; --card: #1e2027; --text: #e8e8e6; --muted: #9a9a96;
     --line: #2c2e36; --accent: #26a69a;
     /* 暗い背景でも見出しの下線・バッジが沈まないよう、松屋・松のや・吉野家・すき家だけ少し明るくする */
-    --matsuya: #b85a00; --matsunoya: #a83a82; --yoshinoya: #3a7bd0; --sukiya: #b8921a; --katsuya: #6b8794; --karayama: #d6477f; }
+    --matsuya: #b85a00; --matsunoya: #a83a82; --yoshinoya: #3a7bd0; --sukiya: #b8921a; --katsuya: #6b8794; --karayama: #d6477f; --marugame: #ff8a3d; }
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--bg); color: var(--text);
@@ -64,6 +64,7 @@ h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); 
 .chain-group[data-chain="sukiya"] h3 { border-color: var(--sukiya); }
 .chain-group[data-chain="katsuya"] h3 { border-color: var(--katsuya); }
 .chain-group[data-chain="karayama"] h3 { border-color: var(--karayama); }
+.chain-group[data-chain="marugame"] h3 { border-color: var(--marugame); }
 .grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
 .item { display: block; background: var(--card); border: 1px solid var(--line);
   border-radius: 10px; padding: 12px; text-decoration: none; }
@@ -78,6 +79,7 @@ h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); 
 .item[data-chain="sukiya"] .badge { background: var(--sukiya); }
 .item[data-chain="katsuya"] .badge { background: var(--katsuya); }
 .item[data-chain="karayama"] .badge { background: var(--karayama); }
+.item[data-chain="marugame"] .badge { background: var(--marugame); }
 .item .st { display: inline-block; font-size: 10px; border-radius: 4px; padding: 0 6px; margin-left: 6px;
   border: 1px solid var(--line); color: var(--muted); }
 .item .st-on { color: var(--accent); border-color: var(--accent); }
@@ -159,7 +161,7 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <body>
 <header>
 <h1><a data-google-vignette="false" href="/"><img src="/assets/logo.png" alt="" width="32" height="32">ファストフードポチ</a></h1>
-<p>マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやまの期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</p>
+<p>マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</p>
 <nav class="sites"><span class="lbl">関連サイト</span>
 <a data-google-vignette="false" href="https://book.netaful.jp/">電書ポチ<span class="lbl"> Kindle本セール</span></a>
 <a data-google-vignette="false" href="https://kaden.netaful.jp/">家電ポチ<span class="lbl"> ガジェット・家電セール</span></a>
@@ -182,7 +184,7 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <label>並び替え: <select id="sort-select"><option value="date">開始日順</option>
 <option value="kcal">カロリー順</option></select></label>
 <label>販売状況: <select id="status-filter"><option value="on_sale">販売中</option><option value="ended">終了</option><option value="all" selected>すべて</option></select></label>
-<label>絞り込み: <select id="chain-filter"><option value="all">すべて</option><option value="mcdonalds">マクドナルド</option><option value="mos">モスバーガー</option><option value="matsuya">松屋</option><option value="matsunoya">松のや</option><option value="yoshinoya">吉野家</option><option value="sukiya">すき家</option><option value="katsuya">かつや</option><option value="karayama">からやま</option></select></label>
+<label>絞り込み: <select id="chain-filter"><option value="all">すべて</option><option value="mcdonalds">マクドナルド</option><option value="mos">モスバーガー</option><option value="matsuya">松屋</option><option value="matsunoya">松のや</option><option value="yoshinoya">吉野家</option><option value="sukiya">すき家</option><option value="katsuya">かつや</option><option value="karayama">からやま</option><option value="marugame">丸亀製麺</option></select></label>
 </div>
 <section class="chain-group" data-chain="matsuya">
 <h3>松屋 (<span class="cnt">14</span>件)</h3>
@@ -442,8 +444,8 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 </main>
 <footer>
 価格・販売期間・販売状況は取得時点のものです。最新の状況は各社公式サイトでご確認ください。
-当サイトはマクドナルド、モスバーガー、松屋、松のや、吉野家、すき家、かつや、からやま各社とは関係のない非公式サイトです。
-公式サイト： <a data-google-vignette="false" href="https://www.mcdonalds.co.jp/">マクドナルド</a> ／ <a data-google-vignette="false" href="https://www.mos.jp/">モスバーガー</a> ／ <a data-google-vignette="false" href="https://www.matsuyafoods.co.jp/matsuya/">松屋</a> ／ <a data-google-vignette="false" href="https://www.matsuyafoods.co.jp/matsunoya/">松のや</a> ／ <a data-google-vignette="false" href="https://www.yoshinoya.com/">吉野家</a> ／ <a data-google-vignette="false" href="https://www.sukiya.jp/">すき家</a> ／ <a data-google-vignette="false" href="https://www.arclandservice.co.jp/katsuya/">かつや</a> ／ <a data-google-vignette="false" href="https://www.arclandservice.co.jp/karayama/">からやま</a>
+当サイトはマクドナルド、モスバーガー、松屋、松のや、吉野家、すき家、かつや、からやま、丸亀製麺各社とは関係のない非公式サイトです。
+公式サイト： <a data-google-vignette="false" href="https://www.mcdonalds.co.jp/">マクドナルド</a> ／ <a data-google-vignette="false" href="https://www.mos.jp/">モスバーガー</a> ／ <a data-google-vignette="false" href="https://www.matsuyafoods.co.jp/matsuya/">松屋</a> ／ <a data-google-vignette="false" href="https://www.matsuyafoods.co.jp/matsunoya/">松のや</a> ／ <a data-google-vignette="false" href="https://www.yoshinoya.com/">吉野家</a> ／ <a data-google-vignette="false" href="https://www.sukiya.jp/">すき家</a> ／ <a data-google-vignette="false" href="https://www.arclandservice.co.jp/katsuya/">かつや</a> ／ <a data-google-vignette="false" href="https://www.arclandservice.co.jp/karayama/">からやま</a> ／ <a data-google-vignette="false" href="https://jp.marugame.com/">丸亀製麺</a>
 ｜ <a data-google-vignette="false" href="https://netaful.jp/policy.html">メディアポリシー</a>
 ｜ <a data-google-vignette="false" href="/rss.xml">RSS</a> ｜ <a data-google-vignette="false" href="/archive/">終了した限定メニュー</a>
 <nav class="sites"><span class="lbl">関連サイト</span>

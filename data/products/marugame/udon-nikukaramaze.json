@@ -1,0 +1,127 @@
+{
+ "chain": "marugame",
+ "product_id": "udon-nikukaramaze",
+ "name": "肉辛まぜうどん",
+ "category": "うどん",
+ "price": 890,
+ "price_note": "税込。表示は「並」の価格。店舗により販売メニューや価格が異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "並",
+   "price": 890
+  },
+  {
+   "label": "大",
+   "price": 1080
+  },
+  {
+   "label": "得",
+   "price": 1270
+  }
+ ],
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "description": "スパイスの効いた辛さが特徴の特製ミンチ、パンチの効いた香りと辛味の生ニラ・生ニンニク、甘みや酸味がアクセントとなるガリトマトなど個性豊かな具材を合わせました。",
+ "description_full_len": 205,
+ "nutrition": {
+  "kcal": 672.0,
+  "protein_g": 21.4,
+  "fat_g": 23.1,
+  "carbs_g": 92.1,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 5.1,
+  "other": {
+   "ナトリウム": "2026mg"
+  }
+ },
+ "nutrition_variants": [
+  {
+   "label": "温・並",
+   "nutrition": {
+    "kcal": 672.0,
+    "protein_g": 21.4,
+    "fat_g": 23.1,
+    "carbs_g": 92.1,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 5.1,
+    "other": {
+     "ナトリウム": "2026mg"
+    }
+   }
+  },
+  {
+   "label": "温・大",
+   "nutrition": {
+    "kcal": 810.0,
+    "protein_g": 25.4,
+    "fat_g": 23.7,
+    "carbs_g": 121.0,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 5.9,
+    "other": {
+     "ナトリウム": "2326mg"
+    }
+   }
+  },
+  {
+   "label": "温・得",
+   "nutrition": {
+    "kcal": 1155.0,
+    "protein_g": 39.1,
+    "fat_g": 38.8,
+    "carbs_g": 157.3,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 8.8,
+    "other": {
+     "ナトリウム": "3465mg"
+    }
+   }
+  }
+ ],
+ "nutrition_note": "栄養成分値は商品のレシピに基づく推定値で、店内の手づくりのため実際の商品と差が出ることがあります",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "えび",
+   "さば",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "ごま"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "期間限定",
+ "badges": [
+  "期間限定"
+ ],
+ "channels": [
+  "店内",
+  "お持ち帰り"
+ ],
+ "takeout_only": false,
+ "official_url": "https://jp.marugame.com/menu/udon/nikukaramaze/",
+ "first_seen_at": "2026-10-17T15:39:39+09:00",
+ "last_seen_at": "2026-10-17",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-17",
+   "price": 890
+  }
+ ],
+ "source_list": [
+  "menu/udon"
+ ],
+ "image": null
+}

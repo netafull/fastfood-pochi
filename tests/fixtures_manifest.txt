@@ -1,6 +1,6 @@
 # tests/fixtures/ に置く、公式ページのスナップショットの一覧(ファイル名のみ)。
 #
-# これらは各社の公式サイト(マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家)から取得した
+# これらは各社の公式サイト(マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺)から取得した
 # ページ・データのコピーなので、**リポジトリには入れていない**(.gitignore で除外。各社の規約が
 # 複製・転載を禁じているため。2026-10-11に追跡から外した。それ以前のコミットには残っている)。
 # 手元にこのファイルが無い環境では、フィクスチャを使うテストは自動でスキップされる。
@@ -89,3 +89,12 @@ yoshinoya/list_yoshinoyanodon.html
 yoshinoya/menu_index.html
 yoshinoya/news_2026.html
 yoshinoya/robots.txt
+marugame/detail_tempura-kashiwa.html
+marugame/detail_topping-sudachi.html
+marugame/detail_udon-nikukaramaze.html
+marugame/detail_udonbento-mentaitororoudonbento.html
+marugame/list_gohanmono.html
+marugame/list_tempura.html
+marugame/list_topping.html
+marugame/list_udon.html
+marugame/list_udonbento.html

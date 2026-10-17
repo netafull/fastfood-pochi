@@ -416,7 +416,7 @@ class TestSite(unittest.TestCase):
     def test_chain_config(self):
         self.assertEqual(g.CHAIN_NAME["katsuya"], "かつや")
         self.assertEqual(g.CHAIN_NAME["karayama"], "からやま")
-        self.assertTrue(g.CHAIN_LIST_TEXT.endswith("・かつや・からやま"))
+        self.assertIn("・かつや・からやま", g.CHAIN_LIST_TEXT)
         for k in ("site_description", "site_tagline"):
             self.assertIn("かつや", g.CONFIG[k])
             self.assertIn("からやま", g.CONFIG[k])

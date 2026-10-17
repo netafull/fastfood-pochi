@@ -1388,3 +1388,228 @@ def match_arcland_launch(name: str, news: list[dict], ref: str,
         if arcland_title_matches(name, t):
             return {"news": a, "launch_date": arcland_start_date(t, a["date"])}
     return None
+
+
+# ---------------------------------------------------------------------------
+# 丸亀製麺 (jp.marugame.com。Next.js製。全ページの <script id="__NEXT_DATA__"> のJSONから取る)
+# ---------------------------------------------------------------------------
+# 調査・方針(2026-10-17。実物で確認した事実):
+#  ・公式は jp.marugame.com。www.marugame.co.jp は別会社なので使わない。robots.txt は Allow: / と Sitemap: だけ。
+#  ・メニュー一覧は /menu/{カテゴリ}/ の props.pageProps.menus = {"shop": [...], "takeout": [...]}。
+#    カテゴリは udon・tempura・gohanmono・topping・udonbento の5つ(各一覧の shopMenuNavigation / takeoutMenuNavigation にある)。
+#    店内(shop)とお持ち帰り(takeout)で同じ商品が重複して出る。udonbento は shop が空で takeout だけ。
+#  ・商品の slug(id)はカテゴリをまたいで重複する(mentaiko がご飯ものとトッピングの両方にある)ので、
+#    商品IDは「カテゴリ-slug」(href の /menu/{カテゴリ}/{slug}/ から)にする。
+#  ・限定の印: icon_select の文字列(「期間限定（limited_time_item）」「新定番（new_classic）」「小学６年生まで限定（kids_12_and_under）」)
+#    と attributes。attributes.limited_time_item は false のまま icon_select だけが立つことがあり(肉辛まぜうどん)、
+#    逆に icon_select が空で attributes.limited=「期間限定」だけの商品もある(すだち)ので、どれか1つでも期間限定なら期間限定とする。
+#    「新定番」は期間限定から定番に加わった印で、新登場ではない(記録の対象にしない)。
+#  ・publishedAt / revisedAt / createdAt / updatedAt はCMSの更新日時で、発売日ではない。使わない。
+#  ・発売日・販売期間の専用フィールドは無い。→ launch_date は null のまま、初めて見つけた日を「記録開始日」として表示する。
+#  ・アレルゲン: allergenItemData の値は "1"=使用(CSV一覧の●)、"5"=不使用(CSVの‐)。公式のアレルギー情報CSV
+#    (allergen_261006.csv)と、メニュー一覧のJSON(64商品×27品目=1,728セル)を突き合わせて、完全に一致することを確認した。
+#    この2値以外が出たら対応が不明なので、アレルゲンは出さない(None)。
+#  ・栄養: nutritionItemData.items はサイズ別(並・大・得・小)・温冷別。値は文字列(energy=kcal、sodium=mg、他g)。
+#  ・存在しないパスは HTTP 403 のソフト404(本文「お探しのページは見つかりませんでした。」)。
+MARUGAME_BASE = "https://jp.marugame.com"
+MARUGAME_HOST = "jp.marugame.com"
+MARUGAME_ENTRY_CATEGORY = "udon"
+MARUGAME_MENU_RE = re.compile(r"^/menu/([a-z0-9_]+)/([A-Za-z0-9_-]+)/?$")
+_NEXT_DATA_RE = re.compile(r'<script id="__NEXT_DATA__" type="application/json">(.*?)</script>', re.S)
+_MARUGAME_SIZE_LABELS = {"small": "小", "regular": "並", "large": "大", "xlarge": "得", "no_size": "",
+                         "piece": "1個", "bowl": "1杯", "1_serving": "うどん１玉", "2_serving": "うどん２玉"}
+
+
+def marugame_menu_path(category: str) -> str:
+    return f"/menu/{category}/"
+
+
+def marugame_page_props(page: str) -> dict | None:
+    """ページの __NEXT_DATA__ から props.pageProps を取り出す。無い・壊れている・形が違うときは None。"""
+    m = _NEXT_DATA_RE.search(page or "")
+    if not m:
+        return None
+    try:
+        data = json.loads(m.group(1))
+        props = data["props"]["pageProps"]
+    except (ValueError, KeyError, TypeError):
+        return None
+    return props if isinstance(props, dict) else None
+
+
+def marugame_prices(m: dict) -> list[dict]:
+    """[{label, price, default}]。公式の prices(単位つき)を使い、無ければ price の辞書から作る。"""
+    out = []
+    for p in m.get("prices") or []:
+        if isinstance(p, dict) and isinstance(p.get("number"), (int, float)):
+            out.append({"label": p.get("unit") or "", "price": int(p["number"]), "default": bool(p.get("default"))})
+    if out:
+        return out
+    price = m.get("price") or {}
+    for key, label in _MARUGAME_SIZE_LABELS.items():
+        v = price.get(key) if isinstance(price, dict) else None
+        if isinstance(v, (int, float)):
+            out.append({"label": label, "price": int(v), "default": key == "regular"})
+    return out
+
+
+def marugame_pick_primary_price(prices: list[dict]) -> dict | None:
+    """代表の価格: 公式が既定にしているもの→「並」→先頭。"""
+    if not prices:
+        return None
+    for p in prices:
+        if p.get("default"):
+            return p
+    for p in prices:
+        if p["label"] == "並":
+            return p
+    return prices[0]
+
+
+def _marugame_icon_label(s: str) -> str:
+    return re.sub(r"[（(][^）)]*[）)]\s*$", "", clean_text(s)).strip()
+
+
+def marugame_flags(m: dict) -> dict:
+    """icon_select と attributes から {is_limited, is_new_classic, badges}。期間限定はどれか1つでも立っていれば真。"""
+    icons = [s for s in (m.get("icon_select") or []) if isinstance(s, str)]
+    attrs = m.get("attributes") or {}
+    badges = [_marugame_icon_label(s) for s in icons]
+    limited = (any("limited_time_item" in s for s in icons) or bool(attrs.get("limited_time_item"))
+               or bool(attrs.get("limited")))
+    if limited and "期間限定" not in badges:
+        badges.insert(0, "期間限定")
+    new_classic = any("new_classic" in s for s in icons) or bool(attrs.get("new_classic"))
+    if new_classic and "新定番" not in badges:
+        badges.append("新定番")
+    return {"is_limited": limited, "is_new_classic": new_classic,
+            "badges": [b for b in dict.fromkeys(badges) if b]}
+
+
+def parse_marugame_list(page: str) -> dict:
+    """カテゴリ一覧ページを {"category": {id,name}|None, "nav": [{id,name}], "items": [...]} にする。
+    items: product_id(カテゴリ-slug)・slug・category_id・name・price(代表)・prices・description(全文。保存時に冒頭1文にする)・
+    lead・badges・is_limited・is_new_classic・channels(shop/takeoutのうち載っていたもの)・takeout_only・href・official_url。
+    構造が変わって取れなければ items は空(nav も空のことがある)。"""
+    props = marugame_page_props(page)
+    out = {"category": None, "nav": [], "items": []}
+    if not props:
+        return out
+    cur = props.get("currentCategory")
+    if isinstance(cur, dict) and cur.get("id"):
+        out["category"] = {"id": cur["id"], "name": clean_text(cur.get("name") or "").replace("\n", "")}
+    nav, seen = [], set()
+    for key in ("shopMenuNavigation", "takeoutMenuNavigation"):
+        for c in props.get(key) or []:
+            if isinstance(c, dict) and c.get("id") and c["id"] not in seen and re.fullmatch(r"[a-z0-9_]+", str(c["id"])):
+                seen.add(c["id"])
+                nav.append({"id": c["id"], "name": clean_text(c.get("name") or "").replace("\n", "")})
+    out["nav"] = nav
+    menus = props.get("menus")
+    if not isinstance(menus, dict):
+        return out
+    items: dict[str, dict] = {}
+    for channel, label in (("shop", "店内"), ("takeout", "お持ち帰り")):
+        for m in menus.get(channel) or []:
+            if not isinstance(m, dict) or not m.get("id") or not m.get("name"):
+                continue
+            href = m.get("href") or f"{marugame_menu_path((out['category'] or {}).get('id') or '')}{m['id']}/"
+            hm = MARUGAME_MENU_RE.match(href)
+            if not hm:
+                continue
+            cat, slug = hm.group(1), hm.group(2)
+            pid = f"{cat}-{slug}"
+            prices = marugame_prices(m)
+            primary = marugame_pick_primary_price(prices)
+            flags = marugame_flags(m)
+            attrs = m.get("attributes") or {}
+            if pid in items:
+                cur_e = items[pid]
+                cur_e["channels"] = [c for c in ("店内", "お持ち帰り") if c in cur_e["channels"] or c == label]
+                cur_e["is_limited"] = cur_e["is_limited"] or flags["is_limited"]
+                cur_e["is_new_classic"] = cur_e["is_new_classic"] or flags["is_new_classic"]
+                cur_e["badges"] += [b for b in flags["badges"] if b not in cur_e["badges"]]
+                if cur_e["price"] is None and primary:
+                    cur_e["price"], cur_e["prices"] = primary["price"], prices
+                continue
+            items[pid] = {
+                "product_id": pid, "slug": slug, "category_id": cat,
+                "name": clean_text(m["name"]).replace("\n", " "),
+                "price": primary["price"] if primary else None,
+                "prices": prices,
+                "description": m.get("description") if isinstance(m.get("description"), str) else None,
+                "lead": m.get("lead") if isinstance(m.get("lead"), str) else None,
+                "badges": flags["badges"], "is_limited": flags["is_limited"], "is_new_classic": flags["is_new_classic"],
+                "channels": [label], "takeout_only": bool(attrs.get("takeout_only")),
+                "href": f"/menu/{cat}/{slug}/", "official_url": f"{MARUGAME_BASE}/menu/{cat}/{slug}/",
+            }
+    out["items"] = list(items.values())
+    return out
+
+
+def marugame_nutrition_label(item: dict) -> str:
+    return "・".join(x for x in (clean_text(item.get("temperature")), clean_text(item.get("size"))) if x)
+
+
+def marugame_nutrition_variants(data) -> list[dict]:
+    """nutritionItemData.items を [{label, nutrition}] にする(サイズ別・温冷別。数値は文字列→float)。
+    食塩相当量は公式の saltEquivalent、ナトリウム(mg)は other に入れる。主要な数値が1つも読めない行は捨てる。"""
+    out = []
+    items = data.get("items") if isinstance(data, dict) else None
+    for it in items or []:
+        if not isinstance(it, dict):
+            continue
+        nut = build_nutrition([("エネルギー", str(it.get("energy") or "")), ("たんぱく質", str(it.get("protein") or "")),
+                               ("脂質", str(it.get("fat") or "")), ("炭水化物", str(it.get("carbohydrate") or "")),
+                               ("食塩相当量", str(it.get("saltEquivalent") or ""))])
+        if nut is None or all(nut[k] is None for k in ("kcal", "protein_g", "fat_g", "carbs_g")):
+            continue
+        sodium = to_number(it.get("sodium"))
+        if sodium is not None:
+            nut["other"]["ナトリウム"] = f"{sodium:g}mg"
+        out.append({"label": marugame_nutrition_label(it), "nutrition": nut})
+    return out
+
+
+def marugame_pick_primary_nutrition(variants: list[dict]) -> dict | None:
+    """代表の栄養: ラベルが「並」で終わるもの(温・並など。先頭優先)→先頭。"""
+    if not variants:
+        return None
+    for v in variants:
+        if v["label"] in ("", "並") or v["label"].endswith("並"):
+            return v
+    return variants[0]
+
+
+def marugame_allergens(item_data, headers) -> dict | None:
+    """allergenItemData と allergenHeadersData から {"contains": [品目名], "partial": []}。
+    値が "1"(使用)と "5"(不使用)以外のものが1つでもあれば、意味が確定していないので None。"""
+    if not isinstance(item_data, dict) or not isinstance(headers, list) or not headers:
+        return None
+    heads = sorted((h for h in headers if isinstance(h, dict) and h.get("id") and h.get("name")),
+                   key=lambda h: int(h["order"]) if str(h.get("order", "")).isdigit() else 999)
+    if not heads:
+        return None
+    contains = []
+    for h in heads:
+        v = item_data.get(h["id"])
+        if v == "1":
+            contains.append(clean_text(h["name"]))
+        elif v != "5":
+            return None
+    return {"contains": contains, "partial": []}
+
+
+def parse_marugame_detail(page: str) -> dict | None:
+    """商品詳細ページ。{name, nutrition_variants, allergens, allergens_ok} を返す。__NEXT_DATA__ が無い・商品が無いときは None。"""
+    props = marugame_page_props(page)
+    if not props or not isinstance(props.get("detail"), dict):
+        return None
+    d = props["detail"]
+    nut = props.get("nutritionItemData")
+    return {
+        "id": d.get("id"),
+        "name": clean_text(d.get("name") or ""),
+        "nutrition_variants": marugame_nutrition_variants(nut),
+        "allergens": marugame_allergens(props.get("allergenItemData"), props.get("allergenHeadersData")),
+    }
