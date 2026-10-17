@@ -1108,6 +1108,272 @@
     "title": "【かつや】辛くて痺れる麻婆に手加減なし「麻婆チキンカツ定食・麻婆チキンカツ丼」"
    }
   ],
+  "marugame": [
+   {
+    "date": "2024-04-14T09:00:00",
+    "id": 148841,
+    "link": "https://netaful.jp/neta-eat/0148841.html",
+    "product_name": "丸亀シェイクうどん",
+    "thumb": {
+     "height": 158,
+     "url": "https://netaful.jp/wp-content/uploads/2024/04/marugame-shake-000-300x158.jpg",
+     "width": 300
+    },
+    "title": "【丸亀製麺】「丸亀シェイクうどん」新商品3種「よくばり」「鶏から塩レモン」「ピリ辛 油淋鶏」を発売（4/16から）"
+   },
+   {
+    "date": "2023-05-19T16:00:00",
+    "id": 129240,
+    "link": "https://netaful.jp/neta-eat/0129240.html",
+    "product_name": "丸亀シェイクうどん",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2023/05/marugame-shake-20-000-19-300x169.jpg",
+     "width": 300
+    },
+    "title": "【丸亀製麺】「丸亀シェイクうどん」発売から3日間で20万食を突破して“丸亀うどん弁当”超え！"
+   },
+   {
+    "date": "2023-05-17T12:30:00",
+    "id": 129138,
+    "link": "https://netaful.jp/fast-food/0129138.html",
+    "product_name": "丸亀シェイクうどん",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2023/05/marygame-shake-udon-008-17-300x225.jpg",
+     "width": 300
+    },
+    "title": "【丸亀製麺】「丸亀シェイクうどん」フリフリして食べるカップうどんは持ちやすい＆もちもちのうどんが美味しい"
+   },
+   {
+    "date": "2023-03-21T09:00:00",
+    "id": 126990,
+    "link": "https://netaful.jp/neta-eat/0126990.html",
+    "product_name": "鴨ねぎうどん",
+    "thumb": {
+     "height": 349,
+     "url": "https://netaful.jp/wp-content/uploads/2023/03/kamo-2x-000-21.jpg",
+     "width": 300
+    },
+    "title": "【丸亀製麺】「鴨ねぎうどん」が値段そのままで鴨肉2倍に増量中"
+   },
+   {
+    "date": "2022-11-27T10:30:00",
+    "id": 122787,
+    "link": "https://netaful.jp/neta-eat/0122787.html",
+    "product_name": "牡蠣たまあんかけうどん",
+    "thumb": {
+     "height": 169,
+     "url": "https://netaful.jp/wp-content/uploads/2022/11/marugame-oyster-27000-300x169.jpg",
+     "width": 300
+    },
+    "title": "【丸亀製麺】広島県産浜ゆで牡蠣を6個使用の「牡蠣たまあんかけうどん」を発売 〜個人的には同日発売の「紅生姜玉子あんかけうどん」を食べたい！（11/29）"
+   },
+   {
+    "date": "2022-08-25T09:00:00",
+    "id": 118760,
+    "link": "https://netaful.jp/neta-eat/0118760.html",
+    "product_name": "タル鶏天ぶっかけうどん",
+    "thumb": {
+     "height": 679,
+     "url": "https://netaful.jp/wp-content/uploads/2022/08/taru-toriten-kara-25000-485x679.jpg",
+     "width": 485
+    },
+    "title": "【丸亀製麺】タルタルにラー油はヤバいやろ！人気の「タル鶏天ぶっかけうどん」に辛いバージョンが登場「辛タル鶏天ぶっかけうどん」食べてみたい！"
+   },
+   {
+    "date": "2021-12-28T11:00:00",
+    "id": 107865,
+    "link": "https://netaful.jp/neta-eat/0107865.html",
+    "product_name": null,
+    "thumb": {
+     "height": 163,
+     "url": "https://netaful.jp/wp-content/uploads/2021/12/marugame-price-up-300x163.jpg",
+     "width": 300
+    },
+    "title": "【丸亀製麺】2022年1月12日より一部うどん・天ぷらの値上げを発表"
+   },
+   {
+    "date": "2021-04-12T10:30:00",
+    "id": 98596,
+    "link": "https://netaful.jp/neta-eat/098596.html",
+    "product_name": "丸亀うどん弁当",
+    "thumb": {
+     "height": 300,
+     "url": "https://netaful.jp/wp-content/uploads/2021/04/marugame-udon-01-04-485x300.jpg",
+     "width": 485
+    },
+    "title": "【丸亀製麺】打ち立てうどんと天ぷら・おかずがひと箱に詰まった「丸亀うどん弁当」390円から4種を発売（4/13より）"
+   },
+   {
+    "date": "2020-11-12T08:00:00",
+    "id": 64151,
+    "link": "https://netaful.jp/neta-eat/064151.html",
+    "product_name": "丸亀ランチセット",
+    "thumb": {
+     "height": 300,
+     "url": "https://netaful.jp/wp-content/uploads/2020/11/marugame-lunch-202011-1-1-485x300.jpg",
+     "width": 485
+    },
+    "title": "【丸亀製麺】創業20周年で500円からの「丸亀ランチセット」期間限定販売（11/24〜12/28）"
+   },
+   {
+    "date": "2020-09-29T14:00:00",
+    "id": 63875,
+    "link": "https://netaful.jp/neta-eat/063875.html",
+    "product_name": "牡蠣ちゃんぽんうどん",
+    "thumb": {
+     "height": 300,
+     "url": "https://netaful.jp/wp-content/uploads/2020/09/slproImg_202009291825270-1-485x300.jpg",
+     "width": 485
+    },
+    "title": "【丸亀製麺】広島県産浜ゆで牡蠣の旨みがたっぷりの「牡蠣ちゃんぽんうどん」発売開始"
+   },
+   {
+    "date": "2020-08-12T11:00:00",
+    "id": 63502,
+    "link": "https://netaful.jp/neta-eat/063502.html",
+    "product_name": "あなたが選ぶ！うどん総選挙",
+    "thumb": {
+     "height": 157,
+     "url": "https://netaful.jp/wp-content/uploads/2020/08/slproImg_202008121142371-1-300x157.jpg",
+     "width": 300
+    },
+    "title": "【丸亀製麺】創業20周年企画「あなたが選ぶ！うどん総選挙」1位は「タル鶏天ぶっかけうどん」2020年秋に復活へ"
+   },
+   {
+    "date": "2020-07-09T10:00:00",
+    "id": 63249,
+    "link": "https://netaful.jp/neta-eat/063249.html",
+    "product_name": "牛焼肉冷麺",
+    "thumb": {
+     "height": 1024,
+     "url": "https://netaful.jp/wp-content/uploads/2020/07/slproImg_202007091006570-1-723x1024.jpg",
+     "width": 723
+    },
+    "title": "【丸亀製麺】夏季限定「牛焼肉冷麺」「辛辛 牛焼肉冷麺」7/14より発売開始"
+   },
+   {
+    "date": "2020-01-19T09:00:00",
+    "id": 62218,
+    "link": "https://netaful.jp/neta-eat/062218.html",
+    "product_name": "かけうどん",
+    "thumb": {
+     "height": 106,
+     "url": "https://netaful.jp/wp-content/uploads/2020/01/slproImg_202001190928470-1-300x106.jpg",
+     "width": 300
+    },
+    "title": "【丸亀製麺】「かけうどん」購入でもう一杯「かけうどん」無料になるキャンペーンを期間限定で実施（1/21〜24）"
+   },
+   {
+    "date": "2019-08-04T13:00:00",
+    "id": 61165,
+    "link": "https://netaful.jp/fast-food/061165.html",
+    "product_name": "旨辛肉つけうどん",
+    "thumb": {
+     "height": 960,
+     "url": "https://netaful.jp/wp-content/uploads/2019/08/slproImg_201908041555530-1.jpg",
+     "width": 1280
+    },
+    "title": "【丸亀製麺】「旨辛肉つけうどん」辣油入りのピリ辛な夏限定メニュー"
+   },
+   {
+    "date": "2019-04-22T08:30:00",
+    "id": 60425,
+    "link": "https://netaful.jp/smartphone-pay/060425.html",
+    "product_name": "丸亀製麺",
+    "thumb": {
+     "height": 154,
+     "url": "https://netaful.jp/wp-content/uploads/2019/04/slproImg_201904220923280-1-300x154.jpg",
+     "width": 300
+    },
+    "title": "【PayPay】全国101店舗の「丸亀製麺」で利用可能に"
+   },
+   {
+    "date": "2019-03-11T11:30:00",
+    "id": 60118,
+    "link": "https://netaful.jp/fast-food/060118.html",
+    "product_name": "新 鴨ねぎうどん",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2019/03/slproImg_201903111114030-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【丸亀製麺】ふわふわ柔らか鴨肉と甘い白ねぎ「新 鴨ねぎうどん」"
+   },
+   {
+    "date": "2018-12-18T17:00:00",
+    "id": 59527,
+    "link": "https://netaful.jp/fast-food/059527.html",
+    "product_name": "夜の肉祭り",
+    "thumb": {
+     "height": 145,
+     "url": "https://netaful.jp/wp-content/uploads/2018/12/slproImg_201812181804081-1-300x145.jpg",
+     "width": 300
+    },
+    "title": "【丸亀製麺】牛肉2倍盛・牛肉3倍盛「夜の肉祭り」を開催（1/14まで）"
+   },
+   {
+    "date": "2018-10-09T14:00:00",
+    "id": 59016,
+    "link": "https://netaful.jp/fast-food/059016.html",
+    "product_name": "うま辛担々うどん",
+    "thumb": {
+     "height": 225,
+     "url": "https://netaful.jp/wp-content/uploads/2018/10/slproImg_201810091452032-1-300x225.jpg",
+     "width": 300
+    },
+    "title": "【丸亀製麺】「うま辛担々うどん」濃厚クリーミーでたっぷり肉味噌【感想】"
+   },
+   {
+    "date": "2018-10-03T09:00:00",
+    "id": 58950,
+    "link": "https://netaful.jp/neta-eat/058950.html",
+    "product_name": "うま辛坦々うどん",
+    "thumb": {
+     "height": 300,
+     "url": "https://netaful.jp/wp-content/uploads/2018/10/slproImg_201810031134470-1-427x300.jpg",
+     "width": 427
+    },
+    "title": "【丸亀製麺】坦々スープに肉味噌「うま辛坦々うどん」10月9日より販売開始"
+   },
+   {
+    "date": "2017-09-06T12:00:00",
+    "id": 56073,
+    "link": "https://netaful.jp/neta-eat/056073.html",
+    "product_name": null,
+    "thumb": {
+     "height": 205,
+     "url": "https://netaful.jp/wp-content/uploads/2017/09/2017-09-06_1437-1-300x205.jpg",
+     "width": 300
+    },
+    "title": "丸亀製麺が1,000円飲み放題セットをやってるなんて知ってた？"
+   },
+   {
+    "date": "2013-11-13T14:30:00",
+    "id": 45138,
+    "link": "https://netaful.jp/aff/045138.html",
+    "product_name": "丸亀製麺オンラインショップ",
+    "thumb": {
+     "height": 235,
+     "url": "https://netaful.jp/wp-content/uploads/2013/11/2013-11-13_1436-1-300x235.jpg",
+     "width": 300
+    },
+    "title": "「丸亀製麺オンラインショップ」のアフィリエイトがあった"
+   },
+   {
+    "date": "2010-06-30T14:32:35",
+    "id": 34940,
+    "link": "https://netaful.jp/urawa-gourmet/034940.html",
+    "product_name": "丸亀製麺",
+    "thumb": {
+     "height": 223,
+     "url": "https://netaful.jp/wp-content/uploads/2010/06/iphone_photo_2066-1-300x223.jpg",
+     "width": 300
+    },
+    "title": "ビバ！釜玉うどん！「丸亀製麺」（浦和・太田窪店）"
+   }
+  ],
   "matsunoya": [
    {
     "date": "2026-08-30T13:00:00",
@@ -9630,7 +9896,7 @@
   ]
  },
  "errors": [],
- "fetched_at": "2026-10-17T07:34:55+09:00",
+ "fetched_at": "2026-10-18T07:35:53+09:00",
  "matches": {
   "karayama-19096": [
    209971
