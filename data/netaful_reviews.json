@@ -2194,6 +2194,18 @@
   ],
   "matsuya": [
    {
+    "date": "2026-10-18T12:05:00",
+    "id": 211090,
+    "link": "https://netaful.jp/fast-food/0211090.html",
+    "product_name": "たっぷり牛皿定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/10/matsuya-oomori-gyuzara-002-485x364.jpeg",
+     "width": 485
+    },
+    "title": "【松屋】「たっぷり牛皿定食」新タレの牛めし大盛り分の肉が旨い！ご飯おかわり無料"
+   },
+   {
     "date": "2026-10-13T12:10:00",
     "id": 210834,
     "link": "https://netaful.jp/fast-food/0210834.html",
@@ -9896,7 +9908,7 @@
   ]
  },
  "errors": [],
- "fetched_at": "2026-10-18T07:35:53+09:00",
+ "fetched_at": "2026-10-19T07:35:42+09:00",
  "matches": {
   "karayama-19096": [
    209971
@@ -9909,6 +9921,9 @@
   ],
   "matsuya-curry-kashmir_hp": [
    210463
+  ],
+  "matsuya-limited-tei_gyuusara_hp": [
+   211090
   ],
   "matsuya-teishoku-tei_kuromabo_hp": [
    210253
