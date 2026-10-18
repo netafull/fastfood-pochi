@@ -2302,12 +2302,57 @@ def run_pdf_step(chain: str, getter, pending: dict, stats: dict) -> dict | None:
     return report
 
 
-def save_run_summary(stats: dict[str, dict]) -> None:
-    """この実行で新規に記録した商品数・終了を観測した商品数を書き出す。notify.py が読む。
+def collect_problems(stats: dict[str, dict]) -> dict[str, list[str]]:
+    """この実行で問題があったチェーンを種別ごとに集める(通知用)。
+
+    list_failed は「一覧の取得・解析が完全には成功しなかった」チェーン。取得失敗・商品0件(構造変更の疑い)・
+    ナビが読めない・丸亀の件数急減・robots.txtで弾いた一覧など、list_ok が False で終わった経路すべてを含む。
+    ただし、ブロック(blocked)・例外(errors)・歯止め(suspected_restructure。既存の「保留」通知がある)は
+    重複させないため除く。詳細ページ単発の失敗(stats["failed"])は一時的なことが多く翌日に自動で再試行されるので、
+    問題には数えない。"""
+    return {
+        "blocked": [c for c, s in stats.items() if s.get("blocked")],
+        "list_failed": [c for c, s in stats.items()
+                        if not s.get("list_ok") and not s.get("blocked") and not s.get("error")
+                        and not s.get("suspected_restructure")],
+        "errors": [c for c, s in stats.items() if s.get("error")],
+    }
+
+
+def update_health(pending: dict, stats: dict[str, dict], today: str) -> dict[str, int]:
+    """チェーンごとの「連続で問題が出ている日数」を pending["_health"] に持ち、今回問題があった
+    チェーンの日数を返す。日付で数えるので同じ日の再実行では増えず、1日でも空けば数え直す。
+    今回巡回しなかったチェーン(チェーン指定の実行)は触らない。歯止めの保留は別に consecutive_days を持つ。"""
+    health = pending.setdefault("_health", {})
+    bad = {c for names in collect_problems(stats).values() for c in names}
+    yesterday = (datetime.date.fromisoformat(today) - datetime.timedelta(days=1)).isoformat()
+    streaks: dict[str, int] = {}
+    for chain in stats:
+        if chain not in bad:
+            health.pop(chain, None)
+            continue
+        prev = health.get(chain) or {}
+        n = int(prev.get("days", 0))
+        if prev.get("last_date") != today:
+            n = n + 1 if prev.get("last_date") == yesterday else 1
+        health[chain] = {"days": n, "last_date": today}
+        streaks[chain] = n
+    if not health:
+        pending.pop("_health", None)
+    return streaks
+
+
+def save_run_summary(stats: dict[str, dict], streaks: dict[str, int] | None = None) -> None:
+    """この実行で新規に記録した商品数・終了を観測した商品数・問題があったチェーンを書き出す。
+    notify.py が読む。
 
     日付(UTC/JSTのずれ)で数えると朝の実行で通知が出ない・手動実行で二重に通知が出る
     不具合が姉妹サイト(コンビニポチ)で起きたため、実行ごとに上書きする一時ファイル
     (gitには入れない)にする。
+
+    形式: {"new": {...}, "ended": {...}, "suspected": {...},
+           "blocked": [チェーン], "list_failed": [チェーン], "errors": [チェーン],
+           "streaks": {チェーン: 連続日数}, "detail_failed": {チェーン: 詳細取得失敗件数}}
     """
     out = {
         "new": {chain: s.get("new_products", 0) for chain, s in stats.items()},
@@ -2315,6 +2360,11 @@ def save_run_summary(stats: dict[str, dict]) -> None:
         "suspected": {chain: s["suspected_restructure"] for chain, s in stats.items()
                       if s.get("suspected_restructure")},
     }
+    problems = collect_problems(stats)
+    out.update(problems)
+    out["streaks"] = streaks or {}
+    listed = set(problems["list_failed"]) | set(problems["blocked"]) | set(problems["errors"])
+    out["detail_failed"] = {c: s["failed"] for c, s in stats.items() if s.get("failed") and c not in listed}
     RUN_SUMMARY.parent.mkdir(parents=True, exist_ok=True)
     RUN_SUMMARY.write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
 
@@ -2344,12 +2394,16 @@ def main(argv: list[str] | None = None) -> int:
             fn(getter, pending, stats)
         except Exception as e:  # noqa: BLE001
             print(f"[error] {fn.__name__} で例外: {e}", file=sys.stderr)
+            err_chain = {v: k for k, v in CRAWLERS.items()}.get(fn)
+            if err_chain:
+                stats.setdefault(err_chain, new_stats())["error"] = f"{type(e).__name__}: {e}"
         chain = {v: k for k, v in CRAWLERS.items()}.get(fn)
         if chain in ("yoshinoya", "sukiya"):
             run_pdf_step(chain, getter, pending, stats)
 
+    streaks = update_health(pending, stats, today_jst())
     save_json(PENDING_PATH, pending, sort_keys=True)
-    save_run_summary(stats)
+    save_run_summary(stats, streaks)
 
     print("=== クロール結果 ===")
     for chain, s in stats.items():
@@ -2359,6 +2413,7 @@ def main(argv: list[str] | None = None) -> int:
             f"/ 新規{s.get('new_products', 0)}件 / 終了観測{s.get('ended', 0)}件 / 失敗{s.get('failed', 0)}件 "
             f"/ 一覧取得={'全部成功' if s.get('list_ok') else '一部失敗'} "
             f"/ ブロック={'あり' if s.get('blocked') else 'なし'}"
+            + (f" / 例外={s['error']}" if s.get("error") else "")
         )
         if s.get("pdf"):
             print(f"  公式PDF: HEAD{s['pdf']['head_requests']}件・GET{s['pdf']['get_requests']}件 / "
