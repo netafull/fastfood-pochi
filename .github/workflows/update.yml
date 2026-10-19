@@ -82,14 +82,21 @@ jobs:
           fi
           git push origin HEAD:main
 
+      # 通知の一時停止スイッチ。リポジトリ変数 NTFY_PAUSED を "true" にすると、
+      # この2つの通知ステップ(要約・失敗)をまとめて飛ばす。
+      #   停止: gh variable set NTFY_PAUSED --body true  -R netafull/<repo>
+      #   再開: gh variable delete NTFY_PAUSED          -R netafull/<repo>
+      # シークレット(NTFY_TOPIC)を消さずに止められる。通知は「その実行で取れた
+      # 新規」だけを送る作りなので、停止中の分は再開しても送られない。
+      # 注意: 失敗通知も止まるので、停止中は更新が止まっても鳴らない
       - name: 新メニュー・終了を通知
-        if: success()
+        if: success() && vars.NTFY_PAUSED != 'true'
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         run: python3 scripts/notify.py --summary
 
       - name: 失敗を通知
-        if: failure()
+        if: failure() && vars.NTFY_PAUSED != 'true'
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         run: python3 scripts/notify.py --failure
