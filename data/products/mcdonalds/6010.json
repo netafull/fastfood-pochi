@@ -1,0 +1,52 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "6010",
+ "name": "マックフィズ® 丸搾りレモネード",
+ "category": "ドリンク",
+ "price": 300,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": "2026-10-21",
+ "planned_end_text": "2026-11-25（モバイルオーダー受付期間の終了日）",
+ "mop_ended_at": "2026-11-25",
+ "list_started_at": "2026-10-13",
+ "description": "レモンを丸ごと搾った果汁を使用した、フルーティーですっきりとした酸味と、レモネードらしい甘みとコクを楽しめます。",
+ "description_full_len": 56,
+ "nutrition": {
+  "kcal": 147.0,
+  "protein_g": 0.0,
+  "fat_g": 0.0,
+  "carbs_g": 36.8,
+  "sugar_g": 34.0,
+  "fiber_g": null,
+  "salt_g": 0.1,
+  "other": {
+   "飽和脂肪酸": "0.00g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "乳"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mcdonalds.co.jp/products/6010/",
+ "first_seen_at": "2026-10-21T07:30:15+09:00",
+ "last_seen_at": "2026-10-21",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-21",
+   "price": 300
+  }
+ ],
+ "source_list": [
+  "/menu/",
+  "/menu/drink/"
+ ],
+ "image": null
+}

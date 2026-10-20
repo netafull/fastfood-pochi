@@ -60,7 +60,7 @@
  "last_seen_at": "2026-10-20",
  "status": "on_sale",
  "ended_observed_at": null,
- "missed_runs": 0,
+ "missed_runs": 1,
  "price_history": [
   {
    "date": "2026-10-11",
@@ -84,5 +84,6 @@
  "allergens_conditional": {
   "mark": "▲",
   "meaning": "原材料「あさり」には『かに』が共生しています。 原材料「あおさ」は『えび』『かに』が混ざる漁法で採取されています。"
- }
+ },
+ "last_miss_date": "2026-10-21"
 }

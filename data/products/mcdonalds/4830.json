@@ -1,0 +1,69 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "4830",
+ "name": "倍ザクザクジューシーマック",
+ "category": "バーガー",
+ "price": 600,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "倍になったジューシーでザクザクな衣の一枚肉のももチキンに、あらびきマスタード香るタルタルソースの相性が抜群の一品。",
+ "description_full_len": 57,
+ "nutrition": {
+  "kcal": 691.0,
+  "protein_g": 29.8,
+  "fat_g": 35.5,
+  "carbs_g": 63.6,
+  "sugar_g": 7.0,
+  "fiber_g": null,
+  "salt_g": 4.8,
+  "other": {
+   "飽和脂肪酸": "11.11g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "乳",
+   "小麦",
+   "ごま",
+   "大豆",
+   "鶏肉"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "バンズ",
+   "origin": "主要原料：小麦粉／アメリカ、カナダ、オーストラリア　製造所所在地：日本"
+  },
+  {
+   "name": "チキンパティ",
+   "origin": "主要原料：鶏肉／タイ　製造所所在地：タイ"
+  },
+  {
+   "name": "レタス",
+   "origin": "主要原料：レタス／日本、台湾、アメリカ、マレーシア、韓国　製造所所在地：日本"
+  }
+ ],
+ "limited_kind": "新メニュー",
+ "official_url": "https://www.mcdonalds.co.jp/products/4830/",
+ "first_seen_at": "2026-10-21T07:30:15+09:00",
+ "last_seen_at": "2026-10-21",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-21",
+   "price": 600
+  }
+ ],
+ "source_list": [
+  "/menu/burger/",
+  "/menu/dinner/"
+ ],
+ "image": null
+}

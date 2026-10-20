@@ -1,0 +1,54 @@
+{
+ "chain": "matsuya",
+ "product_id": "drink-dri_lemon_ori_hp",
+ "name": "未来のレモンサワーオリジナル",
+ "category": "ドリンク",
+ "price": 290,
+ "price_note": "税込。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 183.0,
+  "protein_g": 0.0,
+  "fat_g": 0.0,
+  "carbs_g": 19.3,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 0.3,
+  "other": {}
+ },
+ "nutrition_variants": null,
+ "nutrition_as_of": "2026-10-20",
+ "nutrition_note": null,
+ "allergens": {
+  "contains": [],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "新規掲載",
+ "in_recommended": false,
+ "official_url": "https://www.matsuyafoods.co.jp/matsuya/menu/drink/dri_lemon_ori_hp_261020.html",
+ "current_slug": "drink-dri_lemon_ori_hp_261020",
+ "first_seen_at": "2026-10-21T07:32:07+09:00",
+ "last_seen_at": "2026-10-21",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-21",
+   "price": 290
+  }
+ ],
+ "source_list": [
+  "drink"
+ ],
+ "image": null
+}

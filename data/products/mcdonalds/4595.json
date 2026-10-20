@@ -1,0 +1,69 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "4595",
+ "name": "倍えびフィレオ",
+ "category": "バーガー",
+ "price": 580,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "ザクザクの衣とぷりぷりの食感が特長のえびカツのえびフィレオ®。",
+ "description_full_len": 53,
+ "nutrition": {
+  "kcal": 563.0,
+  "protein_g": 17.5,
+  "fat_g": 24.9,
+  "carbs_g": 67.9,
+  "sugar_g": 7.0,
+  "fiber_g": null,
+  "salt_g": 2.9,
+  "other": {
+   "飽和脂肪酸": "8.26g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "乳",
+   "小麦",
+   "えび",
+   "ごま",
+   "大豆"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "バンズ",
+   "origin": "主要原料：小麦粉／アメリカ、カナダ、オーストラリア　製造所所在地：日本"
+  },
+  {
+   "name": "シュリンプポーション",
+   "origin": "主要原料：エビ／タイ、ベトナム　製造所所在地：タイ"
+  },
+  {
+   "name": "レタス",
+   "origin": "主要原料：レタス／日本、台湾、アメリカ、マレーシア、韓国　製造所所在地：日本"
+  }
+ ],
+ "limited_kind": "新メニュー",
+ "official_url": "https://www.mcdonalds.co.jp/products/4595/",
+ "first_seen_at": "2026-10-21T07:30:15+09:00",
+ "last_seen_at": "2026-10-21",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-21",
+   "price": 580
+  }
+ ],
+ "source_list": [
+  "/menu/burger/",
+  "/menu/dinner/"
+ ],
+ "image": null
+}

@@ -1,0 +1,102 @@
+{
+ "chain": "matsuya",
+ "product_id": "teishoku-tei_chicken_chili_hp",
+ "name": "ごろチキチリソース定食",
+ "category": "定食",
+ "price": 990,
+ "price_note": "税込。表示は「セット」の価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "セット",
+   "price": 990
+  },
+  {
+   "label": "単品",
+   "price": 790
+  }
+ ],
+ "launch_date": "2026-10-20",
+ "launch_date_source": "news_article_body",
+ "planned_end_text": null,
+ "news_url": "https://www.matsuyafoods.co.jp/matsuya/whatsnew/menu/184852.html",
+ "news_title": "人気シリーズから待望の\"中華版\"が登場！「ごろチキチリソース」発売",
+ "news_date": "2026-10-15",
+ "description": "ピリ辛豆板醤と甘酸っぱい特製チリソースをまとった、松屋の定番ごろごろチキン。",
+ "description_full_len": 64,
+ "nutrition": {
+  "kcal": 1361.0,
+  "protein_g": 56.5,
+  "fat_g": 75.3,
+  "carbs_g": 102.2,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 6.7,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "セット",
+   "nutrition": {
+    "kcal": 1361.0,
+    "protein_g": 56.5,
+    "fat_g": 75.3,
+    "carbs_g": 102.2,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 6.7,
+    "other": {}
+   }
+  },
+  {
+   "label": "単品",
+   "nutrition": {
+    "kcal": 957.0,
+    "protein_g": 48.4,
+    "fat_g": 73.1,
+    "carbs_g": 17.2,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 5.1,
+    "other": {}
+   }
+  }
+ ],
+ "nutrition_as_of": "2026-10-20",
+ "nutrition_note": null,
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "乳",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "りんご",
+   "ゼラチン",
+   "ごま"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "新メニュー",
+ "in_recommended": true,
+ "official_url": "https://www.matsuyafoods.co.jp/matsuya/menu/teishoku/tei_chicken_chili_hp_261020.html",
+ "current_slug": "teishoku-tei_chicken_chili_hp_261020",
+ "first_seen_at": "2026-10-21T07:32:07+09:00",
+ "last_seen_at": "2026-10-21",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-21",
+   "price": 990
+  }
+ ],
+ "source_list": [
+  "limited",
+  "teishoku"
+ ],
+ "image": null
+}

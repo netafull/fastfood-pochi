@@ -1,0 +1,68 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "1520",
+ "name": "スパイシーザクザクジューシーマック",
+ "category": "バーガー",
+ "price": 470,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "ジューシーでザクザクな衣の一枚肉のももチキンに、唐辛子とガーリックの旨辛スパイシーソースを合わせたやみつきになる一品。",
+ "description_full_len": 59,
+ "nutrition": {
+  "kcal": 473.0,
+  "protein_g": 17.5,
+  "fat_g": 24.7,
+  "carbs_g": 45.8,
+  "sugar_g": 6.0,
+  "fiber_g": null,
+  "salt_g": 3.1,
+  "other": {
+   "飽和脂肪酸": "6.67g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "乳",
+   "小麦",
+   "ごま",
+   "大豆",
+   "鶏肉"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "バンズ",
+   "origin": "主要原料：小麦粉／アメリカ、カナダ、オーストラリア　製造所所在地：日本"
+  },
+  {
+   "name": "チキンパティ",
+   "origin": "主要原料：鶏肉／タイ　製造所所在地：タイ"
+  },
+  {
+   "name": "レタス",
+   "origin": "主要原料：レタス／日本、台湾、アメリカ、マレーシア、韓国　製造所所在地：日本"
+  }
+ ],
+ "limited_kind": "新メニュー",
+ "official_url": "https://www.mcdonalds.co.jp/products/1520/",
+ "first_seen_at": "2026-10-21T07:30:15+09:00",
+ "last_seen_at": "2026-10-21",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-21",
+   "price": 470
+  }
+ ],
+ "source_list": [
+  "/menu/burger/"
+ ],
+ "image": null
+}

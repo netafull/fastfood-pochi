@@ -1,0 +1,68 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "1035",
+ "name": "えびフィレオ®",
+ "category": "バーガー",
+ "price": 440,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "ザクザクの衣とぷりぷりの食感が特長のえびカツに、コクのあるマスタードペッパータルタルが相性抜群の自信作。",
+ "description_full_len": 52,
+ "nutrition": {
+  "kcal": 389.0,
+  "protein_g": 11.4,
+  "fat_g": 16.8,
+  "carbs_g": 48.7,
+  "sugar_g": 6.0,
+  "fiber_g": null,
+  "salt_g": 2.0,
+  "other": {
+   "飽和脂肪酸": "4.86g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "乳",
+   "小麦",
+   "えび",
+   "ごま",
+   "大豆"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "バンズ",
+   "origin": "主要原料：小麦粉／アメリカ、カナダ、オーストラリア　製造所所在地：日本"
+  },
+  {
+   "name": "シュリンプポーション",
+   "origin": "主要原料：エビ／タイ、ベトナム　製造所所在地：タイ"
+  },
+  {
+   "name": "レタス",
+   "origin": "主要原料：レタス／日本、台湾、アメリカ、マレーシア、韓国　製造所所在地：日本"
+  }
+ ],
+ "limited_kind": "新メニュー",
+ "official_url": "https://www.mcdonalds.co.jp/products/1035/",
+ "first_seen_at": "2026-10-21T07:30:15+09:00",
+ "last_seen_at": "2026-10-21",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-21",
+   "price": 440
+  }
+ ],
+ "source_list": [
+  "/menu/burger/"
+ ],
+ "image": null
+}

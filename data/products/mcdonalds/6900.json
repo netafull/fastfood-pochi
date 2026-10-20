@@ -60,7 +60,7 @@
  "last_seen_at": "2026-10-20",
  "status": "on_sale",
  "ended_observed_at": null,
- "missed_runs": 0,
+ "missed_runs": 1,
  "price_history": [
   {
    "date": "2026-10-07",
@@ -70,5 +70,6 @@
  "source_list": [
   "/menu/burger/"
  ],
- "image": null
+ "image": null,
+ "last_miss_date": "2026-10-21"
 }

@@ -1,0 +1,52 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "6020",
+ "name": "マックフロート® 丸搾りレモネード",
+ "category": "デザート・シェイク",
+ "price": 380,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": "2026-10-21",
+ "planned_end_text": "2026-11-25（モバイルオーダー受付期間の終了日）",
+ "mop_ended_at": "2026-11-25",
+ "list_started_at": "2026-10-13",
+ "description": "レモン果汁を使用した、フルーティーですっきりとした酸味のある炭酸に、ソフトクリームをトッピングしたデザートドリンク。",
+ "description_full_len": 58,
+ "nutrition": {
+  "kcal": 254.0,
+  "protein_g": 2.9,
+  "fat_g": 2.9,
+  "carbs_g": 54.0,
+  "sugar_g": 48.0,
+  "fiber_g": null,
+  "salt_g": 0.2,
+  "other": {
+   "飽和脂肪酸": "1.77g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "乳"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mcdonalds.co.jp/products/6020/",
+ "first_seen_at": "2026-10-21T07:30:15+09:00",
+ "last_seen_at": "2026-10-21",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-21",
+   "price": 380
+  }
+ ],
+ "source_list": [
+  "/menu/",
+  "/menu/dessert/"
+ ],
+ "image": null
+}
