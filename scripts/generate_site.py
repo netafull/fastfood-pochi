@@ -482,7 +482,9 @@ def updated_label(now: datetime.datetime | None = None) -> str:
 def page_shell(title: str, description: str, body: str, canonical: str, extra_head: str = "",
                header_ad: bool = False, header_note: str = "") -> str:
     site_url = CONFIG.get("site_url", "")
-    page_title = f'{esc(title)}｜{esc(CONFIG["site_title"])}' if title != CONFIG["site_title"] else esc(title)
+    # トップページのtitleは、サイト名のあとに説明を添える(姉妹サイトと同じ「名前｜説明」の形)
+    page_title = (f'{esc(title)}｜{esc(CONFIG["site_title"])}' if title != CONFIG["site_title"]
+                  else esc(CONFIG.get("top_title") or title))
 
     ga_id = CONFIG.get("ga_measurement_id")
     ga_tag = ""
