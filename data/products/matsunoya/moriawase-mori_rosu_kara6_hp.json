@@ -1,0 +1,84 @@
+{
+ "chain": "matsunoya",
+ "product_id": "moriawase-mori_rosu_kara6_hp",
+ "name": "【倍量フェア】ロースかつ＆本格唐揚げ（６個）定食",
+ "category": "盛合せ",
+ "price": 990,
+ "price_note": "税込。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 1530.0,
+  "protein_g": 60.9,
+  "fat_g": 80.7,
+  "carbs_g": 146.3,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 5.9,
+  "other": {}
+ },
+ "nutrition_variants": null,
+ "nutrition_as_of": "2026-10-21",
+ "nutrition_note": "特定原材料・栄養成分の数値には、みそ汁も含まれております。",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "乳",
+   "オレンジ",
+   "牛肉",
+   "さけ",
+   "さば",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "ごま"
+  ],
+  "partial": [
+   {
+    "name": "やまいも",
+    "mark": "△"
+   },
+   {
+    "name": "りんご",
+    "mark": "△"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△"
+   },
+   {
+    "name": "アーモンド",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "おすすめ掲載",
+ "in_recommended": true,
+ "official_url": "https://www.matsuyafoods.co.jp/matsunoya/menu/moriawase/mori_rosu_kara6_hp_261021.html",
+ "current_slug": "moriawase-mori_rosu_kara6_hp_261021",
+ "first_seen_at": "2026-10-22T07:31:56+09:00",
+ "last_seen_at": "2026-10-22",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-22",
+   "price": 990
+  }
+ ],
+ "source_list": [
+  "moriawase",
+  "osusume"
+ ],
+ "image": null
+}

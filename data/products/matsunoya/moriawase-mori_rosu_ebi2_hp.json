@@ -1,0 +1,93 @@
+{
+ "chain": "matsunoya",
+ "product_id": "moriawase-mori_rosu_ebi2_hp",
+ "name": "【倍量フェア】ロースかつ＆海老フライ（２尾）定食",
+ "category": "盛合せ",
+ "price": 970,
+ "price_note": "税込。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 1247.0,
+  "protein_g": 38.1,
+  "fat_g": 65.7,
+  "carbs_g": 130.5,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 3.9,
+  "other": {}
+ },
+ "nutrition_variants": null,
+ "nutrition_as_of": "2026-10-21",
+ "nutrition_note": "特定原材料・栄養成分の数値には、みそ汁も含まれております。",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "乳",
+   "えび",
+   "オレンジ",
+   "大豆",
+   "豚肉",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "牛肉",
+    "mark": "△"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "△"
+   },
+   {
+    "name": "やまいも",
+    "mark": "△"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△"
+   },
+   {
+    "name": "ごま",
+    "mark": "△"
+   },
+   {
+    "name": "アーモンド",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "おすすめ掲載",
+ "in_recommended": true,
+ "official_url": "https://www.matsuyafoods.co.jp/matsunoya/menu/moriawase/mori_rosu_ebi2_hp_261021.html",
+ "current_slug": "moriawase-mori_rosu_ebi2_hp_261021",
+ "first_seen_at": "2026-10-22T07:31:56+09:00",
+ "last_seen_at": "2026-10-22",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-22",
+   "price": 970
+  }
+ ],
+ "source_list": [
+  "moriawase",
+  "osusume"
+ ],
+ "image": null
+}

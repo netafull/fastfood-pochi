@@ -1376,6 +1376,18 @@
   ],
   "matsunoya": [
    {
+    "date": "2026-10-21T17:00:00",
+    "id": 211286,
+    "link": "https://netaful.jp/fast-food/0211286.html",
+    "product_name": "惣菜セット（アジ1枚＋カキ2個＋海老1尾＋ポテト）",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/10/matsunoya-sozai-760off-004-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松のや】760円オフ！？「惣菜セット（アジ1枚＋カキ2個＋海老1尾＋ポテト）」を食べてみた"
+   },
+   {
     "date": "2026-08-30T13:00:00",
     "id": 208495,
     "link": "https://netaful.jp/fast-food/0208495.html",
@@ -2193,6 +2205,18 @@
    }
   ],
   "matsuya": [
+   {
+    "date": "2026-10-21T09:00:00",
+    "id": 211230,
+    "link": "https://netaful.jp/fast-food/0211230.html",
+    "product_name": "ごろチキチリソース",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/10/matsuya-chicken-chili-005-485x364.jpg",
+     "width": 485
+    },
+    "title": "【松屋】「ごろチキチリソース」甘酸っぱさのあとにピリ辛！ごろチキの中華版は意外な美味しさ"
+   },
    {
     "date": "2026-10-18T12:05:00",
     "id": 211090,
@@ -9908,7 +9932,7 @@
   ]
  },
  "errors": [],
- "fetched_at": "2026-10-21T07:36:33+09:00",
+ "fetched_at": "2026-10-22T07:35:42+09:00",
  "matches": {
   "karayama-19096": [
    209971
@@ -9924,6 +9948,9 @@
   ],
   "matsuya-limited-tei_gyuusara_hp": [
    211090
+  ],
+  "matsuya-teishoku-tei_chicken_chili_hp": [
+   211230
   ],
   "matsuya-teishoku-tei_kuromabo_hp": [
    210253

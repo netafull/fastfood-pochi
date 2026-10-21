@@ -66,9 +66,9 @@
  "official_url": "https://www.mcdonalds.co.jp/products/6940/",
  "first_seen_at": "2026-10-07T21:22:29+09:00",
  "last_seen_at": "2026-10-20",
- "status": "on_sale",
- "ended_observed_at": null,
- "missed_runs": 1,
+ "status": "ended",
+ "ended_observed_at": "2026-10-22",
+ "missed_runs": 2,
  "price_history": [
   {
    "date": "2026-10-07",
@@ -80,5 +80,5 @@
   "/menu/dinner/"
  ],
  "image": null,
- "last_miss_date": "2026-10-21"
+ "last_miss_date": "2026-10-22"
 }

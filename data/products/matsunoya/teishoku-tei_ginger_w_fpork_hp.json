@@ -56,7 +56,7 @@
  "last_seen_at": "2026-10-21",
  "status": "on_sale",
  "ended_observed_at": null,
- "missed_runs": 0,
+ "missed_runs": 1,
  "price_history": [
   {
    "date": "2026-10-11",
@@ -68,5 +68,6 @@
   "teishoku"
  ],
  "image": null,
- "current_slug": "teishoku-tei_ginger_w_fpork_hp_261002"
+ "current_slug": "teishoku-tei_ginger_w_fpork_hp_261002",
+ "last_miss_date": "2026-10-22"
 }
