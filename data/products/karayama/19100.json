@@ -30,7 +30,7 @@
  "last_seen_at": "2026-10-22",
  "status": "on_sale",
  "ended_observed_at": null,
- "missed_runs": 0,
+ "missed_runs": 1,
  "price_history": [
   {
    "date": "2026-10-11",
@@ -40,5 +40,6 @@
  "source_list": [
   "menu"
  ],
- "image": null
+ "image": null,
+ "last_miss_date": "2026-10-23"
 }
