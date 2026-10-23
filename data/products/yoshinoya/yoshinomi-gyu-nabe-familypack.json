@@ -39,12 +39,15 @@
  "origin_pdf_url": "https://www.yoshinoya.com/pdf/producing_area/",
  "allergens": null,
  "origin": null,
- "limited_kind": "新規掲載",
- "badges": [],
+ "limited_kind": "期間限定",
+ "badges": [
+  "NEW",
+  "期間限定"
+ ],
  "in_limited_list": true,
  "official_url": "https://www.yoshinoya.com/menu/yoshinomi/gyu-nabe-familypack/",
  "first_seen_at": "2026-10-14T07:34:37+09:00",
- "last_seen_at": "2026-10-23",
+ "last_seen_at": "2026-10-24",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,

@@ -28,9 +28,9 @@
  "official_url": "https://www.arclandservice.co.jp/karayama/menu/19101/",
  "first_seen_at": "2026-10-11T17:14:57+09:00",
  "last_seen_at": "2026-10-22",
- "status": "on_sale",
- "ended_observed_at": null,
- "missed_runs": 1,
+ "status": "ended",
+ "ended_observed_at": "2026-10-24",
+ "missed_runs": 2,
  "price_history": [
   {
    "date": "2026-10-11",
@@ -41,5 +41,5 @@
   "menu"
  ],
  "image": null,
- "last_miss_date": "2026-10-23"
+ "last_miss_date": "2026-10-24"
 }
