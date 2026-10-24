@@ -1,10 +1,4 @@
 {
- "_health": {
-  "matsuya": {
-   "days": 1,
-   "last_date": "2026-10-24"
-  }
- },
  "karayama": {},
  "katsuya": {},
  "marugame": {},
@@ -13,5 +7,11 @@
  "mcdonalds": {},
  "mos": {},
  "sukiya": {},
- "yoshinoya": {}
+ "yoshinoya": {
+  "pdf:menu": {
+   "checked_at": "2026-10-25T07:33:08+09:00",
+   "reason": "validation: 表の見出し行が1ページも見つかりません(PDFの構造が変わった疑い)",
+   "url": "https://www.yoshinoya.com/pdf/allergy/"
+  }
+ }
 }

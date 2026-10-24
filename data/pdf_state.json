@@ -15,8 +15,9 @@
  },
  "yoshinoya": {
   "menu": {
+   "failed_signature": null,
    "fetched_at": "2026-10-18T07:33:09+09:00",
-   "last_get": "2026-10-18",
+   "last_get": "2026-10-25",
    "signature": null,
    "version": "262|2026-10-08"
   }

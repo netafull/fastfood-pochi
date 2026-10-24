@@ -31,7 +31,7 @@
    "price": 1360
   }
  ],
- "price_checked_at": "2026-10-18",
+ "price_checked_at": "2026-10-25",
  "launch_date": "2026-09-08",
  "launch_date_source": "news_headline",
  "announced_at": "2026-09-01",
@@ -186,7 +186,7 @@
  ],
  "official_url": "https://www.sukiya.jp/menu/in/gyudon/112700/index.html",
  "first_seen_at": "2026-10-11T14:57:03+09:00",
- "last_seen_at": "2026-10-24",
+ "last_seen_at": "2026-10-25",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
