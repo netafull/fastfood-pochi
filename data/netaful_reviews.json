@@ -2,6 +2,18 @@
  "articles": {
   "karayama": [
    {
+    "date": "2026-10-26T12:10:00",
+    "id": 211513,
+    "link": "https://netaful.jp/fast-food/0211513.html",
+    "product_name": "出汁とり天と白身魚からあげのきのこバターあんかけ定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/10/karayama-toriten-ajikara-003-485x364.jpg",
+     "width": 485
+    },
+    "title": "【からやま】「出汁とり天と白身魚からあげのきのこバターあんかけ定食」魚粉！？出汁がめっちゃ利いてる！"
+   },
+   {
     "date": "2026-09-28T09:00:00",
     "id": 209971,
     "link": "https://netaful.jp/fast-food/0209971.html",
@@ -9932,10 +9944,13 @@
   ]
  },
  "errors": [],
- "fetched_at": "2026-10-26T07:35:28+09:00",
+ "fetched_at": "2026-10-27T07:35:30+09:00",
  "matches": {
   "karayama-19096": [
    209971
+  ],
+  "karayama-19421": [
+   211513
   ],
   "katsuya-22442": [
    210780
