@@ -159,7 +159,7 @@ def extract_geometry(data: bytes, with_chars: bool = False) -> list[dict]:
                     walk(c)
 
         walk(page)
-        d = {"texts": texts, "rules": rules}
+        d = {"texts": texts, "rules": rules, "w": round(page.width, 1), "h": round(page.height, 1)}
         if with_chars:
             d["chars"] = chars
         pages.append(d)
@@ -347,6 +347,16 @@ _NUM = re.compile(r"^[\d,]+(?:\.\d+)?$")
 _NUM_WITH_MARKS = re.compile(r"^([\d,]+(?:\.\d+)?)(?:\s*[○▲])*$")
 
 
+YO_REF_H = 3238.2  # 262号までの吉野家PDFのページ高さ(pt)。座標のしきい値はこの大きさ基準で書いてある
+
+
+def _yoshinoya_scale(p: dict) -> float:
+    """ページの大きさ / 262号までのページの大きさ。263号でPDFが約1/3.85の寸法(A4相当)に変わったため、
+    しきい値(罫線の長さ・名前列の左端・行の許容誤差など)をこの倍率でそろえる。ページ高さが無い入力は旧寸法とみなす。"""
+    h = p.get("h")
+    return h / YO_REF_H if h else 1.0
+
+
 def _is_yoshinoya_ja_table(p: dict) -> bool:
     """日本語の表のページ: 「栄 養 成 分」の見出しと「(kcal)」の単位がある。
     英語・中国語・韓国語のページ(同じ品目が重複する)は見出しの文言が違うので除く。ページ番号は決め打ちしない。"""
@@ -400,7 +410,8 @@ def parse_yoshinoya(pages: list[dict]) -> dict:
         if "chars" not in p:
             problems.append(f"p{pi + 1}: 文字単位の座標がありません")
             continue
-        V = [r for r in R if r[3] - r[1] > 300 and r[2] - r[0] < 6]
+        sc = _yoshinoya_scale(p)
+        V = [r for r in R if r[3] - r[1] > 300 * sc and r[2] - r[0] < 6 * sc]
         ex = _cluster([(r[0] + r[2]) / 2 for r in V])
         unit = [t for t in T if unicodedata.normalize("NFKC", t[4]).startswith("(kca")][0]
         kc = next((i for i in range(len(ex) - 1) if ex[i] <= cx(unit) <= ex[i + 1]), None)
@@ -413,26 +424,26 @@ def parse_yoshinoya(pages: list[dict]) -> dict:
         if len(val_cols) != 5 or len(al_cols) != 28:
             problems.append(f"p{pi + 1}: 列の数が合いません(数値{len(val_cols)}・品目{len(al_cols)})")
             continue
-        lefts = [x for x in ex[:kc - 1] if x > 150]
+        lefts = [x for x in ex[:kc - 1] if x > 150 * sc]
         if not lefts:
             problems.append(f"p{pi + 1}: メニュー名の列が見つかりません")
             continue
         name_col = (min(lefts), ex[kc - 1])
-        H = [r for r in R if r[2] - r[0] > 150 and r[3] - r[1] < 4]
-        long_ys = [r[1] for r in H if r[2] - r[0] > 1500 and r[1] < unit[1]]
+        H = [r for r in R if r[2] - r[0] > 150 * sc and r[3] - r[1] < 4 * sc]
+        long_ys = [r[1] for r in H if r[2] - r[0] > 1500 * sc and r[1] < unit[1]]
         if not long_ys:
             problems.append(f"p{pi + 1}: 見出しの下の罫線がありません")
             continue
         hb = max(long_ys)  # 見出し行の下端 = データ行の上端
         bounds = sorted(_cluster([(r[1] + r[3]) / 2 for r in H
-                                  if r[0] <= name_col[0] + 50 and r[2] >= name_col[1] - 4 and r[2] - r[0] > 250
+                                  if r[0] <= name_col[0] + 50 * sc and r[2] >= name_col[1] - 4 * sc and r[2] - r[0] > 250 * sc
                                   and (r[1] + r[3]) / 2 < hb + 1], tol=2), reverse=True)
         if len(bounds) < 2:
             problems.append(f"p{pi + 1}: 行の区切りの罫線が足りません")
             continue
         pages_table += 1
         chars = p["chars"]
-        page_names = ["".join(c[4] for c in sorted((c for c in chars if a <= cx(c) <= b and hb < cy(c) < hb + 218),
+        page_names = ["".join(c[4] for c in sorted((c for c in chars if a <= cx(c) <= b and hb < cy(c) < hb + 218 * sc),
                                                    key=lambda c: -cy(c)))
                       for a, b in al_cols]
         if names28 is None:
@@ -455,10 +466,10 @@ def parse_yoshinoya(pages: list[dict]) -> dict:
             kcs = sorted((t for t in inb if val_cols[0][0] <= t[0] < val_cols[0][1] and _NUM.match(t[4])),
                          key=lambda t: -cy(t))
             for k in kcs:
-                sz = [t for t in inb if in_col(t, size_col) and abs(cy(t) - cy(k)) < 8]
+                sz = [t for t in inb if in_col(t, size_col) and abs(cy(t) - cy(k)) < 8 * sc]
                 vals = []
                 for q in range(5):
-                    c = [t for t in inb if val_cols[q][0] <= t[0] < val_cols[q][1] and abs(cy(t) - cy(k)) < 8]
+                    c = [t for t in inb if val_cols[q][0] <= t[0] < val_cols[q][1] and abs(cy(t) - cy(k)) < 8 * sc]
                     v = None
                     for t in c:
                         m = _NUM_WITH_MARKS.match(t[4])
@@ -467,7 +478,7 @@ def parse_yoshinoya(pages: list[dict]) -> dict:
                     vals.append(v)
                 marks: list = [None] * 28
                 for c in chars:
-                    if abs(cy(c) - cy(k)) < 8 and c[4] in ("○", "▲"):
+                    if abs(cy(c) - cy(k)) < 8 * sc and c[4] in ("○", "▲"):
                         for j, a in enumerate(al_cols):
                             if a[0] <= cx(c) <= a[1]:
                                 marks[j] = c[4]

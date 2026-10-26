@@ -125,7 +125,7 @@ class TestSukiyaAllergen(unittest.TestCase):
         self.assertIsNone(pn.match_sukiya_allergen(pn.parse_sukiya_allergen(pages), "ふたご丼"))
 
 
-def yoshinoya_pages():
+def yoshinoya_pages(scale=1.0, issue=262, date="2026年10月8日現在"):
     blocks = [
         ("ひだまり丼", ["※この丼の小麦は醤油由来です。"],
          [("小盛", 14.0, 18.0, 60.0, 1.9, {0: "○", 2: "○"}), ("並盛", 19.0, 23.0, 88.0, 2.5, {0: "○", 2: "○", 5: "▲"}),
@@ -133,8 +133,9 @@ def yoshinoya_pages():
         ("こもれび定食", [], [(None, 33.0, 30.0, 110.0, 4.0, {1: "○"})]),
         ("あさつゆ茶", [], [("100ml", 0.0, 0.0, 0.0, 0.0, {})]),
     ]
-    ja = fx.yoshinoya_page(blocks, lang="ja")
-    en = fx.yoshinoya_page([("Hidamari bowl", [], [("Small", 14.0, 18.0, 60.0, 1.9, {})])], lang="en")
+    ja = fx.yoshinoya_page(blocks, lang="ja", scale=scale, issue=issue, date=date)
+    en = fx.yoshinoya_page([("Hidamari bowl", [], [("Small", 14.0, 18.0, 60.0, 1.9, {})])], lang="en", scale=scale,
+                           issue=issue, date=date)
     return [fx.yoshinoya_intro_page(), ja, en]
 
 
@@ -178,6 +179,44 @@ class TestYoshinoya(unittest.TestCase):
         rows = pn.parse_yoshinoya(pages)["rows"]
         self.assertEqual(rows[0]["kcal"], pn.to_number("1,720"))
         self.assertTrue(rows[0]["ok"])
+
+
+class TestYoshinoyaSmallPage(unittest.TestCase):
+    """263号: 同じ表の構造のまま、PDFのページ寸法が約1/3.85(A4相当)に変わった。"""
+
+    def setUp(self):
+        self.pages = yoshinoya_pages(fx.YO_SCALE_263, issue=263, date="2026年10月23日現在")
+        self.parsed = pn.parse_yoshinoya(self.pages)
+
+    def test_parses_same_as_old_size(self):
+        old = pn.parse_yoshinoya(yoshinoya_pages())
+        self.assertEqual(self.parsed["issue"], 263)
+        self.assertEqual(self.parsed["date"], "2026-10-23")
+        self.assertEqual(self.parsed["pages_table"], 1)
+        self.assertEqual(self.parsed["problems"], [])
+        self.assertEqual(self.parsed["allergen_names"], fx.YO_AL)
+        key = ("name", "size", "kcal", "protein_g", "fat_g", "carbs_g", "salt_g", "ok", "marks")
+        self.assertEqual([tuple(r[k] for k in key) for r in self.parsed["rows"]],
+                         [tuple(r[k] for k in key) for r in old["rows"]])
+        self.assertIsNone(pn.validate_source("yoshinoya", self.parsed, min_rows=3))
+
+    def test_small_page_without_size_info_is_held_back(self):
+        # ページ寸法が無いと旧寸法とみなす。小さいページは読み取れず、関門(表が見つからない)で保留になる
+        pages = [dict(p) for p in self.pages]
+        for p in pages:
+            p.pop("w", None)
+            p.pop("h", None)
+        parsed = pn.parse_yoshinoya(pages)
+        self.assertEqual(parsed["pages_table"], 0)
+        self.assertIn("表の見出し行", pn.validate_source("yoshinoya", parsed, min_rows=3))
+
+    def test_unrelated_layout_is_held_back(self):
+        pages = [{"texts": [[10.0, 10.0, 80.0, 20.0, "吉野家メニュー情報\u3000263号"],
+                            [10.0, 30.0, 80.0, 40.0, "牛丼"], [90.0, 30.0, 110.0, 40.0, "633"]],
+                  "rules": [[10, 5, 500, 5.5]], "chars": [], "w": 595.3, "h": 841.9}]
+        parsed = pn.parse_yoshinoya(pages)
+        self.assertEqual(parsed["pages_table"], 0)
+        self.assertIsNotNone(pn.validate_source("yoshinoya", parsed, min_rows=3))
 
 
 class TestMatchingAndBuild(unittest.TestCase):

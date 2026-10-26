@@ -129,13 +129,15 @@ def sukiya_allergen_page(rows, updated: str | None = "2026/9/29更新", merge_fi
 YO_EDGES = [105.0, 144.0, 189.0, 518.0, 596.0, 694.0, 792.0, 889.0, 987.0, 1085.0] + \
            [1085.0 + 39.2 * k for k in range(1, 29)]
 YO_PITCH = 27.0
+YO_SCALE_263 = 841.9 / 3238.2  # 263号のページ高さ / 262号のページ高さ
 YO_AL = ["小麦", "乳", "卵", "落花生", "そば", "えび", "かに", "くるみ", "あわび", "いか", "いくら", "オレンジ",
          "キウイ", "牛肉", "さけ", "さば", "大豆", "鶏肉", "豚肉", "マカダミア", "バナナ", "もも", "山芋",
          "りんご", "ごま", "カシュー", "ゼラチン", "アーモンド"]
 
 
-def yoshinoya_page(blocks, lang="ja", issue=262, date="2026年10月8日現在"):
-    """blocks: [(名前, [注記の行...], [(サイズ|None, p, f, c, salt, {品目の添字: '○'|'▲'}), ...])]"""
+def yoshinoya_page(blocks, lang="ja", issue=262, date="2026年10月8日現在", scale=1.0):
+    """blocks: [(名前, [注記の行...], [(サイズ|None, p, f, c, salt, {品目の添字: '○'|'▲'}), ...])]
+    scale: 全座標の倍率。263号でPDFの寸法が約1/3.85(A4相当)になったので、YO_SCALE_263 で同じ構造の小さいページを作る。"""
     W, H = 2289.7, 3238.2
     texts, rules, chars = [], [], []
     texts.append(box(180.5, 3161.2, 442.8, 3183.3, f"吉野家メニュー情報　{issue}号"))
@@ -190,10 +192,15 @@ def yoshinoya_page(blocks, lang="ja", issue=262, date="2026年10月8日現在"):
         bounds.append(y)
         rules.append([189.9, y - 0.3, 517.2, y + 0.3])
         rules.append([189.7, y - 0.5, 517.5, y + 0.5])
+    if scale != 1.0:
+        def sc(b):
+            return [round(v * scale, 2) for v in b[:4]] + b[4:]
+        texts, rules, chars = [sc(b) for b in texts], [sc(b) for b in rules], [sc(b) for b in chars]
+        W, H = round(W * scale, 1), round(H * scale, 1)
     return {"w": W, "h": H, "texts": texts, "rules": rules, "chars": chars}
 
 
-def yoshinoya_intro_page():
+def yoshinoya_intro_page(scale=1.0):
     """表の前の説明ページ(○ ▲ の凡例)。"""
     return {"texts": [
         box(107.2, 810.5, 1808.7, 836.5, "アレルギー情報は商品の原材料を調べたものです。（○：原材料に含みます。　　▲：原材料「あおのり」には『かに』が共生しています。"),
