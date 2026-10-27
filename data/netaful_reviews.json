@@ -8336,6 +8336,18 @@
   ],
   "sukiya": [
    {
+    "date": "2026-10-27T21:00:00",
+    "id": 211608,
+    "link": "https://netaful.jp/fast-food/0211608.html",
+    "product_name": "牛・胡麻麻辣湯鍋定食",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/10/sukiya-mara-nabe-001-485x364.jpg",
+     "width": 485
+    },
+    "title": "【すき家】「牛・胡麻麻辣湯鍋定食」はテイクアウトでも熱々で旨い｜花椒が香ってしっかり辛い、胡麻のコクでご飯がすすむ！"
+   },
+   {
     "date": "2026-10-14T12:05:00",
     "id": 210904,
     "link": "https://netaful.jp/fast-food/0210904.html",
@@ -9944,7 +9956,7 @@
   ]
  },
  "errors": [],
- "fetched_at": "2026-10-27T07:35:30+09:00",
+ "fetched_at": "2026-10-28T07:35:32+09:00",
  "matches": {
   "karayama-19096": [
    209971
@@ -9990,6 +10002,9 @@
   ],
   "sukiya-don-212900": [
    210904
+  ],
+  "sukiya-gyusuki-1006700": [
+   211608
   ],
   "sukiya-side-7010400": [
    210293

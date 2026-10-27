@@ -147,7 +147,7 @@
  "last_seen_at": "2026-10-27",
  "status": "on_sale",
  "ended_observed_at": null,
- "missed_runs": 0,
+ "missed_runs": 1,
  "price_history": [
   {
    "date": "2026-10-11",
@@ -161,9 +161,9 @@
  "nutrition_source": {
   "url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
   "label": "栄養成分一覧",
-  "version": "2026-10-14",
-  "version_text": "2026年10月14日更新",
-  "fetched_at": "2026-10-15T07:34:25+09:00"
+  "version": "2026-10-27",
+  "version_text": "2026年10月27日更新",
+  "fetched_at": "2026-10-28T07:34:15+09:00"
  },
  "nutrition_note": "表示した数値には、お好みでお使いいただく調味料（紅生姜・醤油・ドレッシング・七味・カルビ追いダレなど）は含まれていません。",
  "allergens_conditional": {
@@ -176,5 +176,6 @@
   "version": "2026-10-14",
   "version_text": "2026年10月14日更新",
   "fetched_at": "2026-10-15T07:34:25+09:00"
- }
+ },
+ "last_miss_date": "2026-10-28"
 }

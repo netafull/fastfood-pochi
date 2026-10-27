@@ -189,7 +189,7 @@
  "last_seen_at": "2026-10-27",
  "status": "on_sale",
  "ended_observed_at": null,
- "missed_runs": 0,
+ "missed_runs": 1,
  "price_history": [
   {
    "date": "2026-10-11",
@@ -218,5 +218,6 @@
   "version": "2026-10-14",
   "version_text": "2026年10月14日更新",
   "fetched_at": "2026-10-15T07:34:25+09:00"
- }
+ },
+ "last_miss_date": "2026-10-28"
 }

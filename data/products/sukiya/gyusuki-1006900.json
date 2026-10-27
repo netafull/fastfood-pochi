@@ -1,0 +1,50 @@
+{
+ "chain": "sukiya",
+ "product_id": "gyusuki-1006900",
+ "name": "牛・胡麻麻辣湯鍋 単品",
+ "category": "鍋",
+ "price": 860,
+ "price_note": "税込・店内の価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "price_checked_at": "2026-10-28",
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "nutrition_variants": null,
+ "nutrition_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
+ "nutrition_pdf_label": "栄養成分一覧",
+ "allergen_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
+ "allergen_pdf_label": "アレルゲン一覧",
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "期間限定",
+ "badges": [
+  "NEW",
+  "期間限定",
+  "店舗限定"
+ ],
+ "official_url": "https://www.sukiya.jp/menu/in/gyusuki/1006900/index.html",
+ "first_seen_at": "2026-10-28T07:33:15+09:00",
+ "last_seen_at": "2026-10-28",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-28",
+   "price": 860
+  }
+ ],
+ "source_list": [
+  "gyusuki"
+ ],
+ "image": null,
+ "pdf_tried": "2026-10-27|2026-10-27"
+}

@@ -38,78 +38,78 @@
  "description": null,
  "description_full_len": 0,
  "nutrition": {
-  "kcal": 573.0,
-  "protein_g": 18.5,
-  "fat_g": 11.0,
-  "carbs_g": 100.0,
+  "kcal": 556.0,
+  "protein_g": 19.1,
+  "fat_g": 10.3,
+  "carbs_g": 96.7,
   "sugar_g": null,
   "fiber_g": null,
-  "salt_g": 2.5,
+  "salt_g": 1.7,
   "other": {}
  },
  "nutrition_variants": [
   {
    "label": "並盛",
    "nutrition": {
-    "kcal": 573.0,
-    "protein_g": 18.5,
-    "fat_g": 11.0,
-    "carbs_g": 100.0,
+    "kcal": 556.0,
+    "protein_g": 19.1,
+    "fat_g": 10.3,
+    "carbs_g": 96.7,
     "sugar_g": null,
     "fiber_g": null,
-    "salt_g": 2.5,
+    "salt_g": 1.7,
     "other": {}
    }
   },
   {
    "label": "ごはん少なめ",
    "nutrition": {
-    "kcal": 504.0,
-    "protein_g": 17.3,
-    "fat_g": 10.7,
-    "carbs_g": 84.4,
+    "kcal": 487.0,
+    "protein_g": 17.9,
+    "fat_g": 10.0,
+    "carbs_g": 81.1,
     "sugar_g": null,
     "fiber_g": null,
-    "salt_g": 2.5,
+    "salt_g": 1.7,
     "other": {}
    }
   },
   {
    "label": "大盛",
    "nutrition": {
-    "kcal": 701.0,
-    "protein_g": 20.6,
-    "fat_g": 11.6,
-    "carbs_g": 128.4,
+    "kcal": 684.0,
+    "protein_g": 21.2,
+    "fat_g": 11.0,
+    "carbs_g": 125.1,
     "sugar_g": null,
     "fiber_g": null,
-    "salt_g": 2.7,
+    "salt_g": 1.9,
     "other": {}
    }
   },
   {
    "label": "特盛",
    "nutrition": {
-    "kcal": 852.0,
-    "protein_g": 31.9,
-    "fat_g": 20.5,
-    "carbs_g": 134.9,
+    "kcal": 819.0,
+    "protein_g": 33.1,
+    "fat_g": 19.1,
+    "carbs_g": 128.3,
     "sugar_g": null,
     "fiber_g": null,
-    "salt_g": 4.6,
+    "salt_g": 3.0,
     "other": {}
    }
   },
   {
    "label": "メガ",
    "nutrition": {
-    "kcal": 1003.0,
-    "protein_g": 43.2,
-    "fat_g": 29.3,
-    "carbs_g": 141.4,
+    "kcal": 953.0,
+    "protein_g": 45.0,
+    "fat_g": 27.3,
+    "carbs_g": 131.5,
     "sugar_g": null,
     "fiber_g": null,
-    "salt_g": 6.4,
+    "salt_g": 4.1,
     "other": {}
    }
   }
@@ -161,7 +161,7 @@
  ],
  "official_url": "https://www.sukiya.jp/menu/in/don/212600/index.html",
  "first_seen_at": "2026-10-15T07:33:24+09:00",
- "last_seen_at": "2026-10-27",
+ "last_seen_at": "2026-10-28",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -178,9 +178,9 @@
  "nutrition_source": {
   "url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
   "label": "栄養成分一覧",
-  "version": "2026-10-14",
-  "version_text": "2026年10月14日更新",
-  "fetched_at": "2026-10-15T07:34:25+09:00"
+  "version": "2026-10-27",
+  "version_text": "2026年10月27日更新",
+  "fetched_at": "2026-10-28T07:34:15+09:00"
  },
  "nutrition_note": "表示した数値には、お好みでお使いいただく調味料（紅生姜・醤油・ドレッシング・七味・カルビ追いダレなど）は含まれていません。",
  "allergens_conditional": {
@@ -190,8 +190,8 @@
  "allergen_source": {
   "url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
   "label": "アレルゲン一覧",
-  "version": "2026-10-14",
-  "version_text": "2026年10月14日更新",
-  "fetched_at": "2026-10-15T07:34:25+09:00"
+  "version": "2026-10-27",
+  "version_text": "2026年10月27日更新",
+  "fetched_at": "2026-10-28T07:34:15+09:00"
  }
 }
