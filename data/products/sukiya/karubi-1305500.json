@@ -142,9 +142,9 @@
  "official_url": "https://www.sukiya.jp/menu/in/karubi/1305500/index.html",
  "first_seen_at": "2026-10-11T14:57:03+09:00",
  "last_seen_at": "2026-10-27",
- "status": "on_sale",
- "ended_observed_at": null,
- "missed_runs": 1,
+ "status": "ended",
+ "ended_observed_at": "2026-10-29",
+ "missed_runs": 2,
  "price_history": [
   {
    "date": "2026-10-11",
@@ -174,5 +174,5 @@
   "version_text": "2026年10月14日更新",
   "fetched_at": "2026-10-15T07:34:25+09:00"
  },
- "last_miss_date": "2026-10-28"
+ "last_miss_date": "2026-10-29"
 }

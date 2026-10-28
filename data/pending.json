@@ -1,4 +1,14 @@
 {
+ "_health": {
+  "matsunoya": {
+   "days": 1,
+   "last_date": "2026-10-29"
+  },
+  "matsuya": {
+   "days": 1,
+   "last_date": "2026-10-29"
+  }
+ },
  "karayama": {},
  "katsuya": {},
  "marugame": {},
