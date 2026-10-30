@@ -1,0 +1,53 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "2020",
+ "name": "マックフライポテト®",
+ "category": "サイド",
+ "price": 220,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "外はカリッとゴールデンブラウン。",
+ "description_full_len": 59,
+ "nutrition": {
+  "kcal": 410.0,
+  "protein_g": 5.5,
+  "fat_g": 20.0,
+  "carbs_g": 52.4,
+  "sugar_g": 0.0,
+  "fiber_g": null,
+  "salt_g": 0.8,
+  "other": {
+   "飽和脂肪酸": "7.51g"
+  }
+ },
+ "allergens": {
+  "contains": [],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "マックフライポテト®",
+   "origin": "主要原料：じゃがいも／アメリカ、カナダ、アルゼンチン　製造所所在地：アメリカ、カナダ、アルゼンチン"
+  }
+ ],
+ "limited_kind": "新メニュー",
+ "official_url": "https://www.mcdonalds.co.jp/products/2020/",
+ "first_seen_at": "2026-10-31T07:30:14+09:00",
+ "last_seen_at": "2026-10-31",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-10-31",
+   "price": 220
+  }
+ ],
+ "source_list": [
+  "/menu/side/"
+ ],
+ "image": null
+}
