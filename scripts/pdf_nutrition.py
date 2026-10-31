@@ -31,6 +31,7 @@ from __future__ import annotations
 import io
 import logging
 import re
+import sys
 import unicodedata
 
 # ---------------------------------------------------------------------------
@@ -130,40 +131,57 @@ def extract_geometry(data: bytes, with_chars: bool = False) -> list[dict]:
     try:
         from pdfminer.high_level import extract_pages
         from pdfminer.layout import LAParams, LTChar, LTLine, LTRect, LTTextLine
+        from pdfminer.pdfparser import PDFSyntaxError
+        from pdfminer.psparser import PSException
     except ImportError as e:  # 呼び出し側が警告を出してPDFの読み取りを飛ばす
         raise ImportError("pdfminer.six が見つかりません(pip install -r requirements-pdf.txt)") from e
     # フォントの色指定への警告がページ数ぶん出て、ログが埋まるため
     logging.getLogger("pdfminer").setLevel(logging.ERROR)
 
-    pages = []
-    for page in extract_pages(io.BytesIO(data), laparams=LAParams(char_margin=1.0)):
-        texts: list = []
-        rules: list = []
-        chars: list = []
+    def read(buf: bytes) -> list[dict]:
+        pages = []
+        for page in extract_pages(io.BytesIO(buf), laparams=LAParams(char_margin=1.0)):
+            texts: list = []
+            rules: list = []
+            chars: list = []
 
-        def walk(o) -> None:
-            if isinstance(o, LTTextLine):
-                t = o.get_text().strip()
-                if with_chars:
+            def walk(o) -> None:
+                if isinstance(o, LTTextLine):
+                    t = o.get_text().strip()
+                    if with_chars:
+                        for c in o:
+                            if isinstance(c, LTChar) and c.get_text().strip():
+                                chars.append([round(c.x0, 1), round(c.y0, 1), round(c.x1, 1), round(c.y1, 1), c.get_text()])
+                    if t:
+                        texts.append([round(o.x0, 1), round(o.y0, 1), round(o.x1, 1), round(o.y1, 1), t])
+                elif isinstance(o, (LTRect, LTLine)):
+                    w, h = o.x1 - o.x0, o.y1 - o.y0
+                    if min(w, h) < 4 and max(w, h) > 10:
+                        rules.append([round(o.x0, 1), round(o.y0, 1), round(o.x1, 1), round(o.y1, 1)])
+                elif hasattr(o, "__iter__"):
                     for c in o:
-                        if isinstance(c, LTChar) and c.get_text().strip():
-                            chars.append([round(c.x0, 1), round(c.y0, 1), round(c.x1, 1), round(c.y1, 1), c.get_text()])
-                if t:
-                    texts.append([round(o.x0, 1), round(o.y0, 1), round(o.x1, 1), round(o.y1, 1), t])
-            elif isinstance(o, (LTRect, LTLine)):
-                w, h = o.x1 - o.x0, o.y1 - o.y0
-                if min(w, h) < 4 and max(w, h) > 10:
-                    rules.append([round(o.x0, 1), round(o.y0, 1), round(o.x1, 1), round(o.y1, 1)])
-            elif hasattr(o, "__iter__"):
-                for c in o:
-                    walk(c)
+                        walk(c)
 
-        walk(page)
-        d = {"texts": texts, "rules": rules, "w": round(page.width, 1), "h": round(page.height, 1)}
-        if with_chars:
-            d["chars"] = chars
-        pages.append(d)
-    return pages
+            walk(page)
+            d = {"texts": texts, "rules": rules, "w": round(page.width, 1), "h": round(page.height, 1)}
+            if with_chars:
+                d["chars"] = chars
+            pages.append(d)
+        return pages
+
+    try:
+        return read(data)
+    except (PDFSyntaxError, PSException) as first:
+        # 吉野家PDFは2026-10-28に追記保存され、pdfminerが最後のXRefを読めず落ちた。追記を1つずつ外して読む
+        eofs = [m.end() for m in re.finditer(rb"%%EOF", data)]
+        for end in reversed(eofs[:-1]):
+            try:
+                pages = read(data[:end])
+            except (PDFSyntaxError, PSException):
+                continue
+            print(f"[pdf] 追記部分({len(data) - end}バイト)を外して読み直した", file=sys.stderr)
+            return pages
+        raise first
 
 
 # ---------------------------------------------------------------------------

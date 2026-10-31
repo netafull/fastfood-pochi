@@ -1,5 +1,6 @@
 """pdf_nutrition.py の純粋関数のテスト。入力は tests/pdf_fixtures.py の合成データ(名前・数値は創作)。"""
 
+import importlib.util
 import unittest
 
 import helpers  # noqa: F401  (scripts/ を import パスに入れる)
@@ -300,6 +301,64 @@ class TestExtractGeometryWithoutPdfminer(unittest.TestCase):
             self.skipTest("pdfminer.six が入っている環境では確かめられない")
         with self.assertRaises(ImportError):
             pn.extract_geometry(b"%PDF-1.4")
+
+
+def _tiny_pdf(text: str = "Hello") -> bytes:
+    """pdfminer が読める最小のPDF(1ページ・1行)。xref は正しいオフセットで作る。"""
+    stream = f"BT /F1 24 Tf 72 700 Td ({text}) Tj ET".encode()
+    objs = [b"<< /Type /Catalog /Pages 2 0 R >>",
+            b"<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
+            b"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R "
+            b"/Resources << /Font << /F1 5 0 R >> >> >>",
+            b"<< /Length %d >>\nstream\n" % len(stream) + stream + b"\nendstream",
+            b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>"]
+    out = b"%PDF-1.4\n"
+    offs = []
+    for i, o in enumerate(objs, 1):
+        offs.append(len(out))
+        out += b"%d 0 obj\n" % i + o + b"\nendobj\n"
+    # 実物と同じ XRef ストリーム形式(trailer キーワードが無い)。pdfminer の再スキャンは trailer しか見ないため、
+    # 追記が壊れると /Root を失って落ちる
+    n = len(objs) + 1
+    xref = len(out)
+    rows = b"\x00\x00\x00\x00\xff" + b"".join(b"\x01" + o.to_bytes(3, "big") + b"\x00" for o in offs)
+    rows += b"\x01" + xref.to_bytes(3, "big") + b"\x00"
+    out += (b"%d 0 obj\n<< /Type /XRef /W [1 3 1] /Size %d /Root 1 0 R /Length %d >>\nstream\n" % (n, n + 1, len(rows))
+            + rows + b"\nendstream\nendobj\nstartxref\n%d\n%%%%EOF\n" % xref)
+    return out
+
+
+def _broken_update(base: bytes) -> bytes:
+    """実物の吉野家PDFと同じく、/Root の無い XRef ストリームだけの追記保存(pdfminer が "No /Root object!" で落ちる)。"""
+    return (b"99 0 obj\n<< /Type /XRef /W [1 3 0] /Prev 116 /Size 100 /Length 4 >>\n"
+            b"stream\n\x01\x00\x00\x01\nendstream\nendobj\nstartxref\n%d\n%%%%EOF\n" % len(base))
+
+
+@unittest.skipIf(importlib.util.find_spec("pdfminer") is None, "pdfminer.six が入っていない")
+class TestExtractGeometryIncrementalUpdate(unittest.TestCase):
+    def test_broken_update_is_stripped(self):
+        base = _tiny_pdf("Hello")
+        expected = pn.extract_geometry(base)
+        data = base + _broken_update(base)
+        with self.assertRaises(Exception):  # 前提: そのままでは pdfminer が落ちる
+            import io
+            from pdfminer.high_level import extract_pages
+            list(extract_pages(io.BytesIO(data)))
+        got = pn.extract_geometry(data)
+        self.assertEqual(got, expected)
+        self.assertEqual(len(got), 1)
+        self.assertIn("Hello", got[0]["texts"][0][4])
+
+    def test_two_broken_updates(self):
+        base = _tiny_pdf("Hello")
+        got = pn.extract_geometry(base + _broken_update(base) + _broken_update(base + _broken_update(base)))
+        self.assertEqual(got, pn.extract_geometry(base))
+
+    def test_all_broken_raises_original_error(self):
+        from pdfminer.pdfparser import PDFSyntaxError
+        data = b"%PDF-1.4\ngarbage\nstartxref\n1\n%%EOF\n" + _broken_update(b"%PDF-1.4\ngarbage\nstartxref\n1\n%%EOF\n")
+        with self.assertRaises(PDFSyntaxError):
+            pn.extract_geometry(data)
 
 
 if __name__ == "__main__":
