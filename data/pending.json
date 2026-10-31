@@ -1,12 +1,12 @@
 {
  "_health": {
   "matsunoya": {
-   "days": 3,
-   "last_date": "2026-10-31"
+   "days": 4,
+   "last_date": "2026-11-01"
   },
   "matsuya": {
-   "days": 3,
-   "last_date": "2026-10-31"
+   "days": 4,
+   "last_date": "2026-11-01"
   }
  },
  "karayama": {},
@@ -19,8 +19,8 @@
  "sukiya": {},
  "yoshinoya": {
   "pdf:menu": {
-   "checked_at": "2026-10-25T07:33:08+09:00",
-   "reason": "validation: 表の見出し行が1ページも見つかりません(PDFの構造が変わった疑い)",
+   "checked_at": "2026-11-01T07:33:15+09:00",
+   "reason": "parse_error: PDFSyntaxError: No /Root object! - Is this really a PDF?",
    "url": "https://www.yoshinoya.com/pdf/allergy/"
   }
  }
