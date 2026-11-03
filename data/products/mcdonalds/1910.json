@@ -1,0 +1,77 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "1910",
+ "name": "チーズチーズてりやきマックバーガー",
+ "category": "バーガー",
+ "price": 470,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": "2026-11-04",
+ "planned_end_text": "2026-11-25（モバイルオーダー受付期間の終了日）",
+ "mop_ended_at": "2026-11-25",
+ "list_started_at": "2023-03-14",
+ "description": "人気のレギュラーメニュー「てりやきマックバーガー」に、ホワイトチェダーチーズとチェダーチーズを加えたコク深い一品。",
+ "description_full_len": 57,
+ "nutrition": {
+  "kcal": 586.0,
+  "protein_g": 20.1,
+  "fat_g": 39.3,
+  "carbs_g": 38.7,
+  "sugar_g": 8.0,
+  "fiber_g": null,
+  "salt_g": 3.2,
+  "other": {
+   "飽和脂肪酸": "14.39g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "乳",
+   "小麦",
+   "ごま",
+   "大豆",
+   "豚肉",
+   "りんご"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "バンズ",
+   "origin": "主要原料：小麦粉／アメリカ、カナダ、オーストラリア　製造所所在地：日本"
+  },
+  {
+   "name": "てりやきポークパティ",
+   "origin": "主要原料：豚肉／アメリカ　製造所所在地：アメリカ"
+  },
+  {
+   "name": "レタス",
+   "origin": "主要原料：レタス／日本、台湾、アメリカ、マレーシア、韓国　製造所所在地：日本"
+  },
+  {
+   "name": "チェダースライスチーズ",
+   "origin": "主要原料：チーズ／ニュージーランド、オーストラリア、日本、アメリカ　製造所所在地：日本、ニュージーランド"
+  },
+  {
+   "name": "ホワイトチェダースライスチーズ",
+   "origin": "主要原料：チーズ／オーストラリア、ニュージーランド、日本、アメリカ　製造所所在地：日本"
+  }
+ ],
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mcdonalds.co.jp/products/1910/",
+ "first_seen_at": "2026-11-04T07:30:16+09:00",
+ "last_seen_at": "2026-11-04",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-04",
+   "price": 470
+  }
+ ],
+ "source_list": [
+  "/menu/burger/"
+ ],
+ "image": null
+}

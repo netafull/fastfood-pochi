@@ -1,0 +1,60 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "2540",
+ "name": "三角チョコパイ ホワイトチョコ&カスタード",
+ "category": "デザート・シェイク",
+ "price": 190,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": "2026-11-04",
+ "planned_end_text": "2026-11-25（モバイルオーダー受付期間の終了日）",
+ "mop_ended_at": "2026-11-25",
+ "list_started_at": "2026-10-27",
+ "description": "ホワイトチョコクリームとカスタードクリームをサクサクのパイ生地で包んだ、期間限定の新作ホットスイーツ。",
+ "description_full_len": 51,
+ "nutrition": {
+  "kcal": 335.0,
+  "protein_g": 3.9,
+  "fat_g": 22.1,
+  "carbs_g": 30.1,
+  "sugar_g": 10.0,
+  "fiber_g": null,
+  "salt_g": 0.5,
+  "other": {
+   "飽和脂肪酸": "8.67g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "乳",
+   "小麦",
+   "大豆",
+   "マカダミアナッツ"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "三角チョコパイ ホワイトチョコ&カスタード",
+   "origin": "主要原料：ホワイトチョコクリーム／日本 | カスタードクリーム／日本　製造所所在地：日本"
+  }
+ ],
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mcdonalds.co.jp/products/2540/",
+ "first_seen_at": "2026-11-04T07:30:16+09:00",
+ "last_seen_at": "2026-11-04",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-04",
+   "price": 190
+  }
+ ],
+ "source_list": [
+  "/menu/",
+  "/menu/dessert/"
+ ],
+ "image": null
+}
