@@ -204,6 +204,16 @@
       "name": "コンビニポチ",
       "desc": "コンビニ新商品アーカイブ",
       "url": "https://conbini.netaful.jp/"
+    },
+    {
+      "name": "カフェポチ",
+      "desc": "カフェ季節限定メニュー",
+      "url": "https://cafe.netaful.jp/"
+    },
+    {
+      "name": "回転寿司ポチ",
+      "desc": "回転寿司の期間限定ネタ",
+      "url": "https://sushi.netaful.jp/"
     }
   ],
   "related_keywords": [
