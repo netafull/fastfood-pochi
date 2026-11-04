@@ -565,7 +565,6 @@ def page_shell(title: str, description: str, body: str, canonical: str, extra_he
 <header>
 <h1><a href="/">{logo_img}{esc(CONFIG["site_title"])}</a></h1>
 <p>{esc(CONFIG["site_description"])}{(" ｜ " + esc(header_note)) if header_note else ""}</p>
-{related_html}
 </header>
 {header_ad_html}
 <main>
