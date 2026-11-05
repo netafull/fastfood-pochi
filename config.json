@@ -214,6 +214,11 @@
       "name": "回転寿司ポチ",
       "desc": "回転寿司の期間限定ネタ",
       "url": "https://sushi.netaful.jp/"
+    },
+    {
+      "name": "カップ麺ポチ",
+      "desc": "カップ麺の新商品",
+      "url": "https://cupmen.netaful.jp/"
     }
   ],
   "related_keywords": [
