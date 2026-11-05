@@ -65,6 +65,19 @@
     "salt_g": 0.4,
     "other": {}
    }
+  },
+  {
+   "label": "L",
+   "nutrition": {
+    "kcal": 405.0,
+    "protein_g": 7.0,
+    "fat_g": 13.5,
+    "carbs_g": 64.5,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 0.6,
+    "other": {}
+   }
   }
  ],
  "nutrition_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
@@ -132,7 +145,7 @@
  ],
  "official_url": "https://www.sukiya.jp/menu/in/drink/810500/index.html",
  "first_seen_at": "2026-10-11T14:57:03+09:00",
- "last_seen_at": "2026-11-05",
+ "last_seen_at": "2026-11-06",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -149,9 +162,9 @@
  "nutrition_source": {
   "url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
   "label": "栄養成分一覧",
-  "version": "2026-10-27",
-  "version_text": "2026年10月27日更新",
-  "fetched_at": "2026-10-28T07:34:15+09:00"
+  "version": "2026-11-05",
+  "version_text": "2026年11月5日更新",
+  "fetched_at": "2026-11-06T07:34:01+09:00"
  },
  "nutrition_note": "表示した数値には、お好みでお使いいただく調味料（紅生姜・醤油・ドレッシング・七味・カルビ追いダレなど）は含まれていません。",
  "allergens_conditional": {
@@ -161,8 +174,8 @@
  "allergen_source": {
   "url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
   "label": "アレルゲン一覧",
-  "version": "2026-10-27",
-  "version_text": "2026年10月27日更新",
-  "fetched_at": "2026-10-28T07:34:15+09:00"
+  "version": "2026-11-05",
+  "version_text": "2026年11月5日更新",
+  "fetched_at": "2026-11-06T07:34:01+09:00"
  }
 }

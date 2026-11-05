@@ -26,39 +26,65 @@
  "description": null,
  "description_full_len": 0,
  "nutrition": {
-  "kcal": 703.0,
-  "protein_g": 16.0,
-  "fat_g": 20.1,
-  "carbs_g": 113.3,
+  "kcal": 716.0,
+  "protein_g": 16.5,
+  "fat_g": 20.9,
+  "carbs_g": 114.3,
   "sugar_g": null,
   "fiber_g": null,
-  "salt_g": 4.2,
+  "salt_g": 4.4,
   "other": {}
  },
  "nutrition_variants": [
   {
    "label": "並盛",
    "nutrition": {
-    "kcal": 703.0,
-    "protein_g": 16.0,
-    "fat_g": 20.1,
-    "carbs_g": 113.3,
+    "kcal": 716.0,
+    "protein_g": 16.5,
+    "fat_g": 20.9,
+    "carbs_g": 114.3,
     "sugar_g": null,
     "fiber_g": null,
-    "salt_g": 4.2,
+    "salt_g": 4.4,
+    "other": {}
+   }
+  },
+  {
+   "label": "ごはん少なめ",
+   "nutrition": {
+    "kcal": 647.0,
+    "protein_g": 15.3,
+    "fat_g": 20.6,
+    "carbs_g": 98.7,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 4.4,
     "other": {}
    }
   },
   {
    "label": "大盛",
    "nutrition": {
-    "kcal": 893.0,
-    "protein_g": 19.0,
-    "fat_g": 20.7,
-    "carbs_g": 156.3,
+    "kcal": 906.0,
+    "protein_g": 19.7,
+    "fat_g": 21.5,
+    "carbs_g": 157.3,
     "sugar_g": null,
     "fiber_g": null,
-    "salt_g": 4.2,
+    "salt_g": 4.4,
+    "other": {}
+   }
+  },
+  {
+   "label": "メガ",
+   "nutrition": {
+    "kcal": 1427.0,
+    "protein_g": 32.7,
+    "fat_g": 41.9,
+    "carbs_g": 227.5,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 8.3,
     "other": {}
    }
   }
@@ -108,7 +134,7 @@
  ],
  "official_url": "https://www.sukiya.jp/menu/in/curry/314800/index.html",
  "first_seen_at": "2026-10-11T14:57:03+09:00",
- "last_seen_at": "2026-11-05",
+ "last_seen_at": "2026-11-06",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -125,9 +151,9 @@
  "nutrition_source": {
   "url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
   "label": "栄養成分一覧",
-  "version": "2026-10-27",
-  "version_text": "2026年10月27日更新",
-  "fetched_at": "2026-10-28T07:34:15+09:00"
+  "version": "2026-11-05",
+  "version_text": "2026年11月5日更新",
+  "fetched_at": "2026-11-06T07:34:01+09:00"
  },
  "nutrition_note": "表示した数値には、お好みでお使いいただく調味料（紅生姜・醤油・ドレッシング・七味・カルビ追いダレなど）は含まれていません。",
  "allergens_conditional": {
@@ -137,8 +163,8 @@
  "allergen_source": {
   "url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
   "label": "アレルゲン一覧",
-  "version": "2026-10-27",
-  "version_text": "2026年10月27日更新",
-  "fetched_at": "2026-10-28T07:34:15+09:00"
+  "version": "2026-11-05",
+  "version_text": "2026年11月5日更新",
+  "fetched_at": "2026-11-06T07:34:01+09:00"
  }
 }
