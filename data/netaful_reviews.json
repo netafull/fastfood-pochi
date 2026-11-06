@@ -508,6 +508,18 @@
   ],
   "katsuya": [
    {
+    "date": "2026-11-06T12:30:00",
+    "id": 212163,
+    "link": "https://netaful.jp/fast-food/0212163.html",
+    "product_name": "あいがけ洋風カツライス",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/11/katsuya-nagaoka-004-485x364.jpg",
+     "width": 485
+    },
+    "title": "【かつや】「あいがけ洋風カツライス」長岡の名物「洋風カツ丼」をかつや流にアレンジ！ずっしり重い大人のお子様ランチ"
+   },
+   {
     "date": "2026-10-12T14:00:00",
     "id": 210780,
     "link": "https://netaful.jp/fast-food/0210780.html",
@@ -9968,7 +9980,7 @@
   ]
  },
  "errors": [],
- "fetched_at": "2026-11-06T07:35:17+09:00",
+ "fetched_at": "2026-11-07T07:35:27+09:00",
  "matches": {
   "karayama-19096": [
    209971
@@ -9981,6 +9993,12 @@
   ],
   "katsuya-22444": [
    210780
+  ],
+  "katsuya-22451": [
+   212163
+  ],
+  "katsuya-22452": [
+   212163
   ],
   "matsuya-curry-kashmir_hp": [
    210463

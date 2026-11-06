@@ -209,9 +209,9 @@
  "nutrition_source": {
   "url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
   "label": "栄養成分一覧",
-  "version": "2026-11-05",
-  "version_text": "2026年11月5日更新",
-  "fetched_at": "2026-11-06T07:34:01+09:00"
+  "version": "2026-11-06",
+  "version_text": "2026年11月6日更新",
+  "fetched_at": "2026-11-07T07:34:06+09:00"
  },
  "nutrition_note": "表示した数値には、お好みでお使いいただく調味料（紅生姜・醤油・ドレッシング・七味・カルビ追いダレなど）は含まれていません。",
  "allergens_conditional": {
@@ -221,9 +221,9 @@
  "allergen_source": {
   "url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
   "label": "アレルゲン一覧",
-  "version": "2026-11-05",
-  "version_text": "2026年11月5日更新",
-  "fetched_at": "2026-11-06T07:34:01+09:00"
+  "version": "2026-11-06",
+  "version_text": "2026年11月6日更新",
+  "fetched_at": "2026-11-07T07:34:06+09:00"
  },
  "last_miss_date": "2026-10-29"
 }
