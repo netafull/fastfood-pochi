@@ -219,6 +219,11 @@
       "name": "カップ麺ポチ",
       "desc": "カップ麺の新商品",
       "url": "https://cupmen.netaful.jp/"
+    },
+    {
+      "name": "ホテルポチ",
+      "desc": "空室ホテルを安い順に検索",
+      "url": "https://hotel.netaful.jp/"
     }
   ],
   "related_keywords": [
