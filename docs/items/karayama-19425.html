@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>からやま「白身魚からあげ1個」の価格・販売期間｜ファストフードポチ</title>
-<meta name="description" content="からやまの限定メニュー「白身魚からあげ1個」、385円（税込）、2026-10-23（記録開始日）〜 販売中。">
+<title>からやま「白身魚からあげ1個」（385円）の価格・販売期間｜ファストフードポチ</title>
+<meta name="description" content="からやまの限定メニュー「白身魚からあげ1個」（385円）、385円（税込）、2026-10-23（記録開始日）〜 販売中。">
 <link rel="canonical" href="https://fastfood.netaful.jp/items/karayama-19425.html">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-464GWH2ZGQ"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-464GWH2ZGQ');</script>
@@ -12,8 +12,8 @@
 <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="からやま「白身魚からあげ1個」の価格・販売期間｜ファストフードポチ">
-<meta property="og:description" content="からやまの限定メニュー「白身魚からあげ1個」、385円（税込）、2026-10-23（記録開始日）〜 販売中。">
+<meta property="og:title" content="からやま「白身魚からあげ1個」（385円）の価格・販売期間｜ファストフードポチ">
+<meta property="og:description" content="からやまの限定メニュー「白身魚からあげ1個」（385円）、385円（税込）、2026-10-23（記録開始日）〜 販売中。">
 <meta property="og:url" content="https://fastfood.netaful.jp/items/karayama-19425.html">
 <meta property="og:site_name" content="ファストフードポチ">
 <meta property="og:locale" content="ja_JP">
@@ -39,10 +39,12 @@ body { background: var(--bg); color: var(--text);
   font-family: "Hiragino Sans", "Noto Sans JP", sans-serif; line-height: 1.6; }
 a { color: inherit; }
 header { padding: 24px 16px 12px; max-width: 980px; margin: 0 auto; }
-header h1 a { text-decoration: none; font-size: 22px;
+/* サイト名はトップだけ h1、他のページでは div.site-name(見た目は h1 と同じ) */
+header .site-name { font-size: 2em; font-weight: bold; }
+header h1 a, header .site-name a { text-decoration: none; font-size: 22px;
   display: inline-flex; align-items: center; gap: 8px; }
 /* ロゴは文字とほぼ同じ高さに揃える(96px画像を縮小して表示。姉妹サイトと同じ) */
-header h1 img { width: 44px; height: 44px; }
+header h1 img, header .site-name img { width: 44px; height: 44px; }
 header p { color: var(--muted); font-size: 13px; margin-top: 4px; }
 nav.crumbs { font-size: 12px; color: var(--muted); margin-top: 8px; }
 nav.crumbs a { text-decoration: none; color: var(--accent); }
@@ -51,7 +53,8 @@ nav.crumbs a { text-decoration: none; color: var(--accent); }
 .sites a { font-size: 12px; padding: 3px 10px; border-radius: 999px;
   border: 1px solid var(--line); background: var(--card); text-decoration: none; }
 main { max-width: 980px; margin: 0 auto; padding: 8px 16px 48px; }
-h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); margin: 24px 0 12px; }
+/* 一覧ページの見出し(h1.pt)は、見た目を h2 と同じにする */
+h2, h1.pt { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); margin: 24px 0 12px; }
 .sort-bar { display: flex; gap: 8px; margin: 8px 0 16px; flex-wrap: wrap; align-items: center; }
 .sort-bar select, .sort-bar input { font-size: 13px; padding: 5px 8px; border-radius: 6px;
   border: 1px solid var(--line); background: var(--card); color: var(--text); font-family: inherit; }
@@ -110,7 +113,12 @@ h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); 
 .detail table.multi th, .detail table.multi td { width: auto; text-align: right; white-space: nowrap; }
 .detail table.multi th:first-child { text-align: left; }
 .detail table.pv { max-width: 320px; }
-.detail h3 { margin-top: 16px; font-size: 14px; }
+/* 商品ページの節見出しは h2。見た目は従来の h3 と同じにする */
+.detail h2 { margin: 16px 0 0; padding: 0; border: 0; font-size: 14px; }
+.detail h1 .variant { font-size: 14px; font-weight: 400; color: var(--muted); }
+.detail ul.rel { margin-top: 8px; padding-left: 20px; font-size: 13px; }
+.detail ul.rel li { margin: 4px 0; }
+.detail ul.rel a { color: var(--accent); }
 .detail details { margin-top: 10px; font-size: 13px; }
 .detail details summary { cursor: pointer; color: var(--accent); }
 .detail blockquote { border-left: 3px solid var(--accent); margin: 12px 0; padding: 8px 14px;
@@ -156,11 +164,11 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 /* カード一覧(.grid)の中に差し込まれる枠は、カード1枚ぶんのマス(列幅)を使う */
 .grid > .ad-slot { max-width: none; margin: 0; }
 </style>
-
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "トップ", "item": "https://fastfood.netaful.jp/"}, {"@type": "ListItem", "position": 2, "name": "からやま", "item": "https://fastfood.netaful.jp/chains/karayama/"}, {"@type": "ListItem", "position": 3, "name": "白身魚からあげ1個", "item": "https://fastfood.netaful.jp/items/karayama-19425.html"}]}</script>
 </head>
 <body>
 <header>
-<h1><a data-google-vignette="false" href="/"><img src="/assets/logo.png" alt="" width="44" height="44">ファストフードポチ</a></h1>
+<div class="site-name"><a data-google-vignette="false" href="/"><img src="/assets/logo.png" alt="" width="44" height="44">ファストフードポチ</a></div>
 <p>マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</p>
 </header>
 
@@ -169,7 +177,7 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <div class="detail">
 <div class="badge" style="display:inline-block;font-size:11px;font-weight:700;color:#fff;
 border-radius:4px;padding:2px 8px;background:var(--karayama)">からやま</div>
-<h1>白身魚からあげ1個</h1>
+<h1>白身魚からあげ1個<span class="variant">（385円）</span></h1>
 <div class='tags'><span>期間限定</span><span>販売中</span></div>
 <p class="price">385円（税込）<br><small>税込。公式サイトの一覧に表示された価格。店舗により価格・取り扱いが異なる場合があります。</small></p>
 
@@ -179,14 +187,18 @@ border-radius:4px;padding:2px 8px;background:var(--karayama)">からやま</div>
 <p class='note'>公式サイトの「期間限定」表示のあるメニューです。</p><p class='note'>販売期間は公式サイトに載っていないため、終了日は一覧から消えたのを確認した日です。</p>
 
 
+<h2>同じ名前の商品</h2>
+<ul class="rel">
+<li><a data-google-vignette="false" href="/items/karayama-19430.html">白身魚からあげ1個（テイクアウト用・378円）</a>　378円（税込）・販売中</li>
+</ul>
 <p class="source"><a data-google-vignette="false" href="https://www.arclandservice.co.jp/karayama/menu/19425/" target="_blank" rel="noopener">公式ページを見る</a>（販売終了後は削除されている場合があります）</p>
-<h3>栄養成分</h3><p class='note'>栄養成分は公式サイトに掲載がありません。</p><p class='note'>アレルゲン情報は公式PDFをご覧ください：<a data-google-vignette="false" href="https://www.arclandservice.co.jp/karayama/wp-content/uploads/sites/12/2026/11/20261101_karayama_allergy.pdf" target="_blank" rel="noopener">アレルゲン一覧（公式PDF）</a></p>
+<h2>栄養成分</h2><p class='note'>栄養成分は公式サイトに掲載がありません。</p><p class='note'>アレルゲン情報は公式PDFをご覧ください：<a data-google-vignette="false" href="https://www.arclandservice.co.jp/karayama/wp-content/uploads/sites/12/2026/11/20261101_karayama_allergy.pdf" target="_blank" rel="noopener">アレルゲン一覧（公式PDF）</a></p>
 
 
 
 
 
-<h3>からやまのネタフル最新レビュー</h3>
+<h2>からやまのネタフル最新レビュー</h2>
 <div class="review-grid">
 <a data-google-vignette="false" class="review-card" href="https://netaful.jp/fast-food/0211513.html" target="_blank" rel="noopener">
 <img src="https://netaful.jp/wp-content/uploads/2026/10/karayama-toriten-ajikara-003-485x364.jpg" alt="【からやま】「出汁とり天と白身魚からあげのきのこバターあんかけ定食」魚粉！？出汁がめっちゃ利いてる！" loading="lazy" width="485" height="364">
@@ -217,6 +229,15 @@ border-radius:4px;padding:2px 8px;background:var(--karayama)">からやま</div>
 </div>
 </a>
 </div>
+<h2>同じ時期のからやまの商品</h2>
+<ul class="rel">
+<li><a data-google-vignette="false" href="/items/karayama-19421.html">出汁とり天と白身魚からあげのきのこバターあんかけ定食</a>　1089円（税込）・販売中</li>
+<li><a data-google-vignette="false" href="/items/karayama-19422.html">出汁とり天合盛り定食</a>　979円（税込）・販売中</li>
+<li><a data-google-vignette="false" href="/items/karayama-19424.html">出汁とり天4個</a>　429円（税込）・販売中</li>
+<li><a data-google-vignette="false" href="/items/karayama-19426.html">出汁とり天と白身魚からあげのきのこバターあんかけ弁当</a>　1069円（税込）・販売中</li>
+<li><a data-google-vignette="false" href="/items/karayama-19427.html">出汁とり天合盛り弁当</a>　961円（税込）・販売中</li>
+<li><a data-google-vignette="false" href="/items/karayama-19429.html">出汁とり天4個</a>　421円（税込）・販売中</li>
+</ul>
 <div class="ad-slot">
 <ins class="adsbygoogle"
      style="display:block"

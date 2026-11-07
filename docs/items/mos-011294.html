@@ -39,10 +39,12 @@ body { background: var(--bg); color: var(--text);
   font-family: "Hiragino Sans", "Noto Sans JP", sans-serif; line-height: 1.6; }
 a { color: inherit; }
 header { padding: 24px 16px 12px; max-width: 980px; margin: 0 auto; }
-header h1 a { text-decoration: none; font-size: 22px;
+/* サイト名はトップだけ h1、他のページでは div.site-name(見た目は h1 と同じ) */
+header .site-name { font-size: 2em; font-weight: bold; }
+header h1 a, header .site-name a { text-decoration: none; font-size: 22px;
   display: inline-flex; align-items: center; gap: 8px; }
 /* ロゴは文字とほぼ同じ高さに揃える(96px画像を縮小して表示。姉妹サイトと同じ) */
-header h1 img { width: 44px; height: 44px; }
+header h1 img, header .site-name img { width: 44px; height: 44px; }
 header p { color: var(--muted); font-size: 13px; margin-top: 4px; }
 nav.crumbs { font-size: 12px; color: var(--muted); margin-top: 8px; }
 nav.crumbs a { text-decoration: none; color: var(--accent); }
@@ -51,7 +53,8 @@ nav.crumbs a { text-decoration: none; color: var(--accent); }
 .sites a { font-size: 12px; padding: 3px 10px; border-radius: 999px;
   border: 1px solid var(--line); background: var(--card); text-decoration: none; }
 main { max-width: 980px; margin: 0 auto; padding: 8px 16px 48px; }
-h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); margin: 24px 0 12px; }
+/* 一覧ページの見出し(h1.pt)は、見た目を h2 と同じにする */
+h2, h1.pt { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); margin: 24px 0 12px; }
 .sort-bar { display: flex; gap: 8px; margin: 8px 0 16px; flex-wrap: wrap; align-items: center; }
 .sort-bar select, .sort-bar input { font-size: 13px; padding: 5px 8px; border-radius: 6px;
   border: 1px solid var(--line); background: var(--card); color: var(--text); font-family: inherit; }
@@ -110,7 +113,12 @@ h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); 
 .detail table.multi th, .detail table.multi td { width: auto; text-align: right; white-space: nowrap; }
 .detail table.multi th:first-child { text-align: left; }
 .detail table.pv { max-width: 320px; }
-.detail h3 { margin-top: 16px; font-size: 14px; }
+/* 商品ページの節見出しは h2。見た目は従来の h3 と同じにする */
+.detail h2 { margin: 16px 0 0; padding: 0; border: 0; font-size: 14px; }
+.detail h1 .variant { font-size: 14px; font-weight: 400; color: var(--muted); }
+.detail ul.rel { margin-top: 8px; padding-left: 20px; font-size: 13px; }
+.detail ul.rel li { margin: 4px 0; }
+.detail ul.rel a { color: var(--accent); }
 .detail details { margin-top: 10px; font-size: 13px; }
 .detail details summary { cursor: pointer; color: var(--accent); }
 .detail blockquote { border-left: 3px solid var(--accent); margin: 12px 0; padding: 8px 14px;
@@ -156,11 +164,11 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 /* カード一覧(.grid)の中に差し込まれる枠は、カード1枚ぶんのマス(列幅)を使う */
 .grid > .ad-slot { max-width: none; margin: 0; }
 </style>
-
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "トップ", "item": "https://fastfood.netaful.jp/"}, {"@type": "ListItem", "position": 2, "name": "モスバーガー", "item": "https://fastfood.netaful.jp/chains/mos/"}, {"@type": "ListItem", "position": 3, "name": "【時間限定】トリプルモスチーズバーガー ＜15時から販売＞", "item": "https://fastfood.netaful.jp/items/mos-011294.html"}]}</script>
 </head>
 <body>
 <header>
-<h1><a data-google-vignette="false" href="/"><img src="/assets/logo.png" alt="" width="44" height="44">ファストフードポチ</a></h1>
+<div class="site-name"><a data-google-vignette="false" href="/"><img src="/assets/logo.png" alt="" width="44" height="44">ファストフードポチ</a></div>
 <p>マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</p>
 </header>
 
@@ -179,11 +187,12 @@ border-radius:4px;padding:2px 8px;background:var(--mos)">モスバーガー</div
 
 
 <p><strong>カテゴリ：</strong>ハンバーガー</p>
+
 <blockquote cite="https://www.mos.jp/menu/detail/?menu_id=011294&amp;c_id=26">モスチーズバーガーのパティをトリプルにした、贅沢で食べ応えがあるバーガーです。</blockquote>
 <p class="source">出典：モスバーガー公式サイト（2026-10-07取得時点） ・
 <a data-google-vignette="false" href="https://www.mos.jp/menu/detail/?menu_id=011294&amp;c_id=26" target="_blank" rel="noopener">公式ページを見る</a></p>
 <p class="warn">※現在は公式ページが削除されている場合があります。</p>
-<h3>栄養成分</h3><table><tr><th>熱量</th><td>733kcal</td></tr><tr><th>たんぱく質</th><td>34.8g</td></tr><tr><th>脂質</th><td>43.7g</td></tr><tr><th>炭水化物</th><td>50.4g</td></tr><tr><th>　食物繊維</th><td>5.5g</td></tr><tr><th>食塩相当量</th><td>4.8g</td></tr></table><details><summary>そのほかの栄養成分（14項目）を見る</summary><table><tr><th>重量</th><td>346.8g</td></tr><tr><th>コレステロール</th><td>93mg</td></tr><tr><th>ナトリウム</th><td>1880mg</td></tr><tr><th>カリウム</th><td>577mg</td></tr><tr><th>カルシウム</th><td>159mg</td></tr><tr><th>リン</th><td>492mg</td></tr><tr><th>鉄</th><td>3.0mg</td></tr><tr><th>ビタミンA</th><td>88μg</td></tr><tr><th>ビタミンB1</th><td>0.17mg</td></tr><tr><th>ビタミンB2</th><td>0.24mg</td></tr><tr><th>ナイアシン</th><td>5.6mg</td></tr><tr><th>ビタミンC</th><td>12mg</td></tr><tr><th>ビタミンD</th><td>0.6μg</td></tr><tr><th>ビタミンE</th><td>1.4mg</td></tr></table></details>
+<h2>栄養成分</h2><table><tr><th>熱量</th><td>733kcal</td></tr><tr><th>たんぱく質</th><td>34.8g</td></tr><tr><th>脂質</th><td>43.7g</td></tr><tr><th>炭水化物</th><td>50.4g</td></tr><tr><th>　食物繊維</th><td>5.5g</td></tr><tr><th>食塩相当量</th><td>4.8g</td></tr></table><details><summary>そのほかの栄養成分（14項目）を見る</summary><table><tr><th>重量</th><td>346.8g</td></tr><tr><th>コレステロール</th><td>93mg</td></tr><tr><th>ナトリウム</th><td>1880mg</td></tr><tr><th>カリウム</th><td>577mg</td></tr><tr><th>カルシウム</th><td>159mg</td></tr><tr><th>リン</th><td>492mg</td></tr><tr><th>鉄</th><td>3.0mg</td></tr><tr><th>ビタミンA</th><td>88μg</td></tr><tr><th>ビタミンB1</th><td>0.17mg</td></tr><tr><th>ビタミンB2</th><td>0.24mg</td></tr><tr><th>ナイアシン</th><td>5.6mg</td></tr><tr><th>ビタミンC</th><td>12mg</td></tr><tr><th>ビタミンD</th><td>0.6μg</td></tr><tr><th>ビタミンE</th><td>1.4mg</td></tr></table></details>
 <p class='tags'><strong>アレルゲン（含む）：</strong>乳、小麦、卵、牛肉、大豆、鶏肉、豚肉、りんご</p><p class='note'>条件つきの表示：落花生◇、くるみ◇、ゼラチン▽、ごま◇（記号の意味は公式サイトの凡例でご確認ください）</p>
 <details><summary>原産地・製造所の情報（9件）を見る</summary><table><tr><th>ハンバーガーバンズ：小麦粉（小麦）</th><td>アメリカ、カナダ、国産</td></tr><tr><th>ハンバーガーパティ：牛肉</th><td>オーストラリア、アメリカ、カナダ</td></tr><tr><th>モスの生野菜：トマト</th><td>国産</td></tr><tr><th>モスの生野菜：オニオン</th><td>国産</td></tr><tr><th>スライスチーズ：チーズ</th><td>ニュージーランド、オーストラリア、アメリカ、その他</td></tr><tr><th>ミートソース：オニオン</th><td>国産、ニュージーランド、カナダ、その他</td></tr><tr><th>ミートソース：トマトおよびその加工品</th><td>オーストラリア、チリ、ポルトガル、その他</td></tr><tr><th>ミートソース：牛肉</th><td>オーストラリア、その他</td></tr><tr><th>ミートソース：豚肉</th><td>カナダ、その他</td></tr></table></details>
 
@@ -196,7 +205,7 @@ border-radius:4px;padding:2px 8px;background:var(--mos)">モスバーガー</div
      data-full-width-responsive="true"></ins>
 </div>
 
-<h3>関連するネタフルの記事（チーズ）</h3>
+<h2>関連するネタフルの記事（チーズ）</h2>
 <div class="review-grid">
 <a data-google-vignette="false" class="review-card" href="https://netaful.jp/neta-eat/0127112.html" target="_blank" rel="noopener">
 <img src="https://netaful.jp/wp-content/uploads/2023/03/mos-teriyaki-001-24-300x212.jpg" alt="【モス】半熟風たまご × 北海道産チーズの贅沢なテリヤキ「とろったまチーズ テリヤキバーガー ～北海道産ゴーダチーズ使用～」発売（3/24）" loading="lazy" width="300" height="212">
@@ -227,6 +236,15 @@ border-radius:4px;padding:2px 8px;background:var(--mos)">モスバーガー</div
 </div>
 </a>
 </div>
+<h2>同じ時期のモスバーガーの商品</h2>
+<ul class="rel">
+<li><a data-google-vignette="false" href="/items/mos-011293.html">【時間限定】トリプルモスバーガー ＜15時から販売＞</a>　800円（税込）・680kcal・販売中</li>
+<li><a data-google-vignette="false" href="/items/mos-010488.html">月見フォカッチャ ～黄金(おうごん)チーズソース～</a>　630円（税込）・520kcal・販売中</li>
+<li><a data-google-vignette="false" href="/items/mos-010489.html">黄金(おうごん)チーズソースのフォカッチャ</a>　560円（税込）・488kcal・販売中</li>
+<li><a data-google-vignette="false" href="/items/mos-010685.html">メンチカツチーズバーガー ～デミグラスソース～</a>　510円（税込）・499kcal・販売中</li>
+<li><a data-google-vignette="false" href="/items/mos-011576.html">ブラックアンガスバーガー</a>　730円（税込）・494kcal・販売終了</li>
+<li><a data-google-vignette="false" href="/items/mos-120108.html">トースト</a>　250円（税込）・201kcal・販売中</li>
+</ul>
 
 </div>
 </main>

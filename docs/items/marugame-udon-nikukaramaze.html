@@ -39,10 +39,12 @@ body { background: var(--bg); color: var(--text);
   font-family: "Hiragino Sans", "Noto Sans JP", sans-serif; line-height: 1.6; }
 a { color: inherit; }
 header { padding: 24px 16px 12px; max-width: 980px; margin: 0 auto; }
-header h1 a { text-decoration: none; font-size: 22px;
+/* サイト名はトップだけ h1、他のページでは div.site-name(見た目は h1 と同じ) */
+header .site-name { font-size: 2em; font-weight: bold; }
+header h1 a, header .site-name a { text-decoration: none; font-size: 22px;
   display: inline-flex; align-items: center; gap: 8px; }
 /* ロゴは文字とほぼ同じ高さに揃える(96px画像を縮小して表示。姉妹サイトと同じ) */
-header h1 img { width: 44px; height: 44px; }
+header h1 img, header .site-name img { width: 44px; height: 44px; }
 header p { color: var(--muted); font-size: 13px; margin-top: 4px; }
 nav.crumbs { font-size: 12px; color: var(--muted); margin-top: 8px; }
 nav.crumbs a { text-decoration: none; color: var(--accent); }
@@ -51,7 +53,8 @@ nav.crumbs a { text-decoration: none; color: var(--accent); }
 .sites a { font-size: 12px; padding: 3px 10px; border-radius: 999px;
   border: 1px solid var(--line); background: var(--card); text-decoration: none; }
 main { max-width: 980px; margin: 0 auto; padding: 8px 16px 48px; }
-h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); margin: 24px 0 12px; }
+/* 一覧ページの見出し(h1.pt)は、見た目を h2 と同じにする */
+h2, h1.pt { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); margin: 24px 0 12px; }
 .sort-bar { display: flex; gap: 8px; margin: 8px 0 16px; flex-wrap: wrap; align-items: center; }
 .sort-bar select, .sort-bar input { font-size: 13px; padding: 5px 8px; border-radius: 6px;
   border: 1px solid var(--line); background: var(--card); color: var(--text); font-family: inherit; }
@@ -110,7 +113,12 @@ h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); 
 .detail table.multi th, .detail table.multi td { width: auto; text-align: right; white-space: nowrap; }
 .detail table.multi th:first-child { text-align: left; }
 .detail table.pv { max-width: 320px; }
-.detail h3 { margin-top: 16px; font-size: 14px; }
+/* 商品ページの節見出しは h2。見た目は従来の h3 と同じにする */
+.detail h2 { margin: 16px 0 0; padding: 0; border: 0; font-size: 14px; }
+.detail h1 .variant { font-size: 14px; font-weight: 400; color: var(--muted); }
+.detail ul.rel { margin-top: 8px; padding-left: 20px; font-size: 13px; }
+.detail ul.rel li { margin: 4px 0; }
+.detail ul.rel a { color: var(--accent); }
 .detail details { margin-top: 10px; font-size: 13px; }
 .detail details summary { cursor: pointer; color: var(--accent); }
 .detail blockquote { border-left: 3px solid var(--accent); margin: 12px 0; padding: 8px 14px;
@@ -156,11 +164,11 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 /* カード一覧(.grid)の中に差し込まれる枠は、カード1枚ぶんのマス(列幅)を使う */
 .grid > .ad-slot { max-width: none; margin: 0; }
 </style>
-
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "トップ", "item": "https://fastfood.netaful.jp/"}, {"@type": "ListItem", "position": 2, "name": "丸亀製麺", "item": "https://fastfood.netaful.jp/chains/marugame/"}, {"@type": "ListItem", "position": 3, "name": "肉辛まぜうどん", "item": "https://fastfood.netaful.jp/items/marugame-udon-nikukaramaze.html"}]}</script>
 </head>
 <body>
 <header>
-<h1><a data-google-vignette="false" href="/"><img src="/assets/logo.png" alt="" width="44" height="44">ファストフードポチ</a></h1>
+<div class="site-name"><a data-google-vignette="false" href="/"><img src="/assets/logo.png" alt="" width="44" height="44">ファストフードポチ</a></div>
 <p>マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</p>
 </header>
 
@@ -179,11 +187,12 @@ border-radius:4px;padding:2px 8px;background:var(--marugame)">丸亀製麺</div>
 <p class='note'>公式サイトで「期間限定」の表示があるメニューです。</p><p class='note'>公式サイトに発売日・販売期間が載っていないため、一覧で初めて見つけた日（記録開始日）から表示しています。発売日ではありません。終了日も、一覧から消えたのを確認した日です。</p><p class='note'>アレルゲンの対象は、表示義務の8品目と推奨の19品目です。使っていない原材料でも、店舗の厨房や製造工場で器具が共有されていることがあります。天ぷら・フライ類は同じフライヤーで調理されます。詳しくは公式のアレルギー情報でご確認ください。</p>
 
 <p><strong>カテゴリ：</strong>うどん</p>
+
 <blockquote cite="https://jp.marugame.com/menu/udon/nikukaramaze/">スパイスの効いた辛さが特徴の特製ミンチ、パンチの効いた香りと辛味の生ニラ・生ニンニク、甘みや酸味がアクセントとなるガリトマトなど個性豊かな具材を合わせました。</blockquote>
 <p class="source">出典：丸亀製麺公式サイト（2026-10-17取得時点） ・
 <a data-google-vignette="false" href="https://jp.marugame.com/menu/udon/nikukaramaze/" target="_blank" rel="noopener">公式ページを見る</a></p>
 <p class="warn">※現在は公式ページが削除されている場合があります。</p>
-<h3>栄養成分</h3><div class='tablewrap'><table class='multi'><tr><th></th><th>温・並</th><th>温・大</th><th>温・得</th></tr><tr><th>熱量</th><td>672kcal</td><td>810kcal</td><td>1155kcal</td></tr><tr><th>たんぱく質</th><td>21.4g</td><td>25.4g</td><td>39.1g</td></tr><tr><th>脂質</th><td>23.1g</td><td>23.7g</td><td>38.8g</td></tr><tr><th>炭水化物</th><td>92.1g</td><td>121g</td><td>157.3g</td></tr><tr><th>食塩相当量</th><td>5.1g</td><td>5.9g</td><td>8.8g</td></tr></table></div><p class='note'>公式の注記：栄養成分値は商品のレシピに基づく推定値で、店内の手づくりのため実際の商品と差が出ることがあります。</p>
+<h2>栄養成分</h2><div class='tablewrap'><table class='multi'><tr><th></th><th>温・並</th><th>温・大</th><th>温・得</th></tr><tr><th>熱量</th><td>672kcal</td><td>810kcal</td><td>1155kcal</td></tr><tr><th>たんぱく質</th><td>21.4g</td><td>25.4g</td><td>39.1g</td></tr><tr><th>脂質</th><td>23.1g</td><td>23.7g</td><td>38.8g</td></tr><tr><th>炭水化物</th><td>92.1g</td><td>121g</td><td>157.3g</td></tr><tr><th>食塩相当量</th><td>5.1g</td><td>5.9g</td><td>8.8g</td></tr></table></div><p class='note'>公式の注記：栄養成分値は商品のレシピに基づく推定値で、店内の手づくりのため実際の商品と差が出ることがあります。</p>
 <p class='tags'><strong>アレルゲン（含む）：</strong>小麦、卵、えび、さば、大豆、鶏肉、豚肉、ごま</p>
 
 
@@ -196,7 +205,7 @@ border-radius:4px;padding:2px 8px;background:var(--marugame)">丸亀製麺</div>
      data-full-width-responsive="true"></ins>
 </div>
 
-<h3>丸亀製麺のネタフル最新レビュー</h3>
+<h2>丸亀製麺のネタフル最新レビュー</h2>
 <div class="review-grid">
 <a data-google-vignette="false" class="review-card" href="https://netaful.jp/neta-eat/0148841.html" target="_blank" rel="noopener">
 <img src="https://netaful.jp/wp-content/uploads/2024/04/marugame-shake-000-300x158.jpg" alt="【丸亀製麺】「丸亀シェイクうどん」新商品3種「よくばり」「鶏から塩レモン」「ピリ辛 油淋鶏」を発売（4/16から）" loading="lazy" width="300" height="158">
@@ -227,6 +236,12 @@ border-radius:4px;padding:2px 8px;background:var(--marugame)">丸亀製麺</div>
 </div>
 </a>
 </div>
+<h2>同じ時期の丸亀製麺の商品</h2>
+<ul class="rel">
+<li><a data-google-vignette="false" href="/items/marugame-udon-misodashi.html">濃厚味噌だしうどん</a>　890円（税込）・722kcal・販売中</li>
+<li><a data-google-vignette="false" href="/items/marugame-topping-sudachi.html">すだち</a>　90円（税込）・3kcal・販売中</li>
+<li><a data-google-vignette="false" href="/items/marugame-udonbento-mentaitororoudonbento.html">明太とろろうどん弁当</a>　450円（税込）・472kcal・販売中</li>
+</ul>
 
 </div>
 </main>

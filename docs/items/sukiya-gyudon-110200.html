@@ -39,10 +39,12 @@ body { background: var(--bg); color: var(--text);
   font-family: "Hiragino Sans", "Noto Sans JP", sans-serif; line-height: 1.6; }
 a { color: inherit; }
 header { padding: 24px 16px 12px; max-width: 980px; margin: 0 auto; }
-header h1 a { text-decoration: none; font-size: 22px;
+/* サイト名はトップだけ h1、他のページでは div.site-name(見た目は h1 と同じ) */
+header .site-name { font-size: 2em; font-weight: bold; }
+header h1 a, header .site-name a { text-decoration: none; font-size: 22px;
   display: inline-flex; align-items: center; gap: 8px; }
 /* ロゴは文字とほぼ同じ高さに揃える(96px画像を縮小して表示。姉妹サイトと同じ) */
-header h1 img { width: 44px; height: 44px; }
+header h1 img, header .site-name img { width: 44px; height: 44px; }
 header p { color: var(--muted); font-size: 13px; margin-top: 4px; }
 nav.crumbs { font-size: 12px; color: var(--muted); margin-top: 8px; }
 nav.crumbs a { text-decoration: none; color: var(--accent); }
@@ -51,7 +53,8 @@ nav.crumbs a { text-decoration: none; color: var(--accent); }
 .sites a { font-size: 12px; padding: 3px 10px; border-radius: 999px;
   border: 1px solid var(--line); background: var(--card); text-decoration: none; }
 main { max-width: 980px; margin: 0 auto; padding: 8px 16px 48px; }
-h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); margin: 24px 0 12px; }
+/* 一覧ページの見出し(h1.pt)は、見た目を h2 と同じにする */
+h2, h1.pt { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); margin: 24px 0 12px; }
 .sort-bar { display: flex; gap: 8px; margin: 8px 0 16px; flex-wrap: wrap; align-items: center; }
 .sort-bar select, .sort-bar input { font-size: 13px; padding: 5px 8px; border-radius: 6px;
   border: 1px solid var(--line); background: var(--card); color: var(--text); font-family: inherit; }
@@ -110,7 +113,12 @@ h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); 
 .detail table.multi th, .detail table.multi td { width: auto; text-align: right; white-space: nowrap; }
 .detail table.multi th:first-child { text-align: left; }
 .detail table.pv { max-width: 320px; }
-.detail h3 { margin-top: 16px; font-size: 14px; }
+/* 商品ページの節見出しは h2。見た目は従来の h3 と同じにする */
+.detail h2 { margin: 16px 0 0; padding: 0; border: 0; font-size: 14px; }
+.detail h1 .variant { font-size: 14px; font-weight: 400; color: var(--muted); }
+.detail ul.rel { margin-top: 8px; padding-left: 20px; font-size: 13px; }
+.detail ul.rel li { margin: 4px 0; }
+.detail ul.rel a { color: var(--accent); }
 .detail details { margin-top: 10px; font-size: 13px; }
 .detail details summary { cursor: pointer; color: var(--accent); }
 .detail blockquote { border-left: 3px solid var(--accent); margin: 12px 0; padding: 8px 14px;
@@ -156,11 +164,11 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 /* カード一覧(.grid)の中に差し込まれる枠は、カード1枚ぶんのマス(列幅)を使う */
 .grid > .ad-slot { max-width: none; margin: 0; }
 </style>
-
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "トップ", "item": "https://fastfood.netaful.jp/"}, {"@type": "ListItem", "position": 2, "name": "すき家", "item": "https://fastfood.netaful.jp/chains/sukiya/"}, {"@type": "ListItem", "position": 3, "name": "辛旨すきやき牛丼", "item": "https://fastfood.netaful.jp/items/sukiya-gyudon-110200.html"}]}</script>
 </head>
 <body>
 <header>
-<h1><a data-google-vignette="false" href="/"><img src="/assets/logo.png" alt="" width="44" height="44">ファストフードポチ</a></h1>
+<div class="site-name"><a data-google-vignette="false" href="/"><img src="/assets/logo.png" alt="" width="44" height="44">ファストフードポチ</a></div>
 <p>マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</p>
 </header>
 
@@ -179,8 +187,9 @@ border-radius:4px;padding:2px 8px;background:var(--sukiya)">すき家</div>
 <p class='note'>公式サイトの「期間限定」表示のあるメニューです。</p><p class='note'>販売期間は公式サイトに載っていないため、終了日は一覧から消えたのを確認した日です。</p><p class='note'>価格はサイズや組み合わせにより異なります。</p>
 
 <p><strong>カテゴリ：</strong>牛丼</p>
+
 <p class="source"><a data-google-vignette="false" href="https://www.sukiya.jp/menu/in/gyudon/110200/index.html" target="_blank" rel="noopener">公式ページを見る</a>（販売終了後は削除されている場合があります）</p>
-<h3>栄養成分</h3><div class='tablewrap'><table class='multi'><tr><th></th><th>並盛</th><th>ミニ</th><th>中盛</th><th>大盛</th><th>特盛</th><th>メガ</th></tr><tr><th>熱量</th><td>816kcal</td><td>585kcal</td><td>873kcal</td><td>1029kcal</td><td>1221kcal</td><td>1486kcal</td></tr><tr><th>たんぱく質</th><td>27.9g</td><td>21g</td><td>32.8g</td><td>34.6g</td><td>44g</td><td>57g</td></tr><tr><th>脂質</th><td>28.7g</td><td>21.3g</td><td>38.7g</td><td>36g</td><td>50.9g</td><td>71.6g</td></tr><tr><th>炭水化物</th><td>112.5g</td><td>78.4g</td><td>99.2g</td><td>142.8g</td><td>147.6g</td><td>154.3g</td></tr><tr><th>食塩相当量</th><td>4.6g</td><td>3.8g</td><td>4.9g</td><td>5.2g</td><td>6.4g</td><td>7.8g</td></tr></table></div><p class='note'>公式の注記：表示した数値には、お好みでお使いいただく調味料（紅生姜・醤油・ドレッシング・七味・カルビ追いダレなど）は含まれていません。</p><p class='note'>出典：公式PDF <a data-google-vignette="false" href="https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf" target="_blank" rel="noopener">「栄養成分一覧」</a>（2026年11月6日更新）。</p>
+<h2>栄養成分</h2><div class='tablewrap'><table class='multi'><tr><th></th><th>並盛</th><th>ミニ</th><th>中盛</th><th>大盛</th><th>特盛</th><th>メガ</th></tr><tr><th>熱量</th><td>816kcal</td><td>585kcal</td><td>873kcal</td><td>1029kcal</td><td>1221kcal</td><td>1486kcal</td></tr><tr><th>たんぱく質</th><td>27.9g</td><td>21g</td><td>32.8g</td><td>34.6g</td><td>44g</td><td>57g</td></tr><tr><th>脂質</th><td>28.7g</td><td>21.3g</td><td>38.7g</td><td>36g</td><td>50.9g</td><td>71.6g</td></tr><tr><th>炭水化物</th><td>112.5g</td><td>78.4g</td><td>99.2g</td><td>142.8g</td><td>147.6g</td><td>154.3g</td></tr><tr><th>食塩相当量</th><td>4.6g</td><td>3.8g</td><td>4.9g</td><td>5.2g</td><td>6.4g</td><td>7.8g</td></tr></table></div><p class='note'>公式の注記：表示した数値には、お好みでお使いいただく調味料（紅生姜・醤油・ドレッシング・七味・カルビ追いダレなど）は含まれていません。</p><p class='note'>出典：公式PDF <a data-google-vignette="false" href="https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf" target="_blank" rel="noopener">「栄養成分一覧」</a>（2026年11月6日更新）。</p>
 <p class='tags'><strong>アレルゲン（含む）：</strong>小麦、卵、乳、牛肉、大豆、りんご、ごま</p><p class='note'>条件つきの表示：落花生（ピーナッツ）△、えび△、かに△、オレンジ△、さば△、鶏肉△、豚肉△、ゼラチン△、バナナ△（△：原材料由来および原材料の製造工場において、そのアレルゲン物質を含む製品を同じライン等で製造しております）</p><p class='note'>出典：公式PDF <a data-google-vignette="false" href="https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf" target="_blank" rel="noopener">「アレルゲン一覧」</a>（2026年11月6日更新）。</p>
 
 
@@ -193,7 +202,7 @@ border-radius:4px;padding:2px 8px;background:var(--sukiya)">すき家</div>
      data-full-width-responsive="true"></ins>
 </div>
 
-<h3>関連するネタフルの記事（すき焼き）</h3>
+<h2>関連するネタフルの記事（すき焼き）</h2>
 <div class="review-grid">
 <a data-google-vignette="false" class="review-card" href="https://netaful.jp/fast-food/0209238.html" target="_blank" rel="noopener">
 <img src="https://netaful.jp/wp-content/uploads/2026/09/sukiya-umakara-tsukimi-004-485x364.jpeg" alt="【すき家】「月見辛旨すきやき牛丼」秋の風物詩を辛旨で食べてみた" loading="lazy" width="485" height="364">
@@ -224,6 +233,15 @@ border-radius:4px;padding:2px 8px;background:var(--sukiya)">すき家</div>
 </div>
 </a>
 </div>
+<h2>同じ時期のすき家の商品</h2>
+<ul class="rel">
+<li><a data-google-vignette="false" href="/items/sukiya-gyudon-110100.html">すきやき牛丼</a>　720円（税込）・811kcal・販売終了</li>
+<li><a data-google-vignette="false" href="/items/sukiya-gyudon-112800.html">月見辛旨すきやき牛丼</a>　780円（税込）・902kcal・販売終了</li>
+<li><a data-google-vignette="false" href="/items/sukiya-gyudon-117600.html">おんたまシビ辛麻婆茄子牛丼</a>　830円（税込）・911kcal・販売終了</li>
+<li><a data-google-vignette="false" href="/items/sukiya-gyudon-112700.html">月見すきやき牛丼</a>　780円（税込）・897kcal・販売終了</li>
+<li><a data-google-vignette="false" href="/items/sukiya-gyudon-117500.html">シビ辛麻婆茄子牛丼</a>　720円（税込）・828kcal・販売終了</li>
+<li><a data-google-vignette="false" href="/items/sukiya-curry-314900.html">牛あいがけビーフカレー</a>　1130円（税込）・910kcal・販売中</li>
+</ul>
 
 </div>
 </main>

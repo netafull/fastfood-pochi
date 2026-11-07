@@ -39,10 +39,12 @@ body { background: var(--bg); color: var(--text);
   font-family: "Hiragino Sans", "Noto Sans JP", sans-serif; line-height: 1.6; }
 a { color: inherit; }
 header { padding: 24px 16px 12px; max-width: 980px; margin: 0 auto; }
-header h1 a { text-decoration: none; font-size: 22px;
+/* サイト名はトップだけ h1、他のページでは div.site-name(見た目は h1 と同じ) */
+header .site-name { font-size: 2em; font-weight: bold; }
+header h1 a, header .site-name a { text-decoration: none; font-size: 22px;
   display: inline-flex; align-items: center; gap: 8px; }
 /* ロゴは文字とほぼ同じ高さに揃える(96px画像を縮小して表示。姉妹サイトと同じ) */
-header h1 img { width: 44px; height: 44px; }
+header h1 img, header .site-name img { width: 44px; height: 44px; }
 header p { color: var(--muted); font-size: 13px; margin-top: 4px; }
 nav.crumbs { font-size: 12px; color: var(--muted); margin-top: 8px; }
 nav.crumbs a { text-decoration: none; color: var(--accent); }
@@ -51,7 +53,8 @@ nav.crumbs a { text-decoration: none; color: var(--accent); }
 .sites a { font-size: 12px; padding: 3px 10px; border-radius: 999px;
   border: 1px solid var(--line); background: var(--card); text-decoration: none; }
 main { max-width: 980px; margin: 0 auto; padding: 8px 16px 48px; }
-h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); margin: 24px 0 12px; }
+/* 一覧ページの見出し(h1.pt)は、見た目を h2 と同じにする */
+h2, h1.pt { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); margin: 24px 0 12px; }
 .sort-bar { display: flex; gap: 8px; margin: 8px 0 16px; flex-wrap: wrap; align-items: center; }
 .sort-bar select, .sort-bar input { font-size: 13px; padding: 5px 8px; border-radius: 6px;
   border: 1px solid var(--line); background: var(--card); color: var(--text); font-family: inherit; }
@@ -110,7 +113,12 @@ h2 { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--accent); 
 .detail table.multi th, .detail table.multi td { width: auto; text-align: right; white-space: nowrap; }
 .detail table.multi th:first-child { text-align: left; }
 .detail table.pv { max-width: 320px; }
-.detail h3 { margin-top: 16px; font-size: 14px; }
+/* 商品ページの節見出しは h2。見た目は従来の h3 と同じにする */
+.detail h2 { margin: 16px 0 0; padding: 0; border: 0; font-size: 14px; }
+.detail h1 .variant { font-size: 14px; font-weight: 400; color: var(--muted); }
+.detail ul.rel { margin-top: 8px; padding-left: 20px; font-size: 13px; }
+.detail ul.rel li { margin: 4px 0; }
+.detail ul.rel a { color: var(--accent); }
 .detail details { margin-top: 10px; font-size: 13px; }
 .detail details summary { cursor: pointer; color: var(--accent); }
 .detail blockquote { border-left: 3px solid var(--accent); margin: 12px 0; padding: 8px 14px;
@@ -156,11 +164,11 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 /* カード一覧(.grid)の中に差し込まれる枠は、カード1枚ぶんのマス(列幅)を使う */
 .grid > .ad-slot { max-width: none; margin: 0; }
 </style>
-
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "トップ", "item": "https://fastfood.netaful.jp/"}, {"@type": "ListItem", "position": 2, "name": "モスバーガー", "item": "https://fastfood.netaful.jp/chains/mos/"}, {"@type": "ListItem", "position": 3, "name": "【金曜日限定】オニオンフライデーパック", "item": "https://fastfood.netaful.jp/items/mos-211298.html"}]}</script>
 </head>
 <body>
 <header>
-<h1><a data-google-vignette="false" href="/"><img src="/assets/logo.png" alt="" width="44" height="44">ファストフードポチ</a></h1>
+<div class="site-name"><a data-google-vignette="false" href="/"><img src="/assets/logo.png" alt="" width="44" height="44">ファストフードポチ</a></div>
 <p>マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</p>
 </header>
 
@@ -179,11 +187,12 @@ border-radius:4px;padding:2px 8px;background:var(--mos)">モスバーガー</div
 
 
 <p><strong>カテゴリ：</strong>サイドメニュー</p>
+
 <blockquote cite="https://www.mos.jp/menu/detail/?menu_id=211298&amp;c_id=26">オニオンフライ5袋分がはいった、毎週金曜日限定のお得なパックです。</blockquote>
 <p class="source">出典：モスバーガー公式サイト（2026-10-07取得時点） ・
 <a data-google-vignette="false" href="https://www.mos.jp/menu/detail/?menu_id=211298&amp;c_id=26" target="_blank" rel="noopener">公式ページを見る</a></p>
 <p class="warn">※現在は公式ページが削除されている場合があります。</p>
-<h3>栄養成分</h3><table><tr><th>熱量</th><td>1096kcal</td></tr><tr><th>たんぱく質</th><td>17.5g</td></tr><tr><th>脂質</th><td>63.4g</td></tr><tr><th>炭水化物</th><td>113.8g</td></tr><tr><th>　食物繊維</th><td>6.7g</td></tr><tr><th>食塩相当量</th><td>5.7g</td></tr></table><details><summary>そのほかの栄養成分（14項目）を見る</summary><table><tr><th>重量</th><td>352.3g</td></tr><tr><th>コレステロール</th><td>0mg</td></tr><tr><th>ナトリウム</th><td>2208mg</td></tr><tr><th>カリウム</th><td>331mg</td></tr><tr><th>カルシウム</th><td>490mg</td></tr><tr><th>リン</th><td>231mg</td></tr><tr><th>鉄</th><td>1.8mg</td></tr><tr><th>ビタミンA</th><td>0μg</td></tr><tr><th>ビタミンB1</th><td>0.14mg</td></tr><tr><th>ビタミンB2</th><td>1.75mg</td></tr><tr><th>ナイアシン</th><td>2.1mg</td></tr><tr><th>ビタミンC</th><td>7mg</td></tr><tr><th>ビタミンD</th><td>0.0μg</td></tr><tr><th>ビタミンE</th><td>12.3mg</td></tr></table></details>
+<h2>栄養成分</h2><table><tr><th>熱量</th><td>1096kcal</td></tr><tr><th>たんぱく質</th><td>17.5g</td></tr><tr><th>脂質</th><td>63.4g</td></tr><tr><th>炭水化物</th><td>113.8g</td></tr><tr><th>　食物繊維</th><td>6.7g</td></tr><tr><th>食塩相当量</th><td>5.7g</td></tr></table><details><summary>そのほかの栄養成分（14項目）を見る</summary><table><tr><th>重量</th><td>352.3g</td></tr><tr><th>コレステロール</th><td>0mg</td></tr><tr><th>ナトリウム</th><td>2208mg</td></tr><tr><th>カリウム</th><td>331mg</td></tr><tr><th>カルシウム</th><td>490mg</td></tr><tr><th>リン</th><td>231mg</td></tr><tr><th>鉄</th><td>1.8mg</td></tr><tr><th>ビタミンA</th><td>0μg</td></tr><tr><th>ビタミンB1</th><td>0.14mg</td></tr><tr><th>ビタミンB2</th><td>1.75mg</td></tr><tr><th>ナイアシン</th><td>2.1mg</td></tr><tr><th>ビタミンC</th><td>7mg</td></tr><tr><th>ビタミンD</th><td>0.0μg</td></tr><tr><th>ビタミンE</th><td>12.3mg</td></tr></table></details>
 <p class='tags'><strong>アレルゲン（含む）：</strong>小麦、大豆</p><p class='note'>条件つきの表示：乳△◇、卵△◇、いか△、えび△、かに△、牛肉△、さば△、鶏肉△、豚肉△、ゼラチン△（記号の意味は公式サイトの凡例でご確認ください）</p>
 <details><summary>原産地・製造所の情報（1件）を見る</summary><table><tr><th>オニオンフライ：オニオン</th><td>中国</td></tr></table></details>
 
@@ -196,7 +205,7 @@ border-radius:4px;padding:2px 8px;background:var(--mos)">モスバーガー</div
      data-full-width-responsive="true"></ins>
 </div>
 
-<h3>モスバーガーのネタフル最新レビュー</h3>
+<h2>モスバーガーのネタフル最新レビュー</h2>
 <div class="review-grid">
 <a data-google-vignette="false" class="review-card" href="https://netaful.jp/magazine/0150269.html" target="_blank" rel="noopener">
 <img src="https://netaful.jp/wp-content/uploads/2024/05/mos-cup-magazine-300x200.jpg" alt="モスバーガーの紙カップをイメージしたタンブラーが付録「MOS BURGER真空断熱ドリンクカップタンブラーBOOK」発売（5/11から）" loading="lazy" width="300" height="200">
@@ -227,6 +236,15 @@ border-radius:4px;padding:2px 8px;background:var(--mos)">モスバーガー</div
 </div>
 </a>
 </div>
+<h2>同じ時期のモスバーガーの商品</h2>
+<ul class="rel">
+<li><a data-google-vignette="false" href="/items/mos-710169.html">【テイクアウト限定】＜冷凍＞香る醤油のローストチキン 〜鹿児島県産 若鶏〜</a>　690円（税込）・208kcal・販売中</li>
+<li><a data-google-vignette="false" href="/items/mos-011293.html">【時間限定】トリプルモスバーガー ＜15時から販売＞</a>　800円（税込）・680kcal・販売中</li>
+<li><a data-google-vignette="false" href="/items/mos-011294.html">【時間限定】トリプルモスチーズバーガー ＜15時から販売＞</a>　850円（税込）・733kcal・販売中</li>
+<li><a data-google-vignette="false" href="/items/mos-120108.html">トースト</a>　250円（税込）・201kcal・販売中</li>
+<li><a data-google-vignette="false" href="/items/mos-120395.html">ストロベリージャム</a>　30円（税込）・27kcal・販売中</li>
+<li><a data-google-vignette="false" href="/items/mos-123003.html">朝モスプレート</a>　460円（税込）・420kcal・販売中</li>
+</ul>
 
 </div>
 </main>
