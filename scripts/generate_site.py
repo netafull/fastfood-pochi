@@ -294,7 +294,7 @@ header { padding: 24px 16px 12px; max-width: 980px; margin: 0 auto; }
 header h1 a { text-decoration: none; font-size: 22px;
   display: inline-flex; align-items: center; gap: 8px; }
 /* ロゴは文字とほぼ同じ高さに揃える(96px画像を縮小して表示。姉妹サイトと同じ) */
-header h1 img { width: 32px; height: 32px; }
+header h1 img { width: 44px; height: 44px; }
 header p { color: var(--muted); font-size: 13px; margin-top: 4px; }
 nav.crumbs { font-size: 12px; color: var(--muted); margin-top: 8px; }
 nav.crumbs a { text-decoration: none; color: var(--accent); }
@@ -506,7 +506,7 @@ def page_shell(title: str, description: str, body: str, canonical: str, extra_he
 
     # 見出しの左に置くポチシリーズ共通のアイコン。画像が置かれていなければ何も出さない
     logo_img = (
-        '<img src="/assets/logo.png" alt="" width="32" height="32">'
+        '<img src="/assets/logo.png" alt="" width="44" height="44">'
         if has_asset("logo.png") else ""
     )
     icon_tags = []
