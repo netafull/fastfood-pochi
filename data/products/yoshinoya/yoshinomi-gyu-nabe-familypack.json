@@ -32,12 +32,59 @@
  "news_date": null,
  "description": null,
  "description_full_len": 0,
- "nutrition": null,
- "nutrition_variants": null,
+ "nutrition": {
+  "kcal": 1235.0,
+  "protein_g": 52.5,
+  "fat_g": 92.7,
+  "carbs_g": 45.2,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 10.4,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "3人前",
+   "nutrition": {
+    "kcal": 1235.0,
+    "protein_g": 52.5,
+    "fat_g": 92.7,
+    "carbs_g": 45.2,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 10.4,
+    "other": {}
+   }
+  },
+  {
+   "label": "4人前",
+   "nutrition": {
+    "kcal": 1647.0,
+    "protein_g": 70.0,
+    "fat_g": 123.6,
+    "carbs_g": 60.3,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 13.9,
+    "other": {}
+   }
+  }
+ ],
  "nutrition_pdf_url": "https://www.yoshinoya.com/pdf/allergy/",
  "nutrition_pdf_label": "吉野家メニュー情報",
  "origin_pdf_url": "https://www.yoshinoya.com/pdf/producing_area/",
- "allergens": null,
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "牛肉",
+   "大豆",
+   "豚肉",
+   "りんご",
+   "ゼラチン"
+  ],
+  "partial": []
+ },
  "origin": null,
  "limited_kind": "期間限定",
  "badges": [
@@ -47,7 +94,7 @@
  "in_limited_list": true,
  "official_url": "https://www.yoshinoya.com/menu/yoshinomi/gyu-nabe-familypack/",
  "first_seen_at": "2026-10-14T07:34:37+09:00",
- "last_seen_at": "2026-11-07",
+ "last_seen_at": "2026-11-08",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -62,5 +109,18 @@
   "yoshinomi"
  ],
  "image": null,
- "pdf_tried": "262|2026-10-08"
+ "pdf_tried": "262|2026-10-08",
+ "nutrition_source": {
+  "url": "https://www.yoshinoya.com/pdf/allergy/",
+  "label": "吉野家メニュー情報",
+  "version": "264|2026-10-29",
+  "version_text": "264号・2026年10月29日現在",
+  "fetched_at": "2026-11-08T07:33:14+09:00",
+  "issue": 264
+ },
+ "nutrition_note": "栄養成分の数値は配合に基づく推定値で、お好みでお使いいただく調味料類は含まれていません。",
+ "allergens_conditional": {
+  "mark": "▲",
+  "meaning": "原材料「あさり」には『かに』が共生しています。 原材料「あおさ」は『えび』『かに』が混ざる漁法で採取されています。"
+ }
 }

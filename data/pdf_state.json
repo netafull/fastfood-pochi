@@ -15,11 +15,10 @@
  },
  "yoshinoya": {
   "menu": {
-   "failed_signature": null,
-   "fetched_at": "2026-10-18T07:33:09+09:00",
-   "last_get": "2026-11-01",
+   "fetched_at": "2026-11-08T07:33:14+09:00",
+   "last_get": "2026-11-08",
    "signature": null,
-   "version": "262|2026-10-08"
+   "version": "264|2026-10-29"
   }
  }
 }

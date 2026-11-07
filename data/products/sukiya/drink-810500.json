@@ -146,9 +146,9 @@
  "official_url": "https://www.sukiya.jp/menu/in/drink/810500/index.html",
  "first_seen_at": "2026-10-11T14:57:03+09:00",
  "last_seen_at": "2026-11-06",
- "status": "on_sale",
- "ended_observed_at": null,
- "missed_runs": 1,
+ "status": "ended",
+ "ended_observed_at": "2026-11-08",
+ "missed_runs": 2,
  "price_history": [
   {
    "date": "2026-10-11",
@@ -178,5 +178,5 @@
   "version_text": "2026年11月6日更新",
   "fetched_at": "2026-11-07T07:34:06+09:00"
  },
- "last_miss_date": "2026-11-07"
+ "last_miss_date": "2026-11-08"
 }

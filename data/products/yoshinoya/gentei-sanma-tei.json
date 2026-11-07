@@ -72,10 +72,10 @@
  "nutrition_source": {
   "url": "https://www.yoshinoya.com/pdf/allergy/",
   "label": "吉野家メニュー情報",
-  "version": "262|2026-10-08",
-  "version_text": "262号・2026年10月8日現在",
-  "fetched_at": "2026-10-11T15:57:05+09:00",
-  "issue": 262
+  "version": "264|2026-10-29",
+  "version_text": "264号・2026年10月29日現在",
+  "fetched_at": "2026-11-08T07:33:14+09:00",
+  "issue": 264
  },
  "nutrition_note": "栄養成分の数値は配合に基づく推定値で、お好みでお使いいただく調味料類は含まれていません。",
  "allergens_conditional": {
