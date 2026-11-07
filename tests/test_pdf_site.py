@@ -36,7 +36,7 @@ def with_nutrition(**kw):
 class TestRender(unittest.TestCase):
     def test_nutrition_table_allergens_note_and_source(self):
         h = g.render_item_page(with_nutrition())
-        self.assertIn("<h3>栄養成分</h3>", h)
+        self.assertIn("<h2>栄養成分</h2>", h)
         self.assertLess(h.index("<th>並盛</th>"), h.index("<th>大盛</th>"))      # 代表サイズが先頭
         self.assertIn("<td>582kcal</td>", h)
         self.assertIn("アレルゲン（含む）：</strong>小麦、乳", h)

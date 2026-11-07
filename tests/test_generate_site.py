@@ -410,5 +410,106 @@ class TestCardLinksAreRootAbsolute(unittest.TestCase):
         self.assertNotIn('href="items/', html)
 
 
+class TestSameNameVariants(unittest.TestCase):
+    def pair(self):
+        old = item(product_id="801706", name="食べくらべポテナゲ特大", launch_date="2026-09-16", status="ended",
+                   ended_observed_at="2026-10-22", price=990, nutrition=None)
+        new = item(product_id="801784", name="食べくらべポテナゲ特大", launch_date="2026-10-21", price=1000,
+                   nutrition=None)
+        return old, new
+
+    def test_period_labels(self):
+        old, new = self.pair()
+        self.assertEqual(g.period_label(old), "2026年9〜10月販売")
+        self.assertEqual(g.period_label(new), "2026年10月〜販売中")
+        self.assertEqual(g.period_label(item(launch_date=None)), "2026年10月に記録開始")
+
+    def test_variant_labels_use_period_then_price_then_kcal(self):
+        old, new = self.pair()
+        self.assertEqual(g.variant_labels([old, new]),
+                         {"801706": "2026年9〜10月販売", "801784": "2026年10月〜販売中"})
+        a = item(product_id="1", launch_date=None, price=429)
+        b = item(product_id="2", launch_date=None, price=421, category="テイクアウト")
+        self.assertEqual(g.variant_labels([a, b]), {"1": "429円", "2": "テイクアウト用・421円"})
+        c = item(product_id="3", launch_date=None, price=250, nutrition=None)
+        d = item(product_id="4", launch_date=None, price=250, nutrition={"kcal": 517.0})
+        self.assertEqual(g.variant_labels([c, d]), {})      # kcalが片方しか無い=区別できない
+        c["nutrition"] = {"kcal": 410.0}
+        self.assertEqual(g.variant_labels([c, d]), {"3": "410kcal", "4": "517kcal"})
+
+    def test_page_shows_variant_and_links(self):
+        old, new = self.pair()
+        h = g.render_item_page(new, [old, new])
+        self.assertIn("「食べくらべポテナゲ特大」（2026年10月〜販売中）の価格・販売期間", h)
+        self.assertIn('<span class="variant">（2026年10月〜販売中）</span></h1>', h)
+        self.assertIn("<h2>同じ名前の商品</h2>", h)
+        self.assertIn('href="/items/mcdonalds-801706.html"', h)
+
+    def test_no_variant_without_same_name(self):
+        h = g.render_item_page(item(), [item()])
+        self.assertIn("<h1>テストバーガー</h1>", h)
+        self.assertNotIn("同じ名前の商品", h)
+        self.assertIn("<title>マクドナルド「テストバーガー」のカロリー・価格・栄養成分｜", h)
+
+
+class TestRelatedItems(unittest.TestCase):
+    def test_nearest_date_same_category_first_and_excludes_same_name(self):
+        me = item(product_id="1", launch_date="2026-10-10")
+        near_other_cat = item(product_id="2", name="A", launch_date="2026-10-10", category="サイド")
+        far_same_cat = item(product_id="3", name="B", launch_date="2026-05-01")
+        same_name = item(product_id="4", launch_date="2026-10-10")
+        other_chain = item(product_id="5", name="C", chain="mos", launch_date="2026-10-10")
+        got = g.related_items(me, [me, near_other_cat, far_same_cat, same_name, other_chain])
+        self.assertEqual([o["product_id"] for o in got], ["3", "2"])
+
+    def test_max_six_and_deterministic(self):
+        items = [item(product_id=str(i), name=f"商品{i}", launch_date=f"2026-09-{i:02d}") for i in range(1, 15)]
+        a = g.related_items(items[6], items)
+        self.assertEqual(len(a), 6)
+        self.assertEqual(a, g.related_items(items[6], list(reversed(items))))
+
+
+class TestLastmodAndChain(unittest.TestCase):
+    def test_item_lastmod_ignores_daily_fields(self):
+        it = item(first_seen_at="2026-10-07T07:00:00+09:00", last_seen_at="2026-11-08",
+                  price_checked_at="2026-11-08",
+                  price_history=[{"date": "2026-10-07", "price": 460}, {"date": "2026-10-20", "price": 480}])
+        self.assertEqual(g.item_lastmod(it), "2026-10-20")
+        it["status"] = "ended"
+        it["ended_observed_at"] = "2026-11-01"
+        self.assertEqual(g.item_lastmod(it), "2026-11-01")
+
+    def test_sitemap_lastmod_is_not_today(self):
+        xml = g.generate_sitemap([item()], [])
+        self.assertIn("<lastmod>2026-10-07</lastmod>", xml)
+
+    def test_chain_description_matsuya_not_limited(self):
+        c = {"slug": "matsuya", "name": "松屋"}
+        its = [item(chain="matsuya", product_id=str(i), name=f"メニュー{i}", launch_date=f"2026-10-0{i}")
+               for i in range(1, 5)]
+        d = g.chain_seo_description(c, its)
+        self.assertNotIn("期間限定", d)
+        self.assertIn("「メニュー4」「メニュー3」「メニュー2」", d)
+        self.assertLessEqual(len(d), 125)
+        self.assertNotIn("期間限定", g.chain_seo_title(c))
+
+
+class TestHeadings(unittest.TestCase):
+    def test_only_top_has_site_name_h1(self):
+        top = g.render_top([item()])
+        self.assertEqual(top.count("<h1"), 1)
+        self.assertIn('<h1><a ', top)
+        for page in (g.render_item_page(item(), [item()]), g.render_grid_page("チェーン", "d", [item()], "https://x/"),
+                     g.render_archive_index([item(status="ended", ended_observed_at="2026-10-08")]),
+                     g.render_chains_top()):
+            self.assertEqual(page.count("<h1"), 1)
+            self.assertNotIn('<h1><a ', page)
+
+    def test_breadcrumb_json_ld(self):
+        h = g.render_item_page(item(), [item()])
+        self.assertIn('"@type": "BreadcrumbList"', h)
+        self.assertIn('"item": "https://fastfood.netaful.jp/items/mcdonalds-9001.html"', h)
+
+
 if __name__ == "__main__":
     unittest.main()
