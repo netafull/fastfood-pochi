@@ -1613,3 +1613,214 @@ def parse_marugame_detail(page: str) -> dict | None:
         "nutrition_variants": marugame_nutrition_variants(nut),
         "allergens": marugame_allergens(props.get("allergenItemData"), props.get("allergenHeadersData")),
     }
+
+
+# ---------------------------------------------------------------------------
+# バーガーキング (www.burgerking.co.jp。SPA。画面が使う内部API(POST)のJSONから取る)
+# ---------------------------------------------------------------------------
+#  ・POST https://www.burgerking.co.jp/burgerking/{電文コード}.json。本文は form-urlencoded の message=<JSON>
+#    ({"header":{"trcode":電文コード,"cdCallChnn":"02"},"body":{...}})。認証・Cookie不要。応答は header.result が true で成功。
+#  ・電文: BKJ0508=メニュー一覧(menuKeywordList に「期間限定」を渡すと、その印の付いた商品だけ)、
+#    BKJ0510=商品詳細(セット価格など)、BKJ0506=ニュース、BKJ0501=イベント(開催中 C / 終了 E。終了済みは dtEnd に実際の終了日)。
+#  ・説明文・画像・栄養は扱わない(規約が複製・転載を禁じている。商品名・価格・日付などの事実だけを記録する)。
+#  ・「NEW」の印(menuFlagList)は全商品で空なので使わない。期間限定の判定はキーワード絞り込みだけ。
+BK_BASE = "https://www.burgerking.co.jp"
+BK_HOST = "www.burgerking.co.jp"
+BK_LIMITED_KEYWORD = "期間限定"
+BK_SET_RE = re.compile(r"セット")  # セット商品は記録しない(バーガー本体と二重になる)
+BK_OPEN_END = "99991231"  # 開催中のイベント・掲載中のお知らせの dtEnd
+BK_NEWS_RECORD_DAYS = 90
+BK_LAUNCH_WORDS = re.compile(r"新発売|新登場|発売|登場|復活|販売")
+BK_NOT_LAUNCH = re.compile(r"終了|改定|値上げ|引き|無料|クーポン|オフ|プレゼント|閉店|オープン")
+
+
+def bk_url(trcode: str) -> str:
+    return f"{BK_BASE}/burgerking/{trcode}.json"
+
+
+def bk_request_form(trcode: str, body: dict) -> dict:
+    """POSTするフォームの中身({"message": JSON文字列})。"""
+    return {"message": json.dumps({"header": {"trcode": trcode, "cdCallChnn": "02"}, "body": body},
+                                  ensure_ascii=False, separators=(",", ":"))}
+
+
+def bk_menu_url(category_cd: str | None, menu_cd: str) -> str:
+    return f"{BK_BASE}/menu/{category_cd}/{menu_cd}" if category_cd else f"{BK_BASE}/menu"
+
+
+def bk_body(text: str) -> dict:
+    """応答のJSONから body を返す。JSONでない・header.result が true でない・body が無いときは ValueError。"""
+    try:
+        data = json.loads(text)
+    except json.JSONDecodeError as e:
+        raise ValueError(f"JSONではない応答: {e}") from e
+    if not isinstance(data, dict) or not (data.get("header") or {}).get("result") or not isinstance(data.get("body"), dict):
+        raise ValueError("応答が成功ではない(header.result≠true、または body なし)")
+    return data["body"]
+
+
+def _bk_price(s) -> int | None:
+    try:
+        return int(str(s).replace(",", ""))
+    except (TypeError, ValueError):
+        return None
+
+
+def _bk_date(s: str | None) -> str | None:
+    m = re.fullmatch(r"(\d{4})(\d{2})(\d{2})", s or "")
+    return f"{m.group(1)}-{m.group(2)}-{m.group(3)}" if m else None
+
+
+def parse_bk_menu(text: str) -> list[dict]:
+    """メニュー一覧(BKJ0508、期間限定で絞り込み済み)を、商品IDで1件にまとめて返す(セット商品は除く)。
+    1件: product_id・name・price(税込。単品)・has_sets(価格幅あり=セットの価格が別にある)・category・category_cd・official_url。
+    同じ商品が複数のカテゴリに出るので、「おすすめ」以外のカテゴリを優先して表示用に使う。商品が取れなければ空リスト
+    (呼び出し側が「構造変更の疑い」として扱う)。応答が不正なら ValueError。"""
+    body = bk_body(text)
+    items: dict[str, dict] = {}
+    for cat in body.get("allMenuList") or []:
+        cname, ccd = cat.get("menuCategoryNm") or "", cat.get("menuCategoryCd")
+        for m in cat.get("menuInfo") or []:
+            pid, name = str(m.get("menuCd") or ""), clean_text(m.get("menuNm"))
+            if not pid or not name or BK_SET_RE.search(name):
+                continue
+            e = items.get(pid)
+            if e is None:
+                e = items[pid] = {"product_id": pid, "name": name, "price": _bk_price(m.get("dineInPrc")),
+                                  "has_sets": m.get("prcRangeYn") == "Y", "category": None, "category_cd": None,
+                                  "_fallback": (cname, ccd)}
+            if cname and cname != "おすすめ" and e["category"] is None:
+                e["category"], e["category_cd"] = cname, ccd
+    out = []
+    for e in items.values():
+        fb = e.pop("_fallback")
+        if e["category"] is None:  # 「おすすめ」にしか出ない商品は、カテゴリ名を出さない(リンクだけ使う)
+            e["category_cd"] = fb[1]
+        e["official_url"] = bk_menu_url(e["category_cd"], e["product_id"])
+        out.append(e)
+    return out
+
+
+def parse_bk_detail(text: str, menu_cd: str) -> dict:
+    """商品詳細(BKJ0510)から、単品とセットの価格の内訳 price_variants([{label, price}]。2件以上のときだけ)と
+    「期間限定」の印があるか(limited)を返す。"""
+    body = bk_body(text)
+    name = clean_text(body.get("menuNm"))
+    variants = []
+    for m in body.get("menuInfoList") or []:
+        price = _bk_price(m.get("dineInPrc"))
+        n = clean_text(m.get("menuNm"))
+        if price is None or not n:
+            continue
+        if str(m.get("menuCd")) == str(menu_cd) or (name and n == name):
+            label = "単品"
+        elif name and n.startswith(name) and n != name:
+            label = n[len(name):].strip()
+        else:
+            label = n
+        variants.append({"label": label, "price": price})
+    variants.sort(key=lambda v: (v["label"] != "単品", v["price"]))
+    kws = [k.get("menuKeywordPk") or k.get("menuKeywordNm") for k in body.get("menuKeywordList") or []]
+    return {"price_variants": variants if len(variants) >= 2 else None,
+            "limited": BK_LIMITED_KEYWORD in kws}
+
+
+def parse_bk_news(text: str) -> list[dict]:
+    """ニュース(BKJ0506)を新しい順の [{id, date(ISO), title, url, category}] にする。応答が不正なら ValueError。"""
+    out = []
+    for d in bk_body(text).get("data") or []:
+        date, title = _bk_date(d.get("dtStart")), clean_text(d.get("dsTitle"))
+        nid = str(d.get("idNotice") or "")
+        if not date or not title or not nid:
+            continue
+        out.append({"id": nid, "date": date, "title": title, "url": f"{BK_BASE}/notice/{nid}",
+                    "category": d.get("categoryName") or ""})
+    out.sort(key=lambda x: (x["date"], x["id"]), reverse=True)
+    return out
+
+
+def parse_bk_events(text: str) -> list[dict]:
+    """イベント(BKJ0501)を [{id, title, start, end(ISO。開催中は None), status(C/E), url}] にする。画像URLは読まない。"""
+    out = []
+    for d in bk_body(text).get("eventList") or []:
+        eid, title = str(d.get("eventId") or ""), clean_text(d.get("eventTitle"))
+        if not eid or not title:
+            continue
+        end = None if d.get("dtEnd") == BK_OPEN_END else _bk_date(d.get("dtEnd"))
+        out.append({"id": eid, "title": title, "start": _bk_date(d.get("dtStart")), "end": end,
+                    "status": d.get("tpStatusEvent") or "", "url": f"{BK_BASE}/event/detail/{eid}"})
+    return out
+
+
+BK_LAUNCH_AFTER_CHARS = 12  # 括弧の直後(この文字数以内)に「新発売」等があれば、その括弧が新商品
+
+
+def bk_title_matches(name: str, title: str, strict: bool = True) -> bool:
+    """商品名が見出しの「」『』の中身と(正規化後に)完全一致するか。括弧のない見出しは照合しない(曖昧になるため)。
+    strict=True は、括弧の**直後**(BK_LAUNCH_AFTER_CHARS文字以内)に「新発売」「新登場」「復活」等が続く括弧だけを見る。
+    見出しは「大人気「マッシュルームワッパー」に新作！…「オータムスペシャル マッシュルームワッパー」新発売」のように
+    元になった商品や使っているソースの名前も括弧で書くので、「新発売」が付いた括弧だけを新商品とみなす。
+    strict=False は全部の括弧を見る(「開催中のイベントに名前が出ているか」を広めに確かめるのに使う)。"""
+    n = normalize_for_match(name)
+    if len(n) < 2:
+        return False
+    for m in re.finditer(r"[「『](.*?)[」』]", title or ""):
+        if strict and not BK_LAUNCH_WORDS.search(title[m.end():m.end() + BK_LAUNCH_AFTER_CHARS]):
+            continue
+        q = m.group(1)
+        if n == normalize_for_match(q) or n in {normalize_for_match(x) for x in q.split("・")}:
+            return True
+    return False
+
+
+def _bk_is_launch_title(title: str) -> bool:
+    return bool(BK_LAUNCH_WORDS.search(title)) and not BK_NOT_LAUNCH.search(title)
+
+
+def match_bk_news(name: str, news: list[dict], ref: str, before: int = ARCLAND_NEWS_WINDOW_BEFORE_DAYS,
+                  after: int = ARCLAND_NEWS_WINDOW_AFTER_DAYS) -> dict | None:
+    """商品名を見出しの「」『』と完全一致で含み、発売・登場・復活を告げる最新のニュース(ref の前 before 日〜後 after 日)。
+    発売日そのものは見出しに無い(PDFの画像の中)ので、返すのは告知日(ニュースの公開日)。"""
+    import datetime
+    try:
+        c = datetime.date.fromisoformat(ref)
+    except ValueError:
+        return None
+    lo, hi = c - datetime.timedelta(days=before), c + datetime.timedelta(days=after)
+    for a in news:  # 新しい順
+        try:
+            d = datetime.date.fromisoformat(a["date"])
+        except ValueError:
+            continue
+        if lo <= d <= hi and _bk_is_launch_title(a["title"]) and bk_title_matches(name, a["title"]):
+            return a
+    return None
+
+
+def has_open_bk_event(name: str, events: list[dict]) -> bool:
+    """開催中(C)のイベントの見出しの「」『』のどれかに商品名が完全一致しているか(広めの照合)。"""
+    return any(e["status"] == "C" and bk_title_matches(name, e["title"], strict=False) for e in events)
+
+
+def find_bk_event_end(name: str, events: list[dict], ref: str, before: int = ARCLAND_NEWS_WINDOW_BEFORE_DAYS) -> dict | None:
+    """商品と確実にひも付くイベントの終了日。次をすべて満たすときだけ返す(曖昧なら None=終了は一覧からの消失で判定)。
+    ・イベント名の「」『』に商品名が完全一致し、発売・登場・復活を告げる見出し(クーポン・値引き等は除く)
+    ・開催中(C)の同名イベントが無い(あれば販売中)
+    ・終了済み(E)で、開始日が ref の前 before 日以降のものがちょうど1種類の終了日に定まる(去年の販売の名残を拾わない)"""
+    import datetime
+    try:
+        lo = datetime.date.fromisoformat(ref) - datetime.timedelta(days=before)
+    except ValueError:
+        return None
+    if has_open_bk_event(name, events):
+        return None  # 開催中のイベントに名前が出ている=販売中の可能性がある
+    hits = [e for e in events if _bk_is_launch_title(e["title"]) and bk_title_matches(name, e["title"])]
+    ended = []
+    for e in hits:
+        if e["status"] != "E" or not e["end"] or not e["start"]:
+            continue
+        if datetime.date.fromisoformat(e["start"]) >= lo:
+            ended.append(e)
+    if len({e["end"] for e in ended}) != 1:
+        return None
+    return max(ended, key=lambda e: e["id"])

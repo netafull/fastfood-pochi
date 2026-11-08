@@ -1,0 +1,44 @@
+{
+ "chain": "burgerking",
+ "product_id": "4000131",
+ "name": "キングフュージョン~made with KITKAT®~",
+ "category": "デザート",
+ "category_cd": "X000000008",
+ "price": 490,
+ "price_note": "税込。公式サイトのメニューに表示された価格。",
+ "price_variants": null,
+ "has_sets": false,
+ "detail_checked": false,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": "2026-10-21",
+ "planned_end_text": null,
+ "official_end_date": null,
+ "official_end_title": null,
+ "official_end_url": null,
+ "news_url": "https://www.burgerking.co.jp/notice/201",
+ "news_title": "「キットカット」のフレーク入り新作サンデーが登場！ 濃厚なチョコレートソースとサクッサク食感のフレークがたまらない 『キングフュージョン ～made with KITKAT®～』新発売！",
+ "news_date": "2026-10-21",
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "期間限定",
+ "official_url": "https://www.burgerking.co.jp/menu/X000000008/4000131",
+ "first_seen_at": "2026-11-08T13:37:41+09:00",
+ "last_seen_at": "2026-11-08",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-08",
+   "price": 490
+  }
+ ],
+ "source_list": [
+  "menu"
+ ],
+ "image": null
+}

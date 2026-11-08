@@ -28,11 +28,14 @@ CHAIN_NAME = {c["slug"]: c["name"] for c in CHAINS}
 # 説明文の引用元の表記(出典：○○公式サイト)
 CHAIN_SOURCE = {"mcdonalds": "マクドナルド公式サイト", "mos": "モスバーガー公式サイト", "matsuya": "松屋公式サイト",
                 "matsunoya": "松のや公式サイト", "yoshinoya": "吉野家公式サイト", "sukiya": "すき家公式サイト",
-                "katsuya": "かつや公式サイト", "karayama": "からやま公式サイト", "marugame": "丸亀製麺公式サイト"}
+                "katsuya": "かつや公式サイト", "karayama": "からやま公式サイト", "marugame": "丸亀製麺公式サイト",
+                "burgerking": "バーガーキング公式サイト"}
 # 全チェーン名の並び(ページの説明文用): 「マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家」
 CHAIN_LIST_TEXT = "・".join(c["name"] for c in CHAINS)
 # 「終了日」の注意書き。公式発表の最終販売日ではなく、一覧から消えたことの観測日
 ENDED_NOTE = "公式サイトの一覧から消えたことを確認した日"
+# バーガーキングは「期間限定」で絞り込んだ一覧から消えた日(絞り込みから外れた場合も含む)
+BK_ENDED_NOTE = "公式サイトの「期間限定」の一覧から消えたことを確認した日"
 
 REVIEWS_PATH = DATA / "netaful_reviews.json"
 
@@ -180,7 +183,7 @@ def is_limited_listed(item: dict) -> bool:
     吉野家は公式が「期間限定」と表示したものだけ。"""
     if is_matsuya_family(item.get("chain")):
         return False
-    if item.get("chain") in ("yoshinoya", "sukiya", "marugame", *ARCLAND_FAMILY):
+    if item.get("chain") in ("yoshinoya", "sukiya", "marugame", "burgerking", *ARCLAND_FAMILY):
         return item.get("limited_kind") == "期間限定"
     return True
 
@@ -245,9 +248,15 @@ def period_text(item: dict, detailed: bool = False) -> str:
     first = season_observed_start(item)
     head = start or f"{first}（記録開始日）"
     if is_ended(item):
+        if item.get("official_end_date"):
+            # バーガーキング: 公式イベントの終了日が商品と確実にひも付いたときは、その日付を終了日にする
+            s = f"{head}〜{item['official_end_date']}"
+            if detailed:
+                s += "（終了日は公式イベントの終了日）"
+            return s
         s = f"{head}〜{item.get('ended_observed_at') or ''}"
         if detailed:
-            s += f"（終了日は{ENDED_NOTE}）"
+            s += f"（終了日は{BK_ENDED_NOTE if item.get('chain') == 'burgerking' else ENDED_NOTE}）"
         return s
     s = f"{head}〜 販売中"
     if detailed and item.get("planned_end_text"):
@@ -278,13 +287,13 @@ CSS = """
 :root {
   --bg: #fafaf7; --card: #ffffff; --text: #1a1a1a; --muted: #6b6b6b;
   --accent: #00897b; --line: #e5e2dc;
-  --mcdonalds: #da291c; --mos: #1b7f3b; --matsuya: #a34a00; --matsunoya: #7a1f5c; --yoshinoya: #1f5fad; --sukiya: #8a6a00; --katsuya: #455a64; --karayama: #c2185b; --marugame: #e65100;
+  --mcdonalds: #da291c; --mos: #1b7f3b; --matsuya: #a34a00; --matsunoya: #7a1f5c; --yoshinoya: #1f5fad; --sukiya: #8a6a00; --katsuya: #455a64; --karayama: #c2185b; --marugame: #e65100; --burgerking: #512da8;
 }
 @media (prefers-color-scheme: dark) {
   :root { --bg: #14151a; --card: #1e2027; --text: #e8e8e6; --muted: #9a9a96;
     --line: #2c2e36; --accent: #26a69a;
     /* 暗い背景でも見出しの下線・バッジが沈まないよう、松屋・松のや・吉野家・すき家だけ少し明るくする */
-    --matsuya: #b85a00; --matsunoya: #a83a82; --yoshinoya: #3a7bd0; --sukiya: #b8921a; --katsuya: #6b8794; --karayama: #d6477f; --marugame: #ff8a3d; }
+    --matsuya: #b85a00; --matsunoya: #a83a82; --yoshinoya: #3a7bd0; --sukiya: #b8921a; --katsuya: #6b8794; --karayama: #d6477f; --marugame: #ff8a3d; --burgerking: #7e57c2; }
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--bg); color: var(--text);
@@ -320,6 +329,7 @@ h2, h1.pt { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--ac
 .chain-group[data-chain="katsuya"] h3 { border-color: var(--katsuya); }
 .chain-group[data-chain="karayama"] h3 { border-color: var(--karayama); }
 .chain-group[data-chain="marugame"] h3 { border-color: var(--marugame); }
+.chain-group[data-chain="burgerking"] h3 { border-color: var(--burgerking); }
 .grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
 .item { display: block; background: var(--card); border: 1px solid var(--line);
   border-radius: 10px; padding: 12px; text-decoration: none; }
@@ -335,6 +345,7 @@ h2, h1.pt { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--ac
 .item[data-chain="katsuya"] .badge { background: var(--katsuya); }
 .item[data-chain="karayama"] .badge { background: var(--karayama); }
 .item[data-chain="marugame"] .badge { background: var(--marugame); }
+.item[data-chain="burgerking"] .badge { background: var(--burgerking); }
 .item .st { display: inline-block; font-size: 10px; border-radius: 4px; padding: 0 6px; margin-left: 6px;
   border: 1px solid var(--line); color: var(--muted); }
 .item .st-on { color: var(--accent); border-color: var(--accent); }
@@ -584,8 +595,8 @@ def page_shell(title: str, description: str, body: str, canonical: str, extra_he
 </main>
 <footer>
 価格・販売期間・販売状況は取得時点のものです。最新の状況は各社公式サイトでご確認ください。
-当サイトはマクドナルド、モスバーガー、松屋、松のや、吉野家、すき家、かつや、からやま、丸亀製麺各社とは関係のない非公式サイトです。
-公式サイト： <a href="https://www.mcdonalds.co.jp/">マクドナルド</a> ／ <a href="https://www.mos.jp/">モスバーガー</a> ／ <a href="https://www.matsuyafoods.co.jp/matsuya/">松屋</a> ／ <a href="https://www.matsuyafoods.co.jp/matsunoya/">松のや</a> ／ <a href="https://www.yoshinoya.com/">吉野家</a> ／ <a href="https://www.sukiya.jp/">すき家</a> ／ <a href="https://www.arclandservice.co.jp/katsuya/">かつや</a> ／ <a href="https://www.arclandservice.co.jp/karayama/">からやま</a> ／ <a href="https://jp.marugame.com/">丸亀製麺</a>
+当サイトはマクドナルド、モスバーガー、松屋、松のや、吉野家、すき家、かつや、からやま、丸亀製麺、バーガーキング各社とは関係のない非公式サイトです。
+公式サイト： <a href="https://www.mcdonalds.co.jp/">マクドナルド</a> ／ <a href="https://www.mos.jp/">モスバーガー</a> ／ <a href="https://www.matsuyafoods.co.jp/matsuya/">松屋</a> ／ <a href="https://www.matsuyafoods.co.jp/matsunoya/">松のや</a> ／ <a href="https://www.yoshinoya.com/">吉野家</a> ／ <a href="https://www.sukiya.jp/">すき家</a> ／ <a href="https://www.arclandservice.co.jp/katsuya/">かつや</a> ／ <a href="https://www.arclandservice.co.jp/karayama/">からやま</a> ／ <a href="https://jp.marugame.com/">丸亀製麺</a> ／ <a href="https://www.burgerking.co.jp/">バーガーキング</a>
 {policy_link}｜ <a href="/rss.xml">RSS</a> ｜ <a href="/archive/">終了した限定メニュー</a>
 {related_html}
 </footer>
@@ -1033,6 +1044,12 @@ def render_nutrition(item: dict) -> str:
                 f"「{esc(label)}」PDFをご覧ください。当サイトでは取り込んでいません。</p>"
                 f"<p><a href=\"{esc(item['nutrition_pdf_url'])}\" target=\"_blank\" rel=\"noopener\">"
                 f"{esc(label)}（公式PDF）</a>{origin}</p>")
+    if not nut and item.get("chain") == "burgerking":
+        # バーガーキング: 栄養成分・アレルギー情報はAPIにほぼ無く(アレルゲンは全商品まとめのPDF1本)、当サイトでは扱わない
+        link = (f" <a href=\"{esc(item['official_url'])}\" target=\"_blank\" rel=\"noopener\">公式の商品ページ</a>"
+                if item.get("official_url") else "")
+        return ("<h2>栄養成分・アレルギー情報</h2><p class='note'>栄養成分・アレルギー情報は当サイトでは掲載していません。"
+                f"公式サイトでご確認ください。{link}</p>")
     if not nut:
         return ("<h2>栄養成分</h2><p class='note'>栄養成分は公式サイトに掲載がありませんでした"
                 "（セット商品や一部の限定商品は載らないことがあります）。</p>")
@@ -1414,6 +1431,33 @@ def render_arcland_notes(item: dict) -> str:
     return "".join(f"<p class='note'>{n}</p>" for n in notes)
 
 
+def render_burgerking_notes(item: dict) -> str:
+    """バーガーキング: 記録の理由、告知日・終了日の出どころ(発売日は公式のデータに無い)、昨季の販売期間。"""
+    notes = ["公式サイトの「期間限定」の印がついたメニューです（画像・説明文・栄養成分は掲載していません）。",
+             "公式のデータに発売日は載っていないため、一覧で初めて見つけた日（記録開始日）から表示しています。発売日ではありません。"]
+    title = item.get("news_title")
+    if title:
+        link = item.get("news_url") or ""
+        title_html = f'<a href="{esc(link)}" target="_blank" rel="noopener">{esc(title)}</a>' if link else esc(title)
+        notes.append(f"告知日：{esc(item.get('announced_at') or item.get('news_date') or '')}（公式ニュース）：{title_html}")
+    if item.get("official_end_date"):
+        link = item.get("official_end_url") or ""
+        et = esc(item.get("official_end_title") or "公式イベント")
+        et_html = f'<a href="{esc(link)}" target="_blank" rel="noopener">{et}</a>' if link else et
+        notes.append(f"終了日は、公式イベントの終了日（{esc(item['official_end_date'])}）です：{et_html}")
+        if item.get("ended_observed_at"):
+            notes.append(f"「期間限定」の一覧から消えたのを確認した日：{esc(item['ended_observed_at'])}")
+    else:
+        notes.append("公式が終了日を載せていないため、終了日は「期間限定」の一覧から消えたのを確認した日です。")
+    if len(item.get("price_variants") or []) > 1:
+        notes.append("価格は単品とセットで異なります。")
+    for s_ in item.get("seasons") or []:
+        start = s_.get("launch_date") or (f"{s_['observed_start']}（記録開始日）" if s_.get("observed_start") else "開始日不明")
+        end = s_.get("official_end_date") or s_.get("ended_observed_at") or ""
+        notes.append(f"昨季の販売：{esc(start)}〜{esc(end)}")
+    return "".join(f"<p class='note'>{n}</p>" for n in notes)
+
+
 def render_marugame_notes(item: dict) -> str:
     """丸亀製麺: 記録の理由、発売日が公式に無いこと(記録開始日で表示)、販売チャネル、アレルゲンの注意、昨季の販売期間。"""
     notes = []
@@ -1534,6 +1578,8 @@ def render_item_page(item: dict, all_items: list[dict] | None = None) -> str:
         yoshinoya_note = render_arcland_notes(item)
     if item.get("chain") == "marugame":
         yoshinoya_note = render_marugame_notes(item)
+    if item.get("chain") == "burgerking":
+        yoshinoya_note = render_burgerking_notes(item)
     variant_span = f'<span class="variant">（{esc(variant)}）</span>' if variant else ""
     body = f"""<nav class="crumbs"><a href="/">トップ</a> &gt; <a href="/chains/{esc(item['chain'])}/">{esc(chain_name)}</a></nav>
 <div class="detail">

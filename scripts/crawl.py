@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺の限定メニュー・新メニューを巡回し、
-data/products/{mcdonalds|mos|matsuya|matsunoya|yoshinoya|sukiya|katsuya|karayama|marugame}/{id}.json に1商品1ファイルで蓄積する。
+"""マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキングの限定メニュー・新メニューを巡回し、
+data/products/{mcdonalds|mos|matsuya|matsunoya|yoshinoya|sukiya|katsuya|karayama|marugame|burgerking}/{id}.json に1商品1ファイルで蓄積する。
 
 このサイトの核は「販売状況の追跡」。公式サイトは販売が終わると商品を消すので、
 一覧に居た商品が消えたら終了とみなして記録を残す。
@@ -28,7 +28,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import parsers  # noqa: E402
-from fetch import BlockedError, NotFoundError, fetch, fetch_binary  # noqa: E402
+from fetch import BlockedError, NotFoundError, fetch, fetch_binary, fetch_post  # noqa: E402
 import pdf_update  # noqa: E402
 
 CONFIG = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
@@ -130,6 +130,11 @@ class Getter:
     def __call__(self, chain: str, url: str) -> str:
         self._tick(chain)
         return fetch(url, UA)
+
+    # バーガーキング用。公式サイトが使う内部API(POST)。他と同じ間隔・上限・カウントに従う。応答の本文(JSON文字列)を返す
+    def post_json(self, chain: str, trcode: str, body: dict) -> str:
+        self._tick(chain)
+        return fetch_post(parsers.bk_url(trcode), parsers.bk_request_form(trcode, body), UA)
 
     # 公式PDF(吉野家・すき家の栄養成分)用。HEAD(版の確認)とGET(本体)。どちらも同じ間隔・上限・カウントに従う
     def pdf_head(self, chain: str, url: str) -> dict:
@@ -2268,6 +2273,256 @@ def crawl_marugame(getter, pending: dict, stats: dict, today: str | None = None)
 
 
 # ---------------------------------------------------------------------------
+# バーガーキング (www.burgerking.co.jp。画面が使う内部API(POST)。仕様は parsers.py のバーガーキングの節)
+# ---------------------------------------------------------------------------
+#  ・1回の巡回は4リクエスト: メニュー(期間限定で絞り込み)・ニュース・イベント(開催中)・イベント(終了済み)。
+#    robots.txt には実体が無い(SPAのトップが返る)ので取らない。新しく記録した「セットのある」商品だけ、詳細(BKJ0510)を
+#    1回の巡回あたり BK_DETAIL_PER_RUN 件まで足す(セット価格の内訳のため。残りは翌日以降)。
+#  ・記録するのは「期間限定」で絞り込んだ一覧に居る商品だけ(定番は記録しない。NEWの印は全商品で空なので使わない)。
+#    説明文・画像・栄養は扱わない(規約が複製・転載を禁じている)。
+#  ・発売日は公式のAPIに無い(ニュースのPDFの画像の中)ので launch_date は null。ニュースの公開日を告知日 announced_at に入れる。
+#  ・終了日: イベントの dtEnd が商品名と確実にひも付く(parsers.find_bk_event_end)ときだけ official_end_date に入れる。
+#    それ以外は他と同じ「別の日に連続2回、一覧から消えた」で ended にする。
+#  ・一覧が空・形式不正・取得失敗・項目数が前回の半分未満の回は何も更新しない(BK_MIN_RATIO)。ブロック(403・チャレンジ)は止まって通知する。
+BK_CHAIN = "burgerking"
+BK_MIN_RATIO = 0.5
+BK_DETAIL_PER_RUN = 6
+BK_MENU_BODY = {"menuKeywordList": [{"menuKeyword": parsers.BK_LIMITED_KEYWORD}], "callChn": "W"}
+BK_NEWS_BODY = {"noticeCategory": "A", "noticePageNum": "1", "noticePageSize": "30"}
+
+
+def bk_state_path() -> Path:
+    return DATA / "burgerking_state.json"
+
+
+def bk_event_body(status: str) -> dict:
+    return {"cdTypeEvent": "01", "tpStatusEvent": status, "page": "1", "pageCount": "30"}
+
+
+def build_bk_product(entry: dict, today: str, now: str) -> dict:
+    price = entry.get("price")
+    return {
+        "chain": BK_CHAIN,
+        "product_id": entry["product_id"],
+        "name": entry["name"],
+        "category": entry.get("category"),
+        "category_cd": entry.get("category_cd"),
+        "price": price,
+        "price_note": "税込。公式サイトのメニューに表示された価格。",
+        "price_variants": None,
+        "has_sets": bool(entry.get("has_sets")),
+        "detail_checked": False,
+        "launch_date": None,
+        "launch_date_source": "not_found",
+        "announced_at": None,
+        "planned_end_text": None,
+        "official_end_date": None,
+        "official_end_title": None,
+        "official_end_url": None,
+        "news_url": None,
+        "news_title": None,
+        "news_date": None,
+        "description": None,
+        "description_full_len": 0,
+        "nutrition": None,
+        "allergens": None,
+        "origin": None,
+        "limited_kind": "期間限定",
+        "official_url": entry["official_url"],
+        "first_seen_at": now,
+        "last_seen_at": today,
+        "status": "on_sale",
+        "ended_observed_at": None,
+        "missed_runs": 0,
+        "price_history": [{"date": today, "price": price}] if price is not None else [],
+        "source_list": ["menu"],
+        "image": None,
+    }
+
+
+def bk_start_new_season(product: dict, old_ended: str | None, today: str) -> None:
+    """終了後に同じIDが一覧へ戻ってきた。昨季の期間を seasons に残し、今季の告知日・終了日は未確定に戻す。"""
+    old_end = product.get("official_end_date")
+    rel = product.get("relaunches") or []  # 今回の再登場は touch_seen が追記済み。昨季の起点はその1つ前(無ければ初回)
+    observed = rel[-2]["reappeared_at"] if len(rel) >= 2 else (product.get("first_seen_at") or "")[:10]
+    yoshinoya_start_new_season(product, old_ended, today)
+    product["seasons"][-1]["observed_start"] = observed
+    if old_end:
+        product["seasons"][-1]["official_end_date"] = old_end
+    product["announced_at"] = None
+    for k in ("planned_end_text", "official_end_date", "official_end_title", "official_end_url"):
+        product[k] = None
+
+
+def bk_planned_end_text(end: str, status: str | None, today: str) -> str:
+    text = f"{end}（公式イベントの終了日）"
+    if status == "on_sale" and end < today:
+        text = f"{end}（公式イベントの終了日。その後も公式の一覧には載っています）"
+    return text
+
+
+def bk_apply_news_and_events(product: dict, news: list[dict] | None, events: list[dict] | None, today: str) -> bool:
+    """告知日(ニュース)と終了日(イベント)をひも付ける。取得済みの一覧を使うので追加のリクエストは無い。変更があれば True。
+    ニュース・イベントの取得に失敗した回(None)は、その分を触らない。終了日は、同名の開催中イベントが現れたら取り消す。"""
+    changed = False
+    ref = (product.get("first_seen_at") or "")[:10]
+    rel = product.get("relaunches") or []
+    if rel and rel[-1].get("reappeared_at"):
+        ref = rel[-1]["reappeared_at"]
+    name = product.get("name") or ""
+    if news and ref and not product.get("news_url"):
+        hit = parsers.match_bk_news(name, news, ref)
+        if hit:
+            product.update({"announced_at": hit["date"], "news_url": hit["url"], "news_title": hit["title"],
+                            "news_date": hit["date"]})
+            changed = True
+    if events is not None and ref:
+        if parsers.has_open_bk_event(name, events):
+            if product.get("official_end_date"):
+                for k in ("planned_end_text", "official_end_date", "official_end_title", "official_end_url"):
+                    product[k] = None
+                changed = True
+        else:
+            ev = parsers.find_bk_event_end(name, events, ref)
+            if ev:
+                text = bk_planned_end_text(ev["end"], product.get("status"), today)
+                if product.get("official_end_date") != ev["end"] or product.get("planned_end_text") != text:
+                    product.update({"official_end_date": ev["end"], "official_end_title": ev["title"],
+                                    "official_end_url": ev["url"], "planned_end_text": text})
+                    changed = True
+    return changed
+
+
+def crawl_burgerking(getter, pending: dict, stats: dict, today: str | None = None) -> None:
+    chain = BK_CHAIN
+    now = now_iso() if today is None else f"{today}T07:00:00+09:00"
+    today = today or today_jst()
+    pending.setdefault(chain, {})
+    stats.setdefault(chain, new_stats())
+    st = stats[chain]
+
+    def post(trcode: str, body: dict) -> str:
+        return getter.post_json(chain, trcode, body)
+
+    # メニュー(期間限定で絞り込み)。取れなければ何も更新しない
+    entries: dict[str, dict] = {}
+    all_ok = True
+    try:
+        text = post("BKJ0508", BK_MENU_BODY)
+        st["list_requests"] += 1
+        entries = {e["product_id"]: e for e in parsers.parse_bk_menu(text)}
+        if not entries:
+            print(f"[warn] {chain} メニュー一覧: 期間限定の商品が0件(構造変更の疑い)", file=sys.stderr)
+            all_ok = False
+    except BlockedError as e:
+        st["blocked"] = True
+        print(f"[blocked] {chain} menu: {e}", file=sys.stderr)
+        return
+    except Exception as e:  # noqa: BLE001
+        print(f"[warn] {chain} メニュー一覧 取得失敗: {e}", file=sys.stderr)
+        all_ok = False
+    state = load_json(bk_state_path(), {})
+    prev_count = state.get("menu_count")
+    if entries and prev_count and len(entries) < prev_count * BK_MIN_RATIO:
+        print(f"[warn] {chain} メニュー一覧が極端に少ない({len(entries)}件。前回{prev_count}件)。"
+              "消えた商品の判定は行わない", file=sys.stderr)
+        all_ok = False
+    st["list_ok"] = all_ok and bool(entries)
+    st["limited_seen"] = len(entries)
+
+    # ニュース・イベント(開催中・終了済み)。失敗しても一覧の更新は続ける(告知日・終了日が付かないだけ)
+    def side(trcode: str, body: dict, parse):
+        try:
+            res = parse(post(trcode, body))
+            st["detail_requests"] += 1
+            return res
+        except BlockedError as e:
+            st["blocked"] = True
+            print(f"[blocked] {chain} {trcode}: {e}", file=sys.stderr)
+        except Exception as e:  # noqa: BLE001
+            print(f"[warn] {chain} {trcode} 取得失敗: {e}", file=sys.stderr)
+        return None
+
+    news = side("BKJ0506", BK_NEWS_BODY, parsers.parse_bk_news)
+    events = None
+    if not st["blocked"]:
+        open_ev = side("BKJ0501", bk_event_body("C"), parsers.parse_bk_events)
+        end_ev = side("BKJ0501", bk_event_body("E"), parsers.parse_bk_events) if not st["blocked"] else None
+        if open_ev is not None and end_ev is not None:  # 片方だけでは「開催中ではない」と言い切れないので、両方取れた回だけ使う
+            events = open_ev + end_ev
+    if st["blocked"]:
+        return
+    if news is not None and not news:
+        print(f"[warn] {chain} ニュース: 0件(構造変更の疑い)", file=sys.stderr)
+    if events is not None and not events:
+        print(f"[warn] {chain} イベント: 0件(構造変更の疑い)", file=sys.stderr)
+        events = None
+
+    baseline = baseline_for(chain)
+    entries = burst_filter(chain, entries, baseline, pending, stats, today)
+    new_ids: list[str] = []
+    for pid, e in entries.items():
+        existing = load_product(chain, pid)
+        if existing is not None:
+            was_ended = existing.get("status") == "ended"
+            old_ended = existing.get("ended_observed_at")
+            touch_seen(existing, e.get("price"), today, now)
+            if was_ended:
+                bk_start_new_season(existing, old_ended, today)
+                st["relaunched"] = st.get("relaunched", 0) + 1
+            if e.get("category") and existing.get("category") != e["category"]:
+                existing["category"], existing["category_cd"] = e["category"], e.get("category_cd")
+                existing["official_url"] = e["official_url"]
+            existing["has_sets"] = bool(e.get("has_sets"))
+            save_product(chain, existing)
+            pending[chain].pop(pid, None)
+            continue
+        product = build_bk_product(e, today, now)
+        save_product(chain, product)
+        new_ids.append(pid)
+        st["new_products"] += 1
+        pending[chain].pop(pid, None)
+
+    if st["list_ok"]:
+        if baseline is None:
+            save_baseline(chain, set(entries))
+        apply_missing(chain, set(entries), today, st)
+        save_json(bk_state_path(), {"menu_count": len(entries), "checked_at": today}, sort_keys=True)
+
+    # セット価格の内訳(詳細1件=1リクエスト)。セットのある商品だけ、1回の巡回で BK_DETAIL_PER_RUN 件まで
+    if st["list_ok"]:
+        todo = [p for p in load_chain_products(chain)
+                if p.get("status") == "on_sale" and p.get("has_sets") and not p.get("detail_checked")]
+        for p in todo[:BK_DETAIL_PER_RUN]:
+            try:
+                text = post("BKJ0510", {"menuCd": p["product_id"], "menuCategoryCd": p.get("category_cd") or "X000000002"})
+                st["detail_requests"] += 1
+                d = parsers.parse_bk_detail(text, p["product_id"])
+            except BlockedError as e:
+                st["blocked"] = True
+                print(f"[blocked] {chain} detail: {e}", file=sys.stderr)
+                break
+            except Exception as e:  # noqa: BLE001
+                st["failed"] += 1
+                print(f"[warn] {chain} 詳細 取得失敗 {p['product_id']}: {e}", file=sys.stderr)
+                continue
+            p["price_variants"] = d["price_variants"]
+            p["detail_checked"] = True
+            save_product(chain, p)
+
+    # 告知日・終了日のひも付け(追加のリクエストは無い)。終わって久しい商品は探し直さない
+    cutoff = (datetime.date.fromisoformat(today) - datetime.timedelta(days=14)).isoformat()
+    for p in load_chain_products(chain):
+        if p.get("status") == "ended" and (p.get("ended_observed_at") or "") < cutoff:
+            continue
+        if bk_apply_news_and_events(p, news, events, today):
+            save_product(chain, p)
+    recorded = load_chain_products(chain)
+    st["news_matched"] = sum(1 for p in recorded if p.get("news_url"))
+    st["event_end_matched"] = sum(1 for p in recorded if p.get("official_end_date"))
+
+
+# ---------------------------------------------------------------------------
 # 実行
 # ---------------------------------------------------------------------------
 
@@ -2372,7 +2627,7 @@ def save_run_summary(stats: dict[str, dict], streaks: dict[str, int] | None = No
 CRAWLERS = {"mcdonalds": crawl_mcdonalds, "mos": crawl_mos, "matsuya": crawl_matsuya,
             "matsunoya": crawl_matsunoya, "yoshinoya": crawl_yoshinoya, "sukiya": crawl_sukiya,
             "katsuya": crawl_katsuya, "karayama": crawl_karayama,
-            "marugame": crawl_marugame}
+            "marugame": crawl_marugame, "burgerking": crawl_burgerking}
 
 
 def main(argv: list[str] | None = None) -> int:

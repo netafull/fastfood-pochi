@@ -1,0 +1,44 @@
+{
+ "chain": "burgerking",
+ "product_id": "2000342",
+ "name": "ギルティ・アメリカンスモーキーチキン4pc",
+ "category": "サイド",
+ "category_cd": "X000000007",
+ "price": 600,
+ "price_note": "税込。公式サイトのメニューに表示された価格。",
+ "price_variants": null,
+ "has_sets": false,
+ "detail_checked": false,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "official_end_date": null,
+ "official_end_title": null,
+ "official_end_url": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "期間限定",
+ "official_url": "https://www.burgerking.co.jp/menu/X000000007/2000342",
+ "first_seen_at": "2026-11-08T13:37:41+09:00",
+ "last_seen_at": "2026-11-08",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-08",
+   "price": 600
+  }
+ ],
+ "source_list": [
+  "menu"
+ ],
+ "image": null
+}

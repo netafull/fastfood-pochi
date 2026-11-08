@@ -34,7 +34,8 @@ SITE_NAME = "ファストフードポチ"
 ROOT = Path(__file__).resolve().parent.parent
 RUN_SUMMARY = ROOT / "data" / "run_summary.json"
 CHAIN_LABEL = {"mcdonalds": "マクドナルド", "mos": "モスバーガー", "matsuya": "松屋", "matsunoya": "松のや",
-               "yoshinoya": "吉野家", "sukiya": "すき家", "katsuya": "かつや", "karayama": "からやま", "marugame": "丸亀製麺"}
+               "yoshinoya": "吉野家", "sukiya": "すき家", "katsuya": "かつや", "karayama": "からやま", "marugame": "丸亀製麺",
+               "burgerking": "バーガーキング"}
 
 
 def send(topic: str, title: str, message: str, click: str = "", priority: int = 0) -> None:

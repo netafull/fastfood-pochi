@@ -64,6 +64,36 @@ def fetch(url: str, user_agent: str, retries: int = 1) -> str:
     raise last_err or RuntimeError(f"fetch failed: {url}")
 
 
+def fetch_post(url: str, form: dict, user_agent: str, retries: int = 1) -> str:
+    """フォーム形式(application/x-www-form-urlencoded)のPOSTを1回送り、本文を返す。
+    リトライ・ブロック(401/403/429・チャレンジページ)・404の扱いは fetch() と同じ。
+    バーガーキングの公式サイトが使う内部API(認証・Cookie不要)用。偽装は一切しない。"""
+    import urllib.parse
+    data = urllib.parse.urlencode(form).encode("utf-8")
+    headers = {"User-Agent": user_agent, "Content-Type": "application/x-www-form-urlencoded",
+               "Accept": "application/json"}
+    last_err: Exception | None = None
+    for attempt in range(retries + 1):
+        req = urllib.request.Request(url, data=data, headers=headers, method="POST")
+        try:
+            with urllib.request.urlopen(req, timeout=TIMEOUT) as res:
+                body = res.read()
+                if _looks_like_challenge(body):
+                    raise BlockedError(f"challenge page detected: {url}")
+                return body.decode("utf-8", "replace")
+        except urllib.error.HTTPError as e:
+            if e.code in (401, 403, 429):
+                raise BlockedError(f"HTTP {e.code}: {url}") from e
+            if e.code == 404:
+                raise NotFoundError(f"HTTP 404: {url}") from e
+            last_err = e
+        except (urllib.error.URLError, TimeoutError, OSError) as e:
+            last_err = e
+        if attempt < retries:
+            time.sleep(2 * (attempt + 1))
+    raise last_err or RuntimeError(f"fetch failed: {url}")
+
+
 def fetch_binary(url: str, user_agent: str, method: str = "GET", retries: int = 1) -> tuple[bytes, dict]:
     """PDFなどバイナリの取得(method="HEAD" なら本文なしで応答ヘッダーだけ)。-> (本文, 小文字キーのヘッダー辞書)
 
