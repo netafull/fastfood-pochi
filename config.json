@@ -224,6 +224,11 @@
       "name": "ホテルポチ",
       "desc": "空室ホテルを安い順に検索",
       "url": "https://hotel.netaful.jp/"
+    },
+    {
+      "name": "温泉宿ポチ",
+      "desc": "温泉地の空室を、すぐ探す",
+      "url": "https://onsen.netaful.jp/"
     }
   ],
   "related_keywords": [
