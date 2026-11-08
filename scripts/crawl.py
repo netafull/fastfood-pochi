@@ -249,8 +249,13 @@ def regular_limit() -> int:
     return int(CONFIG.get("regular_backfill_per_run", 20))
 
 
-def variant_recheck_limit() -> int:
-    return int(CONFIG.get("variant_recheck_per_run", 5))
+def variant_recheck_limit(chain: str | None = None) -> int:
+    """数値ならどのチェーンも同じ件数。辞書ならチェーン名の値、無ければ "default"(既定5)。
+    すき家は基本の価格が詳細にしか無いので多めにする(全商品の一巡を約1週間に収めるため)。"""
+    v = CONFIG.get("variant_recheck_per_run", 5)
+    if isinstance(v, dict):
+        return int(v.get(chain, v.get("default", 5)))
+    return int(v)
 
 
 class RegularBudget:
@@ -353,7 +358,8 @@ def due_for_recheck(products: list[dict], entries: dict, need_variants: bool, to
            and p.get("price_checked_at") != today
            and (not need_variants or p.get("price_variants"))]
     due.sort(key=lambda p: (p.get("price_checked_at") or "", str(p["product_id"])))
-    return due[:variant_recheck_limit()]
+    chain = due[0].get("chain") if due else None
+    return due[:variant_recheck_limit(chain)]
 
 
 def baseline_for(chain: str) -> set[str] | None:
