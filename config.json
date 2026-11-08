@@ -248,6 +248,11 @@
       "name": "温泉宿ポチ",
       "desc": "温泉地の空室を、すぐ探す",
       "url": "https://onsen.netaful.jp/"
+    },
+    {
+      "name": "離島宿ポチ",
+      "desc": "島の空室を、すぐ探す",
+      "url": "https://ritou.netaful.jp/"
     }
   ],
   "related_keywords": [
