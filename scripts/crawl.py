@@ -79,6 +79,9 @@ def product_path(chain: str, product_id: str) -> Path:
 
 
 def save_product(chain: str, product: dict) -> None:
+    # 定番として記録した商品が後から限定・新メニューに変わったら(limited_kind が「定番」でなくなったら)、定番の印を外す
+    if product.get("is_regular") and product.get("limited_kind") != REGULAR_KIND:
+        product["is_regular"] = False
     save_json(product_path(chain, product["product_id"]), product)
 
 
@@ -150,12 +153,28 @@ class Getter:
 # 販売状況の追跡(チェーン共通)
 # ---------------------------------------------------------------------------
 
-def touch_seen(product: dict, entry_price: int | None, today: str, now: str) -> bool:
+def record_price(product: dict, price, today: str, st: dict | None = None) -> bool:
+    """価格を price_history に記録する。前回と違えば追記して True。価格が取れなかった(None)回は何も書かない。
+    初回(履歴が空)の記録は「変更」に数えない。変更なら stats の price_changes を1つ増やす。"""
+    if price is None:
+        return False
+    hist = product.setdefault("price_history", [])
+    last = hist[-1].get("price") if hist else None
+    if last == price:
+        return False
+    hist.append({"date": today, "price": price})
+    product["price"] = price
+    if hist[:-1] and st is not None:
+        st["price_changes"] = st.get("price_changes", 0) + 1
+    return True
+
+
+def touch_seen(product: dict, entry_price: int | None, today: str, now: str, st: dict | None = None) -> bool:
     """一覧に居た既存商品の追跡項目を更新する。変更があれば True。
 
     ・last_seen_at を更新、status=on_sale、見失った回数をリセット
     ・終了後に再登場したら on_sale に戻し、relaunches に記録
-    ・一覧の価格が前回と違えば price_history に追記
+    ・一覧の価格が前回と違えば price_history に追記(価格が取れなかった回は書かない。st があれば価格変更を数える)
     """
     changed = False
     if product.get("status") == "ended":
@@ -176,12 +195,8 @@ def touch_seen(product: dict, entry_price: int | None, today: str, now: str) -> 
     product["last_seen_at"] = today  # 日付だけ(同じ日に複数回実行してもgitの差分が増えないように)
     changed = True
 
-    hist = product.setdefault("price_history", [])
-    if entry_price is not None:
-        last_price = hist[-1]["price"] if hist else None
-        if last_price != entry_price:
-            hist.append({"date": today, "price": entry_price})
-            product["price"] = entry_price
+    product.setdefault("price_history", [])
+    record_price(product, entry_price, today, st)
     return changed
 
 
@@ -206,7 +221,139 @@ def apply_missing(chain: str, seen_ids: set[str], today: str, stats: dict) -> No
 
 def new_stats() -> dict:
     return {"list_requests": 0, "detail_requests": 0, "new_products": 0, "ended": 0,
-            "failed": 0, "blocked": False, "list_ok": False, "limited_seen": 0}
+            "failed": 0, "blocked": False, "list_ok": False, "limited_seen": 0,
+            "regular_created": 0, "regular_deferred": 0, "price_changes": 0}
+
+
+# ---------------------------------------------------------------------------
+# 定番メニューの記録と価格の変遷
+# ---------------------------------------------------------------------------
+# 限定・新メニューに加えて、定番(初回の巡回で baseline に入った既存メニュー)も商品レコードにする。目的は価格の変遷を
+# 毎日たどれるようにすること。区別は limited_kind="定番" と is_regular=True。launch_date は null のまま、first_seen_at が記録開始日。
+#  ・トッピング・セット類・料理でない案内など、各チェーンが元々記録から外しているものは定番にも入れない。
+#  ・詳細ページを取らないと作れないチェーンは、1回の巡回で作る定番を regular_backfill_per_run 件までにする(残りは翌日以降)。
+#    一覧だけで作れるチェーン(モス・かつや・からやま)は一度に作る。
+#  ・定番は baseline に居る項目なので burst_filter の「新規候補」には数えない。通知の「新メニュー」にも数えない(regular_created)。
+#  ・サイズ別価格(price_variants)が詳細ページにしか無いチェーンは、1回の巡回で variant_recheck_per_run 件ずつ、
+#    最後に確認した日(price_checked_at)の古い順に詳細を取り直し、変わっていれば price_variants_history に追記する。
+#  ・config の record_regular を false にすると、定番の記録は止まる(既存の記録の追跡は続く)。
+# 注意: 定番の発売日・お知らせ(ニュース)の照合はしない。launch_date は null のまま。
+REGULAR_KIND = "定番"
+
+
+def regular_enabled() -> bool:
+    return bool(CONFIG.get("record_regular", True))
+
+
+def regular_limit() -> int:
+    return int(CONFIG.get("regular_backfill_per_run", 20))
+
+
+def variant_recheck_limit() -> int:
+    return int(CONFIG.get("variant_recheck_per_run", 5))
+
+
+class RegularBudget:
+    """定番の新規作成の枠。detail_needed=True(詳細ページを取るチェーン)は regular_backfill_per_run 件まで。
+    失敗した試行も枠を使う(1回の巡回のリクエスト数に上限をかけるため)。"""
+
+    def __init__(self, st: dict, detail_needed: bool = True):
+        self.st = st
+        self.enabled = regular_enabled()
+        self.left = regular_limit() if detail_needed else None
+
+    def take(self) -> bool:
+        if not self.enabled:
+            return False
+        if self.left is None:
+            return True
+        if self.left <= 0:
+            self.st["regular_deferred"] = self.st.get("regular_deferred", 0) + 1
+            return False
+        self.left -= 1
+        return True
+
+
+def list_price_for_history(st: dict, price):
+    """複数ページの一覧を読むチェーン用。一覧の取得が全部成功した回だけ価格を履歴に使う。
+    一部のページが取れなかった回は、別のページに載った(別の表示の)価格を拾ってしまい、実際には変わっていない価格が
+    「変更」として残るため、その回は価格を書かない(None を渡す)。"""
+    return price if st.get("list_ok") else None
+
+
+def use_list_price(product: dict, entry_price, today: str) -> dict:
+    """定番の最初の価格を、毎日見ている一覧の価格にそろえる。詳細ページの価格(サイズ別の代表など)を起点にすると、
+    翌日の一覧の価格との差が「価格の変更」として残ってしまうため。"""
+    if entry_price is not None:
+        product["price"] = entry_price
+        product["price_history"] = [{"date": today, "price": entry_price}]
+    return product
+
+
+def mark_regular(product: dict) -> dict:
+    """新しく作った商品レコードを定番にする(限定・新メニューとして組み立てた項目を打ち消す)。"""
+    product["limited_kind"] = REGULAR_KIND
+    product["is_regular"] = True
+    product["launch_date"] = None
+    if "launch_date_source" in product:
+        product["launch_date_source"] = "not_found"
+    for k in ("planned_end_text", "news_url", "news_title", "news_date", "announced_at"):
+        if k in product:
+            product[k] = None
+    if "in_recommended" in product:
+        product["in_recommended"] = False
+    return product
+
+
+def upgrade_regular(product: dict, kind: str) -> None:
+    """定番として記録済みの商品が、限定・新メニューとして一覧に載った。種別を上げて定番の印を外す。"""
+    if product.get("limited_kind") == REGULAR_KIND:
+        product["limited_kind"] = kind
+        product["is_regular"] = False
+
+
+def norm_variants(variants) -> list[dict]:
+    return [{"label": v.get("label") or "", "price": v["price"]} for v in variants or [] if v.get("price") is not None]
+
+
+def record_variants(product: dict, variants, today: str, st: dict | None = None) -> bool:
+    """サイズ別の価格(2件以上)を price_variants_history に記録する。前回と違えば追記して price_variants も更新し True。
+    取れなかった(None・空・1件以下)回は何も書かない。初回の記録は「変更」に数えない。"""
+    new = norm_variants(variants)
+    if len(new) < 2:
+        return False
+    hist = product.setdefault("price_variants_history", [])
+    old = norm_variants(product.get("price_variants"))
+    if not hist and old:
+        hist.append({"date": (product.get("first_seen_at") or today)[:10], "variants": old})  # 記録済みの値を起点にする
+    if hist and hist[-1]["variants"] == new:
+        return False
+    hist.append({"date": today, "variants": new})
+    product["price_variants"] = [dict(v) for v in variants] if variants else new
+    if len(hist) > 1 and st is not None:
+        st["price_changes"] = st.get("price_changes", 0) + 1
+    return len(hist) > 1
+
+
+def seed_variants(product: dict, today: str) -> dict:
+    """新しく作った商品のサイズ別価格を、履歴の最初の1件にする。確認日も入れる。"""
+    product["price_checked_at"] = today
+    new = norm_variants(product.get("price_variants"))
+    if len(new) >= 2:
+        product["price_variants_history"] = [{"date": today, "variants": new}]
+    return product
+
+
+def due_for_recheck(products: list[dict], entries: dict, need_variants: bool, today: str) -> list[dict]:
+    """価格の取り直しの対象を、最後に確認した日(price_checked_at)の古い順に variant_recheck_per_run 件まで選ぶ。
+    今の一覧に居る販売中の商品だけ(今日すでに詳細を取った商品は除く)。need_variants=True はサイズ別の価格を持つ商品だけ
+    (基本の価格が一覧にある松屋・吉野家。すき家は価格が詳細にしか無いので全商品)。"""
+    due = [p for p in products
+           if p.get("status") == "on_sale" and p["product_id"] in entries
+           and p.get("price_checked_at") != today
+           and (not need_variants or p.get("price_variants"))]
+    due.sort(key=lambda p: (p.get("price_checked_at") or "", str(p["product_id"])))
+    return due[:variant_recheck_limit()]
 
 
 def baseline_for(chain: str) -> set[str] | None:
@@ -401,17 +548,21 @@ def crawl_mcdonalds(getter, pending: dict, stats: dict, today: str | None = None
     baseline = baseline_for(chain)
     singles = burst_filter(chain, singles, baseline, pending, stats, today)
     all_ok = all_ok and st["list_ok"]
+    regular_budget = RegularBudget(st)
     for pid, e in singles.items():
         existing = load_product(chain, pid)
         if existing is not None:
-            if touch_seen(existing, e.get("price"), today, now):
+            if touch_seen(existing, list_price_for_history(st, e.get("price")), today, now, st):
                 existing["source_list"] = sorted(set(existing.get("source_list") or []) | set(sources[pid]))
+                if e["limited"]:
+                    upgrade_regular(existing, "期間限定")
                 save_product(chain, existing)
             pending[chain].pop(pid, None)
             continue
         is_new_menu = baseline is not None and pid not in baseline
-        if not (e["limited"] or is_new_menu):
-            continue  # 定番の既存メニューは記録しない(baselineに入るだけ)
+        is_regular = not (e["limited"] or is_new_menu)
+        if is_regular and not regular_budget.take():
+            continue  # 定番は詳細を取るので、1回の巡回で作る件数に上限がある。残りは翌日以降
         detail_path = e["detail_url"]
         if not allowed(detail_path):
             print(f"[skip] robots.txtでDisallow: {detail_path}", file=sys.stderr)
@@ -440,8 +591,11 @@ def crawl_mcdonalds(getter, pending: dict, stats: dict, today: str | None = None
         # /menu/(おすすめ)以外で最初に出たページのラベルをカテゴリにする
         product["category"] = next(
             (page_labels[p] for p in sources[pid] if page_labels.get(p)), None)
+        if is_regular:
+            mark_regular(product)
+            use_list_price(product, e.get("price"), today)
         save_product(chain, product)
-        st["new_products"] += 1
+        st["regular_created" if is_regular else "new_products"] += 1
         pending[chain].pop(pid, None)
 
     # 一覧取得が全部成功した回だけ、baseline作成と終了判定を行う
@@ -558,6 +712,7 @@ def crawl_mos(getter, pending: dict, stats: dict, today: str | None = None) -> N
     entries = burst_filter(chain, entries, baseline, pending, stats, today)
     all_ok = all_ok and st["list_ok"]
     allergy_map: dict[str, str] | None = None
+    regular_budget = RegularBudget(st, detail_needed=False)  # モスは一覧だけで作れるので件数の上限は無い
     for pid, e in entries.items():
         cats = categories[pid]
         in_limited = parsers.LIMITED_CATEGORY_ID in cats
@@ -566,12 +721,16 @@ def crawl_mos(getter, pending: dict, stats: dict, today: str | None = None) -> N
             st["limited_seen"] += 1
         existing = load_product(chain, pid)
         if existing is not None:
-            touch_seen(existing, e.get("price"), today, now)
+            touch_seen(existing, list_price_for_history(st, e.get("price")), today, now, st)
+            if limited:
+                kinds = e.get("limited_kinds") or []
+                upgrade_regular(existing, "・".join(dict.fromkeys(kinds)) if kinds else "限定メニュー")
             save_product(chain, existing)
             continue
         is_new_menu = baseline is not None and pid not in baseline
-        if not (limited or is_new_menu):
-            continue
+        is_regular = not (limited or is_new_menu)
+        if is_regular and not regular_budget.take():
+            continue  # 定番の記録を止めているとき
         if allergy_map is None:
             try:
                 allergy_map = parsers.parse_mos_allergy_map(get("/data/menu/mst_allergy.json"))
@@ -588,8 +747,10 @@ def crawl_mos(getter, pending: dict, stats: dict, today: str | None = None) -> N
         non_limited_cats = [c for c in cats if c != parsers.LIMITED_CATEGORY_ID]
         category_name = cat_names.get(non_limited_cats[0]) if non_limited_cats else cat_names.get(c_id)
         product = build_mos_product(e, category_name, c_id, allergy_map, in_limited, today, now)
+        if is_regular:
+            mark_regular(product)
         save_product(chain, product)
-        st["new_products"] += 1
+        st["regular_created" if is_regular else "new_products"] += 1
 
     if all_ok:
         if baseline is None:
@@ -759,6 +920,7 @@ def build_matsuya_product(entry: dict, detail: dict, sources: list[str], in_limi
         "source_list": sorted(set(sources)),
         "image": None,
     }
+    seed_variants(product, today)
     if same_name:
         # 同じ名前の商品が別のslugで再登場した(slug末尾の日付は更新で変わりうる)。別レコードとして扱う
         product["same_name_as"] = same_name
@@ -874,13 +1036,39 @@ def crawl_matsuya_family(chain: str, getter, pending: dict, stats: dict, today: 
     singles = burst_filter(chain, singles, baseline, pending, stats, today)
     news = MatsuyaNews(getter, st, chain)
     existing_all = None  # 同名商品の検出用(新規に記録するときだけ読む)
+    regular_budget = RegularBudget(st)
+
+    def fetch_detail(pid: str, detail_path: str):
+        """詳細を取得して解析する。失敗は pending に記録して None。ブロックは呼び出し元へ投げる。"""
+        if not allowed(detail_path):
+            print(f"[skip] robots.txtでDisallow: {detail_path}", file=sys.stderr)
+            return None
+        try:
+            html = getter(chain, MATSUYA_BASE + detail_path)
+            st["detail_requests"] += 1
+        except NotFoundError:
+            st["failed"] += 1
+            pending[chain][pid] = {"url": detail_path, "reason": "404", "checked_at": now}
+            return None
+        except BlockedError:
+            raise
+        except Exception as ex:  # noqa: BLE001
+            st["failed"] += 1
+            pending[chain][pid] = {"url": detail_path, "reason": f"fetch_error: {ex}", "checked_at": now}
+            return None
+        detail = parsers.parse_matsuya_detail(html)
+        if detail is None:
+            st["failed"] += 1
+            pending[chain][pid] = {"url": detail_path, "reason": "empty_detail", "checked_at": now}
+        return detail
+
     try:
         for pid, e in singles.items():
             existing = load_product(chain, pid)
             if existing is not None:
                 was_ended = existing.get("status") == "ended"
                 old_ended = existing.get("ended_observed_at")
-                touch_seen(existing, e.get("price"), today, now)
+                touch_seen(existing, list_price_for_history(st, e.get("price")), today, now, st)
                 if was_ended:
                     # 日付抜きの基本キーなので、本当に終了した商品の再登場は同じレコードに戻ってくる。
                     # 昨季の期間は seasons に残し(relaunches は touch_seen が記録済み)、今季の発売日は未確定に戻す
@@ -889,6 +1077,7 @@ def crawl_matsuya_family(chain: str, getter, pending: dict, stats: dict, today: 
                 existing["source_list"] = sorted(set(existing.get("source_list") or []) | set(sources[pid]))
                 if limited_cat in sources[pid]:
                     existing["in_recommended"] = True
+                    upgrade_regular(existing, "おすすめ掲載")
                 # 公式の日付つきURLは更新で変わる。リンクは常に最新に保つ(識別は日付抜きの基本キー)
                 existing["current_slug"] = e["current_slug"]
                 existing["official_url"] = MATSUYA_BASE + e["detail_path"]
@@ -898,46 +1087,46 @@ def crawl_matsuya_family(chain: str, getter, pending: dict, stats: dict, today: 
             in_limited = limited_cat in sources[pid]
             only_unrecorded = all(c in no_record for c in sources[pid])
             is_new_menu = baseline is not None and pid not in baseline
-            if not (in_limited or (is_new_menu and not only_unrecorded)):
-                continue  # 定番の既存メニュー、トッピング・セット類は記録しない(baselineに入るだけ)
-            detail_path = e["detail_path"]
-            if not allowed(detail_path):
-                print(f"[skip] robots.txtでDisallow: {detail_path}", file=sys.stderr)
-                continue
-            try:
-                html = getter(chain, MATSUYA_BASE + detail_path)
-                st["detail_requests"] += 1
-            except NotFoundError:
-                st["failed"] += 1
-                pending[chain][pid] = {"url": detail_path, "reason": "404", "checked_at": now}
-                continue
-            except BlockedError:
-                raise
-            except Exception as ex:  # noqa: BLE001
-                st["failed"] += 1
-                pending[chain][pid] = {"url": detail_path, "reason": f"fetch_error: {ex}", "checked_at": now}
-                continue
-            detail = parsers.parse_matsuya_detail(html)
+            if only_unrecorded and not in_limited:
+                continue  # トッピング・セット類は、定番としても記録しない
+            is_regular = not (in_limited or is_new_menu)
+            if is_regular and not regular_budget.take():
+                continue  # 定番は詳細を取るので、1回の巡回で作る件数に上限がある。残りは翌日以降
+            detail = fetch_detail(pid, e["detail_path"])
             if detail is None:
-                st["failed"] += 1
-                pending[chain][pid] = {"url": detail_path, "reason": "empty_detail", "checked_at": now}
                 continue
             name = e["name"] or detail["name"]
-            resolved = news.resolve(name, e["current_slug"], today)
+            # 定番はニュースの照合をしない(発売日は付けない。ニュースJSON・記事の取得も増やさない)
+            resolved = None if is_regular else news.resolve(name, e["current_slug"], today)
             if existing_all is None:
                 existing_all = load_chain_products(chain)
             norm = parsers.normalize_for_match(name)
             same = [p["product_id"] for p in existing_all
                     if p["product_id"] != pid and parsers.normalize_for_match(p.get("name")) == norm]
             product = build_matsuya_product(e, detail, sources[pid], in_limited, resolved, same, today, now, chain)
+            if is_regular:
+                mark_regular(product)
+                use_list_price(product, e.get("price"), today)
             save_product(chain, product)
             existing_all.append(product)
-            st["new_products"] += 1
-            if resolved is None:
-                st["news_unmatched"] = st.get("news_unmatched", 0) + 1
-            else:
-                st["news_matched"] = st.get("news_matched", 0) + 1
+            st["regular_created" if is_regular else "new_products"] += 1
+            if not is_regular:
+                if resolved is None:
+                    st["news_unmatched"] = st.get("news_unmatched", 0) + 1
+                else:
+                    st["news_matched"] = st.get("news_matched", 0) + 1
             pending[chain].pop(pid, None)
+
+        # サイズ別の価格(詳細ページにしか無い)を、古い順に少数だけ取り直す。基本の価格は一覧で毎日見ているので触らない
+        if st["list_ok"]:
+            for p in due_for_recheck(load_chain_products(chain), singles, True, today):
+                detail = fetch_detail(p["product_id"], singles[p["product_id"]]["detail_path"])
+                if detail is None:
+                    continue
+                prices = parsers.matsuya_variant_labels(detail.get("prices") or [], detail.get("nutrition_note"))
+                record_variants(p, prices, today, st)
+                p["price_checked_at"] = today
+                save_product(chain, p)
     except BlockedError as ex:
         st["blocked"] = True
         print(f"[blocked] {chain}: {ex}", file=sys.stderr)
@@ -1027,6 +1216,8 @@ def yoshinoya_season_ref(product: dict) -> str:
 def yoshinoya_apply_news(product: dict, news: YoshinoyaNews, today: str) -> bool:
     """発売日が未確定の商品はお知らせの見出しから探し直し、終了告知(早期販売終了など)があれば付記する。
     お知らせはすでに取得した分だけを使うので、追加のリクエストは年またぎ(1〜4月は前年分)のときだけ。変更があれば True。"""
+    if product.get("is_regular"):
+        return False  # 定番は発売日・終了告知の照合をしない
     ref = yoshinoya_season_ref(product)
     if not ref:
         return False
@@ -1136,6 +1327,7 @@ def build_yoshinoya_product(entry: dict, detail: dict, sources: list[str], flags
         "source_list": sorted(set(sources)),
         "image": None,
     }
+    seed_variants(product, today)
     if same_name:
         product["same_name_as"] = same_name
     return product
@@ -1233,21 +1425,48 @@ def crawl_yoshinoya(getter, pending: dict, stats: dict, today: str | None = None
     entries = burst_filter(chain, entries, baseline, pending, stats, today)
     news = YoshinoyaNews(getter, st)
     existing_all = None
+    regular_budget = RegularBudget(st)
+
+    def fetch_detail(pid: str, detail_path: str):
+        """詳細を取得して解析する。失敗は pending に記録して None。ブロックは呼び出し元へ投げる。"""
+        if not allowed(detail_path):
+            print(f"[skip] robots.txtでDisallow: {detail_path}", file=sys.stderr)
+            return None
+        try:
+            html = getter(chain, YOSHINOYA_BASE + detail_path)
+            st["detail_requests"] += 1
+        except NotFoundError:
+            st["failed"] += 1
+            pending[chain][pid] = {"url": detail_path, "reason": "404", "checked_at": now}
+            return None
+        except BlockedError:
+            raise
+        except Exception as ex:  # noqa: BLE001
+            st["failed"] += 1
+            pending[chain][pid] = {"url": detail_path, "reason": f"fetch_error: {ex}", "checked_at": now}
+            return None
+        detail = parsers.parse_yoshinoya_detail(html)
+        if detail is None:
+            st["failed"] += 1
+            pending[chain][pid] = {"url": detail_path, "reason": "empty_detail", "checked_at": now}
+        return detail
+
     try:
         for pid, e in entries.items():
             existing = load_product(chain, pid)
             if existing is not None:
                 was_ended = existing.get("status") == "ended"
                 old_ended = existing.get("ended_observed_at")
-                touch_seen(existing, e.get("price"), today, now)
+                touch_seen(existing, list_price_for_history(st, e.get("price")), today, now, st)
                 if was_ended:
                     yoshinoya_start_new_season(existing, old_ended, today)
                     st["relaunched"] = st.get("relaunched", 0) + 1
                 existing["source_list"] = sorted(set(existing.get("source_list") or []) | set(sources[pid]))
                 if limited_cat in sources[pid]:
                     existing["in_limited_list"] = True
-                if flags[pid]["limited"] and existing.get("limited_kind") != "期間限定":
-                    existing["limited_kind"] = "期間限定"
+                    upgrade_regular(existing, "期間限定")
+                if flags[pid]["limited"] and existing.get("limited_kind") not in ("期間限定", REGULAR_KIND):
+                    existing["limited_kind"] = "期間限定"  # 定番は、期間限定の一覧(gentei)に載ったときだけ上で種別を上げる
                 badges = set(existing.get("badges") or [])
                 badges |= {b for b, on in (("NEW", flags[pid]["new"]), ("期間限定", flags[pid]["limited"])) if on}
                 existing["badges"] = [b for b in ("NEW", "期間限定") if b in badges]
@@ -1256,29 +1475,11 @@ def crawl_yoshinoya(getter, pending: dict, stats: dict, today: str | None = None
                 continue
             in_limited = limited_cat in sources[pid]
             is_new_menu = baseline is not None and pid not in baseline
-            if not (in_limited or is_new_menu):
-                continue  # 定番の既存メニューは記録しない(baselineに入るだけ)
-            detail_path = e["detail_path"]
-            if not allowed(detail_path):
-                print(f"[skip] robots.txtでDisallow: {detail_path}", file=sys.stderr)
-                continue
-            try:
-                html = getter(chain, YOSHINOYA_BASE + detail_path)
-                st["detail_requests"] += 1
-            except NotFoundError:
-                st["failed"] += 1
-                pending[chain][pid] = {"url": detail_path, "reason": "404", "checked_at": now}
-                continue
-            except BlockedError:
-                raise
-            except Exception as ex:  # noqa: BLE001
-                st["failed"] += 1
-                pending[chain][pid] = {"url": detail_path, "reason": f"fetch_error: {ex}", "checked_at": now}
-                continue
-            detail = parsers.parse_yoshinoya_detail(html)
+            is_regular = not (in_limited or is_new_menu)
+            if is_regular and not regular_budget.take():
+                continue  # 定番は詳細を取るので、1回の巡回で作る件数に上限がある。残りは翌日以降
+            detail = fetch_detail(pid, e["detail_path"])
             if detail is None:
-                st["failed"] += 1
-                pending[chain][pid] = {"url": detail_path, "reason": "empty_detail", "checked_at": now}
                 continue
             if existing_all is None:
                 existing_all = load_chain_products(chain)
@@ -1286,10 +1487,22 @@ def crawl_yoshinoya(getter, pending: dict, stats: dict, today: str | None = None
             same = [p["product_id"] for p in existing_all
                     if p["product_id"] != pid and parsers.normalize_for_match(p.get("name")) == norm]
             product = build_yoshinoya_product(e, detail, sources[pid], flags[pid], same, labels, today, now)
+            if is_regular:
+                mark_regular(product)
             save_product(chain, product)
             existing_all.append(product)
-            st["new_products"] += 1
+            st["regular_created" if is_regular else "new_products"] += 1
             pending[chain].pop(pid, None)
+
+        # サイズ別の価格(詳細ページにしか無い)を、古い順に少数だけ取り直す。基本の価格は一覧で毎日見ているので触らない
+        if st["list_ok"]:
+            for p in due_for_recheck(load_chain_products(chain), entries, True, today):
+                detail = fetch_detail(p["product_id"], entries[p["product_id"]]["detail_path"])
+                if detail is None:
+                    continue
+                record_variants(p, parsers.yoshinoya_price_variants(detail), today, st)
+                p["price_checked_at"] = today
+                save_product(chain, p)
 
         # 発売日の確定・終了告知の付記(お知らせ見出し)。一覧の更新と終了判定のあとに行う
         if st["list_ok"]:
@@ -1329,13 +1542,11 @@ def crawl_yoshinoya(getter, pending: dict, stats: dict, today: str | None = None
 #    現れた商品。定番の既存メニューは詳細を取らない。発売前の告知(まだメニューに載らない商品)は記録しない。
 #  ・一覧に価格は無く詳細にある。詳細URLの数字は商品ごとに一意(別カテゴリに同じ数字は出ない)で、og:url は
 #    全ページ共通の /menu/gyudon/index.html を指す(canonical は無い)ので、商品IDは「カテゴリ-数字」にする。
-#  ・価格が変わったかは詳細を取り直さないと分からないので、記録済みの販売中商品を古い順に
-#    SUKIYA_PRICE_RECHECK_MAX 件まで、SUKIYA_PRICE_RECHECK_DAYS 日ごとに取り直す。
+#  ・価格が変わったかは詳細を取り直さないと分からないので、記録済みの販売中商品(定番を含む)を price_checked_at の古い順に
+#    config の variant_recheck_per_run 件ずつ取り直す(共通の仕組み。due_for_recheck / sukiya_recheck_price)。
 #  ・終了日は公式が「販売終了時期は未定」とするため、一覧から消えたのを確認した日。
 
 SUKIYA_BASE = parsers.SUKIYA_BASE
-SUKIYA_PRICE_RECHECK_DAYS = 7
-SUKIYA_PRICE_RECHECK_MAX = 10
 
 
 def sukiya_category_labels(index_cats: list[dict] | None = None) -> dict[str, str | None]:
@@ -1357,8 +1568,8 @@ def sukiya_price_note(variants: list[dict], primary: dict | None) -> str:
 def sukiya_apply_news(product: dict, news: list[dict]) -> bool:
     """お知らせに載っていないか、発売日が未確定の商品を探し直す(取得済みの一覧を使うので追加のリクエストは無い)。
     見つかれば announced_at / news_* / 発売日(見出しに「○月○日」があるとき)を埋める。変更があれば True。"""
-    if product.get("launch_date") is not None:
-        return False
+    if product.get("launch_date") is not None or product.get("is_regular"):
+        return False  # 定番は発売日の照合をしない
     ref = (product.get("first_seen_at") or "")[:10]
     rel = product.get("relaunches") or []
     if rel and rel[-1].get("reappeared_at"):
@@ -1429,28 +1640,35 @@ def build_sukiya_product(entry: dict, detail: dict, source: str, same_name: list
         "status": "on_sale",
         "ended_observed_at": None,
         "missed_runs": 0,
-        "price_history": [{"date": today, "price": price}],
+        "price_history": [{"date": today, "price": price}] if price is not None else [],
         "source_list": [source],
         "image": None,
     }
+    seed_variants(product, today)
     if same_name:
         product["same_name_as"] = same_name
     return product
 
 
-def sukiya_recheck_price(product: dict, detail: dict, today: str) -> bool:
-    """詳細を取り直した価格を反映する。価格(代表または内訳)が変われば price_history に追記する。"""
+def sukiya_recheck_price(product: dict, detail: dict, today: str, st: dict | None = None) -> bool:
+    """詳細を取り直した価格を反映する。代表の価格が変われば price_history に、サイズ別の内訳が変われば
+    price_variants_history に追記する(取れなかった回は何も書かない)。確認した日は常に更新する。"""
     variants = parsers.sukiya_price_variants(detail)
     primary = parsers.sukiya_pick_primary(detail)
     product["price_checked_at"] = today
-    new_pv = variants if len(variants) > 1 else None
-    changed = (product.get("price") != primary["price"]) or (product.get("price_variants") != new_pv)
-    if changed:
-        product["price_variants"] = new_pv
+    price = primary["price"] if primary else None
+    price_changed = record_price(product, price, today, st)
+    # 内訳の変更は、代表の価格も変わった回は1件として数える(通知の「価格の変更 N件」が二重にならないように)
+    before = (st or {}).get("price_changes", 0)
+    variants_changed = record_variants(product, variants if len(variants) > 1 else None, today, st)
+    if st is not None and price_changed and st.get("price_changes", 0) > before:
+        st["price_changes"] = before
+    if price_changed or variants_changed:
         product["price_note"] = sukiya_price_note(variants, primary)
-        if product.get("price") != primary["price"]:
-            product["price"] = primary["price"]
-            product.setdefault("price_history", []).append({"date": today, "price": primary["price"]})
+        if len(variants) > 1:
+            product["price_variants"] = variants
+        elif price_changed:
+            product["price_variants"] = None
     return True
 
 
@@ -1577,18 +1795,21 @@ def crawl_sukiya(getter, pending: dict, stats: dict, today: str | None = None) -
             pending[chain][pid] = {"url": detail_path, "reason": "empty_detail", "checked_at": now}
         return detail
 
+    regular_budget = RegularBudget(st)
     try:
         for pid, e in entries.items():
             existing = load_product(chain, pid)
             if existing is not None:
                 was_ended = existing.get("status") == "ended"
                 old_ended = existing.get("ended_observed_at")
-                touch_seen(existing, None, today, now)
+                touch_seen(existing, None, today, now, st)
                 if was_ended:
                     yoshinoya_start_new_season(existing, old_ended, today)
                     st["relaunched"] = st.get("relaunched", 0) + 1
                 if e["is_limited"] and existing.get("limited_kind") != "期間限定":
                     existing["limited_kind"] = "期間限定"
+                elif e["is_new"]:
+                    upgrade_regular(existing, "新メニュー")
                 badges = set(existing.get("badges") or [])
                 badges |= {b for b, on in (("NEW", e["is_new"]), ("期間限定", e["is_limited"]),
                                            ("店舗限定", e["is_store_limited"])) if on}
@@ -1598,8 +1819,9 @@ def crawl_sukiya(getter, pending: dict, stats: dict, today: str | None = None) -
                 continue
             in_news = bool(news) and parsers.match_sukiya_launch(e["name"], news, today) is not None
             is_new_menu = baseline is not None and pid not in baseline
-            if not (e["is_limited"] or e["is_new"] or in_news or is_new_menu):
-                continue  # 定番の既存メニューは記録しない(baselineに入るだけ)
+            is_regular = not (e["is_limited"] or e["is_new"] or in_news or is_new_menu)
+            if is_regular and not regular_budget.take():
+                continue  # 定番は詳細を取るので、1回の巡回で作る件数に上限がある。残りは翌日以降
             detail = fetch_detail(pid, e["detail_path"])
             if detail is None:
                 continue
@@ -1609,10 +1831,13 @@ def crawl_sukiya(getter, pending: dict, stats: dict, today: str | None = None) -
             same = [p["product_id"] for p in existing_all
                     if p["product_id"] != pid and parsers.normalize_for_match(p.get("name")) == norm]
             product = build_sukiya_product(e, detail, source_of[pid], same, labels, today, now)
-            sukiya_apply_news(product, news)
+            if is_regular:
+                mark_regular(product)
+            else:
+                sukiya_apply_news(product, news)
             save_product(chain, product)
             existing_all.append(product)
-            st["new_products"] += 1
+            st["regular_created" if is_regular else "new_products"] += 1
             pending[chain].pop(pid, None)
 
         # 記録済みの販売中商品の価格を、古い順に少数だけ取り直す(価格改定の追跡)
@@ -1620,16 +1845,10 @@ def crawl_sukiya(getter, pending: dict, stats: dict, today: str | None = None) -
             if baseline is None:
                 save_baseline(chain, set(entries))
             apply_missing(chain, set(entries), today, st)
-            cutoff_price = (datetime.date.fromisoformat(today)
-                            - datetime.timedelta(days=SUKIYA_PRICE_RECHECK_DAYS)).isoformat()
-            due = sorted((p for p in load_chain_products(chain)
-                          if p.get("status") == "on_sale" and p["product_id"] in entries
-                          and (p.get("price_checked_at") or "") <= cutoff_price),
-                         key=lambda p: p.get("price_checked_at") or "")
-            for p in due[:SUKIYA_PRICE_RECHECK_MAX]:
+            for p in due_for_recheck(load_chain_products(chain), entries, False, today):
                 detail = fetch_detail(p["product_id"], entries[p["product_id"]]["detail_path"])
                 if detail is not None:
-                    sukiya_recheck_price(p, detail, today)
+                    sukiya_recheck_price(p, detail, today, st)
                     save_product(chain, p)
 
         # 発売日の確定(お知らせ見出し)。一覧の更新と終了判定のあとに行う。追加のリクエストは無い
@@ -1682,8 +1901,8 @@ def arcland_price_note(entry: dict) -> str:
 def arcland_apply_news(product: dict, news: list[dict]) -> bool:
     """発売日が未確定の商品をお知らせの見出しから探し直す(取得済みの一覧を使うので追加のリクエストは無い)。
     見つかれば announced_at / news_* / 発売日(見出しに「○月○日」があるとき)を埋める。変更があれば True。"""
-    if product.get("launch_date") is not None:
-        return False
+    if product.get("launch_date") is not None or product.get("is_regular"):
+        return False  # 定番は発売日の照合をしない
     ref = (product.get("first_seen_at") or "")[:10]
     rel = product.get("relaunches") or []
     if rel and rel[-1].get("reappeared_at"):
@@ -1839,18 +2058,21 @@ def crawl_arcland_family(chain: str, getter, pending: dict, stats: dict, today: 
     baseline = baseline_for(chain)
     entries = burst_filter(chain, entries, baseline, pending, stats, today)
     existing_all = None
+    regular_budget = RegularBudget(st, detail_needed=False)  # 一覧だけで作れるので件数の上限は無い
     for pid, e in entries.items():
         existing = load_product(chain, pid)
         if existing is not None:
             was_ended = existing.get("status") == "ended"
             old_ended = existing.get("ended_observed_at")
-            touch_seen(existing, e.get("price"), today, now)
+            touch_seen(existing, e.get("price"), today, now, st)
             if was_ended:
                 yoshinoya_start_new_season(existing, old_ended, today)
                 existing["announced_at"] = None
                 st["relaunched"] = st.get("relaunched", 0) + 1
             if e["is_limited"] and existing.get("limited_kind") != "期間限定":
                 existing["limited_kind"] = "期間限定"
+            elif e["is_new"]:
+                upgrade_regular(existing, "新メニュー")
             badges = set(existing.get("badges") or [])
             badges |= {b for b in ("NEW", "期間限定") if b in e["badges"]}
             existing["badges"] = [b for b in ("NEW", "期間限定") if b in badges]
@@ -1862,18 +2084,22 @@ def crawl_arcland_family(chain: str, getter, pending: dict, stats: dict, today: 
         in_news = bool(news) and parsers.match_arcland_launch(
             e["name"], news, today, before=parsers.ARCLAND_NEWS_RECORD_DAYS) is not None
         is_new_menu = baseline is not None and pid not in baseline
-        if not (e["is_limited"] or e["is_new"] or in_news or is_new_menu):
-            continue  # 定番の既存メニューは記録しない(baselineに入るだけ)
+        is_regular = not (e["is_limited"] or e["is_new"] or in_news or is_new_menu)
+        if is_regular and not regular_budget.take():
+            continue  # 定番の記録を止めているとき
         if existing_all is None:
             existing_all = load_chain_products(chain)
         norm = parsers.normalize_for_match(e["name"])
         same = [p["product_id"] for p in existing_all
                 if p["product_id"] != pid and parsers.normalize_for_match(p.get("name")) == norm]
         product = build_arcland_product(chain, e, allergen_pdf, same, today, now)
-        arcland_apply_news(product, news)
+        if is_regular:
+            mark_regular(product)
+        else:
+            arcland_apply_news(product, news)
         save_product(chain, product)
         existing_all.append(product)
-        st["new_products"] += 1
+        st["regular_created" if is_regular else "new_products"] += 1
         pending[chain].pop(pid, None)
 
     if st["list_ok"]:
@@ -1912,6 +2138,7 @@ def crawl_arcland_family(chain: str, getter, pending: dict, stats: dict, today: 
 MARUGAME_BASE = parsers.MARUGAME_BASE
 MARUGAME_MIN_RATIO = 0.5
 MARUGAME_DETAIL_BLOCK_STREAK = 3
+MARUGAME_NO_REGULAR_CATEGORIES = ("topping",)  # 定番として記録しないカテゴリ(トッピング)
 MARUGAME_NUTRITION_NOTE = "栄養成分値は商品のレシピに基づく推定値で、店内の手づくりのため実際の商品と差が出ることがあります"
 
 
@@ -1991,6 +2218,7 @@ def build_marugame_product(entry: dict, detail: dict | None, category_name: str 
         "source_list": [f"menu/{entry['category_id']}"],
         "image": None,
     }
+    seed_variants(product, today)
     if same_name:
         product["same_name_as"] = same_name
     return product
@@ -2195,6 +2423,7 @@ def crawl_marugame(getter, pending: dict, stats: dict, today: str | None = None)
     entries = burst_filter(chain, entries, baseline, pending, stats, today)
     existing_all = None
     detail_block_streak = 0
+    regular_budget = RegularBudget(st)
     for pid, e in entries.items():
         existing = load_product(chain, pid)
         if existing is not None:
@@ -2202,7 +2431,11 @@ def crawl_marugame(getter, pending: dict, stats: dict, today: str | None = None)
             was_ended = existing.get("status") == "ended"
             old_ended = existing.get("ended_observed_at")
             ref = yoshinoya_season_ref(existing)
-            touch_seen(existing, e.get("price"), today, now)
+            touch_seen(existing, list_price_for_history(st, e.get("price")), today, now, st)
+            # サイズ別の価格は一覧のJSONに入っているので、毎日追加のリクエストなしで履歴を更新できる
+            if st["list_ok"]:
+                record_variants(existing, [{"label": p["label"], "price": p["price"]} for p in e.get("prices") or []],
+                                today, st)
             if was_ended:
                 yoshinoya_start_new_season(existing, old_ended, today)
                 existing["seasons"][-1]["observed_start"] = ref  # 発売日が無いので、昨季は記録開始日で残す
@@ -2217,8 +2450,12 @@ def crawl_marugame(getter, pending: dict, stats: dict, today: str | None = None)
             pending[chain].pop(pid, None)
             continue
         is_new_menu = baseline is not None and pid not in baseline
-        if not (e["is_limited"] or is_new_menu):
-            continue  # 定番の既存メニュー・新定番は記録しない(baselineに入るだけ)
+        is_regular = not (e["is_limited"] or is_new_menu)
+        if is_regular and (e.get("category_id") in MARUGAME_NO_REGULAR_CATEGORIES
+                           or (e.get("category_id") is None and pid.split("-", 1)[0] in MARUGAME_NO_REGULAR_CATEGORIES)):
+            continue  # トッピングは料理ではないので、定番としては記録しない
+        if is_regular and not regular_budget.take():
+            continue  # 定番は詳細を取るので、1回の巡回で作る件数に上限がある。残りは翌日以降
         if not allowed(e["href"]):
             print(f"[skip] robots.txtでDisallow: {e['href']}", file=sys.stderr)
             continue
@@ -2259,9 +2496,11 @@ def crawl_marugame(getter, pending: dict, stats: dict, today: str | None = None)
         same = [p["product_id"] for p in existing_all
                 if p["product_id"] != pid and parsers.normalize_for_match(p.get("name")) == norm]
         product = build_marugame_product(e, detail, cat_names.get(e["category_id"]), same, today, now)
+        if is_regular:
+            mark_regular(product)
         save_product(chain, product)
         existing_all.append(product)
-        st["new_products"] += 1
+        st["regular_created" if is_regular else "new_products"] += 1
         pending[chain].pop(pid, None)
 
     if st["list_ok"] and not st["blocked"]:
@@ -2466,7 +2705,7 @@ def crawl_burgerking(getter, pending: dict, stats: dict, today: str | None = Non
         if existing is not None:
             was_ended = existing.get("status") == "ended"
             old_ended = existing.get("ended_observed_at")
-            touch_seen(existing, e.get("price"), today, now)
+            touch_seen(existing, e.get("price"), today, now, st)
             if was_ended:
                 bk_start_new_season(existing, old_ended, today)
                 st["relaunched"] = st.get("relaunched", 0) + 1
@@ -2605,12 +2844,16 @@ def save_run_summary(stats: dict[str, dict], streaks: dict[str, int] | None = No
     不具合が姉妹サイト(コンビニポチ)で起きたため、実行ごとに上書きする一時ファイル
     (gitには入れない)にする。
 
-    形式: {"new": {...}, "ended": {...}, "suspected": {...},
+    定番の新規作成(regular)は「新メニュー」(new)に混ぜない。価格の変更(price_changes)は定番も含めて数える。
+
+    形式: {"new": {...}, "regular": {...}, "price_changes": {...}, "ended": {...}, "suspected": {...},
            "blocked": [チェーン], "list_failed": [チェーン], "errors": [チェーン],
            "streaks": {チェーン: 連続日数}, "detail_failed": {チェーン: 詳細取得失敗件数}}
     """
     out = {
         "new": {chain: s.get("new_products", 0) for chain, s in stats.items()},
+        "regular": {chain: s.get("regular_created", 0) for chain, s in stats.items()},
+        "price_changes": {chain: s.get("price_changes", 0) for chain, s in stats.items()},
         "ended": {chain: s.get("ended", 0) for chain, s in stats.items()},
         "suspected": {chain: s["suspected_restructure"] for chain, s in stats.items()
                       if s.get("suspected_restructure")},
@@ -2665,7 +2908,8 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"{chain}: 一覧等{s.get('list_requests', 0)}件 / 詳細{s.get('detail_requests', 0)}件 "
             f"(リクエスト計{getter.counts.get(chain, 0)}) / 限定として一覧に居た{s.get('limited_seen', 0)}件 "
-            f"/ 新規{s.get('new_products', 0)}件 / 終了観測{s.get('ended', 0)}件 / 失敗{s.get('failed', 0)}件 "
+            f"/ 新規{s.get('new_products', 0)}件 / 定番の記録{s.get('regular_created', 0)}件"
+            f"(持ち越し{s.get('regular_deferred', 0)}件) / 価格の変更{s.get('price_changes', 0)}件 / 終了観測{s.get('ended', 0)}件 / 失敗{s.get('failed', 0)}件 "
             f"/ 一覧取得={'全部成功' if s.get('list_ok') else '一部失敗'} "
             f"/ ブロック={'あり' if s.get('blocked') else 'なし'}"
             + (f" / 例外={s['error']}" if s.get("error") else "")

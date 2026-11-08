@@ -672,7 +672,7 @@ class TestSite(unittest.TestCase):
         self.assertEqual(notify.CHAIN_LABEL["marugame"], "丸亀製麺")
 
     def test_config_limits(self):
-        self.assertEqual(crawl.MAX_REQUESTS["marugame"], 30)
+        self.assertEqual(crawl.MAX_REQUESTS["marugame"], 40)
         self.assertGreaterEqual(crawl.INTERVALS["marugame"], 3)
         self.assertEqual(crawl.CONFIG["marugame_categories"], ["udon", "tempura", "gohanmono", "topping", "udonbento"])
 

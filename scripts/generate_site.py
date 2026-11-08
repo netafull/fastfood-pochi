@@ -178,9 +178,16 @@ def is_matsuya_family(chain: str | None) -> bool:
     return chain in MATSUYA_FAMILY
 
 
+def is_regular(item: dict) -> bool:
+    """定番メニューとして記録した商品か(crawl.py の mark_regular。限定・新メニューに変わると is_regular は外れる)。"""
+    return item.get("is_regular") is True
+
+
 def is_limited_listed(item: dict) -> bool:
     """説明文で「限定メニュー」と呼んでよい商品か。松屋・松のやは公式に限定の表示が無いので呼ばない。
-    吉野家は公式が「期間限定」と表示したものだけ。"""
+    吉野家は公式が「期間限定」と表示したものだけ。定番は限定ではない。"""
+    if is_regular(item):
+        return False
     if is_matsuya_family(item.get("chain")):
         return False
     if item.get("chain") in ("yoshinoya", "sukiya", "marugame", "burgerking", *ARCLAND_FAMILY):
@@ -246,6 +253,12 @@ def period_text(item: dict, detailed: bool = False) -> str:
     """「いつからいつまで売っていたか」。終了前は「販売中」と終了予定の原文。"""
     start = item.get("launch_date")
     first = season_observed_start(item)
+    if is_regular(item):
+        # 定番には発売日が無い。記録を始めた日から表示する(発売日ではない)
+        if is_ended(item):
+            s = f"記録開始 {first}〜{item.get('ended_observed_at') or ''}"
+            return s + (f"（終了日は{ENDED_NOTE}）" if detailed else "")
+        return f"記録開始 {first}〜 販売中"
     head = start or f"{first}（記録開始日）"
     if is_ended(item):
         if item.get("official_end_date"):
@@ -330,6 +343,14 @@ h2, h1.pt { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--ac
 .chain-group[data-chain="karayama"] h3 { border-color: var(--karayama); }
 .chain-group[data-chain="marugame"] h3 { border-color: var(--marugame); }
 .chain-group[data-chain="burgerking"] h3 { border-color: var(--burgerking); }
+.regular-menu h3 { font-size: 15px; margin: 18px 0 8px; padding-left: 8px; border-left: 4px solid var(--line); }
+.regular-menu .lead { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+table.pricelog { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+table.pricelog th, table.pricelog td { border-bottom: 1px solid var(--line); padding: 6px 8px; text-align: left; vertical-align: top; }
+table.pricelog td.num { white-space: nowrap; }
+table.pricelog td.up { color: #c62828; }
+table.pricelog td.down { color: #2e7d32; }
+.tablewrap { overflow-x: auto; }
 .grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
 .item { display: block; background: var(--card); border: 1px solid var(--line);
   border-radius: 10px; padding: 12px; text-decoration: none; }
@@ -597,7 +618,7 @@ def page_shell(title: str, description: str, body: str, canonical: str, extra_he
 価格・販売期間・販売状況は取得時点のものです。最新の状況は各社公式サイトでご確認ください。
 当サイトはマクドナルド、モスバーガー、松屋、松のや、吉野家、すき家、かつや、からやま、丸亀製麺、バーガーキング各社とは関係のない非公式サイトです。
 公式サイト： <a href="https://www.mcdonalds.co.jp/">マクドナルド</a> ／ <a href="https://www.mos.jp/">モスバーガー</a> ／ <a href="https://www.matsuyafoods.co.jp/matsuya/">松屋</a> ／ <a href="https://www.matsuyafoods.co.jp/matsunoya/">松のや</a> ／ <a href="https://www.yoshinoya.com/">吉野家</a> ／ <a href="https://www.sukiya.jp/">すき家</a> ／ <a href="https://www.arclandservice.co.jp/katsuya/">かつや</a> ／ <a href="https://www.arclandservice.co.jp/karayama/">からやま</a> ／ <a href="https://jp.marugame.com/">丸亀製麺</a> ／ <a href="https://www.burgerking.co.jp/">バーガーキング</a>
-{policy_link}｜ <a href="/rss.xml">RSS</a> ｜ <a href="/archive/">終了した限定メニュー</a>
+{policy_link}｜ <a href="/rss.xml">RSS</a> ｜ <a href="/archive/">終了した限定メニュー</a> ｜ <a href="/prices/">価格改定の記録</a>
 {related_html}
 </footer>
 {ad_js}
@@ -822,11 +843,11 @@ def render_grid_page(title: str, description: str, items: list[dict], canonical:
                       show_filters: bool = True, review_chain: str | None = None,
                       status_filter: bool = False, default_status: str = "all",
                       empty_text: str = "商品がありません。", seo_title: str | None = None,
-                      extra_head: str = "") -> str:
+                      extra_head: str = "", extra_body: str = "") -> str:
     # seo_title: <title>に入れる文言。省略すると見出し(title)と同じ
     reviews_section = render_review_cards("ネタフルの最新レビュー", latest_reviews(review_chain, 5))
     if not items:
-        body = f"<h1 class='pt'>{esc(title)}</h1><p class='empty'>{esc(empty_text)}</p>\n{reviews_section}"
+        body = f"<h1 class='pt'>{esc(title)}</h1><p class='empty'>{esc(empty_text)}</p>\n{extra_body}\n{reviews_section}"
         return page_shell(seo_title or title, description, body, canonical, extra_head=extra_head)
     filters = filter_bar(status_filter, default_status) if show_filters else ""
     on = sum(1 for it in items if not is_ended(it))
@@ -836,8 +857,116 @@ def render_grid_page(title: str, description: str, items: list[dict], canonical:
 {render_grouped(items)}
 {render_ad_template() if show_filters else ""}
 {SORT_JS if show_filters else ""}
+{extra_body}
 {reviews_section}"""
     return page_shell(seo_title or title, description, body, canonical, extra_head=extra_head, header_ad=True)
+
+
+def category_order(chain_slug: str) -> list[str]:
+    """チェーンのカテゴリの並び(公式サイトの順。config のカテゴリ設定から)。無いチェーンは空。"""
+    if chain_slug == "mcdonalds":
+        return [p["label"] for p in CONFIG.get("mcdonalds_pages", []) if p.get("label")]
+    return [c["label"] for c in CONFIG.get(f"{chain_slug}_categories", []) if isinstance(c, dict) and c.get("label")]
+
+
+def render_regular_section(chain: dict, items: list[dict]) -> str:
+    """チェーン別ページの「定番メニュー（N品）」。限定の一覧の後ろに、カテゴリごとに並べる。
+    ここのカードは並び替え・絞り込みの対象にしない(data-sortable を付けない)。"""
+    if not items:
+        return ""
+    order = category_order(chain["slug"])
+    groups: dict[str, list[dict]] = {}
+    for it in items:
+        groups.setdefault(it.get("category") or "その他", []).append(it)
+
+    def key(name: str):
+        return (name == "その他", order.index(name) if name in order else len(order), name)
+
+    parts = []
+    for name in sorted(groups, key=key):
+        group = sorted(groups[name], key=lambda it: (nfkc(it.get("name")), str(it["product_id"])))
+        parts.append(f'<h3>{esc(name)}（{len(group)}品）</h3>\n<div class="grid">\n'
+                     + "\n".join(render_card(it) for it in group) + "\n</div>")
+    return (f'<section class="regular-menu" id="regular">\n<h2>定番メニュー（{len(items)}品）</h2>\n'
+            f'<p class="lead">定番メニューは記録を始めた日から、価格の変わった日を残しています。'
+            f'<a href="/prices/{esc(chain["slug"])}/">{esc(chain["name"])}の価格改定の記録</a></p>\n'
+            + "\n".join(parts) + "\n</section>")
+
+
+def price_change_events(items: list[dict]) -> list[dict]:
+    """価格が変わった日の記録(price_history の隣り合う2件、price_variants_history のサイズ別)を、新しい日付順に並べる。
+    価格が取れなかった(None)記録・同じ価格の記録(再登場時の再掲など)は変更に数えない。"""
+    chain_idx = {c["slug"]: i for i, c in enumerate(CHAINS)}
+    events: list[dict] = []
+    for it in items:
+        base: set[tuple] = set()
+        hist = it.get("price_history") or []
+        for prev, cur in zip(hist, hist[1:]):
+            a, b = prev.get("price"), cur.get("price")
+            if a is None or b is None or a == b:
+                continue
+            events.append({"date": cur["date"], "item": it, "label": "", "old": a, "new": b})
+            base.add((cur["date"], a, b))
+        vh = it.get("price_variants_history") or []
+        for prev, cur in zip(vh, vh[1:]):
+            old = {(v.get("label") or "標準"): v["price"] for v in prev.get("variants") or []}
+            for v in cur.get("variants") or []:
+                lb = v.get("label") or "標準"
+                a, b = old.get(lb), v["price"]
+                if a is None or a == b or (cur["date"], a, b) in base:
+                    continue  # 代表の価格と同じ変更は二重に載せない
+                events.append({"date": cur["date"], "item": it, "label": lb, "old": a, "new": b})
+    events.sort(key=lambda e: (e["date"], -chain_idx.get(e["item"]["chain"], 99), e["item"]["name"]), reverse=True)
+    return events
+
+
+def recording_start(items: list[dict]) -> str:
+    return min(((it.get("first_seen_at") or "")[:10] for it in items if it.get("first_seen_at")), default="")
+
+
+def ja_date(text: str) -> str:
+    d = _date_or_none(text)
+    return f"{d.year}年{d.month}月{d.day}日" if d else text
+
+
+def render_prices(all_items: list[dict], chain: dict | None = None) -> str:
+    """価格改定の記録。chain を渡すとそのチェーンだけ(JSなしで絞り込めるよう、チェーンごとに別ページにしている)。"""
+    items = [it for it in all_items if chain is None or it["chain"] == chain["slug"]]
+    events = price_change_events(items)
+    scope = chain["name"] if chain else "全チェーン"
+    site_url = CONFIG.get("site_url", "")
+    nav = ('<div class="chainlist">\n'
+           + f'<a href="/prices/">すべて</a>\n'
+           + "\n".join(f'<a href="/prices/{c["slug"]}/">{esc(c["name"])}</a>' for c in CHAINS) + "\n</div>")
+    start = recording_start(items)
+    if events:
+        rows = []
+        for e in events:
+            it = e["item"]
+            diff = e["new"] - e["old"]
+            name = it["name"] + (f"（{e['label']}）" if e["label"] else "")
+            cls = "up" if diff > 0 else "down"
+            sign = "+" if diff > 0 else "−"
+            rows.append(
+                f"<tr><td class='num'>{esc(e['date'])}</td><td>{esc(CHAIN_NAME.get(it['chain'], it['chain']))}</td>"
+                f"<td><a href=\"/{esc(item_url(it))}\">{esc(name)}</a></td>"
+                f"<td class='num'>{fmt_yen(e['old'])} → {fmt_yen(e['new'])}</td>"
+                f"<td class='num {cls}'>{sign}{abs(diff):g}円</td></tr>")
+        table = ("<div class='tablewrap'><table class='pricelog'>"
+                 "<tr><th>日付</th><th>チェーン</th><th>商品</th><th>価格</th><th>差額</th></tr>\n"
+                 + "\n".join(rows) + "</table></div>")
+        lead = (f"<p class='empty'>限定メニューも定番メニューも、毎日の巡回で価格の変わった日を残しています。"
+                f"記録は{esc(ja_date(start))}からです。価格は税込で、公式サイトの一覧・詳細に出ていた金額です。"
+                "サイズ別の価格は商品名のあとに（）で示しています。</p>")
+        body = f"<h1 class='pt'>価格改定の記録（{scope}・{len(events)}件）</h1>\n{lead}\n{nav}\n{table}"
+    else:
+        since = f"記録は{ja_date(start)}から" if start else "記録はこれから始まります"
+        body = (f"<h1 class='pt'>価格改定の記録（{scope}）</h1>\n{nav}\n"
+                f"<p class='empty'>まだ価格の変更はありません。{esc(since)}。</p>")
+    path = f"prices/{chain['slug']}/" if chain else "prices/"
+    desc = (f"{scope}のメニューの価格改定を、変更のあった日付の新しい順に記録。"
+            "限定メニューも定番メニューも、毎日の巡回で価格の変わった日を残しています。")
+    return page_shell(f"価格改定の記録（{scope}）" if chain else "価格改定の記録", desc, body, site_url + path)
 
 
 RECENT_ENDED_DAYS = 30
@@ -1137,13 +1266,52 @@ def render_price_variants(item: dict) -> str:
     return f"<table class='pv'>{rows}</table>"
 
 
+def fmt_yen(v) -> str:
+    return f"{v:g}円"
+
+
+def render_variants_history(item: dict) -> str:
+    """サイズ別の価格の履歴(price_variants_history)。2件以上(=変更があった)ときだけ、日付×サイズの表にする。"""
+    hist = item.get("price_variants_history") or []
+    if len(hist) < 2:
+        return ""
+    labels: list[str] = []
+    for h in hist:
+        for v in h.get("variants") or []:
+            lb = v.get("label") or "標準"
+            if lb not in labels:
+                labels.append(lb)
+    head = "<tr><th>確認した日</th>" + "".join(f"<th>{esc(lb)}</th>" for lb in labels) + "</tr>"
+    rows = ""
+    for h in hist:
+        by = {(v.get("label") or "標準"): v["price"] for v in h.get("variants") or []}
+        rows += (f"<tr><th>{esc(h['date'])}〜</th>"
+                 + "".join(f"<td>{fmt_yen(by[lb]) if lb in by else '−'}</td>" for lb in labels) + "</tr>")
+    return (f"<h3>サイズ別の価格の履歴</h3><div class='tablewrap'><table class='multi'>{head}{rows}</table></div>")
+
+
+REGULAR_PRICE_NOTE = "記録開始より前の価格は分かりません。"
+
+
 def render_price_history(item: dict) -> str:
     hist = item.get("price_history") or []
-    if len(hist) <= 1:
+    regular = is_regular(item)
+    variants_html = render_variants_history(item)
+    if not hist or (len(hist) <= 1 and not regular and not variants_html):
         return ""
+    if len(hist) == 1:
+        # 定番は価格の変遷が目的なので、履歴が1件でも出す(「いつの時点の価格か」が分かるように)
+        h = hist[0]
+        body = f"<p>{esc(h['date'])} 時点 {fmt_yen(h['price'])}（税込）</p>" if hist[0].get("price") is not None else ""
+        note = (f"<p class='note'>{REGULAR_PRICE_NOTE}価格が変わると、変わった日をここに追記します。</p>"
+                if regular else "")
+        return f"<h2>価格の履歴</h2>{body}{note}{variants_html}"
     rows = "".join(f"<tr><th>{esc(h['date'])}〜</th><td>{h['price']:g}円{'（再登場時）' if h.get('relaunch') else ''}</td></tr>"
                    for h in hist)
-    return f"<h2>価格の履歴</h2><table>{rows}</table><p class='note'>公式サイトの一覧に出ていた価格を、変わった日に記録しています。</p>"
+    note = "公式サイトの一覧に出ていた価格を、変わった日に記録しています。"
+    if regular:
+        note += REGULAR_PRICE_NOTE
+    return f"<h2>価格の履歴</h2><table>{rows}</table><p class='note'>{note}</p>{variants_html}"
 
 
 # ---- 同名商品の書き分け・関連リンク・パンくず・lastmod(SEO) ----
@@ -1289,6 +1457,7 @@ def item_lastmod(item: dict) -> str:
     再登場した日のうち最も新しいもの。last_seen_at・price_checked_at は毎日更新されるので使わない。"""
     dates = [(item.get("first_seen_at") or "")[:10], item.get("ended_observed_at") or ""]
     dates += [h.get("date") or "" for h in item.get("price_history") or []]
+    dates += [h.get("date") or "" for h in item.get("price_variants_history") or []]
     for r in item.get("relaunches") or []:
         dates += [r.get("ended_observed_at") or "", r.get("reappeared_at") or ""]
     return max((d for d in dates if _date_or_none(d)), default="")
@@ -1332,6 +1501,8 @@ def seo_title(item: dict, variant: str = "") -> str:
     chain_name = CHAIN_NAME.get(item["chain"], item["chain"])
     nut = item.get("nutrition") or {}
     facts = "カロリー・価格・栄養成分" if nut.get("kcal") is not None else "価格・販売期間"
+    if is_regular(item):
+        facts = "カロリー・価格の推移" if nut.get("kcal") is not None else "価格の推移"
     sup = f"（{variant}）" if variant else ""
     return f"{chain_name}「{item['name']}」{sup}の{facts}"
 
@@ -1483,6 +1654,18 @@ def render_marugame_notes(item: dict) -> str:
     return "".join(f"<p class='note'>{n}</p>" for n in notes)
 
 
+def render_regular_notes(item: dict) -> str:
+    """定番メニュー: 記録の趣旨と、記録開始日が発売日ではないこと。"""
+    notes = [f"定番メニューとして記録しています。記録を始めた日（{esc(season_observed_start(item))}）から、毎日の巡回で価格などを確認しています。"
+             "発売日ではありません。",
+             "販売終了は、公式サイトの一覧から消えたことを連続で確認した日です。"]
+    if item.get("takeout") is False:
+        notes.append("テイクアウトはできません（公式ページの注記）。")
+    if len(item.get("price_variants") or []) > 1:
+        notes.append("価格はサイズや組み合わせにより異なります（内訳は上の表）。")
+    return "".join(f"<p class='note'>{n}</p>" for n in notes)
+
+
 def render_item_page(item: dict, all_items: list[dict] | None = None) -> str:
     chain_name = CHAIN_NAME.get(item["chain"], item["chain"])
     official_url = item.get("official_url") or ""
@@ -1580,6 +1763,10 @@ def render_item_page(item: dict, all_items: list[dict] | None = None) -> str:
         yoshinoya_note = render_marugame_notes(item)
     if item.get("chain") == "burgerking":
         yoshinoya_note = render_burgerking_notes(item)
+    if is_regular(item):
+        # 定番は限定・新メニューの注記(発売日の出どころ・昨季の販売など)を使わない
+        matsuya_note = mop_note = ""
+        yoshinoya_note = render_regular_notes(item)
     variant_span = f'<span class="variant">（{esc(variant)}）</span>' if variant else ""
     body = f"""<nav class="crumbs"><a href="/">トップ</a> &gt; <a href="/chains/{esc(item['chain'])}/">{esc(chain_name)}</a></nav>
 <div class="detail">
@@ -1589,7 +1776,7 @@ border-radius:4px;padding:2px 8px;background:var(--{esc(item['chain'])})">{esc(c
 {kind_html}
 <p class="price">{esc(price)}{price_note}</p>
 {render_price_variants(item)}
-<p><strong>販売期間：</strong>{esc(period_text(item, detailed=True))}</p>
+<p><strong>{'記録：' if is_regular(item) else '販売期間：'}</strong>{esc(period_text(item, detailed=True))}</p>
 {mop_note}
 {matsuya_note}
 {yoshinoya_note}
@@ -1673,8 +1860,10 @@ def generate_rss(items: list[dict]) -> str:
 """
 
 
-def generate_sitemap(items: list[dict], months: list[str]) -> str:
+def generate_sitemap(items: list[dict], months: list[str], regular_items: list[dict] | None = None) -> str:
+    """items は限定・新メニュー(トップ・アーカイブ・チェーン別の限定の一覧に載るもの)、regular_items は定番。"""
     site_url = CONFIG.get("site_url", "")
+    regular_items = regular_items or []
     # lastmod は「そのページの内容が実際に変わった日」。商品ページは item_lastmod、
     # 一覧ページは載っている商品の lastmod の最大値(毎日の生成日にはしない)
     def newest(group: list[dict]) -> str:
@@ -1684,10 +1873,18 @@ def generate_sitemap(items: list[dict], months: list[str]) -> str:
     urls: list[tuple[str, str]] = [(site_url, newest(items)), (site_url + "archive/", newest(ended)),
                                    (site_url + "chains/", newest(items))]
     for c in CHAINS:
-        urls.append((f"{site_url}chains/{c['slug']}/", newest([it for it in items if it["chain"] == c["slug"]])))
+        urls.append((f"{site_url}chains/{c['slug']}/",
+                     newest([it for it in items + regular_items if it["chain"] == c["slug"]])))
     for m in months:
         urls.append((f"{site_url}archive/{m}/", newest([it for it in ended if start_month(it) == m])))
-    for it in items:
+    # 価格改定の記録。lastmod は最後に価格が変わった日
+    all_items = items + regular_items
+    events = price_change_events(all_items)
+    urls.append((site_url + "prices/", events[0]["date"] if events else ""))
+    for c in CHAINS:
+        ev = price_change_events([it for it in all_items if it["chain"] == c["slug"]])
+        urls.append((f"{site_url}prices/{c['slug']}/", ev[0]["date"] if ev else ""))
+    for it in all_items:
         urls.append((site_url + item_url(it), item_lastmod(it)))
     body = "\n".join(
         f"<url><loc>{esc(u)}</loc>" + (f"<lastmod>{lm}</lastmod>" if lm else "") + "</url>" for u, lm in urls
@@ -1700,7 +1897,11 @@ def generate_sitemap(items: list[dict], months: list[str]) -> str:
 
 
 def main() -> int:
-    items = load_all_products()
+    # 定番(is_regular)は、トップ・新着/アーカイブ・RSS・チェーン別の限定の一覧には混ぜない。
+    # チェーン別ページの「定番メニュー」の節・商品ページ・価格改定の記録・検索・サイトマップにだけ出す
+    all_items = load_all_products()
+    items = [it for it in all_items if not is_regular(it)]
+    regular_items = [it for it in all_items if is_regular(it)]
     DOCS.mkdir(parents=True, exist_ok=True)
 
     (DOCS / "index.html").write_text(render_top(items), encoding="utf-8")
@@ -1743,15 +1944,25 @@ def main() -> int:
             empty_text="まだ記録がありません。",
             seo_title=chain_seo_title(c),
             extra_head=breadcrumb_ld([("トップ", CONFIG.get("site_url", "")), (c["name"], chain_url)]),
+            extra_body=render_regular_section(c, [it for it in regular_items if it["chain"] == c["slug"]]),
         )
         (cdir / "index.html").write_text(page, encoding="utf-8")
 
     (DOCS / "items").mkdir(parents=True, exist_ok=True)
-    for it in items:
-        (DOCS / item_url(it)).write_text(render_item_page(it, items), encoding="utf-8")
+    for it in all_items:
+        # 関連リンク・同名商品は、限定は限定どうし、定番は定番どうしで作る(限定の商品ページの見え方を変えない)
+        pool = regular_items if is_regular(it) else items
+        (DOCS / item_url(it)).write_text(render_item_page(it, pool), encoding="utf-8")
+
+    # 価格改定の記録(全体とチェーンごと。JSなしで絞り込めるよう別ページにしている)
+    (DOCS / "prices").mkdir(parents=True, exist_ok=True)
+    (DOCS / "prices" / "index.html").write_text(render_prices(all_items), encoding="utf-8")
+    for c in CHAINS:
+        (DOCS / "prices" / c["slug"]).mkdir(parents=True, exist_ok=True)
+        (DOCS / "prices" / c["slug"] / "index.html").write_text(render_prices(all_items, c), encoding="utf-8")
 
     # 商品削除などで不要になった旧itemページ(オーファン)を掃除する
-    valid_item_files = {(DOCS / item_url(it)).name for it in items}
+    valid_item_files = {(DOCS / item_url(it)).name for it in all_items}
     stale_items = 0
     for f in (DOCS / "items").glob("*.html"):
         if f.name not in valid_item_files:
@@ -1759,10 +1970,10 @@ def main() -> int:
             stale_items += 1
 
     (DOCS / "search-index.json").write_text(
-        json.dumps(build_search_index(items), ensure_ascii=False), encoding="utf-8"
+        json.dumps(build_search_index(all_items), ensure_ascii=False), encoding="utf-8"
     )
     (DOCS / "rss.xml").write_text(generate_rss(items), encoding="utf-8")
-    (DOCS / "sitemap.xml").write_text(generate_sitemap(items, months), encoding="utf-8")
+    (DOCS / "sitemap.xml").write_text(generate_sitemap(items, months, regular_items), encoding="utf-8")
     (DOCS / "robots.txt").write_text(generate_robots(), encoding="utf-8")
     (DOCS / "CNAME").write_text(
         CONFIG.get("site_url", "").replace("https://", "").strip("/") + "\n", encoding="utf-8"
@@ -1771,7 +1982,7 @@ def main() -> int:
 
     print(
         f"generated: index.html, {len(months)} archive months, {len(CHAINS)} chain pages, "
-        f"{len(items)} item pages, rss.xml, sitemap.xml, search-index.json"
+        f"{len(all_items)} item pages ({len(regular_items)} regular), prices pages, rss.xml, sitemap.xml, search-index.json"
         + (f" / removed {stale_items} stale item pages" if stale_items else "")
         + (f" / removed {stale_months} stale archive dirs" if stale_months else "")
     )

@@ -212,9 +212,24 @@ class FakeGetter:
 
 
 class TempData:
-    """crawl.py の保存先を一時ディレクトリへ差し替える(with で使う)。"""
+    """crawl.py の保存先を一時ディレクトリへ差し替える(with で使う)。
+
+    定番メニューの記録(config の record_regular)と価格の取り直し(variant_recheck_per_run)は、既定では止める。限定・新メニューの記録を調べる既存のテストが、
+    定番の詳細ページの取得に巻き込まれないようにするため。定番を調べるテストは TempData(regular=True) にする。
+    regular_per_run / recheck_per_run を渡すと、その回の config の値(定番の1回あたりの作成上限・価格の取り直し件数)を上書きする。"""
+
+    def __init__(self, regular: bool = False, regular_per_run: int | None = None, recheck_per_run: int | None = None):
+        self.regular = regular
+        self.regular_per_run = regular_per_run
+        self.recheck_per_run = recheck_per_run
 
     def __enter__(self):
+        self.saved_config = {k: crawl.CONFIG.get(k) for k in ("record_regular", "regular_backfill_per_run",
+                                                              "variant_recheck_per_run")}
+        crawl.CONFIG["record_regular"] = self.regular
+        if self.regular_per_run is not None:
+            crawl.CONFIG["regular_backfill_per_run"] = self.regular_per_run
+        crawl.CONFIG["variant_recheck_per_run"] = self.recheck_per_run or 0  # 既定では価格の取り直しもしない
         self.tmp = tempfile.TemporaryDirectory()
         base = Path(self.tmp.name)
         self.saved = (crawl.DATA, crawl.PRODUCTS, crawl.PENDING_PATH, crawl.BASELINE_PATH, crawl.RUN_SUMMARY)
@@ -226,5 +241,10 @@ class TempData:
         return base
 
     def __exit__(self, *exc):
+        for k, v in self.saved_config.items():
+            if v is None:
+                crawl.CONFIG.pop(k, None)
+            else:
+                crawl.CONFIG[k] = v
         (crawl.DATA, crawl.PRODUCTS, crawl.PENDING_PATH, crawl.BASELINE_PATH, crawl.RUN_SUMMARY) = self.saved
         self.tmp.cleanup()

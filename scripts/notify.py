@@ -3,7 +3,8 @@
 
 1日1回の実行なので、通知の設計は単純にしてある:
   ・失敗したら毎回鳴らす
-  ・成功して新しく記録したメニュー/販売終了を観測したメニューがあれば要約を送る
+  ・成功して新しく記録したメニュー/販売終了を観測したメニュー/価格が変わったメニューがあれば要約を送る
+    (定番メニューの新規作成は「新メニュー」に数えず、通知にも出さない。価格の変更は定番も含めて数える)
   ・あるチェーンがブロック・一覧取得失敗・例外で取れていない日は、新規0件でも知らせる
     (毎日取れていない状態を、新メニューのない静かな日と区別するため)
 
@@ -62,7 +63,8 @@ def _run_click() -> str:
 
 
 def read_run_summary(path: Path | None = None) -> dict[str, dict]:
-    """直前の crawl.py 実行の {"new": {chain: n}, "ended": {chain: n}, "suspected": {chain: {...}}} を返す。
+    """直前の crawl.py 実行の {"new": {chain: n}, "price_changes": {chain: n}, "ended": {chain: n}, "suspected": {chain: {...}}} を返す。
+    regular(定番の新規作成件数)は参考値で、通知には使わない。
     suspected は「新規候補が極端に多く、公式の構造変更の疑いで記録を保留した」チェーン。
     blocked / list_failed / errors は、その実行で取れていなかったチェーンのリスト、streaks は
     その連続日数、detail_failed は詳細ページ単発の失敗件数(通知対象ではない)。古い形式(これらが
@@ -70,8 +72,8 @@ def read_run_summary(path: Path | None = None) -> dict[str, dict]:
     try:
         data = json.loads((path or RUN_SUMMARY).read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
-        return {"new": {}, "ended": {}, "suspected": {}, "blocked": [], "list_failed": [], "errors": [],
-                "streaks": {}, "detail_failed": {}}
+        return {"new": {}, "regular": {}, "price_changes": {}, "ended": {}, "suspected": {}, "blocked": [],
+                "list_failed": [], "errors": [], "streaks": {}, "detail_failed": {}}
     if not isinstance(data, dict):
         data = {}
     return {
@@ -81,6 +83,8 @@ def read_run_summary(path: Path | None = None) -> dict[str, dict]:
         "streaks": {k: int(v) for k, v in (data.get("streaks") or {}).items()},
         "detail_failed": {k: int(v) for k, v in (data.get("detail_failed") or {}).items()},
         "new": {k: int(v) for k, v in (data.get("new") or {}).items()},
+        "regular": {k: int(v) for k, v in (data.get("regular") or {}).items()},
+        "price_changes": {k: int(v) for k, v in (data.get("price_changes") or {}).items()},
         "ended": {k: int(v) for k, v in (data.get("ended") or {}).items()},
         "suspected": {k: dict(v) for k, v in (data.get("suspected") or {}).items() if isinstance(v, dict)},
     }
@@ -126,12 +130,13 @@ def problem_lines(summary: dict) -> tuple[list[str], list[str]]:
 
 
 def build_message(summary: dict) -> tuple[str, str] | None:
-    """(タイトル, 本文)。新規も終了も0件で、保留も問題も無ければ None。"""
+    """(タイトル, 本文)。新規・終了・価格の変更とも0件で、保留も問題も無ければ None。"""
     n_new = sum(summary["new"].values())
     n_end = sum(summary["ended"].values())
+    n_price = sum((summary.get("price_changes") or {}).values())
     held = summary.get("suspected") or {}
     shown, lines = problem_lines(summary)
-    if n_new == 0 and n_end == 0 and not held and not shown:
+    if n_new == 0 and n_end == 0 and n_price == 0 and not held and not shown:
         return None
     parts = []
     if n_new:
@@ -140,11 +145,16 @@ def build_message(summary: dict) -> tuple[str, str] | None:
     if n_end:
         parts.append("販売終了を観測: " + " / ".join(
             f"{CHAIN_LABEL.get(k, k)} {v}件" for k, v in summary["ended"].items() if v))
+    if n_price:
+        parts.append("価格の変更: " + " / ".join(
+            f"{CHAIN_LABEL.get(k, k)} {v}件" for k, v in summary["price_changes"].items() if v))
     head = []
     if n_new:
         head.append(f"新メニュー {n_new}件")
     if n_end:
         head.append(f"終了 {n_end}件")
+    if n_price:
+        head.append(f"価格の変更 {n_price}件")
     if held:
         names = "・".join(CHAIN_LABEL.get(k, k) for k in held)
         parts.append(f"保留あり: {names}は新規候補が多すぎるため、今回は新規0件として記録していません(別途警告を送っています)")

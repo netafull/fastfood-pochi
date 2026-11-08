@@ -443,31 +443,49 @@ class TestCrawl(unittest.TestCase):
 
     def test_price_recheck_records_price_change(self):
         changed = fx("sukiya/detail_drink-810500.html").replace("<span>210</span>", "<span>230</span>")
-        with TempData():
-            run_s(getter(), DAY1)
-            # 7日たっていなければ取り直さない
-            g_early = getter()
-            run_s(g_early, "2026-10-17")
-            self.assertEqual(sum(1 for u in g_early.calls if "/index.html" in u), 0)
-            g_late = getter(overrides={"/menu/in/drink/810500/index.html": changed})
-            _, st = run_s(g_late, "2026-10-19")
-            rechecked = [u for u in g_late.calls if "/index.html" in u]
-            self.assertEqual(len(rechecked), crawl.SUKIYA_PRICE_RECHECK_MAX)  # 1回の上限
-            self.assertEqual(st["new_products"], 0)
+        ov = {"/menu/in/drink/810500/index.html": changed}
+        with TempData(recheck_per_run=5):
+            _, st = run_s(getter(), DAY1)
+            self.assertEqual(st["new_products"], 33)
+            # 初日は作ったばかりなので取り直さない
+            g_first = getter()
+            run_s(g_first, DAY1)
+            self.assertEqual(sum(1 for u in g_first.calls if "/index.html" in u), 0)
+            # 2日目: 確認日の古い順に、1回の上限(variant_recheck_per_run)だけ取り直す
+            g2 = getter(overrides=ov)
+            _, st2 = run_s(g2, "2026-10-19")
+            self.assertEqual(len([u for u in g2.calls if "/index.html" in u]), 5)
+            self.assertEqual(st2["new_products"], 0)
             done = [p for p in crawl.load_chain_products("sukiya") if p["price_checked_at"] == "2026-10-19"]
-            self.assertEqual(len(done), crawl.SUKIYA_PRICE_RECHECK_MAX)
-            # 残りは翌日以降に回る(古い順)
-            g_next = getter(overrides={"/menu/in/drink/810500/index.html": changed})
-            run_s(g_next, "2026-10-20")
-            run_s(getter(overrides={"/menu/in/drink/810500/index.html": changed}), "2026-10-21")
-            run_s(getter(overrides={"/menu/in/drink/810500/index.html": changed}), "2026-10-22")
+            self.assertEqual(len(done), 5)
+            # 残りは翌日以降に回る(33件を5件ずつ。7日目までに一巡)
+            for day in range(20, 26):
+                run_s(getter(overrides=ov), f"2026-10-{day}")
             p = crawl.load_product("sukiya", "drink-810500")
-            self.assertEqual(p["price_checked_at"] >= "2026-10-19", True)
+            self.assertGreaterEqual(p["price_checked_at"], "2026-10-19")
             self.assertEqual(p["price"], 230)
-            self.assertEqual(p["price_history"], [{"date": DAY1, "price": 210}, {"date": p["price_history"][1]["date"], "price": 230}])
+            self.assertEqual(p["price_history"][0], {"date": DAY1, "price": 210})
+            self.assertEqual(p["price_history"][1]["price"], 230)
+            self.assertEqual(len(p["price_history"]), 2)
             # 変わっていない商品の履歴は増えない
             q = crawl.load_product("sukiya", "gyudon-112700")
             self.assertEqual(len(q["price_history"]), 1)
+
+    def test_price_recheck_counts_change_once_and_skips_none(self):
+        changed = fx("sukiya/detail_drink-810500.html").replace("<span>210</span>", "<span>230</span>")
+        with TempData(recheck_per_run=40):
+            run_s(getter(), DAY1)
+            _, st = run_s(getter(overrides={"/menu/in/drink/810500/index.html": changed}), "2026-10-19")
+            self.assertEqual(st["price_changes"], 1)
+            p = crawl.load_product("sukiya", "drink-810500")
+            self.assertEqual([h["price"] for h in p["price_history"]], [210, 230])
+            # 価格が読み取れなかった回(価格が1つも無い詳細)は、価格の履歴を書かない
+            empty = re.sub(r"<span>\d+</span>円", "", changed)
+            before = len(p["price_history"])
+            _, st2 = run_s(getter(overrides={"/menu/in/drink/810500/index.html": empty}), "2026-10-20")
+            p2 = crawl.load_product("sukiya", "drink-810500")
+            self.assertEqual(len(p2["price_history"]), before)
+            self.assertEqual(st2["price_changes"], 0)
 
     def test_detail_failure_goes_to_pending(self):
         with TempData():
