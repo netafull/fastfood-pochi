@@ -1,0 +1,66 @@
+{
+ "chain": "mos",
+ "product_id": "920000",
+ "name": "和風ドレッシング＜減塩タイプ＞",
+ "category": "サイドメニュー",
+ "price": 50,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "さっぱり和風ドレッシング（従来品）と比較して塩分（ナトリウム）を25％カットしています。",
+ "description_full_len": 61,
+ "nutrition": {
+  "kcal": 22.0,
+  "protein_g": 0.3,
+  "fat_g": 1.0,
+  "carbs_g": 3.0,
+  "sugar_g": null,
+  "fiber_g": 0.0,
+  "salt_g": 0.5,
+  "other": {
+   "重量": "13.6g",
+   "コレステロール": "0mg",
+   "ナトリウム": "207mg",
+   "カリウム": "137mg",
+   "カルシウム": "1mg",
+   "リン": "4mg",
+   "鉄": "0.1mg",
+   "ビタミンA": "0μg",
+   "ビタミンB1": "0.00mg",
+   "ビタミンB2": "0.00mg",
+   "ナイアシン": "0.1mg",
+   "ビタミンC": "0mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "0.2mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "小麦",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "ごま"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=920000&c_id=7",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 50
+  }
+ ],
+ "source_list": [
+  "menu_category/7"
+ ],
+ "image": null,
+ "is_regular": true
+}

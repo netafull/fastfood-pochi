@@ -1,0 +1,116 @@
+{
+ "chain": "mos",
+ "product_id": "010720",
+ "name": "モスの菜摘（なつみ）フィッシュ",
+ "category": "モスの菜摘（なつみ）",
+ "price": 480,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "フィッシュバーガーの具材を、バンズの代わりにレタスで挟みました。",
+ "description_full_len": 32,
+ "nutrition": {
+  "kcal": 238.0,
+  "protein_g": 11.1,
+  "fat_g": 16.5,
+  "carbs_g": 11.5,
+  "sugar_g": null,
+  "fiber_g": 1.0,
+  "salt_g": 1.3,
+  "other": {
+   "重量": "130.5g",
+   "コレステロール": "36mg",
+   "ナトリウム": "523mg",
+   "カリウム": "269mg",
+   "カルシウム": "102mg",
+   "リン": "245mg",
+   "鉄": "0.3mg",
+   "ビタミンA": "52μg",
+   "ビタミンB1": "0.05mg",
+   "ビタミンB2": "0.08mg",
+   "ナイアシン": "0.9mg",
+   "ビタミンC": "2mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "2.5mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "大豆",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "いか",
+    "mark": "△"
+   },
+   {
+    "name": "えび",
+    "mark": "△"
+   },
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "牛肉",
+    "mark": "△"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "フィッシュ（白身魚フライ）：ホキ（白身魚）",
+   "origin": "ニュージーランド沖"
+  },
+  {
+   "name": "モスの生野菜：レタス",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  },
+  {
+   "name": "スライスチーズ：チーズ",
+   "origin": "ニュージーランド、オーストラリア、アメリカ、その他"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=010720&c_id=30",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 480
+  }
+ ],
+ "source_list": [
+  "menu_category/30"
+ ],
+ "image": null,
+ "is_regular": true
+}

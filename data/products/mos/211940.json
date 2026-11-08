@@ -1,0 +1,113 @@
+{
+ "chain": "mos",
+ "product_id": "211940",
+ "name": "バラエティパックA",
+ "category": "サイドメニュー",
+ "price": 1380,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "フレンチフライポテトLサイズ2コ分と、オニオンフライ2コ分をお得なセットにしました。",
+ "description_full_len": 42,
+ "nutrition": {
+  "kcal": 1256.0,
+  "protein_g": 17.4,
+  "fat_g": 58.8,
+  "carbs_g": 164.4,
+  "sugar_g": null,
+  "fiber_g": 11.2,
+  "salt_g": 4.8,
+  "other": {
+   "重量": "503.0g",
+   "コレステロール": "0mg",
+   "ナトリウム": "1852mg",
+   "カリウム": "1610mg",
+   "カルシウム": "250mg",
+   "リン": "524mg",
+   "鉄": "3.0mg",
+   "ビタミンA": "0μg",
+   "ビタミンB1": "0.50mg",
+   "ビタミンB2": "0.74mg",
+   "ナイアシン": "7.6mg",
+   "ビタミンC": "12mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "12.2mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "小麦",
+   "大豆"
+  ],
+  "partial": [
+   {
+    "name": "乳",
+    "mark": "△◇"
+   },
+   {
+    "name": "卵",
+    "mark": "△◇"
+   },
+   {
+    "name": "いか",
+    "mark": "△"
+   },
+   {
+    "name": "えび",
+    "mark": "△"
+   },
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "牛肉",
+    "mark": "△"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "フレンチフライポテト：じゃがいも",
+   "origin": "アメリカ、カナダ"
+  },
+  {
+   "name": "オニオンフライ：オニオン",
+   "origin": "中国"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=211940&c_id=7",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 1380
+  }
+ ],
+ "source_list": [
+  "menu_category/7"
+ ],
+ "image": null,
+ "is_regular": true
+}

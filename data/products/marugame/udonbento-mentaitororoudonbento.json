@@ -88,7 +88,7 @@
  "takeout_only": true,
  "official_url": "https://jp.marugame.com/menu/udonbento/mentaitororoudonbento/",
  "first_seen_at": "2026-10-17T15:39:39+09:00",
- "last_seen_at": "2026-11-08",
+ "last_seen_at": "2026-11-09",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -101,5 +101,20 @@
  "source_list": [
   "menu/udonbento"
  ],
- "image": null
+ "image": null,
+ "price_variants_history": [
+  {
+   "date": "2026-10-17",
+   "variants": [
+    {
+     "label": "並",
+     "price": 450
+    },
+    {
+     "label": "大",
+     "price": 640
+    }
+   ]
+  }
+ ]
 }

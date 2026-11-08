@@ -1,0 +1,140 @@
+{
+ "chain": "mos",
+ "product_id": "121055",
+ "name": "ソイ朝の野菜バーガー ～オーロラソース～",
+ "category": "朝モス",
+ "price": 440,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "朝の野菜バーガー ～オーロラソース～に使用しているパティを、大豆由来の植物性たんぱくを使った「ソイパティ」にしました。",
+ "description_full_len": 72,
+ "nutrition": {
+  "kcal": 362.0,
+  "protein_g": 11.9,
+  "fat_g": 16.0,
+  "carbs_g": 43.0,
+  "sugar_g": null,
+  "fiber_g": 4.0,
+  "salt_g": 2.3,
+  "other": {
+   "重量": "184.8g",
+   "コレステロール": "8mg",
+   "ナトリウム": "865mg",
+   "カリウム": "354mg",
+   "カルシウム": "43mg",
+   "リン": "113mg",
+   "鉄": "1.2mg",
+   "ビタミンA": "24μg",
+   "ビタミンB1": "0.13mg",
+   "ビタミンB2": "0.06mg",
+   "ナイアシン": "1.3mg",
+   "ビタミンC": "7mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "2.4mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "大豆",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "いか",
+    "mark": "◇"
+   },
+   {
+    "name": "えび",
+    "mark": "◇"
+   },
+   {
+    "name": "かに",
+    "mark": "◇"
+   },
+   {
+    "name": "牛肉",
+    "mark": "▽◇"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "さば",
+    "mark": "◇"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "▽◇"
+   },
+   {
+    "name": "豚肉",
+    "mark": "▽◇"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽◇"
+   },
+   {
+    "name": "バナナ",
+    "mark": "◇"
+   },
+   {
+    "name": "魚介類",
+    "mark": "◇"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "ソイパティ：脱脂大豆（植物性たん白）",
+   "origin": "アメリカ、カナダ"
+  },
+  {
+   "name": "モスの生野菜：トマト",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：レタス",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=121055&c_id=12",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 440
+  }
+ ],
+ "source_list": [
+  "menu_category/12"
+ ],
+ "image": null,
+ "is_regular": true
+}

@@ -19,7 +19,7 @@
    "price": 1490
   }
  ],
- "price_checked_at": "2026-11-08",
+ "price_checked_at": "2026-11-09",
  "launch_date": "2026-09-29",
  "launch_date_source": "news_headline",
  "announced_at": "2026-09-25",
@@ -138,7 +138,7 @@
  ],
  "official_url": "https://www.sukiya.jp/menu/in/curry/314800/index.html",
  "first_seen_at": "2026-10-11T14:57:03+09:00",
- "last_seen_at": "2026-11-08",
+ "last_seen_at": "2026-11-09",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -170,5 +170,24 @@
   "version": "2026-11-06",
   "version_text": "2026年11月6日更新",
   "fetched_at": "2026-11-07T07:34:06+09:00"
- }
+ },
+ "price_variants_history": [
+  {
+   "date": "2026-10-11",
+   "variants": [
+    {
+     "label": "並盛",
+     "price": 850
+    },
+    {
+     "label": "ごはん大盛",
+     "price": 900
+    },
+    {
+     "label": "メガ（ルー2倍・ごはん2倍）",
+     "price": 1490
+    }
+   ]
+  }
+ ]
 }

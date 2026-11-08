@@ -19,7 +19,7 @@
    "price": 1750
   }
  ],
- "price_checked_at": "2026-11-03",
+ "price_checked_at": "2026-11-09",
  "launch_date": null,
  "launch_date_source": "not_found",
  "announced_at": null,
@@ -112,7 +112,7 @@
  ],
  "official_url": "https://www.sukiya.jp/menu/in/unagi/902300/index.html",
  "first_seen_at": "2026-10-11T14:57:03+09:00",
- "last_seen_at": "2026-11-08",
+ "last_seen_at": "2026-11-09",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -144,5 +144,24 @@
   "version": "2026-10-14",
   "version_text": "2026年10月14日更新",
   "fetched_at": "2026-10-15T07:34:25+09:00"
- }
+ },
+ "price_variants_history": [
+  {
+   "date": "2026-10-11",
+   "variants": [
+    {
+     "label": "並盛",
+     "price": 1050
+    },
+    {
+     "label": "ごはん大盛",
+     "price": 1100
+    },
+    {
+     "label": "特盛(うなぎ2枚ごはん大盛)",
+     "price": 1750
+    }
+   ]
+  }
+ ]
 }

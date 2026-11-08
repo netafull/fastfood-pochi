@@ -1,0 +1,137 @@
+{
+ "chain": "mos",
+ "product_id": "010722",
+ "name": "モスの菜摘（なつみ）海老カツ",
+ "category": "モスの菜摘（なつみ）",
+ "price": 560,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "海老カツバーガーの具材を、バンズの代わりにレタスで挟みました。",
+ "description_full_len": 54,
+ "nutrition": {
+  "kcal": 254.0,
+  "protein_g": 9.4,
+  "fat_g": 17.0,
+  "carbs_g": 16.6,
+  "sugar_g": null,
+  "fiber_g": 1.1,
+  "salt_g": 1.5,
+  "other": {
+   "重量": "147.4g",
+   "コレステロール": "85mg",
+   "ナトリウム": "575mg",
+   "カリウム": "259mg",
+   "カルシウム": "51mg",
+   "リン": "128mg",
+   "鉄": "1.0mg",
+   "ビタミンA": "13μg",
+   "ビタミンB1": "0.05mg",
+   "ビタミンB2": "0.05mg",
+   "ナイアシン": "1.9mg",
+   "ビタミンC": "9mg",
+   "ビタミンD": "0.1μg",
+   "ビタミンE": "4.5mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "えび",
+   "大豆",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "いか",
+    "mark": "△◇"
+   },
+   {
+    "name": "オレンジ",
+    "mark": "◇"
+   },
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "牛肉",
+    "mark": "△◇"
+   },
+   {
+    "name": "さけ",
+    "mark": "◇"
+   },
+   {
+    "name": "さば",
+    "mark": "△◇"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "△◇"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△◇"
+   },
+   {
+    "name": "もも",
+    "mark": "◇"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△◇"
+   },
+   {
+    "name": "バナナ",
+    "mark": "◇"
+   },
+   {
+    "name": "カシューナッツ",
+    "mark": "◇"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   },
+   {
+    "name": "アーモンド",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "海老カツ：エビ",
+   "origin": "インドネシア、タイ"
+  },
+  {
+   "name": "モスの生野菜：レタス",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：キャベツ",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=010722&c_id=30",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 560
+  }
+ ],
+ "source_list": [
+  "menu_category/30"
+ ],
+ "image": null,
+ "is_regular": true
+}

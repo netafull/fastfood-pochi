@@ -1,0 +1,109 @@
+{
+ "chain": "mos",
+ "product_id": "010083",
+ "name": "ダブルチーズバーガー",
+ "category": "ハンバーガー",
+ "price": 450,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "ケチャップとマスタードの味が嬉しいシンプルなハンバーガーに、定番のチーズの組み合わせ。",
+ "description_full_len": 63,
+ "nutrition": {
+  "kcal": 515.0,
+  "protein_g": 24.8,
+  "fat_g": 28.5,
+  "carbs_g": 39.9,
+  "sugar_g": null,
+  "fiber_g": 3.6,
+  "salt_g": 3.2,
+  "other": {
+   "重量": "199.0g",
+   "コレステロール": "62mg",
+   "ナトリウム": "1239mg",
+   "カリウム": "378mg",
+   "カルシウム": "137mg",
+   "リン": "379mg",
+   "鉄": "2.1mg",
+   "ビタミンA": "63μg",
+   "ビタミンB1": "0.12mg",
+   "ビタミンB2": "0.19mg",
+   "ナイアシン": "4.0mg",
+   "ビタミンC": "3mg",
+   "ビタミンD": "0.4μg",
+   "ビタミンE": "0.9mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "牛肉",
+   "大豆",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "▽"
+   },
+   {
+    "name": "豚肉",
+    "mark": "▽"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "ハンバーガーパティ：牛肉",
+   "origin": "オーストラリア、アメリカ、カナダ"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  },
+  {
+   "name": "スライスチーズ：チーズ",
+   "origin": "ニュージーランド、オーストラリア、アメリカ、その他"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=010083&c_id=1",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 450
+  }
+ ],
+ "source_list": [
+  "menu_category/1"
+ ],
+ "image": null,
+ "is_regular": true
+}

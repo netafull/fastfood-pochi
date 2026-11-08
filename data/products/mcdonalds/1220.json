@@ -1,0 +1,76 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "1220",
+ "name": "炙り醤油風 ダブル肉厚ビーフ",
+ "category": "バーガー",
+ "price": 590,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "2枚重ねた厚みのある100%ビーフのおいしさを、香ばしい炙り醤油風のソースが引き立てる、思わずやみつきになる一品です。",
+ "description_full_len": 59,
+ "nutrition": {
+  "kcal": 633.0,
+  "protein_g": 38.0,
+  "fat_g": 37.1,
+  "carbs_g": 37.2,
+  "sugar_g": 8.0,
+  "fiber_g": null,
+  "salt_g": 3.5,
+  "other": {
+   "飽和脂肪酸": "17.59g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "牛肉",
+   "大豆",
+   "豚肉"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "バンズ",
+   "origin": "主要原料：小麦粉／アメリカ、カナダ、オーストラリア　製造所所在地：日本"
+  },
+  {
+   "name": "ビーフパティ",
+   "origin": "主要原料：牛肉／オーストラリア、ニュージーランド　製造所所在地：日本"
+  },
+  {
+   "name": "オニオン",
+   "origin": "主要原料：たまねぎ／アメリカ、インド　製造所所在地：アメリカ、インド"
+  },
+  {
+   "name": "チェダースライスチーズ",
+   "origin": "主要原料：チーズ／ニュージーランド、オーストラリア、日本、アメリカ　製造所所在地：日本、ニュージーランド"
+  },
+  {
+   "name": "炙り醤油風ソース",
+   "origin": "主要原料：醤油／日本　製造所所在地：日本"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mcdonalds.co.jp/products/1220/",
+ "first_seen_at": "2026-11-09T07:30:17+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 590
+  }
+ ],
+ "source_list": [
+  "/menu/burger/"
+ ],
+ "image": null,
+ "is_regular": true
+}

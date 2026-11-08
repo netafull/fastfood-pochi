@@ -1,0 +1,97 @@
+{
+ "chain": "mos",
+ "product_id": "010718",
+ "name": "モスの菜摘（なつみ）モス野菜",
+ "category": "モスの菜摘（なつみ）",
+ "price": 550,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "モス野菜バーガーの具材を、バンズの代わりにレタスで挟みました。",
+ "description_full_len": 31,
+ "nutrition": {
+  "kcal": 223.0,
+  "protein_g": 9.1,
+  "fat_g": 16.5,
+  "carbs_g": 10.4,
+  "sugar_g": null,
+  "fiber_g": 2.5,
+  "salt_g": 1.3,
+  "other": {
+   "重量": "190.3g",
+   "コレステロール": "31mg",
+   "ナトリウム": "513mg",
+   "カリウム": "378mg",
+   "カルシウム": "38mg",
+   "リン": "129mg",
+   "鉄": "1.2mg",
+   "ビタミンA": "47μg",
+   "ビタミンB1": "0.09mg",
+   "ビタミンB2": "0.09mg",
+   "ナイアシン": "2.0mg",
+   "ビタミンC": "12mg",
+   "ビタミンD": "0.2μg",
+   "ビタミンE": "2.0mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "牛肉",
+   "大豆",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "鶏肉",
+    "mark": "▽"
+   },
+   {
+    "name": "豚肉",
+    "mark": "▽"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーパティ：牛肉",
+   "origin": "オーストラリア、アメリカ、カナダ"
+  },
+  {
+   "name": "モスの生野菜：レタス",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：トマト",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=010718&c_id=30",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 550
+  }
+ ],
+ "source_list": [
+  "menu_category/30"
+ ],
+ "image": null,
+ "is_regular": true
+}

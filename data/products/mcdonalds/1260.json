@@ -1,0 +1,90 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "1260",
+ "name": "炙り醤油風 たまごベーコン肉厚ビーフ",
+ "category": "バーガー",
+ "price": 580,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "厚みのある100%ビーフとたまごに、香ばしいソースが決め手の、ビーフとたまごのバランスが絶妙な一品です。",
+ "description_full_len": 52,
+ "nutrition": {
+  "kcal": 517.0,
+  "protein_g": 30.8,
+  "fat_g": 27.0,
+  "carbs_g": 37.3,
+  "sugar_g": 8.0,
+  "fiber_g": null,
+  "salt_g": 3.2,
+  "other": {
+   "飽和脂肪酸": "11.21g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "乳",
+   "小麦",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "豚肉"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "バンズ",
+   "origin": "主要原料：小麦粉／アメリカ、カナダ、オーストラリア　製造所所在地：日本"
+  },
+  {
+   "name": "タマゴ",
+   "origin": "主要原料：卵／日本　製造所所在地：日本"
+  },
+  {
+   "name": "ビーフパティ",
+   "origin": "主要原料：牛肉／オーストラリア、ニュージーランド　製造所所在地：日本"
+  },
+  {
+   "name": "レタス",
+   "origin": "主要原料：レタス／日本、台湾、アメリカ、マレーシア、韓国　製造所所在地：日本"
+  },
+  {
+   "name": "オニオン",
+   "origin": "主要原料：たまねぎ／アメリカ、インド　製造所所在地：アメリカ、インド"
+  },
+  {
+   "name": "ホワイトチェダースライスチーズ",
+   "origin": "主要原料：チーズ／オーストラリア、ニュージーランド、日本、アメリカ　製造所所在地：日本"
+  },
+  {
+   "name": "スモークベーコン",
+   "origin": "主要原料：豚肉／デンマーク、アイルランド、ブラジル　製造所所在地：日本"
+  },
+  {
+   "name": "炙り醤油風ソース",
+   "origin": "主要原料：醤油／日本　製造所所在地：日本"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mcdonalds.co.jp/products/1260/",
+ "first_seen_at": "2026-11-09T07:30:17+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 580
+  }
+ ],
+ "source_list": [
+  "/menu/burger/"
+ ],
+ "image": null,
+ "is_regular": true
+}

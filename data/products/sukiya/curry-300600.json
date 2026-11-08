@@ -1,0 +1,140 @@
+{
+ "chain": "sukiya",
+ "product_id": "curry-300600",
+ "name": "牛カレー",
+ "category": "カレー",
+ "price": 830,
+ "price_note": "税込・店内の価格。サイズや組み合わせにより価格が異なります（内訳は下の表）。表示は「並盛」の価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "ミニ",
+   "price": 730
+  },
+  {
+   "label": "並盛",
+   "price": 830
+  },
+  {
+   "label": "大盛",
+   "price": 970
+  },
+  {
+   "label": "メガ",
+   "price": 1230
+  }
+ ],
+ "price_checked_at": "2026-11-09",
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "nutrition_variants": null,
+ "nutrition_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
+ "nutrition_pdf_label": "栄養成分一覧",
+ "allergen_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
+ "allergen_pdf_label": "アレルゲン一覧",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "乳",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "りんご",
+   "バナナ",
+   "ごま"
+  ],
+  "partial": [
+   {
+    "name": "卵",
+    "mark": "△"
+   },
+   {
+    "name": "落花生（ピーナッツ）",
+    "mark": "△"
+   },
+   {
+    "name": "えび",
+    "mark": "△"
+   },
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "オレンジ",
+    "mark": "△"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "badges": [],
+ "official_url": "https://www.sukiya.jp/menu/in/curry/300600/index.html",
+ "first_seen_at": "2026-11-09T07:35:31+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 830
+  }
+ ],
+ "source_list": [
+  "curry"
+ ],
+ "image": null,
+ "price_variants_history": [
+  {
+   "date": "2026-11-09",
+   "variants": [
+    {
+     "label": "ミニ",
+     "price": 730
+    },
+    {
+     "label": "並盛",
+     "price": 830
+    },
+    {
+     "label": "大盛",
+     "price": 970
+    },
+    {
+     "label": "メガ",
+     "price": 1230
+    }
+   ]
+  }
+ ],
+ "is_regular": true,
+ "allergens_conditional": {
+  "mark": "△",
+  "meaning": "原材料由来および原材料の製造工場において、そのアレルゲン物質を含む製品を同じライン等で製造しております"
+ },
+ "allergen_source": {
+  "url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
+  "label": "アレルゲン一覧",
+  "version": "2026-11-06",
+  "version_text": "2026年11月6日更新",
+  "fetched_at": "2026-11-09T07:38:46+09:00"
+ },
+ "pdf_tried": "2026-11-06|2026-11-06"
+}

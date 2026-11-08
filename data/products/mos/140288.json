@@ -1,0 +1,110 @@
+{
+ "chain": "mos",
+ "product_id": "140288",
+ "name": "ワイワイテリヤキバーガーセット",
+ "category": "モスワイワイセット（お子さま向け）",
+ "price": 630,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "オリジナルのテリヤキソースをパティにからめ、細切りレタスをはさんだハンバーガーに、フレンチフライポテトのSサイズ、Sサイズドリンク、おまけがついたお子さま向けのセットです。",
+ "description_full_len": 86,
+ "nutrition": {
+  "kcal": 348.0,
+  "protein_g": 14.0,
+  "fat_g": 15.7,
+  "carbs_g": 37.7,
+  "sugar_g": null,
+  "fiber_g": 2.6,
+  "salt_g": 2.2,
+  "other": {
+   "重量": "142.2g",
+   "コレステロール": "29mg",
+   "ナトリウム": "848mg",
+   "カリウム": "214mg",
+   "カルシウム": "34mg",
+   "リン": "140mg",
+   "鉄": "1.3mg",
+   "ビタミンA": "14μg",
+   "ビタミンB1": "0.09mg",
+   "ビタミンB2": "0.09mg",
+   "ナイアシン": "2.3mg",
+   "ビタミンC": "2mg",
+   "ビタミンD": "0.2μg",
+   "ビタミンE": "0.6mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "牛肉",
+   "大豆",
+   "豚肉",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "▽"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "ハンバーガーパティ：牛肉",
+   "origin": "オーストラリア、アメリカ、カナダ"
+  },
+  {
+   "name": "モスの生野菜：レタス",
+   "origin": "国産"
+  },
+  {
+   "name": "テリヤキソース：味噌",
+   "origin": "国産"
+  },
+  {
+   "name": "テリヤキソース：醤油",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=140288&c_id=11",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 630
+  }
+ ],
+ "source_list": [
+  "menu_category/11"
+ ],
+ "image": null,
+ "is_regular": true
+}

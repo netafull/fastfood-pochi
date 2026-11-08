@@ -1,0 +1,64 @@
+{
+ "chain": "marugame",
+ "product_id": "udon-kamaagekazokuudon",
+ "slug": "kamaagekazokuudon",
+ "category_id": "udon",
+ "name": "釜揚げ家族うどん",
+ "category": "うどん",
+ "price": 2050,
+ "price_note": "税込。店舗により販売メニューや価格が異なる場合があります。",
+ "price_variants": null,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "description": "丸亀製麺の看板商品、釜揚げうどん（並）6人前を特製の大きな桶でご用意。",
+ "description_full_len": 120,
+ "nutrition": {
+  "kcal": 1977.0,
+  "protein_g": 60.0,
+  "fat_g": 9.0,
+  "carbs_g": 413.8,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 25.4,
+  "other": {
+   "ナトリウム": "9990mg"
+  }
+ },
+ "nutrition_variants": null,
+ "nutrition_note": "栄養成分値は商品のレシピに基づく推定値で、店内の手づくりのため実際の商品と差が出ることがあります",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "さば",
+   "大豆"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "badges": [],
+ "channels": [
+  "店内"
+ ],
+ "takeout_only": false,
+ "official_url": "https://jp.marugame.com/menu/udon/kamaagekazokuudon/",
+ "first_seen_at": "2026-11-09T07:39:17+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 2050
+  }
+ ],
+ "source_list": [
+  "menu/udon"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-09",
+ "is_regular": true
+}

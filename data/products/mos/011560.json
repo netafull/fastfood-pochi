@@ -1,0 +1,108 @@
+{
+ "chain": "mos",
+ "product_id": "011560",
+ "name": "とびきりチーズ 〜北海道チーズ〜",
+ "category": "とびきりバーガー　国産牛100％",
+ "price": 730,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "とびきりな肉感とうまみが広がる100%国産牛使用のパティ。",
+ "description_full_len": 108,
+ "nutrition": {
+  "kcal": 478.0,
+  "protein_g": 21.9,
+  "fat_g": 24.7,
+  "carbs_g": 42.2,
+  "sugar_g": null,
+  "fiber_g": 3.0,
+  "salt_g": 3.0,
+  "other": {
+   "重量": "223.9g",
+   "コレステロール": "51mg",
+   "ナトリウム": "1191mg",
+   "カリウム": "369mg",
+   "カルシウム": "95mg",
+   "リン": "296mg",
+   "鉄": "1.5mg",
+   "ビタミンA": "85μg",
+   "ビタミンB1": "0.13mg",
+   "ビタミンB2": "0.18mg",
+   "ナイアシン": "2.4mg",
+   "ビタミンC": "9mg",
+   "ビタミンD": "0.1μg",
+   "ビタミンE": "1.4mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "りんご",
+   "ゼラチン"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "国産牛パティ：牛肉",
+   "origin": "国産"
+  },
+  {
+   "name": "北海道チーズ：チーズ",
+   "origin": "国産（北海道）、オーストラリア"
+  },
+  {
+   "name": "モスの生野菜：トマト",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：グリーンリーフ",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=011560&c_id=27",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 730
+  }
+ ],
+ "source_list": [
+  "menu_category/27"
+ ],
+ "image": null,
+ "is_regular": true
+}

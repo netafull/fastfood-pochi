@@ -1,0 +1,78 @@
+{
+ "chain": "mos",
+ "product_id": "221020",
+ "name": "冷凍モスチキン 5本入り",
+ "category": "サイドメニュー",
+ "price": 1600,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "和風の下味をしっかりとつけた鶏の胸肉をカリカリ衣でつつみました。",
+ "description_full_len": 97,
+ "nutrition": {
+  "kcal": 315.0,
+  "protein_g": 14.5,
+  "fat_g": 21.7,
+  "carbs_g": 15.4,
+  "sugar_g": null,
+  "fiber_g": 0.0,
+  "salt_g": 1.5,
+  "other": {
+   "重量": "100.0g",
+   "コレステロール": "0mg",
+   "ナトリウム": "0mg",
+   "カリウム": "0mg",
+   "カルシウム": "0mg",
+   "リン": "0mg",
+   "鉄": "0.0mg",
+   "ビタミンA": "0μg",
+   "ビタミンB1": "0.00mg",
+   "ビタミンB2": "0.00mg",
+   "ナイアシン": "0.0mg",
+   "ビタミンC": "0mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "0.0mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "小麦",
+   "大豆",
+   "鶏肉"
+  ],
+  "partial": [
+   {
+    "name": "乳",
+    "mark": "◇"
+   },
+   {
+    "name": "卵",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "モスチキン：鶏肉",
+   "origin": "中国"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=221020&c_id=7",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 1600
+  }
+ ],
+ "source_list": [
+  "menu_category/7"
+ ],
+ "image": null,
+ "is_regular": true
+}

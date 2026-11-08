@@ -1,0 +1,67 @@
+{
+ "chain": "mos",
+ "product_id": "211520",
+ "name": "チリディップソース",
+ "category": "サイドメニュー",
+ "price": 100,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "辛みが引き立つトマトソース風味のチリディップソース。",
+ "description_full_len": 54,
+ "nutrition": {
+  "kcal": 48.0,
+  "protein_g": 3.0,
+  "fat_g": 1.2,
+  "carbs_g": 6.4,
+  "sugar_g": null,
+  "fiber_g": 1.0,
+  "salt_g": 1.1,
+  "other": {
+   "重量": "45.0g",
+   "コレステロール": "0mg",
+   "ナトリウム": "419mg",
+   "カリウム": "54mg",
+   "カルシウム": "5mg",
+   "リン": "11mg",
+   "鉄": "0.1mg",
+   "ビタミンA": "2μg",
+   "ビタミンB1": "0.02mg",
+   "ビタミンB2": "0.00mg",
+   "ナイアシン": "0.1mg",
+   "ビタミンC": "2mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "0.0mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "小麦",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "りんご"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=211520&c_id=7",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 100
+  }
+ ],
+ "source_list": [
+  "menu_category/7"
+ ],
+ "image": null,
+ "is_regular": true
+}

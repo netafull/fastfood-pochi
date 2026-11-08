@@ -1,0 +1,65 @@
+{
+ "chain": "mos",
+ "product_id": "685776",
+ "name": "【イートイン限定】ダブル ふんわりスフレパンケーキ＜メープルシロップ＞",
+ "category": "デザート",
+ "price": 920,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "バターをトッピングした、ふんわり、しっとり食感のスフレパンケーキです｡バターの塩味がケーキの甘さと程よくマッチします。",
+ "description_full_len": 73,
+ "nutrition": {
+  "kcal": 639.0,
+  "protein_g": 11.2,
+  "fat_g": 33.4,
+  "carbs_g": 73.3,
+  "sugar_g": null,
+  "fiber_g": 0.0,
+  "salt_g": 0.6,
+  "other": {
+   "重量": "174.0g",
+   "コレステロール": "200mg",
+   "ナトリウム": "264mg",
+   "カリウム": "156mg",
+   "カルシウム": "41mg",
+   "リン": "84mg",
+   "鉄": "0.9mg",
+   "ビタミンA": "112μg",
+   "ビタミンB1": "0.04mg",
+   "ビタミンB2": "0.34mg",
+   "ナイアシン": "0.2mg",
+   "ビタミンC": "0mg",
+   "ビタミンD": "0.8μg",
+   "ビタミンE": "2.2mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "大豆"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=685776&c_id=9",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 920
+  }
+ ],
+ "source_list": [
+  "menu_category/9"
+ ],
+ "image": null,
+ "is_regular": true
+}

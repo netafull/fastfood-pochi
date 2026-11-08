@@ -1,0 +1,143 @@
+{
+ "chain": "marugame",
+ "product_id": "udon-kitune",
+ "slug": "kitune",
+ "category_id": "udon",
+ "name": "きつねうどん",
+ "category": "うどん",
+ "price": 640,
+ "price_note": "税込。表示は「並」の価格。店舗により販売メニューや価格が異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "並",
+   "price": 640
+  },
+  {
+   "label": "大",
+   "price": 830
+  },
+  {
+   "label": "得",
+   "price": 1020
+  }
+ ],
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "description": "丼からはみ出るほどの大きなきつね揚げは、コクのある甘さ。",
+ "description_full_len": 91,
+ "nutrition": {
+  "kcal": 434.0,
+  "protein_g": 15.4,
+  "fat_g": 9.6,
+  "carbs_g": 71.2,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 6.2,
+  "other": {
+   "ナトリウム": "2433mg"
+  }
+ },
+ "nutrition_variants": [
+  {
+   "label": "温・並",
+   "nutrition": {
+    "kcal": 434.0,
+    "protein_g": 15.4,
+    "fat_g": 9.6,
+    "carbs_g": 71.2,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 6.2,
+    "other": {
+     "ナトリウム": "2433mg"
+    }
+   }
+  },
+  {
+   "label": "温・大",
+   "nutrition": {
+    "kcal": 579.0,
+    "protein_g": 19.9,
+    "fat_g": 10.2,
+    "carbs_g": 101.5,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 8.3,
+    "other": {
+     "ナトリウム": "3283mg"
+    }
+   }
+  },
+  {
+   "label": "温・得",
+   "nutrition": {
+    "kcal": 855.0,
+    "protein_g": 30.0,
+    "fat_g": 19.2,
+    "carbs_g": 140.1,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 10.3,
+    "other": {
+     "ナトリウム": "4041mg"
+    }
+   }
+  }
+ ],
+ "nutrition_note": "栄養成分値は商品のレシピに基づく推定値で、店内の手づくりのため実際の商品と差が出ることがあります",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "さば",
+   "大豆"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "badges": [],
+ "channels": [
+  "店内",
+  "お持ち帰り"
+ ],
+ "takeout_only": false,
+ "official_url": "https://jp.marugame.com/menu/udon/kitune/",
+ "first_seen_at": "2026-11-09T07:39:17+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 640
+  }
+ ],
+ "source_list": [
+  "menu/udon"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-09",
+ "price_variants_history": [
+  {
+   "date": "2026-11-09",
+   "variants": [
+    {
+     "label": "並",
+     "price": 640
+    },
+    {
+     "label": "大",
+     "price": 830
+    },
+    {
+     "label": "得",
+     "price": 1020
+    }
+   ]
+  }
+ ],
+ "is_regular": true
+}

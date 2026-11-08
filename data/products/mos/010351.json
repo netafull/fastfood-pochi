@@ -1,0 +1,123 @@
+{
+ "chain": "mos",
+ "product_id": "010351",
+ "name": "スパイシーダブルモスバーガー",
+ "category": "ハンバーガー",
+ "price": 700,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "あつあつのミートソースにハラペーニョをトッピング！熱さ、辛さとパティ×ダブルでより一層辛い旨みが楽しめるモスバーガーです。",
+ "description_full_len": 61,
+ "nutrition": {
+  "kcal": 535.0,
+  "protein_g": 23.8,
+  "fat_g": 28.5,
+  "carbs_g": 46.1,
+  "sugar_g": null,
+  "fiber_g": 4.6,
+  "salt_g": 3.6,
+  "other": {
+   "重量": "284.5g",
+   "コレステロール": "56mg",
+   "ナトリウム": "1400mg",
+   "カリウム": "457mg",
+   "カルシウム": "68mg",
+   "リン": "255mg",
+   "鉄": "2.3mg",
+   "ビタミンA": "49μg",
+   "ビタミンB1": "0.14mg",
+   "ビタミンB2": "0.15mg",
+   "ナイアシン": "4.1mg",
+   "ビタミンC": "13mg",
+   "ビタミンD": "0.4μg",
+   "ビタミンE": "1.3mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "ハンバーガーパティ：牛肉",
+   "origin": "オーストラリア、アメリカ、カナダ"
+  },
+  {
+   "name": "モスの生野菜：トマト",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  },
+  {
+   "name": "ハラペーニョ：ハラペーニョ",
+   "origin": "インド、メキシコ"
+  },
+  {
+   "name": "ミートソース：オニオン",
+   "origin": "国産、ニュージーランド、カナダ、その他"
+  },
+  {
+   "name": "ミートソース：トマトおよびその加工品",
+   "origin": "オーストラリア、チリ、ポルトガル、その他"
+  },
+  {
+   "name": "ミートソース：牛肉",
+   "origin": "オーストラリア、その他"
+  },
+  {
+   "name": "ミートソース：豚肉",
+   "origin": "カナダ、その他"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=010351&c_id=1",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 700
+  }
+ ],
+ "source_list": [
+  "menu_category/1"
+ ],
+ "image": null,
+ "is_regular": true
+}

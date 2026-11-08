@@ -1,0 +1,104 @@
+{
+ "chain": "mos",
+ "product_id": "121013",
+ "name": "朝のホットドッグ",
+ "category": "朝モス",
+ "price": 320,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "あらびきポークの「シャウエッセン」を使用しました。",
+ "description_full_len": 79,
+ "nutrition": {
+  "kcal": 267.0,
+  "protein_g": 9.5,
+  "fat_g": 15.4,
+  "carbs_g": 22.4,
+  "sugar_g": null,
+  "fiber_g": 1.3,
+  "salt_g": 1.3,
+  "other": {
+   "重量": "92.9g",
+   "コレステロール": "0mg",
+   "ナトリウム": "540mg",
+   "カリウム": "71mg",
+   "カルシウム": "14mg",
+   "リン": "37mg",
+   "鉄": "0.3mg",
+   "ビタミンA": "2μg",
+   "ビタミンB1": "0.03mg",
+   "ビタミンB2": "0.02mg",
+   "ナイアシン": "0.6mg",
+   "ビタミンC": "0mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "0.5mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "大豆",
+   "豚肉",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "卵",
+    "mark": "▽◇"
+   },
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "牛肉",
+    "mark": "▽"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "▽"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ホットドッグロール：小麦粉（小麦）",
+   "origin": "カナダ、アメリカ、国産"
+  },
+  {
+   "name": "モスの生野菜：レタス",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=121013&c_id=12",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 320
+  }
+ ],
+ "source_list": [
+  "menu_category/12"
+ ],
+ "image": null,
+ "is_regular": true
+}

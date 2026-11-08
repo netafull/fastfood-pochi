@@ -1,0 +1,105 @@
+{
+ "chain": "mos",
+ "product_id": "140938",
+ "name": "ワイワイチーズバーガーセット",
+ "category": "モスワイワイセット（お子さま向け）",
+ "price": 610,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "生のオニオンとマスタードを抜いて、ケチャップで味付けしたシンプルなチーズバーガーに、フレンチフライポテトのSサイズ、Sサイズドリンク、おまけがついたお子さま向けのセットです。",
+ "description_full_len": 119,
+ "nutrition": {
+  "kcal": 364.0,
+  "protein_g": 16.6,
+  "fat_g": 17.5,
+  "carbs_g": 35.0,
+  "sugar_g": null,
+  "fiber_g": 2.5,
+  "salt_g": 2.2,
+  "other": {
+   "重量": "137.2g",
+   "コレステロール": "37mg",
+   "ナトリウム": "860mg",
+   "カリウム": "242mg",
+   "カルシウム": "118mg",
+   "リン": "280mg",
+   "鉄": "1.3mg",
+   "ビタミンA": "53μg",
+   "ビタミンB1": "0.09mg",
+   "ビタミンB2": "0.14mg",
+   "ナイアシン": "2.5mg",
+   "ビタミンC": "2mg",
+   "ビタミンD": "0.2μg",
+   "ビタミンE": "0.8mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "牛肉",
+   "大豆",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "▽"
+   },
+   {
+    "name": "豚肉",
+    "mark": "▽"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "ハンバーガーパティ：牛肉",
+   "origin": "オーストラリア、アメリカ、カナダ"
+  },
+  {
+   "name": "スライスチーズ：チーズ",
+   "origin": "ニュージーランド、オーストラリア、アメリカ、その他"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=140938&c_id=11",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 610
+  }
+ ],
+ "source_list": [
+  "menu_category/11"
+ ],
+ "image": null,
+ "is_regular": true
+}

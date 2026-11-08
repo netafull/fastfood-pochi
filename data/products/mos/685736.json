@@ -1,0 +1,67 @@
+{
+ "chain": "mos",
+ "product_id": "685736",
+ "name": "アイスドルチェ カップ ショコラ風ムースケーキ",
+ "category": "デザート",
+ "price": 410,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "卵・乳・小麦と動物性原料を使用せず(二次原料まで)に作ったデザートです。",
+ "description_full_len": 136,
+ "nutrition": {
+  "kcal": 199.0,
+  "protein_g": 2.1,
+  "fat_g": 10.4,
+  "carbs_g": 24.3,
+  "sugar_g": null,
+  "fiber_g": 0.8,
+  "salt_g": 0.1,
+  "other": {
+   "重量": "64.5g",
+   "コレステロール": "0mg",
+   "ナトリウム": "57mg",
+   "カリウム": "160mg",
+   "カルシウム": "19mg",
+   "リン": "46mg",
+   "鉄": "0.5mg",
+   "ビタミンA": "0μg",
+   "ビタミンB1": "0.02mg",
+   "ビタミンB2": "0.01mg",
+   "ナイアシン": "0.1mg",
+   "ビタミンC": "0mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "0.6mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "大豆"
+  ],
+  "partial": [
+   {
+    "name": "小麦",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=685736&c_id=9",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 410
+  }
+ ],
+ "source_list": [
+  "menu_category/9"
+ ],
+ "image": null,
+ "is_regular": true
+}

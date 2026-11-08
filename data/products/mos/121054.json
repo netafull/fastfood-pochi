@@ -1,0 +1,114 @@
+{
+ "chain": "mos",
+ "product_id": "121054",
+ "name": "朝のとろったまチーズバーガー ～テリヤキソース～",
+ "category": "朝モス",
+ "price": 440,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "スライスチーズとパティに半熟風たまごのとろったまを重ね、テリヤキソースで仕上げた朝限定のバーガーです。",
+ "description_full_len": 64,
+ "nutrition": {
+  "kcal": 416.0,
+  "protein_g": 17.9,
+  "fat_g": 21.9,
+  "carbs_g": 36.8,
+  "sugar_g": null,
+  "fiber_g": 2.4,
+  "salt_g": 2.6,
+  "other": {
+   "重量": "155.2g",
+   "コレステロール": "44mg",
+   "ナトリウム": "1011mg",
+   "カリウム": "203mg",
+   "カルシウム": "153mg",
+   "リン": "287mg",
+   "鉄": "1.2mg",
+   "ビタミンA": "51μg",
+   "ビタミンB1": "0.08mg",
+   "ビタミンB2": "0.17mg",
+   "ナイアシン": "2.3mg",
+   "ビタミンC": "1mg",
+   "ビタミンD": "0.2μg",
+   "ビタミンE": "1.4mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "牛肉",
+   "大豆",
+   "豚肉",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "▽"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "ハンバーガーパティ：牛肉",
+   "origin": "オーストラリア、アメリカ、カナダ"
+  },
+  {
+   "name": "鶏卵加工品：鶏卵",
+   "origin": "国産"
+  },
+  {
+   "name": "スライスチーズ：チーズ",
+   "origin": "ニュージーランド、オーストラリア、アメリカ、その他"
+  },
+  {
+   "name": "テリヤキソース：味噌",
+   "origin": "国産"
+  },
+  {
+   "name": "テリヤキソース：醤油",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=121054&c_id=12",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 440
+  }
+ ],
+ "source_list": [
+  "menu_category/12"
+ ],
+ "image": null,
+ "is_regular": true
+}

@@ -1,0 +1,128 @@
+{
+ "chain": "mos",
+ "product_id": "010005",
+ "name": "フィッシュバーガー",
+ "category": "ハンバーガー",
+ "price": 430,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "さっぱりとした白身魚のフライに、チーズがマッチ。",
+ "description_full_len": 24,
+ "nutrition": {
+  "kcal": 381.0,
+  "protein_g": 16.2,
+  "fat_g": 18.8,
+  "carbs_g": 37.0,
+  "sugar_g": null,
+  "fiber_g": 1.9,
+  "salt_g": 1.9,
+  "other": {
+   "重量": "143.9g",
+   "コレステロール": "36mg",
+   "ナトリウム": "745mg",
+   "カリウム": "239mg",
+   "カルシウム": "107mg",
+   "リン": "273mg",
+   "鉄": "0.6mg",
+   "ビタミンA": "44μg",
+   "ビタミンB1": "0.08mg",
+   "ビタミンB2": "0.10mg",
+   "ナイアシン": "1.6mg",
+   "ビタミンC": "0mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "2.6mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "大豆",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "いか",
+    "mark": "△"
+   },
+   {
+    "name": "えび",
+    "mark": "△"
+   },
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "牛肉",
+    "mark": "△"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "フィッシュ（白身魚フライ）：ホキ（白身魚）",
+   "origin": "ニュージーランド沖"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  },
+  {
+   "name": "スライスチーズ：チーズ",
+   "origin": "ニュージーランド、オーストラリア、アメリカ、その他"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=010005&c_id=1",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 430
+  }
+ ],
+ "source_list": [
+  "menu_category/1"
+ ],
+ "image": null,
+ "is_regular": true
+}

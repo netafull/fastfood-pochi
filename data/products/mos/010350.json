@@ -1,0 +1,123 @@
+{
+ "chain": "mos",
+ "product_id": "010350",
+ "name": "スパイシーモスバーガー",
+ "category": "ハンバーガー",
+ "price": 550,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "あつあつのミートソースに、ピリッと辛いハラペーニョを利かせたモスバーガー。",
+ "description_full_len": 59,
+ "nutrition": {
+  "kcal": 375.0,
+  "protein_g": 15.3,
+  "fat_g": 17.1,
+  "carbs_g": 40.4,
+  "sugar_g": null,
+  "fiber_g": 3.5,
+  "salt_g": 2.5,
+  "other": {
+   "重量": "219.2g",
+   "コレステロール": "30mg",
+   "ナトリウム": "969mg",
+   "カリウム": "327mg",
+   "カルシウム": "51mg",
+   "リン": "158mg",
+   "鉄": "1.5mg",
+   "ビタミンA": "39μg",
+   "ビタミンB1": "0.11mg",
+   "ビタミンB2": "0.10mg",
+   "ナイアシン": "2.6mg",
+   "ビタミンC": "12mg",
+   "ビタミンD": "0.2μg",
+   "ビタミンE": "1.2mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "ハンバーガーパティ：牛肉",
+   "origin": "オーストラリア、アメリカ、カナダ"
+  },
+  {
+   "name": "モスの生野菜：トマト",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  },
+  {
+   "name": "ハラペーニョ：ハラペーニョ",
+   "origin": "インド、メキシコ"
+  },
+  {
+   "name": "ミートソース：オニオン",
+   "origin": "国産、ニュージーランド、カナダ、その他"
+  },
+  {
+   "name": "ミートソース：トマトおよびその加工品",
+   "origin": "オーストラリア、チリ、ポルトガル、その他"
+  },
+  {
+   "name": "ミートソース：牛肉",
+   "origin": "オーストラリア、その他"
+  },
+  {
+   "name": "ミートソース：豚肉",
+   "origin": "カナダ、その他"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=010350&c_id=1",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 550
+  }
+ ],
+ "source_list": [
+  "menu_category/1"
+ ],
+ "image": null,
+ "is_regular": true
+}

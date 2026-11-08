@@ -1,0 +1,113 @@
+{
+ "chain": "mos",
+ "product_id": "011466",
+ "name": "ダブルモス野菜バーガー",
+ "category": "ハンバーガー",
+ "price": 650,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "野菜の旨みがつまったモスオリジナルオーロラソースをかけた、モス野菜バーガーのパティを2枚にしました。",
+ "description_full_len": 71,
+ "nutrition": {
+  "kcal": 511.0,
+  "protein_g": 22.2,
+  "fat_g": 29.5,
+  "carbs_g": 39.7,
+  "sugar_g": null,
+  "fiber_g": 4.2,
+  "salt_g": 2.7,
+  "other": {
+   "重量": "247.5g",
+   "コレステロール": "56mg",
+   "ナトリウム": "1064mg",
+   "カリウム": "452mg",
+   "カルシウム": "58mg",
+   "リン": "250mg",
+   "鉄": "2.3mg",
+   "ビタミンA": "47μg",
+   "ビタミンB1": "0.14mg",
+   "ビタミンB2": "0.16mg",
+   "ナイアシン": "4.2mg",
+   "ビタミンC": "10mg",
+   "ビタミンD": "0.4μg",
+   "ビタミンE": "2.2mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "牛肉",
+   "大豆",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "▽"
+   },
+   {
+    "name": "豚肉",
+    "mark": "▽"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "ハンバーガーパティ：牛肉",
+   "origin": "オーストラリア、アメリカ、カナダ"
+  },
+  {
+   "name": "モスの生野菜：トマト",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：レタス",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=011466&c_id=1",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 650
+  }
+ ],
+ "source_list": [
+  "menu_category/1"
+ ],
+ "image": null,
+ "is_regular": true
+}

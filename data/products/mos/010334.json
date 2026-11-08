@@ -1,0 +1,110 @@
+{
+ "chain": "mos",
+ "product_id": "010334",
+ "name": "ダブルテリヤキバーガー",
+ "category": "ハンバーガー",
+ "price": 640,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "オリジナルのテリヤキソースを絡めたパティと、シャキシャキレタスを合わせた和風バーガーです。",
+ "description_full_len": 62,
+ "nutrition": {
+  "kcal": 560.0,
+  "protein_g": 22.8,
+  "fat_g": 29.3,
+  "carbs_g": 51.4,
+  "sugar_g": null,
+  "fiber_g": 3.8,
+  "salt_g": 4.0,
+  "other": {
+   "重量": "237.5g",
+   "コレステロール": "58mg",
+   "ナトリウム": "1579mg",
+   "カリウム": "383mg",
+   "カルシウム": "58mg",
+   "リン": "247mg",
+   "鉄": "2.3mg",
+   "ビタミンA": "29μg",
+   "ビタミンB1": "0.13mg",
+   "ビタミンB2": "0.18mg",
+   "ナイアシン": "4.0mg",
+   "ビタミンC": "5mg",
+   "ビタミンD": "0.4μg",
+   "ビタミンE": "1.1mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "牛肉",
+   "大豆",
+   "豚肉",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "▽"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "ハンバーガーパティ：牛肉",
+   "origin": "オーストラリア、アメリカ、カナダ"
+  },
+  {
+   "name": "モスの生野菜：レタス",
+   "origin": "国産"
+  },
+  {
+   "name": "テリヤキソース：味噌",
+   "origin": "国産"
+  },
+  {
+   "name": "テリヤキソース：醤油",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=010334&c_id=1",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 640
+  }
+ ],
+ "source_list": [
+  "menu_category/1"
+ ],
+ "image": null,
+ "is_regular": true
+}

@@ -1,0 +1,85 @@
+{
+ "chain": "mos",
+ "product_id": "312435",
+ "name": "クラムチャウダー",
+ "category": "ドリンク／スープ",
+ "price": 380,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "あさり、ベーコン、玉ねぎ、じゃがいもなどの具材がたっぷり入った、食感が楽しいミルクベースのクラムチャウダーです。",
+ "description_full_len": 85,
+ "nutrition": {
+  "kcal": 119.0,
+  "protein_g": 4.1,
+  "fat_g": 4.3,
+  "carbs_g": 15.8,
+  "sugar_g": null,
+  "fiber_g": 0.7,
+  "salt_g": 1.3,
+  "other": {
+   "重量": "180.0g",
+   "コレステロール": "7mg",
+   "ナトリウム": "509mg",
+   "カリウム": "230mg",
+   "カルシウム": "72mg",
+   "リン": "108mg",
+   "鉄": "0.9mg",
+   "ビタミンA": "13μg",
+   "ビタミンB1": "0.05mg",
+   "ビタミンB2": "0.18mg",
+   "ナイアシン": "0.7mg",
+   "ビタミンC": "0mg",
+   "ビタミンD": "0.5μg",
+   "ビタミンE": "0.4mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "大豆",
+   "鶏肉",
+   "豚肉"
+  ],
+  "partial": [
+   {
+    "name": "かに",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "クラムチャウダー：じゃがいも",
+   "origin": "国産"
+  },
+  {
+   "name": "クラムチャウダー：オニオン",
+   "origin": "中国、アメリカ、国産、その他"
+  },
+  {
+   "name": "クラムチャウダー：あさり",
+   "origin": "中国"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=312435&c_id=34",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 380
+  }
+ ],
+ "source_list": [
+  "menu_category/34"
+ ],
+ "image": null,
+ "is_regular": true
+}

@@ -1,0 +1,109 @@
+{
+ "chain": "mos",
+ "product_id": "211290",
+ "name": "オニオンフライ",
+ "category": "サイドメニュー",
+ "price": 340,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "辛味の少ないオニオンに、軽い衣をつけてさっくり揚げました。",
+ "description_full_len": 44,
+ "nutrition": {
+  "kcal": 219.0,
+  "protein_g": 3.5,
+  "fat_g": 12.7,
+  "carbs_g": 22.8,
+  "sugar_g": null,
+  "fiber_g": 1.3,
+  "salt_g": 1.1,
+  "other": {
+   "重量": "70.4g",
+   "コレステロール": "0mg",
+   "ナトリウム": "442mg",
+   "カリウム": "66mg",
+   "カルシウム": "98mg",
+   "リン": "46mg",
+   "鉄": "0.4mg",
+   "ビタミンA": "0μg",
+   "ビタミンB1": "0.03mg",
+   "ビタミンB2": "0.35mg",
+   "ナイアシン": "0.4mg",
+   "ビタミンC": "1mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "2.5mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "小麦",
+   "大豆"
+  ],
+  "partial": [
+   {
+    "name": "乳",
+    "mark": "△◇"
+   },
+   {
+    "name": "卵",
+    "mark": "△◇"
+   },
+   {
+    "name": "いか",
+    "mark": "△"
+   },
+   {
+    "name": "えび",
+    "mark": "△"
+   },
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "牛肉",
+    "mark": "△"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "オニオンフライ：オニオン",
+   "origin": "中国"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=211290&c_id=7",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 340
+  }
+ ],
+ "source_list": [
+  "menu_category/7"
+ ],
+ "image": null,
+ "is_regular": true
+}

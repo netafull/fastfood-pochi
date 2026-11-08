@@ -1,0 +1,127 @@
+{
+ "chain": "mos",
+ "product_id": "010361",
+ "name": "スパイシーダブルモスチーズバーガー",
+ "category": "ハンバーガー",
+ "price": 750,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "辛いだけでなく､ミートソースとチーズのコク､更にパティの旨みもダブルで､味わい､食べごたえ､刺激の揃ったバーガーになりました｡",
+ "description_full_len": 63,
+ "nutrition": {
+  "kcal": 588.0,
+  "protein_g": 26.8,
+  "fat_g": 32.9,
+  "carbs_g": 46.5,
+  "sugar_g": null,
+  "fiber_g": 4.6,
+  "salt_g": 4.1,
+  "other": {
+   "重量": "299.5g",
+   "コレステロール": "68mg",
+   "ナトリウム": "1589mg",
+   "カリウム": "467mg",
+   "カルシウム": "154mg",
+   "リン": "398mg",
+   "鉄": "2.3mg",
+   "ビタミンA": "88μg",
+   "ビタミンB1": "0.14mg",
+   "ビタミンB2": "0.20mg",
+   "ナイアシン": "4.1mg",
+   "ビタミンC": "13mg",
+   "ビタミンD": "0.4μg",
+   "ビタミンE": "1.5mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "ハンバーガーパティ：牛肉",
+   "origin": "オーストラリア、アメリカ、カナダ"
+  },
+  {
+   "name": "モスの生野菜：トマト",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  },
+  {
+   "name": "スライスチーズ：チーズ",
+   "origin": "ニュージーランド、オーストラリア、アメリカ、その他"
+  },
+  {
+   "name": "ハラペーニョ：ハラペーニョ",
+   "origin": "インド、メキシコ"
+  },
+  {
+   "name": "ミートソース：オニオン",
+   "origin": "国産、ニュージーランド、カナダ、その他"
+  },
+  {
+   "name": "ミートソース：トマトおよびその加工品",
+   "origin": "オーストラリア、チリ、ポルトガル、その他"
+  },
+  {
+   "name": "ミートソース：牛肉",
+   "origin": "オーストラリア、その他"
+  },
+  {
+   "name": "ミートソース：豚肉",
+   "origin": "カナダ、その他"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=010361&c_id=1",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 750
+  }
+ ],
+ "source_list": [
+  "menu_category/1"
+ ],
+ "image": null,
+ "is_regular": true
+}

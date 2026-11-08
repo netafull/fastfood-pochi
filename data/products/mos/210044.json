@@ -1,0 +1,64 @@
+{
+ "chain": "mos",
+ "product_id": "210044",
+ "name": "マスタードソース",
+ "category": "サイドメニュー",
+ "price": 50,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "マヨネーズにマスタードのさわやかな酸味とほのかな甘みを加えた、辛口のソースです。",
+ "description_full_len": 40,
+ "nutrition": {
+  "kcal": 101.0,
+  "protein_g": 0.4,
+  "fat_g": 10.1,
+  "carbs_g": 2.2,
+  "sugar_g": null,
+  "fiber_g": 0.0,
+  "salt_g": 0.7,
+  "other": {
+   "重量": "20.0g",
+   "コレステロール": "9mg",
+   "ナトリウム": "270mg",
+   "カリウム": "10mg",
+   "カルシウム": "4mg",
+   "リン": "9mg",
+   "鉄": "0.1mg",
+   "ビタミンA": "3μg",
+   "ビタミンB1": "0.01mg",
+   "ビタミンB2": "0.01mg",
+   "ナイアシン": "0.0mg",
+   "ビタミンC": "0mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "1.9mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "大豆",
+   "りんご"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=210044&c_id=7",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 50
+  }
+ ],
+ "source_list": [
+  "menu_category/7"
+ ],
+ "image": null,
+ "is_regular": true
+}

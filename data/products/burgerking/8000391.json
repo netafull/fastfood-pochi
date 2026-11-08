@@ -6,9 +6,22 @@
  "category_cd": "X000000006",
  "price": 2490,
  "price_note": "税込。公式サイトのメニューに表示された価格。",
- "price_variants": null,
+ "price_variants": [
+  {
+   "label": "単品",
+   "price": 2490
+  },
+  {
+   "label": "セット",
+   "price": 2790
+  },
+  {
+   "label": "LLセット",
+   "price": 2940
+  }
+ ],
  "has_sets": true,
- "detail_checked": false,
+ "detail_checked": true,
  "launch_date": null,
  "launch_date_source": "not_found",
  "announced_at": "2026-11-05",
@@ -27,7 +40,7 @@
  "limited_kind": "期間限定",
  "official_url": "https://www.burgerking.co.jp/menu/X000000006/8000391",
  "first_seen_at": "2026-11-08T13:37:41+09:00",
- "last_seen_at": "2026-11-08",
+ "last_seen_at": "2026-11-09",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,

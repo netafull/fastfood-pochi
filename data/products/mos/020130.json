@@ -1,0 +1,106 @@
+{
+ "chain": "mos",
+ "product_id": "020130",
+ "name": "モスライスバーガー海鮮かきあげ（塩だれ）",
+ "category": "モスライスバーガー／ホットドッグ",
+ "price": 510,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "いか・海老の海の幸に、玉ねぎ・人参・枝豆を加え、ごま油と塩昆布の風味豊かな特製塩だれでさっぱりと仕上げました。",
+ "description_full_len": 55,
+ "nutrition": {
+  "kcal": 372.0,
+  "protein_g": 8.5,
+  "fat_g": 10.5,
+  "carbs_g": 61.3,
+  "sugar_g": null,
+  "fiber_g": 1.9,
+  "salt_g": 1.9,
+  "other": {
+   "重量": "183.0g",
+   "コレステロール": "41mg",
+   "ナトリウム": "776mg",
+   "カリウム": "96mg",
+   "カルシウム": "44mg",
+   "リン": "51mg",
+   "鉄": "0.6mg",
+   "ビタミンA": "56μg",
+   "ビタミンB1": "0.09mg",
+   "ビタミンB2": "0.04mg",
+   "ナイアシン": "0.3mg",
+   "ビタミンC": "0mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "2.2mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "いか",
+   "えび",
+   "さば",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "ゼラチン",
+   "ごま"
+  ],
+  "partial": [
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "牛肉",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ライスプレート：米",
+   "origin": "国産"
+  },
+  {
+   "name": "海鮮かきあげ：オニオン",
+   "origin": "中国"
+  },
+  {
+   "name": "海鮮かきあげ：エビ",
+   "origin": "パキスタン"
+  },
+  {
+   "name": "海鮮かきあげ：にんじん",
+   "origin": "中国"
+  },
+  {
+   "name": "海鮮かきあげ：イカ",
+   "origin": "ペルー"
+  },
+  {
+   "name": "海鮮かきあげ：枝豆",
+   "origin": "中国"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=020130&c_id=35",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 510
+  }
+ ],
+ "source_list": [
+  "menu_category/35"
+ ],
+ "image": null,
+ "is_regular": true
+}

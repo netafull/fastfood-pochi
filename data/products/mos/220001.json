@@ -1,0 +1,106 @@
+{
+ "chain": "mos",
+ "product_id": "220001",
+ "name": "モスチキン",
+ "category": "サイドメニュー",
+ "price": 340,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "和風の下味をしっかりとつけた鶏の胸肉をカリカリ衣でつつみました。",
+ "description_full_len": 32,
+ "nutrition": {
+  "kcal": 269.0,
+  "protein_g": 15.3,
+  "fat_g": 16.6,
+  "carbs_g": 14.7,
+  "sugar_g": null,
+  "fiber_g": 0.5,
+  "salt_g": 1.5,
+  "other": {
+   "重量": "90.0g",
+   "コレステロール": "68mg",
+   "ナトリウム": "612mg",
+   "カリウム": "239mg",
+   "カルシウム": "10mg",
+   "リン": "182mg",
+   "鉄": "0.6mg",
+   "ビタミンA": "27μg",
+   "ビタミンB1": "0.05mg",
+   "ビタミンB2": "0.06mg",
+   "ナイアシン": "6.0mg",
+   "ビタミンC": "0mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "2.7mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "小麦",
+   "大豆",
+   "鶏肉"
+  ],
+  "partial": [
+   {
+    "name": "乳",
+    "mark": "△◇"
+   },
+   {
+    "name": "卵",
+    "mark": "△◇"
+   },
+   {
+    "name": "いか",
+    "mark": "△"
+   },
+   {
+    "name": "えび",
+    "mark": "△"
+   },
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "牛肉",
+    "mark": "△"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "モスチキン：鶏肉",
+   "origin": "中国"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=220001&c_id=7",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 340
+  }
+ ],
+ "source_list": [
+  "menu_category/7"
+ ],
+ "image": null,
+ "is_regular": true
+}

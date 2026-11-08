@@ -1,0 +1,113 @@
+{
+ "chain": "mos",
+ "product_id": "211130",
+ "name": "オニポテ（フレンチフライポテト＆オニオンフライ）",
+ "category": "サイドメニュー",
+ "price": 340,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "ホクホクのフレンチフライポテトと甘み抜群のオニオンフライ。",
+ "description_full_len": 39,
+ "nutrition": {
+  "kcal": 189.0,
+  "protein_g": 2.6,
+  "fat_g": 8.7,
+  "carbs_g": 25.3,
+  "sugar_g": null,
+  "fiber_g": 1.7,
+  "salt_g": 0.7,
+  "other": {
+   "重量": "77.4g",
+   "コレステロール": "0mg",
+   "ナトリウム": "242mg",
+   "カリウム": "262mg",
+   "カルシウム": "33mg",
+   "リン": "83mg",
+   "鉄": "0.5mg",
+   "ビタミンA": "0μg",
+   "ビタミンB1": "0.08mg",
+   "ビタミンB2": "0.10mg",
+   "ナイアシン": "1.2mg",
+   "ビタミンC": "2mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "1.8mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "小麦",
+   "大豆"
+  ],
+  "partial": [
+   {
+    "name": "乳",
+    "mark": "△◇"
+   },
+   {
+    "name": "卵",
+    "mark": "△◇"
+   },
+   {
+    "name": "いか",
+    "mark": "△"
+   },
+   {
+    "name": "えび",
+    "mark": "△"
+   },
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "牛肉",
+    "mark": "△"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "フレンチフライポテト：じゃがいも",
+   "origin": "アメリカ、カナダ"
+  },
+  {
+   "name": "オニオンフライ：オニオン",
+   "origin": "中国"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=211130&c_id=7",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 340
+  }
+ ],
+ "source_list": [
+  "menu_category/7"
+ ],
+ "image": null,
+ "is_regular": true
+}

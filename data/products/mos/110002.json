@@ -1,0 +1,98 @@
+{
+ "chain": "mos",
+ "product_id": "110002",
+ "name": "チリドッグ",
+ "category": "モスライスバーガー／ホットドッグ",
+ "price": 480,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "トマト風味と辛みが引き立ったモス特製のホットチリソースにジューシーなソーセージ。",
+ "description_full_len": 63,
+ "nutrition": {
+  "kcal": 373.0,
+  "protein_g": 13.0,
+  "fat_g": 24.0,
+  "carbs_g": 26.5,
+  "sugar_g": null,
+  "fiber_g": 1.6,
+  "salt_g": 2.6,
+  "other": {
+   "重量": "134.3g",
+   "コレステロール": "40mg",
+   "ナトリウム": "1018mg",
+   "カリウム": "215mg",
+   "カルシウム": "17mg",
+   "リン": "177mg",
+   "鉄": "0.7mg",
+   "ビタミンA": "5μg",
+   "ビタミンB1": "0.34mg",
+   "ビタミンB2": "0.11mg",
+   "ナイアシン": "2.7mg",
+   "ビタミンC": "26mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "0.4mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "卵",
+    "mark": "◇"
+   },
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ホットドッグロール：小麦粉（小麦）",
+   "origin": "カナダ、アメリカ、国産"
+  },
+  {
+   "name": "ドッグ用ソーセージ：豚肉",
+   "origin": "アメリカ、チリ、その他"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=110002&c_id=35",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 480
+  }
+ ],
+ "source_list": [
+  "menu_category/35"
+ ],
+ "image": null,
+ "is_regular": true
+}

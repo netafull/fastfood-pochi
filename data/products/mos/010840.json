@@ -1,0 +1,145 @@
+{
+ "chain": "mos",
+ "product_id": "010840",
+ "name": "海老カツバーガー",
+ "category": "ハンバーガー",
+ "price": 510,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "プリプリの海老を使ってサクサクの衣で揚げました。",
+ "description_full_len": 66,
+ "nutrition": {
+  "kcal": 397.0,
+  "protein_g": 14.5,
+  "fat_g": 19.3,
+  "carbs_g": 42.1,
+  "sugar_g": null,
+  "fiber_g": 2.0,
+  "salt_g": 2.1,
+  "other": {
+   "重量": "160.8g",
+   "コレステロール": "85mg",
+   "ナトリウム": "797mg",
+   "カリウム": "229mg",
+   "カルシウム": "56mg",
+   "リン": "156mg",
+   "鉄": "1.3mg",
+   "ビタミンA": "5μg",
+   "ビタミンB1": "0.08mg",
+   "ビタミンB2": "0.07mg",
+   "ナイアシン": "2.6mg",
+   "ビタミンC": "7mg",
+   "ビタミンD": "0.1μg",
+   "ビタミンE": "4.6mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "えび",
+   "大豆",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "いか",
+    "mark": "△◇"
+   },
+   {
+    "name": "オレンジ",
+    "mark": "◇"
+   },
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "牛肉",
+    "mark": "△◇"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "さけ",
+    "mark": "◇"
+   },
+   {
+    "name": "さば",
+    "mark": "△◇"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "△◇"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△◇"
+   },
+   {
+    "name": "もも",
+    "mark": "◇"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△◇"
+   },
+   {
+    "name": "バナナ",
+    "mark": "◇"
+   },
+   {
+    "name": "カシューナッツ",
+    "mark": "◇"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   },
+   {
+    "name": "アーモンド",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "海老カツ：エビ",
+   "origin": "インドネシア、タイ"
+  },
+  {
+   "name": "モスの生野菜：キャベツ",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=010840&c_id=1",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 510
+  }
+ ],
+ "source_list": [
+  "menu_category/1"
+ ],
+ "image": null,
+ "is_regular": true
+}

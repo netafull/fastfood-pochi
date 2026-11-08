@@ -1,0 +1,65 @@
+{
+ "chain": "mos",
+ "product_id": "210043",
+ "name": "バーベキューソース",
+ "category": "サイドメニュー",
+ "price": 50,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "ケチャップをベースに野菜や果実を加えた、フルーティーな甘酸っぱさが特徴のソースです。",
+ "description_full_len": 42,
+ "nutrition": {
+  "kcal": 24.0,
+  "protein_g": 0.1,
+  "fat_g": 0.0,
+  "carbs_g": 6.0,
+  "sugar_g": null,
+  "fiber_g": 0.1,
+  "salt_g": 0.7,
+  "other": {
+   "重量": "20.0g",
+   "コレステロール": "0mg",
+   "ナトリウム": "284mg",
+   "カリウム": "28mg",
+   "カルシウム": "2mg",
+   "リン": "2mg",
+   "鉄": "0.1mg",
+   "ビタミンA": "2μg",
+   "ビタミンB1": "0.00mg",
+   "ビタミンB2": "0.00mg",
+   "ナイアシン": "0.1mg",
+   "ビタミンC": "0mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "0.1mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "大豆",
+   "鶏肉",
+   "りんご",
+   "ゼラチン"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=210043&c_id=7",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 50
+  }
+ ],
+ "source_list": [
+  "menu_category/7"
+ ],
+ "image": null,
+ "is_regular": true
+}

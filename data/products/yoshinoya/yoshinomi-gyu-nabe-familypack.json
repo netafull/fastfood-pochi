@@ -94,7 +94,7 @@
  "in_limited_list": true,
  "official_url": "https://www.yoshinoya.com/menu/yoshinomi/gyu-nabe-familypack/",
  "first_seen_at": "2026-10-14T07:34:37+09:00",
- "last_seen_at": "2026-11-08",
+ "last_seen_at": "2026-11-09",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -122,5 +122,29 @@
  "allergens_conditional": {
   "mark": "▲",
   "meaning": "原材料「あさり」には『かに』が共生しています。 原材料「あおさ」は『えび』『かに』が混ざる漁法で採取されています。"
- }
+ },
+ "price_variants_history": [
+  {
+   "date": "2026-10-14",
+   "variants": [
+    {
+     "label": "3人前",
+     "price": 1095
+    },
+    {
+     "label": "4人前",
+     "price": 1293
+    },
+    {
+     "label": "3人前・テイクアウト",
+     "price": 1075
+    },
+    {
+     "label": "4人前・テイクアウト",
+     "price": 1270
+    }
+   ]
+  }
+ ],
+ "price_checked_at": "2026-11-09"
 }

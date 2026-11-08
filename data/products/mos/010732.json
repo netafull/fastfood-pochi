@@ -1,0 +1,131 @@
+{
+ "chain": "mos",
+ "product_id": "010732",
+ "name": "モスの菜摘（なつみ）ソイモス野菜",
+ "category": "モスの菜摘（なつみ）",
+ "price": 600,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "ソイモス野菜バーガーの具材を、バンズの代わりにレタスで挟みました。",
+ "description_full_len": 33,
+ "nutrition": {
+  "kcal": 217.0,
+  "protein_g": 7.0,
+  "fat_g": 13.3,
+  "carbs_g": 18.4,
+  "sugar_g": null,
+  "fiber_g": 3.5,
+  "salt_g": 1.6,
+  "other": {
+   "重量": "195.9g",
+   "コレステロール": "6mg",
+   "ナトリウム": "616mg",
+   "カリウム": "437mg",
+   "カルシウム": "44mg",
+   "リン": "91mg",
+   "鉄": "1.1mg",
+   "ビタミンA": "37μg",
+   "ビタミンB1": "0.11mg",
+   "ビタミンB2": "0.06mg",
+   "ナイアシン": "0.7mg",
+   "ビタミンC": "11mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "2.5mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "大豆",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "乳",
+    "mark": "▽◇"
+   },
+   {
+    "name": "いか",
+    "mark": "◇"
+   },
+   {
+    "name": "えび",
+    "mark": "◇"
+   },
+   {
+    "name": "かに",
+    "mark": "◇"
+   },
+   {
+    "name": "牛肉",
+    "mark": "▽◇"
+   },
+   {
+    "name": "さば",
+    "mark": "◇"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "▽◇"
+   },
+   {
+    "name": "豚肉",
+    "mark": "▽◇"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽◇"
+   },
+   {
+    "name": "バナナ",
+    "mark": "◇"
+   },
+   {
+    "name": "魚介類",
+    "mark": "◇"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ソイパティ：脱脂大豆（植物性たん白）",
+   "origin": "アメリカ、カナダ"
+  },
+  {
+   "name": "モスの生野菜：レタス",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：トマト",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=010732&c_id=30",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 600
+  }
+ ],
+ "source_list": [
+  "menu_category/30"
+ ],
+ "image": null,
+ "is_regular": true
+}

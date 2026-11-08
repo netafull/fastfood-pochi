@@ -1,0 +1,169 @@
+{
+ "chain": "mos",
+ "product_id": "010574",
+ "name": "米粉入りバンズのアボカドバジルバーガー",
+ "category": "ハンバーガー",
+ "price": 650,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "主要原材料に動物性食材を使わず、野菜と穀物を主原料にしたハンバーガーです。",
+ "description_full_len": 92,
+ "nutrition": {
+  "kcal": 401.0,
+  "protein_g": 11.0,
+  "fat_g": 21.2,
+  "carbs_g": 43.4,
+  "sugar_g": null,
+  "fiber_g": 4.7,
+  "salt_g": 2.5,
+  "other": {
+   "重量": "195.9g",
+   "コレステロール": "0mg",
+   "ナトリウム": "974mg",
+   "カリウム": "446mg",
+   "カルシウム": "37mg",
+   "リン": "100mg",
+   "鉄": "1.2mg",
+   "ビタミンA": "32μg",
+   "ビタミンB1": "0.14mg",
+   "ビタミンB2": "0.10mg",
+   "ナイアシン": "1.3mg",
+   "ビタミンC": "9mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "3.0mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "小麦",
+   "大豆"
+  ],
+  "partial": [
+   {
+    "name": "乳",
+    "mark": "▽◇"
+   },
+   {
+    "name": "卵",
+    "mark": "▽◇"
+   },
+   {
+    "name": "いか",
+    "mark": "◇"
+   },
+   {
+    "name": "えび",
+    "mark": "◇"
+   },
+   {
+    "name": "オレンジ",
+    "mark": "◇"
+   },
+   {
+    "name": "かに",
+    "mark": "◇"
+   },
+   {
+    "name": "牛肉",
+    "mark": "▽◇"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "さけ",
+    "mark": "◇"
+   },
+   {
+    "name": "さば",
+    "mark": "◇"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "▽◇"
+   },
+   {
+    "name": "豚肉",
+    "mark": "▽◇"
+   },
+   {
+    "name": "りんご",
+    "mark": "▽◇"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽◇"
+   },
+   {
+    "name": "バナナ",
+    "mark": "◇"
+   },
+   {
+    "name": "魚介類",
+    "mark": "◇"
+   },
+   {
+    "name": "カシューナッツ",
+    "mark": "◇"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   },
+   {
+    "name": "アーモンド",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "米粉入りバンズ：小麦粉",
+   "origin": "国内製造"
+  },
+  {
+   "name": "米粉入りバンズ：米粉",
+   "origin": "国産"
+  },
+  {
+   "name": "ソイパティ：脱脂大豆（植物性たん白）",
+   "origin": "アメリカ、カナダ"
+  },
+  {
+   "name": "アボカド：アボカド",
+   "origin": "ペルー"
+  },
+  {
+   "name": "モスの生野菜：トマト",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：グリーンリーフ",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=010574&c_id=1",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 650
+  }
+ ],
+ "source_list": [
+  "menu_category/1"
+ ],
+ "image": null,
+ "is_regular": true
+}

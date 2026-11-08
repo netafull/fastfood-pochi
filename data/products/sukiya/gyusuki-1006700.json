@@ -19,7 +19,7 @@
    "price": 1040
   }
  ],
- "price_checked_at": "2026-11-04",
+ "price_checked_at": "2026-11-09",
  "launch_date": null,
  "launch_date_source": "not_found",
  "announced_at": null,
@@ -172,7 +172,7 @@
  ],
  "official_url": "https://www.sukiya.jp/menu/in/gyusuki/1006700/index.html",
  "first_seen_at": "2026-10-28T07:33:15+09:00",
- "last_seen_at": "2026-11-08",
+ "last_seen_at": "2026-11-09",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -204,5 +204,24 @@
   "version": "2026-11-06",
   "version_text": "2026年11月6日更新",
   "fetched_at": "2026-11-07T07:34:06+09:00"
- }
+ },
+ "price_variants_history": [
+  {
+   "date": "2026-10-28",
+   "variants": [
+    {
+     "label": "ごはんミニ",
+     "price": 960
+    },
+    {
+     "label": "ごはん並盛",
+     "price": 990
+    },
+    {
+     "label": "ごはん大盛",
+     "price": 1040
+    }
+   ]
+  }
+ ]
 }

@@ -1,0 +1,119 @@
+{
+ "chain": "mos",
+ "product_id": "010322",
+ "name": "ダブルモスバーガー",
+ "category": "ハンバーガー",
+ "price": 650,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "モスバーガーのハンバーガーパティをダブルにしました。",
+ "description_full_len": 60,
+ "nutrition": {
+  "kcal": 532.0,
+  "protein_g": 23.7,
+  "fat_g": 28.4,
+  "carbs_g": 45.7,
+  "sugar_g": null,
+  "fiber_g": 4.5,
+  "salt_g": 3.4,
+  "other": {
+   "重量": "276.5g",
+   "コレステロール": "56mg",
+   "ナトリウム": "1337mg",
+   "カリウム": "441mg",
+   "カルシウム": "56mg",
+   "リン": "253mg",
+   "鉄": "2.2mg",
+   "ビタミンA": "39μg",
+   "ビタミンB1": "0.14mg",
+   "ビタミンB2": "0.14mg",
+   "ナイアシン": "4.1mg",
+   "ビタミンC": "11mg",
+   "ビタミンD": "0.4μg",
+   "ビタミンE": "1.1mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "ハンバーガーパティ：牛肉",
+   "origin": "オーストラリア、アメリカ、カナダ"
+  },
+  {
+   "name": "モスの生野菜：トマト",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  },
+  {
+   "name": "ミートソース：オニオン",
+   "origin": "国産、ニュージーランド、カナダ、その他"
+  },
+  {
+   "name": "ミートソース：トマトおよびその加工品",
+   "origin": "オーストラリア、チリ、ポルトガル、その他"
+  },
+  {
+   "name": "ミートソース：牛肉",
+   "origin": "オーストラリア、その他"
+  },
+  {
+   "name": "ミートソース：豚肉",
+   "origin": "カナダ、その他"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=010322&c_id=1",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 650
+  }
+ ],
+ "source_list": [
+  "menu_category/1"
+ ],
+ "image": null,
+ "is_regular": true
+}

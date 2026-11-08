@@ -1,0 +1,60 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "4010",
+ "name": "ホットケーキ",
+ "category": "バーガー",
+ "price": 380,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "ゴールデンブラウンのまん丸は、幸せな朝のカタチ。",
+ "description_full_len": 57,
+ "nutrition": {
+  "kcal": 323.0,
+  "protein_g": 8.3,
+  "fat_g": 9.3,
+  "carbs_g": 53.5,
+  "sugar_g": 12.0,
+  "fiber_g": null,
+  "salt_g": 1.4,
+  "other": {
+   "飽和脂肪酸": "1.86g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "乳",
+   "小麦",
+   "大豆"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "ホットケーキ",
+   "origin": "主要原料：小麦粉／アメリカ　製造所所在地：アメリカ"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mcdonalds.co.jp/products/4010/",
+ "first_seen_at": "2026-11-09T07:30:17+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 380
+  }
+ ],
+ "source_list": [
+  "/menu/burger/",
+  "/menu/morning/"
+ ],
+ "image": null,
+ "is_regular": true
+}

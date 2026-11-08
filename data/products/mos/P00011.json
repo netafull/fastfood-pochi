@@ -1,0 +1,38 @@
+{
+ "chain": "mos",
+ "product_id": "P00011",
+ "name": "モスシェイク バニラ",
+ "category": "ドリンク／スープ",
+ "price": 320,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "コクがあって飽きのこない味わいに仕上げた、バニラ風味のシェイクです。",
+ "description_full_len": 34,
+ "nutrition": null,
+ "allergens": {
+  "contains": [
+   "乳"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=P00011&c_id=34",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 320
+  }
+ ],
+ "source_list": [
+  "menu_category/34"
+ ],
+ "image": null,
+ "is_regular": true
+}

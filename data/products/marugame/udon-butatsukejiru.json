@@ -1,0 +1,144 @@
+{
+ "chain": "marugame",
+ "product_id": "udon-butatsukejiru",
+ "slug": "butatsukejiru",
+ "category_id": "udon",
+ "name": "旨辛豚つけ汁うどん",
+ "category": "うどん",
+ "price": 990,
+ "price_note": "税込。店舗により販売メニューや価格が異なる場合があります。",
+ "price_variants": null,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "description": "水できゅっと締めた、打ち立ての冷たいうどんに、ラー油の辛さがじわっと広がる甘辛いつけ汁を合わせました。",
+ "description_full_len": 141,
+ "nutrition": {
+  "kcal": 743.0,
+  "protein_g": 20.4,
+  "fat_g": 31.7,
+  "carbs_g": 91.8,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 6.6,
+  "other": {
+   "ナトリウム": "2617mg"
+  }
+ },
+ "nutrition_variants": [
+  {
+   "label": "冷・1玉",
+   "nutrition": {
+    "kcal": 743.0,
+    "protein_g": 20.4,
+    "fat_g": 31.7,
+    "carbs_g": 91.8,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 6.6,
+    "other": {
+     "ナトリウム": "2617mg"
+    }
+   }
+  },
+  {
+   "label": "冷・1.5玉",
+   "nutrition": {
+    "kcal": 881.0,
+    "protein_g": 24.4,
+    "fat_g": 32.3,
+    "carbs_g": 120.7,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 7.4,
+    "other": {
+     "ナトリウム": "2917mg"
+    }
+   }
+  },
+  {
+   "label": "冷・2玉",
+   "nutrition": {
+    "kcal": 1018.0,
+    "protein_g": 28.4,
+    "fat_g": 33.0,
+    "carbs_g": 149.6,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 8.2,
+    "other": {
+     "ナトリウム": "3217mg"
+    }
+   }
+  },
+  {
+   "label": "冷・2.5玉",
+   "nutrition": {
+    "kcal": 1156.0,
+    "protein_g": 32.4,
+    "fat_g": 33.6,
+    "carbs_g": 178.5,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 8.9,
+    "other": {
+     "ナトリウム": "3517mg"
+    }
+   }
+  },
+  {
+   "label": "冷・3玉",
+   "nutrition": {
+    "kcal": 1293.0,
+    "protein_g": 36.4,
+    "fat_g": 34.2,
+    "carbs_g": 207.3,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 9.7,
+    "other": {
+     "ナトリウム": "3817mg"
+    }
+   }
+  }
+ ],
+ "nutrition_note": "栄養成分値は商品のレシピに基づく推定値で、店内の手づくりのため実際の商品と差が出ることがあります",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "さば",
+   "大豆",
+   "豚肉",
+   "ごま"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "badges": [
+  "新定番"
+ ],
+ "channels": [
+  "店内"
+ ],
+ "takeout_only": false,
+ "official_url": "https://jp.marugame.com/menu/udon/butatsukejiru/",
+ "first_seen_at": "2026-11-09T07:39:17+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 990
+  }
+ ],
+ "source_list": [
+  "menu/udon"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-09",
+ "is_regular": true
+}

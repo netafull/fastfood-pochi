@@ -1,0 +1,105 @@
+{
+ "chain": "mos",
+ "product_id": "010082",
+ "name": "ダブルハンバーガー",
+ "category": "ハンバーガー",
+ "price": 400,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "ケチャップ、マスタード。",
+ "description_full_len": 56,
+ "nutrition": {
+  "kcal": 462.0,
+  "protein_g": 21.8,
+  "fat_g": 24.1,
+  "carbs_g": 39.5,
+  "sugar_g": null,
+  "fiber_g": 3.6,
+  "salt_g": 2.7,
+  "other": {
+   "重量": "184.0g",
+   "コレステロール": "50mg",
+   "ナトリウム": "1050mg",
+   "カリウム": "368mg",
+   "カルシウム": "51mg",
+   "リン": "236mg",
+   "鉄": "2.1mg",
+   "ビタミンA": "24μg",
+   "ビタミンB1": "0.12mg",
+   "ビタミンB2": "0.14mg",
+   "ナイアシン": "4.0mg",
+   "ビタミンC": "3mg",
+   "ビタミンD": "0.4μg",
+   "ビタミンE": "0.7mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "牛肉",
+   "大豆",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "▽"
+   },
+   {
+    "name": "豚肉",
+    "mark": "▽"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "ハンバーガーパティ：牛肉",
+   "origin": "オーストラリア、アメリカ、カナダ"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=010082&c_id=1",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 400
+  }
+ ],
+ "source_list": [
+  "menu_category/1"
+ ],
+ "image": null,
+ "is_regular": true
+}

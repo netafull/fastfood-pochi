@@ -1,0 +1,100 @@
+{
+ "chain": "mos",
+ "product_id": "141000",
+ "name": "ワイワイナゲットセット",
+ "category": "モスワイワイセット（お子さま向け）",
+ "price": 680,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "若鶏の胸肉を食べやすい大きさにして、ほんのりスパイスを効かせたナゲット5個に、フレンチフライポテトのSサイズ、Sサイズドリンク、おまけがついたお子さま向けのセットです。",
+ "description_full_len": 110,
+ "nutrition": {
+  "kcal": 195.0,
+  "protein_g": 14.8,
+  "fat_g": 10.2,
+  "carbs_g": 10.9,
+  "sugar_g": null,
+  "fiber_g": 0.3,
+  "salt_g": 0.8,
+  "other": {
+   "重量": "88.5g",
+   "コレステロール": "42mg",
+   "ナトリウム": "319mg",
+   "カリウム": "212mg",
+   "カルシウム": "5mg",
+   "リン": "140mg",
+   "鉄": "0.4mg",
+   "ビタミンA": "11μg",
+   "ビタミンB1": "0.06mg",
+   "ビタミンB2": "0.06mg",
+   "ナイアシン": "6.6mg",
+   "ビタミンC": "2mg",
+   "ビタミンD": "0.1μg",
+   "ビタミンE": "2.0mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "さば",
+   "大豆",
+   "鶏肉"
+  ],
+  "partial": [
+   {
+    "name": "卵",
+    "mark": "△◇"
+   },
+   {
+    "name": "いか",
+    "mark": "△"
+   },
+   {
+    "name": "えび",
+    "mark": "△"
+   },
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "牛肉",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "チキンナゲット：鶏肉",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=141000&c_id=11",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 680
+  }
+ ],
+ "source_list": [
+  "menu_category/11"
+ ],
+ "image": null,
+ "is_regular": true
+}

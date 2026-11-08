@@ -1,0 +1,121 @@
+{
+ "chain": "mos",
+ "product_id": "010011",
+ "name": "ロースカツバーガー",
+ "category": "ハンバーガー",
+ "price": 520,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "どこか懐かしい分厚いカツに、キャベツが大盛り｡",
+ "description_full_len": 23,
+ "nutrition": {
+  "kcal": 410.0,
+  "protein_g": 16.6,
+  "fat_g": 16.3,
+  "carbs_g": 49.7,
+  "sugar_g": null,
+  "fiber_g": 2.7,
+  "salt_g": 2.3,
+  "other": {
+   "重量": "174.4g",
+   "コレステロール": "24mg",
+   "ナトリウム": "859mg",
+   "カリウム": "288mg",
+   "カルシウム": "35mg",
+   "リン": "183mg",
+   "鉄": "0.9mg",
+   "ビタミンA": "7μg",
+   "ビタミンB1": "0.61mg",
+   "ビタミンB2": "0.10mg",
+   "ナイアシン": "4.3mg",
+   "ビタミンC": "12mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "2.9mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "大豆",
+   "豚肉",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "いか",
+    "mark": "△"
+   },
+   {
+    "name": "えび",
+    "mark": "△"
+   },
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "牛肉",
+    "mark": "△"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "△"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "ロースカツ：豚肉",
+   "origin": "アメリカ"
+  },
+  {
+   "name": "モスの生野菜：キャベツ",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=010011&c_id=1",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 520
+  }
+ ],
+ "source_list": [
+  "menu_category/1"
+ ],
+ "image": null,
+ "is_regular": true
+}

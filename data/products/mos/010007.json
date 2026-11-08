@@ -1,0 +1,109 @@
+{
+ "chain": "mos",
+ "product_id": "010007",
+ "name": "テリヤキチキンバーガー",
+ "category": "ハンバーガー",
+ "price": 510,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "じっくり焼いたチキンが香ばしい。",
+ "description_full_len": 61,
+ "nutrition": {
+  "kcal": 303.0,
+  "protein_g": 20.1,
+  "fat_g": 10.3,
+  "carbs_g": 32.4,
+  "sugar_g": null,
+  "fiber_g": 1.6,
+  "salt_g": 2.2,
+  "other": {
+   "重量": "148.9g",
+   "コレステロール": "72mg",
+   "ナトリウム": "842mg",
+   "カリウム": "290mg",
+   "カルシウム": "21mg",
+   "リン": "160mg",
+   "鉄": "0.8mg",
+   "ビタミンA": "31μg",
+   "ビタミンB1": "0.11mg",
+   "ビタミンB2": "0.16mg",
+   "ナイアシン": "4.3mg",
+   "ビタミンC": "3mg",
+   "ビタミンD": "0.1μg",
+   "ビタミンE": "0.6mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "大豆",
+   "鶏肉",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "牛肉",
+    "mark": "▽"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "豚肉",
+    "mark": "▽"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "テリヤキチキン：鶏肉",
+   "origin": "中国"
+  },
+  {
+   "name": "モスの生野菜：レタス",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=010007&c_id=1",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 510
+  }
+ ],
+ "source_list": [
+  "menu_category/1"
+ ],
+ "image": null,
+ "is_regular": true
+}

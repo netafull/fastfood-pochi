@@ -1,0 +1,91 @@
+{
+ "chain": "mos",
+ "product_id": "211161",
+ "name": "こだわりサラダ 和風ドレッシング＜減塩タイプ＞",
+ "category": "サイドメニュー",
+ "price": 370,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "レタスとキャベツを使用したサラダベースの上に、サラダほうれん草、オニオン、赤パプリカ、トマトを乗せた彩り鮮やかなサラダです。",
+ "description_full_len": 92,
+ "nutrition": {
+  "kcal": 41.0,
+  "protein_g": 1.3,
+  "fat_g": 1.0,
+  "carbs_g": 7.3,
+  "sugar_g": null,
+  "fiber_g": 1.4,
+  "salt_g": 0.5,
+  "other": {
+   "重量": "109.6g",
+   "コレステロール": "0mg",
+   "ナトリウム": "213mg",
+   "カリウム": "360mg",
+   "カルシウム": "26mg",
+   "リン": "30mg",
+   "鉄": "0.5mg",
+   "ビタミンA": "49μg",
+   "ビタミンB1": "0.04mg",
+   "ビタミンB2": "0.05mg",
+   "ナイアシン": "0.5mg",
+   "ビタミンC": "32mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "1.0mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "小麦",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "ごま"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "モスの生野菜：キャベツ",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：レタス",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：トマト",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：赤パプリカ",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：サラダほうれん草",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=211161&c_id=7",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 370
+  }
+ ],
+ "source_list": [
+  "menu_category/7"
+ ],
+ "image": null,
+ "is_regular": true
+}

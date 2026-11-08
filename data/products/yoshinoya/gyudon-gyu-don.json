@@ -1,0 +1,150 @@
+{
+ "chain": "yoshinoya",
+ "product_id": "gyudon-gyu-don",
+ "name": "牛丼",
+ "category": "牛丼",
+ "price": 498,
+ "price_note": "税込・店内の価格。表示は「並盛」の価格。テイクアウトは税率が違うため税込額が異なる場合があります（内訳は下の表）。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "小盛",
+   "price": 465
+  },
+  {
+   "label": "並盛",
+   "price": 498
+  },
+  {
+   "label": "アタマの大盛",
+   "price": 674
+  },
+  {
+   "label": "大盛",
+   "price": 740
+  },
+  {
+   "label": "特盛",
+   "price": 938
+  },
+  {
+   "label": "超特盛",
+   "price": 1059
+  },
+  {
+   "label": "小盛・テイクアウト",
+   "price": 456
+  },
+  {
+   "label": "並盛・テイクアウト",
+   "price": 489
+  },
+  {
+   "label": "アタマの大盛・テイクアウト",
+   "price": 661
+  },
+  {
+   "label": "大盛・テイクアウト",
+   "price": 726
+  },
+  {
+   "label": "特盛・テイクアウト",
+   "price": 921
+  },
+  {
+   "label": "超特盛・テイクアウト",
+   "price": 1039
+  }
+ ],
+ "takeout": true,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "nutrition_variants": null,
+ "nutrition_pdf_url": "https://www.yoshinoya.com/pdf/allergy/",
+ "nutrition_pdf_label": "吉野家メニュー情報",
+ "origin_pdf_url": "https://www.yoshinoya.com/pdf/producing_area/",
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "定番",
+ "badges": [],
+ "in_limited_list": false,
+ "official_url": "https://www.yoshinoya.com/menu/gyudon/gyu-don/",
+ "first_seen_at": "2026-11-09T07:33:33+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 498
+  }
+ ],
+ "source_list": [
+  "gyudon"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-09",
+ "price_variants_history": [
+  {
+   "date": "2026-11-09",
+   "variants": [
+    {
+     "label": "小盛",
+     "price": 465
+    },
+    {
+     "label": "並盛",
+     "price": 498
+    },
+    {
+     "label": "アタマの大盛",
+     "price": 674
+    },
+    {
+     "label": "大盛",
+     "price": 740
+    },
+    {
+     "label": "特盛",
+     "price": 938
+    },
+    {
+     "label": "超特盛",
+     "price": 1059
+    },
+    {
+     "label": "小盛・テイクアウト",
+     "price": 456
+    },
+    {
+     "label": "並盛・テイクアウト",
+     "price": 489
+    },
+    {
+     "label": "アタマの大盛・テイクアウト",
+     "price": 661
+    },
+    {
+     "label": "大盛・テイクアウト",
+     "price": 726
+    },
+    {
+     "label": "特盛・テイクアウト",
+     "price": 921
+    },
+    {
+     "label": "超特盛・テイクアウト",
+     "price": 1039
+    }
+   ]
+  }
+ ],
+ "is_regular": true
+}

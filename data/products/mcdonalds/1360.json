@@ -1,0 +1,75 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "1360",
+ "name": "ダブルチーズバーガー",
+ "category": "バーガー",
+ "price": 480,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "クリーミーなチーズと、香ばしく焼き上げられた100%ビーフパティを2枚も使った、マクドナルドの人気メニューのひとつ。",
+ "description_full_len": 58,
+ "nutrition": {
+  "kcal": 459.0,
+  "protein_g": 26.4,
+  "fat_g": 25.1,
+  "carbs_g": 31.8,
+  "sugar_g": 7.0,
+  "fiber_g": null,
+  "salt_g": 2.9,
+  "other": {
+   "飽和脂肪酸": "12.11g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "牛肉",
+   "大豆"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "バンズ",
+   "origin": "主要原料：小麦粉／アメリカ、カナダ、オーストラリア　製造所所在地：日本"
+  },
+  {
+   "name": "ビーフパティ",
+   "origin": "主要原料：牛肉／オーストラリア、ニュージーランド、アメリカ、カナダ　製造所所在地：日本、アメリカ、オーストラリア、カナダ"
+  },
+  {
+   "name": "オニオン",
+   "origin": "主要原料：たまねぎ／アメリカ、インド　製造所所在地：アメリカ、インド"
+  },
+  {
+   "name": "ピクルス",
+   "origin": "主要原料：きゅうり／インド、スリランカ、トルコ　製造所所在地：日本、スリランカ、トルコ"
+  },
+  {
+   "name": "チェダースライスチーズ",
+   "origin": "主要原料：チーズ／ニュージーランド、オーストラリア、日本、アメリカ　製造所所在地：日本、ニュージーランド"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mcdonalds.co.jp/products/1360/",
+ "first_seen_at": "2026-11-09T07:30:17+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 480
+  }
+ ],
+ "source_list": [
+  "/menu/burger/"
+ ],
+ "image": null,
+ "is_regular": true
+}

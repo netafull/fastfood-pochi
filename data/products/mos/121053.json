@@ -1,0 +1,113 @@
+{
+ "chain": "mos",
+ "product_id": "121053",
+ "name": "朝の野菜バーガー ～オーロラソース～",
+ "category": "朝モス",
+ "price": 390,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "レタス、トマト、オニオンスライスをオーロラソースで合わせ、サラダ感覚で楽しめる朝限定の野菜バーガーです。",
+ "description_full_len": 83,
+ "nutrition": {
+  "kcal": 368.0,
+  "protein_g": 14.0,
+  "fat_g": 19.2,
+  "carbs_g": 35.0,
+  "sugar_g": null,
+  "fiber_g": 3.0,
+  "salt_g": 2.0,
+  "other": {
+   "重量": "179.2g",
+   "コレステロール": "33mg",
+   "ナトリウム": "762mg",
+   "カリウム": "295mg",
+   "カルシウム": "37mg",
+   "リン": "151mg",
+   "鉄": "1.3mg",
+   "ビタミンA": "34μg",
+   "ビタミンB1": "0.11mg",
+   "ビタミンB2": "0.09mg",
+   "ナイアシン": "2.6mg",
+   "ビタミンC": "8mg",
+   "ビタミンD": "0.2μg",
+   "ビタミンE": "1.9mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "牛肉",
+   "大豆",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "▽"
+   },
+   {
+    "name": "豚肉",
+    "mark": "▽"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "ハンバーガーパティ：牛肉",
+   "origin": "オーストラリア、アメリカ、カナダ"
+  },
+  {
+   "name": "モスの生野菜：トマト",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：レタス",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=121053&c_id=12",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 390
+  }
+ ],
+ "source_list": [
+  "menu_category/12"
+ ],
+ "image": null,
+ "is_regular": true
+}

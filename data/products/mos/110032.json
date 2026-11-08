@@ -1,0 +1,72 @@
+{
+ "chain": "mos",
+ "product_id": "110032",
+ "name": "ポークロール＜米粉＞",
+ "category": "低アレルゲンメニュー",
+ "price": 430,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "国産の米粉を100％使用したパンに、ジューシーなポークソーセージをのせました。",
+ "description_full_len": 162,
+ "nutrition": {
+  "kcal": 247.0,
+  "protein_g": 5.1,
+  "fat_g": 12.6,
+  "carbs_g": 28.3,
+  "sugar_g": null,
+  "fiber_g": 0.4,
+  "salt_g": 1.5,
+  "other": {
+   "重量": "88.0g",
+   "コレステロール": "14mg",
+   "ナトリウム": "571mg",
+   "カリウム": "93mg",
+   "カルシウム": "4mg",
+   "リン": "46mg",
+   "鉄": "0.2mg",
+   "ビタミンA": "4μg",
+   "ビタミンB1": "0.13mg",
+   "ビタミンB2": "0.04mg",
+   "ナイアシン": "1.0mg",
+   "ビタミンC": "0mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "0.6mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "豚肉",
+   "りんご"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "ポークロール〈米粉〉：豚肉",
+   "origin": "アメリカ、カナダ、その他"
+  },
+  {
+   "name": "ポークロール〈米粉〉：米",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=110032&c_id=32",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 430
+  }
+ ],
+ "source_list": [
+  "menu_category/32"
+ ],
+ "image": null,
+ "is_regular": true
+}

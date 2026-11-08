@@ -1,0 +1,73 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "4040",
+ "name": "ソーセージエッグマフィン",
+ "category": "バーガー",
+ "price": 360,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "ジューシー&スパイシーなソーセージパティと、たまごにチーズ。",
+ "description_full_len": 60,
+ "nutrition": {
+  "kcal": 477.0,
+  "protein_g": 22.0,
+  "fat_g": 30.6,
+  "carbs_g": 27.3,
+  "sugar_g": 2.0,
+  "fiber_g": null,
+  "salt_g": 1.8,
+  "other": {
+   "飽和脂肪酸": "10.87g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "乳",
+   "小麦",
+   "大豆",
+   "豚肉"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "イングリッシュマフィン",
+   "origin": "主要原料：小麦粉／アメリカ、カナダ、オーストラリア　製造所所在地：日本"
+  },
+  {
+   "name": "タマゴ",
+   "origin": "主要原料：卵／日本　製造所所在地：日本"
+  },
+  {
+   "name": "ソーセージパティ",
+   "origin": "主要原料：豚肉／アメリカ　製造所所在地：アメリカ"
+  },
+  {
+   "name": "チェダースライスチーズ",
+   "origin": "主要原料：チーズ／ニュージーランド、オーストラリア、日本、アメリカ　製造所所在地：日本、ニュージーランド"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mcdonalds.co.jp/products/4040/",
+ "first_seen_at": "2026-11-09T07:30:17+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 360
+  }
+ ],
+ "source_list": [
+  "/menu/burger/",
+  "/menu/morning/"
+ ],
+ "image": null,
+ "is_regular": true
+}

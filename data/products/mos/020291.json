@@ -1,0 +1,72 @@
+{
+ "chain": "mos",
+ "product_id": "020291",
+ "name": "ポークサンド＜米粉＞",
+ "category": "低アレルゲンメニュー",
+ "price": 430,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "国産の米粉を100％使用したバンズに、豚肉と玉ねぎを混ぜ込んだハンバーグをはさみました。",
+ "description_full_len": 167,
+ "nutrition": {
+  "kcal": 213.0,
+  "protein_g": 5.9,
+  "fat_g": 7.1,
+  "carbs_g": 31.2,
+  "sugar_g": null,
+  "fiber_g": 0.8,
+  "salt_g": 1.4,
+  "other": {
+   "重量": "98.0g",
+   "コレステロール": "15mg",
+   "ナトリウム": "571mg",
+   "カリウム": "117mg",
+   "カルシウム": "88mg",
+   "リン": "56mg",
+   "鉄": "0.2mg",
+   "ビタミンA": "3μg",
+   "ビタミンB1": "0.15mg",
+   "ビタミンB2": "0.05mg",
+   "ナイアシン": "1.1mg",
+   "ビタミンC": "0mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "0.6mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "豚肉",
+   "りんご"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "ポークサンド〈米粉〉：豚肉",
+   "origin": "アメリカ、カナダ、その他"
+  },
+  {
+   "name": "ポークサンド〈米粉〉：米",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=020291&c_id=32",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 430
+  }
+ ],
+ "source_list": [
+  "menu_category/32"
+ ],
+ "image": null,
+ "is_regular": true
+}

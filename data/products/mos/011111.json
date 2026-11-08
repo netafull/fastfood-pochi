@@ -1,0 +1,143 @@
+{
+ "chain": "mos",
+ "product_id": "011111",
+ "name": "ソイモスバーガー",
+ "category": "ソイパティ",
+ "price": 550,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "モスバーガーに使用しているパティを、大豆由来の植物性たんぱくを使った「ソイパティ」にしました。",
+ "description_full_len": 47,
+ "nutrition": {
+  "kcal": 366.0,
+  "protein_g": 13.1,
+  "fat_g": 13.8,
+  "carbs_g": 48.0,
+  "sugar_g": null,
+  "fiber_g": 4.4,
+  "salt_g": 2.6,
+  "other": {
+   "重量": "216.8g",
+   "コレステロール": "5mg",
+   "ナトリウム": "1009mg",
+   "カリウム": "370mg",
+   "カルシウム": "45mg",
+   "リン": "118mg",
+   "鉄": "1.3mg",
+   "ビタミンA": "19μg",
+   "ビタミンB1": "0.13mg",
+   "ビタミンB2": "0.06mg",
+   "ナイアシン": "1.3mg",
+   "ビタミンC": "9mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "1.5mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "いか",
+    "mark": "◇"
+   },
+   {
+    "name": "えび",
+    "mark": "◇"
+   },
+   {
+    "name": "かに",
+    "mark": "◇"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "さば",
+    "mark": "◇"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽◇"
+   },
+   {
+    "name": "バナナ",
+    "mark": "◇"
+   },
+   {
+    "name": "魚介類",
+    "mark": "◇"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "ソイパティ：脱脂大豆（植物性たん白）",
+   "origin": "アメリカ、カナダ"
+  },
+  {
+   "name": "モスの生野菜：トマト",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  },
+  {
+   "name": "ミートソース：オニオン",
+   "origin": "国産、ニュージーランド、カナダ、その他"
+  },
+  {
+   "name": "ミートソース：トマトおよびその加工品",
+   "origin": "オーストラリア、チリ、ポルトガル、その他"
+  },
+  {
+   "name": "ミートソース：牛肉",
+   "origin": "オーストラリア、その他"
+  },
+  {
+   "name": "ミートソース：豚肉",
+   "origin": "カナダ、その他"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=011111&c_id=33",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 550
+  }
+ ],
+ "source_list": [
+  "menu_category/33"
+ ],
+ "image": null,
+ "is_regular": true
+}

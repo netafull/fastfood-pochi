@@ -1,0 +1,60 @@
+{
+ "chain": "mos",
+ "product_id": "310008",
+ "name": "ブレンドコーヒー",
+ "category": "ドリンク／スープ",
+ "price": 320,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "フルーティーな香りが特長で、まろやかな酸味と深みのあるコクを追求したバランスのとれたブレンドコーヒーです。",
+ "description_full_len": 201,
+ "nutrition": {
+  "kcal": 5.0,
+  "protein_g": 0.2,
+  "fat_g": 0.2,
+  "carbs_g": 1.3,
+  "sugar_g": null,
+  "fiber_g": 0.0,
+  "salt_g": 0.0,
+  "other": {
+   "重量": "180.0g",
+   "コレステロール": "0mg",
+   "ナトリウム": "4mg",
+   "カリウム": "117mg",
+   "カルシウム": "4mg",
+   "リン": "13mg",
+   "鉄": "0.0mg",
+   "ビタミンA": "0μg",
+   "ビタミンB1": "0.00mg",
+   "ビタミンB2": "0.02mg",
+   "ナイアシン": "1.4mg",
+   "ビタミンC": "0mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "0.0mg"
+  }
+ },
+ "allergens": {
+  "contains": [],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=310008&c_id=34",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 320
+  }
+ ],
+ "source_list": [
+  "menu_category/34"
+ ],
+ "image": null,
+ "is_regular": true
+}

@@ -19,7 +19,7 @@
    "price": 350
   }
  ],
- "price_checked_at": "2026-11-05",
+ "price_checked_at": "2026-11-09",
  "launch_date": "2026-10-14",
  "launch_date_source": "news_headline",
  "announced_at": "2026-10-08",
@@ -139,7 +139,7 @@
  ],
  "official_url": "https://www.sukiya.jp/menu/in/drink/811800/index.html",
  "first_seen_at": "2026-10-15T07:33:24+09:00",
- "last_seen_at": "2026-11-08",
+ "last_seen_at": "2026-11-09",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -171,5 +171,24 @@
   "version": "2026-11-06",
   "version_text": "2026年11月6日更新",
   "fetched_at": "2026-11-07T07:34:06+09:00"
- }
+ },
+ "price_variants_history": [
+  {
+   "date": "2026-10-15",
+   "variants": [
+    {
+     "label": "S",
+     "price": 210
+    },
+    {
+     "label": "M",
+     "price": 260
+    },
+    {
+     "label": "L",
+     "price": 350
+    }
+   ]
+  }
+ ]
 }

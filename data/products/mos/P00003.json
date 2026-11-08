@@ -1,0 +1,38 @@
+{
+ "chain": "mos",
+ "product_id": "P00003",
+ "name": "オレンジブレンド100",
+ "category": "ドリンク／スープ",
+ "price": 330,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "オレンジ果汁、マンダリンオレンジ果汁、うんしゅうみかん果汁の3種類をブレンドしました。",
+ "description_full_len": 70,
+ "nutrition": null,
+ "allergens": {
+  "contains": [
+   "オレンジ"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=P00003&c_id=34",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 330
+  }
+ ],
+ "source_list": [
+  "menu_category/34"
+ ],
+ "image": null,
+ "is_regular": true
+}

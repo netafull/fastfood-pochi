@@ -1,0 +1,65 @@
+{
+ "chain": "mos",
+ "product_id": "211524",
+ "name": "カップ ハラペーニョ",
+ "category": "サイドメニュー",
+ "price": 100,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "お好きな商品にハラペーニョをトッピングいただけるよう、カップ入りのハラペーニョをご用意しました。",
+ "description_full_len": 71,
+ "nutrition": {
+  "kcal": 7.0,
+  "protein_g": 0.2,
+  "fat_g": 0.2,
+  "carbs_g": 1.0,
+  "sugar_g": null,
+  "fiber_g": 0.3,
+  "salt_g": 0.4,
+  "other": {
+   "重量": "20.0g",
+   "コレステロール": "0mg",
+   "ナトリウム": "156mg",
+   "カリウム": "40mg",
+   "カルシウム": "30mg",
+   "リン": "4mg",
+   "鉄": "0.1mg",
+   "ビタミンA": "26μg",
+   "ビタミンB1": "0.01mg",
+   "ビタミンB2": "0.02mg",
+   "ナイアシン": "0.1mg",
+   "ビタミンC": "6mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "0.5mg"
+  }
+ },
+ "allergens": {
+  "contains": [],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "ハラペーニョ：ハラペーニョ",
+   "origin": "インド、メキシコ"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=211524&c_id=7",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 100
+  }
+ ],
+ "source_list": [
+  "menu_category/7"
+ ],
+ "image": null,
+ "is_regular": true
+}

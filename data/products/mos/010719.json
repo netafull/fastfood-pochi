@@ -1,0 +1,106 @@
+{
+ "chain": "mos",
+ "product_id": "010719",
+ "name": "モスの菜摘（なつみ）チキン",
+ "category": "モスの菜摘（なつみ）",
+ "price": 500,
+ "price_note": null,
+ "launch_date": null,
+ "planned_end_text": null,
+ "description": "チキンバーガーの具材を、バンズの代わりにレタスで挟みました。",
+ "description_full_len": 30,
+ "nutrition": {
+  "kcal": 243.0,
+  "protein_g": 9.9,
+  "fat_g": 16.3,
+  "carbs_g": 14.6,
+  "sugar_g": null,
+  "fiber_g": 1.4,
+  "salt_g": 1.0,
+  "other": {
+   "重量": "139.0g",
+   "コレステロール": "26mg",
+   "ナトリウム": "394mg",
+   "カリウム": "291mg",
+   "カルシウム": "22mg",
+   "リン": "74mg",
+   "鉄": "0.5mg",
+   "ビタミンA": "13μg",
+   "ビタミンB1": "0.11mg",
+   "ビタミンB2": "0.07mg",
+   "ナイアシン": "3.0mg",
+   "ビタミンC": "8mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "3.6mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "いか",
+    "mark": "△"
+   },
+   {
+    "name": "えび",
+    "mark": "△"
+   },
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "牛肉",
+    "mark": "△"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "チキンカツ：鶏肉",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：レタス",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：キャベツ",
+   "origin": "国産"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=010719&c_id=30",
+ "first_seen_at": "2026-11-09T07:31:42+09:00",
+ "last_seen_at": "2026-11-09",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-09",
+   "price": 500
+  }
+ ],
+ "source_list": [
+  "menu_category/30"
+ ],
+ "image": null,
+ "is_regular": true
+}
