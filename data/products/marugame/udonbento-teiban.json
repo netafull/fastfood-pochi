@@ -1,0 +1,121 @@
+{
+ "chain": "marugame",
+ "product_id": "udonbento-teiban",
+ "slug": "teiban",
+ "category_id": "udonbento",
+ "name": "2種の天ぷらとおかずの定番うどん弁当",
+ "category": "うどん弁当",
+ "price": 490,
+ "price_note": "税込。表示は「並」の価格。店舗により販売メニューや価格が異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "並",
+   "price": 490
+  },
+  {
+   "label": "大",
+   "price": 680
+  }
+ ],
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "description": "うどん一玉に、お弁当に合う定番おかず（ちくわ磯辺天、野菜バラ天、きんぴらごぼう、玉子焼き）を詰め込んだ、丸亀製麺一番人気のうどん弁当。",
+ "description_full_len": 110,
+ "nutrition": {
+  "kcal": 532.0,
+  "protein_g": 15.0,
+  "fat_g": 14.2,
+  "carbs_g": 86.1,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 5.7,
+  "other": {
+   "ナトリウム": "2255mg"
+  }
+ },
+ "nutrition_variants": [
+  {
+   "label": "冷・並",
+   "nutrition": {
+    "kcal": 532.0,
+    "protein_g": 15.0,
+    "fat_g": 14.2,
+    "carbs_g": 86.1,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 5.7,
+    "other": {
+     "ナトリウム": "2255mg"
+    }
+   }
+  },
+  {
+   "label": "冷・大",
+   "nutrition": {
+    "kcal": 669.0,
+    "protein_g": 19.0,
+    "fat_g": 14.8,
+    "carbs_g": 114.9,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 6.5,
+    "other": {
+     "ナトリウム": "2555mg"
+    }
+   }
+  }
+ ],
+ "nutrition_note": "栄養成分値は商品のレシピに基づく推定値で、店内の手づくりのため実際の商品と差が出ることがあります",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "さば",
+   "大豆",
+   "ごま"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "badges": [],
+ "channels": [
+  "お持ち帰り"
+ ],
+ "takeout_only": true,
+ "official_url": "https://jp.marugame.com/menu/udonbento/teiban/",
+ "first_seen_at": "2026-11-10T07:39:28+09:00",
+ "last_seen_at": "2026-11-10",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-10",
+   "price": 490
+  }
+ ],
+ "source_list": [
+  "menu/udonbento"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-10",
+ "price_variants_history": [
+  {
+   "date": "2026-11-10",
+   "variants": [
+    {
+     "label": "並",
+     "price": 490
+    },
+    {
+     "label": "大",
+     "price": 680
+    }
+   ]
+  }
+ ],
+ "is_regular": true
+}

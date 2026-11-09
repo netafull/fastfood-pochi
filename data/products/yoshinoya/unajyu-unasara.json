@@ -1,0 +1,103 @@
+{
+ "chain": "yoshinoya",
+ "product_id": "unajyu-unasara",
+ "name": "鰻皿",
+ "category": "おかず（皿メニュー）",
+ "price": 1152,
+ "price_note": "税込・店内の価格。表示は「一枚盛」の価格。テイクアウトは税率が違うため税込額が異なる場合があります（内訳は下の表）。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "一枚盛",
+   "price": 1152
+  },
+  {
+   "label": "二枚盛",
+   "price": 1966
+  },
+  {
+   "label": "三枚盛",
+   "price": 2780
+  },
+  {
+   "label": "一枚盛・テイクアウト",
+   "price": 1131
+  },
+  {
+   "label": "二枚盛・テイクアウト",
+   "price": 1931
+  },
+  {
+   "label": "三枚盛・テイクアウト",
+   "price": 2730
+  }
+ ],
+ "takeout": true,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "nutrition_variants": null,
+ "nutrition_pdf_url": "https://www.yoshinoya.com/pdf/allergy/",
+ "nutrition_pdf_label": "吉野家メニュー情報",
+ "origin_pdf_url": "https://www.yoshinoya.com/pdf/producing_area/",
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "定番",
+ "badges": [],
+ "in_limited_list": false,
+ "official_url": "https://www.yoshinoya.com/menu/unajyu/unasara/",
+ "first_seen_at": "2026-11-10T07:33:40+09:00",
+ "last_seen_at": "2026-11-10",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-10",
+   "price": 1152
+  }
+ ],
+ "source_list": [
+  "unajyu",
+  "yoshinomi"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-10",
+ "price_variants_history": [
+  {
+   "date": "2026-11-10",
+   "variants": [
+    {
+     "label": "一枚盛",
+     "price": 1152
+    },
+    {
+     "label": "二枚盛",
+     "price": 1966
+    },
+    {
+     "label": "三枚盛",
+     "price": 2780
+    },
+    {
+     "label": "一枚盛・テイクアウト",
+     "price": 1131
+    },
+    {
+     "label": "二枚盛・テイクアウト",
+     "price": 1931
+    },
+    {
+     "label": "三枚盛・テイクアウト",
+     "price": 2730
+    }
+   ]
+  }
+ ],
+ "is_regular": true
+}

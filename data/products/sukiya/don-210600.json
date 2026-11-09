@@ -1,0 +1,202 @@
+{
+ "chain": "sukiya",
+ "product_id": "don-210600",
+ "name": "明太マヨ旨だしとりそぼろ丼",
+ "category": "こだわり丼",
+ "price": 580,
+ "price_note": "税込・店内の価格。サイズや組み合わせにより価格が異なります（内訳は下の表）。表示は「並盛」の価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "ミニ",
+   "price": 550
+  },
+  {
+   "label": "並盛",
+   "price": 580
+  },
+  {
+   "label": "ごはん大盛",
+   "price": 630
+  },
+  {
+   "label": "特盛（とりそぼろ2倍ごはん大盛）",
+   "price": 870
+  }
+ ],
+ "price_checked_at": "2026-11-10",
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 742.0,
+  "protein_g": 31.1,
+  "fat_g": 21.4,
+  "carbs_g": 106.0,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 4.1,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "並盛",
+   "nutrition": {
+    "kcal": 742.0,
+    "protein_g": 31.1,
+    "fat_g": 21.4,
+    "carbs_g": 106.0,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 4.1,
+    "other": {}
+   }
+  },
+  {
+   "label": "ミニ",
+   "nutrition": {
+    "kcal": 673.0,
+    "protein_g": 29.9,
+    "fat_g": 21.1,
+    "carbs_g": 90.4,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 4.1,
+    "other": {}
+   }
+  },
+  {
+   "label": "大盛",
+   "nutrition": {
+    "kcal": 863.0,
+    "protein_g": 33.1,
+    "fat_g": 21.8,
+    "carbs_g": 133.4,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 4.1,
+    "other": {}
+   }
+  },
+  {
+   "label": "特盛",
+   "nutrition": {
+    "kcal": 1040.0,
+    "protein_g": 48.4,
+    "fat_g": 28.2,
+    "carbs_g": 146.3,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 6.6,
+    "other": {}
+   }
+  }
+ ],
+ "nutrition_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
+ "nutrition_pdf_label": "栄養成分一覧",
+ "allergen_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
+ "allergen_pdf_label": "アレルゲン一覧",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "乳",
+   "えび",
+   "さば",
+   "大豆",
+   "鶏肉",
+   "りんご",
+   "ゼラチン",
+   "ごま"
+  ],
+  "partial": [
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "オレンジ",
+    "mark": "△"
+   },
+   {
+    "name": "牛肉",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   },
+   {
+    "name": "バナナ",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "badges": [],
+ "official_url": "https://www.sukiya.jp/menu/in/don/210600/index.html",
+ "first_seen_at": "2026-11-10T07:35:40+09:00",
+ "last_seen_at": "2026-11-10",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-10",
+   "price": 580
+  }
+ ],
+ "source_list": [
+  "don"
+ ],
+ "image": null,
+ "price_variants_history": [
+  {
+   "date": "2026-11-10",
+   "variants": [
+    {
+     "label": "ミニ",
+     "price": 550
+    },
+    {
+     "label": "並盛",
+     "price": 580
+    },
+    {
+     "label": "ごはん大盛",
+     "price": 630
+    },
+    {
+     "label": "特盛（とりそぼろ2倍ごはん大盛）",
+     "price": 870
+    }
+   ]
+  }
+ ],
+ "is_regular": true,
+ "nutrition_source": {
+  "url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
+  "label": "栄養成分一覧",
+  "version": "2026-11-06",
+  "version_text": "2026年11月6日更新",
+  "fetched_at": "2026-11-10T07:38:56+09:00"
+ },
+ "nutrition_note": "表示した数値には、お好みでお使いいただく調味料（紅生姜・醤油・ドレッシング・七味・カルビ追いダレなど）は含まれていません。",
+ "allergens_conditional": {
+  "mark": "△",
+  "meaning": "原材料由来および原材料の製造工場において、そのアレルゲン物質を含む製品を同じライン等で製造しております"
+ },
+ "allergen_source": {
+  "url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
+  "label": "アレルゲン一覧",
+  "version": "2026-11-06",
+  "version_text": "2026年11月6日更新",
+  "fetched_at": "2026-11-10T07:38:56+09:00"
+ }
+}

@@ -1,0 +1,64 @@
+{
+ "chain": "marugame",
+ "product_id": "gohanmono-mentaiko",
+ "slug": "mentaiko",
+ "category_id": "gohanmono",
+ "name": "明太子",
+ "category": "ご飯もの",
+ "price": 170,
+ "price_note": "税込。店舗により販売メニューや価格が異なる場合があります。",
+ "price_variants": null,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "description": "ピリリと辛い明太子と、風味のよい海苔がふっくらと炊いた国産米のアクセントに！",
+ "description_full_len": 60,
+ "nutrition": {
+  "kcal": 150.0,
+  "protein_g": 3.5,
+  "fat_g": 0.5,
+  "carbs_g": 34.7,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 1.5,
+  "other": {
+   "ナトリウム": "607mg"
+  }
+ },
+ "nutrition_variants": null,
+ "nutrition_note": "栄養成分値は商品のレシピに基づく推定値で、店内の手づくりのため実際の商品と差が出ることがあります",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "大豆"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "badges": [],
+ "channels": [
+  "店内",
+  "お持ち帰り"
+ ],
+ "takeout_only": false,
+ "official_url": "https://jp.marugame.com/menu/gohanmono/mentaiko/",
+ "first_seen_at": "2026-11-10T07:39:28+09:00",
+ "last_seen_at": "2026-11-10",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-10",
+   "price": 170
+  }
+ ],
+ "source_list": [
+  "menu/gohanmono"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-10",
+ "is_regular": true
+}

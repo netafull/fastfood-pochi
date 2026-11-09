@@ -1,0 +1,71 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "4530",
+ "name": "倍てりやきマックバーガー",
+ "category": "バーガー",
+ "price": 540,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "ポークパティをてりやき風味に仕上げたてりやきマックバーガー。",
+ "description_full_len": 55,
+ "nutrition": {
+  "kcal": 747.0,
+  "protein_g": 23.3,
+  "fat_g": 52.9,
+  "carbs_g": 45.4,
+  "sugar_g": 11.0,
+  "fiber_g": null,
+  "salt_g": 3.4,
+  "other": {
+   "飽和脂肪酸": "17.27g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "乳",
+   "小麦",
+   "ごま",
+   "大豆",
+   "豚肉",
+   "りんご"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "バンズ",
+   "origin": "主要原料：小麦粉／アメリカ、カナダ、オーストラリア　製造所所在地：日本"
+  },
+  {
+   "name": "てりやきポークパティ",
+   "origin": "主要原料：豚肉／アメリカ　製造所所在地：アメリカ"
+  },
+  {
+   "name": "レタス",
+   "origin": "主要原料：レタス／日本、台湾、アメリカ、マレーシア、韓国　製造所所在地：日本"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mcdonalds.co.jp/products/4530/",
+ "first_seen_at": "2026-11-10T07:30:17+09:00",
+ "last_seen_at": "2026-11-10",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-10",
+   "price": 540
+  }
+ ],
+ "source_list": [
+  "/menu/burger/",
+  "/menu/dinner/"
+ ],
+ "image": null,
+ "is_regular": true
+}

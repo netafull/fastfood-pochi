@@ -1,0 +1,68 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "4730",
+ "name": "倍マックポーク",
+ "category": "バーガー",
+ "price": 370,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "倍になったポークパティにガーリックペッパーソースを合わせた、ボリューミーでやみつきになる一品。",
+ "description_full_len": 47,
+ "nutrition": {
+  "kcal": 644.0,
+  "protein_g": 23.7,
+  "fat_g": 45.3,
+  "carbs_g": 35.6,
+  "sugar_g": 8.0,
+  "fiber_g": null,
+  "salt_g": 2.7,
+  "other": {
+   "飽和脂肪酸": "16.34g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "大豆",
+   "豚肉"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "バンズ",
+   "origin": "主要原料：小麦粉／アメリカ、カナダ、オーストラリア　製造所所在地：日本"
+  },
+  {
+   "name": "てりやきポークパティ",
+   "origin": "主要原料：豚肉／アメリカ　製造所所在地：アメリカ"
+  },
+  {
+   "name": "レタス",
+   "origin": "主要原料：レタス／日本、台湾、アメリカ、マレーシア、韓国　製造所所在地：日本"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mcdonalds.co.jp/products/4730/",
+ "first_seen_at": "2026-11-10T07:30:17+09:00",
+ "last_seen_at": "2026-11-10",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-10",
+   "price": 370
+  }
+ ],
+ "source_list": [
+  "/menu/burger/",
+  "/menu/dinner/"
+ ],
+ "image": null,
+ "is_regular": true
+}

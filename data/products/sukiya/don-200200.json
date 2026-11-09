@@ -1,0 +1,202 @@
+{
+ "chain": "sukiya",
+ "product_id": "don-200200",
+ "name": "山かけまぐろたたき丼",
+ "category": "こだわり丼",
+ "price": 850,
+ "price_note": "税込・店内の価格。サイズや組み合わせにより価格が異なります（内訳は下の表）。表示は「並盛」の価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "並盛",
+   "price": 850
+  },
+  {
+   "label": "ごはん大盛",
+   "price": 900
+  },
+  {
+   "label": "特盛（まぐろたたき2倍ごはん大盛）",
+   "price": 1190
+  }
+ ],
+ "price_checked_at": "2026-11-10",
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 629.0,
+  "protein_g": 29.0,
+  "fat_g": 9.6,
+  "carbs_g": 105.8,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 1.5,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "並盛",
+   "nutrition": {
+    "kcal": 629.0,
+    "protein_g": 29.0,
+    "fat_g": 9.6,
+    "carbs_g": 105.8,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 1.5,
+    "other": {}
+   }
+  },
+  {
+   "label": "大盛",
+   "nutrition": {
+    "kcal": 754.0,
+    "protein_g": 31.1,
+    "fat_g": 10.0,
+    "carbs_g": 134.1,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 1.8,
+    "other": {}
+   }
+  },
+  {
+   "label": "特盛",
+   "nutrition": {
+    "kcal": 913.0,
+    "protein_g": 50.9,
+    "fat_g": 18.0,
+    "carbs_g": 134.8,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 2.3,
+    "other": {}
+   }
+  }
+ ],
+ "nutrition_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
+ "nutrition_pdf_label": "栄養成分一覧",
+ "allergen_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
+ "allergen_pdf_label": "アレルゲン一覧",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "大豆",
+   "やまいも"
+  ],
+  "partial": [
+   {
+    "name": "卵",
+    "mark": "△"
+   },
+   {
+    "name": "乳",
+    "mark": "△"
+   },
+   {
+    "name": "落花生（ピーナッツ）",
+    "mark": "△"
+   },
+   {
+    "name": "えび",
+    "mark": "△"
+   },
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "牛肉",
+    "mark": "△"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   },
+   {
+    "name": "りんご",
+    "mark": "△"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△"
+   },
+   {
+    "name": "ごま",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "badges": [],
+ "official_url": "https://www.sukiya.jp/menu/in/don/200200/index.html",
+ "first_seen_at": "2026-11-10T07:35:40+09:00",
+ "last_seen_at": "2026-11-10",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-10",
+   "price": 850
+  }
+ ],
+ "source_list": [
+  "don"
+ ],
+ "image": null,
+ "price_variants_history": [
+  {
+   "date": "2026-11-10",
+   "variants": [
+    {
+     "label": "並盛",
+     "price": 850
+    },
+    {
+     "label": "ごはん大盛",
+     "price": 900
+    },
+    {
+     "label": "特盛（まぐろたたき2倍ごはん大盛）",
+     "price": 1190
+    }
+   ]
+  }
+ ],
+ "is_regular": true,
+ "nutrition_source": {
+  "url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
+  "label": "栄養成分一覧",
+  "version": "2026-11-06",
+  "version_text": "2026年11月6日更新",
+  "fetched_at": "2026-11-10T07:38:56+09:00"
+ },
+ "nutrition_note": "表示した数値には、お好みでお使いいただく調味料（紅生姜・醤油・ドレッシング・七味・カルビ追いダレなど）は含まれていません。",
+ "allergens_conditional": {
+  "mark": "△",
+  "meaning": "原材料由来および原材料の製造工場において、そのアレルゲン物質を含む製品を同じライン等で製造しております"
+ },
+ "allergen_source": {
+  "url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
+  "label": "アレルゲン一覧",
+  "version": "2026-11-06",
+  "version_text": "2026年11月6日更新",
+  "fetched_at": "2026-11-10T07:38:56+09:00"
+ }
+}

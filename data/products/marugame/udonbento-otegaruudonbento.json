@@ -1,0 +1,119 @@
+{
+ "chain": "marugame",
+ "product_id": "udonbento-otegaruudonbento",
+ "slug": "otegaruudonbento",
+ "category_id": "udonbento",
+ "name": "薬味とトッピングで楽しむ お手軽うどん弁当",
+ "category": "うどん弁当",
+ "price": 300,
+ "price_note": "税込。表示は「うどん１玉」の価格。店舗により販売メニューや価格が異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "うどん１玉",
+   "price": 300
+  },
+  {
+   "label": "うどん２玉",
+   "price": 500
+  }
+ ],
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "description": "毎日すべての店で北海道産小麦100%、塩、水のみからつくるうどんを、ぶっかけだしでお楽しみいただけるうどん弁当。",
+ "description_full_len": 128,
+ "nutrition": {
+  "kcal": 314.0,
+  "protein_g": 9.3,
+  "fat_g": 1.3,
+  "carbs_g": 66.3,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 4.5,
+  "other": {
+   "ナトリウム": "1770mg"
+  }
+ },
+ "nutrition_variants": [
+  {
+   "label": "冷・うどん１玉",
+   "nutrition": {
+    "kcal": 314.0,
+    "protein_g": 9.3,
+    "fat_g": 1.3,
+    "carbs_g": 66.3,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 4.5,
+    "other": {
+     "ナトリウム": "1770mg"
+    }
+   }
+  },
+  {
+   "label": "冷・うどん２玉",
+   "nutrition": {
+    "kcal": 589.0,
+    "protein_g": 17.3,
+    "fat_g": 2.5,
+    "carbs_g": 124.0,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 6.0,
+    "other": {
+     "ナトリウム": "2370mg"
+    }
+   }
+  }
+ ],
+ "nutrition_note": "栄養成分値は商品のレシピに基づく推定値で、店内の手づくりのため実際の商品と差が出ることがあります",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "さば",
+   "大豆"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "badges": [],
+ "channels": [
+  "お持ち帰り"
+ ],
+ "takeout_only": true,
+ "official_url": "https://jp.marugame.com/menu/udonbento/otegaruudonbento/",
+ "first_seen_at": "2026-11-10T07:39:28+09:00",
+ "last_seen_at": "2026-11-10",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-10",
+   "price": 300
+  }
+ ],
+ "source_list": [
+  "menu/udonbento"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-10",
+ "price_variants_history": [
+  {
+   "date": "2026-11-10",
+   "variants": [
+    {
+     "label": "うどん１玉",
+     "price": 300
+    },
+    {
+     "label": "うどん２玉",
+     "price": 500
+    }
+   ]
+  }
+ ],
+ "is_regular": true
+}

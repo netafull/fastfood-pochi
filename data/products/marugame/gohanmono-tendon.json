@@ -1,0 +1,85 @@
+{
+ "chain": "marugame",
+ "product_id": "gohanmono-tendon",
+ "slug": "tendon",
+ "category_id": "gohanmono",
+ "name": "白ごはん",
+ "category": "ご飯もの",
+ "price": 180,
+ "price_note": "税込。表示は「並」の価格。店舗により販売メニューや価格が異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "並",
+   "price": 180
+  },
+  {
+   "label": "大",
+   "price": 230
+  }
+ ],
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "description": "丸亀製麺で使用しているお米は全て国産米。",
+ "description_full_len": 89,
+ "nutrition": {
+  "kcal": 281.0,
+  "protein_g": 4.5,
+  "fat_g": 0.5,
+  "carbs_g": 66.8,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 0.0,
+  "other": {
+   "ナトリウム": "2mg"
+  }
+ },
+ "nutrition_variants": null,
+ "nutrition_note": "栄養成分値は商品のレシピに基づく推定値で、店内の手づくりのため実際の商品と差が出ることがあります",
+ "allergens": {
+  "contains": [],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "badges": [],
+ "channels": [
+  "店内",
+  "お持ち帰り"
+ ],
+ "takeout_only": false,
+ "official_url": "https://jp.marugame.com/menu/gohanmono/tendon/",
+ "first_seen_at": "2026-11-10T07:39:28+09:00",
+ "last_seen_at": "2026-11-10",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-10",
+   "price": 180
+  }
+ ],
+ "source_list": [
+  "menu/gohanmono"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-10",
+ "price_variants_history": [
+  {
+   "date": "2026-11-10",
+   "variants": [
+    {
+     "label": "並",
+     "price": 180
+    },
+    {
+     "label": "大",
+     "price": 230
+    }
+   ]
+  }
+ ],
+ "is_regular": true
+}

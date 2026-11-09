@@ -1,0 +1,63 @@
+{
+ "chain": "marugame",
+ "product_id": "gohanmono-syake",
+ "slug": "syake",
+ "category_id": "gohanmono",
+ "name": "鮭",
+ "category": "ご飯もの",
+ "price": 170,
+ "price_note": "税込。店舗により販売メニューや価格が異なる場合があります。",
+ "price_variants": null,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "description": "ふっくらと炊き上げた国産米に、たっぷりの鮭を包みました。",
+ "description_full_len": 48,
+ "nutrition": {
+  "kcal": 160.0,
+  "protein_g": 4.4,
+  "fat_g": 1.4,
+  "carbs_g": 33.8,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 1.2,
+  "other": {
+   "ナトリウム": "487mg"
+  }
+ },
+ "nutrition_variants": null,
+ "nutrition_note": "栄養成分値は商品のレシピに基づく推定値で、店内の手づくりのため実際の商品と差が出ることがあります",
+ "allergens": {
+  "contains": [
+   "さけ"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "badges": [],
+ "channels": [
+  "店内",
+  "お持ち帰り"
+ ],
+ "takeout_only": false,
+ "official_url": "https://jp.marugame.com/menu/gohanmono/syake/",
+ "first_seen_at": "2026-11-10T07:39:28+09:00",
+ "last_seen_at": "2026-11-10",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-10",
+   "price": 170
+  }
+ ],
+ "source_list": [
+  "menu/gohanmono"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-10",
+ "is_regular": true
+}
