@@ -1,0 +1,61 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "2220",
+ "name": "えだまめコーン",
+ "category": "サイド",
+ "price": 300,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "栄養バランスを考慮してスイートコーンにえだまめをプラスした、おいしく栄養を摂っていただけるメニューです。",
+ "description_full_len": 52,
+ "nutrition": {
+  "kcal": 84.0,
+  "protein_g": 5.2,
+  "fat_g": 3.2,
+  "carbs_g": 9.4,
+  "sugar_g": 3.0,
+  "fiber_g": null,
+  "salt_g": 0.2,
+  "other": {
+   "飽和脂肪酸": "0.42g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "大豆"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "えだまめ",
+   "origin": "主要原料：大豆／台湾　製造所所在地：台湾"
+  },
+  {
+   "name": "スイートコーン",
+   "origin": "主要原料：とうもろこし／タイ　製造所所在地：タイ"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mcdonalds.co.jp/products/2220/",
+ "first_seen_at": "2026-11-11T07:30:13+09:00",
+ "last_seen_at": "2026-11-11",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-11",
+   "price": 300
+  }
+ ],
+ "source_list": [
+  "/menu/morning/",
+  "/menu/side/"
+ ],
+ "image": null,
+ "is_regular": true
+}

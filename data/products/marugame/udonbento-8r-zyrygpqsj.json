@@ -1,0 +1,126 @@
+{
+ "chain": "marugame",
+ "product_id": "udonbento-8r-zyrygpqsj",
+ "slug": "8r-zyrygpqsj",
+ "category_id": "udonbento",
+ "name": "かしわ天と定番おかずのうどん弁当",
+ "category": "うどん弁当",
+ "price": 590,
+ "price_note": "税込。表示は「並」の価格。店舗により販売メニューや価格が異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "並",
+   "price": 590
+  },
+  {
+   "label": "大",
+   "price": 780
+  }
+ ],
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "description": "丸亀製麺一番人気のかしわ天と、うどんとの相性が評判の定番おかず（ちくわ磯辺天、野菜バラ天、きんぴらごぼう、玉子焼き）が入ったうどん弁当です。",
+ "description_full_len": 89,
+ "nutrition": {
+  "kcal": 675.0,
+  "protein_g": 27.4,
+  "fat_g": 21.7,
+  "carbs_g": 92.6,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 6.0,
+  "other": {
+   "ナトリウム": "2362mg"
+  }
+ },
+ "nutrition_variants": [
+  {
+   "label": "冷・並",
+   "nutrition": {
+    "kcal": 675.0,
+    "protein_g": 27.4,
+    "fat_g": 21.7,
+    "carbs_g": 92.6,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 6.0,
+    "other": {
+     "ナトリウム": "2362mg"
+    }
+   }
+  },
+  {
+   "label": "冷・大",
+   "nutrition": {
+    "kcal": 812.0,
+    "protein_g": 31.4,
+    "fat_g": 22.4,
+    "carbs_g": 121.5,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 6.8,
+    "other": {
+     "ナトリウム": "2662mg"
+    }
+   }
+  }
+ ],
+ "nutrition_note": "栄養成分値は商品のレシピに基づく推定値で、店内の手づくりのため実際の商品と差が出ることがあります",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "乳",
+   "牛肉",
+   "さば",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "もも",
+   "ごま"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "badges": [],
+ "channels": [
+  "お持ち帰り"
+ ],
+ "takeout_only": true,
+ "official_url": "https://jp.marugame.com/menu/udonbento/8r-zyrygpqsj/",
+ "first_seen_at": "2026-11-11T07:39:18+09:00",
+ "last_seen_at": "2026-11-11",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-11",
+   "price": 590
+  }
+ ],
+ "source_list": [
+  "menu/udonbento"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-11",
+ "price_variants_history": [
+  {
+   "date": "2026-11-11",
+   "variants": [
+    {
+     "label": "並",
+     "price": 590
+    },
+    {
+     "label": "大",
+     "price": 780
+    }
+   ]
+  }
+ ],
+ "is_regular": true
+}

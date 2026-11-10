@@ -1,0 +1,92 @@
+{
+ "chain": "mos",
+ "product_id": "685902",
+ "name": "おしるこ（粒あん）",
+ "category": "デザート",
+ "price": 440,
+ "price_note": null,
+ "launch_date": "2026-11-11",
+ "planned_end_text": "2027年3月下旬頃まで",
+ "description": "北海道十勝産小豆を使用したおしるこに、丸餅を入れました。",
+ "description_full_len": 179,
+ "nutrition": {
+  "kcal": 253.0,
+  "protein_g": 6.5,
+  "fat_g": 0.7,
+  "carbs_g": 55.4,
+  "sugar_g": null,
+  "fiber_g": 4.0,
+  "salt_g": 0.3,
+  "other": {
+   "重量": "170.0g",
+   "コレステロール": "0mg",
+   "ナトリウム": "98mg",
+   "カリウム": "301mg",
+   "カルシウム": "17mg",
+   "リン": "100mg",
+   "鉄": "1.5mg",
+   "ビタミンA": "0μg",
+   "ビタミンB1": "0.04mg",
+   "ビタミンB2": "0.03mg",
+   "ナイアシン": "0.7mg",
+   "ビタミンC": "0mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "0.0mg"
+  }
+ },
+ "allergens": {
+  "contains": [],
+  "partial": [
+   {
+    "name": "乳",
+    "mark": "◇"
+   },
+   {
+    "name": "小麦",
+    "mark": "◇"
+   },
+   {
+    "name": "卵",
+    "mark": "◇"
+   },
+   {
+    "name": "大豆",
+    "mark": "◇"
+   },
+   {
+    "name": "やまいも",
+    "mark": "◇"
+   },
+   {
+    "name": "りんご",
+    "mark": "◇"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "◇"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=685902&c_id=26",
+ "first_seen_at": "2026-11-11T07:31:38+09:00",
+ "last_seen_at": "2026-11-11",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-11",
+   "price": 440
+  }
+ ],
+ "source_list": [
+  "menu_category/26"
+ ],
+ "image": null
+}

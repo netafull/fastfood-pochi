@@ -1,12 +1,12 @@
 {
  "_health": {
   "matsunoya": {
-   "days": 13,
-   "last_date": "2026-11-10"
+   "days": 14,
+   "last_date": "2026-11-11"
   },
   "matsuya": {
-   "days": 13,
-   "last_date": "2026-11-10"
+   "days": 14,
+   "last_date": "2026-11-11"
   }
  },
  "burgerking": {},
@@ -20,7 +20,7 @@
  "sukiya": {},
  "yoshinoya": {
   "yoshinomi-gyu-yakinikusara": {
-   "checked_at": "2026-11-10T07:33:40+09:00",
+   "checked_at": "2026-11-11T07:33:34+09:00",
    "reason": "empty_detail",
    "url": "/menu/yoshinomi/gyu-yakinikusara/"
   }

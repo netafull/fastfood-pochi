@@ -1,0 +1,126 @@
+{
+ "chain": "mos",
+ "product_id": "010552",
+ "name": "冬の白いモスバーガー",
+ "category": "ハンバーガー",
+ "price": 590,
+ "price_note": null,
+ "launch_date": "2026-11-11",
+ "planned_end_text": "2027年1月下旬頃まで",
+ "description": "ホワイトソースをたっぷりとかけた、真っ白なモスバーガーです。",
+ "description_full_len": 174,
+ "nutrition": {
+  "kcal": 396.0,
+  "protein_g": 15.8,
+  "fat_g": 19.8,
+  "carbs_g": 39.1,
+  "sugar_g": null,
+  "fiber_g": 3.1,
+  "salt_g": 2.3,
+  "other": {
+   "重量": "208.2g",
+   "コレステロール": "33mg",
+   "ナトリウム": "924mg",
+   "カリウム": "312mg",
+   "カルシウム": "56mg",
+   "リン": "169mg",
+   "鉄": "1.3mg",
+   "ビタミンA": "47μg",
+   "ビタミンB1": "0.11mg",
+   "ビタミンB2": "0.12mg",
+   "ナイアシン": "2.6mg",
+   "ビタミンC": "8mg",
+   "ビタミンD": "0.4μg",
+   "ビタミンE": "1.3mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "落花生",
+    "mark": "◇"
+   },
+   {
+    "name": "えび",
+    "mark": "◇"
+   },
+   {
+    "name": "かに",
+    "mark": "◇"
+   },
+   {
+    "name": "くるみ",
+    "mark": "◇"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "▽"
+   },
+   {
+    "name": "ごま",
+    "mark": "◇"
+   }
+  ]
+ },
+ "origin": [
+  {
+   "name": "ハンバーガーバンズ：小麦粉（小麦）",
+   "origin": "アメリカ、カナダ、国産"
+  },
+  {
+   "name": "ハンバーガーパティ：牛肉",
+   "origin": "オーストラリア、アメリカ、カナダ"
+  },
+  {
+   "name": "モスの生野菜：トマト",
+   "origin": "国産"
+  },
+  {
+   "name": "モスの生野菜：オニオン",
+   "origin": "国産"
+  },
+  {
+   "name": "ミートソース：オニオン",
+   "origin": "国産、ニュージーランド、カナダ、その他"
+  },
+  {
+   "name": "ミートソース：トマトおよびその加工品",
+   "origin": "オーストラリア、チリ、ポルトガル、その他"
+  },
+  {
+   "name": "ミートソース：牛肉",
+   "origin": "オーストラリア、その他"
+  },
+  {
+   "name": "ミートソース：豚肉",
+   "origin": "カナダ、その他"
+  }
+ ],
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=010552&c_id=26",
+ "first_seen_at": "2026-11-11T07:31:38+09:00",
+ "last_seen_at": "2026-11-11",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-11",
+   "price": 590
+  }
+ ],
+ "source_list": [
+  "menu_category/26"
+ ],
+ "image": null
+}

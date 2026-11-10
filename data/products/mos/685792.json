@@ -1,0 +1,64 @@
+{
+ "chain": "mos",
+ "product_id": "685792",
+ "name": "【テイクアウト限定】＜冷凍＞ バスクチーズケーキ",
+ "category": "デザート",
+ "price": 350,
+ "price_note": null,
+ "launch_date": "2026-11-11",
+ "planned_end_text": "2027年1月下旬頃まで",
+ "description": "ほどよい酸味とミルク感が特長のオーストラリア産クリームチーズを使用したバスクチーズケーキです。",
+ "description_full_len": 156,
+ "nutrition": {
+  "kcal": 231.0,
+  "protein_g": 4.6,
+  "fat_g": 17.2,
+  "carbs_g": 14.6,
+  "sugar_g": null,
+  "fiber_g": 0.0,
+  "salt_g": 0.3,
+  "other": {
+   "重量": "65.0g",
+   "コレステロール": "91mg",
+   "ナトリウム": "124mg",
+   "カリウム": "34mg",
+   "カルシウム": "27mg",
+   "リン": "52mg",
+   "鉄": "0.2mg",
+   "ビタミンA": "72μg",
+   "ビタミンB1": "0.03mg",
+   "ビタミンB2": "0.12mg",
+   "ナイアシン": "0.0mg",
+   "ビタミンC": "0mg",
+   "ビタミンD": "0.3μg",
+   "ビタミンE": "0.7mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "卵",
+   "大豆"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=685792&c_id=26",
+ "first_seen_at": "2026-11-11T07:31:38+09:00",
+ "last_seen_at": "2026-11-11",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-11",
+   "price": 350
+  }
+ ],
+ "source_list": [
+  "menu_category/26"
+ ],
+ "image": null
+}

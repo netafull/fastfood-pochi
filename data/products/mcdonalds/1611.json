@@ -1,0 +1,54 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "1611",
+ "name": "バーベキューソース",
+ "category": "サイド",
+ "price": 50,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "太陽の恵みを受けたトマトペーストに、ミックススパイスと赤ワインビネガーなどをブレンド。",
+ "description_full_len": 57,
+ "nutrition": {
+  "kcal": 33.0,
+  "protein_g": 0.2,
+  "fat_g": 0.2,
+  "carbs_g": 7.6,
+  "sugar_g": 6.0,
+  "fiber_g": null,
+  "salt_g": 0.5,
+  "other": {
+   "飽和脂肪酸": "0.01g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "小麦",
+   "大豆"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "official_url": "https://www.mcdonalds.co.jp/products/1611/",
+ "first_seen_at": "2026-11-11T07:30:13+09:00",
+ "last_seen_at": "2026-11-11",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-11",
+   "price": 50
+  }
+ ],
+ "source_list": [
+  "/menu/dinner/",
+  "/menu/morning/",
+  "/menu/side/"
+ ],
+ "image": null,
+ "is_regular": true
+}

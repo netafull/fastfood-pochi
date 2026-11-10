@@ -1,0 +1,58 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "1610",
+ "name": "チキンマックナゲット® 5ピース",
+ "category": "サイド",
+ "price": 290,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "外はカリッとゴールデンブラウン。",
+ "description_full_len": 58,
+ "nutrition": {
+  "kcal": 262.0,
+  "protein_g": 15.3,
+  "fat_g": 15.9,
+  "carbs_g": 14.4,
+  "sugar_g": 0.0,
+  "fiber_g": null,
+  "salt_g": 1.2,
+  "other": {
+   "飽和脂肪酸": "5.9g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "小麦",
+   "鶏肉"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "チキンマックナゲット®",
+   "origin": "主要原料：鶏肉／タイ　製造所所在地：タイ"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mcdonalds.co.jp/products/1610/",
+ "first_seen_at": "2026-11-11T07:30:13+09:00",
+ "last_seen_at": "2026-11-11",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-11",
+   "price": 290
+  }
+ ],
+ "source_list": [
+  "/menu/morning/",
+  "/menu/side/"
+ ],
+ "image": null,
+ "is_regular": true
+}

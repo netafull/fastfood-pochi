@@ -1,0 +1,54 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "1612",
+ "name": "マスタードソース",
+ "category": "サイド",
+ "price": 50,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "色鮮やかなフレンチマスタードとクリーミーなドレッシングをブレンドした、ほのかな辛みと甘酸っぱさが楽しめるソースです。",
+ "description_full_len": 58,
+ "nutrition": {
+  "kcal": 43.0,
+  "protein_g": 0.4,
+  "fat_g": 2.2,
+  "carbs_g": 5.4,
+  "sugar_g": 4.0,
+  "fiber_g": null,
+  "salt_g": 0.4,
+  "other": {
+   "飽和脂肪酸": "0.2g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "大豆"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "official_url": "https://www.mcdonalds.co.jp/products/1612/",
+ "first_seen_at": "2026-11-11T07:30:13+09:00",
+ "last_seen_at": "2026-11-11",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-11",
+   "price": 50
+  }
+ ],
+ "source_list": [
+  "/menu/dinner/",
+  "/menu/morning/",
+  "/menu/side/"
+ ],
+ "image": null,
+ "is_regular": true
+}

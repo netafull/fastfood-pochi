@@ -1,0 +1,102 @@
+{
+ "chain": "yoshinoya",
+ "product_id": "morningset-asagyu-set",
+ "name": "朝牛セット",
+ "category": "朝食",
+ "price": 519,
+ "price_note": "税込・店内の価格。表示は「並盛」の価格。テイクアウトはできません。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "小盛",
+   "price": 519
+  },
+  {
+   "label": "並盛",
+   "price": 552
+  },
+  {
+   "label": "アタマの大盛",
+   "price": 728
+  },
+  {
+   "label": "大盛",
+   "price": 794
+  },
+  {
+   "label": "特盛",
+   "price": 992
+  },
+  {
+   "label": "超特盛",
+   "price": 1113
+  }
+ ],
+ "takeout": false,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "nutrition_variants": null,
+ "nutrition_pdf_url": "https://www.yoshinoya.com/pdf/allergy/",
+ "nutrition_pdf_label": "吉野家メニュー情報",
+ "origin_pdf_url": "https://www.yoshinoya.com/pdf/producing_area/",
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "定番",
+ "badges": [],
+ "in_limited_list": false,
+ "official_url": "https://www.yoshinoya.com/menu/morningset/asagyu-set/",
+ "first_seen_at": "2026-11-11T07:33:34+09:00",
+ "last_seen_at": "2026-11-11",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-11",
+   "price": 519
+  }
+ ],
+ "source_list": [
+  "morningset"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-11",
+ "price_variants_history": [
+  {
+   "date": "2026-11-11",
+   "variants": [
+    {
+     "label": "小盛",
+     "price": 519
+    },
+    {
+     "label": "並盛",
+     "price": 552
+    },
+    {
+     "label": "アタマの大盛",
+     "price": 728
+    },
+    {
+     "label": "大盛",
+     "price": 794
+    },
+    {
+     "label": "特盛",
+     "price": 992
+    },
+    {
+     "label": "超特盛",
+     "price": 1113
+    }
+   ]
+  }
+ ],
+ "is_regular": true
+}

@@ -1,0 +1,77 @@
+{
+ "chain": "mos",
+ "product_id": "312512",
+ "name": "ブロッコリーと赤インゲン豆のトマトポタージュ",
+ "category": "ドリンク／スープ",
+ "price": 380,
+ "price_note": null,
+ "launch_date": "2026-11-11",
+ "planned_end_text": "2027年3月下旬頃まで",
+ "description": "たまねぎ、セロリ、にんじん、ブロッコリーの茎をソテーしてうま味と香りを引き出し、トマトペーストと赤インゲン豆のペーストにミルクを合わせて煮込みました。",
+ "description_full_len": 166,
+ "nutrition": {
+  "kcal": 110.0,
+  "protein_g": 3.0,
+  "fat_g": 6.7,
+  "carbs_g": 9.8,
+  "sugar_g": null,
+  "fiber_g": 3.7,
+  "salt_g": 1.8,
+  "other": {
+   "重量": "175.0g",
+   "コレステロール": "0mg",
+   "ナトリウム": "716mg",
+   "カリウム": "312mg",
+   "カルシウム": "30mg",
+   "リン": "68mg",
+   "鉄": "0.7mg",
+   "ビタミンA": "42μg",
+   "ビタミンB1": "0.09mg",
+   "ビタミンB2": "0.07mg",
+   "ナイアシン": "0.5mg",
+   "ビタミンC": "30mg",
+   "ビタミンD": "0.0μg",
+   "ビタミンE": "1.4mg"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "大豆",
+   "鶏肉"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "ポタージュ：ブロッコリー",
+   "origin": "国産"
+  },
+  {
+   "name": "ポタージュ：オニオン",
+   "origin": "中国、国産"
+  },
+  {
+   "name": "ポタージュ：赤いんげん豆",
+   "origin": "アメリカ"
+  }
+ ],
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mos.jp/menu/detail/?menu_id=312512&c_id=26",
+ "first_seen_at": "2026-11-11T07:31:38+09:00",
+ "last_seen_at": "2026-11-11",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-11",
+   "price": 380
+  }
+ ],
+ "source_list": [
+  "menu_category/26"
+ ],
+ "image": null
+}
