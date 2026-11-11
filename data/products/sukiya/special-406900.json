@@ -1,0 +1,79 @@
+{
+ "chain": "sukiya",
+ "product_id": "special-406900",
+ "name": "焼鮭・納豆定食",
+ "category": "定食",
+ "price": 730,
+ "price_note": "税込・店内の価格。サイズや組み合わせにより価格が異なります（内訳は下の表）。表示は「ごはん並盛」の価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "ごはんミニ",
+   "price": 700
+  },
+  {
+   "label": "ごはん並盛",
+   "price": 730
+  },
+  {
+   "label": "ごはん大盛",
+   "price": 780
+  }
+ ],
+ "price_checked_at": "2026-11-12",
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "nutrition_variants": null,
+ "nutrition_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
+ "nutrition_pdf_label": "栄養成分一覧",
+ "allergen_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
+ "allergen_pdf_label": "アレルゲン一覧",
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "定番",
+ "badges": [],
+ "official_url": "https://www.sukiya.jp/menu/in/special/406900/index.html",
+ "first_seen_at": "2026-11-12T07:37:28+09:00",
+ "last_seen_at": "2026-11-12",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-12",
+   "price": 730
+  }
+ ],
+ "source_list": [
+  "special"
+ ],
+ "image": null,
+ "price_variants_history": [
+  {
+   "date": "2026-11-12",
+   "variants": [
+    {
+     "label": "ごはんミニ",
+     "price": 700
+    },
+    {
+     "label": "ごはん並盛",
+     "price": 730
+    },
+    {
+     "label": "ごはん大盛",
+     "price": 780
+    }
+   ]
+  }
+ ],
+ "is_regular": true,
+ "pdf_tried": "2026-11-06|2026-11-06"
+}

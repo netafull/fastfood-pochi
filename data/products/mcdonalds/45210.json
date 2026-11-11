@@ -1,0 +1,58 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "45210",
+ "name": "マカロン チョコレート",
+ "category": "マックカフェ",
+ "price": 200,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "チョコレートの風味を楽しめるクリームをサンドしたマカロン。",
+ "description_full_len": 29,
+ "nutrition": {
+  "kcal": 82.0,
+  "protein_g": 1.5,
+  "fat_g": 4.2,
+  "carbs_g": 9.5,
+  "sugar_g": 8.0,
+  "fiber_g": null,
+  "salt_g": 0.0,
+  "other": {
+   "飽和脂肪酸": "1.62g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "乳",
+   "アーモンド"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "マカロン チョコレート",
+   "origin": "主要原料：アーモンド／アメリカ、スペイン | チョコクリーム／フランス　製造所所在地：フランス"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mcdonalds.co.jp/products/45210/",
+ "first_seen_at": "2026-11-12T07:32:05+09:00",
+ "last_seen_at": "2026-11-12",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-12",
+   "price": 200
+  }
+ ],
+ "source_list": [
+  "/menu/mccafe/"
+ ],
+ "image": null,
+ "is_regular": true
+}

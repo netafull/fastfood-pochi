@@ -1,0 +1,53 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "41110",
+ "name": "クッキー&クリームチョコフラッペ",
+ "category": "マックカフェ",
+ "price": 470,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "北海道産生クリームを使用したクリーミーなコクがあるチョコフラッペドリンクにホイップクリーム・ココアクッキーをトッピング。",
+ "description_full_len": 60,
+ "nutrition": {
+  "kcal": 332.0,
+  "protein_g": 6.5,
+  "fat_g": 10.8,
+  "carbs_g": 53.5,
+  "sugar_g": 40.0,
+  "fiber_g": null,
+  "salt_g": 0.5,
+  "other": {
+   "飽和脂肪酸": "7.35g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "大豆"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "official_url": "https://www.mcdonalds.co.jp/products/41110/",
+ "first_seen_at": "2026-11-12T07:32:05+09:00",
+ "last_seen_at": "2026-11-12",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-12",
+   "price": 470
+  }
+ ],
+ "source_list": [
+  "/menu/mccafe/"
+ ],
+ "image": null,
+ "is_regular": true
+}

@@ -1,0 +1,49 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "41040",
+ "name": "マンゴースムージー",
+ "category": "マックカフェ",
+ "price": 450,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "「マンゴーの王様」と称されるアルフォンソマンゴーのピューレを使用した、豊かな香りととろける甘さのマンゴースムージー。",
+ "description_full_len": 58,
+ "nutrition": {
+  "kcal": 203.0,
+  "protein_g": 0.5,
+  "fat_g": 0.2,
+  "carbs_g": 49.9,
+  "sugar_g": 42.0,
+  "fiber_g": null,
+  "salt_g": 0.2,
+  "other": {
+   "飽和脂肪酸": "0.03g"
+  }
+ },
+ "allergens": {
+  "contains": [],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "official_url": "https://www.mcdonalds.co.jp/products/41040/",
+ "first_seen_at": "2026-11-12T07:32:05+09:00",
+ "last_seen_at": "2026-11-12",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-12",
+   "price": 450
+  }
+ ],
+ "source_list": [
+  "/menu/mccafe/"
+ ],
+ "image": null,
+ "is_regular": true
+}

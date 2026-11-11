@@ -1,0 +1,70 @@
+{
+ "chain": "yoshinoya",
+ "product_id": "sidemenu-kimuchi",
+ "name": "キムチ",
+ "category": "サイドメニュー・お飲み物",
+ "price": 162,
+ "price_note": "税込・店内の価格。テイクアウトは税率が違うため税込額が異なる場合があります（内訳は下の表）。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "",
+   "price": 162
+  },
+  {
+   "label": "テイクアウト",
+   "price": 159
+  }
+ ],
+ "takeout": true,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "nutrition_variants": null,
+ "nutrition_pdf_url": "https://www.yoshinoya.com/pdf/allergy/",
+ "nutrition_pdf_label": "吉野家メニュー情報",
+ "origin_pdf_url": "https://www.yoshinoya.com/pdf/producing_area/",
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "定番",
+ "badges": [],
+ "in_limited_list": false,
+ "official_url": "https://www.yoshinoya.com/menu/sidemenu/kimuchi/",
+ "first_seen_at": "2026-11-12T07:35:27+09:00",
+ "last_seen_at": "2026-11-12",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-12",
+   "price": 162
+  }
+ ],
+ "source_list": [
+  "sidemenu"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-12",
+ "price_variants_history": [
+  {
+   "date": "2026-11-12",
+   "variants": [
+    {
+     "label": "",
+     "price": 162
+    },
+    {
+     "label": "テイクアウト",
+     "price": 159
+    }
+   ]
+  }
+ ],
+ "is_regular": true
+}

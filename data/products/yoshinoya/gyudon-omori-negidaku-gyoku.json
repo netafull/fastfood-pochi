@@ -37,9 +37,9 @@
  "official_url": "https://www.yoshinoya.com/menu/gyudon/omori-negidaku-gyoku/",
  "first_seen_at": "2026-11-09T07:33:33+09:00",
  "last_seen_at": "2026-11-10",
- "status": "on_sale",
- "ended_observed_at": null,
- "missed_runs": 1,
+ "status": "ended",
+ "ended_observed_at": "2026-11-12",
+ "missed_runs": 2,
  "price_history": [
   {
    "date": "2026-11-09",
@@ -67,5 +67,5 @@
   }
  ],
  "is_regular": true,
- "last_miss_date": "2026-11-11"
+ "last_miss_date": "2026-11-12"
 }

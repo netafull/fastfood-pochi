@@ -1,0 +1,49 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "3930",
+ "name": "サントリー黒烏龍茶#濃いめ",
+ "category": "ドリンク",
+ "price": 340,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "濃くてスッキリした味わいで、ハンバーガーやポテトにピッタリな特定保健用食品 サントリー黒烏龍茶 濃いめです。",
+ "description_full_len": 54,
+ "nutrition": {
+  "kcal": 5.0,
+  "protein_g": 0.0,
+  "fat_g": 0.0,
+  "carbs_g": 1.0,
+  "sugar_g": 0.0,
+  "fiber_g": null,
+  "salt_g": 0.1,
+  "other": {
+   "飽和脂肪酸": "0g"
+  }
+ },
+ "allergens": {
+  "contains": [],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "official_url": "https://www.mcdonalds.co.jp/products/3930/",
+ "first_seen_at": "2026-11-12T07:32:05+09:00",
+ "last_seen_at": "2026-11-12",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-12",
+   "price": 340
+  }
+ ],
+ "source_list": [
+  "/menu/drink/"
+ ],
+ "image": null,
+ "is_regular": true
+}

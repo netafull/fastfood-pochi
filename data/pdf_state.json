@@ -1,14 +1,14 @@
 {
  "sukiya": {
   "allergen": {
-   "fetched_at": "2026-11-11T07:38:50+09:00",
-   "last_get": "2026-11-11",
+   "fetched_at": "2026-11-12T07:40:44+09:00",
+   "last_get": "2026-11-12",
    "signature": "\"8cd5c2d09da3a9b625eec46272fb8930\"|Fri, 06 Nov 2026 08:55:23 GMT|1626161",
    "version": "2026-11-06"
   },
   "nutrition": {
-   "fetched_at": "2026-11-11T07:38:50+09:00",
-   "last_get": "2026-11-11",
+   "fetched_at": "2026-11-12T07:40:44+09:00",
+   "last_get": "2026-11-12",
    "signature": "\"b7b3bc59426a3c919405e0f738b91d74\"|Mon, 09 Nov 2026 01:46:02 GMT|976833",
    "version": "2026-11-06"
   }
