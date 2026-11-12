@@ -19,7 +19,7 @@
    "price": 1000
   }
  ],
- "price_checked_at": "2026-11-11",
+ "price_checked_at": "2026-11-13",
  "launch_date": null,
  "launch_date_source": "not_found",
  "announced_at": null,
@@ -184,7 +184,7 @@
  ],
  "official_url": "https://www.sukiya.jp/menu/in/gyusuki/1007600/index.html",
  "first_seen_at": "2026-10-28T07:33:15+09:00",
- "last_seen_at": "2026-11-12",
+ "last_seen_at": "2026-11-13",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,

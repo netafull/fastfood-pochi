@@ -1,0 +1,51 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "40010",
+ "name": "ホットチョコレート",
+ "category": "マックカフェ",
+ "price": 390,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "泡立てたミルクを使った温かなチョコレートドリンク。",
+ "description_full_len": 56,
+ "nutrition": {
+  "kcal": 168.0,
+  "protein_g": 5.9,
+  "fat_g": 5.8,
+  "carbs_g": 22.8,
+  "sugar_g": 20.0,
+  "fiber_g": null,
+  "salt_g": 0.3,
+  "other": {
+   "飽和脂肪酸": "3.63g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "official_url": "https://www.mcdonalds.co.jp/products/40010/",
+ "first_seen_at": "2026-11-13T07:30:17+09:00",
+ "last_seen_at": "2026-11-13",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-13",
+   "price": 390
+  }
+ ],
+ "source_list": [
+  "/menu/mccafe/"
+ ],
+ "image": null,
+ "is_regular": true
+}

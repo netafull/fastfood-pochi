@@ -1,0 +1,50 @@
+{
+ "chain": "sukiya",
+ "product_id": "side-708500",
+ "name": "炙り塩さば",
+ "category": "おかず",
+ "price": 290,
+ "price_note": "税込・店内の価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "price_checked_at": "2026-11-13",
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "nutrition_variants": null,
+ "nutrition_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
+ "nutrition_pdf_label": "栄養成分一覧",
+ "allergen_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
+ "allergen_pdf_label": "アレルゲン一覧",
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "定番",
+ "badges": [],
+ "official_url": "https://www.sukiya.jp/menu/in/side/708500/index.html",
+ "first_seen_at": "2026-11-13T07:35:01+09:00",
+ "last_seen_at": "2026-11-13",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-13",
+   "price": 290
+  }
+ ],
+ "source_list": [
+  "side"
+ ],
+ "image": null,
+ "same_name_as": [
+  "morning-508900"
+ ],
+ "is_regular": true,
+ "pdf_tried": "2026-11-06|2026-11-06"
+}

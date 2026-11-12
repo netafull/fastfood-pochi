@@ -5630,6 +5630,18 @@
   ],
   "mcdonalds": [
    {
+    "date": "2026-11-12T13:00:00",
+    "id": 212585,
+    "link": "https://netaful.jp/mcdonalds/0212585.html",
+    "product_name": "ザクザクジューシーマック",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/11/mcd-zakuzaku-chicken-004-485x364.jpg",
+     "width": 485
+    },
+    "title": "【マクドナルド】「ザクザクジューシーマック」販売休止前に実食！テイクアウトでもザクザク食感で174gの食べごたえ"
+   },
+   {
     "date": "2026-05-25T09:00:00",
     "id": 204627,
     "link": "https://netaful.jp/mcdonalds/0204627.html",
@@ -9684,6 +9696,18 @@
   ],
   "yoshinoya": [
    {
+    "date": "2026-11-12T12:05:00",
+    "id": 212572,
+    "link": "https://netaful.jp/fast-food/0212572.html",
+    "product_name": "牛すき鍋膳",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/11/yoshinoya-gyusukizen-001-485x364.jpg",
+     "width": 485
+    },
+    "title": "【吉野家】「牛すき鍋膳」牛すき祭で100円オフの783円はヤバい！きしめん入り鍋とライス大盛で747g"
+   },
+   {
     "date": "2026-10-29T19:00:00",
     "id": 211730,
     "link": "https://netaful.jp/fast-food/0211730.html",
@@ -10354,7 +10378,7 @@
   ]
  },
  "errors": [],
- "fetched_at": "2026-11-12T07:42:10+09:00",
+ "fetched_at": "2026-11-13T07:39:45+09:00",
  "matches": {
   "karayama-19096": [
    209971
@@ -10385,6 +10409,18 @@
   ],
   "matsuya-teishoku-tei_kuromabo_hp": [
    210253
+  ],
+  "mcdonalds-1520": [
+   212585
+  ],
+  "mcdonalds-1530": [
+   212585
+  ],
+  "mcdonalds-4820": [
+   212585
+  ],
+  "mcdonalds-4830": [
+   212585
   ],
   "sukiya-curry-314800": [
    210077
@@ -10421,6 +10457,9 @@
   ],
   "yoshinoya-gentei-gyusanma-tei": [
    210715
+  ],
+  "yoshinoya-set-gyusuki-nabe-zen": [
+   212572
   ]
  }
 }

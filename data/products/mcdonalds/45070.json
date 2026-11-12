@@ -1,0 +1,61 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "45070",
+ "name": "プリンケーキ",
+ "category": "マックカフェ",
+ "price": 270,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "カスタード風味の生地を、カラメルソースに浸し、シュガーコーティングした、まるでプリンのような手のひらサイズの焼菓子です。",
+ "description_full_len": 60,
+ "nutrition": {
+  "kcal": 179.0,
+  "protein_g": 2.1,
+  "fat_g": 10.1,
+  "carbs_g": 19.8,
+  "sugar_g": 13.0,
+  "fiber_g": null,
+  "salt_g": 0.1,
+  "other": {
+   "飽和脂肪酸": "1.97g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "乳",
+   "小麦",
+   "アーモンド",
+   "大豆",
+   "ゼラチン"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "プリンケーキ",
+   "origin": "主要原料：小麦粉／日本 | カラメルソース／日本　製造所所在地：日本"
+  }
+ ],
+ "limited_kind": "定番",
+ "official_url": "https://www.mcdonalds.co.jp/products/45070/",
+ "first_seen_at": "2026-11-13T07:30:17+09:00",
+ "last_seen_at": "2026-11-13",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-13",
+   "price": 270
+  }
+ ],
+ "source_list": [
+  "/menu/mccafe/"
+ ],
+ "image": null,
+ "is_regular": true
+}

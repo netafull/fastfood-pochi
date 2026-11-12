@@ -1,0 +1,51 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "40004",
+ "name": "ホットカフェラテ(マックカフェ バイ バリスタ)",
+ "category": "マックカフェ",
+ "price": 270,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": null,
+ "planned_end_text": null,
+ "mop_ended_at": null,
+ "list_started_at": null,
+ "description": "苦みと酸味のバランスがよいエスプレッソにフォームミルクを加えたカフェラテ。",
+ "description_full_len": 60,
+ "nutrition": {
+  "kcal": 95.0,
+  "protein_g": 4.7,
+  "fat_g": 5.3,
+  "carbs_g": 6.9,
+  "sugar_g": 6.0,
+  "fiber_g": null,
+  "salt_g": 0.1,
+  "other": {
+   "飽和脂肪酸": "3.23g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "乳"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "official_url": "https://www.mcdonalds.co.jp/products/40004/",
+ "first_seen_at": "2026-11-13T07:30:17+09:00",
+ "last_seen_at": "2026-11-13",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-13",
+   "price": 270
+  }
+ ],
+ "source_list": [
+  "/menu/mccafe/"
+ ],
+ "image": null,
+ "is_regular": true
+}
