@@ -3,7 +3,7 @@
  "product_id": "2020",
  "name": "マックフライポテト®",
  "category": "サイド",
- "price": 250,
+ "price": 350,
  "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
  "launch_date": null,
  "planned_end_text": null,
@@ -36,7 +36,7 @@
  "limited_kind": "新メニュー",
  "official_url": "https://www.mcdonalds.co.jp/products/2020/",
  "first_seen_at": "2026-10-31T07:30:14+09:00",
- "last_seen_at": "2026-11-13",
+ "last_seen_at": "2026-11-14",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -52,6 +52,10 @@
   {
    "date": "2026-11-02",
    "price": 250
+  },
+  {
+   "date": "2026-11-14",
+   "price": 350
   }
  ],
  "source_list": [

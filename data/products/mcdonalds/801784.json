@@ -18,9 +18,9 @@
  "official_url": "https://www.mcdonalds.co.jp/products/801784/",
  "first_seen_at": "2026-10-21T07:30:15+09:00",
  "last_seen_at": "2026-11-12",
- "status": "on_sale",
- "ended_observed_at": null,
- "missed_runs": 1,
+ "status": "ended",
+ "ended_observed_at": "2026-11-14",
+ "missed_runs": 2,
  "price_history": [
   {
    "date": "2026-10-21",
@@ -33,5 +33,5 @@
   "/menu/side/"
  ],
  "image": null,
- "last_miss_date": "2026-11-13"
+ "last_miss_date": "2026-11-14"
 }
