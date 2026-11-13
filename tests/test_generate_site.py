@@ -397,6 +397,33 @@ class TestUpdatedLabel(unittest.TestCase):
         self.assertNotIn("最終更新", shell)  # 全ページに入れると毎日すべてのファイルが変わる
 
 
+class TestVisibleBreadcrumbs(unittest.TestCase):
+    """見えるパンくず（タイトルの下）。JSON-LD と同じ trail を渡したページだけに出す（2026-11-13追加）。"""
+
+    TRAIL = [("トップ", "https://fastfood.netaful.jp/"),
+             ("マクドナルド", "https://fastfood.netaful.jp/chains/mcdonalds/")]
+
+    def test_grid_page_with_crumbs_shows_nav_under_title(self):
+        page = g.render_grid_page("マクドナルドの限定メニュー", "説明", [item()],
+                                  "https://fastfood.netaful.jp/chains/mcdonalds/", crumbs=self.TRAIL)
+        nav = ('<nav class="crumbs" aria-label="パンくずリスト"><a data-google-vignette="false" href="/">トップ</a>'
+               ' &gt; <span aria-current="page">マクドナルド</span></nav>')
+        self.assertIn(nav, page)
+        self.assertLess(page.index('<h1 class="pt">'), page.index(nav))
+
+    def test_grid_page_without_crumbs_has_no_nav(self):
+        page = g.render_grid_page("2026年9月に始まった限定メニュー", "説明", [item()],
+                                  "https://fastfood.netaful.jp/archive/2026-09/")
+        self.assertNotIn('aria-label="パンくずリスト"', page)
+
+    def test_empty_grid_page_with_crumbs_shows_nav(self):
+        page = g.render_grid_page("モスバーガーの限定メニュー", "説明", [],
+                                  "https://fastfood.netaful.jp/chains/mos/",
+                                  crumbs=[("トップ", "https://fastfood.netaful.jp/"),
+                                          ("モスバーガー", "https://fastfood.netaful.jp/chains/mos/")])
+        self.assertIn('<span aria-current="page">モスバーガー</span>', page)
+
+
 class TestCardLinksAreRootAbsolute(unittest.TestCase):
     """カードのリンクが /items/… になっている(階層のあるページ /chains/x/ などで404にならない)。"""
 

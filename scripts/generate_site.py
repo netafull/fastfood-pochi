@@ -843,17 +843,21 @@ def render_grid_page(title: str, description: str, items: list[dict], canonical:
                       show_filters: bool = True, review_chain: str | None = None,
                       status_filter: bool = False, default_status: str = "all",
                       empty_text: str = "商品がありません。", seo_title: str | None = None,
-                      extra_head: str = "", extra_body: str = "") -> str:
+                      extra_head: str = "", extra_body: str = "",
+                      crumbs: list[tuple[str, str]] | None = None) -> str:
     # seo_title: <title>に入れる文言。省略すると見出し(title)と同じ
+    # crumbs: パンくずの trail（JSON-LD と同じもの）。渡すと見えるパンくずをタイトルの下に出す
+    nav = breadcrumb_nav(crumbs) if crumbs else ""
+    navline = (nav + "\n") if nav else ""   # パンくずが無いページでは空白行も出さない（従来の出力と完全一致させる）
     reviews_section = render_review_cards("ネタフルの最新レビュー", latest_reviews(review_chain, 5))
     if not items:
-        body = f"<h1 class='pt'>{esc(title)}</h1><p class='empty'>{esc(empty_text)}</p>\n{extra_body}\n{reviews_section}"
+        body = f"<h1 class='pt'>{esc(title)}</h1>{nav}<p class='empty'>{esc(empty_text)}</p>\n{extra_body}\n{reviews_section}"
         return page_shell(seo_title or title, description, body, canonical, extra_head=extra_head)
     filters = filter_bar(status_filter, default_status) if show_filters else ""
     on = sum(1 for it in items if not is_ended(it))
     count_text = f"{len(items)}件" if not status_filter else f"{len(items)}件（販売中{on}件）"
     body = f"""<h1 class="pt">{esc(title)} ({count_text})</h1>
-{filters}
+{navline}{filters}
 {render_grouped(items)}
 {render_ad_template() if show_filters else ""}
 {SORT_JS if show_filters else ""}
@@ -1452,6 +1456,19 @@ def breadcrumb_ld(trail: list[tuple[str, str]]) -> str:
     return f'<script type="application/ld+json">{data}</script>'
 
 
+def breadcrumb_nav(trail: list[tuple[str, str]]) -> str:
+    """見えるパンくず（タイトルの下）。JSON-LD と同じ trail を渡し、末尾（現在のページ）はリンクにしない。
+    href はサイト内パスにする（商品ページの既存の nav.crumbs と同じ書き方）。"""
+    site_url = CONFIG.get("site_url", "")
+    parts = []
+    for name, url in trail[:-1]:
+        href = url[len(site_url):] if site_url and url.startswith(site_url) else url
+        parts.append(f'<a href="/{esc(href.lstrip("/"))}">{esc(name)}</a>')
+    if trail:
+        parts.append(f'<span aria-current="page">{esc(trail[-1][0])}</span>')
+    return '<nav class="crumbs" aria-label="パンくずリスト">' + " &gt; ".join(parts) + "</nav>"
+
+
 def item_lastmod(item: dict) -> str:
     """商品ページのデータが実際に変わった日。初検出日、終了を確認した日、価格が変わった日、
     再登場した日のうち最も新しいもの。last_seen_at・price_checked_at は毎日更新されるので使わない。"""
@@ -1944,6 +1961,7 @@ def main() -> int:
             empty_text="まだ記録がありません。",
             seo_title=chain_seo_title(c),
             extra_head=breadcrumb_ld([("トップ", CONFIG.get("site_url", "")), (c["name"], chain_url)]),
+            crumbs=[("トップ", CONFIG.get("site_url", "")), (c["name"], chain_url)],
             extra_body=render_regular_section(c, [it for it in regular_items if it["chain"] == c["slug"]]),
         )
         (cdir / "index.html").write_text(page, encoding="utf-8")
