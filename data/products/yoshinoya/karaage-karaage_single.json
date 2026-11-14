@@ -48,7 +48,7 @@
  "in_limited_list": false,
  "official_url": "https://www.yoshinoya.com/menu/karaage/karaage_single/",
  "first_seen_at": "2026-11-10T07:33:40+09:00",
- "last_seen_at": "2026-11-14",
+ "last_seen_at": "2026-11-15",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -90,5 +90,6 @@
    ]
   }
  ],
- "is_regular": true
+ "is_regular": true,
+ "pdf_tried": "264|2026-10-29"
 }

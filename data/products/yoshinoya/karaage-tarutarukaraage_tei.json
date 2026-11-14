@@ -28,19 +28,87 @@
  "news_date": null,
  "description": null,
  "description_full_len": 0,
- "nutrition": null,
- "nutrition_variants": null,
+ "nutrition": {
+  "kcal": 1427.0,
+  "protein_g": 45.2,
+  "fat_g": 83.5,
+  "carbs_g": 126.7,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 6.6,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "並盛",
+   "nutrition": {
+    "kcal": 1427.0,
+    "protein_g": 45.2,
+    "fat_g": 83.5,
+    "carbs_g": 126.7,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 6.6,
+    "other": {}
+   }
+  },
+  {
+   "label": "大盛",
+   "nutrition": {
+    "kcal": 1618.0,
+    "protein_g": 54.1,
+    "fat_g": 97.6,
+    "carbs_g": 133.6,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 7.4,
+    "other": {}
+   }
+  },
+  {
+   "label": "特盛",
+   "nutrition": {
+    "kcal": 1808.0,
+    "protein_g": 62.9,
+    "fat_g": 111.7,
+    "carbs_g": 140.5,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 8.2,
+    "other": {}
+   }
+  }
+ ],
  "nutrition_pdf_url": "https://www.yoshinoya.com/pdf/allergy/",
  "nutrition_pdf_label": "吉野家メニュー情報",
  "origin_pdf_url": "https://www.yoshinoya.com/pdf/producing_area/",
- "allergens": null,
+ "allergens": {
+  "contains": [
+   "小麦",
+   "乳",
+   "卵",
+   "大豆",
+   "鶏肉",
+   "ごま"
+  ],
+  "partial": [
+   {
+    "name": "えび",
+    "mark": "▲"
+   },
+   {
+    "name": "かに",
+    "mark": "▲"
+   }
+  ]
+ },
  "origin": null,
  "limited_kind": "定番",
  "badges": [],
  "in_limited_list": false,
  "official_url": "https://www.yoshinoya.com/menu/karaage/tarutarukaraage_tei/",
  "first_seen_at": "2026-11-10T07:33:40+09:00",
- "last_seen_at": "2026-11-14",
+ "last_seen_at": "2026-11-15",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -75,5 +143,18 @@
    ]
   }
  ],
- "is_regular": true
+ "is_regular": true,
+ "nutrition_source": {
+  "url": "https://www.yoshinoya.com/pdf/allergy/",
+  "label": "吉野家メニュー情報",
+  "version": "264|2026-10-29",
+  "version_text": "264号・2026年10月29日現在",
+  "fetched_at": "2026-11-15T07:33:36+09:00",
+  "issue": 264
+ },
+ "nutrition_note": "栄養成分の数値は配合に基づく推定値で、お好みでお使いいただく調味料類は含まれていません。",
+ "allergens_conditional": {
+  "mark": "▲",
+  "meaning": "原材料「あさり」には『かに』が共生しています。 原材料「あおさ」は『えび』『かに』が混ざる漁法で採取されています。"
+ }
 }

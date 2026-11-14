@@ -27,7 +27,7 @@
  "in_limited_list": false,
  "official_url": "https://www.yoshinoya.com/menu/morningset/sakana-gyu-tei/",
  "first_seen_at": "2026-11-11T07:33:34+09:00",
- "last_seen_at": "2026-11-14",
+ "last_seen_at": "2026-11-15",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -42,5 +42,6 @@
  ],
  "image": null,
  "price_checked_at": "2026-11-11",
- "is_regular": true
+ "is_regular": true,
+ "pdf_tried": "264|2026-10-29"
 }
