@@ -1,12 +1,12 @@
 {
  "_health": {
   "matsunoya": {
-   "days": 19,
-   "last_date": "2026-11-16"
+   "days": 20,
+   "last_date": "2026-11-17"
   },
   "matsuya": {
-   "days": 19,
-   "last_date": "2026-11-16"
+   "days": 20,
+   "last_date": "2026-11-17"
   }
  },
  "burgerking": {},
@@ -19,29 +19,29 @@
  "mos": {},
  "sukiya": {
   "side-7004400": {
-   "checked_at": "2026-11-16T08:44:08+09:00",
+   "checked_at": "2026-11-17T07:33:41+09:00",
    "reason": "empty_detail",
    "url": "/menu/in/side/7004400/index.html"
   },
   "side-7004500": {
-   "checked_at": "2026-11-16T08:44:08+09:00",
+   "checked_at": "2026-11-17T07:33:41+09:00",
    "reason": "empty_detail",
    "url": "/menu/in/side/7004500/index.html"
   },
   "side-7004600": {
-   "checked_at": "2026-11-16T08:44:08+09:00",
+   "checked_at": "2026-11-17T07:33:41+09:00",
    "reason": "empty_detail",
    "url": "/menu/in/side/7004600/index.html"
   },
   "side-7004700": {
-   "checked_at": "2026-11-16T08:44:08+09:00",
+   "checked_at": "2026-11-17T07:33:41+09:00",
    "reason": "empty_detail",
    "url": "/menu/in/side/7004700/index.html"
   }
  },
  "yoshinoya": {
   "yoshinomi-gyu-yakinikusara": {
-   "checked_at": "2026-11-16T08:43:05+09:00",
+   "checked_at": "2026-11-17T07:32:38+09:00",
    "reason": "empty_detail",
    "url": "/menu/yoshinomi/gyu-yakinikusara/"
   }
