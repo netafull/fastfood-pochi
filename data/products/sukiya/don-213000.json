@@ -1,0 +1,240 @@
+{
+ "chain": "sukiya",
+ "product_id": "don-213000",
+ "name": "ねぎ塩豚タン丼",
+ "category": "こだわり丼",
+ "price": 780,
+ "price_note": "税込・店内の価格。サイズや組み合わせにより価格が異なります（内訳は下の表）。表示は「並盛」の価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "ごはん少なめ",
+   "price": 780
+  },
+  {
+   "label": "並盛",
+   "price": 780
+  },
+  {
+   "label": "ごはん大盛",
+   "price": 830
+  },
+  {
+   "label": "特盛（肉2倍ごはん大盛）",
+   "price": 1280
+  }
+ ],
+ "price_checked_at": "2026-11-18",
+ "launch_date": "2026-11-17",
+ "launch_date_source": "news_headline",
+ "announced_at": "2026-11-13",
+ "planned_end_text": null,
+ "news_url": "https://www.sukiya.jp/news/Press_sukiya_20261110_tontan.pdf",
+ "news_title": "11月17日（火）朝9:00より『ねぎ塩豚タン丼』販売開始！",
+ "news_date": "2026-11-13",
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 570.0,
+  "protein_g": 18.8,
+  "fat_g": 11.3,
+  "carbs_g": 98.8,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 3.2,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "並盛",
+   "nutrition": {
+    "kcal": 570.0,
+    "protein_g": 18.8,
+    "fat_g": 11.3,
+    "carbs_g": 98.8,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 3.2,
+    "other": {}
+   }
+  },
+  {
+   "label": "ごはん少なめ",
+   "nutrition": {
+    "kcal": 501.0,
+    "protein_g": 17.6,
+    "fat_g": 11.0,
+    "carbs_g": 83.2,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 3.2,
+    "other": {}
+   }
+  },
+  {
+   "label": "大盛",
+   "nutrition": {
+    "kcal": 697.0,
+    "protein_g": 21.0,
+    "fat_g": 12.0,
+    "carbs_g": 126.8,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 3.6,
+    "other": {}
+   }
+  },
+  {
+   "label": "特盛",
+   "nutrition": {
+    "kcal": 844.0,
+    "protein_g": 32.4,
+    "fat_g": 21.0,
+    "carbs_g": 131.9,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 5.8,
+    "other": {}
+   }
+  }
+ ],
+ "nutrition_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
+ "nutrition_pdf_label": "栄養成分一覧",
+ "allergen_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
+ "allergen_pdf_label": "アレルゲン一覧",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "乳",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "りんご",
+   "ゼラチン",
+   "ごま"
+  ],
+  "partial": [
+   {
+    "name": "落花生（ピーナッツ）",
+    "mark": "△"
+   },
+   {
+    "name": "えび",
+    "mark": "△"
+   },
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "くるみ",
+    "mark": "△"
+   },
+   {
+    "name": "カシューナッツ",
+    "mark": "△"
+   },
+   {
+    "name": "いか",
+    "mark": "△"
+   },
+   {
+    "name": "オレンジ",
+    "mark": "△"
+   },
+   {
+    "name": "キウイ",
+    "mark": "△"
+   },
+   {
+    "name": "さけ",
+    "mark": "△"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   },
+   {
+    "name": "もも",
+    "mark": "△"
+   },
+   {
+    "name": "やまいも",
+    "mark": "△"
+   },
+   {
+    "name": "バナナ",
+    "mark": "△"
+   },
+   {
+    "name": "アーモンド",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "期間限定",
+ "badges": [
+  "NEW",
+  "期間限定"
+ ],
+ "official_url": "https://www.sukiya.jp/menu/in/don/213000/index.html",
+ "first_seen_at": "2026-11-18T07:33:44+09:00",
+ "last_seen_at": "2026-11-18",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-18",
+   "price": 780
+  }
+ ],
+ "source_list": [
+  "don"
+ ],
+ "image": null,
+ "price_variants_history": [
+  {
+   "date": "2026-11-18",
+   "variants": [
+    {
+     "label": "ごはん少なめ",
+     "price": 780
+    },
+    {
+     "label": "並盛",
+     "price": 780
+    },
+    {
+     "label": "ごはん大盛",
+     "price": 830
+    },
+    {
+     "label": "特盛（肉2倍ごはん大盛）",
+     "price": 1280
+    }
+   ]
+  }
+ ],
+ "nutrition_source": {
+  "url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
+  "label": "栄養成分一覧",
+  "version": "2026-11-17",
+  "version_text": "2026年11月17日更新",
+  "fetched_at": "2026-11-18T07:36:27+09:00"
+ },
+ "nutrition_note": "表示した数値には、お好みでお使いいただく調味料（紅生姜・醤油・ドレッシング・七味・カルビ追いダレなど）は含まれていません。",
+ "allergens_conditional": {
+  "mark": "△",
+  "meaning": "原材料由来および原材料の製造工場において、そのアレルゲン物質を含む製品を同じライン等で製造しております"
+ },
+ "allergen_source": {
+  "url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
+  "label": "アレルゲン一覧",
+  "version": "2026-11-17",
+  "version_text": "2026年11月17日更新",
+  "fetched_at": "2026-11-18T07:36:27+09:00"
+ }
+}

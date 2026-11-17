@@ -30,39 +30,39 @@
  "description": null,
  "description_full_len": 0,
  "nutrition": {
-  "kcal": 954.0,
-  "protein_g": 26.7,
-  "fat_g": 42.2,
-  "carbs_g": 116.4,
+  "kcal": 967.0,
+  "protein_g": 27.1,
+  "fat_g": 43.0,
+  "carbs_g": 117.4,
   "sugar_g": null,
   "fiber_g": null,
-  "salt_g": 6.0,
+  "salt_g": 6.2,
   "other": {}
  },
  "nutrition_variants": [
   {
    "label": "並盛",
    "nutrition": {
-    "kcal": 954.0,
-    "protein_g": 26.7,
-    "fat_g": 42.2,
-    "carbs_g": 116.4,
+    "kcal": 967.0,
+    "protein_g": 27.1,
+    "fat_g": 43.0,
+    "carbs_g": 117.4,
     "sugar_g": null,
     "fiber_g": null,
-    "salt_g": 6.0,
+    "salt_g": 6.2,
     "other": {}
    }
   },
   {
    "label": "大盛",
    "nutrition": {
-    "kcal": 1144.0,
-    "protein_g": 29.9,
-    "fat_g": 42.8,
-    "carbs_g": 159.4,
+    "kcal": 1157.0,
+    "protein_g": 30.3,
+    "fat_g": 43.6,
+    "carbs_g": 160.4,
     "sugar_g": null,
     "fiber_g": null,
-    "salt_g": 6.0,
+    "salt_g": 6.2,
     "other": {}
    }
   }
@@ -112,7 +112,7 @@
  ],
  "official_url": "https://www.sukiya.jp/menu/in/curry/315000/index.html",
  "first_seen_at": "2026-10-11T14:57:03+09:00",
- "last_seen_at": "2026-11-17",
+ "last_seen_at": "2026-11-18",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -129,9 +129,9 @@
  "nutrition_source": {
   "url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
   "label": "栄養成分一覧",
-  "version": "2026-10-27",
-  "version_text": "2026年10月27日更新",
-  "fetched_at": "2026-10-28T07:34:15+09:00"
+  "version": "2026-11-17",
+  "version_text": "2026年11月17日更新",
+  "fetched_at": "2026-11-18T07:36:27+09:00"
  },
  "nutrition_note": "表示した数値には、お好みでお使いいただく調味料（紅生姜・醤油・ドレッシング・七味・カルビ追いダレなど）は含まれていません。",
  "allergens_conditional": {
@@ -141,9 +141,9 @@
  "allergen_source": {
   "url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
   "label": "アレルゲン一覧",
-  "version": "2026-11-06",
-  "version_text": "2026年11月6日更新",
-  "fetched_at": "2026-11-07T07:34:06+09:00"
+  "version": "2026-11-17",
+  "version_text": "2026年11月17日更新",
+  "fetched_at": "2026-11-18T07:36:27+09:00"
  },
  "price_variants_history": [
   {

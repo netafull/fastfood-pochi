@@ -1,0 +1,237 @@
+{
+ "chain": "sukiya",
+ "product_id": "don-213300",
+ "name": "山かけねぎ塩豚タン丼",
+ "category": "こだわり丼",
+ "price": 990,
+ "price_note": "税込・店内の価格。サイズや組み合わせにより価格が異なります（内訳は下の表）。表示は「並盛」の価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "ごはん少なめ",
+   "price": 990
+  },
+  {
+   "label": "並盛",
+   "price": 990
+  },
+  {
+   "label": "ごはん大盛",
+   "price": 1040
+  },
+  {
+   "label": "特盛（肉2倍ごはん大盛）",
+   "price": 1490
+  }
+ ],
+ "price_checked_at": "2026-11-18",
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 623.0,
+  "protein_g": 20.3,
+  "fat_g": 11.4,
+  "carbs_g": 110.1,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 3.5,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "並盛",
+   "nutrition": {
+    "kcal": 623.0,
+    "protein_g": 20.3,
+    "fat_g": 11.4,
+    "carbs_g": 110.1,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 3.5,
+    "other": {}
+   }
+  },
+  {
+   "label": "ごはん少なめ",
+   "nutrition": {
+    "kcal": 554.0,
+    "protein_g": 19.1,
+    "fat_g": 11.1,
+    "carbs_g": 94.5,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 3.5,
+    "other": {}
+   }
+  },
+  {
+   "label": "大盛",
+   "nutrition": {
+    "kcal": 749.0,
+    "protein_g": 22.5,
+    "fat_g": 12.1,
+    "carbs_g": 138.1,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 3.8,
+    "other": {}
+   }
+  },
+  {
+   "label": "特盛",
+   "nutrition": {
+    "kcal": 896.0,
+    "protein_g": 33.8,
+    "fat_g": 21.1,
+    "carbs_g": 143.2,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 6.0,
+    "other": {}
+   }
+  }
+ ],
+ "nutrition_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
+ "nutrition_pdf_label": "栄養成分一覧",
+ "allergen_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
+ "allergen_pdf_label": "アレルゲン一覧",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "乳",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "やまいも",
+   "りんご",
+   "ゼラチン",
+   "ごま"
+  ],
+  "partial": [
+   {
+    "name": "落花生（ピーナッツ）",
+    "mark": "△"
+   },
+   {
+    "name": "えび",
+    "mark": "△"
+   },
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "くるみ",
+    "mark": "△"
+   },
+   {
+    "name": "カシューナッツ",
+    "mark": "△"
+   },
+   {
+    "name": "いか",
+    "mark": "△"
+   },
+   {
+    "name": "オレンジ",
+    "mark": "△"
+   },
+   {
+    "name": "キウイ",
+    "mark": "△"
+   },
+   {
+    "name": "さけ",
+    "mark": "△"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   },
+   {
+    "name": "もも",
+    "mark": "△"
+   },
+   {
+    "name": "バナナ",
+    "mark": "△"
+   },
+   {
+    "name": "アーモンド",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "期間限定",
+ "badges": [
+  "NEW",
+  "期間限定"
+ ],
+ "official_url": "https://www.sukiya.jp/menu/in/don/213300/index.html",
+ "first_seen_at": "2026-11-18T07:33:44+09:00",
+ "last_seen_at": "2026-11-18",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-18",
+   "price": 990
+  }
+ ],
+ "source_list": [
+  "don"
+ ],
+ "image": null,
+ "price_variants_history": [
+  {
+   "date": "2026-11-18",
+   "variants": [
+    {
+     "label": "ごはん少なめ",
+     "price": 990
+    },
+    {
+     "label": "並盛",
+     "price": 990
+    },
+    {
+     "label": "ごはん大盛",
+     "price": 1040
+    },
+    {
+     "label": "特盛（肉2倍ごはん大盛）",
+     "price": 1490
+    }
+   ]
+  }
+ ],
+ "nutrition_source": {
+  "url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
+  "label": "栄養成分一覧",
+  "version": "2026-11-17",
+  "version_text": "2026年11月17日更新",
+  "fetched_at": "2026-11-18T07:36:27+09:00"
+ },
+ "nutrition_note": "表示した数値には、お好みでお使いいただく調味料（紅生姜・醤油・ドレッシング・七味・カルビ追いダレなど）は含まれていません。",
+ "allergens_conditional": {
+  "mark": "△",
+  "meaning": "原材料由来および原材料の製造工場において、そのアレルゲン物質を含む製品を同じライン等で製造しております"
+ },
+ "allergen_source": {
+  "url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
+  "label": "アレルゲン一覧",
+  "version": "2026-11-17",
+  "version_text": "2026年11月17日更新",
+  "fetched_at": "2026-11-18T07:36:27+09:00"
+ }
+}

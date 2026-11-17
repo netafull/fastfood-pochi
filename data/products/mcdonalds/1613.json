@@ -1,0 +1,55 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "1613",
+ "name": "すきやき風ソース",
+ "category": "サイド",
+ "price": 50,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": "2026-11-18",
+ "planned_end_text": "2027-01-04（モバイルオーダー受付期間の終了日）",
+ "mop_ended_at": "2027-01-04",
+ "list_started_at": "2026-11-10",
+ "description": "醤油と砂糖の甘辛い味わいに野菜や牛肉の旨みを加えた、冬のごちそう気分が楽しめるすきやき風のソースです。",
+ "description_full_len": 51,
+ "nutrition": {
+  "kcal": 34.0,
+  "protein_g": 0.3,
+  "fat_g": 0.8,
+  "carbs_g": 6.5,
+  "sugar_g": 5.0,
+  "fiber_g": null,
+  "salt_g": 0.8,
+  "other": {
+   "飽和脂肪酸": "0.21g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "小麦",
+   "牛肉",
+   "大豆"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mcdonalds.co.jp/products/1613/",
+ "first_seen_at": "2026-11-18T07:30:19+09:00",
+ "last_seen_at": "2026-11-18",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-18",
+   "price": 50
+  }
+ ],
+ "source_list": [
+  "/menu/",
+  "/menu/dinner/",
+  "/menu/morning/",
+  "/menu/side/"
+ ],
+ "image": null
+}

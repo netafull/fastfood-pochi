@@ -8734,6 +8734,18 @@
   ],
   "sukiya": [
    {
+    "date": "2026-11-17T13:30:00",
+    "id": 212806,
+    "link": "https://netaful.jp/fast-food/0212806.html",
+    "product_name": "ねぎ塩豚タン丼",
+    "thumb": {
+     "height": 364,
+     "url": "https://netaful.jp/wp-content/uploads/2026/11/sukiya-tontandon-003-485x364.jpg",
+     "width": 485
+    },
+    "title": "【すき家】「ねぎ塩豚タン丼」豚タン10枚入り！濃い目の旨塩だれでご飯がぐんぐん進む"
+   },
+   {
     "date": "2026-10-27T21:00:00",
     "id": 211608,
     "link": "https://netaful.jp/fast-food/0211608.html",
@@ -10378,7 +10390,7 @@
   ]
  },
  "errors": [],
- "fetched_at": "2026-11-17T07:37:33+09:00",
+ "fetched_at": "2026-11-18T07:37:57+09:00",
  "matches": {
   "karayama-19096": [
    209971
@@ -10442,6 +10454,18 @@
   ],
   "sukiya-don-212900": [
    210904
+  ],
+  "sukiya-don-213000": [
+   212806
+  ],
+  "sukiya-don-213100": [
+   212806
+  ],
+  "sukiya-don-213200": [
+   212806
+  ],
+  "sukiya-don-213300": [
+   212806
   ],
   "sukiya-gyusuki-1006700": [
    211608

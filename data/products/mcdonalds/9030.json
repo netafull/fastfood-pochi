@@ -3,7 +3,7 @@
  "product_id": "9030",
  "name": "チキンマックナゲット® 15ピース",
  "category": "サイド",
- "price": 740,
+ "price": 490,
  "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
  "launch_date": null,
  "planned_end_text": null,
@@ -36,10 +36,10 @@
    "origin": "主要原料：鶏肉／タイ　製造所所在地：タイ"
   }
  ],
- "limited_kind": "定番",
+ "limited_kind": "期間限定",
  "official_url": "https://www.mcdonalds.co.jp/products/9030/",
  "first_seen_at": "2026-11-11T07:30:13+09:00",
- "last_seen_at": "2026-11-17",
+ "last_seen_at": "2026-11-18",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -47,12 +47,17 @@
   {
    "date": "2026-11-11",
    "price": 740
+  },
+  {
+   "date": "2026-11-18",
+   "price": 490
   }
  ],
  "source_list": [
+  "/menu/",
   "/menu/morning/",
   "/menu/side/"
  ],
  "image": null,
- "is_regular": true
+ "is_regular": false
 }
