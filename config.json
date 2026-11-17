@@ -258,6 +258,11 @@
       "name": "道の駅ポチ",
       "desc": "道の駅の駐車場と設備",
       "url": "https://michinoeki.netaful.jp/"
+    },
+    {
+      "name": "新発売ポチ",
+      "desc": "新商品を発売日でまとめて",
+      "url": "https://shinhatsubai.netaful.jp/"
     }
   ],
   "related_keywords": [
