@@ -1,10 +1,10 @@
 {
  "sukiya": {
   "allergen": {
-   "fetched_at": "2026-11-18T07:36:27+09:00",
-   "last_get": "2026-11-18",
-   "signature": "\"40ef0d3b8f5aa971fe2df0b2aaa3a5ae\"|Tue, 17 Nov 2026 00:00:05 GMT|1626614",
-   "version": "2026-11-17"
+   "fetched_at": "2026-11-19T07:36:15+09:00",
+   "last_get": "2026-11-19",
+   "signature": "\"006343ee8b704df1b45b2c16ce0a7f12\"|Wed, 18 Nov 2026 00:23:43 GMT|2208989",
+   "version": "2026-11-18"
   },
   "nutrition": {
    "fetched_at": "2026-11-18T07:36:27+09:00",

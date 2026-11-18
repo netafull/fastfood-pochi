@@ -31,7 +31,7 @@
    "price": 1210
   }
  ],
- "price_checked_at": "2026-11-16",
+ "price_checked_at": "2026-11-19",
  "launch_date": null,
  "launch_date_source": "not_found",
  "announced_at": null,
@@ -182,7 +182,7 @@
  "badges": [],
  "official_url": "https://www.sukiya.jp/menu/in/gyudon/116700/index.html",
  "first_seen_at": "2026-11-09T07:35:31+09:00",
- "last_seen_at": "2026-11-18",
+ "last_seen_at": "2026-11-19",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -243,8 +243,8 @@
  "allergen_source": {
   "url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
   "label": "アレルゲン一覧",
-  "version": "2026-11-17",
-  "version_text": "2026年11月17日更新",
-  "fetched_at": "2026-11-18T07:36:27+09:00"
+  "version": "2026-11-18",
+  "version_text": "2026年11月18日更新",
+  "fetched_at": "2026-11-19T07:36:15+09:00"
  }
 }

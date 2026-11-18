@@ -10389,8 +10389,22 @@
    }
   ]
  },
- "errors": [],
- "fetched_at": "2026-11-18T07:37:57+09:00",
+ "errors": [
+  "mcdonalds tag=735 page=1: JSON解析失敗 Expecting value [13732バイト, text/html, 先頭: '<!DOCTYPE html> <html lang=\"en\"> <head>   <meta charset=\"utf8\">   <meta name=\"viewport\" content=\"width=device-width,init']: line 1 column 1 (char 0)",
+  "mos tag=882 page=1: JSON解析失敗 Expecting value [13732バイト, text/html, 先頭: '<!DOCTYPE html> <html lang=\"en\"> <head>   <meta charset=\"utf8\">   <meta name=\"viewport\" content=\"width=device-width,init']: line 1 column 1 (char 0)",
+  "mos tag=882 page=1: JSON解析失敗 Expecting value [13892バイト, text/html, 先頭: '<!DOCTYPE html> <html lang=\"en\"> <head>   <meta charset=\"utf8\">   <meta name=\"viewport\" content=\"width=device-width,init']: line 1 column 1 (char 0)",
+  "matsuya tag=729 page=1: JSON解析失敗 Expecting value [13742バイト, text/html, 先頭: '<!DOCTYPE html> <html lang=\"en\"> <head>   <meta charset=\"utf8\">   <meta name=\"viewport\" content=\"width=device-width,init']: line 1 column 1 (char 0)",
+  "matsunoya tag=937 page=1: JSON解析失敗 Expecting value [13762バイト, text/html, 先頭: '<!DOCTYPE html> <html lang=\"en\"> <head>   <meta charset=\"utf8\">   <meta name=\"viewport\" content=\"width=device-width,init']: line 1 column 1 (char 0)",
+  "yoshinoya tag=765 page=1: JSON解析失敗 Expecting value [13798バイト, text/html, 先頭: '<!DOCTYPE html> <html lang=\"en\"> <head>   <meta charset=\"utf8\">   <meta name=\"viewport\" content=\"width=device-width,init']: line 1 column 1 (char 0)",
+  "sukiya tag=869 page=1: JSON解析失敗 Expecting value [13766バイト, text/html, 先頭: '<!DOCTYPE html> <html lang=\"en\"> <head>   <meta charset=\"utf8\">   <meta name=\"viewport\" content=\"width=device-width,init']: line 1 column 1 (char 0)",
+  "katsuya tag=874 page=1: JSON解析失敗 Expecting value [13777バイト, text/html, 先頭: '<!DOCTYPE html> <html lang=\"en\"> <head>   <meta charset=\"utf8\">   <meta name=\"viewport\" content=\"width=device-width,init']: line 1 column 1 (char 0)",
+  "karayama tag=877 page=1: JSON解析失敗 Expecting value [13722バイト, text/html, 先頭: '<!DOCTYPE html> <html lang=\"en\"> <head>   <meta charset=\"utf8\">   <meta name=\"viewport\" content=\"width=device-width,init']: line 1 column 1 (char 0)",
+  "marugame tag=890 page=1: JSON解析失敗 Expecting value [13737バイト, text/html, 先頭: '<!DOCTYPE html> <html lang=\"en\"> <head>   <meta charset=\"utf8\">   <meta name=\"viewport\" content=\"width=device-width,init']: line 1 column 1 (char 0)",
+  "marugame tag=890 page=1: JSON解析失敗 Expecting value [13715バイト, text/html, 先頭: '<!DOCTYPE html> <html lang=\"en\"> <head>   <meta charset=\"utf8\">   <meta name=\"viewport\" content=\"width=device-width,init']: line 1 column 1 (char 0)",
+  "burgerking tag=1017 page=1: JSON解析失敗 Expecting value [13711バイト, text/html, 先頭: '<!DOCTYPE html> <html lang=\"en\"> <head>   <meta charset=\"utf8\">   <meta name=\"viewport\" content=\"width=device-width,init']: line 1 column 1 (char 0)",
+  "hidakaya tag=842 page=1: JSON解析失敗 Expecting value [13777バイト, text/html, 先頭: '<!DOCTYPE html> <html lang=\"en\"> <head>   <meta charset=\"utf8\">   <meta name=\"viewport\" content=\"width=device-width,init']: line 1 column 1 (char 0)"
+ ],
+ "fetched_at": "2026-11-19T08:06:17+09:00",
  "matches": {
   "karayama-19096": [
    209971

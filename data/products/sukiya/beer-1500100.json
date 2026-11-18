@@ -6,7 +6,7 @@
  "price": 800,
  "price_note": "税込・店内の価格。店舗により価格・取り扱いが異なる場合があります。",
  "price_variants": null,
- "price_checked_at": "2026-11-16",
+ "price_checked_at": "2026-11-19",
  "launch_date": null,
  "launch_date_source": "not_found",
  "announced_at": null,
@@ -28,7 +28,7 @@
  "badges": [],
  "official_url": "https://www.sukiya.jp/menu/in/beer/1500100/index.html",
  "first_seen_at": "2026-11-16T07:33:44+09:00",
- "last_seen_at": "2026-11-18",
+ "last_seen_at": "2026-11-19",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -43,5 +43,5 @@
  ],
  "image": null,
  "is_regular": true,
- "pdf_tried": "2026-11-17|2026-11-17"
+ "pdf_tried": "2026-11-18|2026-11-17"
 }

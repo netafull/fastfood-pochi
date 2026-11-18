@@ -1,0 +1,57 @@
+{
+ "chain": "kourakuen",
+ "product_id": "17204",
+ "name": "味噌とんこつらーめん",
+ "category": null,
+ "price": 860,
+ "price_note": "税込。公式サイトの一覧に表示された価格。一部店舗では販売していません。",
+ "price_variants": null,
+ "launch_date": null,
+ "launch_date_source": "news_without_date",
+ "announced_at": "2026-09-30",
+ "planned_end_text": null,
+ "news_url": "https://www.kourakuen.co.jp/storage/brand_info/attachment/924/NewsRelease-kourakuen20260930mt.pdf",
+ "news_title": "味噌のコクと豚骨の旨味を楽しめる 「味噌とんこつらーめん」期間限定販売！",
+ "news_date": "2026-09-30",
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 1115.0,
+  "protein_g": 45.6,
+  "fat_g": 53.9,
+  "carbs_g": 104.5,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 10.9,
+  "other": {}
+ },
+ "nutrition_variants": null,
+ "nutrition_note": null,
+ "allergen_pdf_url": "https://www.kourakuen.co.jp/upload/pdf/allergy.pdf",
+ "allergen_pdf_label": "アレルギー情報（全商品）",
+ "allergens": {
+  "contains": [
+   "小麦"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "期間限定",
+ "badges": [],
+ "official_url": "https://stores.kourakuen.co.jp/grandmenu/info.html?id=17204",
+ "first_seen_at": "2026-11-19T07:37:04+09:00",
+ "last_seen_at": "2026-11-19",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-19",
+   "price": 860
+  }
+ ],
+ "source_list": [
+  "menu"
+ ],
+ "image": null
+}

@@ -3,8 +3,64 @@
 <channel>
 <title>ファストフードポチ</title>
 <link>https://fastfood.netaful.jp/</link>
-<description>マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキングの期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</description>
-<lastBuildDate>Wed, 18 Nov 2026 05:02:23 +0000</lastBuildDate>
+<description>マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</description>
+<lastBuildDate>Wed, 18 Nov 2026 23:06:20 +0000</lastBuildDate>
+<item>
+<title>【日高屋】濃厚豚骨醤油ラーメン</title>
+<link>https://fastfood.netaful.jp/items/hidakaya-20261009.html</link>
+<guid isPermaLink="false">hidakaya-20261009</guid>
+<category>日高屋</category>
+<pubDate>Thu, 19 Nov 2026 07:38:35 +0900</pubDate>
+</item>
+<item>
+<title>【幸楽苑】メガたんめん</title>
+<link>https://fastfood.netaful.jp/items/kourakuen-15726.html</link>
+<guid isPermaLink="false">kourakuen-15726</guid>
+<category>幸楽苑</category>
+<pubDate>Thu, 19 Nov 2026 07:37:04 +0900</pubDate>
+</item>
+<item>
+<title>【幸楽苑】濃厚クリーミー カルボ醤油らーめん 温玉添え</title>
+<link>https://fastfood.netaful.jp/items/kourakuen-17167.html</link>
+<guid isPermaLink="false">kourakuen-17167</guid>
+<category>幸楽苑</category>
+<pubDate>Thu, 19 Nov 2026 07:37:04 +0900</pubDate>
+</item>
+<item>
+<title>【幸楽苑】鶏白湯らーめん</title>
+<link>https://fastfood.netaful.jp/items/kourakuen-17175.html</link>
+<guid isPermaLink="false">kourakuen-17175</guid>
+<category>幸楽苑</category>
+<pubDate>Thu, 19 Nov 2026 07:37:04 +0900</pubDate>
+</item>
+<item>
+<title>【幸楽苑】担担麺</title>
+<link>https://fastfood.netaful.jp/items/kourakuen-17179.html</link>
+<guid isPermaLink="false">kourakuen-17179</guid>
+<category>幸楽苑</category>
+<pubDate>Thu, 19 Nov 2026 07:37:04 +0900</pubDate>
+</item>
+<item>
+<title>【幸楽苑】麻辣担担麺</title>
+<link>https://fastfood.netaful.jp/items/kourakuen-17183.html</link>
+<guid isPermaLink="false">kourakuen-17183</guid>
+<category>幸楽苑</category>
+<pubDate>Thu, 19 Nov 2026 07:37:04 +0900</pubDate>
+</item>
+<item>
+<title>【幸楽苑】味噌とんこつらーめん</title>
+<link>https://fastfood.netaful.jp/items/kourakuen-17204.html</link>
+<guid isPermaLink="false">kourakuen-17204</guid>
+<category>幸楽苑</category>
+<pubDate>Thu, 19 Nov 2026 07:37:04 +0900</pubDate>
+</item>
+<item>
+<title>【幸楽苑】トムヤムクンらーめん</title>
+<link>https://fastfood.netaful.jp/items/kourakuen-17215.html</link>
+<guid isPermaLink="false">kourakuen-17215</guid>
+<category>幸楽苑</category>
+<pubDate>Thu, 19 Nov 2026 07:37:04 +0900</pubDate>
+</item>
 <item>
 <title>【すき家】ねぎ塩豚タン丼</title>
 <link>https://fastfood.netaful.jp/items/sukiya-don-213000.html</link>
@@ -648,62 +704,6 @@
 <guid isPermaLink="false">sukiya-don-212600</guid>
 <category>すき家</category>
 <pubDate>Thu, 15 Oct 2026 07:33:24 +0900</pubDate>
-</item>
-<item>
-<title>【すき家】にんにくローストポーク丼</title>
-<link>https://fastfood.netaful.jp/items/sukiya-don-212700.html</link>
-<guid isPermaLink="false">sukiya-don-212700</guid>
-<category>すき家</category>
-<pubDate>Thu, 15 Oct 2026 07:33:24 +0900</pubDate>
-</item>
-<item>
-<title>【すき家】おんたまローストポーク丼</title>
-<link>https://fastfood.netaful.jp/items/sukiya-don-212800.html</link>
-<guid isPermaLink="false">sukiya-don-212800</guid>
-<category>すき家</category>
-<pubDate>Thu, 15 Oct 2026 07:33:24 +0900</pubDate>
-</item>
-<item>
-<title>【すき家】山かけローストポーク丼</title>
-<link>https://fastfood.netaful.jp/items/sukiya-don-212900.html</link>
-<guid isPermaLink="false">sukiya-don-212900</guid>
-<category>すき家</category>
-<pubDate>Thu, 15 Oct 2026 07:33:24 +0900</pubDate>
-</item>
-<item>
-<title>【すき家】Sukiシェイクアサイー・バナナ</title>
-<link>https://fastfood.netaful.jp/items/sukiya-drink-811800.html</link>
-<guid isPermaLink="false">sukiya-drink-811800</guid>
-<category>すき家</category>
-<pubDate>Thu, 15 Oct 2026 07:33:24 +0900</pubDate>
-</item>
-<item>
-<title>【松のや】単品ジンギスカン</title>
-<link>https://fastfood.netaful.jp/items/matsunoya-souzai-souzai_jingisukan_hp.html</link>
-<guid isPermaLink="false">matsunoya-souzai-souzai_jingisukan_hp</guid>
-<category>松のや</category>
-<pubDate>Thu, 15 Oct 2026 07:31:59 +0900</pubDate>
-</item>
-<item>
-<title>【松のや】ジンギスカン定食</title>
-<link>https://fastfood.netaful.jp/items/matsunoya-teishoku-tei_jingisukan_hp.html</link>
-<guid isPermaLink="false">matsunoya-teishoku-tei_jingisukan_hp</guid>
-<category>松のや</category>
-<pubDate>Thu, 15 Oct 2026 07:31:59 +0900</pubDate>
-</item>
-<item>
-<title>【吉野家】牛すき鍋（単品）</title>
-<link>https://fastfood.netaful.jp/items/yoshinoya-set-gyusuki-nabe-zen-single.html</link>
-<guid isPermaLink="false">yoshinoya-set-gyusuki-nabe-zen-single</guid>
-<category>吉野家</category>
-<pubDate>Wed, 14 Oct 2026 07:34:37 +0900</pubDate>
-</item>
-<item>
-<title>【吉野家】牛すき鍋膳</title>
-<link>https://fastfood.netaful.jp/items/yoshinoya-set-gyusuki-nabe-zen.html</link>
-<guid isPermaLink="false">yoshinoya-set-gyusuki-nabe-zen</guid>
-<category>吉野家</category>
-<pubDate>Wed, 14 Oct 2026 07:34:37 +0900</pubDate>
 </item>
 </channel>
 </rss>

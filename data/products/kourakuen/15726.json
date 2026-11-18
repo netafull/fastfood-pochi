@@ -1,0 +1,61 @@
+{
+ "chain": "kourakuen",
+ "product_id": "15726",
+ "name": "メガたんめん",
+ "category": null,
+ "price": 990,
+ "price_note": "税込。公式サイトの一覧に表示された価格。一部店舗では販売していません。味噌味、塩味からお選び頂けます。",
+ "price_variants": null,
+ "launch_date": "2026-11-04",
+ "launch_date_source": "news_headline",
+ "announced_at": "2026-10-28",
+ "planned_end_text": null,
+ "news_url": "https://www.kourakuen.co.jp/storage/brand_info/attachment/936/NewsRelease-kourakuen20261028mt.pdf",
+ "news_title": "「メガたんめん（味噌・塩）」11月4日（水）より、期間限定販売！",
+ "news_date": "2026-10-28",
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 2047.0,
+  "protein_g": 72.1,
+  "fat_g": 99.6,
+  "carbs_g": 201.0,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 17.1,
+  "other": {}
+ },
+ "nutrition_variants": null,
+ "nutrition_note": null,
+ "allergen_pdf_url": "https://www.kourakuen.co.jp/upload/pdf/allergy.pdf",
+ "allergen_pdf_label": "アレルギー情報（全商品）",
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "期間限定",
+ "badges": [],
+ "official_url": "https://stores.kourakuen.co.jp/grandmenu/info.html?id=15726",
+ "first_seen_at": "2026-11-19T07:37:04+09:00",
+ "last_seen_at": "2026-11-19",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-19",
+   "price": 990
+  }
+ ],
+ "source_list": [
+  "menu"
+ ],
+ "image": null,
+ "sale_notes": [
+  "味噌味、塩味からお選び頂けます。"
+ ]
+}

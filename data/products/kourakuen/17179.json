@@ -1,0 +1,59 @@
+{
+ "chain": "kourakuen",
+ "product_id": "17179",
+ "name": "担担麺",
+ "category": null,
+ "price": 860,
+ "price_note": "税込。公式サイトの一覧に表示された価格。一部店舗では販売していません。",
+ "price_variants": null,
+ "launch_date": null,
+ "launch_date_source": "news_without_date",
+ "announced_at": "2026-09-08",
+ "planned_end_text": null,
+ "news_url": "https://www.kourakuen.co.jp/storage/brand_info/attachment/915/NewsRelease-kourakuen20260908tt.pdf",
+ "news_title": "期間限定「鶏白湯らーめん」「担担麺」「麻辣担担麺」の3種が登場！",
+ "news_date": "2026-09-08",
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 1175.0,
+  "protein_g": 44.7,
+  "fat_g": 58.9,
+  "carbs_g": 111.3,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 11.9,
+  "other": {}
+ },
+ "nutrition_variants": null,
+ "nutrition_note": null,
+ "allergen_pdf_url": "https://www.kourakuen.co.jp/upload/pdf/allergy.pdf",
+ "allergen_pdf_label": "アレルギー情報（全商品）",
+ "allergens": {
+  "contains": [
+   "乳",
+   "小麦",
+   "落花生"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "期間限定",
+ "badges": [],
+ "official_url": "https://stores.kourakuen.co.jp/grandmenu/info.html?id=17179",
+ "first_seen_at": "2026-11-19T07:37:04+09:00",
+ "last_seen_at": "2026-11-19",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-19",
+   "price": 860
+  }
+ ],
+ "source_list": [
+  "menu"
+ ],
+ "image": null
+}
