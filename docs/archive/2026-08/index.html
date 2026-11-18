@@ -81,6 +81,12 @@ table.pricelog td.down { color: #2e7d32; }
 .item { display: block; background: var(--card); border: 1px solid var(--line);
   border-radius: 10px; padding: 12px; text-decoration: none; }
 .item:hover { border-color: var(--accent); }
+/* 2026-11-18 カードのカテゴリアイコン（ドット絵32px）。左にアイコン、右に今までの中身。
+   ドット絵は元の32マスの倍数で出すと点がそろう。PC幅は2倍の64px、スマホは48px */
+.item:has(> .cat-icon) { display: flex; gap: 12px; align-items: flex-start; }
+.item .ib { flex: 1; min-width: 0; }
+.cat-icon { width: 48px; height: 48px; flex-shrink: 0; image-rendering: pixelated; }
+@media (min-width: 700px) { .cat-icon { width: 64px; height: 64px; } }
 .item .badge { display: inline-block; font-size: 10px; font-weight: 700; color: #fff;
   border-radius: 4px; padding: 1px 6px; margin-bottom: 6px; }
 .item[data-chain="mcdonalds"] .badge { background: var(--mcdonalds); }
@@ -201,28 +207,34 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <div class="grid" data-sortable>
 <a data-google-vignette="false" class="item" href="/items/mos-211324.html" data-kcal="153.0"
    data-date="2026-08-28" data-chain="mos" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">モスバーガー</div><span class="st st-ended">終了</span>
   <div class="t">熱々（あつあつ）おさつボール ～紫いも～ 3個入り</div>
   <div class="price">290円（税込）<span class="kcal">153kcal</span></div>
   <div class="meta">2026-08-28〜2026-11-12・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mos-211325.html" data-kcal="255.0"
    data-date="2026-08-28" data-chain="mos" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">モスバーガー</div><span class="st st-ended">終了</span>
   <div class="t">熱々（あつあつ）おさつボール ～紫いも～ 5個入り</div>
   <div class="price">470円（税込）<span class="kcal">255kcal</span></div>
   <div class="meta">2026-08-28〜2026-11-12・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mos-P00060.html" data-kcal=""
    data-date="2026-08-28" data-chain="mos" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">モスバーガー</div><span class="st st-ended">終了</span>
   <div class="t">まぜるシェイク 蜜（みつ）いも</div>
   <div class="price">410円（税込）</div>
   <div class="meta">2026-08-28〜2026-11-12・期間限定</div>
   
-</a>
+</div></a>
 </div>
 </section>
 <section class="chain-group" data-chain="yoshinoya">
@@ -230,20 +242,24 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <div class="grid" data-sortable>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-set-tsukimi_gyutoji_tei.html" data-kcal="866.0"
    data-date="2026-08-27" data-chain="yoshinoya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-ended">終了</span>
   <div class="t">月見牛とじ御膳</div>
   <div class="price">798円（税込）<span class="kcal">866kcal</span></div>
   <div class="meta">2026-08-27〜2026-10-16・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-yoshinoyanodon-tsukimi_gyutoji_don.html" data-kcal="841.0"
    data-date="2026-08-27" data-chain="yoshinoya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-ended">終了</span>
   <div class="t">月見牛とじ丼</div>
   <div class="price">699円（税込）<span class="kcal">841kcal</span></div>
   <div class="meta">2026-08-27〜2026-10-16・期間限定</div>
   
-</a>
+</div></a>
 </div>
 </section>
 <section class="chain-group" data-chain="sukiya">
@@ -251,20 +267,24 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <div class="grid" data-sortable>
 <a data-google-vignette="false" class="item" href="/items/sukiya-drink-810300.html" data-kcal="199.0"
    data-date="2026-08-04" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">Sukiシェイクマスカット</div>
   <div class="price">210円（税込）<span class="kcal">199kcal</span></div>
   <div class="meta">2026-08-04〜2026-10-16・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-117500.html" data-kcal="828.0"
    data-date="2026-08-04" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">シビ辛麻婆茄子牛丼</div>
   <div class="price">720円（税込）<span class="kcal">828kcal</span></div>
   <div class="meta">2026-08-04〜2026-10-16・期間限定</div>
   
-</a>
+</div></a>
 </div>
 </section>
 <template id="ad-template"><div class="ad-slot">

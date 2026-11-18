@@ -81,6 +81,12 @@ table.pricelog td.down { color: #2e7d32; }
 .item { display: block; background: var(--card); border: 1px solid var(--line);
   border-radius: 10px; padding: 12px; text-decoration: none; }
 .item:hover { border-color: var(--accent); }
+/* 2026-11-18 カードのカテゴリアイコン（ドット絵32px）。左にアイコン、右に今までの中身。
+   ドット絵は元の32マスの倍数で出すと点がそろう。PC幅は2倍の64px、スマホは48px */
+.item:has(> .cat-icon) { display: flex; gap: 12px; align-items: flex-start; }
+.item .ib { flex: 1; min-width: 0; }
+.cat-icon { width: 48px; height: 48px; flex-shrink: 0; image-rendering: pixelated; }
+@media (min-width: 700px) { .cat-icon { width: 64px; height: 64px; } }
 .item .badge { display: inline-block; font-size: 10px; font-weight: 700; color: #fff;
   border-radius: 4px; padding: 1px 6px; margin-bottom: 6px; }
 .item[data-chain="mcdonalds"] .badge { background: var(--mcdonalds); }
@@ -203,76 +209,94 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <div class="grid" data-sortable>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-yoshinoyanodon-gyunikudofu-don.html" data-kcal=""
    data-date="2026-10-29" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">【予告】牛肉豆腐丼</div>
   <div class="price">649円（税込）</div>
   <div class="meta">2026-10-29（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-set-gyusuki-nabe-zen.html" data-kcal="1001.0"
    data-date="2026-10-15" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">牛すき鍋膳</div>
   <div class="price">899円（税込）<span class="kcal">1001kcal</span></div>
   <div class="meta">2026-10-15〜 販売中・期間限定</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-set-gyusuki-nabe-zen-single.html" data-kcal="654.0"
    data-date="2026-10-14" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">牛すき鍋（単品）</div>
   <div class="price">789円（税込）<span class="kcal">654kcal</span></div>
   <div class="meta">2026-10-14（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-yoshinomi-gyu-nabe-familypack.html" data-kcal="1235.0"
    data-date="2026-10-14" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">牛鍋ファミリーパック</div>
   <div class="price">1095円（税込）<span class="kcal">1235kcal</span></div>
   <div class="meta">2026-10-14（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-gentei-sanma-tei.html" data-kcal="507.0"
    data-date="2026-10-11" data-chain="yoshinoya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-ended">終了</span>
   <div class="t">さんま定食</div>
   <div class="price">789円（税込）<span class="kcal">507kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-23・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-gentei-sanma.html" data-kcal="127.0"
    data-date="2026-10-11" data-chain="yoshinoya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-ended">終了</span>
   <div class="t">さんま（単品）</div>
   <div class="price">327円（税込）<span class="kcal">127kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-23・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-gentei-gyusanma-tei.html" data-kcal="680.0"
    data-date="2026-10-08" data-chain="yoshinoya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-ended">終了</span>
   <div class="t">牛さんま定食</div>
   <div class="price">899円（税込）<span class="kcal">680kcal</span></div>
   <div class="meta">2026-10-08〜2026-10-23・期間限定</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-set-tsukimi_gyutoji_tei.html" data-kcal="866.0"
    data-date="2026-08-27" data-chain="yoshinoya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-ended">終了</span>
   <div class="t">月見牛とじ御膳</div>
   <div class="price">798円（税込）<span class="kcal">866kcal</span></div>
   <div class="meta">2026-08-27〜2026-10-16・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-yoshinoyanodon-tsukimi_gyutoji_don.html" data-kcal="841.0"
    data-date="2026-08-27" data-chain="yoshinoya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-ended">終了</span>
   <div class="t">月見牛とじ丼</div>
   <div class="price">699円（税込）<span class="kcal">841kcal</span></div>
   <div class="meta">2026-08-27〜2026-10-16・期間限定</div>
   
-</a>
+</div></a>
 </div>
 </section>
 <template id="ad-template"><div class="ad-slot">
@@ -410,711 +434,881 @@ function computeAdPlan(counts, every, max) {
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-gyudon-negidaku-gyu-don.html" data-kcal=""
    data-date="2026-11-09" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">ねぎだく牛丼</div>
   <div class="price">660円（税込）</div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-gyudon-negirayu-gyu-don.html" data-kcal=""
    data-date="2026-11-09" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">ねぎラー油牛丼</div>
   <div class="price">660円（税込）</div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-gyudon-gyu-negitama-don.html" data-kcal=""
    data-date="2026-11-09" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">ねぎ玉牛丼</div>
   <div class="price">660円（税込）</div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-gyudon-kimuchi-gyu-don.html" data-kcal=""
    data-date="2026-11-09" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">キムチ牛丼</div>
   <div class="price">660円（税込）</div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-gyudon-cheese-gyu-don.html" data-kcal=""
    data-date="2026-11-09" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">チーズ牛丼</div>
   <div class="price">660円（税込）</div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-gyudon-omori-negidaku-gyoku.html" data-kcal=""
    data-date="2026-11-09" data-chain="yoshinoya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-ended">終了</span>
   <div class="t">大盛ねぎだくギョク</div>
   <div class="price">1020円（税込）</div>
   <div class="meta">記録開始 2026-11-09〜2026-11-12・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-gyudon-mentaitakanamayo-gyu-don.html" data-kcal=""
    data-date="2026-11-09" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">明太高菜マヨ牛丼</div>
   <div class="price">660円（税込）</div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-gyudon-gyu-don.html" data-kcal="633.0"
    data-date="2026-11-09" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">牛丼</div>
   <div class="price">498円（税込）<span class="kcal">633kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-gyudon-gyudon-aburasoba-set.html" data-kcal=""
    data-date="2026-11-09" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">牛丼・油そばセット</div>
   <div class="price">950円（税込）</div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-gyudon-tororo-gyu-don.html" data-kcal=""
    data-date="2026-11-09" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">特製とろろ牛丼</div>
   <div class="price">726円（税込）</div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-gyudon-nikudaku-gyu-don.html" data-kcal=""
    data-date="2026-11-09" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">肉だく牛丼</div>
   <div class="price">720円（税込）</div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-gyudon-nikumisonegi-gyu-don.html" data-kcal=""
    data-date="2026-11-09" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">肉味噌ねぎ牛丼</div>
   <div class="price">693円（税込）</div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-gyudon-onioroshi-ponzu-gyudon.html" data-kcal=""
    data-date="2026-11-09" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">鬼おろしポン酢牛丼</div>
   <div class="price">660円（税込）</div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>吉野家の丼（8品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-karaage-karaage-don.html" data-kcal=""
    data-date="2026-11-10" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">から揚げ丼</div>
   <div class="price">619円（税込）</div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-yoshinoyanodon-buta-kimuchi-don.html" data-kcal=""
    data-date="2026-11-09" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">キムチ豚丼</div>
   <div class="price">627円（税込）</div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-yoshinoyanodon-stamina-chotokumori-don.html" data-kcal=""
    data-date="2026-11-09" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">スタミナ超特盛丼</div>
   <div class="price">1271円（税込）</div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-karaage-tarutarukaraage-don.html" data-kcal="1209.0"
    data-date="2026-11-09" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">タルタル南蛮から揚げ丼</div>
   <div class="price">729円（税込）<span class="kcal">1209kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-yoshinoyanodon-buta-cheese-don.html" data-kcal=""
    data-date="2026-11-09" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">チーズ豚丼</div>
   <div class="price">627円（税込）</div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-yoshinoyanodon-gyu-yakiniku-don.html" data-kcal="707.0"
    data-date="2026-11-09" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">牛焼肉丼</div>
   <div class="price">718円（税込）<span class="kcal">707kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-yoshinoyanodon-buta-don.html" data-kcal="576.0"
    data-date="2026-11-09" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">豚丼</div>
   <div class="price">465円（税込）<span class="kcal">576kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-karaage-onioroshi-ponzu-karaage-don.html" data-kcal=""
    data-date="2026-11-09" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">鬼おろしポン酢から揚げ丼</div>
   <div class="price">781円（税込）</div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>から揚げ（6品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-karaage-karaage_single.html" data-kcal=""
    data-date="2026-11-10" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">から揚げ（単品）</div>
   <div class="price">162円（税込）</div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-karaage-karaage_tei.html" data-kcal=""
    data-date="2026-11-10" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">から揚げ定食</div>
   <div class="price">844円（税込）</div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-karaage-karaage_blackcurry.html" data-kcal="874.0"
    data-date="2026-11-10" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">から揚げ黒カレー</div>
   <div class="price">707円（税込）<span class="kcal">874kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-karaage-tarutarukaraage_tei.html" data-kcal="1427.0"
    data-date="2026-11-10" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">タルタル南蛮から揚げ定食</div>
   <div class="price">954円（税込）<span class="kcal">1427kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-karaage-gyusara-karaage-tei.html" data-kcal="1224.0"
    data-date="2026-11-10" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">牛皿・から揚げ定食</div>
   <div class="price">1064円（税込）<span class="kcal">1224kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-karaage-onioroshi-ponzu-karaage-tei.html" data-kcal=""
    data-date="2026-11-10" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">鬼おろしポン酢から揚げ定食</div>
   <div class="price">1006円（税込）</div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>定食（6品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-set-butakakuni.html" data-kcal="1150.0"
    data-date="2026-11-10" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">厚切り豚角煮定食</div>
   <div class="price">1207円（税込）<span class="kcal">1150kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-set-butakakuni-gyu-tei.html" data-kcal="1291.0"
    data-date="2026-11-10" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">厚切り豚角煮牛小鉢定食</div>
   <div class="price">1429円（税込）<span class="kcal">1291kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-set-gyusara_gyuyakiniku_tei.html" data-kcal="1134.0"
    data-date="2026-11-10" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">牛皿・牛鉄板焼肉定食</div>
   <div class="price">1064円（税込）<span class="kcal">1134kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-set-gyusara-teisyoku.html" data-kcal="720.0"
    data-date="2026-11-10" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">牛皿定食</div>
   <div class="price">789円（税込）<span class="kcal">720kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-set-gyuteppan-yakiniku-tei.html" data-kcal="928.0"
    data-date="2026-11-10" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">牛鉄板焼肉定食</div>
   <div class="price">954円（税込）<span class="kcal">928kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-set-gyushake_tei.html" data-kcal="662.0"
    data-date="2026-11-10" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">牛鮭定食</div>
   <div class="price">844円（税込）<span class="kcal">662kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>おかず（皿メニュー）（5品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-yoshinomi-gyusara.html" data-kcal="281.0"
    data-date="2026-11-10" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">牛皿</div>
   <div class="price">444円（税込）<span class="kcal">281kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-yoshinomi-gyusara-familypack.html" data-kcal="843.0"
    data-date="2026-11-10" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">牛皿ファミリーパック</div>
   <div class="price">1051円（税込）<span class="kcal">843kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-yoshinomi-gyuteppan-yakinikusara.html" data-kcal="489.0"
    data-date="2026-11-10" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">牛鉄板焼肉皿</div>
   <div class="price">633円（税込）<span class="kcal">489kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-yoshinomi-butasara.html" data-kcal="233.0"
    data-date="2026-11-10" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">豚皿</div>
   <div class="price">435円（税込）<span class="kcal">233kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-unajyu-unasara.html" data-kcal="337.0"
    data-date="2026-11-10" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">鰻皿</div>
   <div class="price">1152円（税込）<span class="kcal">337kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>カレー（4品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-curry-cheese-blackcurry.html" data-kcal=""
    data-date="2026-11-11" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">チーズ黒カレー</div>
   <div class="price">660円（税込）</div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-curry-gyu-blackcurry.html" data-kcal="622.0"
    data-date="2026-11-11" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">牛黒カレー</div>
   <div class="price">652円（税込）<span class="kcal">622kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-curry-nikudaku-blackcurry.html" data-kcal="761.0"
    data-date="2026-11-10" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">肉だく牛黒カレー</div>
   <div class="price">762円（税込）<span class="kcal">761kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-curry-blackcurry.html" data-kcal="480.0"
    data-date="2026-11-11" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">黒カレー</div>
   <div class="price">498円（税込）<span class="kcal">480kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>鰻（2品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-unajyu-unajyu-ichimaimori.html" data-kcal="718.0"
    data-date="2026-11-11" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">鰻重</div>
   <div class="price">1251円（税込）<span class="kcal">718kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-unajyu-unajyu-gyukobachi-misoshiru-set.html" data-kcal="896.0"
    data-date="2026-11-11" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">鰻重牛小鉢セット</div>
   <div class="price">1568円（税込）<span class="kcal">896kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>朝食（10品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-morningset-hamegggyu-w-tei.html" data-kcal=""
    data-date="2026-11-11" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">Wハムエッグ牛小鉢定食</div>
   <div class="price">666円（税込）</div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-morningset-hamegg-natto-w-tei.html" data-kcal=""
    data-date="2026-11-11" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">Wハムエッグ納豆定食</div>
   <div class="price">567円（税込）</div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-morningset-hamegg-gyu-tei.html" data-kcal=""
    data-date="2026-11-11" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">ハムエッグ牛小鉢定食</div>
   <div class="price">567円（税込）</div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-morningset-hamegg-natto-tei.html" data-kcal=""
    data-date="2026-11-11" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">ハムエッグ納豆定食</div>
   <div class="price">468円（税込）</div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-morningset-asagyu-set.html" data-kcal=""
    data-date="2026-11-11" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">朝牛セット</div>
   <div class="price">519円（税込）</div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-morningset-yakizakana-tei.html" data-kcal=""
    data-date="2026-11-11" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">焼魚定食</div>
   <div class="price">530円（税込）</div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-morningset-sakana-gyu-tei.html" data-kcal=""
    data-date="2026-11-11" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">焼魚牛小鉢定食</div>
   <div class="price">666円（税込）</div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-morningset-tokuasa-tei.html" data-kcal=""
    data-date="2026-11-11" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">特朝定食</div>
   <div class="price">630円（税込）</div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-morningset-nattou-tei.html" data-kcal="544.0"
    data-date="2026-11-11" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">納豆定食</div>
   <div class="price">430円（税込）<span class="kcal">544kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-morningset-natto-gyu-tei.html" data-kcal=""
    data-date="2026-11-11" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">納豆牛小鉢定食</div>
   <div class="price">468円（税込）</div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>お子様セット（2品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-kids-mini-curry-set.html" data-kcal=""
    data-date="2026-11-11" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">ミニカレーセット</div>
   <div class="price">437円（税込）</div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-kids-mini-gyudon-set.html" data-kcal=""
    data-date="2026-11-11" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">ミニ牛丼セット</div>
   <div class="price">437円（税込）</div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>サイドメニュー・お飲み物（31品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-oshinko.html" data-kcal="17.0"
    data-date="2026-11-12" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">お新香</div>
   <div class="price">162円（税込）<span class="kcal">17kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-oshinkoset.html" data-kcal="37.0"
    data-date="2026-11-12" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">お新香セット</div>
   <div class="price">217円（税込）<span class="kcal">37kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-karaageset.html" data-kcal=""
    data-date="2026-11-12" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">から揚げセット</div>
   <div class="price">217円（税込）</div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-karaage_single_one.html" data-kcal=""
    data-date="2026-11-12" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">から揚げ単品（1個）</div>
   <div class="price">162円（税込）</div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-rice.html" data-kcal="343.0"
    data-date="2026-11-13" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">ご飯</div>
   <div class="price">217円（税込）<span class="kcal">343kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-shijimi-jiru.html" data-kcal="41.0"
    data-date="2026-11-13" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/soup.svg" width="32" height="32" alt="スープ・グラタン" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">しじみ汁</div>
   <div class="price">228円（税込）<span class="kcal">41kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-ton-jiru.html" data-kcal=""
    data-date="2026-11-12" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/soup.svg" width="32" height="32" alt="スープ・グラタン" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">とん汁</div>
   <div class="price">250円（税込）</div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-negidaku.html" data-kcal="48.0"
    data-date="2026-11-12" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">ねぎだく</div>
   <div class="price">162円（税込）<span class="kcal">48kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-negirayu-single.html" data-kcal="110.0"
    data-date="2026-11-12" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">ねぎラー油</div>
   <div class="price">162円（税込）<span class="kcal">110kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-negi-egg.html" data-kcal="107.0"
    data-date="2026-11-12" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">ねぎ玉子</div>
   <div class="price">162円（税込）<span class="kcal">107kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-nori.html" data-kcal="5.0"
    data-date="2026-11-13" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">のり</div>
   <div class="price">85円（税込）<span class="kcal">5kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-miso-siru.html" data-kcal="20.0"
    data-date="2026-11-12" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/soup.svg" width="32" height="32" alt="スープ・グラタン" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">みそ汁</div>
   <div class="price">96円（税込）<span class="kcal">20kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-kimuchi.html" data-kcal="26.0"
    data-date="2026-11-12" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">キムチ</div>
   <div class="price">162円（税込）<span class="kcal">26kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-kimuchiset.html" data-kcal=""
    data-date="2026-11-12" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">キムチセット</div>
   <div class="price">217円（税込）</div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-cheese.html" data-kcal=""
    data-date="2026-11-12" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">クワトロチーズ</div>
   <div class="price">162円（税込）</div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-saladset.html" data-kcal=""
    data-date="2026-11-11" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/salad.svg" width="32" height="32" alt="サラダ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">サラダセット</div>
   <div class="price">217円（税込）</div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-potatosalad.html" data-kcal="88.0"
    data-date="2026-11-13" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/salad.svg" width="32" height="32" alt="サラダ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">ポテトサラダ</div>
   <div class="price">195円（税込）<span class="kcal">88kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-potatosaladset.html" data-kcal=""
    data-date="2026-11-11" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/salad.svg" width="32" height="32" alt="サラダ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">ポテトサラダセット</div>
   <div class="price">250円（税込）</div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-sake.html" data-kcal=""
    data-date="2026-11-13" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/alcohol.svg" width="32" height="32" alt="お酒" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">冷酒</div>
   <div class="price">398円（税込）</div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-hanjyuku-egg.html" data-kcal="76.0"
    data-date="2026-11-12" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">半熟玉子</div>
   <div class="price">118円（税込）<span class="kcal">76kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-mentaitakanamayo.html" data-kcal=""
    data-date="2026-11-12" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">明太高菜マヨ</div>
   <div class="price">162円（税込）</div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-tororo_tanpin.html" data-kcal=""
    data-date="2026-11-12" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">特製とろろ</div>
   <div class="price">228円（税込）</div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-egg.html" data-kcal="76.0"
    data-date="2026-11-12" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">玉子</div>
   <div class="price">118円（税込）<span class="kcal">76kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-beer-glass.html" data-kcal=""
    data-date="2026-11-13" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/alcohol.svg" width="32" height="32" alt="お酒" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">生ビール(グラス)</div>
   <div class="price">266円（税込）</div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-beer.html" data-kcal=""
    data-date="2026-11-13" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/alcohol.svg" width="32" height="32" alt="お酒" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">生ビール(ジョッキ)</div>
   <div class="price">442円（税込）</div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-salad.html" data-kcal="16.0"
    data-date="2026-11-13" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/salad.svg" width="32" height="32" alt="サラダ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">生野菜サラダ</div>
   <div class="price">162円（税込）<span class="kcal">16kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-natto.html" data-kcal=""
    data-date="2026-11-13" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">納豆</div>
   <div class="price">129円（税込）</div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-nikudaku.html" data-kcal="142.0"
    data-date="2026-11-12" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">肉だく（牛小鉢）</div>
   <div class="price">222円（税込）<span class="kcal">142kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-nikumisonegi.html" data-kcal="158.0"
    data-date="2026-11-12" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">肉味噌ねぎ</div>
   <div class="price">195円（税込）<span class="kcal">158kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-onioroshi-ponzu.html" data-kcal=""
    data-date="2026-11-12" data-chain="yoshinoya" data-status="on_sale">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
@@ -1125,12 +1319,14 @@ function computeAdPlan(counts, every, max) {
 </a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-sidemenu-shake.html" data-kcal="109.0"
    data-date="2026-11-13" data-chain="yoshinoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-on">販売中</span>
   <div class="t">鮭（単品）</div>
   <div class="price">250円（税込）<span class="kcal">109kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 </section>
 <h2>ネタフルの最新レビュー</h2>

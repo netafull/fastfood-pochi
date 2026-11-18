@@ -16,6 +16,8 @@ import shutil
 import unicodedata
 from pathlib import Path
 
+from icon_guess import guess_icon
+
 ROOT = Path(__file__).resolve().parent.parent
 CONFIG = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
 DATA = ROOT / "data"
@@ -277,6 +279,98 @@ def period_text(item: dict, detailed: bool = False) -> str:
     return s
 
 
+# カテゴリ名 -> アイコン（docs/assets/icons/cat/<slug>.svg）。カテゴリ名はチェーンごとに意味が違うので (チェーン, カテゴリ) で引く。
+# カテゴリが無い・未登録の商品は、商品名から推定する(icon_guess.py)。それでも決まらなければアイコンを出さない
+# （「その他」にはフォールバックしない）。推定はアイコンの選択と代替テキストにだけ使い、カテゴリ名としては表示しない
+def _m(slug, *cats):
+    return {c: slug for c in cats}
+
+
+CATEGORY_ICONS = {
+    "mcdonalds": {**_m("burger", "バーガー"), **_m("sozai", "サイド"), **_m("sweets", "デザート・シェイク"),
+                  **_m("drink", "ドリンク")},
+    "mos": {**_m("burger", "ハンバーガー", "ソイパティ", "モスの菜摘（なつみ）", "モスライスバーガー／ホットドッグ",
+                 "とびきりバーガー\u3000国産牛100％"),
+            **_m("sozai", "サイドメニュー"), **_m("sweets", "デザート")},
+    "burgerking": {**_m("burger", "バーガー他", "ワッパー", "ワッパーJr."), **_m("sozai", "サイド"),
+                   **_m("sweets", "デザート")},
+    "matsuya": {**_m("donburi", "丼", "定食"), **_m("curry", "カレー"), **_m("drink", "ドリンク")},
+    "matsunoya": {**_m("donburi", "丼", "定食", "盛合せ"), **_m("sozai", "惣菜")},
+    "yoshinoya": {**_m("donburi", "牛丼", "吉野家の丼", "定食", "鰻"), **_m("curry", "カレー"),
+                  **_m("sozai", "から揚げ", "おかず（皿メニュー）")},
+    "sukiya": {**_m("donburi", "牛丼", "こだわり丼", "牛カルビ焼肉丼", "定食", "うなぎ"), **_m("curry", "カレー"),
+               **_m("sozai", "おかず"), **_m("salad", "お食事サラダ"), **_m("soup", "鍋")},
+    "katsuya": {**_m("donburi", "丼", "定食", "ライト級", "ヘビー級", "豚焼肉"), **_m("sozai", "サイド")},
+    "karayama": {**_m("donburi", "定食"), **_m("sozai", "とり天")},
+    "marugame": {**_m("noodles", "うどん"), **_m("sozai", "天ぷら"), **_m("bento", "ご飯もの", "うどん弁当")},
+}
+
+# 推定したアイコンの代替テキスト
+ICON_LABELS = {
+    "onigiri": "おにぎり", "bento": "弁当・ごはん", "donburi": "丼・定食", "curry": "カレー", "sushi": "寿司",
+    "sandwich": "サンドイッチ", "burger": "ハンバーガー", "bread": "パン", "noodles": "麺", "pasta": "パスタ",
+    "cupnoodle": "カップ麺", "sozai": "惣菜・揚げ物", "salad": "サラダ", "soup": "スープ・グラタン",
+    "chukaman": "中華まん", "sweets": "スイーツ", "ice": "アイス", "snack": "お菓子", "drink": "ドリンク",
+    "alcohol": "お酒", "other": "その他",
+}
+
+
+# 中身が混ざっているカテゴリ（飲み物と食べ物・単品とセットなど）は、商品名の推定を先に使い、
+# 推定できなかったときだけ、ここに書いた種類にする。ここに無いものは商品名で決まらなければアイコンなし
+CATEGORY_FALLBACK = {
+    ("mcdonalds", "マックカフェ"): "drink",
+    ("mos", "ドリンク／スープ"): "drink", ("mos", "朝モス"): "bread",
+    ("yoshinoya", "サイドメニュー・お飲み物"): "sozai", ("yoshinoya", "朝食"): "bento",
+    ("sukiya", "スイーツ＆ドリンク"): "drink", ("sukiya", "朝食"): "bento", ("sukiya", "夜すき"): "bento",
+    ("katsuya", "テイクアウト"): "sozai",
+    ("karayama", "単品"): "sozai", ("karayama", "テイクアウト"): "sozai", ("karayama", None): "sozai",
+}
+# 推定の取りこぼし・取り違えを直す商品名の規則（上から順。カテゴリの表に載っていないときだけ使う）。
+# slug が None のものは、アイコンを付けない（ソース・薬味など、料理の絵が合わないもの）
+NAME_RULES = [
+    (re.compile(r"^追加ダレ|^おろしダレ|マヨネーズ|ソース小袋|ポン酢|ジャム|すだち"), None),
+    (re.compile(r"チャウダー|汁"), "soup"),
+    (re.compile(r"冷酒"), "alcohol"),
+    (re.compile(r"ショコラ|ティラミス|ぷりん"), "sweets"),
+    (re.compile(r"^アイス(?!クリーム)|ホットチョコ|ティーミルク|シェイク|コーラ|ペプシ|ファンタ|カルピス|"
+                r"オレンジ|烏龍|ソーダ|ジンジャーエール|エスプレッソ|アメリカーノ|カフェモカ|カプチーノ"), "drink"),
+]
+# NAME_RULES を使うカテゴリ（飲み物とスイーツが混ざっていて、推定が「アイス」「お菓子」に寄りやすいもの）
+NAME_RULE_CATEGORIES = {("mcdonalds", "マックカフェ"), ("mos", "ドリンク／スープ"), ("sukiya", "スイーツ＆ドリンク"),
+                        ("yoshinoya", "サイドメニュー・お飲み物"), ("katsuya", "テイクアウト"),
+                        ("karayama", "単品"), ("karayama", "テイクアウト"), ("karayama", None)}
+
+
+def category_icon(item: dict):
+    """商品のカテゴリアイコン (slug, 代替テキスト) を返す。決められなければ None。
+
+    チェーン別のカテゴリ表に載っていればそれを使う。載っていなければ(カテゴリ無し・表に無い・中身が混在する
+    カテゴリ)商品名から推定し、混在カテゴリは推定できなかったときだけ CATEGORY_FALLBACK の種類にする。
+    """
+    chain, cat, name = item.get("chain"), item.get("category"), item.get("name") or ""
+    slug = CATEGORY_ICONS.get(chain, {}).get(cat)
+    if not slug:
+        key = (chain, cat)
+        if key in NAME_RULE_CATEGORIES:
+            for rx, rule_slug in NAME_RULES:
+                if rx.search(name):
+                    slug = rule_slug
+                    if slug is None:
+                        return None
+                    break
+        if not slug:
+            slug = guess_icon(name, "fastfood")
+        if not slug:
+            slug = CATEGORY_FALLBACK.get(key)
+            if key == ("yoshinoya", "朝食") and not re.search(r"セット|定食|朝食", name):
+                slug = "sozai"
+            if key == ("sukiya", "朝食") and not re.search(r"セット|定食|朝食", name):
+                slug = "sozai"
+    if slug and slug in ICON_LABELS:
+        return slug, ICON_LABELS[slug]
+    return None
+
+
 def render_card(item: dict) -> str:
     chain_name = CHAIN_NAME.get(item["chain"], item["chain"])
     date = effective_date(item) or ""
@@ -286,14 +380,18 @@ def render_card(item: dict) -> str:
     status = "ended" if is_ended(item) else "on_sale"
     status_html = '<span class="st st-ended">終了</span>' if is_ended(item) else '<span class="st st-on">販売中</span>'
     kind = item.get("limited_kind") or ""
+    icon = category_icon(item)
+    icon_html = (f'<img class="cat-icon" src="/assets/icons/cat/{icon[0]}.svg" width="32" height="32" '
+                 f'alt="{esc(icon[1])}" loading="lazy" decoding="async">\n') if icon else ""
+    body_open, body_close = ('<div class="ib">\n', "</div>") if icon else ("", "")
     return f"""<a class="item" href="/{esc(item_url(item))}" data-kcal="{kcal if kcal is not None else ''}"
    data-date="{esc(date)}" data-chain="{esc(item['chain'])}" data-status="{status}">
-  <div class="badge">{esc(chain_name)}</div>{status_html}
+{icon_html}{body_open}  <div class="badge">{esc(chain_name)}</div>{status_html}
   <div class="t">{esc(item['name'])}</div>
   <div class="price">{esc(fmt_price(item))}{kcal_html}</div>
   <div class="meta">{esc(period_text(item))}{('・' + esc(kind)) if kind else ''}</div>
   {review_html}
-</a>"""
+{body_close}</a>"""
 
 
 CSS = """
@@ -355,6 +453,12 @@ table.pricelog td.down { color: #2e7d32; }
 .item { display: block; background: var(--card); border: 1px solid var(--line);
   border-radius: 10px; padding: 12px; text-decoration: none; }
 .item:hover { border-color: var(--accent); }
+/* 2026-11-18 カードのカテゴリアイコン（ドット絵32px）。左にアイコン、右に今までの中身。
+   ドット絵は元の32マスの倍数で出すと点がそろう。PC幅は2倍の64px、スマホは48px */
+.item:has(> .cat-icon) { display: flex; gap: 12px; align-items: flex-start; }
+.item .ib { flex: 1; min-width: 0; }
+.cat-icon { width: 48px; height: 48px; flex-shrink: 0; image-rendering: pixelated; }
+@media (min-width: 700px) { .cat-icon { width: 64px; height: 64px; } }
 .item .badge { display: inline-block; font-size: 10px; font-weight: 700; color: #fff;
   border-radius: 4px; padding: 1px 6px; margin-bottom: 6px; }
 .item[data-chain="mcdonalds"] .badge { background: var(--mcdonalds); }

@@ -81,6 +81,12 @@ table.pricelog td.down { color: #2e7d32; }
 .item { display: block; background: var(--card); border: 1px solid var(--line);
   border-radius: 10px; padding: 12px; text-decoration: none; }
 .item:hover { border-color: var(--accent); }
+/* 2026-11-18 カードのカテゴリアイコン（ドット絵32px）。左にアイコン、右に今までの中身。
+   ドット絵は元の32マスの倍数で出すと点がそろう。PC幅は2倍の64px、スマホは48px */
+.item:has(> .cat-icon) { display: flex; gap: 12px; align-items: flex-start; }
+.item .ib { flex: 1; min-width: 0; }
+.cat-icon { width: 48px; height: 48px; flex-shrink: 0; image-rendering: pixelated; }
+@media (min-width: 700px) { .cat-icon { width: 64px; height: 64px; } }
 .item .badge { display: inline-block; font-size: 10px; font-weight: 700; color: #fff;
   border-radius: 4px; padding: 1px 6px; margin-bottom: 6px; }
 .item[data-chain="mcdonalds"] .badge { background: var(--mcdonalds); }
@@ -203,140 +209,174 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <div class="grid" data-sortable>
 <a data-google-vignette="false" class="item" href="/items/burgerking-1000722.html" data-kcal=""
    data-date="2026-11-08" data-chain="burgerking" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">バーガーキング</div><span class="st st-on">販売中</span>
   <div class="t">ギルティ・ホットドッグ</div>
   <div class="price">530円（税込）</div>
   <div class="meta">2026-11-08（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/burgerking-1000723.html" data-kcal=""
    data-date="2026-11-08" data-chain="burgerking" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">バーガーキング</div><span class="st st-on">販売中</span>
   <div class="t">ギルティ・ウップス</div>
   <div class="price">150円（税込）</div>
   <div class="meta">2026-11-08（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/burgerking-2000341.html" data-kcal=""
    data-date="2026-11-08" data-chain="burgerking" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">バーガーキング</div><span class="st st-on">販売中</span>
   <div class="t">ギルティ・フレンチフライ</div>
   <div class="price">400円（税込）</div>
   <div class="meta">2026-11-08（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/burgerking-2000342.html" data-kcal=""
    data-date="2026-11-08" data-chain="burgerking" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">バーガーキング</div><span class="st st-on">販売中</span>
   <div class="t">ギルティ・アメリカンスモーキーチキン4pc</div>
   <div class="price">600円（税込）</div>
   <div class="meta">2026-11-08（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/burgerking-2000343.html" data-kcal=""
    data-date="2026-11-08" data-chain="burgerking" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">バーガーキング</div><span class="st st-on">販売中</span>
   <div class="t">ギルティ・チキンナゲット5ピース</div>
   <div class="price">390円（税込）</div>
   <div class="meta">2026-11-08（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/burgerking-4000131.html" data-kcal=""
    data-date="2026-11-08" data-chain="burgerking" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">バーガーキング</div><span class="st st-on">販売中</span>
   <div class="t">キングフュージョン~made with KITKAT®~</div>
   <div class="price">490円（税込）</div>
   <div class="meta">2026-11-08（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/burgerking-4000133.html" data-kcal=""
    data-date="2026-11-08" data-chain="burgerking" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">バーガーキング</div><span class="st st-on">販売中</span>
   <div class="t">My Premiumショコラ チョコ＆キャラメル</div>
   <div class="price">250円（税込）</div>
   <div class="meta">2026-11-08（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/burgerking-8000376.html" data-kcal=""
    data-date="2026-11-08" data-chain="burgerking" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">バーガーキング</div><span class="st st-on">販売中</span>
   <div class="t">マッシュルームワッパー</div>
   <div class="price">990円（税込）</div>
   <div class="meta">2026-11-08（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/burgerking-8000377.html" data-kcal=""
    data-date="2026-11-08" data-chain="burgerking" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">バーガーキング</div><span class="st st-on">販売中</span>
   <div class="t">ダブルマッシュルームワッパー</div>
   <div class="price">1440円（税込）</div>
   <div class="meta">2026-11-08（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/burgerking-8000378.html" data-kcal=""
    data-date="2026-11-08" data-chain="burgerking" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">バーガーキング</div><span class="st st-on">販売中</span>
   <div class="t">マッシュルームワッパーJr.</div>
   <div class="price">590円（税込）</div>
   <div class="meta">2026-11-08（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/burgerking-8000379.html" data-kcal=""
    data-date="2026-11-08" data-chain="burgerking" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">バーガーキング</div><span class="st st-on">販売中</span>
   <div class="t">ビーフ＆ダブルハッシュ Big Mouthギルティ</div>
   <div class="price">1390円（税込）</div>
   <div class="meta">2026-11-08（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/burgerking-8000380.html" data-kcal=""
    data-date="2026-11-08" data-chain="burgerking" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">バーガーキング</div><span class="st st-on">販売中</span>
   <div class="t">ダブルビーフ＆ベーコン Big Mouthギルティ</div>
   <div class="price">1640円（税込）</div>
   <div class="meta">2026-11-08（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/burgerking-8000383.html" data-kcal=""
    data-date="2026-11-08" data-chain="burgerking" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">バーガーキング</div><span class="st st-on">販売中</span>
   <div class="t">チーズチキンナゲット</div>
   <div class="price">330円（税込）</div>
   <div class="meta">2026-11-08（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/burgerking-8000388.html" data-kcal=""
    data-date="2026-11-08" data-chain="burgerking" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">バーガーキング</div><span class="st st-on">販売中</span>
   <div class="t">オータムSpecial マッシュルームワッパー</div>
   <div class="price">990円（税込）</div>
   <div class="meta">2026-11-08（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/burgerking-8000389.html" data-kcal=""
    data-date="2026-11-08" data-chain="burgerking" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">バーガーキング</div><span class="st st-on">販売中</span>
   <div class="t">オータムSpecial ダブルMushroomワッパー</div>
   <div class="price">1440円（税込）</div>
   <div class="meta">2026-11-08（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/burgerking-8000390.html" data-kcal=""
    data-date="2026-11-08" data-chain="burgerking" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">バーガーキング</div><span class="st st-on">販売中</span>
   <div class="t">オータムSpecial マッシュルームワッパーJr.</div>
   <div class="price">590円（税込）</div>
   <div class="meta">2026-11-08（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/burgerking-8000391.html" data-kcal=""
    data-date="2026-11-08" data-chain="burgerking" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">バーガーキング</div><span class="st st-on">販売中</span>
   <div class="t">ギルティ ザ・ワンパウンダー</div>
   <div class="price">2490円（税込）</div>
   <div class="meta">2026-11-08（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 </div>
 </section>
 <template id="ad-template"><div class="ad-slot">

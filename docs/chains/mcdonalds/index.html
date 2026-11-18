@@ -81,6 +81,12 @@ table.pricelog td.down { color: #2e7d32; }
 .item { display: block; background: var(--card); border: 1px solid var(--line);
   border-radius: 10px; padding: 12px; text-decoration: none; }
 .item:hover { border-color: var(--accent); }
+/* 2026-11-18 カードのカテゴリアイコン（ドット絵32px）。左にアイコン、右に今までの中身。
+   ドット絵は元の32マスの倍数で出すと点がそろう。PC幅は2倍の64px、スマホは48px */
+.item:has(> .cat-icon) { display: flex; gap: 12px; align-items: flex-start; }
+.item .ib { flex: 1; min-width: 0; }
+.cat-icon { width: 48px; height: 48px; flex-shrink: 0; image-rendering: pixelated; }
+@media (min-width: 700px) { .cat-icon { width: 64px; height: 64px; } }
 .item .badge { display: inline-block; font-size: 10px; font-weight: 700; color: #fff;
   border-radius: 4px; padding: 1px 6px; margin-bottom: 6px; }
 .item[data-chain="mcdonalds"] .badge { background: var(--mcdonalds); }
@@ -203,332 +209,414 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <div class="grid" data-sortable>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1613.html" data-kcal="34.0"
    data-date="2026-11-18" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">すきやき風ソース</div>
   <div class="price">50円（税込）<span class="kcal">34kcal</span></div>
   <div class="meta">2026-11-18〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1614.html" data-kcal="89.0"
    data-date="2026-11-18" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">芳醇トリュフのチーズソース</div>
   <div class="price">50円（税込）<span class="kcal">89kcal</span></div>
   <div class="meta">2026-11-18〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-8615.html" data-kcal="304.0"
    data-date="2026-11-18" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マックフルーリー® ザクザク いちごのミルフィーユ味</div>
   <div class="price">380円（税込）<span class="kcal">304kcal</span></div>
   <div class="meta">2026-11-18〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-9030.html" data-kcal="786.0"
    data-date="2026-11-11" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">チキンマックナゲット® 15ピース</div>
   <div class="price">490円（税込）<span class="kcal">786kcal</span></div>
   <div class="meta">2026-11-11（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1900.html" data-kcal="561.0"
    data-date="2026-11-04" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">チーズチーズダブルチーズバーガー</div>
   <div class="price">550円（税込）<span class="kcal">561kcal</span></div>
   <div class="meta">2026-11-04〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1910.html" data-kcal="586.0"
    data-date="2026-11-04" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">チーズチーズてりやきマックバーガー</div>
   <div class="price">470円（税込）<span class="kcal">586kcal</span></div>
   <div class="meta">2026-11-04〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1920.html" data-kcal="590.0"
    data-date="2026-11-04" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">チーズチーズてりやきチキンジューシーマック</div>
   <div class="price">540円（税込）<span class="kcal">590kcal</span></div>
   <div class="meta">2026-11-04〜2026-11-14・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1930.html" data-kcal="745.0"
    data-date="2026-11-04" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">チーチーダブチソーセージマフィン</div>
   <div class="price">490円（税込）<span class="kcal">745kcal</span></div>
   <div class="meta">2026-11-04〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-2540.html" data-kcal="335.0"
    data-date="2026-11-04" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">三角チョコパイ ホワイトチョコ&amp;カスタード</div>
   <div class="price">190円（税込）<span class="kcal">335kcal</span></div>
   <div class="meta">2026-11-04〜2026-11-18・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-2020.html" data-kcal="410.0"
    data-date="2026-10-31" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">マックフライポテト®</div>
   <div class="price">350円（税込）<span class="kcal">410kcal</span></div>
   <div class="meta">2026-10-31（記録開始日）〜2026-11-18・新メニュー</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-2050.html" data-kcal="517.0"
    data-date="2026-10-31" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">マックフライポテト®</div>
   <div class="price">400円（税込）<span class="kcal">517kcal</span></div>
   <div class="meta">2026-10-31（記録開始日）〜2026-11-18・新メニュー</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1035.html" data-kcal="389.0"
    data-date="2026-10-21" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">えびフィレオ®</div>
   <div class="price">440円（税込）<span class="kcal">389kcal</span></div>
   <div class="meta">2026-10-21（記録開始日）〜 販売中・新メニュー</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1045.html" data-kcal="384.0"
    data-date="2026-10-21" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ベーコンレタスバーガー</div>
   <div class="price">450円（税込）<span class="kcal">384kcal</span></div>
   <div class="meta">2026-10-21（記録開始日）〜 販売中・新メニュー</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1500.html" data-kcal="239.0"
    data-date="2026-10-21" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">ザクザクジューシーももチキン</div>
   <div class="price">270円（税込）<span class="kcal">239kcal</span></div>
   <div class="meta">2026-10-21（記録開始日）〜2026-11-14・新メニュー</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1510.html" data-kcal="488.0"
    data-date="2026-10-21" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">てりやきチキンジューシーマック</div>
   <div class="price">470円（税込）<span class="kcal">488kcal</span></div>
   <div class="meta">2026-10-21（記録開始日）〜2026-11-14・新メニュー</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1520.html" data-kcal="473.0"
    data-date="2026-10-21" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">スパイシーザクザクジューシーマック</div>
   <div class="price">470円（税込）<span class="kcal">473kcal</span></div>
   <div class="meta">2026-10-21（記録開始日）〜2026-11-14・新メニュー</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1530.html" data-kcal="452.0"
    data-date="2026-10-21" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">ザクザクジューシーマック</div>
   <div class="price">460円（税込）<span class="kcal">452kcal</span></div>
   <div class="meta">2026-10-21（記録開始日）〜2026-11-14・新メニュー</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-4585.html" data-kcal="483.0"
    data-date="2026-10-21" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">倍ベーコンレタスバーガー</div>
   <div class="price">590円（税込）<span class="kcal">483kcal</span></div>
   <div class="meta">2026-10-21（記録開始日）〜 販売中・新メニュー</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-4595.html" data-kcal="563.0"
    data-date="2026-10-21" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">倍えびフィレオ</div>
   <div class="price">580円（税込）<span class="kcal">563kcal</span></div>
   <div class="meta">2026-10-21（記録開始日）〜 販売中・新メニュー</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-4810.html" data-kcal="754.0"
    data-date="2026-10-21" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">倍てりやきチキンジューシーマック</div>
   <div class="price">610円（税込）<span class="kcal">754kcal</span></div>
   <div class="meta">2026-10-21（記録開始日）〜2026-11-14・新メニュー</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-4820.html" data-kcal="712.0"
    data-date="2026-10-21" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">倍スパイシーザクザクジューシーマック</div>
   <div class="price">610円（税込）<span class="kcal">712kcal</span></div>
   <div class="meta">2026-10-21（記録開始日）〜2026-11-14・新メニュー</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-4830.html" data-kcal="691.0"
    data-date="2026-10-21" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">倍ザクザクジューシーマック</div>
   <div class="price">600円（税込）<span class="kcal">691kcal</span></div>
   <div class="meta">2026-10-21（記録開始日）〜2026-11-14・新メニュー</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-6010.html" data-kcal="147.0"
    data-date="2026-10-21" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マックフィズ® 丸搾りレモネード</div>
   <div class="price">300円（税込）<span class="kcal">147kcal</span></div>
   <div class="meta">2026-10-21〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-6020.html" data-kcal="254.0"
    data-date="2026-10-21" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マックフロート® 丸搾りレモネード</div>
   <div class="price">380円（税込）<span class="kcal">254kcal</span></div>
   <div class="meta">2026-10-21〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-6030.html" data-kcal="8.0"
    data-date="2026-10-21" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">シャカシャカポテト® やみつきブラックペッパーシーズニング</div>
   <div class="price">50円（税込）<span class="kcal">8kcal</span></div>
   <div class="meta">2026-10-21〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-801260.html" data-kcal=""
    data-date="2026-10-21" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">390ペア(サンキューペア)</div>
   <div class="price">390円（税込）</div>
   <div class="meta">2026-10-21（記録開始日）〜 販売中・新メニュー</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-801783.html" data-kcal=""
    data-date="2026-10-21" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">食べくらべポテナゲ大</div>
   <div class="price">640円（税込）</div>
   <div class="meta">2026-10-21〜2026-11-14・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-801784.html" data-kcal=""
    data-date="2026-10-21" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">食べくらべポテナゲ特大</div>
   <div class="price">1000円（税込）</div>
   <div class="meta">2026-10-21〜2026-11-14・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-2520.html" data-kcal="323.0"
    data-date="2026-10-07" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">三角チョコパイ 黒</div>
   <div class="price">180円（税込）<span class="kcal">323kcal</span></div>
   <div class="meta">2026-10-07〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-2530.html" data-kcal="327.0"
    data-date="2026-10-07" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">三角チョコパイ クッキー&amp;クリーム いちご味</div>
   <div class="price">190円（税込）<span class="kcal">327kcal</span></div>
   <div class="meta">2026-10-07〜2026-10-29・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-6930.html" data-kcal="490.0"
    data-date="2026-09-24" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">北海道産じゃがペッパー月見</div>
   <div class="price">570円（税込）<span class="kcal">490kcal</span></div>
   <div class="meta">2026-09-24〜2026-10-22・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-2500.html" data-kcal="164.0"
    data-date="2026-09-16" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">プリプリエビプリオ 5ピース</div>
   <div class="price">290円（税込）<span class="kcal">164kcal</span></div>
   <div class="meta">2026-09-16〜2026-10-29・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-801705.html" data-kcal=""
    data-date="2026-09-16" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">食べくらべポテナゲ大</div>
   <div class="price">630円（税込）</div>
   <div class="meta">2026-09-16〜2026-10-22・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-801706.html" data-kcal=""
    data-date="2026-09-16" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">食べくらべポテナゲ特大</div>
   <div class="price">990円（税込）</div>
   <div class="meta">2026-09-16〜2026-10-22・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-8610.html" data-kcal="310.0"
    data-date="2026-09-16" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">マックフルーリー® 明治アーモンドチョコレート</div>
   <div class="price">370円（税込）<span class="kcal">310kcal</span></div>
   <div class="meta">2026-09-16〜2026-10-15・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-6900.html" data-kcal="401.0"
    data-date="2026-09-02" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">月見バーガー</div>
   <div class="price">460円（税込）<span class="kcal">401kcal</span></div>
   <div class="meta">2026-09-02〜2026-10-22・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-6910.html" data-kcal="452.0"
    data-date="2026-09-02" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">チーズ月見</div>
   <div class="price">490円（税込）<span class="kcal">452kcal</span></div>
   <div class="meta">2026-09-02〜2026-10-22・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-6940.html" data-kcal="601.0"
    data-date="2026-09-02" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">チーズチーズ倍月見</div>
   <div class="price">670円（税込）<span class="kcal">601kcal</span></div>
   <div class="meta">2026-09-02〜2026-10-22・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-6950.html" data-kcal="501.0"
    data-date="2026-09-02" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">月見マフィン</div>
   <div class="price">420円（税込）<span class="kcal">501kcal</span></div>
   <div class="meta">2026-09-02〜2026-10-22・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-6970.html" data-kcal="87.0"
    data-date="2026-09-02" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">黄金のたまごタルタルソース</div>
   <div class="price">50円（税込）<span class="kcal">87kcal</span></div>
   <div class="meta">2026-09-02〜2026-10-22・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-6980.html" data-kcal="220.0"
    data-date="2026-09-02" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">月見 マックシェイク® 長野県産シャインマスカット</div>
   <div class="price">200円（税込）<span class="kcal">220kcal</span></div>
   <div class="meta">2026-09-02〜2026-10-22・期間限定</div>
   
-</a>
+</div></a>
 </div>
 </section>
 <template id="ad-template"><div class="ad-slot">
@@ -666,784 +754,976 @@ function computeAdPlan(counts, every, max) {
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1070.html" data-kcal="485.0"
    data-date="2026-11-09" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">てりやきマックバーガー</div>
   <div class="price">400円（税込）<span class="kcal">485kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-7070.html" data-kcal="390.0"
    data-date="2026-11-09" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">エッグチーズバーガー</div>
   <div class="price">280円（税込）<span class="kcal">390kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1410.html" data-kcal="310.0"
    data-date="2026-11-09" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">エッグマックマフィン®</div>
   <div class="price">290円（税込）<span class="kcal">310kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-4040.html" data-kcal="477.0"
    data-date="2026-11-09" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ソーセージエッグマフィン</div>
   <div class="price">360円（税込）<span class="kcal">477kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-4030.html" data-kcal="397.0"
    data-date="2026-11-09" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ソーセージマフィン</div>
   <div class="price">180円（税込）<span class="kcal">397kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1360.html" data-kcal="459.0"
    data-date="2026-11-09" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ダブルチーズバーガー</div>
   <div class="price">480円（税込）<span class="kcal">459kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1430.html" data-kcal="401.0"
    data-date="2026-11-09" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">チキンマックマフィン</div>
   <div class="price">240円（税込）<span class="kcal">401kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1020.html" data-kcal="310.0"
    data-date="2026-11-10" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">チーズバーガー</div>
   <div class="price">240円（税込）<span class="kcal">310kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1010.html" data-kcal="259.0"
    data-date="2026-11-09" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ハンバーガー</div>
   <div class="price">190円（税込）<span class="kcal">259kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1210.html" data-kcal="524.0"
    data-date="2026-11-09" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ビッグマック®</div>
   <div class="price">500円（税込）<span class="kcal">524kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1110.html" data-kcal="338.0"
    data-date="2026-11-09" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">フィレオフィッシュ®</div>
   <div class="price">410円（税込）<span class="kcal">338kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1420.html" data-kcal="294.0"
    data-date="2026-11-09" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ベーコンエッグマックサンド</div>
   <div class="price">300円（税込）<span class="kcal">294kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-4010.html" data-kcal="323.0"
    data-date="2026-11-09" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ホットケーキ</div>
   <div class="price">380円（税込）<span class="kcal">323kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-8640.html" data-kcal="414.0"
    data-date="2026-11-09" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マックグリドル® ソーセージ</div>
   <div class="price">250円（税込）<span class="kcal">414kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-8642.html" data-kcal="545.0"
    data-date="2026-11-09" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マックグリドル® ソーセージエッグ</div>
   <div class="price">390円（税込）<span class="kcal">545kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-8641.html" data-kcal="382.0"
    data-date="2026-11-09" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マックグリドル® ベーコンエッグ</div>
   <div class="price">340円（税込）<span class="kcal">382kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1250.html" data-kcal="386.0"
    data-date="2026-11-09" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マックチキン®︎</div>
   <div class="price">190円（税込）<span class="kcal">386kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1270.html" data-kcal="409.0"
    data-date="2026-11-09" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マックポーク®</div>
   <div class="price">230円（税込）<span class="kcal">409kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-8637.html" data-kcal="693.0"
    data-date="2026-11-09" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">メガマフィン</div>
   <div class="price">440円（税込）<span class="kcal">693kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-4530.html" data-kcal="747.0"
    data-date="2026-11-10" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">倍てりやきマックバーガー</div>
   <div class="price">540円（税込）<span class="kcal">747kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-4600.html" data-kcal="489.0"
    data-date="2026-11-10" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">倍エッグチーズバーガー</div>
   <div class="price">420円（税込）<span class="kcal">489kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-4560.html" data-kcal="657.0"
    data-date="2026-11-10" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">倍ダブルチーズバーガー</div>
   <div class="price">740円（税込）<span class="kcal">657kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-4510.html" data-kcal="409.0"
    data-date="2026-11-10" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">倍チーズバーガー</div>
   <div class="price">380円（税込）<span class="kcal">409kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-4500.html" data-kcal="358.0"
    data-date="2026-11-10" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">倍ハンバーガー</div>
   <div class="price">330円（税込）<span class="kcal">358kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-4550.html" data-kcal="722.0"
    data-date="2026-11-10" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">倍ビッグマック</div>
   <div class="price">760円（税込）<span class="kcal">722kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-4540.html" data-kcal="453.0"
    data-date="2026-11-10" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">倍フィレオフィッシュ</div>
   <div class="price">550円（税込）<span class="kcal">453kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-4720.html" data-kcal="549.0"
    data-date="2026-11-10" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">倍マックチキン</div>
   <div class="price">330円（税込）<span class="kcal">549kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-4730.html" data-kcal="644.0"
    data-date="2026-11-10" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">倍マックポーク</div>
   <div class="price">370円（税込）<span class="kcal">644kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1260.html" data-kcal="517.0"
    data-date="2026-11-09" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">炙り醤油風 たまごベーコン肉厚ビーフ</div>
   <div class="price">580円（税込）<span class="kcal">517kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1220.html" data-kcal="633.0"
    data-date="2026-11-09" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">炙り醤油風 ダブル肉厚ビーフ</div>
   <div class="price">590円（税込）<span class="kcal">633kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>デザート・シェイク（12品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-8611.html" data-kcal="148.0"
    data-date="2026-11-10" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ソフトツイスト</div>
   <div class="price">140円（税込）<span class="kcal">148kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-2888.html" data-kcal="161.0"
    data-date="2026-11-11" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">プチパンケーキ</div>
   <div class="price">270円（税込）<span class="kcal">161kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-2110.html" data-kcal="211.0"
    data-date="2026-11-11" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ホットアップルパイ</div>
   <div class="price">140円（税込）<span class="kcal">211kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-8517.html" data-kcal="226.0"
    data-date="2026-11-10" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マックシェイク® ストロベリー</div>
   <div class="price">160円（税込）<span class="kcal">226kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-8519.html" data-kcal="231.0"
    data-date="2026-11-10" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マックシェイク® チョコレート</div>
   <div class="price">160円（税込）<span class="kcal">231kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-8521.html" data-kcal="222.0"
    data-date="2026-11-10" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マックシェイク® バニラ</div>
   <div class="price">160円（税込）<span class="kcal">222kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-8614.html" data-kcal="235.0"
    data-date="2026-11-10" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マックフルーリー® オレオ® クッキー</div>
   <div class="price">290円（税込）<span class="kcal">235kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-2810.html" data-kcal="355.0"
    data-date="2026-11-10" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マックフルーリー® 超 オレオ® クッキー</div>
   <div class="price">340円（税込）<span class="kcal">355kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-9056.html" data-kcal="213.0"
    data-date="2026-11-10" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マックフロート® グレープ</div>
   <div class="price">370円（税込）<span class="kcal">213kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-9057.html" data-kcal="200.0"
    data-date="2026-11-10" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マックフロート® コーク®</div>
   <div class="price">370円（税込）<span class="kcal">200kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-9058.html" data-kcal="113.0"
    data-date="2026-11-10" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マックフロート® コーヒー</div>
   <div class="price">370円（税込）<span class="kcal">113kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-9059.html" data-kcal="213.0"
    data-date="2026-11-10" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マックフロート® メロン</div>
   <div class="price">370円（税込）<span class="kcal">213kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>サイド（9品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-2220.html" data-kcal="84.0"
    data-date="2026-11-11" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">えだまめコーン</div>
   <div class="price">300円（税込）<span class="kcal">84kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-2200.html" data-kcal="10.0"
    data-date="2026-11-11" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">サイドサラダ</div>
   <div class="price">350円（税込）<span class="kcal">10kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1610.html" data-kcal="262.0"
    data-date="2026-11-11" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">チキンマックナゲット® 5ピース</div>
   <div class="price">290円（税込）<span class="kcal">262kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-5010.html" data-kcal="157.0"
    data-date="2026-11-11" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ハッシュポテト</div>
   <div class="price">180円（税込）<span class="kcal">157kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1611.html" data-kcal="33.0"
    data-date="2026-11-11" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">バーベキューソース</div>
   <div class="price">50円（税込）<span class="kcal">33kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-801159.html" data-kcal=""
    data-date="2026-11-11" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ポテナゲ大</div>
   <div class="price">600円（税込）</div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-801160.html" data-kcal=""
    data-date="2026-11-11" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ポテナゲ特大</div>
   <div class="price">980円（税込）</div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1612.html" data-kcal="43.0"
    data-date="2026-11-11" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マスタードソース</div>
   <div class="price">50円（税込）<span class="kcal">43kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-2010.html" data-kcal="225.0"
    data-date="2026-11-11" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マックフライポテト®(S)</div>
   <div class="price">220円（税込）<span class="kcal">225kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>ドリンク（24品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-3603.html" data-kcal="96.0"
    data-date="2026-11-11" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">Qoo 白ぶどう</div>
   <div class="price">160円（税込）<span class="kcal">96kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-3080.html" data-kcal="72.0"
    data-date="2026-11-12" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">アイスカフェラテ</div>
   <div class="price">220円（税込）<span class="kcal">72kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-3084.html" data-kcal="124.0"
    data-date="2026-11-12" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">アイスキャラメルラテ</div>
   <div class="price">280円（税込）<span class="kcal">124kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-8550.html" data-kcal="0.0"
    data-date="2026-11-11" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">アールグレイ アイスティー(ストレート)</div>
   <div class="price">160円（税込）<span class="kcal">0kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-8556.html" data-kcal="9.0"
    data-date="2026-11-12" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">アールグレイ アイスティー(ミルク)</div>
   <div class="price">160円（税込）<span class="kcal">9kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-8553.html" data-kcal="1.0"
    data-date="2026-11-12" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">アールグレイ アイスティー(レモン)</div>
   <div class="price">160円（税込）<span class="kcal">1kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-3050.html" data-kcal="82.0"
    data-date="2026-11-12" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">カフェラテ</div>
   <div class="price">220円（税込）<span class="kcal">82kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-3056.html" data-kcal="134.0"
    data-date="2026-11-12" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">キャラメルラテ</div>
   <div class="price">280円（税込）<span class="kcal">134kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-3110.html" data-kcal="94.0"
    data-date="2026-11-11" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">コカ・コーラ</div>
   <div class="price">160円（税込）<span class="kcal">94kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-3270.html" data-kcal="0.0"
    data-date="2026-11-11" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">コカ・コーラ ゼロ</div>
   <div class="price">160円（税込）<span class="kcal">0kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-3930.html" data-kcal="5.0"
    data-date="2026-11-12" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">サントリー黒烏龍茶#濃いめ</div>
   <div class="price">340円（税込）<span class="kcal">5kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-3700.html" data-kcal="83.0"
    data-date="2026-11-11" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">スプライト</div>
   <div class="price">160円（税込）<span class="kcal">83kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-3400.html" data-kcal="106.0"
    data-date="2026-11-11" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ファンタ グレープ</div>
   <div class="price">160円（税込）<span class="kcal">106kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-3410.html" data-kcal="106.0"
    data-date="2026-11-11" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ファンタ メロン</div>
   <div class="price">160円（税込）<span class="kcal">106kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-4110.html" data-kcal="6.0"
    data-date="2026-11-12" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">プレミアムローストアイスコーヒー</div>
   <div class="price">140円（税込）<span class="kcal">6kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-5100.html" data-kcal="7.0"
    data-date="2026-11-12" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">プレミアムローストコーヒー</div>
   <div class="price">140円（税込）<span class="kcal">7kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-5030.html" data-kcal="2.0"
    data-date="2026-11-12" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ホットティー(ストレート)</div>
   <div class="price">160円（税込）<span class="kcal">2kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-5050.html" data-kcal="11.0"
    data-date="2026-11-12" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ホットティー(ミルク)</div>
   <div class="price">160円（税込）<span class="kcal">11kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-5070.html" data-kcal="3.0"
    data-date="2026-11-12" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ホットティー(レモン)</div>
   <div class="price">160円（税込）<span class="kcal">3kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-3922.html" data-kcal="96.0"
    data-date="2026-11-12" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ミニッツメイド® アップル100%</div>
   <div class="price">200円（税込）<span class="kcal">96kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-3330.html" data-kcal="102.0"
    data-date="2026-11-12" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ミニッツメイド® オレンジブレンド100%</div>
   <div class="price">260円（税込）<span class="kcal">102kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-3480.html" data-kcal="138.0"
    data-date="2026-11-12" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ミルク</div>
   <div class="price">290円（税込）<span class="kcal">138kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-3472.html" data-kcal="0.0"
    data-date="2026-11-11" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">爽健美茶</div>
   <div class="price">160円（税込）<span class="kcal">0kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-3800.html" data-kcal="78.0"
    data-date="2026-11-12" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">野菜生活100</div>
   <div class="price">210円（税込）<span class="kcal">78kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>マックカフェ（21品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-400033.html" data-kcal="2.0"
    data-date="2026-11-13" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">アイスアメリカーノ</div>
   <div class="price">300円（税込）<span class="kcal">2kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-40540.html" data-kcal="216.0"
    data-date="2026-11-13" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">アイスカフェモカ</div>
   <div class="price">370円（税込）<span class="kcal">216kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-400031.html" data-kcal="87.0"
    data-date="2026-11-13" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">アイスカフェラテ(マックカフェ バイ バリスタ)</div>
   <div class="price">310円（税込）<span class="kcal">87kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-40640.html" data-kcal="206.0"
    data-date="2026-11-13" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">アイスキャラメルラテ(マックカフェ バイ バリスタ)</div>
   <div class="price">370円（税込）<span class="kcal">206kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-40740.html" data-kcal="251.0"
    data-date="2026-11-13" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">アイスチョコレート</div>
   <div class="price">430円（税込）<span class="kcal">251kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-40002.html" data-kcal="2.0"
    data-date="2026-11-13" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">アメリカーノ</div>
   <div class="price">260円（税込）<span class="kcal">2kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-40001.html" data-kcal="2.0"
    data-date="2026-11-13" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">エスプレッソ</div>
   <div class="price">200円（税込）<span class="kcal">2kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-40008.html" data-kcal="89.0"
    data-date="2026-11-13" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">カプチーノ</div>
   <div class="price">270円（税込）<span class="kcal">89kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-41110.html" data-kcal="332.0"
    data-date="2026-11-12" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/ice.svg" width="32" height="32" alt="アイス" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">クッキー&amp;クリームチョコフラッペ</div>
   <div class="price">470円（税込）<span class="kcal">332kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-45060.html" data-kcal="297.0"
    data-date="2026-11-13" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bread.svg" width="32" height="32" alt="パン" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">トリプルチョコ&amp;キャラメルスコーン</div>
   <div class="price">390円（税込）<span class="kcal">297kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-45070.html" data-kcal="179.0"
    data-date="2026-11-13" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">プリンケーキ</div>
   <div class="price">270円（税込）<span class="kcal">179kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-400020.html" data-kcal="171.0"
    data-date="2026-11-13" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ホットカフェモカ</div>
   <div class="price">330円（税込）<span class="kcal">171kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-40004.html" data-kcal="95.0"
    data-date="2026-11-13" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ホットカフェラテ(マックカフェ バイ バリスタ)</div>
   <div class="price">270円（税込）<span class="kcal">95kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-400024.html" data-kcal="126.0"
    data-date="2026-11-13" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ホットキャラメルラテ(マックカフェ バイ バリスタ)</div>
   <div class="price">330円（税込）<span class="kcal">126kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-40010.html" data-kcal="168.0"
    data-date="2026-11-13" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ホットチョコレート</div>
   <div class="price">390円（税込）<span class="kcal">168kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-45210.html" data-kcal="82.0"
    data-date="2026-11-12" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マカロン チョコレート</div>
   <div class="price">200円（税込）<span class="kcal">82kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-45200.html" data-kcal="83.0"
    data-date="2026-11-12" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マカロン バニラ</div>
   <div class="price">200円（税込）<span class="kcal">83kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-45230.html" data-kcal="81.0"
    data-date="2026-11-13" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マカロン ラズベリー</div>
   <div class="price">200円（税込）<span class="kcal">81kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-41040.html" data-kcal="203.0"
    data-date="2026-11-12" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">マンゴースムージー</div>
   <div class="price">450円（税込）<span class="kcal">203kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-45050.html" data-kcal="269.0"
    data-date="2026-11-13" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">ロールケーキ オレオ® クッキー</div>
   <div class="price">480円（税込）<span class="kcal">269kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-41120.html" data-kcal="262.0"
    data-date="2026-11-13" data-chain="mcdonalds" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/ice.svg" width="32" height="32" alt="アイス" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-on">販売中</span>
   <div class="t">宇治抹茶フラッペ</div>
   <div class="price">470円（税込）<span class="kcal">262kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 </section>
 <h2>ネタフルの最新レビュー</h2>

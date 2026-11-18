@@ -81,6 +81,12 @@ table.pricelog td.down { color: #2e7d32; }
 .item { display: block; background: var(--card); border: 1px solid var(--line);
   border-radius: 10px; padding: 12px; text-decoration: none; }
 .item:hover { border-color: var(--accent); }
+/* 2026-11-18 カードのカテゴリアイコン（ドット絵32px）。左にアイコン、右に今までの中身。
+   ドット絵は元の32マスの倍数で出すと点がそろう。PC幅は2倍の64px、スマホは48px */
+.item:has(> .cat-icon) { display: flex; gap: 12px; align-items: flex-start; }
+.item .ib { flex: 1; min-width: 0; }
+.cat-icon { width: 48px; height: 48px; flex-shrink: 0; image-rendering: pixelated; }
+@media (min-width: 700px) { .cat-icon { width: 64px; height: 64px; } }
 .item .badge { display: inline-block; font-size: 10px; font-weight: 700; color: #fff;
   border-radius: 4px; padding: 1px 6px; margin-bottom: 6px; }
 .item[data-chain="mcdonalds"] .badge { background: var(--mcdonalds); }
@@ -201,100 +207,124 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <div class="grid" data-sortable>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-2020.html" data-kcal="410.0"
    data-date="2026-10-31" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">マックフライポテト®</div>
   <div class="price">350円（税込）<span class="kcal">410kcal</span></div>
   <div class="meta">2026-10-31（記録開始日）〜2026-11-18・新メニュー</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-2050.html" data-kcal="517.0"
    data-date="2026-10-31" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">マックフライポテト®</div>
   <div class="price">400円（税込）<span class="kcal">517kcal</span></div>
   <div class="meta">2026-10-31（記録開始日）〜2026-11-18・新メニュー</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1500.html" data-kcal="239.0"
    data-date="2026-10-21" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">ザクザクジューシーももチキン</div>
   <div class="price">270円（税込）<span class="kcal">239kcal</span></div>
   <div class="meta">2026-10-21（記録開始日）〜2026-11-14・新メニュー</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1510.html" data-kcal="488.0"
    data-date="2026-10-21" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">てりやきチキンジューシーマック</div>
   <div class="price">470円（税込）<span class="kcal">488kcal</span></div>
   <div class="meta">2026-10-21（記録開始日）〜2026-11-14・新メニュー</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1520.html" data-kcal="473.0"
    data-date="2026-10-21" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">スパイシーザクザクジューシーマック</div>
   <div class="price">470円（税込）<span class="kcal">473kcal</span></div>
   <div class="meta">2026-10-21（記録開始日）〜2026-11-14・新メニュー</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-1530.html" data-kcal="452.0"
    data-date="2026-10-21" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">ザクザクジューシーマック</div>
   <div class="price">460円（税込）<span class="kcal">452kcal</span></div>
   <div class="meta">2026-10-21（記録開始日）〜2026-11-14・新メニュー</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-4810.html" data-kcal="754.0"
    data-date="2026-10-21" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">倍てりやきチキンジューシーマック</div>
   <div class="price">610円（税込）<span class="kcal">754kcal</span></div>
   <div class="meta">2026-10-21（記録開始日）〜2026-11-14・新メニュー</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-4820.html" data-kcal="712.0"
    data-date="2026-10-21" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">倍スパイシーザクザクジューシーマック</div>
   <div class="price">610円（税込）<span class="kcal">712kcal</span></div>
   <div class="meta">2026-10-21（記録開始日）〜2026-11-14・新メニュー</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-4830.html" data-kcal="691.0"
    data-date="2026-10-21" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/burger.svg" width="32" height="32" alt="ハンバーガー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">倍ザクザクジューシーマック</div>
   <div class="price">600円（税込）<span class="kcal">691kcal</span></div>
   <div class="meta">2026-10-21（記録開始日）〜2026-11-14・新メニュー</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-801783.html" data-kcal=""
    data-date="2026-10-21" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">食べくらべポテナゲ大</div>
   <div class="price">640円（税込）</div>
   <div class="meta">2026-10-21〜2026-11-14・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-801784.html" data-kcal=""
    data-date="2026-10-21" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">食べくらべポテナゲ特大</div>
   <div class="price">1000円（税込）</div>
   <div class="meta">2026-10-21〜2026-11-14・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/mcdonalds-2530.html" data-kcal="327.0"
    data-date="2026-10-07" data-chain="mcdonalds" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">マクドナルド</div><span class="st st-ended">終了</span>
   <div class="t">三角チョコパイ クッキー&amp;クリーム いちご味</div>
   <div class="price">190円（税込）<span class="kcal">327kcal</span></div>
   <div class="meta">2026-10-07〜2026-10-29・期間限定</div>
   
-</a>
+</div></a>
 </div>
 </section>
 <section class="chain-group" data-chain="matsunoya">
@@ -302,28 +332,34 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <div class="grid" data-sortable>
 <a data-google-vignette="false" class="item" href="/items/matsunoya-moriawase-mori_ginger_fpork_karaage_hp.html" data-kcal="1195.0"
    data-date="2026-10-11" data-chain="matsunoya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">松のや</div><span class="st st-ended">終了</span>
   <div class="t">背脂生姜タレのポークフライドステーキ＆本格唐揚げ(３個)定食</div>
   <div class="price">1090円（税込）<span class="kcal">1195kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-23・おすすめ掲載</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/matsunoya-moriawase-mori_ginger_fpork_rosu_hp.html" data-kcal="1356.0"
    data-date="2026-10-11" data-chain="matsunoya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">松のや</div><span class="st st-ended">終了</span>
   <div class="t">背脂生姜タレのポークフライドステーキ＆ロースかつ定食</div>
   <div class="price">1090円（税込）<span class="kcal">1356kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-23・おすすめ掲載</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/matsunoya-teishoku-tei_ginger_w_fpork_hp.html" data-kcal="1301.0"
    data-date="2026-10-11" data-chain="matsunoya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">松のや</div><span class="st st-ended">終了</span>
   <div class="t">背脂生姜タレのダブルロースポークフライドステーキ定食</div>
   <div class="price">1090円（税込）<span class="kcal">1301kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-23・おすすめ掲載</div>
   
-</a>
+</div></a>
 </div>
 </section>
 <section class="chain-group" data-chain="yoshinoya">
@@ -331,28 +367,34 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <div class="grid" data-sortable>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-gentei-sanma-tei.html" data-kcal="507.0"
    data-date="2026-10-11" data-chain="yoshinoya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-ended">終了</span>
   <div class="t">さんま定食</div>
   <div class="price">789円（税込）<span class="kcal">507kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-23・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-gentei-sanma.html" data-kcal="127.0"
    data-date="2026-10-11" data-chain="yoshinoya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-ended">終了</span>
   <div class="t">さんま（単品）</div>
   <div class="price">327円（税込）<span class="kcal">127kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-23・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/yoshinoya-gentei-gyusanma-tei.html" data-kcal="680.0"
    data-date="2026-10-08" data-chain="yoshinoya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">吉野家</div><span class="st st-ended">終了</span>
   <div class="t">牛さんま定食</div>
   <div class="price">899円（税込）<span class="kcal">680kcal</span></div>
   <div class="meta">2026-10-08〜2026-10-23・期間限定</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 </div>
 </section>
 <section class="chain-group" data-chain="sukiya">
@@ -360,76 +402,94 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <div class="grid" data-sortable>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-110100.html" data-kcal="811.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">すきやき牛丼</div>
   <div class="price">720円（税込）<span class="kcal">811kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-29・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-110200.html" data-kcal="816.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">辛旨すきやき牛丼</div>
   <div class="price">720円（税込）<span class="kcal">816kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-29・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-112800.html" data-kcal="902.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">月見辛旨すきやき牛丼</div>
   <div class="price">780円（税込）<span class="kcal">902kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-29・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-117600.html" data-kcal="911.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">おんたまシビ辛麻婆茄子牛丼</div>
   <div class="price">830円（税込）<span class="kcal">911kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-16・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-karubi-1305300.html" data-kcal=""
    data-date="2026-10-11" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">牛カルビ焼肉丼</div>
   <div class="price">780円（税込）</div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-29・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-karubi-1305400.html" data-kcal="929.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">キムチ牛カルビ焼肉丼</div>
   <div class="price">990円（税込）<span class="kcal">929kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-29・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-karubi-1305500.html" data-kcal="1015.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">ねぎ玉牛カルビ焼肉丼</div>
   <div class="price">990円（税込）<span class="kcal">1015kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-29・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-karubi-1305600.html" data-kcal=""
    data-date="2026-10-11" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">とろ〜り3種のチーズ牛カルビ焼肉丼</div>
   <div class="price">990円（税込）</div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-29・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-karubi-1305700.html" data-kcal="942.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">にんにく牛カルビ焼肉丼</div>
   <div class="price">850円（税込）<span class="kcal">942kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-29・期間限定</div>
   
-</a>
+</div></a>
 </div>
 </section>
 <section class="chain-group" data-chain="katsuya">
@@ -437,36 +497,44 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <div class="grid" data-sortable>
 <a data-google-vignette="false" class="item" href="/items/katsuya-22443.html" data-kcal=""
    data-date="2026-10-11" data-chain="katsuya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">かつや</div><span class="st st-ended">終了</span>
   <div class="t">海老トリプル定食</div>
   <div class="price">1089円（税込）</div>
   <div class="meta">2026-10-11（記録開始日）〜2026-11-07・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/katsuya-22444.html" data-kcal=""
    data-date="2026-10-11" data-chain="katsuya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">かつや</div><span class="st st-ended">終了</span>
   <div class="t">海老トリプル丼弁当</div>
   <div class="price">961円（税込）</div>
   <div class="meta">2026-10-11（記録開始日）〜2026-11-07・期間限定</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/katsuya-22445.html" data-kcal=""
    data-date="2026-10-11" data-chain="katsuya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">かつや</div><span class="st st-ended">終了</span>
   <div class="t">海老トリプル弁当</div>
   <div class="price">1069円（税込）</div>
   <div class="meta">2026-10-11（記録開始日）〜2026-11-07・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/katsuya-22442.html" data-kcal=""
    data-date="2026-10-09" data-chain="katsuya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">かつや</div><span class="st st-ended">終了</span>
   <div class="t">海老トリプル丼</div>
   <div class="price">979円（税込）</div>
   <div class="meta">2026-10-09〜2026-11-07・期間限定</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 </div>
 </section>
 <section class="chain-group" data-chain="karayama">
@@ -474,44 +542,54 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <div class="grid" data-sortable>
 <a data-google-vignette="false" class="item" href="/items/karayama-19097.html" data-kcal=""
    data-date="2026-10-11" data-chain="karayama" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">からやま</div><span class="st st-ended">終了</span>
   <div class="t">黒胡椒とり天合盛り定食</div>
   <div class="price">979円（税込）</div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-24・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/karayama-19099.html" data-kcal=""
    data-date="2026-10-11" data-chain="karayama" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">からやま</div><span class="st st-ended">終了</span>
   <div class="t">黒胡椒とり天4個</div>
   <div class="price">429円（税込）</div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-24・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/karayama-19100.html" data-kcal=""
    data-date="2026-10-11" data-chain="karayama" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">からやま</div><span class="st st-ended">終了</span>
   <div class="t">黒胡椒とり天のレモンステーキ弁当</div>
   <div class="price">1069円（税込）</div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-24・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/karayama-19101.html" data-kcal=""
    data-date="2026-10-11" data-chain="karayama" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">からやま</div><span class="st st-ended">終了</span>
   <div class="t">黒胡椒とり天合盛り弁当</div>
   <div class="price">961円（税込）</div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-24・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/karayama-19103.html" data-kcal=""
    data-date="2026-10-11" data-chain="karayama" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">からやま</div><span class="st st-ended">終了</span>
   <div class="t">黒胡椒とり天4個</div>
   <div class="price">421円（税込）</div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-24・期間限定</div>
   
-</a>
+</div></a>
 </div>
 </section>
 <template id="ad-template"><div class="ad-slot">

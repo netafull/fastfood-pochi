@@ -81,6 +81,12 @@ table.pricelog td.down { color: #2e7d32; }
 .item { display: block; background: var(--card); border: 1px solid var(--line);
   border-radius: 10px; padding: 12px; text-decoration: none; }
 .item:hover { border-color: var(--accent); }
+/* 2026-11-18 カードのカテゴリアイコン（ドット絵32px）。左にアイコン、右に今までの中身。
+   ドット絵は元の32マスの倍数で出すと点がそろう。PC幅は2倍の64px、スマホは48px */
+.item:has(> .cat-icon) { display: flex; gap: 12px; align-items: flex-start; }
+.item .ib { flex: 1; min-width: 0; }
+.cat-icon { width: 48px; height: 48px; flex-shrink: 0; image-rendering: pixelated; }
+@media (min-width: 700px) { .cat-icon { width: 64px; height: 64px; } }
 .item .badge { display: inline-block; font-size: 10px; font-weight: 700; color: #fff;
   border-radius: 4px; padding: 1px 6px; margin-bottom: 6px; }
 .item[data-chain="mcdonalds"] .badge { background: var(--mcdonalds); }
@@ -203,388 +209,484 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <div class="grid" data-sortable>
 <a data-google-vignette="false" class="item" href="/items/sukiya-don-213100.html" data-kcal="613.0"
    data-date="2026-11-18" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">にんにくねぎ塩豚タン丼</div>
   <div class="price">850円（税込）<span class="kcal">613kcal</span></div>
   <div class="meta">2026-11-18（記録開始日）〜 販売中・期間限定</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-don-213200.html" data-kcal="654.0"
    data-date="2026-11-18" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">おんたまねぎ塩豚タン丼</div>
   <div class="price">890円（税込）<span class="kcal">654kcal</span></div>
   <div class="meta">2026-11-18（記録開始日）〜 販売中・期間限定</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-don-213300.html" data-kcal="623.0"
    data-date="2026-11-18" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">山かけねぎ塩豚タン丼</div>
   <div class="price">990円（税込）<span class="kcal">623kcal</span></div>
   <div class="meta">2026-11-18（記録開始日）〜 販売中・期間限定</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-don-213000.html" data-kcal="570.0"
    data-date="2026-11-17" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">ねぎ塩豚タン丼</div>
   <div class="price">780円（税込）<span class="kcal">570kcal</span></div>
   <div class="meta">2026-11-17〜 販売中・期間限定</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-drink-809200.html" data-kcal=""
    data-date="2026-11-17" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">Sukiシェイク塩バターキャラメル</div>
   <div class="price">210円（税込）</div>
   <div class="meta">2026-11-17〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyusuki-1006700.html" data-kcal="997.0"
    data-date="2026-10-28" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/soup.svg" width="32" height="32" alt="スープ・グラタン" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">牛・胡麻麻辣湯鍋定食</div>
   <div class="price">990円（税込）<span class="kcal">997kcal</span></div>
   <div class="meta">2026-10-28（記録開始日）〜 販売中・期間限定</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyusuki-1006900.html" data-kcal=""
    data-date="2026-10-28" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/soup.svg" width="32" height="32" alt="スープ・グラタン" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">牛・胡麻麻辣湯鍋 単品</div>
   <div class="price">860円（税込）</div>
   <div class="meta">2026-10-28（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyusuki-1007600.html" data-kcal="1084.0"
    data-date="2026-10-28" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/soup.svg" width="32" height="32" alt="スープ・グラタン" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">牛すき鍋定食（たまご1個）</div>
   <div class="price">950円（税込）<span class="kcal">1084kcal</span></div>
   <div class="meta">2026-10-28（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyusuki-1007700.html" data-kcal=""
    data-date="2026-10-28" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/soup.svg" width="32" height="32" alt="スープ・グラタン" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">牛すき鍋 単品（たまご1個）</div>
   <div class="price">820円（税込）</div>
   <div class="meta">2026-10-28（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-7011000.html" data-kcal="90.0"
    data-date="2026-10-28" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">麻辣オイル</div>
   <div class="price">20円（税込）<span class="kcal">90kcal</span></div>
   <div class="meta">2026-10-28（記録開始日）〜 販売中・新規掲載</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-don-212700.html" data-kcal="599.0"
    data-date="2026-10-15" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">にんにくローストポーク丼</div>
   <div class="price">850円（税込）<span class="kcal">599kcal</span></div>
   <div class="meta">2026-10-15（記録開始日）〜 販売中・期間限定</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-don-212800.html" data-kcal="640.0"
    data-date="2026-10-15" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">おんたまローストポーク丼</div>
   <div class="price">890円（税込）<span class="kcal">640kcal</span></div>
   <div class="meta">2026-10-15（記録開始日）〜 販売中・期間限定</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-don-212900.html" data-kcal="609.0"
    data-date="2026-10-15" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">山かけローストポーク丼</div>
   <div class="price">990円（税込）<span class="kcal">609kcal</span></div>
   <div class="meta">2026-10-15（記録開始日）〜 販売中・期間限定</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-don-212600.html" data-kcal="556.0"
    data-date="2026-10-14" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">ローストポーク丼</div>
   <div class="price">780円（税込）<span class="kcal">556kcal</span></div>
   <div class="meta">2026-10-14〜 販売中・期間限定</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-drink-811800.html" data-kcal="196.0"
    data-date="2026-10-14" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">Sukiシェイクアサイー・バナナ</div>
   <div class="price">210円（税込）<span class="kcal">196kcal</span></div>
   <div class="meta">2026-10-14〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-curry-314900.html" data-kcal="910.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">牛あいがけビーフカレー</div>
   <div class="price">1130円（税込）<span class="kcal">910kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜 販売中・期間限定</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-curry-315000.html" data-kcal="967.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">ソーセージビーフカレー</div>
   <div class="price">1130円（税込）<span class="kcal">967kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜 販売中・期間限定</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-110100.html" data-kcal="811.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">すきやき牛丼</div>
   <div class="price">720円（税込）<span class="kcal">811kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-29・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-110200.html" data-kcal="816.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">辛旨すきやき牛丼</div>
   <div class="price">720円（税込）<span class="kcal">816kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-29・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-112800.html" data-kcal="902.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">月見辛旨すきやき牛丼</div>
   <div class="price">780円（税込）<span class="kcal">902kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-29・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-117600.html" data-kcal="911.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">おんたまシビ辛麻婆茄子牛丼</div>
   <div class="price">830円（税込）<span class="kcal">911kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-16・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-karubi-1305300.html" data-kcal=""
    data-date="2026-10-11" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">牛カルビ焼肉丼</div>
   <div class="price">780円（税込）</div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-29・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-karubi-1305400.html" data-kcal="929.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">キムチ牛カルビ焼肉丼</div>
   <div class="price">990円（税込）<span class="kcal">929kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-29・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-karubi-1305500.html" data-kcal="1015.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">ねぎ玉牛カルビ焼肉丼</div>
   <div class="price">990円（税込）<span class="kcal">1015kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-29・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-karubi-1305600.html" data-kcal=""
    data-date="2026-10-11" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">とろ〜り3種のチーズ牛カルビ焼肉丼</div>
   <div class="price">990円（税込）</div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-29・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-karubi-1305700.html" data-kcal="942.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">にんにく牛カルビ焼肉丼</div>
   <div class="price">850円（税込）<span class="kcal">942kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜2026-10-29・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-7004000.html" data-kcal="30.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">季節の小鉢</div>
   <div class="price">100円（税込）<span class="kcal">30kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-7010500.html" data-kcal="382.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">牛とん汁みそらーめん</div>
   <div class="price">500円（税込）<span class="kcal">382kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜 販売中・期間限定</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-7010600.html" data-kcal="300.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">辛ねぎとん汁みそらーめん</div>
   <div class="price">460円（税込）<span class="kcal">300kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜 販売中・期間限定</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-unagi-704800.html" data-kcal="255.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">うな皿</div>
   <div class="price">880円（税込）<span class="kcal">255kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-unagi-707600.html" data-kcal=""
    data-date="2026-10-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">特うな皿</div>
   <div class="price">1580円（税込）</div>
   <div class="meta">2026-10-11（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-unagi-900100.html" data-kcal="662.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">うな丼</div>
   <div class="price">980円（税込）<span class="kcal">662kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-unagi-900200.html" data-kcal="860.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">うな牛</div>
   <div class="price">1190円（税込）<span class="kcal">860kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-unagi-900500.html" data-kcal=""
    data-date="2026-10-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">特うな丼</div>
   <div class="price">1680円（税込）</div>
   <div class="meta">2026-10-11（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-unagi-902100.html" data-kcal="443.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">うな牛皿</div>
   <div class="price">1090円（税込）<span class="kcal">443kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-unagi-902200.html" data-kcal=""
    data-date="2026-10-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">特うな牛皿</div>
   <div class="price">1790円（税込）</div>
   <div class="meta">2026-10-11（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-unagi-902300.html" data-kcal="746.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">おんたまうな丼</div>
   <div class="price">1050円（税込）<span class="kcal">746kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-unagi-902400.html" data-kcal="945.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">おんたまうな牛</div>
   <div class="price">1260円（税込）<span class="kcal">945kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-unagi-902500.html" data-kcal="714.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">山かけうな丼</div>
   <div class="price">1130円（税込）<span class="kcal">714kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-unagi-902600.html" data-kcal="913.0"
    data-date="2026-10-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">山かけうな牛</div>
   <div class="price">1340円（税込）<span class="kcal">913kcal</span></div>
   <div class="meta">2026-10-11（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-unagi-902700.html" data-kcal=""
    data-date="2026-10-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">特うな牛</div>
   <div class="price">1890円（税込）</div>
   <div class="meta">2026-10-11（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-curry-314800.html" data-kcal="716.0"
    data-date="2026-09-29" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">ビーフカレー</div>
   <div class="price">850円（税込）<span class="kcal">716kcal</span></div>
   <div class="meta">2026-09-29〜 販売中・期間限定</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-drink-808000.html" data-kcal="165.0"
    data-date="2026-09-29" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">黒糖ゼリーほうじ茶ラテ</div>
   <div class="price">290円（税込）<span class="kcal">165kcal</span></div>
   <div class="meta">2026-09-29〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-7010400.html" data-kcal="272.0"
    data-date="2026-09-29" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">とん汁みそらーめん</div>
   <div class="price">360円（税込）<span class="kcal">272kcal</span></div>
   <div class="meta">2026-09-29〜 販売中・期間限定</div>
   <div class="review-badge">レビューあり</div>
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-drink-810500.html" data-kcal="218.0"
    data-date="2026-09-08" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">Sukiシェイク焼き芋</div>
   <div class="price">210円（税込）<span class="kcal">218kcal</span></div>
   <div class="meta">2026-09-08〜2026-11-08・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-112700.html" data-kcal="897.0"
    data-date="2026-09-08" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">月見すきやき牛丼</div>
   <div class="price">780円（税込）<span class="kcal">897kcal</span></div>
   <div class="meta">2026-09-08〜2026-10-29・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-drink-810300.html" data-kcal="199.0"
    data-date="2026-08-04" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">Sukiシェイクマスカット</div>
   <div class="price">210円（税込）<span class="kcal">199kcal</span></div>
   <div class="meta">2026-08-04〜2026-10-16・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-117500.html" data-kcal="828.0"
    data-date="2026-08-04" data-chain="sukiya" data-status="ended">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-ended">終了</span>
   <div class="t">シビ辛麻婆茄子牛丼</div>
   <div class="price">720円（税込）<span class="kcal">828kcal</span></div>
   <div class="meta">2026-08-04〜2026-10-16・期間限定</div>
   
-</a>
+</div></a>
 </div>
 </section>
 <template id="ad-template"><div class="ad-slot">
@@ -722,1074 +824,1334 @@ function computeAdPlan(counts, every, max) {
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-116700.html" data-kcal="719.0"
    data-date="2026-11-09" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">おろしポン酢牛丼</div>
   <div class="price">630円（税込）<span class="kcal">719kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-116800.html" data-kcal="412.0"
    data-date="2026-11-09" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">おろしポン酢牛丼ライト</div>
   <div class="price">730円（税込）<span class="kcal">412kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-103100.html" data-kcal="714.0"
    data-date="2026-11-09" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">かつぶしオクラ牛丼</div>
   <div class="price">630円（税込）<span class="kcal">714kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-107100.html" data-kcal="427.0"
    data-date="2026-11-09" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">かつぶしオクラ牛丼ライト</div>
   <div class="price">730円（税込）<span class="kcal">427kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-102900.html" data-kcal="871.0"
    data-date="2026-11-09" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">とろ〜り３種のチーズ牛丼</div>
   <div class="price">690円（税込）<span class="kcal">871kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-100400.html" data-kcal="803.0"
    data-date="2026-11-09" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">ねぎ玉牛丼</div>
   <div class="price">690円（税込）<span class="kcal">803kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-103000.html" data-kcal="748.0"
    data-date="2026-11-09" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">わさび山かけ牛丼</div>
   <div class="price">690円（税込）<span class="kcal">748kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-107000.html" data-kcal="452.0"
    data-date="2026-11-09" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">わさび山かけ牛丼ライト</div>
   <div class="price">790円（税込）<span class="kcal">452kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-100500.html" data-kcal="725.0"
    data-date="2026-11-09" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">キムチ牛丼</div>
   <div class="price">690円（税込）<span class="kcal">725kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-106500.html" data-kcal="429.0"
    data-date="2026-11-09" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">キムチ牛丼ライト</div>
   <div class="price">790円（税込）<span class="kcal">429kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-100100.html" data-kcal="695.0"
    data-date="2026-11-09" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">牛丼</div>
   <div class="price">480円（税込）<span class="kcal">695kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-101200.html" data-kcal="399.0"
    data-date="2026-11-09" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">牛丼ライト</div>
   <div class="price">580円（税込）<span class="kcal">399kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-gyudon-100300.html" data-kcal="795.0"
    data-date="2026-11-09" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">高菜明太マヨ牛丼</div>
   <div class="price">690円（税込）<span class="kcal">795kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>カレー（11品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/sukiya-curry-300200.html" data-kcal="737.0"
    data-date="2026-11-09" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">おんたまカレー</div>
   <div class="price">630円（税込）<span class="kcal">737kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-curry-307000.html" data-kcal="931.0"
    data-date="2026-11-09" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">おんたま牛カレー</div>
   <div class="price">890円（税込）<span class="kcal">931kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-curry-300300.html" data-kcal="829.0"
    data-date="2026-11-09" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">とろ〜りチーズカレー</div>
   <div class="price">730円（税込）<span class="kcal">829kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-curry-300100.html" data-kcal="653.0"
    data-date="2026-11-09" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">カレー</div>
   <div class="price">550円（税込）<span class="kcal">653kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-curry-305400.html" data-kcal="903.0"
    data-date="2026-11-09" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">ソーセージカレー</div>
   <div class="price">830円（税込）<span class="kcal">903kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-curry-308500.html" data-kcal="913.0"
    data-date="2026-11-09" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">チーズおんたまカレー</div>
   <div class="price">790円（税込）<span class="kcal">913kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-curry-308400.html" data-kcal="1023.0"
    data-date="2026-11-10" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">チーズ牛カレー</div>
   <div class="price">990円（税込）<span class="kcal">1023kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-curry-300600.html" data-kcal="847.0"
    data-date="2026-11-09" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">牛カレー</div>
   <div class="price">830円（税込）<span class="kcal">847kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-curry-314200.html" data-kcal="1020.0"
    data-date="2026-11-10" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">目玉焼きソーセージカレー</div>
   <div class="price">920円（税込）<span class="kcal">1020kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-curry-313500.html" data-kcal="963.0"
    data-date="2026-11-10" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">目玉焼き牛カレー</div>
   <div class="price">890円（税込）<span class="kcal">963kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-curry-308200.html" data-kcal="1041.0"
    data-date="2026-11-10" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">肉2倍牛カレー</div>
   <div class="price">1080円（税込）<span class="kcal">1041kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>こだわり丼（6品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/sukiya-don-202800.html" data-kcal="581.0"
    data-date="2026-11-10" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">まぐろたたき丼</div>
   <div class="price">690円（税込）<span class="kcal">581kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-don-202700.html" data-kcal="688.0"
    data-date="2026-11-10" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">まぐろユッケ丼</div>
   <div class="price">820円（税込）<span class="kcal">688kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-don-210700.html" data-kcal="689.0"
    data-date="2026-11-10" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">オクラ旨だしとりそぼろ丼</div>
   <div class="price">630円（税込）<span class="kcal">689kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-don-200200.html" data-kcal="629.0"
    data-date="2026-11-10" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">山かけまぐろたたき丼</div>
   <div class="price">850円（税込）<span class="kcal">629kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-don-201400.html" data-kcal="673.0"
    data-date="2026-11-10" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">旨だしとりそぼろ丼</div>
   <div class="price">530円（税込）<span class="kcal">673kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-don-210600.html" data-kcal="742.0"
    data-date="2026-11-10" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">明太マヨ旨だしとりそぼろ丼</div>
   <div class="price">580円（税込）<span class="kcal">742kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>朝食（32品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-505000.html" data-kcal="552.0"
    data-date="2026-11-10" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">たまかけ朝食</div>
   <div class="price">330円（税込）<span class="kcal">552kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-511900.html" data-kcal="84.0"
    data-date="2026-11-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">たまご</div>
   <div class="price">90円（税込）<span class="kcal">84kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-512900.html" data-kcal="531.0"
    data-date="2026-11-10" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">まぜのっけ朝食</div>
   <div class="price">330円（税込）<span class="kcal">531kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-508800.html" data-kcal=""
    data-date="2026-11-12" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/salad.svg" width="32" height="32" alt="サラダ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">サラダ</div>
   <div class="price">180円（税込）</div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-514500.html" data-kcal="125.0"
    data-date="2026-11-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">ソーセージ</div>
   <div class="price">150円（税込）<span class="kcal">125kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-514200.html" data-kcal="710.0"
    data-date="2026-11-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">ソーセージエッグ朝食</div>
   <div class="price">470円（税込）<span class="kcal">710kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-514600.html" data-kcal="100.0"
    data-date="2026-11-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">ベーコン</div>
   <div class="price">150円（税込）<span class="kcal">100kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-513300.html" data-kcal="787.0"
    data-date="2026-11-10" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">塩さばたまかけ朝食</div>
   <div class="price">580円（税込）<span class="kcal">787kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-513100.html" data-kcal="767.0"
    data-date="2026-11-10" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">塩さばまぜのっけ朝食</div>
   <div class="price">580円（税込）<span class="kcal">767kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-515400.html" data-kcal="703.0"
    data-date="2026-11-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">塩さば朝食</div>
   <div class="price">560円（税込）<span class="kcal">703kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-513500.html" data-kcal="30.0"
    data-date="2026-11-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">季節の小鉢</div>
   <div class="price">100円（税込）<span class="kcal">30kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-509300.html" data-kcal=""
    data-date="2026-11-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">山かけ(わさび付)</div>
   <div class="price">210円（税込）</div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-508900.html" data-kcal=""
    data-date="2026-11-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">炙り塩さば</div>
   <div class="price">290円（税込）</div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-509000.html" data-kcal=""
    data-date="2026-11-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">焼鮭</div>
   <div class="price">290円（税込）</div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-513200.html" data-kcal="672.0"
    data-date="2026-11-10" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">焼鮭たまかけ朝食</div>
   <div class="price">580円（税込）<span class="kcal">672kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-513000.html" data-kcal="653.0"
    data-date="2026-11-10" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">焼鮭まぜのっけ朝食</div>
   <div class="price">580円（税込）<span class="kcal">653kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-515300.html" data-kcal="588.0"
    data-date="2026-11-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">焼鮭朝食</div>
   <div class="price">560円（税込）<span class="kcal">588kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-509900.html" data-kcal="662.0"
    data-date="2026-11-10" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">牛たまかけ朝食</div>
   <div class="price">430円（税込）<span class="kcal">662kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-503400.html" data-kcal="641.0"
    data-date="2026-11-10" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">牛まぜのっけ朝食</div>
   <div class="price">430円（税込）<span class="kcal">641kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-515200.html" data-kcal="834.0"
    data-date="2026-11-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">牛塩さば朝食</div>
   <div class="price">670円（税込）<span class="kcal">834kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-505200.html" data-kcal="110.0"
    data-date="2026-11-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">牛小鉢</div>
   <div class="price">180円（税込）<span class="kcal">110kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-514400.html" data-kcal="817.0"
    data-date="2026-11-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">牛小鉢ソーセージエッグ朝食</div>
   <div class="price">570円（税込）<span class="kcal">817kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-512500.html" data-kcal="795.0"
    data-date="2026-11-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">牛小鉢ベーコンエッグ朝食</div>
   <div class="price">570円（税込）<span class="kcal">795kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-515100.html" data-kcal="720.0"
    data-date="2026-11-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">牛焼鮭朝食</div>
   <div class="price">670円（税込）<span class="kcal">720kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-509200.html" data-kcal="90.0"
    data-date="2026-11-12" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">納豆</div>
   <div class="price">100円（税込）<span class="kcal">90kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-507900.html" data-kcal="641.0"
    data-date="2026-11-10" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">納豆たまかけ朝食</div>
   <div class="price">400円（税込）<span class="kcal">641kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-513400.html" data-kcal="620.0"
    data-date="2026-11-10" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">納豆まぜのっけ朝食</div>
   <div class="price">400円（税込）<span class="kcal">620kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-514300.html" data-kcal="799.0"
    data-date="2026-11-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">納豆ソーセージエッグ朝食</div>
   <div class="price">540円（税込）<span class="kcal">799kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-512400.html" data-kcal="773.0"
    data-date="2026-11-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">納豆ベーコンエッグ朝食</div>
   <div class="price">540円（税込）<span class="kcal">773kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-515600.html" data-kcal="792.0"
    data-date="2026-11-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">納豆塩さば朝食</div>
   <div class="price">590円（税込）<span class="kcal">792kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-515500.html" data-kcal="677.0"
    data-date="2026-11-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">納豆焼鮭朝食</div>
   <div class="price">590円（税込）<span class="kcal">677kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-morning-512300.html" data-kcal="685.0"
    data-date="2026-11-11" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">自社製ベーコンエッグ朝食</div>
   <div class="price">470円（税込）<span class="kcal">685kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>夜すき（4品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/sukiya-dinner-1502200.html" data-kcal="1083.0"
    data-date="2026-11-12" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">まぐろWセット</div>
   <div class="price">1090円（税込）<span class="kcal">1083kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-dinner-1502000.html" data-kcal="1125.0"
    data-date="2026-11-12" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">元祖Wセット</div>
   <div class="price">850円（税込）<span class="kcal">1125kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-dinner-1502800.html" data-kcal="1151.0"
    data-date="2026-11-12" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/salad.svg" width="32" height="32" alt="サラダ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">元祖Wセット（サラダ付き）</div>
   <div class="price">990円（税込）<span class="kcal">1151kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-dinner-1502600.html" data-kcal="977.0"
    data-date="2026-11-12" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">塩さば牛皿定食</div>
   <div class="price">990円（税込）<span class="kcal">977kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>定食（8品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/sukiya-special-408600.html" data-kcal="768.0"
    data-date="2026-11-12" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">おろしポン酢牛皿定食</div>
   <div class="price">800円（税込）<span class="kcal">768kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-special-407300.html" data-kcal=""
    data-date="2026-11-12" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">塩さば・納豆定食</div>
   <div class="price">730円（税込）</div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-special-407200.html" data-kcal=""
    data-date="2026-11-12" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">塩さば定食</div>
   <div class="price">630円（税込）</div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-special-407100.html" data-kcal=""
    data-date="2026-11-12" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">山かけ牛皿定食</div>
   <div class="price">860円（税込）</div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-special-406900.html" data-kcal=""
    data-date="2026-11-12" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">焼鮭・納豆定食</div>
   <div class="price">730円（税込）</div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-special-406700.html" data-kcal=""
    data-date="2026-11-12" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">焼鮭定食</div>
   <div class="price">630円（税込）</div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-special-400100.html" data-kcal="832.0"
    data-date="2026-11-12" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">牛皿定食</div>
   <div class="price">700円（税込）<span class="kcal">832kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-special-406800.html" data-kcal="622.0"
    data-date="2026-11-12" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">納豆定食</div>
   <div class="price">460円（税込）<span class="kcal">622kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>お食事サラダ（3品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/sukiya-oshokujisalad-1402100.html" data-kcal="85.0"
    data-date="2026-11-12" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/salad.svg" width="32" height="32" alt="サラダ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">ささみチキン</div>
   <div class="price">280円（税込）<span class="kcal">85kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-oshokujisalad-1402000.html" data-kcal="247.0"
    data-date="2026-11-12" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/salad.svg" width="32" height="32" alt="サラダ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">チキン・お食事サラダ</div>
   <div class="price">650円（税込）<span class="kcal">247kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-oshokujisalad-1401900.html" data-kcal="359.0"
    data-date="2026-11-12" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/salad.svg" width="32" height="32" alt="サラダ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">牛・お食事サラダ</div>
   <div class="price">650円（税込）<span class="kcal">359kcal</span></div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>お子様向け（3品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/sukiya-kids-600500.html" data-kcal=""
    data-date="2026-11-12" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">お子様とりそぼろ丼すきすきセット</div>
   <div class="price">500円（税込）</div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-kids-600200.html" data-kcal=""
    data-date="2026-11-12" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">お子様カレーすきすきセット</div>
   <div class="price">500円（税込）</div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-kids-600100.html" data-kcal=""
    data-date="2026-11-12" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">お子様牛丼すきすきセット</div>
   <div class="price">500円（税込）</div>
   <div class="meta">記録開始 2026-11-12〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>おかず（32品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-701400.html" data-kcal="13.0"
    data-date="2026-11-13" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">おしんこ</div>
   <div class="price">100円（税込）<span class="kcal">13kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-7010300.html" data-kcal="24.0"
    data-date="2026-11-14" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">おろしポン酢</div>
   <div class="price">150円（税込）<span class="kcal">24kcal</span></div>
   <div class="meta">記録開始 2026-11-14〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-701600.html" data-kcal="84.0"
    data-date="2026-11-13" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">おんたま</div>
   <div class="price">110円（税込）<span class="kcal">84kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-707100.html" data-kcal=""
    data-date="2026-11-14" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">かつぶしオクラ</div>
   <div class="price">150円（税込）</div>
   <div class="meta">記録開始 2026-11-14〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-704300.html" data-kcal="123.0"
    data-date="2026-11-13" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">からあげ</div>
   <div class="price">140円（税込）<span class="kcal">123kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-702800.html" data-kcal="398.0"
    data-date="2026-11-14" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">ごはん</div>
   <div class="price">170円（税込）<span class="kcal">398kcal</span></div>
   <div class="meta">記録開始 2026-11-14〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-701500.html" data-kcal="84.0"
    data-date="2026-11-13" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">たまご</div>
   <div class="price">90円（税込）<span class="kcal">84kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-703400.html" data-kcal=""
    data-date="2026-11-13" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">とろ〜り3種のチーズ</div>
   <div class="price">210円（税込）</div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-701300.html" data-kcal="115.0"
    data-date="2026-11-13" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">とん汁</div>
   <div class="price">240円（税込）<span class="kcal">115kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-702600.html" data-kcal=""
    data-date="2026-11-14" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">のり</div>
   <div class="price">60円（税込）</div>
   <div class="meta">記録開始 2026-11-14〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-7002500.html" data-kcal="170.0"
    data-date="2026-11-13" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">まぐろたたき皿</div>
   <div class="price">560円（税込）<span class="kcal">170kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-701200.html" data-kcal="519.0"
    data-date="2026-11-13" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">みそ汁</div>
   <div class="price">110円（税込）<span class="kcal">519kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-707900.html" data-kcal=""
    data-date="2026-11-13" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">オクラサラダ</div>
   <div class="price">230円（税込）</div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-709100.html" data-kcal=""
    data-date="2026-11-13" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">カットりんご</div>
   <div class="price">130円（税込）</div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-702000.html" data-kcal="30.0"
    data-date="2026-11-14" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">キムチ</div>
   <div class="price">210円（税込）<span class="kcal">30kcal</span></div>
   <div class="meta">記録開始 2026-11-14〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-703200.html" data-kcal="19.0"
    data-date="2026-11-14" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">コチュジャンだれ</div>
   <div class="price">60円（税込）<span class="kcal">19kcal</span></div>
   <div class="meta">記録開始 2026-11-14〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-707700.html" data-kcal=""
    data-date="2026-11-13" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">サラダ</div>
   <div class="price">180円（税込）</div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-7003200.html" data-kcal="80.0"
    data-date="2026-11-13" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">シーザーサラダ</div>
   <div class="price">250円（税込）<span class="kcal">80kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-7006000.html" data-kcal="125.0"
    data-date="2026-11-13" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">ソーセージ</div>
   <div class="price">150円（税込）<span class="kcal">125kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-7001300.html" data-kcal="43.0"
    data-date="2026-11-14" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">フライドにんにく</div>
   <div class="price">70円（税込）<span class="kcal">43kcal</span></div>
   <div class="meta">記録開始 2026-11-14〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-7010000.html" data-kcal=""
    data-date="2026-11-14" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">ポン酢</div>
   <div class="price">60円（税込）</div>
   <div class="meta">記録開始 2026-11-14〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-703300.html" data-kcal=""
    data-date="2026-11-14" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">マヨネーズ</div>
   <div class="price">70円（税込）</div>
   <div class="meta">記録開始 2026-11-14〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-702200.html" data-kcal="88.0"
    data-date="2026-11-14" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">冷やっこ</div>
   <div class="price">140円（税込）<span class="kcal">88kcal</span></div>
   <div class="meta">記録開始 2026-11-14〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-701900.html" data-kcal=""
    data-date="2026-11-14" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">山かけ(わさび付)</div>
   <div class="price">210円（税込）</div>
   <div class="meta">記録開始 2026-11-14〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-703100.html" data-kcal="71.0"
    data-date="2026-11-14" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">明太マヨ</div>
   <div class="price">70円（税込）<span class="kcal">71kcal</span></div>
   <div class="meta">記録開始 2026-11-14〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-708500.html" data-kcal=""
    data-date="2026-11-13" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">炙り塩さば</div>
   <div class="price">290円（税込）</div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-701800.html" data-kcal=""
    data-date="2026-11-13" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">焼鮭</div>
   <div class="price">290円（税込）</div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-702900.html" data-kcal="297.0"
    data-date="2026-11-13" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">牛皿</div>
   <div class="price">370円（税込）<span class="kcal">297kcal</span></div>
   <div class="meta">記録開始 2026-11-13〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-702300.html" data-kcal="90.0"
    data-date="2026-11-14" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">納豆</div>
   <div class="price">100円（税込）<span class="kcal">90kcal</span></div>
   <div class="meta">記録開始 2026-11-14〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-702100.html" data-kcal="11.0"
    data-date="2026-11-14" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">青ねぎ</div>
   <div class="price">90円（税込）<span class="kcal">11kcal</span></div>
   <div class="meta">記録開始 2026-11-14〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-702400.html" data-kcal="29.0"
    data-date="2026-11-14" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">高菜</div>
   <div class="price">140円（税込）<span class="kcal">29kcal</span></div>
   <div class="meta">記録開始 2026-11-14〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-side-702500.html" data-kcal="100.0"
    data-date="2026-11-14" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">高菜明太マヨ</div>
   <div class="price">210円（税込）<span class="kcal">100kcal</span></div>
   <div class="meta">記録開始 2026-11-14〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>スイーツ＆ドリンク（16品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/sukiya-drink-808800.html" data-kcal="176.0"
    data-date="2026-11-15" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">Sukiシェイク バニラ</div>
   <div class="price">150円（税込）<span class="kcal">176kcal</span></div>
   <div class="meta">記録開始 2026-11-15〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-drink-810400.html" data-kcal="194.0"
    data-date="2026-11-15" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">Sukiシェイク抹茶</div>
   <div class="price">190円（税込）<span class="kcal">194kcal</span></div>
   <div class="meta">記録開始 2026-11-15〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-drink-806600.html" data-kcal=""
    data-date="2026-11-15" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">とろけるダブルショコラ</div>
   <div class="price">190円（税込）</div>
   <div class="meta">記録開始 2026-11-15〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-drink-806500.html" data-kcal=""
    data-date="2026-11-15" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sweets.svg" width="32" height="32" alt="スイーツ" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">なめらかカラメルぷりん</div>
   <div class="price">190円（税込）</div>
   <div class="meta">記録開始 2026-11-15〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-drink-801000.html" data-kcal="94.0"
    data-date="2026-11-15" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">りんごジュース</div>
   <div class="price">130円（税込）<span class="kcal">94kcal</span></div>
   <div class="meta">記録開始 2026-11-15〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-drink-800900.html" data-kcal=""
    data-date="2026-11-15" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">アイスコーヒー</div>
   <div class="price">130円（税込）</div>
   <div class="meta">記録開始 2026-11-15〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-drink-800200.html" data-kcal=""
    data-date="2026-11-15" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">オレンジ</div>
   <div class="price">130円（税込）</div>
   <div class="meta">記録開始 2026-11-15〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-drink-800400.html" data-kcal="122.0"
    data-date="2026-11-15" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">カルピス</div>
   <div class="price">130円（税込）<span class="kcal">122kcal</span></div>
   <div class="meta">記録開始 2026-11-15〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-drink-800100.html" data-kcal="99.0"
    data-date="2026-11-15" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">コカ・コーラ</div>
   <div class="price">130円（税込）<span class="kcal">99kcal</span></div>
   <div class="meta">記録開始 2026-11-15〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-drink-805300.html" data-kcal=""
    data-date="2026-11-15" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/alcohol.svg" width="32" height="32" alt="お酒" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">ノンアルコールビール</div>
   <div class="price">300円（税込）</div>
   <div class="meta">記録開始 2026-11-15〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-drink-804500.html" data-kcal=""
    data-date="2026-11-15" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/alcohol.svg" width="32" height="32" alt="お酒" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">ビール(中瓶)</div>
   <div class="price">500円（税込）</div>
   <div class="meta">記録開始 2026-11-15〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-drink-800300.html" data-kcal="110.0"
    data-date="2026-11-15" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">ファンタメロン</div>
   <div class="price">130円（税込）<span class="kcal">110kcal</span></div>
   <div class="meta">記録開始 2026-11-15〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-drink-800800.html" data-kcal=""
    data-date="2026-11-15" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">ホットコーヒー</div>
   <div class="price">130円（税込）</div>
   <div class="meta">記録開始 2026-11-15〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-drink-810700.html" data-kcal=""
    data-date="2026-11-15" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">白ぶどうジュース</div>
   <div class="price">130円（税込）</div>
   <div class="meta">記録開始 2026-11-15〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-drink-800600.html" data-kcal="0.0"
    data-date="2026-11-15" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">緑茶</div>
   <div class="price">140円（税込）<span class="kcal">0kcal</span></div>
   <div class="meta">記録開始 2026-11-15〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-drink-800700.html" data-kcal=""
    data-date="2026-11-15" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">黒烏龍茶</div>
   <div class="price">140円（税込）</div>
   <div class="meta">記録開始 2026-11-15〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>ビールセット（2品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/sukiya-beer-1500200.html" data-kcal=""
    data-date="2026-11-16" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/alcohol.svg" width="32" height="32" alt="お酒" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">冷やっこビールセット</div>
   <div class="price">600円（税込）</div>
   <div class="meta">記録開始 2026-11-16〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/sukiya-beer-1500100.html" data-kcal=""
    data-date="2026-11-16" data-chain="sukiya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/alcohol.svg" width="32" height="32" alt="お酒" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">すき家</div><span class="st st-on">販売中</span>
   <div class="t">牛皿ビールセット</div>
   <div class="price">800円（税込）</div>
   <div class="meta">記録開始 2026-11-16〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 </section>
 <h2>ネタフルの最新レビュー</h2>

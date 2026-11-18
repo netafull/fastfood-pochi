@@ -538,5 +538,55 @@ class TestHeadings(unittest.TestCase):
         self.assertIn('"item": "https://fastfood.netaful.jp/items/mcdonalds-9001.html"', h)
 
 
+class TestCategoryIcons(unittest.TestCase):
+    """カードのカテゴリアイコン: 表にあるカテゴリはその絵、無ければ商品名から推定、決まらなければ出さない。"""
+
+    def test_mapped_category(self):
+        h = g.render_card(item(chain="mcdonalds", category="バーガー", name="テストバーガー"))
+        self.assertIn('<img class="cat-icon" src="/assets/icons/cat/burger.svg"', h)
+        self.assertIn('alt="ハンバーガー"', h)
+        self.assertIn('<div class="ib">', h)
+
+    def test_same_category_name_differs_by_chain(self):
+        self.assertEqual(g.category_icon(item(chain="matsuya", category="定食", name="x"))[0], "donburi")
+        self.assertEqual(g.category_icon(item(chain="marugame", category="うどん", name="x"))[0], "noodles")
+
+    def test_no_category_is_guessed_from_name(self):
+        self.assertEqual(g.category_icon(item(chain="katsuya", category=None, name="海老トリプル丼"))[0], "bento")
+
+    def test_mixed_category_uses_name_then_fallback(self):
+        self.assertEqual(g.category_icon(item(chain="mcdonalds", category="マックカフェ", name="アイスカフェラテ"))[0], "drink")
+        self.assertEqual(g.category_icon(item(chain="mcdonalds", category="マックカフェ", name="エスプレッソ"))[0], "drink")
+        self.assertEqual(g.category_icon(item(chain="mcdonalds", category="マックカフェ", name="マカロン バニラ"))[0], "sweets")
+
+    def test_unguessable_has_no_icon(self):
+        i = item(chain="marugame", category="薬味・トッピング", name="すだち")
+        self.assertIsNone(g.category_icon(i))
+        h = g.render_card(i)
+        self.assertNotIn("cat-icon", h)
+        self.assertNotIn('class="ib"', h)
+
+    def test_never_falls_back_to_other(self):
+        for it in [item(category=None, name="zzz"), item(chain="katsuya", category="未知", name="zzz")]:
+            ic = g.category_icon(it)
+            self.assertTrue(ic is None or ic[0] != "other")
+
+    def test_guess_is_not_shown_as_category_text(self):
+        h = g.render_card(item(chain="katsuya", category=None, name="海老トリプル丼"))
+        self.assertNotIn(">弁当・ごはん<", h)
+
+    def test_every_slug_used_has_a_file(self):
+        slugs = {s for m in g.CATEGORY_ICONS.values() for s in m.values()}
+        slugs |= {s for s in g.CATEGORY_FALLBACK.values()} | {s for _, s in g.NAME_RULES if s}
+        for s in slugs:
+            self.assertTrue((g.DOCS / "assets" / "icons" / "cat" / f"{s}.svg").is_file(), s)
+
+    def test_every_real_product_icon_file_exists(self):
+        for it in g.load_all_products():
+            ic = g.category_icon(it)
+            if ic:
+                self.assertTrue((g.DOCS / "assets" / "icons" / "cat" / f"{ic[0]}.svg").is_file(), it["name"])
+
+
 if __name__ == "__main__":
     unittest.main()

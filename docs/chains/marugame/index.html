@@ -81,6 +81,12 @@ table.pricelog td.down { color: #2e7d32; }
 .item { display: block; background: var(--card); border: 1px solid var(--line);
   border-radius: 10px; padding: 12px; text-decoration: none; }
 .item:hover { border-color: var(--accent); }
+/* 2026-11-18 カードのカテゴリアイコン（ドット絵32px）。左にアイコン、右に今までの中身。
+   ドット絵は元の32マスの倍数で出すと点がそろう。PC幅は2倍の64px、スマホは48px */
+.item:has(> .cat-icon) { display: flex; gap: 12px; align-items: flex-start; }
+.item .ib { flex: 1; min-width: 0; }
+.cat-icon { width: 48px; height: 48px; flex-shrink: 0; image-rendering: pixelated; }
+@media (min-width: 700px) { .cat-icon { width: 64px; height: 64px; } }
 .item .badge { display: inline-block; font-size: 10px; font-weight: 700; color: #fff;
   border-radius: 4px; padding: 1px 6px; margin-bottom: 6px; }
 .item[data-chain="mcdonalds"] .badge { background: var(--mcdonalds); }
@@ -203,12 +209,14 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <div class="grid" data-sortable>
 <a data-google-vignette="false" class="item" href="/items/marugame-udon-misodashi.html" data-kcal="722.0"
    data-date="2026-10-28" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/noodles.svg" width="32" height="32" alt="麺" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">濃厚味噌だしうどん</div>
   <div class="price">890円（税込）<span class="kcal">722kcal</span></div>
   <div class="meta">2026-10-28（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-topping-sudachi.html" data-kcal="3.0"
    data-date="2026-10-17" data-chain="marugame" data-status="on_sale">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
@@ -219,20 +227,24 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 </a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udon-nikukaramaze.html" data-kcal="672.0"
    data-date="2026-10-17" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/noodles.svg" width="32" height="32" alt="麺" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">肉辛まぜうどん</div>
   <div class="price">890円（税込）<span class="kcal">672kcal</span></div>
   <div class="meta">2026-10-17（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udonbento-mentaitororoudonbento.html" data-kcal="472.0"
    data-date="2026-10-17" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">明太とろろうどん弁当</div>
   <div class="price">450円（税込）<span class="kcal">472kcal</span></div>
   <div class="meta">2026-10-17（記録開始日）〜 販売中・期間限定</div>
   
-</a>
+</div></a>
 </div>
 </section>
 <template id="ad-template"><div class="ad-slot">
@@ -370,341 +382,423 @@ function computeAdPlan(counts, every, max) {
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/marugame-udon-oroshisyouyu.html" data-kcal="284.0"
    data-date="2026-11-09" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/noodles.svg" width="32" height="32" alt="麺" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">おろし醤油うどん</div>
   <div class="price">550円（税込）<span class="kcal">284kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udon-okosamamanpukusetkake.html" data-kcal="250.0"
    data-date="2026-11-09" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/noodles.svg" width="32" height="32" alt="麺" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">お子さま まんぷくセット（小かけうどん）</div>
   <div class="price">290円（税込）<span class="kcal">250kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udon-okosamamanpukusetbukkake.html" data-kcal="254.0"
    data-date="2026-11-09" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/noodles.svg" width="32" height="32" alt="麺" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">お子さま まんぷくセット（小ぶっかけうどん）</div>
   <div class="price">290円（税込）<span class="kcal">254kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udon-kake.html" data-kcal="299.0"
    data-date="2026-11-09" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/noodles.svg" width="32" height="32" alt="麺" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">かけうどん</div>
   <div class="price">440円（税込）<span class="kcal">299kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udon-kitune.html" data-kcal="434.0"
    data-date="2026-11-09" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/noodles.svg" width="32" height="32" alt="麺" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">きつねうどん</div>
   <div class="price">640円（税込）<span class="kcal">434kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udon-zaru.html" data-kcal="305.0"
    data-date="2026-11-09" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/noodles.svg" width="32" height="32" alt="麺" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">ざるうどん</div>
   <div class="price">440円（税込）<span class="kcal">305kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udon-torotama.html" data-kcal="407.0"
    data-date="2026-11-09" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/noodles.svg" width="32" height="32" alt="麺" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">とろ玉うどん</div>
   <div class="price">640円（税込）<span class="kcal">407kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udon-bukkake.html" data-kcal="301.0"
    data-date="2026-11-09" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/noodles.svg" width="32" height="32" alt="麺" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">ぶっかけうどん</div>
   <div class="price">440円（税込）<span class="kcal">301kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udon-curry.html" data-kcal="620.0"
    data-date="2026-11-09" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/noodles.svg" width="32" height="32" alt="麺" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">カレーうどん</div>
   <div class="price">660円（税込）<span class="kcal">620kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udon-butatsukejiru.html" data-kcal="743.0"
    data-date="2026-11-09" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/noodles.svg" width="32" height="32" alt="麺" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">旨辛豚つけ汁うどん</div>
   <div class="price">990円（税込）<span class="kcal">743kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udon-mentaicreamudon.html" data-kcal="506.0"
    data-date="2026-11-09" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/noodles.svg" width="32" height="32" alt="麺" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">明太クリームうどん</div>
   <div class="price">690円（税込）<span class="kcal">506kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udon-mentaikamatama.html" data-kcal="391.0"
    data-date="2026-11-09" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/noodles.svg" width="32" height="32" alt="麺" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">明太釜玉うどん</div>
   <div class="price">640円（税込）<span class="kcal">391kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udon-nikuudon.html" data-kcal="693.0"
    data-date="2026-11-09" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/noodles.svg" width="32" height="32" alt="麺" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">焼きたて肉うどん</div>
   <div class="price">890円（税込）<span class="kcal">693kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udon-nikubukkake.html" data-kcal="695.0"
    data-date="2026-11-09" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/noodles.svg" width="32" height="32" alt="麺" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">焼きたて肉ぶっかけうどん</div>
   <div class="price">890円（税込）<span class="kcal">695kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udon-nikugobouudon.html" data-kcal="452.0"
    data-date="2026-11-09" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/noodles.svg" width="32" height="32" alt="麺" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">肉ごぼううどん</div>
   <div class="price">640円（税込）<span class="kcal">452kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udon-nikugoboubukkake.html" data-kcal="456.0"
    data-date="2026-11-09" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/noodles.svg" width="32" height="32" alt="麺" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">肉ごぼうぶっかけ</div>
   <div class="price">640円（税込）<span class="kcal">456kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udon-kamaage.html" data-kcal="338.0"
    data-date="2026-11-09" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/noodles.svg" width="32" height="32" alt="麺" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">釜揚げうどん</div>
   <div class="price">390円（税込）<span class="kcal">338kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udon-kamaagekazokuudon.html" data-kcal="1977.0"
    data-date="2026-11-09" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/noodles.svg" width="32" height="32" alt="麺" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">釜揚げ家族うどん</div>
   <div class="price">2050円（税込）<span class="kcal">1977kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udon-kamatama.html" data-kcal="367.0"
    data-date="2026-11-09" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/noodles.svg" width="32" height="32" alt="麺" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">釜玉うどん</div>
   <div class="price">550円（税込）<span class="kcal">367kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>うどん弁当（4品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/marugame-udonbento-teiban.html" data-kcal="532.0"
    data-date="2026-11-10" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">2種の天ぷらとおかずの定番うどん弁当</div>
   <div class="price">490円（税込）<span class="kcal">532kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udonbento-ebiten.html" data-kcal="652.0"
    data-date="2026-11-10" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">えび天と定番おかずのうどん弁当</div>
   <div class="price">590円（税込）<span class="kcal">652kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udonbento-8r-zyrygpqsj.html" data-kcal="675.0"
    data-date="2026-11-11" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">かしわ天と定番おかずのうどん弁当</div>
   <div class="price">590円（税込）<span class="kcal">675kcal</span></div>
   <div class="meta">記録開始 2026-11-11〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-udonbento-otegaruudonbento.html" data-kcal="314.0"
    data-date="2026-11-10" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">薬味とトッピングで楽しむ お手軽うどん弁当</div>
   <div class="price">300円（税込）<span class="kcal">314kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>ご飯もの（8品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/marugame-gohanmono-inari.html" data-kcal="160.0"
    data-date="2026-11-10" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">いなり</div>
   <div class="price">160円（税込）<span class="kcal">160kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-gohanmono-konbu.html" data-kcal="158.0"
    data-date="2026-11-10" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">こんぶ</div>
   <div class="price">170円（税込）<span class="kcal">158kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-gohanmono-wasabiinari.html" data-kcal="178.0"
    data-date="2026-11-10" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">わさびいなり</div>
   <div class="price">170円（税込）<span class="kcal">178kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-gohanmono-mentaiko.html" data-kcal="150.0"
    data-date="2026-11-10" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">明太子</div>
   <div class="price">170円（税込）<span class="kcal">150kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-gohanmono-ume.html" data-kcal="146.0"
    data-date="2026-11-10" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">梅</div>
   <div class="price">170円（税込）<span class="kcal">146kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-gohanmono-umeshiso.html" data-kcal="146.0"
    data-date="2026-11-10" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">梅しそ</div>
   <div class="price">120円（税込）<span class="kcal">146kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-gohanmono-tendon.html" data-kcal="281.0"
    data-date="2026-11-10" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">白ごはん</div>
   <div class="price">180円（税込）<span class="kcal">281kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-gohanmono-syake.html" data-kcal="160.0"
    data-date="2026-11-10" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">鮭</div>
   <div class="price">170円（税込）<span class="kcal">160kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 <h3>天ぷら（10品）</h3>
 <div class="grid">
 <a data-google-vignette="false" class="item" href="/items/marugame-tempura-ika.html" data-kcal="136.0"
    data-date="2026-11-10" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">いか天</div>
   <div class="price">190円（税込）<span class="kcal">136kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-tempura-ebi.html" data-kcal="110.0"
    data-date="2026-11-10" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">えび天</div>
   <div class="price">200円（税込）<span class="kcal">110kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-tempura-kashiwa.html" data-kcal="143.0"
    data-date="2026-11-09" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">かしわ天</div>
   <div class="price">220円（税込）<span class="kcal">143kcal</span></div>
   <div class="meta">記録開始 2026-11-09〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-tempura-kabocha.html" data-kcal="151.0"
    data-date="2026-11-10" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">かぼちゃ天</div>
   <div class="price">150円（税込）<span class="kcal">151kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-tempura-goboukakiage.html" data-kcal="208.0"
    data-date="2026-11-10" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">ごぼうのかき揚げ</div>
   <div class="price">120円（税込）<span class="kcal">208kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-tempura-satsumaimo.html" data-kcal="159.0"
    data-date="2026-11-10" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">さつまいも天</div>
   <div class="price">170円（税込）<span class="kcal">159kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-tempura-chikuwa.html" data-kcal="164.0"
    data-date="2026-11-10" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">ちくわ天</div>
   <div class="price">170円（税込）<span class="kcal">164kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-tempura-chikuwaisobe.html" data-kcal="87.0"
    data-date="2026-11-10" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">ちくわ磯辺天</div>
   <div class="price">120円（税込）<span class="kcal">87kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-tempura-renkon.html" data-kcal="126.0"
    data-date="2026-11-10" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">れんこん天</div>
   <div class="price">160円（税込）<span class="kcal">126kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/marugame-tempura-yasaikakiage.html" data-kcal="490.0"
    data-date="2026-11-10" data-chain="marugame" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
   <div class="badge">丸亀製麺</div><span class="st st-on">販売中</span>
   <div class="t">野菜かき揚げ</div>
   <div class="price">200円（税込）<span class="kcal">490kcal</span></div>
   <div class="meta">記録開始 2026-11-10〜 販売中・定番</div>
   
-</a>
+</div></a>
 </div>
 </section>
 <h2>ネタフルの最新レビュー</h2>
