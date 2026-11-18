@@ -1824,3 +1824,329 @@ def find_bk_event_end(name: str, events: list[dict], ref: str, before: int = ARC
     if len({e["end"] for e in ended}) != 1:
         return None
     return max(ended, key=lambda e: e["id"])
+
+
+# ---------------------------------------------------------------------------
+# 幸楽苑・日高屋(ラーメンチェーン。2026-11-18追加、11・12チェーン目)
+# ---------------------------------------------------------------------------
+# 調査・方針(2026-11-18。実物で確認した事実):
+#  共通:
+#  ・公式サイトに「期間限定」の印は無い。限定・新メニューは、お知らせの見出し(日高屋は本文の日付も)に「期間限定」「発売」「販売開始」
+#    「登場」があり、商品名が見出しと一致するものだけを記録する(かつや・からやまの arcland と同じ考え方)。
+#  ・説明文・画像は保存も表示もしない。栄養・アレルゲンは詳細ページの値(事実)。
+#  ・一覧にあっても記録しない: セット(名前に「セット」)・トッピング・アルコール・お持ち帰りの冷凍品など(下の各関数)。
+#  幸楽苑(stores.kourakuen.co.jp / www.kourakuen.co.jp):
+#  ・メニューは /grandmenu/ の静的HTML1ページ(タブ=カテゴリ。同じ商品が「おすすめ」と各カテゴリに重複して出る)。
+#    商品IDは詳細リンクの数値(info.html?id=15145。日付は入らない)。価格は c-menuListPriceNum(1,230 のようにカンマあり)。
+#  ・詳細 info.html?id= に栄養(熱量・たんぱく質・脂質・炭水化物・食塩相当量)とアレルゲン(●の列。主要9品目)がある。
+#  ・お知らせは www.kourakuen.co.jp/news の1ページに全件(掲載日 2026.11.16 形式)。見出しの日付が発売日。
+#  ・stores 側の robots.txt は /404.html へ301で飛ぶ(=制限なし)。www 側は Disallow なし。
+#  日高屋(hidakaya.hiday.co.jp。hidaka.co.jp は別会社なので使わない):
+#  ・メニューは /hits/ja/menu/1/list/{1..8}.html(カテゴリ別の静的HTML)と、おすすめ /hits/ja/menu/1/list.html。
+#    期間限定の「濃厚豚骨醤油ラーメン」(detail/20261009)は「おすすめ」にしか出ない。ほかの menu/2・6・12・98 は来来軒・焼鳥日高・台南・
+#    その他店舗の別ブランドのメニューで、menu/99 は全店舗の合算。日高屋(menu/1)だけを対象にする。
+#  ・商品IDは詳細のファイル名(1・9_196・808-1・20261009)。8桁の日付形式は限定品ごとの別ページ(2026-11-18時点で1件)。
+#  ・お知らせは /json/news.json(掲載期間があり、期間が過ぎると消える。店舗オープン・休業の告知が混ざる)。
+KOURAKUEN_STORES_BASE = "https://stores.kourakuen.co.jp"
+KOURAKUEN_WWW_BASE = "https://www.kourakuen.co.jp"
+KOURAKUEN_MENU_PATH = "/grandmenu/"
+KOURAKUEN_NEWS_PATH = "/news"
+HIDAKAYA_BASE = "https://hidakaya.hiday.co.jp"
+HIDAKAYA_NEWS_PATH = "/json/news.json"
+# 日高屋の一覧: (パス, カテゴリ名)。おすすめ・ラーメン・定食・単品・おつまみだけ。セット(2)・ドリンク(6。ほぼお酒)・
+# テイクアウト(7。冷凍品など)・トッピング(8)は記録しない
+HIDAKAYA_LISTS = [("/hits/ja/menu/1/list.html", None), ("/hits/ja/menu/1/list/1.html", "ラーメン"),
+                  ("/hits/ja/menu/1/list/3.html", "定食"), ("/hits/ja/menu/1/list/4.html", "単品"),
+                  ("/hits/ja/menu/1/list/5.html", "おつまみ")]
+RAMEN_NEWS_RECORD_DAYS = 90      # 一覧に居る商品を「お知らせに出た」として記録する対象の期間(直近何日)
+RAMEN_NEWS_WINDOW_BEFORE_DAYS = 120
+RAMEN_NEWS_WINDOW_AFTER_DAYS = 14
+
+_RAMEN_LAUNCH_WORDS = re.compile(r"販売|発売|登場")
+_RAMEN_NOT_LAUNCH = re.compile(r"終了|改定|値上げ|引き|無料|クーポン|オープン|閉店|休業|休止|店舗|募金|寄付|リニューアル")
+
+
+def _yen_int(s: str | None) -> int | None:
+    m = re.search(r"(\d[\d,]*)", s or "")
+    return int(m.group(1).replace(",", "")) if m else None
+
+
+def looks_like_html(text: str | None) -> bool:
+    return bool(re.search(r"<\s*(html|!doctype|body)", (text or "")[:500], re.I))
+
+
+# 幸楽苑 --------------------------------------------------------------------
+
+KOURAKUEN_EXCLUDED_CATEGORIES = ("アルコール", "お酒のセット")  # セット・お酒
+KOURAKUEN_TOPPING_MAX_PRICE = 130   # 「もう一品」のうちこの価格以下は味玉・ネギ・コーンなどのトッピング(薬味も含む)
+
+
+def kourakuen_excluded(entry: dict) -> str | None:
+    """記録しない商品なら理由を返す(セット・アルコール・トッピング)。"""
+    name = entry.get("name") or ""
+    if "セット" in name:
+        return "set"
+    if entry.get("category") in KOURAKUEN_EXCLUDED_CATEGORIES:
+        return "category"
+    if entry.get("category") == "もう一品" and entry.get("price") is not None and entry["price"] <= KOURAKUEN_TOPPING_MAX_PRICE:
+        return "topping"
+    return None
+
+
+def parse_kourakuen_menu(page: str) -> list[dict]:
+    """/grandmenu/ の全商品(記録の対象外も含む)を、IDの重複なしで返す。
+    product_id・name・price(税込)・category(「おすすめ」以外で最初に出たタブ名。「おすすめ」だけなら None)・
+    in_recommended・notes(「15:00からの販売」などの注記)・official_url。商品が取れなければ空。"""
+    page = _strip_html_comments(page)
+    items: dict[str, dict] = {}
+    for sec in re.split(r'<section class="c-menuListWrap[^"]*" data-category="', page)[1:]:
+        t = re.search(r"<h2[^>]*>(.*?)</h2>", sec, re.S)
+        tab = clean_text(t.group(1)) if t else ""
+        for li in sec.split('<li class="c-menuListItem">')[1:]:
+            a = re.search(r'info\.html\?id=(\d+)"', li)
+            n = re.search(r'c-menuListTitle">(.*?)</p>', li, re.S)
+            if not a or not n:
+                continue
+            pid = a.group(1)
+            p = re.search(r'c-menuListPriceNum">([^<]*)', li)
+            notes = [clean_text(x) for x in re.findall(r'menuListTagItem">(.*?)</li>', li, re.S)]
+            cat = None if tab == "おすすめ" else tab
+            cur = items.get(pid)
+            if cur is None:
+                items[pid] = {"product_id": pid, "name": clean_text(n.group(1)), "price": _yen_int(p.group(1)) if p else None,
+                              "category": cat, "in_recommended": tab == "おすすめ", "notes": [x for x in notes if x],
+                              "official_url": f"{KOURAKUEN_STORES_BASE}/grandmenu/info.html?id={pid}"}
+            else:
+                cur["category"] = cur["category"] or cat
+                cur["in_recommended"] = cur["in_recommended"] or tab == "おすすめ"
+    return list(items.values())
+
+
+def parse_kourakuen_detail(page: str) -> dict | None:
+    """info.html の栄養とアレルゲン。栄養の表もアレルゲンの表も無ければ None(構造変更)。
+    戻り値: {"name", "price", "nutrition": {kcal, protein_g, fat_g, carbs_g, salt_g, ...}|None, "allergens": {contains, partial}|None}"""
+    page = _strip_html_comments(page)
+    title = re.search(r'menuMainTitle[^>]*>(.*?)</h1>', page, re.S)
+    price = re.search(r'menuMainPriceNum">([^<]*)', page)
+
+    def table(cls: str) -> list[tuple[str, str]]:
+        m = re.search(r'class="%s [^"]*">(.*?)</div>\s*(?:<div class="allergyInfoMoreButton"|</section>)' % cls, page, re.S)
+        blk = m.group(1) if m else ""
+        return [(clean_text(k), clean_text(v)) for k, v in
+                re.findall(r'menuDataTableTitle">(.*?)</dt>\s*<dd class="menuDataTableText">(.*?)</dd>', blk, re.S)]
+
+    nut_rows = dict(table("nutritionFacts"))
+    al_rows = table("allergyInfo")
+    nutrition = None
+    if nut_rows:
+        def num(key):
+            m = re.search(r"(\d[\d,]*(?:\.\d+)?)", nut_rows.get(key, ""))  # 「1,120Kcal」のカンマ
+            return float(m.group(1).replace(",", "")) if m else None
+        nutrition = {"kcal": num("熱量"), "protein_g": num("たんぱく質"), "fat_g": num("脂質"), "carbs_g": num("炭水化物"),
+                     "sugar_g": None, "fiber_g": None, "salt_g": num("食塩相当量"), "other": {}}
+        if nutrition["kcal"] is None:
+            nutrition = None
+    allergens = {"contains": [k for k, v in al_rows if v.strip()], "partial": []} if al_rows else None
+    if nutrition is None and allergens is None:
+        return None
+    return {"name": clean_text(title.group(1)) if title else None, "price": _yen_int(price.group(1)) if price else None,
+            "nutrition": nutrition, "allergens": allergens}
+
+
+def parse_kourakuen_news(page: str) -> list[dict]:
+    """www.kourakuen.co.jp/news を、新しい順の [{date(ISO), title, url(絶対), category}] にする。"""
+    import urllib.parse
+    out, seen = [], set()
+    for li in _strip_html_comments(page).split("<li>")[1:]:
+        a = re.search(r'<a\s+href="([^"]*)"', li)
+        d = re.search(r'class="date[^"]*">\s*(\d{4})\.(\d{1,2})\.(\d{1,2})', li)
+        t = re.search(r'class="title">(.*?)</div>', li, re.S)
+        if not d or not t:
+            continue
+        date = f"{int(d.group(1)):04d}-{int(d.group(2)):02d}-{int(d.group(3)):02d}"
+        url = urllib.parse.urljoin(KOURAKUEN_WWW_BASE + "/news", a.group(1).strip()) if a else ""
+        title = clean_text(t.group(1)).replace("\n", " ")
+        if (date, url, title) in seen:
+            continue
+        seen.add((date, url, title))
+        out.append({"date": date, "title": title, "url": url, "category": ""})
+    out.sort(key=lambda x: x["date"], reverse=True)
+    return out
+
+
+# 日高屋 --------------------------------------------------------------------
+
+def hidakaya_excluded(entry: dict) -> str | None:
+    name = entry.get("name") or ""
+    if "セット" in name:
+        return "set"
+    if entry.get("price") is None:
+        return "no_price"      # 価格欄が無い(商品名に価格が入っているお持ち帰りの冷凍品など)
+    return None
+
+
+def hidakaya_is_dated_id(pid: str) -> bool:
+    """detail/20261009 のような8桁の日付形式のID(期間限定の商品ごとに別ページ。2026-11-18時点で1件だけ)。"""
+    return bool(re.fullmatch(r"20\d{6}", pid or ""))
+
+
+_HIDAKAYA_TAG_RE = re.compile(r"[【\[［]\s*(期間限定|店舗限定)\s*[】\]］]")
+
+
+def hidakaya_split_name(raw: str) -> tuple[str, bool, bool]:
+    """一覧の商品名の【期間限定】【店舗限定】(前後の空白・全角半角の揺れを許す)を外す。
+    戻り値は (名前, 期間限定の印, 店舗限定の印)。【期間限定】は公式の限定の印(お知らせに出ない限定品がある。2025年のチゲ味噌ラーメン)。"""
+    t = clean_text(raw)
+    tags = {m.group(1) for m in _HIDAKAYA_TAG_RE.finditer(unicodedata.normalize("NFKC", t))}
+    name = _HIDAKAYA_TAG_RE.sub("", t)  # 【】は全角のまま。角括弧([]・［］)の揺れも同じ印として外す
+    name = re.sub(r"[\s　]+", " ", name).strip()
+    return name, "期間限定" in tags, "店舗限定" in tags
+
+
+def parse_hidakaya_list(page: str, category: str | None = None) -> list[dict]:
+    """メニュー一覧(おすすめ・カテゴリ別)の商品。product_id(詳細のファイル名)・name・price(税込。無ければ None)・category・official_url。"""
+    page = _strip_html_comments(page)
+    out: dict[str, dict] = {}
+    for li in page.split("<li>")[1:]:
+        m = re.search(r'href="/hits/ja/menu/1/detail/([^"/]+)\.html"', li)
+        nm = re.search(r"<dd>\s*<span>(.*?)</span>", li, re.S)
+        if not m or not nm:
+            continue
+        pr = re.search(r'<span>([\d,]+)</span>\s*<span class="yen">', li)
+        pid = m.group(1)
+        name, period, store = hidakaya_split_name(nm.group(1))
+        cur = out.get(pid)
+        if cur is not None:
+            cur["period_limited"] = cur["period_limited"] or period
+            cur["store_limited"] = cur["store_limited"] or store
+            continue
+        out[pid] = {"product_id": pid, "name": name, "price": _yen_int(pr.group(1)) if pr else None,
+                    "category": category, "period_limited": period, "store_limited": store,
+                    "official_url": f"{HIDAKAYA_BASE}/hits/ja/menu/1/detail/{pid}.html"}
+    return list(out.values())
+
+
+def parse_hidakaya_detail(page: str) -> dict | None:
+    """詳細ページ。栄養(カロリー・塩分相当量。「スープを含む」等の注記つき)とアレルゲン(テキストの列挙)。表が無ければ None。"""
+    page = _strip_html_comments(page)
+    title = re.search(r"<h1>(.*?)</h1>", page, re.S)
+    spec = re.search(r'<div class="menu_spec">(.*?)</div>', page, re.S)
+    if not spec:
+        return None
+    rows = {clean_text(k): v for k, v in re.findall(r"<th>(.*?)</th>\s*<td>(.*?)</td>", spec.group(1), re.S)}
+    price = re.search(r'<li class="price">.*?<span>([\d,]+)</span>', page, re.S)
+
+    def num_note(label: str):
+        v = rows.get(label)
+        if v is None:
+            return None, None
+        m = re.search(r"<span>(\d[\d,]*(?:\.\d+)?)</span>", v)
+        note = clean_text(re.sub(r"<span>[\d.,]+</span>\s*(?:kcal|g)", "", v)).strip("（）() 　")
+        return (float(m.group(1).replace(",", "")) if m else None), (note or None)
+
+    kcal, note = num_note("カロリー")
+    salt, note2 = num_note("塩分相当量")
+    nutrition = None
+    if kcal is not None:
+        nutrition = {"kcal": kcal, "protein_g": None, "fat_g": None, "carbs_g": None, "sugar_g": None, "fiber_g": None,
+                     "salt_g": salt, "other": {}}
+    allergens = None
+    if "アレルギー" in rows:
+        txt = clean_text(rows["アレルギー"])
+        allergens = {"contains": [x.strip() for x in re.split(r"[、,，]", txt) if x.strip()], "partial": []}
+    if nutrition is None and allergens is None:
+        return None
+    return {"name": clean_text(title.group(1)) if title else None, "price": _yen_int(price.group(1)) if price else None,
+            "nutrition": nutrition, "nutrition_note": note or note2, "allergens": allergens}
+
+
+def parse_hidakaya_news(text: str) -> list[dict]:
+    """news.json を、新しい順の [{date(ISO), title, url, category, body}] にする。"""
+    data = json.loads(text)
+    if not isinstance(data, list):
+        raise ValueError("news.json is not a list")
+    out = []
+    for x in data:
+        m = re.match(r"(\d{4})/(\d{1,2})/(\d{1,2})", str(x.get("display_date_from") or ""))
+        if not m:
+            continue
+        out.append({"date": f"{int(m.group(1)):04d}-{int(m.group(2)):02d}-{int(m.group(3)):02d}",
+                    "title": clean_text(x.get("news_title")).replace("\n", " "),
+                    "url": (x.get("link") or "").strip(), "category": str(x.get("news_kbn") or ""),
+                    "body": clean_text(x.get("news_body")), "news_id": x.get("news_id")})
+    out.sort(key=lambda x: x["date"], reverse=True)
+    return out
+
+
+# お知らせ見出しの照合(両チェーン共通) -------------------------------------------
+
+_RAMEN_DATE_RE = re.compile(r"(?:(\d{4})年)?(\d{1,2})月(\d{1,2})日|(?<![\d/])(\d{1,2})/(\d{1,2})(?![\d/])")
+
+
+def ramen_start_date(text: str, news_date: str) -> str | None:
+    """見出し・本文の最初の日付(「11月4日（水）より」「10月9日(金)より」「6/2より」。全角数字はNFKCで半角に)を発売日(ISO)にする。
+    年が無いときはお知らせの日付から補う(12月のお知らせの「1月8日」は翌年)。読めなければ None。"""
+    import datetime
+    t = unicodedata.normalize("NFKC", text or "")
+    m = _RAMEN_DATE_RE.search(t)
+    if not m:
+        return None
+    try:
+        nd = datetime.date.fromisoformat(news_date)
+    except ValueError:
+        return None
+    year, mo, dy = (m.group(1), m.group(2), m.group(3)) if m.group(2) else (None, m.group(4), m.group(5))
+    try:
+        d = datetime.date(int(year) if year else nd.year, int(mo), int(dy))
+    except ValueError:
+        return None
+    if not year:
+        if (nd - d).days > 200:
+            d = d.replace(year=d.year + 1)
+        elif (d - nd).days > 200:
+            d = d.replace(year=d.year - 1)
+    return d.isoformat()
+
+
+def ramen_name_in_title(name: str, title: str) -> bool:
+    """商品名が見出しの「」の中身と一致するか(括弧書き「（味噌・塩）」を外した形・中黒で並べた各項目とも照合)。
+    「」が無い見出しは、正規化した部分一致(4文字以上)。"""
+    n = normalize_for_match(name)
+    if len(n) < 2:
+        return False
+    quotes = re.findall(r"[「『](.*?)[」』]", title or "")
+    if not quotes:
+        return len(n) >= 4 and n in normalize_for_match(title)
+    cands = set()
+    for q in quotes:
+        for base in (q, re.sub(r"[（(][^）)]*[）)]", "", q)):
+            cands.add(normalize_for_match(base))
+            cands.update(normalize_for_match(p) for p in base.split("・"))
+    return n in cands
+
+
+def match_ramen_launch(name: str, news: list[dict], ref: str, before: int = RAMEN_NEWS_WINDOW_BEFORE_DAYS,
+                       after: int = RAMEN_NEWS_WINDOW_AFTER_DAYS) -> dict | None:
+    """商品名を見出しに含み、販売・発売・登場を告げる最新のお知らせ(ref の前 before 日〜後 after 日)。
+    戻り値は {"news": {...}, "launch_date": ISO または None, "limited": 見出しに「期間限定」があるか}。
+    発売日は見出しから、読めなければ本文(日高屋)から取る。見出しに商品名が無い本文だけの一致は認めない。"""
+    import datetime
+    try:
+        c = datetime.date.fromisoformat(ref)
+    except ValueError:
+        return None
+    lo, hi = c - datetime.timedelta(days=before), c + datetime.timedelta(days=after)
+    for a in news:
+        try:
+            d = datetime.date.fromisoformat(a["date"])
+        except ValueError:
+            continue
+        if not (lo <= d <= hi):
+            continue
+        t = a["title"]
+        if not (_RAMEN_LAUNCH_WORDS.search(t) or "期間限定" in t) or _RAMEN_NOT_LAUNCH.search(t):
+            continue
+        if ramen_name_in_title(name, t):
+            launch = ramen_start_date(t, a["date"]) or ramen_start_date(a.get("body") or "", a["date"])
+            return {"news": a, "launch_date": launch, "limited": "期間限定" in t}
+    return None

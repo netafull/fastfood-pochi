@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキングの限定メニュー・新メニューを巡回し、
-data/products/{mcdonalds|mos|matsuya|matsunoya|yoshinoya|sukiya|katsuya|karayama|marugame|burgerking}/{id}.json に1商品1ファイルで蓄積する。
+"""マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋の限定メニュー・新メニューを巡回し、
+data/products/{mcdonalds|mos|matsuya|matsunoya|yoshinoya|sukiya|katsuya|karayama|marugame|burgerking|kourakuen|hidakaya}/{id}.json に1商品1ファイルで蓄積する。
 
 このサイトの核は「販売状況の追跡」。公式サイトは販売が終わると商品を消すので、
 一覧に居た商品が消えたら終了とみなして記録を残す。
@@ -2128,6 +2128,326 @@ def crawl_arcland_family(chain: str, getter, pending: dict, stats: dict, today: 
 
 
 # ---------------------------------------------------------------------------
+# 幸楽苑・日高屋 (ラーメンチェーン。2026-11-18追加、11・12チェーン目。実物の構造は parsers.py の同名のコメントにまとめた)
+# ---------------------------------------------------------------------------
+# 方針:
+#  ・巡回は robots.txt + メニュー一覧(幸楽苑1ページ・日高屋5ページ) + お知らせ(幸楽苑1ページ・日高屋のJSON1本) + 新しく記録する商品の詳細ページ。
+#    詳細ページは栄養とアレルゲンのためだけに取る(一覧に価格・名前がある)。
+#  ・公式に「期間限定」の印が無いので、記録するのは (a) お知らせの見出しに商品名があり発売・登場・期間限定を告げるもの(直近90日)、
+#    (b) baseline(初回巡回の全メニュー)に無く後から現れた商品、(c) 日高屋の8桁の日付形式ID(限定品ごとの別ページ)、
+#    (d) 定番(それ以外。詳細を取るので1回の巡回で regular_backfill_per_run 件まで)。
+#  ・セット・トッピング・アルコールなどは記録しない(parsers の *_excluded)。説明文・画像は保存も表示もしない。
+#  ・日付形式のIDが公式の更新で付け替わる可能性は未確認。付け替わっても、新規が1〜2件増えて古い方が終了になるだけで済む
+#    (一度に閾値を超える新規候補が出たら burst_filter が止める)。
+#  ・一覧が空・取得失敗・前回の半分未満の回は、何も更新せず終了判定もしない。
+RAMEN_CHAINS = ("kourakuen", "hidakaya")
+RAMEN_MIN_RATIO = 0.5
+RAMEN_NAMES = {"kourakuen": "幸楽苑", "hidakaya": "日高屋"}
+KOURAKUEN_ALLERGEN_PDF = "https://www.kourakuen.co.jp/upload/pdf/allergy.pdf"
+HIDAKAYA_ALLERGEN_PAGE = "https://hidakaya.hiday.co.jp/hits/menu/allergy.html"
+
+
+STORE_LIMITED_NOTE = "公式の一覧で「店舗限定」の表示がある商品です(取り扱いのある店舗は限られます)。"
+
+
+def ramen_state_path() -> Path:
+    return DATA / "ramen_state.json"
+
+
+def ramen_price_note(chain: str, entry: dict) -> str:
+    note = "税込。公式サイトの一覧に表示された価格。"
+    if chain == "kourakuen":
+        note += "一部店舗では販売していません。"
+        if entry.get("notes"):
+            note += "".join(n if n.endswith("。") else n + "。" for n in entry["notes"])
+    else:
+        note += "店舗により価格・取り扱いが異なる場合があります。"
+    return note
+
+
+def ramen_apply_news(product: dict, news: list[dict]) -> bool:
+    """発売日が未確定の限定・新メニューを、お知らせの見出しから探し直す(取得済みのお知らせを使うので追加のリクエストは無い)。
+    見つかれば announced_at / news_* / 発売日を埋める。変更があれば True。定番は照合しない。"""
+    if product.get("launch_date") is not None or product.get("is_regular"):
+        return False
+    ref = (product.get("first_seen_at") or "")[:10]
+    rel = product.get("relaunches") or []
+    if rel and rel[-1].get("reappeared_at"):
+        ref = rel[-1]["reappeared_at"]
+    if not ref:
+        return False
+    hit = parsers.match_ramen_launch(product.get("name") or "", news, ref)
+    if not hit:
+        return False
+    a = hit["news"]
+    changed = (product.get("news_url") != a["url"] or product.get("launch_date") != hit["launch_date"])
+    product["announced_at"] = a["date"]
+    product["news_url"] = a["url"]
+    product["news_title"] = a["title"]
+    product["news_date"] = a["date"]
+    product["launch_date"] = hit["launch_date"]
+    product["launch_date_source"] = "news_headline" if hit["launch_date"] else "news_without_date"
+    if hit["limited"]:
+        product["limited_kind"] = "期間限定"
+    elif product.get("limited_kind") in (None, "新規掲載"):
+        product["limited_kind"] = "新メニュー"
+    return changed
+
+
+def build_ramen_product(chain: str, entry: dict, detail: dict, kind: str, today: str, now: str) -> dict:
+    price = entry.get("price") if entry.get("price") is not None else detail.get("price")
+    product = {
+        "chain": chain,
+        "product_id": entry["product_id"],
+        "name": entry["name"],
+        "category": entry.get("category"),
+        "price": price,
+        "price_note": ramen_price_note(chain, entry),
+        "price_variants": None,
+        "launch_date": None,
+        "launch_date_source": "not_found",
+        "announced_at": None,
+        "planned_end_text": None,
+        "news_url": None,
+        "news_title": None,
+        "news_date": None,
+        "description": None,
+        "description_full_len": 0,
+        "nutrition": detail.get("nutrition"),
+        "nutrition_variants": None,
+        "nutrition_note": detail.get("nutrition_note"),
+        "allergen_pdf_url": KOURAKUEN_ALLERGEN_PDF if chain == "kourakuen" else HIDAKAYA_ALLERGEN_PAGE,
+        "allergen_pdf_label": "アレルギー情報（全商品）" if chain == "kourakuen" else "アレルギー情報（全商品の表）",
+        "allergens": detail.get("allergens"),
+        "origin": None,
+        "limited_kind": kind,
+        "badges": [],
+        "official_url": entry["official_url"],
+        "first_seen_at": now,
+        "last_seen_at": today,
+        "status": "on_sale",
+        "ended_observed_at": None,
+        "missed_runs": 0,
+        "price_history": [{"date": today, "price": price}] if price is not None else [],
+        "source_list": ["menu"],
+        "image": None,
+    }
+    if chain == "hidakaya" and parsers.hidakaya_is_dated_id(entry["product_id"]):
+        product["dated_id"] = True
+    if entry.get("notes"):
+        product["sale_notes"] = entry["notes"]
+    if entry.get("store_limited"):
+        product["store_limited"] = True
+        product["price_note"] += STORE_LIMITED_NOTE
+    return product
+
+
+def crawl_kourakuen(getter, pending: dict, stats: dict, today: str | None = None) -> None:
+    crawl_ramen_chain("kourakuen", getter, pending, stats, today)
+
+
+def crawl_hidakaya(getter, pending: dict, stats: dict, today: str | None = None) -> None:
+    crawl_ramen_chain("hidakaya", getter, pending, stats, today)
+
+
+def crawl_ramen_chain(chain: str, getter, pending: dict, stats: dict, today: str | None = None) -> None:
+    now = now_iso() if today is None else f"{today}T07:00:00+09:00"
+    today = today or today_jst()
+    pending.setdefault(chain, {})
+    stats.setdefault(chain, new_stats())
+    st = stats[chain]
+    kou = chain == "kourakuen"
+    bases = [parsers.KOURAKUEN_STORES_BASE, parsers.KOURAKUEN_WWW_BASE] if kou else [parsers.HIDAKAYA_BASE]
+
+    # robots.txt(ホストごとに1リクエスト)。取れない・404・HTMLが返る(幸楽苑のstoresは404ページへ飛ばす)ときは制限なしとして扱う
+    robots: dict[str, urllib.robotparser.RobotFileParser] = {}
+    for base in bases:
+        text = None
+        try:
+            text = getter(chain, base + "/robots.txt")
+        except NotFoundError:
+            pass
+        except BlockedError as e:
+            st["list_requests"] += 1
+            st["blocked"] = True
+            print(f"[blocked] {chain} robots.txt: {e}", file=sys.stderr)
+            return
+        except Exception as e:  # noqa: BLE001
+            print(f"[warn] {chain} robots.txt 取得失敗(全許可として続行): {e}", file=sys.stderr)
+        st["list_requests"] += 1
+        rp = urllib.robotparser.RobotFileParser()
+        rp.parse(text.splitlines() if text and not parsers.looks_like_html(text) else ["User-agent: *", "Allow: /"])
+        robots[base] = rp
+
+    def allowed(url: str) -> bool:
+        for base, rp in robots.items():
+            if url.startswith(base):
+                return rp.can_fetch(UA, url)
+        return True
+
+    # メニュー一覧。1ページでも取れない・0件の回は list_ok を立てない(何も更新せず終了判定もしない)
+    entries: dict[str, dict] = {}
+    all_ok = True
+    pages = ([(parsers.KOURAKUEN_STORES_BASE + parsers.KOURAKUEN_MENU_PATH, None)] if kou
+             else [(parsers.HIDAKAYA_BASE + p, c) for p, c in parsers.HIDAKAYA_LISTS])
+    for url, cat in pages:
+        if not allowed(url):
+            print(f"[skip] robots.txtでDisallow: {url}", file=sys.stderr)
+            all_ok = False
+            continue
+        try:
+            page = getter(chain, url)
+            st["list_requests"] += 1
+        except BlockedError as e:
+            st["list_requests"] += 1
+            st["blocked"] = True
+            print(f"[blocked] {chain} menu {url}: {e}", file=sys.stderr)
+            return
+        except Exception as e:  # noqa: BLE001
+            st["list_requests"] += 1
+            print(f"[warn] {chain} メニュー一覧 取得失敗 {url}: {e}", file=sys.stderr)
+            all_ok = False
+            continue
+        got = parsers.parse_kourakuen_menu(page) if kou else parsers.parse_hidakaya_list(page, cat)
+        if not got:
+            print(f"[warn] {chain} メニュー一覧 {url}: 商品が0件(構造変更の疑い)", file=sys.stderr)
+            all_ok = False
+            continue
+        for e in got:
+            cur = entries.get(e["product_id"])
+            if cur is None:
+                entries[e["product_id"]] = e
+            else:  # 「おすすめ」と各カテゴリに重複して出る。カテゴリは名前のあるほうを採る
+                cur["category"] = cur.get("category") or e.get("category")
+                for k in ("period_limited", "store_limited"):
+                    cur[k] = bool(cur.get(k) or e.get(k))
+                if cur.get("price") is None:
+                    cur["price"] = e.get("price")
+    # 記録しない商品(セット・トッピング・アルコールなど)を除く
+    excluded = parsers.kourakuen_excluded if kou else parsers.hidakaya_excluded
+    entries = {pid: e for pid, e in entries.items() if not excluded(e)}
+    state = load_json(ramen_state_path(), {})
+    prev_count = (state.get(chain) or {}).get("menu_count")
+    if entries and prev_count and len(entries) < prev_count * RAMEN_MIN_RATIO:
+        print(f"[warn] {chain} メニュー一覧が極端に少ない({len(entries)}件。前回{prev_count}件)。"
+              "消えた商品の判定は行わない", file=sys.stderr)
+        all_ok = False
+    st["list_ok"] = all_ok and bool(entries)
+
+    # お知らせ(1リクエスト)。見出し・日付・リンク先URLだけを読み、リンク先は取得しない。取れなくてもメニューの記録は続ける
+    news: list[dict] = []
+    news_url = (parsers.KOURAKUEN_WWW_BASE + parsers.KOURAKUEN_NEWS_PATH) if kou else (parsers.HIDAKAYA_BASE + parsers.HIDAKAYA_NEWS_PATH)
+    if allowed(news_url):
+        try:
+            text = getter(chain, news_url)
+            st["detail_requests"] += 1
+            news = parsers.parse_kourakuen_news(text) if kou else parsers.parse_hidakaya_news(text)
+            if not news:
+                print(f"[warn] {chain} お知らせ: 0件(構造変更の疑い)", file=sys.stderr)
+        except BlockedError as e:
+            st["detail_requests"] += 1
+            st["blocked"] = True
+            print(f"[blocked] {chain} news: {e}", file=sys.stderr)
+            return
+        except Exception as e:  # noqa: BLE001
+            st["detail_requests"] += 1
+            print(f"[warn] {chain} お知らせ 取得失敗: {e}", file=sys.stderr)
+    else:
+        print(f"[skip] robots.txtでDisallow: {news_url}", file=sys.stderr)
+
+    baseline = baseline_for(chain)
+    entries = burst_filter(chain, entries, baseline, pending, stats, today)
+    regular_budget = RegularBudget(st)
+    limited_seen = 0
+    for pid, e in entries.items():
+        existing = load_product(chain, pid)
+        if existing is not None:
+            touch_seen(existing, e.get("price") if kou else list_price_for_history(st, e.get("price")), today, now, st)
+            if e.get("period_limited"):  # 後から【期間限定】が付いたら上げる。外れても定番には戻さない
+                if existing.get("limited_kind") == REGULAR_KIND:
+                    upgrade_regular(existing, "期間限定")
+                else:
+                    existing["limited_kind"] = "期間限定"
+            if e.get("store_limited") and not existing.get("store_limited"):
+                existing["store_limited"] = True
+                existing["price_note"] = (existing.get("price_note") or "") + STORE_LIMITED_NOTE
+            if e.get("name") and existing.get("name") != e["name"]:
+                existing["name"] = e["name"]  # 名前の印(【…】)を外した形にそろえる。IDは詳細のファイル名なので変わらない
+            save_product(chain, existing)
+            pending[chain].pop(pid, None)
+            continue
+        hit = parsers.match_ramen_launch(e["name"], news, today, before=parsers.RAMEN_NEWS_RECORD_DAYS) if news else None
+        limited_seen += 1 if hit else 0
+        is_new_menu = baseline is not None and pid not in baseline
+        dated = (not kou) and parsers.hidakaya_is_dated_id(pid)
+        if e.get("period_limited"):
+            kind = "期間限定"  # 一覧の名前の【期間限定】。お知らせに出ない限定品もあるので、お知らせの照合に頼らない
+        elif hit:
+            kind = "期間限定" if hit["limited"] else "新メニュー"
+        elif is_new_menu or dated:
+            kind = "新規掲載"
+        else:
+            kind = REGULAR_KIND
+        is_regular = kind == REGULAR_KIND
+        if is_regular and not regular_budget.take():
+            continue  # 定番は詳細を取るので、1回の巡回で作る件数に上限がある。残りは翌日以降
+        detail_url = e["official_url"]
+        if not allowed(detail_url):
+            print(f"[skip] robots.txtでDisallow: {detail_url}", file=sys.stderr)
+            continue
+        try:
+            html = getter(chain, detail_url)
+            st["detail_requests"] += 1
+        except BlockedError as ex:
+            st["detail_requests"] += 1
+            st["blocked"] = True
+            print(f"[blocked] {chain} detail {detail_url}: {ex}", file=sys.stderr)
+            return
+        except NotFoundError:
+            st["detail_requests"] += 1
+            st["failed"] += 1
+            pending[chain][pid] = {"url": detail_url, "reason": "404", "checked_at": now}
+            continue
+        except Exception as ex:  # noqa: BLE001
+            st["detail_requests"] += 1
+            st["failed"] += 1
+            pending[chain][pid] = {"url": detail_url, "reason": f"fetch_error: {ex}", "checked_at": now}
+            continue
+        detail = parsers.parse_kourakuen_detail(html) if kou else parsers.parse_hidakaya_detail(html)
+        if detail is None:
+            st["failed"] += 1
+            pending[chain][pid] = {"url": detail_url, "reason": "empty_detail", "checked_at": now}
+            continue
+        product = build_ramen_product(chain, e, detail, kind, today, now)
+        if is_regular:
+            mark_regular(product)
+        else:
+            ramen_apply_news(product, news)
+        save_product(chain, product)
+        st["regular_created" if is_regular else "new_products"] += 1
+        pending[chain].pop(pid, None)
+    st["limited_seen"] = limited_seen
+
+    if st["list_ok"]:
+        if baseline is None:
+            save_baseline(chain, set(entries))
+        apply_missing(chain, set(entries), today, st)
+        state[chain] = {"menu_count": len(entries), "checked_at": today}
+        save_json(ramen_state_path(), state, sort_keys=True)
+
+    # 発売日の確定(お知らせ見出し)。追加のリクエストは無い
+    cutoff = (datetime.date.fromisoformat(today) - datetime.timedelta(days=14)).isoformat()
+    for p in load_chain_products(chain):
+        if p.get("status") == "ended" and (p.get("ended_observed_at") or "") < cutoff:
+            continue  # 終わって久しい商品は探し直さない
+        if news and ramen_apply_news(p, news):
+            save_product(chain, p)
+    recorded = [p for p in load_chain_products(chain) if not p.get("is_regular")]
+    st["news_matched"] = sum(1 for p in recorded if p.get("news_url"))
+    st["news_unmatched"] = sum(1 for p in recorded if not p.get("news_url"))
+
+
+# ---------------------------------------------------------------------------
 # 丸亀製麺 (jp.marugame.com)
 # ---------------------------------------------------------------------------
 # 調査・方針(2026-10-17。実物の構造は parsers.py の「丸亀製麺」のコメントにまとめた):
@@ -2876,7 +3196,8 @@ def save_run_summary(stats: dict[str, dict], streaks: dict[str, int] | None = No
 CRAWLERS = {"mcdonalds": crawl_mcdonalds, "mos": crawl_mos, "matsuya": crawl_matsuya,
             "matsunoya": crawl_matsunoya, "yoshinoya": crawl_yoshinoya, "sukiya": crawl_sukiya,
             "katsuya": crawl_katsuya, "karayama": crawl_karayama,
-            "marugame": crawl_marugame, "burgerking": crawl_burgerking}
+            "marugame": crawl_marugame, "burgerking": crawl_burgerking,
+            "kourakuen": crawl_kourakuen, "hidakaya": crawl_hidakaya}
 
 
 def main(argv: list[str] | None = None) -> int:
