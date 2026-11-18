@@ -306,7 +306,8 @@ class TestTop(unittest.TestCase):
     def test_about_mentions_fast_meshi_with_link(self):
         h = g.render_top([item()]).replace(' data-google-vignette="false"', "")
         self.assertIn("ファスト飯", h)
-        self.assertIn('<a href="https://netaful.jp/">ネタフル</a>', h)
+        # 運営者の一文（「運営はブログ『ネタフル』のコグレです」）は2026-11-16にフッター・aboutから外した
+        self.assertNotIn("運営はブログ", h)
         self.assertIn("非公式サイト", h)
         # 「ケンタッキーなど対象外」の1文は、aboutを短くするため2026-10-11に削除した
 

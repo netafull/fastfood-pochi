@@ -5,6 +5,7 @@
 from __future__ import annotations
 
 import json
+import re
 import unittest
 import urllib.parse
 
@@ -448,7 +449,8 @@ class TestSite(unittest.TestCase):
         self.assertIn("https://www.burgerking.co.jp/menu/X000000001/8000391", h)
         self.assertIn("栄養成分・アレルギー情報は当サイトでは掲載していません", h)
         self.assertNotIn("<blockquote", h)  # 説明文の引用は無い
-        self.assertNotIn("<img", h.split("<main>")[1])  # 画像は出さない
+        # 公式の商品画像は出さない。ネタフルのレビュー記事カードのサムネイル（netaful.jp の画像）だけは出てよい
+        self.assertIsNone(re.search(r'<img(?![^>]*src="https://netaful\.jp/)', h.split("<main>")[1]))
         self.assertIn("「期間限定」の一覧から消えたのを確認した日", h)  # 公式が終了日を載せない旨
 
     def test_ended_with_official_end_date(self):
