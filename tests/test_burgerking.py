@@ -468,8 +468,8 @@ class TestSite(unittest.TestCase):
     def test_chain_config(self):
         self.assertEqual(g.CHAIN_NAME[CHAIN], "バーガーキング")
         self.assertEqual(g.CHAIN_SOURCE[CHAIN], "バーガーキング公式サイト")
-        self.assertTrue(g.CHAIN_LIST_TEXT.endswith("・丸亀製麺・バーガーキング"))
-        self.assertEqual(len(g.CHAINS), 10)
+        self.assertTrue(g.CHAIN_LIST_TEXT.endswith("・丸亀製麺・バーガーキング・幸楽苑・日高屋"))
+        self.assertEqual(len(g.CHAINS), 12)
         for k in ("site_description", "site_tagline"):
             self.assertIn("バーガーキング", g.CONFIG[k])
         about = g.CONFIG["about"]
@@ -482,7 +482,7 @@ class TestSite(unittest.TestCase):
         self.assertEqual(len(colors), len(set(colors)))
         shell = g.page_shell("x", "d", "<p>b</p>", "https://fastfood.netaful.jp/")
         self.assertIn("https://www.burgerking.co.jp/", shell)
-        self.assertIn("丸亀製麺、バーガーキング各社", shell)
+        self.assertIn("丸亀製麺、バーガーキング、幸楽苑、日高屋各社", shell)
 
     def test_notification_label_and_limits(self):
         import notify
