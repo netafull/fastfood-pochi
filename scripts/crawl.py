@@ -2147,6 +2147,9 @@ KOURAKUEN_ALLERGEN_PDF = "https://www.kourakuen.co.jp/upload/pdf/allergy.pdf"
 HIDAKAYA_ALLERGEN_PAGE = "https://hidakaya.hiday.co.jp/hits/menu/allergy.html"
 
 
+STORE_LIMITED_NOTE = "公式の一覧で「店舗限定」の表示がある商品です(取り扱いのある店舗は限られます)。"
+
+
 def ramen_state_path() -> Path:
     return DATA / "ramen_state.json"
 
@@ -2233,6 +2236,9 @@ def build_ramen_product(chain: str, entry: dict, detail: dict, kind: str, today:
         product["dated_id"] = True
     if entry.get("notes"):
         product["sale_notes"] = entry["notes"]
+    if entry.get("store_limited"):
+        product["store_limited"] = True
+        product["price_note"] += STORE_LIMITED_NOTE
     return product
 
 
@@ -2313,6 +2319,8 @@ def crawl_ramen_chain(chain: str, getter, pending: dict, stats: dict, today: str
                 entries[e["product_id"]] = e
             else:  # 「おすすめ」と各カテゴリに重複して出る。カテゴリは名前のあるほうを採る
                 cur["category"] = cur.get("category") or e.get("category")
+                for k in ("period_limited", "store_limited"):
+                    cur[k] = bool(cur.get(k) or e.get(k))
                 if cur.get("price") is None:
                     cur["price"] = e.get("price")
     # 記録しない商品(セット・トッピング・アルコールなど)を除く
@@ -2355,6 +2363,16 @@ def crawl_ramen_chain(chain: str, getter, pending: dict, stats: dict, today: str
         existing = load_product(chain, pid)
         if existing is not None:
             touch_seen(existing, e.get("price") if kou else list_price_for_history(st, e.get("price")), today, now, st)
+            if e.get("period_limited"):  # 後から【期間限定】が付いたら上げる。外れても定番には戻さない
+                if existing.get("limited_kind") == REGULAR_KIND:
+                    upgrade_regular(existing, "期間限定")
+                else:
+                    existing["limited_kind"] = "期間限定"
+            if e.get("store_limited") and not existing.get("store_limited"):
+                existing["store_limited"] = True
+                existing["price_note"] = (existing.get("price_note") or "") + STORE_LIMITED_NOTE
+            if e.get("name") and existing.get("name") != e["name"]:
+                existing["name"] = e["name"]  # 名前の印(【…】)を外した形にそろえる。IDは詳細のファイル名なので変わらない
             save_product(chain, existing)
             pending[chain].pop(pid, None)
             continue
@@ -2362,7 +2380,9 @@ def crawl_ramen_chain(chain: str, getter, pending: dict, stats: dict, today: str
         limited_seen += 1 if hit else 0
         is_new_menu = baseline is not None and pid not in baseline
         dated = (not kou) and parsers.hidakaya_is_dated_id(pid)
-        if hit:
+        if e.get("period_limited"):
+            kind = "期間限定"  # 一覧の名前の【期間限定】。お知らせに出ない限定品もあるので、お知らせの照合に頼らない
+        elif hit:
             kind = "期間限定" if hit["limited"] else "新メニュー"
         elif is_new_menu or dated:
             kind = "新規掲載"

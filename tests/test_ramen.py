@@ -53,7 +53,7 @@ def kou(menu=None, news=None, details=None, **kw):
 def hid(pages=None, news=None, details=None, **kw):
     p = {S.HID + path: html for path, html in (pages or S.hid_pages()).items()}
     p[HNEWS] = news if news is not None else S.hid_news()
-    for pid in ("1", "2", "20261009", "20261201", "808-1", "18", "151", "30"):
+    for pid in ("1", "2", "20261009", "20261201", "808-1", "18", "151", "30", "801"):
         p[f"{S.HID}/hits/ja/menu/1/detail/{pid}.html"] = S.hid_detail(name=f"合成{pid}")
     p.update(details or {})
     return FakeRamen(p, **kw)
@@ -155,6 +155,70 @@ class TestHidakayaParsers(unittest.TestCase):
         self.assertIn("期間限定", n[1]["title"])
         with self.assertRaises(ValueError):
             P.parse_hidakaya_news("{}")
+
+
+class TestHidakayaPeriodTag(unittest.TestCase):
+    """一覧の名前の先頭の【期間限定】(お知らせに出ない限定品がある。2025年のチゲ味噌ラーメン)。"""
+
+    def test_split_name(self):
+        f = P.hidakaya_split_name
+        self.assertEqual(f("【期間限定】チゲ味噌ラーメン"), ("チゲ味噌ラーメン", True, False))
+        self.assertEqual(f(" 【 期間限定 】 チゲ味噌ラーメン"), ("チゲ味噌ラーメン", True, False))  # 空白の揺れ
+        self.assertEqual(f("[期間限定]チゲ味噌ラーメン"), ("チゲ味噌ラーメン", True, False))  # 半角括弧
+        self.assertEqual(f("カタヤキソバ【店舗限定】"), ("カタヤキソバ", False, True))
+        self.assertEqual(f("【期間限定】【店舗限定】合成X"), ("合成X", True, True))
+        self.assertEqual(f("合成中華そば"), ("合成中華そば", False, False))
+
+    def test_list_flags_and_id(self):
+        page = S.hid_list("ラーメン", [S.hid_item("801", "【期間限定】合成チゲ味噌ラーメン", 790),
+                                   S.hid_item("12", "合成カタヤキソバ【店舗限定】", 720)])
+        e = {x["product_id"]: x for x in P.parse_hidakaya_list(page, "ラーメン")}
+        self.assertEqual((e["801"]["name"], e["801"]["period_limited"], e["801"]["store_limited"]), ("合成チゲ味噌ラーメン", True, False))
+        self.assertEqual((e["12"]["name"], e["12"]["store_limited"]), ("合成カタヤキソバ", True))
+        self.assertEqual(e["801"]["official_url"], S.HID + "/hits/ja/menu/1/detail/801.html")
+
+    def pages(self, tag=True, store=False):
+        name = ("【期間限定】" if tag else "") + "合成チゲ味噌ラーメン" + ("【店舗限定】" if store else "")
+        return S.hid_pages(extra={1: [S.hid_item("801", name, 790)]})
+
+    def test_recorded_as_limited_without_news_and_name_stripped(self):
+        with TempData():  # 定番は既定でオフ。【期間限定】はその枠に頼らず記録される
+            _, st = run("hidakaya", hid(pages=self.pages(), details={f"{S.HID}/hits/ja/menu/1/detail/801.html": S.hid_detail(name="合成チゲ味噌ラーメン", price=790)}), D1)
+            p = prod("hidakaya", "801")
+            self.assertEqual((p["name"], p["limited_kind"], p["launch_date"], p["is_regular"] if "is_regular" in p else False),
+                             ("合成チゲ味噌ラーメン", "期間限定", None, False))
+            self.assertIn("801", crawl.baseline_for("hidakaya"))
+            self.assertEqual(st["new_products"], 2)  # 日付形式IDの1件 + 801
+
+    def test_launch_date_from_news_when_both(self):
+        news = S.hid_news(extra=[{"news_id": 400, "news_kbn": "2", "news_title": "【期間限定】合成チゲ味噌ラーメン発売開始",
+                                  "news_body": "11月10日(火)より販売します。", "display_date_from": "2026/11/10", "link": ""}])
+        with TempData():
+            run("hidakaya", hid(pages=self.pages(), news=news), D1)
+            p = prod("hidakaya", "801")
+            self.assertEqual((p["limited_kind"], p["launch_date"], p["announced_at"]), ("期間限定", "2026-11-10", "2026-11-10"))
+
+    def test_regular_is_upgraded_but_never_goes_back(self):
+        with TempData(regular=True):
+            run("hidakaya", hid(pages=self.pages(tag=False)), D1)
+            p = prod("hidakaya", "801")
+            self.assertEqual((p["limited_kind"], p["is_regular"]), ("定番", True))
+            run("hidakaya", hid(pages=self.pages(tag=True)), D2)
+            p = prod("hidakaya", "801")
+            self.assertEqual((p["limited_kind"], p["is_regular"]), ("期間限定", False))
+            run("hidakaya", hid(pages=self.pages(tag=False)), D3)  # 印が外れても定番に戻さない
+            p = prod("hidakaya", "801")
+            self.assertEqual((p["limited_kind"], p["is_regular"], p["name"]), ("期間限定", False, "合成チゲ味噌ラーメン"))
+            self.assertEqual(sorted(x["product_id"] for x in crawl.load_chain_products("hidakaya")).count("801"), 1)  # IDは変わらない
+
+    def test_store_limited_is_kept_as_information(self):
+        with TempData(regular=True):
+            run("hidakaya", hid(pages=self.pages(tag=False, store=True)), D1)
+            p = prod("hidakaya", "801")
+            self.assertEqual((p["name"], p["store_limited"], p["limited_kind"]), ("合成チゲ味噌ラーメン", True, "定番"))
+            self.assertIn("店舗限定", p["price_note"])
+            self.assertIn("店舗限定", g.render_item_page(p))
+            self.assertNotIn("【店舗限定】", g.render_item_page(p))
 
 
 class TestMatching(unittest.TestCase):

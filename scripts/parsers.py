@@ -1990,6 +1990,19 @@ def hidakaya_is_dated_id(pid: str) -> bool:
     return bool(re.fullmatch(r"20\d{6}", pid or ""))
 
 
+_HIDAKAYA_TAG_RE = re.compile(r"[【\[［]\s*(期間限定|店舗限定)\s*[】\]］]")
+
+
+def hidakaya_split_name(raw: str) -> tuple[str, bool, bool]:
+    """一覧の商品名の【期間限定】【店舗限定】(前後の空白・全角半角の揺れを許す)を外す。
+    戻り値は (名前, 期間限定の印, 店舗限定の印)。【期間限定】は公式の限定の印(お知らせに出ない限定品がある。2025年のチゲ味噌ラーメン)。"""
+    t = clean_text(raw)
+    tags = {m.group(1) for m in _HIDAKAYA_TAG_RE.finditer(unicodedata.normalize("NFKC", t))}
+    name = _HIDAKAYA_TAG_RE.sub("", t)  # 【】は全角のまま。角括弧([]・［］)の揺れも同じ印として外す
+    name = re.sub(r"[\s　]+", " ", name).strip()
+    return name, "期間限定" in tags, "店舗限定" in tags
+
+
 def parse_hidakaya_list(page: str, category: str | None = None) -> list[dict]:
     """メニュー一覧(おすすめ・カテゴリ別)の商品。product_id(詳細のファイル名)・name・price(税込。無ければ None)・category・official_url。"""
     page = _strip_html_comments(page)
@@ -2001,9 +2014,15 @@ def parse_hidakaya_list(page: str, category: str | None = None) -> list[dict]:
             continue
         pr = re.search(r'<span>([\d,]+)</span>\s*<span class="yen">', li)
         pid = m.group(1)
-        out.setdefault(pid, {"product_id": pid, "name": clean_text(nm.group(1)), "price": _yen_int(pr.group(1)) if pr else None,
-                             "category": category,
-                             "official_url": f"{HIDAKAYA_BASE}/hits/ja/menu/1/detail/{pid}.html"})
+        name, period, store = hidakaya_split_name(nm.group(1))
+        cur = out.get(pid)
+        if cur is not None:
+            cur["period_limited"] = cur["period_limited"] or period
+            cur["store_limited"] = cur["store_limited"] or store
+            continue
+        out[pid] = {"product_id": pid, "name": name, "price": _yen_int(pr.group(1)) if pr else None,
+                    "category": category, "period_limited": period, "store_limited": store,
+                    "official_url": f"{HIDAKAYA_BASE}/hits/ja/menu/1/detail/{pid}.html"}
     return list(out.values())
 
 

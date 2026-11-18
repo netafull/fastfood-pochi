@@ -1738,7 +1738,10 @@ def render_ramen_notes(item: dict) -> str:
     notes = []
     kind = item.get("limited_kind")
     if kind == "期間限定":
-        notes.append("公式のお知らせに「期間限定」と載ったメニューです（公式サイトのメニューには「期間限定」の印がありません）。")
+        if item.get("chain") == "hidakaya" and not item.get("news_title"):
+            notes.append("公式の一覧で商品名に【期間限定】と付いているメニューです。")
+        else:
+            notes.append("公式のお知らせに「期間限定」と載ったメニューです（公式サイトのメニューには「期間限定」の印がありません）。")
     elif kind == "新メニュー":
         notes.append("公式のお知らせで、発売・登場が告知されたメニューです。")
     elif kind == "定番":
