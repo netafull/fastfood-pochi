@@ -1,0 +1,65 @@
+{
+ "chain": "hidakaya",
+ "product_id": "22",
+ "name": "生姜焼き定食",
+ "category": "定食",
+ "price": 870,
+ "price_note": "税込。公式サイトの一覧に表示された価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 932.0,
+  "protein_g": null,
+  "fat_g": null,
+  "carbs_g": null,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 6.1,
+  "other": {}
+ },
+ "nutrition_variants": null,
+ "nutrition_note": null,
+ "allergen_pdf_url": "https://hidakaya.hiday.co.jp/hits/menu/allergy.html",
+ "allergen_pdf_label": "アレルギー情報（全商品の表）",
+ "allergens": {
+  "contains": [
+   "乳製品",
+   "大豆",
+   "卵",
+   "りんご",
+   "鶏肉",
+   "ゼラチン",
+   "豚肉",
+   "小麦粉"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "badges": [],
+ "official_url": "https://hidakaya.hiday.co.jp/hits/ja/menu/1/detail/22.html",
+ "first_seen_at": "2026-11-20T07:38:08+09:00",
+ "last_seen_at": "2026-11-20",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-20",
+   "price": 870
+  }
+ ],
+ "source_list": [
+  "menu"
+ ],
+ "image": null,
+ "is_regular": true
+}
