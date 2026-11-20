@@ -20,6 +20,12 @@ from icon_guess import guess_icon
 
 ROOT = Path(__file__).resolve().parent.parent
 CONFIG = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
+
+# ポチシリーズ全体の一覧ページ(ポチフル)へのリンク。関連サイトの直後に1行で出す
+SERIES_INDEX_HTML = (
+    '<nav class="sites"><span class="lbl">ポチシリーズ一覧：</span>\n'
+    '<a href="https://pochi.netaful.jp/">ポチフル</a>\n</nav>'
+)
 DATA = ROOT / "data"
 PRODUCTS = DATA / "products"
 DOCS = ROOT / "docs"
@@ -734,6 +740,7 @@ def page_shell(title: str, description: str, body: str, canonical: str, extra_he
 公式サイト： <a href="https://www.mcdonalds.co.jp/">マクドナルド</a> ／ <a href="https://www.mos.jp/">モスバーガー</a> ／ <a href="https://www.matsuyafoods.co.jp/matsuya/">松屋</a> ／ <a href="https://www.matsuyafoods.co.jp/matsunoya/">松のや</a> ／ <a href="https://www.yoshinoya.com/">吉野家</a> ／ <a href="https://www.sukiya.jp/">すき家</a> ／ <a href="https://www.arclandservice.co.jp/katsuya/">かつや</a> ／ <a href="https://www.arclandservice.co.jp/karayama/">からやま</a> ／ <a href="https://jp.marugame.com/">丸亀製麺</a> ／ <a href="https://www.burgerking.co.jp/">バーガーキング</a> ／ <a href="https://www.kourakuen.co.jp/">幸楽苑</a> ／ <a href="https://hidakaya.hiday.co.jp/">日高屋</a>
 {policy_link}｜ <a href="/rss.xml">RSS</a> ｜ <a href="/archive/">終了した限定メニュー</a> ｜ <a href="/prices/">価格改定の記録</a>
 {related_html}
+{SERIES_INDEX_HTML}
 </footer>
 {ad_js}
 </body>
