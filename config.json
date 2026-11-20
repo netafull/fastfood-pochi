@@ -240,6 +240,11 @@
       "url": "https://manga.netaful.jp/"
     },
     {
+      "name": "マンガ新刊ポチ",
+      "desc": "コミック新刊の発売日をまとめて",
+      "url": "https://shinkan.netaful.jp/"
+    },
+    {
       "name": "コンビニポチ",
       "desc": "コンビニ新商品アーカイブ",
       "url": "https://conbini.netaful.jp/"
