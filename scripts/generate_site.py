@@ -698,10 +698,14 @@ def page_shell(title: str, description: str, body: str, canonical: str, extra_he
     )
     related_html = f'<nav class="sites"><span class="lbl">関連サイト</span>\n{links}\n</nav>' if related else ""
 
-    policy_url = CONFIG.get("policy_url", "")
-    policy_link = (
-        f'｜ <a href="{esc(policy_url)}">メディアポリシー</a>\n' if policy_url else ""
-    )
+    # 広告・解析の開示文(実際に使っているものだけ書く)
+    if adsense_id and ga_id:
+        disclosure = "当サイトは広告（Google AdSense）を掲載し、アクセス解析（Googleアナリティクス）を使っています。いずれもCookieを使うことがあります。"
+    elif ga_id:
+        disclosure = "当サイトはアクセス解析（Googleアナリティクス）を使っています。Cookieを使うことがあります。"
+    else:
+        disclosure = ""
+    disclosure_line = disclosure + "\n" if disclosure else ""
 
     # サイト名の見出し: トップだけ h1。他のページはページ自身の見出しを h1 にするため div にする
     site_name_tag = "h1" if is_top else "div"
@@ -740,7 +744,7 @@ def page_shell(title: str, description: str, body: str, canonical: str, extra_he
 <footer>
 価格・販売期間・販売状況は取得時点のものです。最新の状況は各社公式サイトでご確認ください。
 当サイトはマクドナルド、モスバーガー、松屋、松のや、吉野家、すき家、かつや、からやま、丸亀製麺、バーガーキング、幸楽苑、日高屋各社とは関係のない非公式サイトです。
-{policy_link}｜ <a href="/archive/">終了した限定メニュー</a> ｜ <a href="/prices/">価格改定の記録</a>
+{disclosure_line}｜ <a href="/archive/">終了した限定メニュー</a> ｜ <a href="/prices/">価格改定の記録</a>
 {related_html}
 {SERIES_INDEX_HTML}
 </footer>
