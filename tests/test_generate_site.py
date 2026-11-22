@@ -65,8 +65,37 @@ class TestItemPage(unittest.TestCase):
     def test_quote_block(self):
         h = g.render_item_page(item())
         self.assertIn('<blockquote cite="https://www.mcdonalds.co.jp/products/9001/">テストの説明文です。</blockquote>', h)
-        self.assertIn("出典：マクドナルド公式サイト（2026-10-07取得時点）", h)
+        self.assertIn("出典：マクドナルド公式サイト（2026年10月7日時点）", h)
         self.assertIn("現在は公式ページが削除されている場合があります", h)
+
+    def test_facts_table_and_block_order(self):
+        h = g.render_item_page(item(category="バーガー"))
+        self.assertIn("<table class='facts'>", h)
+        self.assertIn("<th>販売期間</th>", h)
+        self.assertIn("<th>カテゴリ</th><td>バーガー</td>", h)
+        self.assertNotIn("<strong>販売期間：</strong>", h)
+        self.assertLess(h.index("table class='facts'"), h.index("<blockquote"))
+        self.assertLess(h.index("<blockquote"), h.index("<p class=\"source\">"))
+        self.assertLess(h.index("<p class=\"source\">"), h.index("<h2>栄養成分"))
+
+    def test_source_line_without_description(self):
+        h = g.render_item_page(item(description=None))
+        self.assertNotIn("<blockquote", h)
+        self.assertIn("出典：マクドナルド公式サイト（2026年10月7日時点）", h)
+        self.assertIn("公式ページを見る", h)
+        self.assertNotIn("取得時点）", h)
+        self.assertNotIn("<p class=\"warn\">", h)
+
+    def test_notes_under_hosoku_heading(self):
+        h = g.render_item_page(item(chain="matsuya"))
+        self.assertIn("<h2>補足</h2>", h)
+        self.assertGreater(h.index("<h2>補足</h2>"), h.index("<h2>栄養成分"))
+        self.assertGreater(h.index("「期間限定」の表示も販売期間も載せていません"), h.index("<h2>補足</h2>"))
+        self.assertNotIn("<h2>補足</h2>", g.render_item_page(item()))
+
+    def test_regular_item_has_source_line(self):
+        h = g.render_item_page(item(description=None, limited_kind=None, is_regular=True))
+        self.assertIn("出典：マクドナルド公式サイト（", h)
 
     def test_nutrition_inline_for_few_other(self):
         h = g.render_item_page(item())

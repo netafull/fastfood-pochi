@@ -517,6 +517,7 @@ table.pricelog td.down { color: #2e7d32; }
 .detail table.multi th, .detail table.multi td { width: auto; text-align: right; white-space: nowrap; }
 .detail table.multi th:first-child { text-align: left; }
 .detail table.pv { max-width: 320px; }
+.detail table.facts { max-width: 420px; margin-bottom: 4px; }
 /* 商品ページの節見出しは h2。見た目は従来の h3 と同じにする */
 .detail h2 { margin: 16px 0 0; padding: 0; border: 0; font-size: 14px; }
 .detail h1 .variant { font-size: 14px; font-weight: 400; color: var(--muted); }
@@ -1854,23 +1855,30 @@ def render_item_page(item: dict, all_items: list[dict] | None = None) -> str:
     related_links_html = render_related(item, all_items) if all_items else ""
 
     quote_html = ""
-    if item.get("description"):
-        fetched = (item.get("first_seen_at") or "")[:10]
-        # 松屋の説明文は商品ページではなくニュース記事(発売のお知らせ)から引用している
-        cite_url = item.get("news_url") or official_url
+    source_html = ""
+    fetched = (item.get("first_seen_at") or "")[:10]
+    fetched_jp = ""
+    m_date = re.match(r"(\d{4})-(\d{1,2})-(\d{1,2})", fetched)
+    if m_date:
+        fetched_jp = f"{int(m_date[1])}年{int(m_date[2])}月{int(m_date[3])}日時点"
+    # 松屋の説明文は商品ページではなくニュース記事(発売のお知らせ)から引用している
+    cite_url = (item.get("news_url") or official_url) if item.get("description") else official_url
+    if cite_url:
         source_label = CHAIN_SOURCE.get(item['chain'], chain_name + '公式サイト')
-        if item.get("news_url"):
+        if item.get("description") and item.get("news_url"):
             source_label += "のニュース"
-        link_label = "公式ニュースを見る" if item.get("news_url") else "公式ページを見る"
+        link_label = "公式ニュースを見る" if (item.get("description") and item.get("news_url")) else "公式ページを見る"
         extra_link = (f' ・ <a href="{esc(official_url)}" target="_blank" rel="noopener">商品ページ</a>'
-                      if item.get("news_url") and official_url else "")
+                      if item.get("description") and item.get("news_url") and official_url else "")
+        date_part = f"（{esc(fetched_jp)}）" if fetched_jp else ""
+        source_html = (f'<p class="source">出典：{esc(source_label)}{date_part} ・\n'
+                       f'<a href="{esc(cite_url)}" target="_blank" rel="noopener">{link_label}</a>{extra_link}</p>')
+    if item.get("description"):
         quote_html = f"""<blockquote cite="{esc(cite_url)}">{esc(item['description'])}</blockquote>
-<p class="source">出典：{esc(source_label)}（{esc(fetched)}取得時点） ・
-<a href="{esc(cite_url)}" target="_blank" rel="noopener">{link_label}</a>{extra_link}</p>
+{source_html}
 <p class="warn">※現在は公式ページが削除されている場合があります。</p>"""
-    elif official_url:
-        quote_html = (f'<p class="source"><a href="{esc(official_url)}" target="_blank" rel="noopener">'
-                      "公式ページを見る</a>（販売終了後は削除されている場合があります）</p>")
+    else:
+        quote_html = source_html
 
     reviews_html = ""
     reviews = item_reviews(item)
@@ -1944,6 +1952,13 @@ def render_item_page(item: dict, all_items: list[dict] | None = None) -> str:
         # 定番は限定・新メニューの注記(発売日の出どころ・昨季の販売など)を使わない
         matsuya_note = mop_note = ""
         yoshinoya_note = render_regular_notes(item)
+    notes_joined = "\n".join(n for n in (mop_note, matsuya_note, yoshinoya_note, relaunch) if n.strip())
+    notes_html = f"<h2>補足</h2>\n{notes_joined}" if notes_joined else ""
+    fact_rows = [("記録" if is_regular(item) else "販売期間", period_text(item, detailed=True))]
+    if item.get("category"):
+        fact_rows.append(("カテゴリ", item["category"]))
+    facts_html = "<table class='facts'>" + "".join(
+        f"<tr><th>{esc(k)}</th><td>{esc(v)}</td></tr>" for k, v in fact_rows) + "</table>"
     variant_span = f'<span class="variant">（{esc(variant)}）</span>' if variant else ""
     body = f"""<nav class="crumbs"><a href="/">トップ</a> &gt; <a href="/chains/{esc(item['chain'])}/">{esc(chain_name)}</a></nav>
 <div class="detail">
@@ -1953,14 +1968,9 @@ border-radius:4px;padding:2px 8px;background:var(--{esc(item['chain'])})">{esc(c
 {kind_html}
 <p class="price">{esc(price)}{price_note}</p>
 {render_price_variants(item)}
-<p><strong>{'記録：' if is_regular(item) else '販売期間：'}</strong>{esc(period_text(item, detailed=True))}</p>
-{mop_note}
-{matsuya_note}
-{yoshinoya_note}
-{relaunch}
-{('<p><strong>カテゴリ：</strong>' + esc(item['category']) + '</p>') if item.get('category') else ''}
-{same_name_html}
+{facts_html}
 {quote_html}
+{same_name_html}
 {nutrition_html}
 {allergen_html}
 {origin_html}
@@ -1970,6 +1980,7 @@ border-radius:4px;padding:2px 8px;background:var(--{esc(item['chain'])})">{esc(c
 {related_html}
 {related_links_html}
 {bottom_ad}
+{notes_html}
 </div>"""
     site_url = CONFIG.get("site_url", "")
     canonical = site_url + item_url(item)
