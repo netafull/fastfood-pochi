@@ -518,7 +518,7 @@ class TestSite(unittest.TestCase):
         self.assertIn("/chains/yoshinoya/", g.render_chains_top())
         self.assertIn("吉野家", g.render_chains_top())
         h = g.page_shell("x", "d", "<p>b</p>", "https://fastfood.netaful.jp/")
-        self.assertIn("https://www.yoshinoya.com/", h)
+        self.assertNotIn("https://www.yoshinoya.com/", h)
         self.assertIn("吉野家、すき家、かつや、からやま、丸亀製麺、バーガーキング、幸楽苑、日高屋各社", h)
 
     def test_card_and_grouping(self):

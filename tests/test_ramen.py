@@ -541,8 +541,8 @@ class TestSiteAndConfig(unittest.TestCase):
         colors = [c["color"].lower() for c in g.CHAINS]
         self.assertEqual(len(colors), len(set(colors)))
         h = g.page_shell("x", "d", "<p>b</p>", "https://fastfood.netaful.jp/")
-        self.assertIn("https://www.kourakuen.co.jp/", h)
-        self.assertIn("https://hidakaya.hiday.co.jp/", h)
+        self.assertNotIn("https://www.kourakuen.co.jp/", h)
+        self.assertNotIn("https://hidakaya.hiday.co.jp/", h)
         self.assertIn("バーガーキング、幸楽苑、日高屋各社", h)
 
     def test_config_limits_and_intervals(self):

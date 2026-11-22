@@ -356,12 +356,11 @@ class TestSite(unittest.TestCase):
         self.assertIn("サイズ別の価格の履歴", h)
         self.assertIn("370円", h)
 
-    def test_top_rss_archive_exclude_regular_but_search_and_sitemap_include(self):
+    def test_top_archive_exclude_regular_but_search_and_sitemap_include(self):
         all_items = [self.lim, self.reg]
         limited = [i for i in all_items if not g.is_regular(i)]
         top = g.render_top(limited)
         self.assertNotIn("定番ポテト", top)
-        self.assertNotIn("定番ポテト", g.generate_rss(limited))
         idx = g.build_search_index(all_items)
         self.assertIn("定番ポテト", [e["n"] for e in idx])
         xml = g.generate_sitemap(limited, [], [self.reg])
