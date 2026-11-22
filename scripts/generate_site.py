@@ -507,6 +507,9 @@ table.pricelog td.down { color: #2e7d32; }
 .detail { background: var(--card); border: 1px solid var(--line); border-radius: 12px;
   padding: 20px; margin-top: 12px; }
 .detail h1 { font-size: 20px; margin-bottom: 8px; }
+/* 2026-11-22 商品ページは h1 の左にカテゴリアイコン（カードと同じ大きさ）。商品名が長くても縮まない */
+.detail .h1row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.detail .h1row h1 { margin: 0; min-width: 0; flex: 1; }
 .detail .price { font-size: 18px; font-weight: 700; margin: 8px 0; }
 .detail .price small { font-size: 12px; font-weight: 400; color: var(--muted); }
 .detail table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
@@ -1960,11 +1963,16 @@ def render_item_page(item: dict, all_items: list[dict] | None = None) -> str:
     facts_html = "<table class='facts'>" + "".join(
         f"<tr><th>{esc(k)}</th><td>{esc(v)}</td></tr>" for k, v in fact_rows) + "</table>"
     variant_span = f'<span class="variant">（{esc(variant)}）</span>' if variant else ""
+    h1_html = f"<h1>{esc(item['name'])}{variant_span}</h1>"
+    icon = category_icon(item)  # 一覧カードと同じ対応表・推定。決まらなければ出さない
+    if icon:
+        h1_html = (f'<div class="h1row"><img class="cat-icon" src="/assets/icons/cat/{icon[0]}.svg" width="32" '
+                   f'height="32" alt="{esc(icon[1])}" decoding="async">\n{h1_html}</div>')
     body = f"""<nav class="crumbs"><a href="/">トップ</a> &gt; <a href="/chains/{esc(item['chain'])}/">{esc(chain_name)}</a></nav>
 <div class="detail">
 <div class="badge" style="display:inline-block;font-size:11px;font-weight:700;color:#fff;
 border-radius:4px;padding:2px 8px;background:var(--{esc(item['chain'])})">{esc(chain_name)}</div>
-<h1>{esc(item['name'])}{variant_span}</h1>
+{h1_html}
 {kind_html}
 <p class="price">{esc(price)}{price_note}</p>
 {render_price_variants(item)}

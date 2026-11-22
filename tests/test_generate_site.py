@@ -577,6 +577,21 @@ class TestCategoryIcons(unittest.TestCase):
         self.assertIn('alt="ハンバーガー"', h)
         self.assertIn('<div class="ib">', h)
 
+    def test_item_page_shows_icon_left_of_h1(self):
+        it = item(chain="mcdonalds", category="バーガー", name="テストバーガー")
+        h = g.render_item_page(it, [it])
+        slug = g.category_icon(it)[0]
+        self.assertIn(f'<div class="h1row"><img class="cat-icon" src="/assets/icons/cat/{slug}.svg"', h)
+        self.assertLess(h.index('class="cat-icon"'), h.index("<h1>"))
+        self.assertIn(f'/assets/icons/cat/{slug}.svg', g.render_card(it))
+        self.assertEqual(h.count('class="cat-icon"'), 1)
+
+    def test_item_page_without_icon(self):
+        it = item(chain="marugame", category="薬味・トッピング", name="すだち")
+        h = g.render_item_page(it, [it])
+        self.assertNotIn('class="cat-icon"', h)
+        self.assertNotIn("h1row", h.split("</style>")[-1])
+
     def test_same_category_name_differs_by_chain(self):
         self.assertEqual(g.category_icon(item(chain="matsuya", category="定食", name="x"))[0], "donburi")
         self.assertEqual(g.category_icon(item(chain="marugame", category="うどん", name="x"))[0], "noodles")
