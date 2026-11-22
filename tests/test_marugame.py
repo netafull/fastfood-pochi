@@ -660,7 +660,7 @@ class TestSite(unittest.TestCase):
         colors = [c["color"].lower() for c in g.CHAINS]
         self.assertEqual(len(colors), len(set(colors)))
         shell = g.page_shell("x", "d", "<p>b</p>", "https://fastfood.netaful.jp/")
-        self.assertIn("https://jp.marugame.com/", shell)
+        self.assertNotIn("https://jp.marugame.com/", shell)
         self.assertNotIn("marugame.co.jp", shell)
 
     def test_card_link_is_root_absolute(self):

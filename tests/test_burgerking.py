@@ -481,7 +481,7 @@ class TestSite(unittest.TestCase):
         colors = [c["color"].lower() for c in g.CHAINS]
         self.assertEqual(len(colors), len(set(colors)))
         shell = g.page_shell("x", "d", "<p>b</p>", "https://fastfood.netaful.jp/")
-        self.assertIn("https://www.burgerking.co.jp/", shell)
+        self.assertNotIn("https://www.burgerking.co.jp/", shell)
         self.assertIn("丸亀製麺、バーガーキング、幸楽苑、日高屋各社", shell)
 
     def test_notification_label_and_limits(self):

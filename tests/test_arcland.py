@@ -429,7 +429,7 @@ class TestSite(unittest.TestCase):
             self.assertIn(f'data-chain="{c}"', g.CSS)
         colors = [c["color"].lower() for c in g.CHAINS]
         self.assertEqual(len(colors), len(set(colors)))
-        self.assertIn("arclandservice.co.jp/katsuya/", g.page_shell("x", "d", "<p>b</p>", "https://fastfood.netaful.jp/"))
+        self.assertNotIn("arclandservice.co.jp/katsuya/", g.page_shell("x", "d", "<p>b</p>", "https://fastfood.netaful.jp/"))
 
     def test_notification_labels(self):
         import notify
