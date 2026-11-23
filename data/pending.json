@@ -12,12 +12,12 @@
  "burgerking": {},
  "hidakaya": {
   "375": {
-   "checked_at": "2026-11-23T15:02:33+09:00",
+   "checked_at": "2026-11-23T15:23:19+09:00",
    "reason": "empty_detail",
    "url": "https://hidakaya.hiday.co.jp/hits/ja/menu/1/detail/375.html"
   },
   "376": {
-   "checked_at": "2026-11-23T15:02:33+09:00",
+   "checked_at": "2026-11-23T15:23:19+09:00",
    "reason": "empty_detail",
    "url": "https://hidakaya.hiday.co.jp/hits/ja/menu/1/detail/376.html"
   }
@@ -32,29 +32,29 @@
  "mos": {},
  "sukiya": {
   "side-7004400": {
-   "checked_at": "2026-11-23T14:59:12+09:00",
+   "checked_at": "2026-11-23T15:19:57+09:00",
    "reason": "empty_detail",
    "url": "/menu/in/side/7004400/index.html"
   },
   "side-7004500": {
-   "checked_at": "2026-11-23T14:59:12+09:00",
+   "checked_at": "2026-11-23T15:19:57+09:00",
    "reason": "empty_detail",
    "url": "/menu/in/side/7004500/index.html"
   },
   "side-7004600": {
-   "checked_at": "2026-11-23T14:59:12+09:00",
+   "checked_at": "2026-11-23T15:19:57+09:00",
    "reason": "empty_detail",
    "url": "/menu/in/side/7004600/index.html"
   },
   "side-7004700": {
-   "checked_at": "2026-11-23T14:59:12+09:00",
+   "checked_at": "2026-11-23T15:19:57+09:00",
    "reason": "empty_detail",
    "url": "/menu/in/side/7004700/index.html"
   }
  },
  "yoshinoya": {
   "yoshinomi-gyu-yakinikusara": {
-   "checked_at": "2026-11-23T14:58:09+09:00",
+   "checked_at": "2026-11-23T15:18:54+09:00",
    "reason": "empty_detail",
    "url": "/menu/yoshinomi/gyu-yakinikusara/"
   }
