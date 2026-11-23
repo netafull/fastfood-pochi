@@ -255,6 +255,11 @@
       "url": "https://cafe.netaful.jp/"
     },
     {
+      "name": "ファミレスポチ",
+      "desc": "ファミレスの期間限定フェア",
+      "url": "https://famires.netaful.jp/"
+    },
+    {
       "name": "回転寿司ポチ",
       "desc": "回転寿司の期間限定ネタ",
       "url": "https://sushi.netaful.jp/"
