@@ -507,7 +507,8 @@ class TestSite(unittest.TestCase):
         self.assertEqual(g.CHAIN_NAME["yoshinoya"], "吉野家")
         self.assertIn("吉野家", g.CONFIG["site_description"])
         self.assertIn("吉野家", g.CONFIG["site_tagline"])
-        self.assertTrue(any("吉野家" in p and "PDF" in p for p in g.CONFIG["about"]))
+        # 2026-11-23のオーナー指示でaboutは目的の1段落だけにした（栄養成分の取り方の説明は外した）
+        self.assertTrue(any("吉野家" in p for p in g.CONFIG["about"]))
         self.assertIn("--yoshinoya:", g.CSS)
         self.assertIn('data-chain="yoshinoya"', g.CSS)
         colors = {c["slug"]: c["color"].lower() for c in g.CHAINS}

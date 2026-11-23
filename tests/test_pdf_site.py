@@ -75,7 +75,8 @@ class TestRender(unittest.TestCase):
 
     def test_about_text(self):
         about = "".join(g.CONFIG["about"])
-        self.assertIn("吉野家とすき家の栄養成分は、公式PDFから読み取っています。", about)
+        # 2026-11-23のオーナー指示でaboutは目的の1段落だけにした（栄養成分の取り方の説明は外した）
+        self.assertNotIn("吉野家とすき家の栄養成分は、公式PDFから読み取っています。", about)
         self.assertNotIn("リンクで案内", about)
         self.assertLess(len(about), 700)
 

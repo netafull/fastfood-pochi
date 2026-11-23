@@ -421,7 +421,7 @@ class TestSite(unittest.TestCase):
             self.assertIn("かつや", g.CONFIG[k])
             self.assertIn("からやま", g.CONFIG[k])
         about = g.CONFIG["about"]
-        self.assertEqual(len(about), 4)
+        self.assertEqual(len(about), 1)  # 2026-11-23のオーナー指示でaboutは目的の1段落だけにした
         self.assertLess(sum(len(p) for p in about), 700)
         self.assertTrue(any("かつや" in p and "からやま" in p for p in about))
         for c in ("katsuya", "karayama"):
