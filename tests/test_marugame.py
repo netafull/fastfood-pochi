@@ -652,7 +652,7 @@ class TestSite(unittest.TestCase):
         for k in ("site_description", "site_tagline"):
             self.assertIn("丸亀製麺", g.CONFIG[k])
         about = g.CONFIG["about"]
-        self.assertEqual(len(about), 4)
+        self.assertEqual(len(about), 2)  # 2026-11-23の整理でaboutは目的の段落＋「ファスト飯」の一文だけにした
         self.assertLess(sum(len(p) for p in about), 700)
         self.assertTrue(any("丸亀製麺" in p for p in about))
         self.assertIn("--marugame:", g.CSS)
