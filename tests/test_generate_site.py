@@ -334,8 +334,8 @@ class TestTop(unittest.TestCase):
 
     def test_about_mentions_fast_meshi_with_link(self):
         h = g.render_top([item()]).replace(' data-google-vignette="false"', "")
-        # 2026-11-23のオーナー指示でaboutは目的の1段落だけにした（「ファスト飯」の一文も外した）
-        self.assertNotIn("ファスト飯", h)
+        # 2026-11-23の整理でaboutは目的の段落＋「ファスト飯」の一文だけにした（オーナー指示でファスト飯は残す）
+        self.assertIn("ファスト飯", h)
         # 運営者の一文（「運営はブログ『ネタフル』のコグレです」）は2026-11-16にフッター・aboutから外した
         self.assertNotIn("運営はブログ", h)
         self.assertIn("非公式サイト", h)

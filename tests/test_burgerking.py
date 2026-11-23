@@ -473,7 +473,7 @@ class TestSite(unittest.TestCase):
         for k in ("site_description", "site_tagline"):
             self.assertIn("バーガーキング", g.CONFIG[k])
         about = g.CONFIG["about"]
-        self.assertEqual(len(about), 1)  # 2026-11-23のオーナー指示でaboutは目的の1段落だけにした
+        self.assertEqual(len(about), 2)  # 2026-11-23の整理でaboutは目的の段落＋「ファスト飯」の一文だけにした
         self.assertLess(sum(len(x) for x in about), 700)
         self.assertTrue(any("バーガーキング" in x for x in about))
         self.assertIn("--burgerking:", g.CSS)
