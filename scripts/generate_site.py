@@ -700,7 +700,7 @@ def page_shell(title: str, description: str, body: str, canonical: str, extra_he
 
     # 広告・解析の開示文(実際に使っているものだけ書く)
     if adsense_id and ga_id:
-        disclosure = "当サイトは広告（Google AdSense）を掲載し、アクセス解析（Googleアナリティクス）を使っています。いずれもCookieを使うことがあります。"
+        disclosure = "当サイトはGoogle AdSenseを掲載し、Googleアナリティクスを使っています。いずれもCookieを使うことがあります。"
     elif ga_id:
         disclosure = "当サイトはアクセス解析（Googleアナリティクス）を使っています。Cookieを使うことがあります。"
     else:
