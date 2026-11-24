@@ -293,6 +293,11 @@
       "name": "新発売ポチ",
       "desc": "新商品を発売日でまとめて",
       "url": "https://shinhatsubai.netaful.jp/"
+    },
+    {
+      "name": "ニュースポチ",
+      "desc": "ブログの新着をまとめて",
+      "url": "https://news.netaful.jp/"
     }
   ],
   "related_keywords": [
