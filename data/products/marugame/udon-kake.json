@@ -5,7 +5,7 @@
  "category_id": "udon",
  "name": "かけうどん",
  "category": "うどん",
- "price": 440,
+ "price": 390,
  "price_note": "税込。表示は「並」の価格。店舗により販売メニューや価格が異なる場合があります。",
  "price_variants": [
   {
@@ -14,15 +14,15 @@
   },
   {
    "label": "並",
-   "price": 440
+   "price": 390
   },
   {
    "label": "大",
-   "price": 630
+   "price": 580
   },
   {
    "label": "得",
-   "price": 820
+   "price": 770
   }
  ],
  "launch_date": null,
@@ -124,7 +124,7 @@
  "takeout_only": false,
  "official_url": "https://jp.marugame.com/menu/udon/kake/",
  "first_seen_at": "2026-11-09T07:39:17+09:00",
- "last_seen_at": "2026-11-24",
+ "last_seen_at": "2026-11-25",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -132,6 +132,10 @@
   {
    "date": "2026-11-09",
    "price": 440
+  },
+  {
+   "date": "2026-11-25",
+   "price": 390
   }
  ],
  "source_list": [
@@ -158,6 +162,27 @@
     {
      "label": "得",
      "price": 820
+    }
+   ]
+  },
+  {
+   "date": "2026-11-25",
+   "variants": [
+    {
+     "label": "小",
+     "price": 340
+    },
+    {
+     "label": "並",
+     "price": 390
+    },
+    {
+     "label": "大",
+     "price": 580
+    },
+    {
+     "label": "得",
+     "price": 770
     }
    ]
   }

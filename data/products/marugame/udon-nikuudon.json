@@ -5,20 +5,20 @@
  "category_id": "udon",
  "name": "焼きたて肉うどん",
  "category": "うどん",
- "price": 890,
+ "price": 840,
  "price_note": "税込。表示は「並」の価格。店舗により販売メニューや価格が異なる場合があります。",
  "price_variants": [
   {
    "label": "並",
-   "price": 890
+   "price": 840
   },
   {
    "label": "大",
-   "price": 1080
+   "price": 1030
   },
   {
    "label": "得",
-   "price": 1270
+   "price": 1220
   }
  ],
  "launch_date": null,
@@ -106,7 +106,7 @@
  "takeout_only": false,
  "official_url": "https://jp.marugame.com/menu/udon/nikuudon/",
  "first_seen_at": "2026-11-09T07:39:17+09:00",
- "last_seen_at": "2026-11-24",
+ "last_seen_at": "2026-11-25",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -114,6 +114,10 @@
   {
    "date": "2026-11-09",
    "price": 890
+  },
+  {
+   "date": "2026-11-25",
+   "price": 840
   }
  ],
  "source_list": [
@@ -136,6 +140,23 @@
     {
      "label": "得",
      "price": 1270
+    }
+   ]
+  },
+  {
+   "date": "2026-11-25",
+   "variants": [
+    {
+     "label": "並",
+     "price": 840
+    },
+    {
+     "label": "大",
+     "price": 1030
+    },
+    {
+     "label": "得",
+     "price": 1220
     }
    ]
   }

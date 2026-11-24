@@ -23,7 +23,7 @@
    "price": 1280
   }
  ],
- "price_checked_at": "2026-11-23",
+ "price_checked_at": "2026-11-25",
  "launch_date": "2026-11-17",
  "launch_date_source": "news_headline",
  "announced_at": "2026-11-13",
@@ -181,7 +181,7 @@
  ],
  "official_url": "https://www.sukiya.jp/menu/in/don/213000/index.html",
  "first_seen_at": "2026-11-18T07:33:44+09:00",
- "last_seen_at": "2026-11-24",
+ "last_seen_at": "2026-11-25",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,

@@ -1,0 +1,72 @@
+{
+ "chain": "mcdonalds",
+ "product_id": "6500",
+ "name": "グラコロ®",
+ "category": "バーガー",
+ "price": 460,
+ "price_note": "税込。「~」は最低価格表記。店舗・デリバリーで価格が異なる場合があります",
+ "launch_date": "2026-11-25",
+ "planned_end_text": "2027-01-06（モバイルオーダー受付期間の終了日）",
+ "mop_ended_at": "2027-01-06",
+ "list_started_at": "2026-11-18",
+ "description": "えびとマカロニ入りのクリーミーなグラタンコロッケを、リニューアルしたふわふわの特製の蒸しバンズではさんだ冬だけの一品。",
+ "description_full_len": 59,
+ "nutrition": {
+  "kcal": 423.0,
+  "protein_g": 10.6,
+  "fat_g": 22.2,
+  "carbs_g": 46.3,
+  "sugar_g": 8.0,
+  "fiber_g": null,
+  "salt_g": 1.8,
+  "other": {
+   "飽和脂肪酸": "5.49g"
+  }
+ },
+ "allergens": {
+  "contains": [
+   "卵",
+   "乳",
+   "小麦",
+   "えび",
+   "かに",
+   "大豆",
+   "鶏肉",
+   "りんご",
+   "ゼラチン"
+  ],
+  "partial": []
+ },
+ "origin": [
+  {
+   "name": "バンズ",
+   "origin": "主要原料：小麦粉／アメリカ、カナダ、オーストラリア　製造所所在地：日本"
+  },
+  {
+   "name": "グラタンコロッケ",
+   "origin": "主要原料：エビ／ベトナム、インド | マカロニ／日本 | 乳製品・乳加工品／日本、オランダ　製造所所在地：日本"
+  },
+  {
+   "name": "スライスキャベツ",
+   "origin": "主要原料：キャベツ／日本、台湾、アメリカ、韓国　製造所所在地：日本"
+  }
+ ],
+ "limited_kind": "期間限定",
+ "official_url": "https://www.mcdonalds.co.jp/products/6500/",
+ "first_seen_at": "2026-11-25T07:30:27+09:00",
+ "last_seen_at": "2026-11-25",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-25",
+   "price": 460
+  }
+ ],
+ "source_list": [
+  "/menu/burger/",
+  "/menu/morning/"
+ ],
+ "image": null
+}
