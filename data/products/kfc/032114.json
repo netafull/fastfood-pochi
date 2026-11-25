@@ -1,0 +1,45 @@
+{
+ "chain": "kfc",
+ "product_id": "032114",
+ "name": "とりの日パック",
+ "category": "チキン",
+ "price": 1290,
+ "price_note": "税込。公式サイトの一覧に表示された価格。",
+ "price_variants": null,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": "2026-11-19",
+ "planned_end_text": null,
+ "news_url": "https://japan.kfc.co.jp/news_release/8198",
+ "news_title": "【11月21日は“フライドチキンの日”！】 KFC自慢の「オリジナルチキン」と「ナゲット」を一緒に楽しめる 毎月28日限定のおトクな「とりの日パック」が 11月20日(金)から12月1日(火)まで期間を拡大して販売",
+ "news_date": "2026-11-19",
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "nutrition_variants": null,
+ "nutrition_note": null,
+ "nutrition_pdf_url": null,
+ "nutrition_pdf_label": null,
+ "allergen_pdf_url": null,
+ "allergen_pdf_label": null,
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "新メニュー",
+ "badges": [],
+ "official_url": "https://www.kfc.co.jp/menu?category=%E3%83%81%E3%82%AD%E3%83%B3",
+ "first_seen_at": "2026-11-25T18:32:24+09:00",
+ "last_seen_at": "2026-11-25",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-25",
+   "price": 1290
+  }
+ ],
+ "source_list": [
+  "menu"
+ ],
+ "image": null
+}

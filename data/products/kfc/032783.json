@@ -1,0 +1,47 @@
+{
+ "chain": "kfc",
+ "product_id": "032783",
+ "name": "マッケンチーズチキンバーガーセット",
+ "category": "おすすめ",
+ "price": 1060,
+ "price_note": "税込。公式サイトの一覧に表示された価格。",
+ "price_variants": null,
+ "launch_date": "2026-11-18",
+ "launch_date_source": "press_release",
+ "announced_at": "2026-11-12",
+ "planned_end_text": "※数量限定、なくなり次第販売終了",
+ "news_url": "https://japan.kfc.co.jp/news_release/8194",
+ "news_title": "【思わずかぶりつきたくなる、KFCならではの“背徳感”】 厚切りベーコンや濃厚なマッケンチーズが食欲を刺激する 「欲望まみれの背徳バーガーズ」 11月18日(水)から数量限定で発売",
+ "news_date": "2026-11-12",
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "nutrition_variants": null,
+ "nutrition_note": null,
+ "nutrition_pdf_url": null,
+ "nutrition_pdf_label": null,
+ "allergen_pdf_url": null,
+ "allergen_pdf_label": null,
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "期間限定",
+ "badges": [
+  "期間限定"
+ ],
+ "official_url": "https://www.kfc.co.jp/menu?category=%E3%81%8A%E3%81%99%E3%81%99%E3%82%81",
+ "first_seen_at": "2026-11-25T18:32:24+09:00",
+ "last_seen_at": "2026-11-25",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-25",
+   "price": 1060
+  }
+ ],
+ "source_list": [
+  "menu"
+ ],
+ "image": null
+}

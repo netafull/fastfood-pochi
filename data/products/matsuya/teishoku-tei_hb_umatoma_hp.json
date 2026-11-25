@@ -1,0 +1,138 @@
+{
+ "chain": "matsuya",
+ "product_id": "teishoku-tei_hb_umatoma_hp",
+ "name": "うまトマハンバーグ定食",
+ "category": "定食",
+ "price": 890,
+ "price_note": "税込。表示は「セット（みそ汁を含む）」の価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "セット（みそ汁を含む）",
+   "price": 890
+  },
+  {
+   "label": "ダブル",
+   "price": 1380
+  },
+  {
+   "label": "単品",
+   "price": 550
+  }
+ ],
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 955.0,
+  "protein_g": 32.0,
+  "fat_g": 40.0,
+  "carbs_g": 108.6,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 5.7,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "セット（みそ汁を含む）",
+   "nutrition": {
+    "kcal": 955.0,
+    "protein_g": 32.0,
+    "fat_g": 40.0,
+    "carbs_g": 108.6,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 5.7,
+    "other": {}
+   }
+  },
+  {
+   "label": "ダブル",
+   "nutrition": {
+    "kcal": 1434.0,
+    "protein_g": 50.1,
+    "fat_g": 73.0,
+    "carbs_g": 132.0,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 9.6,
+    "other": {}
+   }
+  },
+  {
+   "label": "単品",
+   "nutrition": {
+    "kcal": 551.0,
+    "protein_g": 23.9,
+    "fat_g": 37.9,
+    "carbs_g": 23.7,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 4.1,
+    "other": {}
+   }
+  }
+ ],
+ "nutrition_as_of": "2026-11-24",
+ "nutrition_note": "特定原材料・栄養成分の数値には、みそ汁も含まれております。",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "乳",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "ゼラチン",
+   "ごま"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "in_recommended": false,
+ "official_url": "https://www.matsuyafoods.co.jp/matsuya/menu/teishoku/tei_hb_umatoma_hp_260602.html",
+ "current_slug": "teishoku-tei_hb_umatoma_hp_260602",
+ "first_seen_at": "2026-11-25T18:19:06+09:00",
+ "last_seen_at": "2026-11-25",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-25",
+   "price": 890
+  }
+ ],
+ "source_list": [
+  "teishoku"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-25",
+ "price_variants_history": [
+  {
+   "date": "2026-11-25",
+   "variants": [
+    {
+     "label": "セット（みそ汁を含む）",
+     "price": 890
+    },
+    {
+     "label": "ダブル",
+     "price": 1380
+    },
+    {
+     "label": "単品",
+     "price": 550
+    }
+   ]
+  }
+ ],
+ "is_regular": true
+}

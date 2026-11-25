@@ -1,0 +1,69 @@
+{
+ "chain": "matsuya",
+ "product_id": "morning-morning_aburi_sake_hp",
+ "name": "“炙り”焼鮭朝定食",
+ "category": "モーニング",
+ "price": 700,
+ "price_note": "税込。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 520.0,
+  "protein_g": 20.0,
+  "fat_g": 9.6,
+  "carbs_g": 84.8,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 4.0,
+  "other": {}
+ },
+ "nutrition_variants": null,
+ "nutrition_as_of": "2026-11-24",
+ "nutrition_note": "特定原材料・栄養成分の数値には、みそ汁も含まれております。選べる小鉢は含まれておりません。",
+ "allergens": {
+  "contains": [
+   "さけ",
+   "大豆",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "えび",
+    "mark": "△"
+   },
+   {
+    "name": "カニ",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "in_recommended": false,
+ "official_url": "https://www.matsuyafoods.co.jp/matsuya/menu/morning/morning_aburi_sake_hp_250422.html",
+ "current_slug": "morning-morning_aburi_sake_hp_250422",
+ "first_seen_at": "2026-11-25T18:19:06+09:00",
+ "last_seen_at": "2026-11-25",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-25",
+   "price": 700
+  }
+ ],
+ "source_list": [
+  "morning"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-25",
+ "is_regular": true
+}
