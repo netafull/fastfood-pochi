@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋の限定メニュー・新メニューを巡回し、
-data/products/{mcdonalds|mos|matsuya|matsunoya|yoshinoya|sukiya|katsuya|karayama|marugame|burgerking|kourakuen|hidakaya}/{id}.json に1商品1ファイルで蓄積する。
+"""マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリアの限定メニュー・新メニューを巡回し、
+data/products/{mcdonalds|mos|matsuya|matsunoya|yoshinoya|sukiya|katsuya|karayama|marugame|burgerking|kourakuen|hidakaya|zetteria}/{id}.json に1商品1ファイルで蓄積する。
 
 このサイトの核は「販売状況の追跡」。公式サイトは販売が終わると商品を消すので、
 一覧に居た商品が消えたら終了とみなして記録を残す。
@@ -2448,6 +2448,393 @@ def crawl_ramen_chain(chain: str, getter, pending: dict, stats: dict, today: str
 
 
 # ---------------------------------------------------------------------------
+# ゼッテリア (www.zetteria.jp。2026-11-25追加、13チェーン目。実物の構造は parsers.py の同名のコメントにまとめた)
+# ---------------------------------------------------------------------------
+# 方針:
+#  ・巡回は robots.txt + メニュー一覧9ページ + お知らせ1ページ + 新しく記録する商品の詳細ページ +
+#    限定品の発売日を取るプレスリリースPDF(1回の実行で最大 ZETTERIA_PRESS_MAX_FETCHES 件まで)。
+#  ・期間限定の根拠は fair.html(フェアの一覧)に載っていること。ほかに、お知らせの見出しに商品名があり
+#    発売・登場・期間限定を告げるものも拾う(ラーメン型と同じ照合)。カテゴリは fair 以外のページのものを優先する
+#    (fair は横断の一覧。ただし sweets_drink の「フェア」の節よりは fair.html の見出しのほうが詳しいので除く)。
+#  ・発売日はプレスリリースPDF本文から取る(お知らせの発表日とは約1週間ずれる)。PDFの【商品概要】と
+#    商品名・価格で照合できれば launch_date_source="press_pdf"。見出しでしか照合できなければ、見出しに
+#    日付があれば "news_headline"、無ければ発表日で代用して "news_date_fallback" とし、PDFの値と区別する。
+#  ・セット商品も記録する(オーナー決定。モーニング・ランチ・ディナー・わくわくセットはセットが中心の
+#    カテゴリで、外すと丸ごと空になる。ラーメン型の「セット除外」はゼッテリアには適用しない)。
+#  ・説明文は詳細ページの冒頭の1文だけ保存する(他チェーンと同じ短縮)。栄養・アレルゲンの値そのものは
+#    取り込まず、全商品分の公式ページへのリンクだけを持つ(第1段階)。
+#  ・一覧が空・取得失敗・前回の半分未満の回は、何も更新せず終了判定もしない。
+ZETTERIA_MIN_RATIO = 0.5
+ZETTERIA_PRESS_MAX_FETCHES = 5
+ZETTERIA_PRESS_WINDOW_BEFORE_DAYS = 120
+ZETTERIA_PRESS_WINDOW_AFTER_DAYS = 14
+ZETTERIA_PRESS_RECHECK_DAYS = 14   # 発売日が発表日代用・未確定の商品を、PDFで探し直す期間(初めて見つけた日から)
+
+
+def zetteria_state_path() -> Path:
+    return DATA / "zetteria_state.json"
+
+
+def zetteria_price_note(entry: dict) -> str:
+    note = "税込。公式サイトの一覧に表示された価格。"
+    if entry.get("price_tilde"):
+        note += "一部店舗・デリバリーでは価格が異なります。"
+    return note
+
+
+def fetch_zetteria_press(getter, url: str) -> dict | None:
+    """プレスリリースPDFを取得して解析する。pdfminer が入っていない環境では None
+    (呼び出し側はお知らせの発表日で代用する)。取得の失敗は例外として呼び出し側へ返す。"""
+    if not pdf_update.have_pdfminer():
+        return None
+    data = getter.pdf_get("zetteria", url)
+    pages = pdf_update.pn.extract_geometry(data)
+    return parsers.parse_zetteria_press(pages)
+
+
+class ZetteriaPress:
+    """プレスリリースPDFの取得を1回の実行ぶんだけ覚える(同じPDFは1回だけ取る)。上限を超えたら取らない。"""
+
+    def __init__(self, getter, st: dict):
+        self.getter = getter
+        self.st = st
+        self.cache: dict[str, dict | None] = {}
+        self.fetches = 0
+
+    def get(self, url: str) -> dict | None:
+        if url in self.cache:
+            return self.cache[url]
+        info = None
+        if self.fetches < ZETTERIA_PRESS_MAX_FETCHES:
+            self.fetches += 1
+            try:
+                info = fetch_zetteria_press(self.getter, url)
+            except BlockedError as e:
+                self.st["blocked"] = True
+                print(f"[blocked] zetteria press PDF {url}: {e}", file=sys.stderr)
+            except Exception as e:  # noqa: BLE001
+                print(f"[warn] zetteria プレスリリースPDF 取得・解析失敗 {url}: {e}", file=sys.stderr)
+            self.st["detail_requests"] += 1
+        self.cache[url] = info
+        return info
+
+
+def zetteria_apply_launch(product: dict, news: list[dict], press: ZetteriaPress, allow_press: bool = True) -> bool:
+    """限定・新メニューの発売日を確定する。プレスリリースPDF(商品名・価格で照合)→お知らせ見出しの順に探す。
+    変更があれば True。定番と、PDFで確定済みの商品は照合しない。"""
+    if product.get("is_regular") or product.get("launch_date_source") == "press_pdf":
+        return False
+    ref = (product.get("first_seen_at") or "")[:10]
+    rel = product.get("relaunches") or []
+    if rel and rel[-1].get("reappeared_at"):
+        ref = rel[-1]["reappeared_at"]
+    if not ref:
+        return False
+    before = (product.get("news_url"), product.get("launch_date"), product.get("launch_date_source"),
+              product.get("planned_end_text"), product.get("limited_kind"))
+    if allow_press:
+        try:
+            c = datetime.date.fromisoformat(ref)
+        except ValueError:
+            c = None
+        if c is not None:
+            lo = (c - datetime.timedelta(days=ZETTERIA_PRESS_WINDOW_BEFORE_DAYS)).isoformat()
+            hi = (c + datetime.timedelta(days=ZETTERIA_PRESS_WINDOW_AFTER_DAYS)).isoformat()
+            for a in news:
+                if a.get("category") != "プレスリリース" or not (a.get("url") or "").endswith(".pdf"):
+                    continue
+                if not (lo <= a["date"] <= hi):
+                    continue
+                info = press.get(a["url"])
+                if not info or not parsers.match_zetteria_press(product.get("name") or "", product.get("price"), info):
+                    continue
+                product["announced_at"] = a["date"]
+                product["news_url"] = a["url"]
+                product["news_title"] = a["title"]
+                product["news_date"] = a["date"]
+                if info.get("launch_date"):
+                    product["launch_date"] = info["launch_date"]
+                    product["launch_date_source"] = "press_pdf"
+                else:
+                    product["launch_date"] = a["date"]   # PDFに発売日が読み取れなかったので発表日で代用する
+                    product["launch_date_source"] = "news_date_fallback"
+                if info.get("planned_end_text"):
+                    product["planned_end_text"] = info["planned_end_text"]
+                if "期間限定" in a["title"]:
+                    product["limited_kind"] = "期間限定"
+                elif product.get("limited_kind") in (None, "新規掲載"):
+                    product["limited_kind"] = "新メニュー"
+                break
+    if product.get("launch_date_source") != "press_pdf":
+        hit = parsers.match_ramen_launch(product.get("name") or "", news, ref)
+        if hit:
+            a = hit["news"]
+            product["announced_at"] = a["date"]
+            product["news_url"] = a["url"]
+            product["news_title"] = a["title"]
+            product["news_date"] = a["date"]
+            if hit["launch_date"]:
+                product["launch_date"] = hit["launch_date"]
+                product["launch_date_source"] = "news_headline"
+            elif product.get("launch_date_source") != "news_date_fallback":
+                product["launch_date"] = a["date"]   # 見出しに発売日が無いので発表日で代用する
+                product["launch_date_source"] = "news_date_fallback"
+            if hit["limited"]:
+                product["limited_kind"] = "期間限定"
+            elif product.get("limited_kind") in (None, "新規掲載"):
+                product["limited_kind"] = "新メニュー"
+    after = (product.get("news_url"), product.get("launch_date"), product.get("launch_date_source"),
+             product.get("planned_end_text"), product.get("limited_kind"))
+    return before != after
+
+
+def build_zetteria_product(entry: dict, detail: dict, kind: str, today: str, now: str) -> dict:
+    price = entry.get("price") if entry.get("price") is not None else detail.get("price")
+    variants = entry.get("price_variants") or detail.get("price_variants")
+    short, full_len = parsers.shorten_description(detail.get("description"))
+    product = {
+        "chain": "zetteria",
+        "product_id": entry["product_id"],
+        "name": entry["name"],
+        "category": entry.get("category"),
+        "price": price,
+        "price_note": zetteria_price_note(entry),
+        "price_variants": variants if variants and len(variants) >= 2 else None,
+        "launch_date": None,
+        "launch_date_source": "not_found",
+        "announced_at": None,
+        "planned_end_text": None,
+        "news_url": None,
+        "news_title": None,
+        "news_date": None,
+        "description": short,
+        "description_full_len": full_len,
+        "nutrition": None,
+        "nutrition_variants": None,
+        "nutrition_note": None,
+        "nutrition_pdf_url": parsers.ZETTERIA_NUTRITION_PDF_URL,
+        "nutrition_pdf_label": "栄養成分一覧表",
+        "allergen_pdf_url": None,
+        "allergen_pdf_label": None,
+        "allergen_page_url": parsers.ZETTERIA_ALLERGEN_URL,
+        "allergens": None,
+        "origin": None,
+        "limited_kind": kind,
+        "badges": [],
+        "official_url": entry["official_url"],
+        "first_seen_at": now,
+        "last_seen_at": today,
+        "status": "on_sale",
+        "ended_observed_at": None,
+        "missed_runs": 0,
+        "price_history": [{"date": today, "price": price}] if price is not None else [],
+        "source_list": ["menu"],
+        "image": None,
+    }
+    if entry.get("in_fair"):
+        product["in_fair"] = True
+    seed_variants(product, today)
+    return product
+
+
+def crawl_zetteria(getter, pending: dict, stats: dict, today: str | None = None) -> None:
+    chain = "zetteria"
+    now = now_iso() if today is None else f"{today}T07:00:00+09:00"
+    today = today or today_jst()
+    pending.setdefault(chain, {})
+    stats.setdefault(chain, new_stats())
+    st = stats[chain]
+    base = parsers.ZETTERIA_BASE
+
+    # robots.txt(1リクエスト)。404(ファイル自体が無い)ときは制限なしとして扱う
+    robots_text = None
+    try:
+        robots_text = getter(chain, base + "/robots.txt")
+    except NotFoundError:
+        pass
+    except BlockedError as e:
+        st["list_requests"] += 1
+        st["blocked"] = True
+        print(f"[blocked] zetteria robots.txt: {e}", file=sys.stderr)
+        return
+    except Exception as e:  # noqa: BLE001
+        print(f"[warn] zetteria robots.txt 取得失敗(全許可として続行): {e}", file=sys.stderr)
+    st["list_requests"] += 1
+    rp = urllib.robotparser.RobotFileParser()
+    rp.parse((robots_text or "User-agent: *\nAllow: /").splitlines())
+
+    def allowed(url: str) -> bool:
+        return rp.can_fetch(UA, url)
+
+    # メニュー一覧(9ページ)。1ページでも取れない・0件の回は list_ok を立てない(何も更新せず終了判定もしない)
+    entries: dict[str, dict] = {}
+    all_ok = True
+    for path, label in parsers.ZETTERIA_MENU_PAGES:
+        url = base + path
+        if not allowed(url):
+            print(f"[skip] robots.txtでDisallow: {url}", file=sys.stderr)
+            all_ok = False
+            continue
+        try:
+            page = getter(chain, url)
+            st["list_requests"] += 1
+        except BlockedError as e:
+            st["list_requests"] += 1
+            st["blocked"] = True
+            print(f"[blocked] zetteria menu {url}: {e}", file=sys.stderr)
+            return
+        except Exception as e:  # noqa: BLE001
+            st["list_requests"] += 1
+            print(f"[warn] zetteria メニュー一覧 取得失敗 {url}: {e}", file=sys.stderr)
+            all_ok = False
+            continue
+        got = parsers.parse_zetteria_menu(page, label)
+        if not got:
+            print(f"[warn] zetteria メニュー一覧 {url}: 商品が0件(構造変更の疑い)", file=sys.stderr)
+            all_ok = False
+            continue
+        for e in got:
+            pid = e["product_id"]
+            cur = entries.get(pid)
+            if cur is None:
+                e["in_fair"] = path == "/menu/fair.html"
+                e["_from_fair"] = path == "/menu/fair.html"
+                entries[pid] = e
+                continue
+            cur["in_fair"] = bool(cur.get("in_fair") or path == "/menu/fair.html")
+            if cur.get("_from_fair") and path != "/menu/fair.html" and e.get("category") != "フェア":
+                cur["category"] = e.get("category")   # カテゴリは fair 以外のページのものを優先する
+                cur["_from_fair"] = False
+            if cur.get("price") is None:
+                cur["price"] = e.get("price")
+            if not cur.get("price_variants") and e.get("price_variants"):
+                cur["price_variants"] = e["price_variants"]
+            cur["price_tilde"] = bool(cur.get("price_tilde") or e.get("price_tilde"))
+    for e in entries.values():
+        e.pop("_from_fair", None)
+    # 記録しない商品(価格が無いもの)を除く。セット商品は記録する
+    entries = {pid: e for pid, e in entries.items() if not parsers.zetteria_excluded(e)}
+    state = load_json(zetteria_state_path(), {})
+    prev_count = state.get("menu_count")
+    if entries and prev_count and len(entries) < prev_count * ZETTERIA_MIN_RATIO:
+        print(f"[warn] zetteria メニュー一覧が極端に少ない({len(entries)}件。前回{prev_count}件)。"
+              "消えた商品の判定は行わない", file=sys.stderr)
+        all_ok = False
+    st["list_ok"] = all_ok and bool(entries)
+    st["limited_seen"] = sum(1 for e in entries.values() if e.get("in_fair"))
+
+    # お知らせ(1リクエスト)。見出し・日付・リンク先URLだけを読み、リンク先は取得しない。取れなくてもメニューの記録は続ける
+    news: list[dict] = []
+    news_url = base + parsers.ZETTERIA_NEWS_PATH
+    if allowed(news_url):
+        try:
+            text = getter(chain, news_url)
+            st["detail_requests"] += 1
+            news = parsers.parse_zetteria_news(text)
+            if not news:
+                print("[warn] zetteria お知らせ: 0件(構造変更の疑い)", file=sys.stderr)
+        except BlockedError as e:
+            st["detail_requests"] += 1
+            st["blocked"] = True
+            print(f"[blocked] zetteria news: {e}", file=sys.stderr)
+            return
+        except Exception as e:  # noqa: BLE001
+            st["detail_requests"] += 1
+            print(f"[warn] zetteria お知らせ 取得失敗: {e}", file=sys.stderr)
+    else:
+        print(f"[skip] robots.txtでDisallow: {news_url}", file=sys.stderr)
+
+    baseline = baseline_for(chain)
+    entries = burst_filter(chain, entries, baseline, pending, stats, today)
+    press = ZetteriaPress(getter, st)
+    regular_budget = RegularBudget(st)
+    for pid, e in entries.items():
+        existing = load_product(chain, pid)
+        if existing is not None:
+            touch_seen(existing, list_price_for_history(st, e.get("price")), today, now, st)
+            if e.get("in_fair"):
+                if existing.get("limited_kind") == REGULAR_KIND:
+                    upgrade_regular(existing, "期間限定")
+                existing["in_fair"] = True
+            if e.get("name") and existing.get("name") != e["name"]:
+                existing["name"] = e["name"]
+            save_product(chain, existing)
+            pending[chain].pop(pid, None)
+            continue
+        hit = parsers.match_ramen_launch(e["name"], news, today, before=parsers.RAMEN_NEWS_RECORD_DAYS) if news else None
+        is_new_menu = baseline is not None and pid not in baseline
+        if e.get("in_fair"):
+            kind = "期間限定"   # フェアの一覧に載っていること自体が限定の根拠
+        elif hit:
+            kind = "期間限定" if hit["limited"] else "新メニュー"
+        elif is_new_menu:
+            kind = "新規掲載"
+        else:
+            kind = REGULAR_KIND
+        is_regular = kind == REGULAR_KIND
+        if is_regular and not regular_budget.take():
+            continue   # 定番は詳細を取るので、1回の巡回で作る件数に上限がある。残りは翌日以降
+        detail_url = e["official_url"]
+        if not allowed(detail_url):
+            print(f"[skip] robots.txtでDisallow: {detail_url}", file=sys.stderr)
+            continue
+        try:
+            html = getter(chain, detail_url)
+            st["detail_requests"] += 1
+        except BlockedError as ex:
+            st["detail_requests"] += 1
+            st["blocked"] = True
+            print(f"[blocked] zetteria detail {detail_url}: {ex}", file=sys.stderr)
+            return
+        except NotFoundError:
+            st["detail_requests"] += 1
+            st["failed"] += 1
+            pending[chain][pid] = {"url": detail_url, "reason": "404", "checked_at": now}
+            continue
+        except Exception as ex:  # noqa: BLE001
+            st["detail_requests"] += 1
+            st["failed"] += 1
+            pending[chain][pid] = {"url": detail_url, "reason": f"fetch_error: {ex}", "checked_at": now}
+            continue
+        detail = parsers.parse_zetteria_detail(html)
+        if detail is None:
+            st["failed"] += 1
+            pending[chain][pid] = {"url": detail_url, "reason": "empty_detail", "checked_at": now}
+            continue
+        product = build_zetteria_product(e, detail, kind, today, now)
+        if is_regular:
+            mark_regular(product)
+        else:
+            zetteria_apply_launch(product, news, press)
+        save_product(chain, product)
+        st["regular_created" if is_regular else "new_products"] += 1
+        pending[chain].pop(pid, None)
+        if st["blocked"]:
+            return
+
+    if st["list_ok"]:
+        if baseline is None:
+            save_baseline(chain, set(entries))
+        apply_missing(chain, set(entries), today, st)
+        save_json(zetteria_state_path(), {"menu_count": len(entries), "checked_at": today}, sort_keys=True)
+
+    # 発売日の確定(プレスリリースPDF・お知らせ見出し)。PDFの取得は上限があり、探し直しは初めて見つけてから
+    # ZETTERIA_PRESS_RECHECK_DAYS 日までの商品だけにする
+    cutoff = (datetime.date.fromisoformat(today) - datetime.timedelta(days=14)).isoformat()
+    press_from = (datetime.date.fromisoformat(today) - datetime.timedelta(days=ZETTERIA_PRESS_RECHECK_DAYS)).isoformat()
+    for p in load_chain_products(chain):
+        if p.get("status") == "ended" and (p.get("ended_observed_at") or "") < cutoff:
+            continue   # 終わって久しい商品は探し直さない
+        if zetteria_apply_launch(p, news, press, allow_press=(p.get("first_seen_at") or "")[:10] >= press_from):
+            save_product(chain, p)
+        if st["blocked"]:
+            break
+    recorded = [p for p in load_chain_products(chain) if not p.get("is_regular")]
+    st["news_matched"] = sum(1 for p in recorded if p.get("news_url"))
+    st["news_unmatched"] = sum(1 for p in recorded if not p.get("news_url"))
+
+
+# ---------------------------------------------------------------------------
 # 丸亀製麺 (jp.marugame.com)
 # ---------------------------------------------------------------------------
 # 調査・方針(2026-10-17。実物の構造は parsers.py の「丸亀製麺」のコメントにまとめた):
@@ -3197,7 +3584,8 @@ CRAWLERS = {"mcdonalds": crawl_mcdonalds, "mos": crawl_mos, "matsuya": crawl_mat
             "matsunoya": crawl_matsunoya, "yoshinoya": crawl_yoshinoya, "sukiya": crawl_sukiya,
             "katsuya": crawl_katsuya, "karayama": crawl_karayama,
             "marugame": crawl_marugame, "burgerking": crawl_burgerking,
-            "kourakuen": crawl_kourakuen, "hidakaya": crawl_hidakaya}
+            "kourakuen": crawl_kourakuen, "hidakaya": crawl_hidakaya,
+            "zetteria": crawl_zetteria}
 
 
 def main(argv: list[str] | None = None) -> int:
