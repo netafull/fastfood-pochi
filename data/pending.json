@@ -24,21 +24,25 @@
  "kourakuen": {},
  "marugame": {},
  "matsunoya": {
-  "_suspected_restructure": {
-   "consecutive_days": 1,
-   "count": 27,
-   "date": "2026-11-25",
-   "first_date": "2026-11-25",
-   "list_size": 97,
-   "reason": "suspected_restructure",
-   "sample": [
-    "donburi-don_yumenodaichi_rosu_hp",
-    "moriawase-mori_rosu_rare_hire_hp",
-    "moriawase-mori_yumenodaichi_ribu_rosu_aji_hp",
-    "moriawase-mori_yumenodaichi_ribu_rosu_ebi1_hp",
-    "moriawase-mori_yumenodaichi_ribu_rosu_ebi2_hp"
-   ],
-   "threshold": 24
+  "donburi-don_kaki_hp": {
+   "checked_at": "2026-11-25T20:46:04+09:00",
+   "reason": "fetch_error: matsunoya: 1回の実行あたりのリクエスト上限(60)に達しました",
+   "url": "/matsunoya/menu/donburi/don_kaki_hp_260916.html"
+  },
+  "side_menu-side_chige_hp": {
+   "checked_at": "2026-11-25T20:46:04+09:00",
+   "reason": "fetch_error: matsunoya: 1回の実行あたりのリクエスト上限(60)に達しました",
+   "url": "/matsunoya/menu/side_menu/side_chige_hp_261104.html"
+  },
+  "souzai-souzai_rare_hire_hp": {
+   "checked_at": "2026-11-25T20:46:04+09:00",
+   "reason": "fetch_error: matsunoya: 1回の実行あたりのリクエスト上限(60)に達しました",
+   "url": "/matsunoya/menu/souzai/souzai_rare_hire_hp_261118.html"
+  },
+  "souzai-souzai_yumenodaichi_ribu_rosu_hp": {
+   "checked_at": "2026-11-25T20:46:04+09:00",
+   "reason": "fetch_error: matsunoya: 1回の実行あたりのリクエスト上限(60)に達しました",
+   "url": "/matsunoya/menu/souzai/souzai_yumenodaichi_ribu_rosu_hp_261125.html"
   }
  },
  "matsuya": {},
