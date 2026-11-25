@@ -1,0 +1,48 @@
+{
+ "chain": "matsunoya",
+ "product_id": "backfill-mugikomachi-2026-03",
+ "name": "“国産麦小町”鬼おろしポン酢ロースかつ定食",
+ "category": "定食",
+ "price": 1090,
+ "price_note": "税込。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "launch_date": "2026-11-11",
+ "launch_date_source": "news_article_body",
+ "planned_end_text": null,
+ "news_url": "https://www.matsuyafoods.co.jp/matsunoya/whatsnew/menu/192728.html",
+ "news_title": "国産豚総選挙 第1弾！日本ハムとのコラボで贈る「“国産麦小町”ロースかつ定食」発売",
+ "news_date": "2026-11-18",
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "nutrition_variants": null,
+ "nutrition_as_of": null,
+ "nutrition_note": null,
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "新メニュー",
+ "in_recommended": false,
+ "official_url": null,
+ "current_slug": null,
+ "first_seen_at": null,
+ "last_seen_at": null,
+ "status": "ended",
+ "ended_observed_at": "2026-11-25",
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-11",
+   "price": 1090
+  }
+ ],
+ "source_list": [
+  "news_article"
+ ],
+ "image": null,
+ "backfill": {
+  "source": "news_article",
+  "created": "2026-11-25",
+  "reason": "公式サイト停止中(2026-10-29〜11-25)に販売され、巡回で観測できなかったため、公式ニュース記事から補完",
+  "end_note": "終了日は記事に記載なし。2026-11-25に公式の一覧に無いことを確認"
+ }
+}

@@ -1322,6 +1322,10 @@ def render_nutrition(item: dict) -> str:
                 if item.get("official_url") else "")
         return ("<h2>栄養成分・アレルギー情報</h2><p class='note'>栄養成分・アレルギー情報は当サイトでは掲載していません。"
                 f"公式サイトでご確認ください。{link}</p>")
+    if not nut and item.get("backfill"):
+        # 公式ニュース記事から手で補った商品は、商品ページを一度も見ていないので「掲載なし」とは言えない
+        return ("<h2>栄養成分</h2><p class='note'>この商品は商品ページを確認できなかったため、"
+                "栄養成分は記録していません。</p>")
     if not nut:
         return ("<h2>栄養成分</h2><p class='note'>栄養成分は公式サイトに掲載がありませんでした"
                 "（セット商品や一部の限定商品は載らないことがあります）。</p>")
@@ -2040,7 +2044,15 @@ def render_item_page(item: dict, all_items: list[dict] | None = None) -> str:
         # 定番は限定・新メニューの注記(発売日の出どころ・昨季の販売など)を使わない
         matsuya_note = mop_note = ""
         yoshinoya_note = render_regular_notes(item)
-    notes_joined = "\n".join(n for n in (mop_note, matsuya_note, yoshinoya_note, relaunch) if n.strip())
+    # 巡回で観測できず、公式ニュース記事から手で補った商品(record に "backfill" がある)
+    backfill_note = ""
+    if item.get("backfill"):
+        news_link = (f'<a href="{esc(item["news_url"])}" target="_blank" rel="noopener">公式ニュース記事</a>'
+                     if item.get("news_url") else "公式ニュース記事")
+        backfill_note = ("<p class='note'>この商品は、公式サイトが止まっていた間（2026年10月29日〜11月25日）に販売されたため、"
+                         f"巡回では確認できていません。発売日と価格は{news_link}から記録しました。"
+                         "終了日は記事に書かれておらず、11月25日に公式の一覧に無いことを確認した日を載せています。</p>")
+    notes_joined = "\n".join(n for n in (mop_note, matsuya_note, backfill_note, yoshinoya_note, relaunch) if n.strip())
     notes_html = f"<h2>補足</h2>\n{notes_joined}" if notes_joined else ""
     fact_rows = [("記録" if is_regular(item) else "販売期間", period_text(item, detailed=True))]
     if item.get("category"):
