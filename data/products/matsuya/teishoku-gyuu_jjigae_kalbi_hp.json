@@ -1,0 +1,75 @@
+{
+ "chain": "matsuya",
+ "product_id": "teishoku-gyuu_jjigae_kalbi_hp",
+ "name": "牛豆腐キムチチゲ牛カルビ焼肉セット",
+ "category": "定食",
+ "price": 1330,
+ "price_note": "税込。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "launch_date": "2026-11-03",
+ "launch_date_source": "news_article_body",
+ "planned_end_text": null,
+ "news_url": "https://www.matsuyafoods.co.jp/matsuya/whatsnew/menu/188015.html",
+ "news_title": "海鮮だしが決め手\"旨辛チゲ\"が今年も登場！「牛豆腐キムチチゲ」発売",
+ "news_date": "2026-10-29",
+ "description": "寒さ深まる季節は、熱々の一杯で心も体も満たしたい。",
+ "description_full_len": 60,
+ "nutrition": {
+  "kcal": 1379.0,
+  "protein_g": 49.7,
+  "fat_g": 76.9,
+  "carbs_g": 114.0,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 8.3,
+  "other": {}
+ },
+ "nutrition_variants": null,
+ "nutrition_as_of": "2026-11-24",
+ "nutrition_note": null,
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "えび",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "りんご",
+   "ゼラチン",
+   "ごま"
+  ],
+  "partial": [
+   {
+    "name": "カニ",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "新メニュー",
+ "in_recommended": true,
+ "official_url": "https://www.matsuyafoods.co.jp/matsuya/menu/teishoku/gyuu_jjigae_kalbi_hp_261103.html",
+ "current_slug": "teishoku-gyuu_jjigae_kalbi_hp_261103",
+ "first_seen_at": "2026-11-25T17:12:46+09:00",
+ "last_seen_at": "2026-11-25",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-25",
+   "price": 1330
+  }
+ ],
+ "source_list": [
+  "limited",
+  "teishoku"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-25"
+}

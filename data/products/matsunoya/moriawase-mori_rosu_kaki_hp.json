@@ -6,12 +6,12 @@
  "price": 1030,
  "price_note": "税込。店舗により価格・取り扱いが異なる場合があります。",
  "price_variants": null,
- "launch_date": "2026-09-16",
- "launch_date_source": "news_article_body",
+ "launch_date": null,
+ "launch_date_source": "not_found",
  "planned_end_text": null,
- "news_url": "https://www.matsuyafoods.co.jp/matsunoya/whatsnew/menu/175938.html",
- "news_title": "至福の食感、海鮮フライが今年も復活「アジフライ」「カキフライ」発売",
- "news_date": "2026-09-11",
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
  "description": "肉厚な真あじはふわっと、カキはぷりっとジューシーに。",
  "description_full_len": 57,
  "nutrition": {
@@ -74,14 +74,19 @@
  "in_recommended": true,
  "official_url": "https://www.matsuyafoods.co.jp/matsunoya/menu/moriawase/mori_rosu_kaki_hp_260916.html",
  "first_seen_at": "2026-10-11T12:25:53+09:00",
- "last_seen_at": "2026-10-21",
- "status": "ended",
- "ended_observed_at": "2026-10-23",
- "missed_runs": 2,
+ "last_seen_at": "2026-11-25",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
  "price_history": [
   {
    "date": "2026-10-11",
    "price": 1030
+  },
+  {
+   "date": "2026-11-25",
+   "price": 1030,
+   "relaunch": true
   }
  ],
  "source_list": [
@@ -90,5 +95,22 @@
  ],
  "image": null,
  "current_slug": "moriawase-mori_rosu_kaki_hp_260916",
- "last_miss_date": "2026-10-23"
+ "last_miss_date": null,
+ "relaunches": [
+  {
+   "ended_observed_at": "2026-10-23",
+   "reappeared_at": "2026-11-25"
+  }
+ ],
+ "seasons": [
+  {
+   "launch_date": "2026-09-16",
+   "launch_date_source": "news_article_body",
+   "ended_observed_at": "2026-10-23",
+   "news_url": "https://www.matsuyafoods.co.jp/matsunoya/whatsnew/menu/175938.html",
+   "news_title": "至福の食感、海鮮フライが今年も復活「アジフライ」「カキフライ」発売",
+   "early_end_notice": null
+  }
+ ],
+ "early_end_notice": null
 }

@@ -1,0 +1,110 @@
+{
+ "chain": "sukiya",
+ "product_id": "side-7011200",
+ "name": "食べラー白髪ねぎ",
+ "category": "おかず",
+ "price": 210,
+ "price_note": "税込・店内の価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "price_checked_at": "2026-11-25",
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "nutrition_variants": null,
+ "nutrition_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
+ "nutrition_pdf_label": "栄養成分一覧",
+ "allergen_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
+ "allergen_pdf_label": "アレルゲン一覧",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "大豆",
+   "鶏肉",
+   "ごま"
+  ],
+  "partial": [
+   {
+    "name": "卵",
+    "mark": "△"
+   },
+   {
+    "name": "乳",
+    "mark": "△"
+   },
+   {
+    "name": "落花生（ピーナッツ）",
+    "mark": "△"
+   },
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "オレンジ",
+    "mark": "△"
+   },
+   {
+    "name": "牛肉",
+    "mark": "△"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   },
+   {
+    "name": "りんご",
+    "mark": "△"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△"
+   },
+   {
+    "name": "バナナ",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "新規掲載",
+ "badges": [],
+ "official_url": "https://www.sukiya.jp/menu/in/side/7011200/index.html",
+ "first_seen_at": "2026-11-25T17:16:56+09:00",
+ "last_seen_at": "2026-11-25",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-25",
+   "price": 210
+  }
+ ],
+ "source_list": [
+  "side"
+ ],
+ "image": null,
+ "allergens_conditional": {
+  "mark": "△",
+  "meaning": "原材料由来および原材料の製造工場において、そのアレルゲン物質を含む製品を同じライン等で製造しております"
+ },
+ "allergen_source": {
+  "url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
+  "label": "アレルゲン一覧",
+  "version": "2026-11-25",
+  "version_text": "2026年11月25日更新",
+  "fetched_at": "2026-11-25T17:19:56+09:00"
+ },
+ "pdf_tried": "2026-11-25|2026-11-25"
+}

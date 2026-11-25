@@ -1,0 +1,138 @@
+{
+ "chain": "matsuya",
+ "product_id": "limited-tei_hb_onigra_hp",
+ "name": "オニオングラタンチーズハンバーグ定食",
+ "category": "定食",
+ "price": 980,
+ "price_note": "税込。表示は「セット（みそ汁を含む）」の価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "セット（みそ汁を含む）",
+   "price": 980
+  },
+  {
+   "label": "ダブル",
+   "price": 1470
+  },
+  {
+   "label": "単品",
+   "price": 640
+  }
+ ],
+ "launch_date": "2026-11-24",
+ "launch_date_source": "news_article",
+ "planned_end_text": null,
+ "news_url": "https://www.matsuyafoods.co.jp/matsuya/whatsnew/menu/191873.html",
+ "news_title": "ごはんも進む、あつあつ\"オニグラ\"初登場「オニオングラタンチーズハンバーグ定食」発売",
+ "news_date": "2026-11-19",
+ "description": "熱々が恋しい季節に、最後までとろ～りぐつぐつ煮立つ鉄皿でご提供。",
+ "description_full_len": 70,
+ "nutrition": {
+  "kcal": 1054.0,
+  "protein_g": 31.5,
+  "fat_g": 47.5,
+  "carbs_g": 118.8,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 5.6,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "セット（みそ汁を含む）",
+   "nutrition": {
+    "kcal": 1054.0,
+    "protein_g": 31.5,
+    "fat_g": 47.5,
+    "carbs_g": 118.8,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 5.6,
+    "other": {}
+   }
+  },
+  {
+   "label": "ダブル",
+   "nutrition": {
+    "kcal": 1559.0,
+    "protein_g": 49.3,
+    "fat_g": 83.8,
+    "carbs_g": 142.6,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 8.6,
+    "other": {}
+   }
+  },
+  {
+   "label": "単品",
+   "nutrition": {
+    "kcal": 650.0,
+    "protein_g": 23.4,
+    "fat_g": 45.4,
+    "carbs_g": 33.9,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 4.0,
+    "other": {}
+   }
+  }
+ ],
+ "nutrition_as_of": "2026-11-24",
+ "nutrition_note": "特定原材料・栄養成分の数値には、みそ汁も含まれております。",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "乳",
+   "牛肉",
+   "さけ",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "ごま"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "新メニュー",
+ "in_recommended": true,
+ "official_url": "https://www.matsuyafoods.co.jp/matsuya/menu/limited/tei_hb_onigra_hp_261124.html",
+ "current_slug": "limited-tei_hb_onigra_hp_261124",
+ "first_seen_at": "2026-11-25T17:12:46+09:00",
+ "last_seen_at": "2026-11-25",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-25",
+   "price": 980
+  }
+ ],
+ "source_list": [
+  "limited",
+  "teishoku"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-25",
+ "price_variants_history": [
+  {
+   "date": "2026-11-25",
+   "variants": [
+    {
+     "label": "セット（みそ汁を含む）",
+     "price": 980
+    },
+    {
+     "label": "ダブル",
+     "price": 1470
+    },
+    {
+     "label": "単品",
+     "price": 640
+    }
+   ]
+  }
+ ]
+}

@@ -9,6 +9,10 @@
  "price_note": "税込。表示は「並」の価格。店舗により販売メニューや価格が異なる場合があります。",
  "price_variants": [
   {
+   "label": "小",
+   "price": 130
+  },
+  {
    "label": "並",
    "price": 180
   },
@@ -70,6 +74,23 @@
   {
    "date": "2026-11-10",
    "variants": [
+    {
+     "label": "並",
+     "price": 180
+    },
+    {
+     "label": "大",
+     "price": 230
+    }
+   ]
+  },
+  {
+   "date": "2026-11-25",
+   "variants": [
+    {
+     "label": "小",
+     "price": 130
+    },
     {
      "label": "並",
      "price": 180

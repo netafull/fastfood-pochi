@@ -31,7 +31,7 @@
    "price": 1270
   }
  ],
- "price_checked_at": "2026-11-23",
+ "price_checked_at": "2026-11-25",
  "launch_date": null,
  "launch_date_source": "not_found",
  "announced_at": null,
@@ -231,9 +231,9 @@
  "nutrition_source": {
   "url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
   "label": "栄養成分一覧",
-  "version": "2026-11-17",
-  "version_text": "2026年11月17日更新",
-  "fetched_at": "2026-11-18T07:36:27+09:00"
+  "version": "2026-11-25",
+  "version_text": "2026年11月25日更新",
+  "fetched_at": "2026-11-25T17:19:56+09:00"
  },
  "nutrition_note": "表示した数値には、お好みでお使いいただく調味料（紅生姜・醤油・ドレッシング・七味・カルビ追いダレなど）は含まれていません。",
  "allergens_conditional": {
@@ -243,8 +243,8 @@
  "allergen_source": {
   "url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
   "label": "アレルゲン一覧",
-  "version": "2026-11-18",
-  "version_text": "2026年11月18日更新",
-  "fetched_at": "2026-11-19T07:36:15+09:00"
+  "version": "2026-11-25",
+  "version_text": "2026年11月25日更新",
+  "fetched_at": "2026-11-25T17:19:56+09:00"
  }
 }

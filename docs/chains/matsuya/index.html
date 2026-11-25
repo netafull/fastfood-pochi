@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>松屋の新メニュー・おすすめ一覧（新しい順）｜ファストフードポチ</title>
-<meta name="description" content="松屋の「おすすめ」に載ったメニューと新メニュー17件（販売中17件・終了0件）を新しい順に記録。最近の記録は「未来のレモンサワープレーン」「未来のレモンサワーオリジナル」「ごろチキチリソース定食」など。カロリー・価格・栄養成分を掲載。">
+<meta name="description" content="松屋の「おすすめ」に載ったメニューと新メニュー27件（販売中27件・終了0件）を新しい順に記録。最近の記録は「うまトマチーズ牛皿」「キムチ牛皿」「牛皿」など。カロリー・価格・栄養成分を掲載。">
 <link rel="canonical" href="https://fastfood.netaful.jp/chains/matsuya/">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-464GWH2ZGQ"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-464GWH2ZGQ');</script>
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="松屋の新メニュー・おすすめ一覧（新しい順）｜ファストフードポチ">
-<meta property="og:description" content="松屋の「おすすめ」に載ったメニューと新メニュー17件（販売中17件・終了0件）を新しい順に記録。最近の記録は「未来のレモンサワープレーン」「未来のレモンサワーオリジナル」「ごろチキチリソース定食」など。カロリー・価格・栄養成分を掲載。">
+<meta property="og:description" content="松屋の「おすすめ」に載ったメニューと新メニュー27件（販売中27件・終了0件）を新しい順に記録。最近の記録は「うまトマチーズ牛皿」「キムチ牛皿」「牛皿」など。カロリー・価格・栄養成分を掲載。">
 <meta property="og:url" content="https://fastfood.netaful.jp/chains/matsuya/">
 <meta property="og:site_name" content="ファストフードポチ">
 <meta property="og:locale" content="ja_JP">
@@ -25,13 +25,13 @@
 :root {
   --bg: #fafaf7; --card: #ffffff; --text: #1a1a1a; --muted: #6b6b6b;
   --accent: #00897b; --line: #e5e2dc;
-  --mcdonalds: #da291c; --mos: #1b7f3b; --matsuya: #a34a00; --matsunoya: #7a1f5c; --yoshinoya: #1f5fad; --sukiya: #8a6a00; --katsuya: #455a64; --karayama: #c2185b; --marugame: #e65100; --burgerking: #512da8; --kourakuen: #5d4037; --hidakaya: #00838f;
+  --mcdonalds: #da291c; --mos: #1b7f3b; --matsuya: #a34a00; --matsunoya: #7a1f5c; --yoshinoya: #1f5fad; --sukiya: #8a6a00; --katsuya: #455a64; --karayama: #c2185b; --marugame: #e65100; --burgerking: #512da8; --kourakuen: #5d4037; --hidakaya: #00838f; --zetteria: #33691e;
 }
 @media (prefers-color-scheme: dark) {
   :root { --bg: #14151a; --card: #1e2027; --text: #e8e8e6; --muted: #9a9a96;
     --line: #2c2e36; --accent: #26a69a;
     /* 暗い背景でも見出しの下線・バッジが沈まないよう、松屋・松のや・吉野家・すき家だけ少し明るくする */
-    --matsuya: #b85a00; --matsunoya: #a83a82; --yoshinoya: #3a7bd0; --sukiya: #b8921a; --katsuya: #6b8794; --karayama: #d6477f; --marugame: #ff8a3d; --burgerking: #7e57c2; --kourakuen: #a1887f; --hidakaya: #26a6b5; }
+    --matsuya: #b85a00; --matsunoya: #a83a82; --yoshinoya: #3a7bd0; --sukiya: #b8921a; --katsuya: #6b8794; --karayama: #d6477f; --marugame: #ff8a3d; --burgerking: #7e57c2; --kourakuen: #a1887f; --hidakaya: #26a6b5; --zetteria: #9ccc65; }
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--bg); color: var(--text);
@@ -70,6 +70,7 @@ h2, h1.pt { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--ac
 .chain-group[data-chain="burgerking"] h3 { border-color: var(--burgerking); }
 .chain-group[data-chain="kourakuen"] h3 { border-color: var(--kourakuen); }
 .chain-group[data-chain="hidakaya"] h3 { border-color: var(--hidakaya); }
+.chain-group[data-chain="zetteria"] h3 { border-color: var(--zetteria); }
 .regular-menu h3 { font-size: 15px; margin: 18px 0 8px; padding-left: 8px; border-left: 4px solid var(--line); }
 .regular-menu .lead { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
 table.pricelog { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
@@ -102,6 +103,7 @@ table.pricelog td.down { color: #2e7d32; }
 .item[data-chain="burgerking"] .badge { background: var(--burgerking); }
 .item[data-chain="kourakuen"] .badge { background: var(--kourakuen); }
 .item[data-chain="hidakaya"] .badge { background: var(--hidakaya); }
+.item[data-chain="zetteria"] .badge { background: var(--zetteria); }
 .item .st { display: inline-block; font-size: 10px; border-radius: 4px; padding: 0 6px; margin-left: 6px;
   border: 1px solid var(--line); color: var(--muted); }
 .item .st-on { color: var(--accent); border-color: var(--accent); }
@@ -192,7 +194,7 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <body>
 <header>
 <div class="site-name"><a data-google-vignette="false" href="/"><img src="/assets/logo.png" alt="" width="44" height="44">ファストフードポチ</a></div>
-<p>マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</p>
+<p>マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリアの期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています</p>
 </header>
 <div class="ad-slot">
 <ins class="adsbygoogle"
@@ -203,17 +205,89 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
      data-full-width-responsive="true"></ins>
 </div>
 <main>
-<h1 class="pt">松屋の限定メニュー (17件（販売中17件）)</h1>
+<h1 class="pt">松屋の限定メニュー (27件（販売中27件）)</h1>
 <nav class="crumbs" aria-label="パンくずリスト"><a data-google-vignette="false" href="/">トップ</a> &gt; <span aria-current="page">松屋</span></nav>
 <div class="sort-bar">
 <label>並び替え: <select id="sort-select"><option value="date">開始日順</option>
 <option value="kcal">カロリー順</option></select></label>
 <label>販売状況: <select id="status-filter"><option value="on_sale">販売中</option><option value="ended">終了</option><option value="all" selected>すべて</option></select></label>
-<label>絞り込み: <select id="chain-filter"><option value="all">すべて</option><option value="mcdonalds">マクドナルド</option><option value="mos">モスバーガー</option><option value="matsuya">松屋</option><option value="matsunoya">松のや</option><option value="yoshinoya">吉野家</option><option value="sukiya">すき家</option><option value="katsuya">かつや</option><option value="karayama">からやま</option><option value="marugame">丸亀製麺</option><option value="burgerking">バーガーキング</option><option value="kourakuen">幸楽苑</option><option value="hidakaya">日高屋</option></select></label>
+<label>絞り込み: <select id="chain-filter"><option value="all">すべて</option><option value="mcdonalds">マクドナルド</option><option value="mos">モスバーガー</option><option value="matsuya">松屋</option><option value="matsunoya">松のや</option><option value="yoshinoya">吉野家</option><option value="sukiya">すき家</option><option value="katsuya">かつや</option><option value="karayama">からやま</option><option value="marugame">丸亀製麺</option><option value="burgerking">バーガーキング</option><option value="kourakuen">幸楽苑</option><option value="hidakaya">日高屋</option><option value="zetteria">ゼッテリア</option></select></label>
 </div>
 <section class="chain-group" data-chain="matsuya">
-<h3>松屋 (<span class="cnt">17</span>件)</h3>
+<h3>松屋 (<span class="cnt">27</span>件)</h3>
 <div class="grid" data-sortable>
+<a data-google-vignette="false" class="item" href="/items/matsuya-cat4128-mdel_gyuu_cheese_hp.html" data-kcal="477.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">チーズ牛皿</div>
+  <div class="price">490円（税込）<span class="kcal">477kcal</span></div>
+  <div class="meta">2026-11-25（記録開始日）〜 販売中・新規掲載</div>
+  
+</a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-cat4128-mdel_gyuu_hp.html" data-kcal="284.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">牛皿</div>
+  <div class="price">290円（税込）<span class="kcal">284kcal</span></div>
+  <div class="meta">2026-11-25（記録開始日）〜 販売中・新規掲載</div>
+  
+</a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-cat4128-mdel_gyuu_kimchi_hp.html" data-kcal="333.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">キムチ牛皿</div>
+  <div class="price">390円（税込）<span class="kcal">333kcal</span></div>
+  <div class="meta">2026-11-25（記録開始日）〜 販売中・新規掲載</div>
+  
+</a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-cat4128-mdel_gyuu_umatoma_hp.html" data-kcal="528.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">うまトマチーズ牛皿</div>
+  <div class="price">520円（税込）<span class="kcal">528kcal</span></div>
+  <div class="meta">2026-11-25（記録開始日）〜 販売中・新規掲載</div>
+  
+</a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-limited-tei_hb_onigra_hp.html" data-kcal="1054.0"
+   data-date="2026-11-24" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">オニオングラタンチーズハンバーグ定食</div>
+  <div class="price">980円（税込）<span class="kcal">1054kcal</span></div>
+  <div class="meta">2026-11-24〜 販売中・新メニュー</div>
+  <div class="review-badge">レビューあり</div>
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-don-don_gyusteak_hp.html" data-kcal="718.0"
+   data-date="2026-11-17" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">牛カットステーキ丼</div>
+  <div class="price">1280円（税込）<span class="kcal">718kcal</span></div>
+  <div class="meta">2026-11-17〜 販売中・新メニュー</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-teishoku-gyuu_jjigae_hp.html" data-kcal="865.0"
+   data-date="2026-11-03" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">牛豆腐キムチチゲセット</div>
+  <div class="price">780円（税込）<span class="kcal">865kcal</span></div>
+  <div class="meta">2026-11-03〜 販売中・新メニュー</div>
+  <div class="review-badge">レビューあり</div>
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-teishoku-gyuu_jjigae_kalbi_hp.html" data-kcal="1379.0"
+   data-date="2026-11-03" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">牛豆腐キムチチゲ牛カルビ焼肉セット</div>
+  <div class="price">1330円（税込）<span class="kcal">1379kcal</span></div>
+  <div class="meta">2026-11-03〜 販売中・新メニュー</div>
+  <div class="review-badge">レビューあり</div>
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/matsuya-drink-dri_lemon_ori_hp.html" data-kcal="183.0"
    data-date="2026-10-21" data-chain="matsuya" data-status="on_sale">
 <img class="cat-icon" src="/assets/icons/cat/drink.svg" width="32" height="32" alt="ドリンク" loading="lazy" decoding="async">
@@ -244,6 +318,22 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
   <div class="meta">2026-10-20〜 販売中・新メニュー</div>
   <div class="review-badge">レビューあり</div>
 </div></a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-cat4128-mdel_gyuu_negitama_hp.html" data-kcal="418.0"
+   data-date="2026-10-13" data-chain="matsuya" data-status="on_sale">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">ネギたま牛皿</div>
+  <div class="price">490円（税込）<span class="kcal">418kcal</span></div>
+  <div class="meta">2026-10-13〜 販売中・新メニュー</div>
+  
+</a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-cat4128-mdel_gyuu_oroshi_hp.html" data-kcal="311.0"
+   data-date="2026-10-13" data-chain="matsuya" data-status="on_sale">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">鬼おろしポン酢牛皿</div>
+  <div class="price">390円（税込）<span class="kcal">311kcal</span></div>
+  <div class="meta">2026-10-13〜 販売中・新メニュー</div>
+  
+</a>
 <a data-google-vignette="false" class="item" href="/items/matsuya-limited-tei_gyuusara_hp.html" data-kcal="778.0"
    data-date="2026-10-13" data-chain="matsuya" data-status="on_sale">
 <img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
@@ -514,7 +604,222 @@ function computeAdPlan(counts, every, max) {
 })();
 </script>
 
-
+<section class="regular-menu" id="regular">
+<h2>定番メニュー（20品）</h2>
+<p class="lead">定番メニューは記録を始めた日から、価格の変わった日を残しています。<a data-google-vignette="false" href="/prices/matsuya/">松屋の価格改定の記録</a></p>
+<h3>牛めし（8品）</h3>
+<div class="grid">
+<a data-google-vignette="false" class="item" href="/items/matsuya-gyumeshi-gyu_umatoma_hp.html" data-kcal="914.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">うまトマチーズ牛めし</div>
+  <div class="price">710円（税込）<span class="kcal">914kcal</span></div>
+  <div class="meta">記録開始 2026-11-25〜 販売中・定番</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-gyumeshi-gyu_kimuchi_hp.html" data-kcal="719.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">キムチ牛めし</div>
+  <div class="price">580円（税込）<span class="kcal">719kcal</span></div>
+  <div class="meta">記録開始 2026-11-25〜 販売中・定番</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-gyumeshi-gyu_cheese_hp.html" data-kcal="863.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">チーズ牛めし</div>
+  <div class="price">680円（税込）<span class="kcal">863kcal</span></div>
+  <div class="meta">記録開始 2026-11-25〜 販売中・定番</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-gyumeshi-gyu_negitama_hp.html" data-kcal="804.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">ネギたっぷり旨辛ネギたま牛めし</div>
+  <div class="price">680円（税込）<span class="kcal">804kcal</span></div>
+  <div class="meta">記録開始 2026-11-25〜 販売中・定番</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-gyumeshi-gyumeshi_hp.html" data-kcal="670.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">牛めし</div>
+  <div class="price">480円（税込）<span class="kcal">670kcal</span></div>
+  <div class="meta">記録開始 2026-11-25〜 販売中・定番</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-hp-gyu2_hp.html" data-kcal="1340.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">牛めし弁当2個セット</div>
+  <div class="price">900円（税込）<span class="kcal">1340kcal</span></div>
+  <div class="meta">記録開始 2026-11-25〜 販売中・定番</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-hp-gyu3_hp.html" data-kcal="2010.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">牛めし弁当3個セット</div>
+  <div class="price">1320円（税込）<span class="kcal">2010kcal</span></div>
+  <div class="meta">記録開始 2026-11-25〜 販売中・定番</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-gyumeshi-gyu_onioroshi_hp.html" data-kcal="697.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">鬼おろしポン酢牛めし</div>
+  <div class="price">580円（税込）<span class="kcal">697kcal</span></div>
+  <div class="meta">記録開始 2026-11-25〜 販売中・定番</div>
+  
+</div></a>
+</div>
+<h3>カレー（5品）</h3>
+<div class="grid">
+<a data-google-vignette="false" class="item" href="/items/matsuya-curry-beef_cheese_hp.html" data-kcal="972.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">チーズ創業ビーフカレー</div>
+  <div class="price">880円（税込）<span class="kcal">972kcal</span></div>
+  <div class="meta">記録開始 2026-11-25〜 販売中・定番</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-curry-beef_hb_hp.html" data-kcal="1125.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">ハンバーグ創業ビーフカレー</div>
+  <div class="price">950円（税込）<span class="kcal">1125kcal</span></div>
+  <div class="meta">記録開始 2026-11-25〜 販売中・定番</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-curry-beef_gyu_hp.html" data-kcal="991.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">創業ビーフカレギュウ</div>
+  <div class="price">950円（税込）<span class="kcal">991kcal</span></div>
+  <div class="meta">記録開始 2026-11-25〜 販売中・定番</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-curry-beef_hp.html" data-kcal="769.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">創業ビーフカレー</div>
+  <div class="price">680円（税込）<span class="kcal">769kcal</span></div>
+  <div class="meta">記録開始 2026-11-25〜 販売中・定番</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-curry-beef_rosu_hp.html" data-kcal="1211.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/curry.svg" width="32" height="32" alt="カレー" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">創業ビーフロースかつカレー</div>
+  <div class="price">1070円（税込）<span class="kcal">1211kcal</span></div>
+  <div class="meta">記録開始 2026-11-25〜 販売中・定番</div>
+  
+</div></a>
+</div>
+<h3>丼（3品）</h3>
+<div class="grid">
+<a data-google-vignette="false" class="item" href="/items/matsuya-don-don_kimukaru_hp.html" data-kcal="793.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">キムカル丼</div>
+  <div class="price">690円（税込）<span class="kcal">793kcal</span></div>
+  <div class="meta">記録開始 2026-11-25〜 販売中・定番</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-don-don_gyu_bibin_hp.html" data-kcal="840.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">牛ビビン丼</div>
+  <div class="price">690円（税込）<span class="kcal">840kcal</span></div>
+  <div class="meta">記録開始 2026-11-25〜 販売中・定番</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-don-don_porkloin_hp.html" data-kcal="685.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">豚ロースネギ塩丼</div>
+  <div class="price">630円（税込）<span class="kcal">685kcal</span></div>
+  <div class="meta">記録開始 2026-11-25〜 販売中・定番</div>
+  
+</div></a>
+</div>
+<h3>定食（4品）</h3>
+<div class="grid">
+<a data-google-vignette="false" class="item" href="/items/matsuya-teishoku-tei_hb_brown_hp.html" data-kcal="920.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">ブラウンソースハンバーグ定食</div>
+  <div class="price">830円（税込）<span class="kcal">920kcal</span></div>
+  <div class="meta">記録開始 2026-11-25〜 販売中・定番</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-teishoku-tei_gyuuyaki_hp.html" data-kcal="806.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">牛焼肉定食</div>
+  <div class="price">890円（税込）<span class="kcal">806kcal</span></div>
+  <div class="meta">記録開始 2026-11-25〜 販売中・定番</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-teishoku-tei_shougayaki_hp.html" data-kcal="952.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">生姜焼き定食</div>
+  <div class="price">850円（税込）<span class="kcal">952kcal</span></div>
+  <div class="meta">記録開始 2026-11-25〜 販売中・定番</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/matsuya-teishoku-tei_porkloin_hp.html" data-kcal="736.0"
+   data-date="2026-11-25" data-chain="matsuya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松屋</div><span class="st st-on">販売中</span>
+  <div class="t">豚ロース焼肉定食</div>
+  <div class="price">790円（税込）<span class="kcal">736kcal</span></div>
+  <div class="meta">記録開始 2026-11-25〜 販売中・定番</div>
+  
+</div></a>
+</div>
+</section>
 <h2>ネタフルの最新レビュー</h2>
 <div class="review-grid">
 <a data-google-vignette="false" class="review-card" href="https://netaful.jp/fast-food/0213229.html" target="_blank" rel="noopener">
@@ -556,7 +861,7 @@ function computeAdPlan(counts, every, max) {
 </main>
 <footer>
 価格・販売期間・販売状況は取得時点のものです。最新の状況は各社公式サイトでご確認ください。
-当サイトはマクドナルド、モスバーガー、松屋、松のや、吉野家、すき家、かつや、からやま、丸亀製麺、バーガーキング、幸楽苑、日高屋各社とは関係のない非公式サイトです。
+当サイトはマクドナルド、モスバーガー、松屋、松のや、吉野家、すき家、かつや、からやま、丸亀製麺、バーガーキング、幸楽苑、日高屋、ゼッテリア各社とは関係のない非公式サイトです。
 当サイトはGoogle AdSenseを掲載し、Googleアナリティクスを使っています。いずれもCookieを使うことがあります。
 ｜ <a data-google-vignette="false" href="/archive/">終了した限定メニュー</a> ｜ <a data-google-vignette="false" href="/prices/">価格改定の記録</a>
 <nav class="sites"><span class="lbl">関連サイト</span>

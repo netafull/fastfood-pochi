@@ -1,0 +1,169 @@
+{
+ "chain": "matsuya",
+ "product_id": "don-don_kimukaru_hp",
+ "name": "キムカル丼",
+ "category": "丼",
+ "price": 690,
+ "price_note": "税込。表示は「並盛」の価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "小盛",
+   "price": 660
+  },
+  {
+   "label": "並盛",
+   "price": 690
+  },
+  {
+   "label": "大盛",
+   "price": 910
+  },
+  {
+   "label": "特盛",
+   "price": 1090
+  }
+ ],
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 793.0,
+  "protein_g": 19.8,
+  "fat_g": 31.4,
+  "carbs_g": 99.7,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 5.3,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "小盛",
+   "nutrition": {
+    "kcal": 667.0,
+    "protein_g": 17.9,
+    "fat_g": 31.2,
+    "carbs_g": 71.8,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 4.7,
+    "other": {}
+   }
+  },
+  {
+   "label": "並盛",
+   "nutrition": {
+    "kcal": 793.0,
+    "protein_g": 19.8,
+    "fat_g": 31.4,
+    "carbs_g": 99.7,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 5.3,
+    "other": {}
+   }
+  },
+  {
+   "label": "大盛",
+   "nutrition": {
+    "kcal": 1153.0,
+    "protein_g": 28.6,
+    "fat_g": 46.5,
+    "carbs_g": 143.1,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 6.7,
+    "other": {}
+   }
+  },
+  {
+   "label": "特盛",
+   "nutrition": {
+    "kcal": 1423.0,
+    "protein_g": 35.8,
+    "fat_g": 61.3,
+    "carbs_g": 167.5,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 8.1,
+    "other": {}
+   }
+  }
+ ],
+ "nutrition_as_of": "2026-11-24",
+ "nutrition_note": "特定原材料・栄養成分の数値には、みそ汁も含まれております。",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "えび",
+   "牛肉",
+   "さば",
+   "大豆",
+   "りんご"
+  ],
+  "partial": [
+   {
+    "name": "カニ",
+    "mark": "△"
+   },
+   {
+    "name": "鶏肉",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "in_recommended": false,
+ "official_url": "https://www.matsuyafoods.co.jp/matsuya/menu/don/don_kimukaru_hp_250422.html",
+ "current_slug": "don-don_kimukaru_hp_250422",
+ "first_seen_at": "2026-11-25T17:12:46+09:00",
+ "last_seen_at": "2026-11-25",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-25",
+   "price": 690
+  }
+ ],
+ "source_list": [
+  "don"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-25",
+ "price_variants_history": [
+  {
+   "date": "2026-11-25",
+   "variants": [
+    {
+     "label": "小盛",
+     "price": 660
+    },
+    {
+     "label": "並盛",
+     "price": 690
+    },
+    {
+     "label": "大盛",
+     "price": 910
+    },
+    {
+     "label": "特盛",
+     "price": 1090
+    }
+   ]
+  }
+ ],
+ "is_regular": true
+}

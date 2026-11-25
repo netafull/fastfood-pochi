@@ -1,0 +1,126 @@
+{
+ "chain": "matsuya",
+ "product_id": "teishoku-gyuu_jjigae_hp",
+ "name": "牛豆腐キムチチゲセット",
+ "category": "定食",
+ "price": 780,
+ "price_note": "税込。表示は「セット」の価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "セット",
+   "price": 780
+  },
+  {
+   "label": "単品",
+   "price": 580
+  }
+ ],
+ "launch_date": "2026-11-03",
+ "launch_date_source": "news_article_body",
+ "planned_end_text": null,
+ "news_url": "https://www.matsuyafoods.co.jp/matsuya/whatsnew/menu/188015.html",
+ "news_title": "海鮮だしが決め手\"旨辛チゲ\"が今年も登場！「牛豆腐キムチチゲ」発売",
+ "news_date": "2026-10-29",
+ "description": "寒さ深まる季節は、熱々の一杯で心も体も満たしたい。",
+ "description_full_len": 60,
+ "nutrition": {
+  "kcal": 865.0,
+  "protein_g": 32.9,
+  "fat_g": 33.1,
+  "carbs_g": 106.7,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 6.7,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "セット",
+   "nutrition": {
+    "kcal": 865.0,
+    "protein_g": 32.9,
+    "fat_g": 33.1,
+    "carbs_g": 106.7,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 6.7,
+    "other": {}
+   }
+  },
+  {
+   "label": "単品",
+   "nutrition": {
+    "kcal": 450.0,
+    "protein_g": 21.9,
+    "fat_g": 27.6,
+    "carbs_g": 30.5,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 6.6,
+    "other": {}
+   }
+  }
+ ],
+ "nutrition_as_of": "2026-11-24",
+ "nutrition_note": null,
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "えび",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "りんご",
+   "ゼラチン",
+   "ごま"
+  ],
+  "partial": [
+   {
+    "name": "カニ",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "新メニュー",
+ "in_recommended": true,
+ "official_url": "https://www.matsuyafoods.co.jp/matsuya/menu/teishoku/gyuu_jjigae_hp_261103.html",
+ "current_slug": "teishoku-gyuu_jjigae_hp_261103",
+ "first_seen_at": "2026-11-25T17:12:46+09:00",
+ "last_seen_at": "2026-11-25",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-25",
+   "price": 780
+  }
+ ],
+ "source_list": [
+  "limited",
+  "teishoku"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-25",
+ "price_variants_history": [
+  {
+   "date": "2026-11-25",
+   "variants": [
+    {
+     "label": "セット",
+     "price": 780
+    },
+    {
+     "label": "単品",
+     "price": 580
+    }
+   ]
+  }
+ ]
+}

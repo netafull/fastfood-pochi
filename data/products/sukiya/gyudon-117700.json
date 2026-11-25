@@ -1,0 +1,258 @@
+{
+ "chain": "sukiya",
+ "product_id": "gyudon-117700",
+ "name": "食べラー白髪ねぎ牛丼",
+ "category": "牛丼",
+ "price": 690,
+ "price_note": "税込・店内の価格。サイズや組み合わせにより価格が異なります（内訳は下の表）。表示は「並盛」の価格。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "ミニ",
+   "price": 630
+  },
+  {
+   "label": "並盛",
+   "price": 690
+  },
+  {
+   "label": "中盛",
+   "price": 890
+  },
+  {
+   "label": "大盛",
+   "price": 890
+  },
+  {
+   "label": "特盛",
+   "price": 1090
+  },
+  {
+   "label": "メガ",
+   "price": 1270
+  }
+ ],
+ "price_checked_at": "2026-11-25",
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 857.0,
+  "protein_g": 22.7,
+  "fat_g": 38.4,
+  "carbs_g": 106.1,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 2.9,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "並盛",
+   "nutrition": {
+    "kcal": 857.0,
+    "protein_g": 22.7,
+    "fat_g": 38.4,
+    "carbs_g": 106.1,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 2.9,
+    "other": {}
+   }
+  },
+  {
+   "label": "ミニ",
+   "nutrition": {
+    "kcal": 626.0,
+    "protein_g": 15.8,
+    "fat_g": 31.0,
+    "carbs_g": 72.0,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 2.2,
+    "other": {}
+   }
+  },
+  {
+   "label": "中盛",
+   "nutrition": {
+    "kcal": 914.0,
+    "protein_g": 27.6,
+    "fat_g": 48.4,
+    "carbs_g": 92.8,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 3.3,
+    "other": {}
+   }
+  },
+  {
+   "label": "大盛",
+   "nutrition": {
+    "kcal": 1070.0,
+    "protein_g": 29.4,
+    "fat_g": 45.7,
+    "carbs_g": 136.4,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 3.6,
+    "other": {}
+   }
+  },
+  {
+   "label": "特盛",
+   "nutrition": {
+    "kcal": 1262.0,
+    "protein_g": 38.8,
+    "fat_g": 60.6,
+    "carbs_g": 141.2,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 4.7,
+    "other": {}
+   }
+  },
+  {
+   "label": "メガ",
+   "nutrition": {
+    "kcal": 1527.0,
+    "protein_g": 51.8,
+    "fat_g": 81.3,
+    "carbs_g": 147.9,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 6.2,
+    "other": {}
+   }
+  }
+ ],
+ "nutrition_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
+ "nutrition_pdf_label": "栄養成分一覧",
+ "allergen_pdf_url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
+ "allergen_pdf_label": "アレルゲン一覧",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "りんご",
+   "ごま"
+  ],
+  "partial": [
+   {
+    "name": "卵",
+    "mark": "△"
+   },
+   {
+    "name": "乳",
+    "mark": "△"
+   },
+   {
+    "name": "落花生（ピーナッツ）",
+    "mark": "△"
+   },
+   {
+    "name": "かに",
+    "mark": "△"
+   },
+   {
+    "name": "オレンジ",
+    "mark": "△"
+   },
+   {
+    "name": "さば",
+    "mark": "△"
+   },
+   {
+    "name": "豚肉",
+    "mark": "△"
+   },
+   {
+    "name": "ゼラチン",
+    "mark": "△"
+   },
+   {
+    "name": "バナナ",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "期間限定",
+ "badges": [
+  "NEW",
+  "期間限定"
+ ],
+ "official_url": "https://www.sukiya.jp/menu/in/gyudon/117700/index.html",
+ "first_seen_at": "2026-11-25T17:16:56+09:00",
+ "last_seen_at": "2026-11-25",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-25",
+   "price": 690
+  }
+ ],
+ "source_list": [
+  "gyudon"
+ ],
+ "image": null,
+ "price_variants_history": [
+  {
+   "date": "2026-11-25",
+   "variants": [
+    {
+     "label": "ミニ",
+     "price": 630
+    },
+    {
+     "label": "並盛",
+     "price": 690
+    },
+    {
+     "label": "中盛",
+     "price": 890
+    },
+    {
+     "label": "大盛",
+     "price": 890
+    },
+    {
+     "label": "特盛",
+     "price": 1090
+    },
+    {
+     "label": "メガ",
+     "price": 1270
+    }
+   ]
+  }
+ ],
+ "nutrition_source": {
+  "url": "https://images.zensho.co.jp/materials/sukiya/allergen/nutrition.pdf",
+  "label": "栄養成分一覧",
+  "version": "2026-11-25",
+  "version_text": "2026年11月25日更新",
+  "fetched_at": "2026-11-25T17:19:56+09:00"
+ },
+ "nutrition_note": "表示した数値には、お好みでお使いいただく調味料（紅生姜・醤油・ドレッシング・七味・カルビ追いダレなど）は含まれていません。",
+ "allergens_conditional": {
+  "mark": "△",
+  "meaning": "原材料由来および原材料の製造工場において、そのアレルゲン物質を含む製品を同じライン等で製造しております"
+ },
+ "allergen_source": {
+  "url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
+  "label": "アレルゲン一覧",
+  "version": "2026-11-25",
+  "version_text": "2026年11月25日更新",
+  "fetched_at": "2026-11-25T17:19:56+09:00"
+ }
+}

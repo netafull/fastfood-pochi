@@ -104,7 +104,7 @@
  "in_recommended": true,
  "official_url": "https://www.matsuyafoods.co.jp/matsuya/menu/don/don_gyuyaki_hp_260811.html",
  "first_seen_at": "2026-10-11T12:09:31+09:00",
- "last_seen_at": "2026-10-28",
+ "last_seen_at": "2026-11-25",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -119,5 +119,25 @@
   "limited"
  ],
  "image": null,
- "current_slug": "don-don_gyuyaki_hp_260811"
+ "current_slug": "don-don_gyuyaki_hp_260811",
+ "price_variants_history": [
+  {
+   "date": "2026-10-11",
+   "variants": [
+    {
+     "label": "小盛",
+     "price": 600
+    },
+    {
+     "label": "並盛",
+     "price": 630
+    },
+    {
+     "label": "大盛",
+     "price": 850
+    }
+   ]
+  }
+ ],
+ "price_checked_at": "2026-11-25"
 }

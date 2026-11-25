@@ -1,0 +1,64 @@
+{
+ "chain": "matsuya",
+ "product_id": "don-don_gyusteak_hp",
+ "name": "牛カットステーキ丼",
+ "category": "丼",
+ "price": 1280,
+ "price_note": "税込。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "launch_date": "2026-11-17",
+ "launch_date_source": "news_article",
+ "planned_end_text": null,
+ "news_url": "https://www.matsuyafoods.co.jp/matsuya/whatsnew/menu/190660.html",
+ "news_title": "本能を刺激する、希少赤身\"ブレードミート\"「牛カットステーキ丼」発売",
+ "news_date": "2026-11-18",
+ "description": "肉好き必見、リブロース上部の希少部位「ブレードミート」。",
+ "description_full_len": 58,
+ "nutrition": {
+  "kcal": 718.0,
+  "protein_g": 31.7,
+  "fat_g": 25.1,
+  "carbs_g": 88.9,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 4.6,
+  "other": {}
+ },
+ "nutrition_variants": null,
+ "nutrition_as_of": "2026-11-24",
+ "nutrition_note": "特定原材料・栄養成分の数値には、みそ汁も含まれております。",
+ "allergens": {
+  "contains": [
+   "小麦",
+   "牛肉",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "りんご",
+   "ごま"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "新メニュー",
+ "in_recommended": true,
+ "official_url": "https://www.matsuyafoods.co.jp/matsuya/menu/don/don_gyusteak_hp_261117.html",
+ "current_slug": "don-don_gyusteak_hp_261117",
+ "first_seen_at": "2026-11-25T17:12:46+09:00",
+ "last_seen_at": "2026-11-25",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-25",
+   "price": 1280
+  }
+ ],
+ "source_list": [
+  "don",
+  "limited"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-25"
+}

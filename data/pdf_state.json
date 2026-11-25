@@ -1,16 +1,16 @@
 {
  "sukiya": {
   "allergen": {
-   "fetched_at": "2026-11-19T07:36:15+09:00",
-   "last_get": "2026-11-19",
-   "signature": "\"006343ee8b704df1b45b2c16ce0a7f12\"|Wed, 18 Nov 2026 00:23:43 GMT|2208989",
-   "version": "2026-11-18"
+   "fetched_at": "2026-11-25T17:19:56+09:00",
+   "last_get": "2026-11-25",
+   "signature": "\"d0431bad6aabb480814a6030c7567505\"|Wed, 25 Nov 2026 00:00:04 GMT|2419282",
+   "version": "2026-11-25"
   },
   "nutrition": {
-   "fetched_at": "2026-11-18T07:36:27+09:00",
-   "last_get": "2026-11-18",
-   "signature": "\"fd5aee16cbb5e888bf88c4d22e301954\"|Tue, 17 Nov 2026 00:00:06 GMT|960072",
-   "version": "2026-11-17"
+   "fetched_at": "2026-11-25T17:19:56+09:00",
+   "last_get": "2026-11-25",
+   "signature": "\"32df3056b4dac875853b95f4aa790923\"|Wed, 25 Nov 2026 00:00:05 GMT|980825",
+   "version": "2026-11-25"
   }
  },
  "yoshinoya": {

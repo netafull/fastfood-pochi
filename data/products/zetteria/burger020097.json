@@ -1,0 +1,48 @@
+{
+ "chain": "zetteria",
+ "product_id": "burger020097",
+ "name": "柚子香る舞茸竜田チキンバーガー",
+ "category": "フェア バーガー",
+ "price": 620,
+ "price_note": "税込。公式サイトの一覧に表示された価格。",
+ "price_variants": null,
+ "launch_date": "2026-11-18",
+ "launch_date_source": "press_pdf",
+ "announced_at": "2026-11-11",
+ "planned_end_text": "12月上旬まで販売予定",
+ "news_url": "https://www.zetteria.jp/news/press/wa_burger_202611.pdf",
+ "news_title": "柚子（ゆず）・舞茸・翡翠（ひすい）ねぎが織りなす“和バーガー” ゼッテリア「和バーガーフェア 第2弾」開催",
+ "news_date": "2026-11-11",
+ "description": "一つひとつ店内で粉付けして揚げたジューシーな竜田チキンを、2種の醤油と青森県産黒にんにく、国産りんごを合わせた特製てりやきソースにしっかりと絡め、香り豊かで旨みのある舞茸やシャキシャキ食感の翡翠ねぎ…",
+ "description_full_len": 137,
+ "nutrition": null,
+ "nutrition_variants": null,
+ "nutrition_note": null,
+ "nutrition_pdf_url": "https://images.zensho.co.jp/materials/zetteria/allergen/nutrition.pdf",
+ "nutrition_pdf_label": "栄養成分一覧表",
+ "allergen_pdf_url": null,
+ "allergen_pdf_label": null,
+ "allergen_page_url": "https://www.zetteria.jp/allergen/",
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "期間限定",
+ "badges": [],
+ "official_url": "https://www.zetteria.jp/menu/burger020097.html",
+ "first_seen_at": "2026-11-25T17:21:47+09:00",
+ "last_seen_at": "2026-11-25",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-25",
+   "price": 620
+  }
+ ],
+ "source_list": [
+  "menu"
+ ],
+ "image": null,
+ "in_fair": true,
+ "price_checked_at": "2026-11-25"
+}

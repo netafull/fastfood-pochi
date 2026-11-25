@@ -12,7 +12,7 @@
   },
   {
    "label": "単品",
-   "price": 790
+   "price": 650
   }
  ],
  "launch_date": "2026-10-20",
@@ -84,7 +84,7 @@
  "official_url": "https://www.matsuyafoods.co.jp/matsuya/menu/teishoku/tei_chicken_chili_hp_261020.html",
  "current_slug": "teishoku-tei_chicken_chili_hp_261020",
  "first_seen_at": "2026-10-21T07:32:07+09:00",
- "last_seen_at": "2026-10-28",
+ "last_seen_at": "2026-11-25",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -98,5 +98,34 @@
   "limited",
   "teishoku"
  ],
- "image": null
+ "image": null,
+ "price_variants_history": [
+  {
+   "date": "2026-10-21",
+   "variants": [
+    {
+     "label": "セット",
+     "price": 990
+    },
+    {
+     "label": "単品",
+     "price": 790
+    }
+   ]
+  },
+  {
+   "date": "2026-11-25",
+   "variants": [
+    {
+     "label": "セット",
+     "price": 990
+    },
+    {
+     "label": "単品",
+     "price": 650
+    }
+   ]
+  }
+ ],
+ "price_checked_at": "2026-11-25"
 }

@@ -41,6 +41,10 @@
   ],
   "partial": [
    {
+    "name": "落花生（ピーナッツ）",
+    "mark": "△"
+   },
+   {
     "name": "かに",
     "mark": "△"
    },
@@ -113,8 +117,8 @@
  "allergen_source": {
   "url": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
   "label": "アレルゲン一覧",
-  "version": "2026-11-18",
-  "version_text": "2026年11月18日更新",
-  "fetched_at": "2026-11-19T07:36:15+09:00"
+  "version": "2026-11-25",
+  "version_text": "2026年11月25日更新",
+  "fetched_at": "2026-11-25T17:19:56+09:00"
  }
 }
