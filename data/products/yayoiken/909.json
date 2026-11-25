@@ -1,0 +1,45 @@
+{
+ "chain": "yayoiken",
+ "product_id": "909",
+ "name": "【ニラチヂミ付】辛旨チゲ定食",
+ "category": "定食",
+ "price": 1280,
+ "price_note": "税込。公式サイトの一覧に表示された価格。",
+ "price_variants": null,
+ "launch_date": "2026-11-17",
+ "launch_date_source": "news_article",
+ "announced_at": "2026-11-24",
+ "planned_end_text": null,
+ "news_url": "https://www.yayoiken.com/contents/news/261124_recommend.html",
+ "news_title": "「やよい軒」全国の店長が選んだ『チゲ定食』のおいしさ調査",
+ "news_date": "2026-11-24",
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "nutrition_variants": null,
+ "nutrition_note": null,
+ "nutrition_pdf_url": null,
+ "nutrition_pdf_label": null,
+ "allergen_pdf_url": null,
+ "allergen_pdf_label": null,
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "新メニュー",
+ "badges": [],
+ "official_url": "https://www.yayoiken.com/menu_list/view/13/909",
+ "first_seen_at": "2026-11-25T21:10:58+09:00",
+ "last_seen_at": "2026-11-25",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-25",
+   "price": 1280
+  }
+ ],
+ "source_list": [
+  "menu"
+ ],
+ "image": null
+}

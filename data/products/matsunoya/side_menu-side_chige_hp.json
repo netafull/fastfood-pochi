@@ -1,0 +1,71 @@
+{
+ "chain": "matsunoya",
+ "product_id": "side_menu-side_chige_hp",
+ "name": "単品 豚バラ野菜豆腐キムチチゲ",
+ "category": "サイドメニュー",
+ "price": 590,
+ "price_note": "税込。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 535.0,
+  "protein_g": 22.6,
+  "fat_g": 35.6,
+  "carbs_g": 33.3,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 6.2,
+  "other": {}
+ },
+ "nutrition_variants": null,
+ "nutrition_as_of": "2026-11-25",
+ "nutrition_note": null,
+ "allergens": {
+  "contains": [
+   "小麦",
+   "えび",
+   "牛肉",
+   "さけ",
+   "大豆",
+   "鶏肉",
+   "豚肉",
+   "りんご",
+   "ゼラチン",
+   "ごま"
+  ],
+  "partial": [
+   {
+    "name": "カニ",
+    "mark": "△"
+   }
+  ]
+ },
+ "origin": null,
+ "limited_kind": "新規掲載",
+ "in_recommended": false,
+ "official_url": "https://www.matsuyafoods.co.jp/matsunoya/menu/side_menu/side_chige_hp_261104.html",
+ "current_slug": "side_menu-side_chige_hp_261104",
+ "first_seen_at": "2026-11-25T21:01:59+09:00",
+ "last_seen_at": "2026-11-25",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-25",
+   "price": 590
+  }
+ ],
+ "source_list": [
+  "side_menu"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-25"
+}

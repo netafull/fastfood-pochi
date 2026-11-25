@@ -1,0 +1,62 @@
+{
+ "chain": "matsunoya",
+ "product_id": "side_menu-side_tarutaru_hp",
+ "name": "タルタルソース",
+ "category": "サイドメニュー",
+ "price": 60,
+ "price_note": "税込。店舗により価格・取り扱いが異なる場合があります。",
+ "price_variants": null,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 66.0,
+  "protein_g": 0.5,
+  "fat_g": 6.0,
+  "carbs_g": 2.4,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 0.8,
+  "other": {}
+ },
+ "nutrition_variants": null,
+ "nutrition_as_of": "2026-11-25",
+ "nutrition_note": null,
+ "allergens": {
+  "contains": [
+   "小麦",
+   "卵",
+   "乳",
+   "大豆",
+   "りんご"
+  ],
+  "partial": []
+ },
+ "origin": null,
+ "limited_kind": "定番",
+ "in_recommended": false,
+ "official_url": "https://www.matsuyafoods.co.jp/matsunoya/menu/side_menu/side_tarutaru_hp_240809.html",
+ "current_slug": "side_menu-side_tarutaru_hp_240809",
+ "first_seen_at": "2026-11-25T21:01:59+09:00",
+ "last_seen_at": "2026-11-25",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-25",
+   "price": 60
+  }
+ ],
+ "source_list": [
+  "side_menu"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-25",
+ "is_regular": true
+}

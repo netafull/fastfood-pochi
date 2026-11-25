@@ -1,19 +1,13 @@
 {
- "_health": {
-  "hidakaya": {
-   "days": 1,
-   "last_date": "2026-11-25"
-  }
- },
  "burgerking": {},
  "hidakaya": {
   "375": {
-   "checked_at": "2026-11-25T17:21:22+09:00",
+   "checked_at": "2026-11-25T21:08:17+09:00",
    "reason": "empty_detail",
    "url": "https://hidakaya.hiday.co.jp/hits/ja/menu/1/detail/375.html"
   },
   "376": {
-   "checked_at": "2026-11-25T18:25:44+09:00",
+   "checked_at": "2026-11-25T21:08:17+09:00",
    "reason": "empty_detail",
    "url": "https://hidakaya.hiday.co.jp/hits/ja/menu/1/detail/376.html"
   }
@@ -23,60 +17,39 @@
  "kfc": {},
  "kourakuen": {},
  "marugame": {},
- "matsunoya": {
-  "donburi-don_kaki_hp": {
-   "checked_at": "2026-11-25T20:46:04+09:00",
-   "reason": "fetch_error: matsunoya: 1回の実行あたりのリクエスト上限(60)に達しました",
-   "url": "/matsunoya/menu/donburi/don_kaki_hp_260916.html"
-  },
-  "side_menu-side_chige_hp": {
-   "checked_at": "2026-11-25T20:46:04+09:00",
-   "reason": "fetch_error: matsunoya: 1回の実行あたりのリクエスト上限(60)に達しました",
-   "url": "/matsunoya/menu/side_menu/side_chige_hp_261104.html"
-  },
-  "souzai-souzai_rare_hire_hp": {
-   "checked_at": "2026-11-25T20:46:04+09:00",
-   "reason": "fetch_error: matsunoya: 1回の実行あたりのリクエスト上限(60)に達しました",
-   "url": "/matsunoya/menu/souzai/souzai_rare_hire_hp_261118.html"
-  },
-  "souzai-souzai_yumenodaichi_ribu_rosu_hp": {
-   "checked_at": "2026-11-25T20:46:04+09:00",
-   "reason": "fetch_error: matsunoya: 1回の実行あたりのリクエスト上限(60)に達しました",
-   "url": "/matsunoya/menu/souzai/souzai_yumenodaichi_ribu_rosu_hp_261125.html"
-  }
- },
+ "matsunoya": {},
  "matsuya": {},
  "mcdonalds": {},
  "mos": {},
  "sukiya": {
   "side-7004400": {
-   "checked_at": "2026-11-25T18:22:19+09:00",
+   "checked_at": "2026-11-25T21:04:54+09:00",
    "reason": "empty_detail",
    "url": "/menu/in/side/7004400/index.html"
   },
   "side-7004500": {
-   "checked_at": "2026-11-25T18:22:19+09:00",
+   "checked_at": "2026-11-25T21:04:54+09:00",
    "reason": "empty_detail",
    "url": "/menu/in/side/7004500/index.html"
   },
   "side-7004600": {
-   "checked_at": "2026-11-25T18:22:19+09:00",
+   "checked_at": "2026-11-25T21:04:54+09:00",
    "reason": "empty_detail",
    "url": "/menu/in/side/7004600/index.html"
   },
   "side-7004700": {
-   "checked_at": "2026-11-25T18:22:19+09:00",
+   "checked_at": "2026-11-25T21:04:54+09:00",
    "reason": "empty_detail",
    "url": "/menu/in/side/7004700/index.html"
   }
  },
+ "yayoiken": {},
  "yoshinoya": {
   "yoshinomi-gyu-yakinikusara": {
-   "checked_at": "2026-11-25T18:21:16+09:00",
+   "checked_at": "2026-11-25T21:03:50+09:00",
    "reason": "empty_detail",
    "url": "/menu/yoshinomi/gyu-yakinikusara/"
   }
  },
- "zetteria": {},
- "yayoiken": {}
+ "zetteria": {}
 }

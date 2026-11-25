@@ -1,1 +1,80 @@
-{"article_checked":[],"articles":{},"checked_at":null,"menu_count":null}
+{
+ "article_checked": [
+  "https://www.yayoiken.com/contents/news/261112_sakaioonoshiba.html",
+  "https://www.yayoiken.com/contents/news/261116_snscp.html",
+  "https://www.yayoiken.com/contents/news/261124_nagahama.html"
+ ],
+ "articles": {
+  "https://www.yayoiken.com/contents/news/261112_recommend.html": {
+   "date": "2026-11-12",
+   "items": [
+    {
+     "name": "すき焼き定食",
+     "price": 1150
+    },
+    {
+     "name": "【お肉2倍】すき焼き定食",
+     "price": 1650
+    },
+    {
+     "name": "[テイクアウト]すき焼き ごはん・生たまご付",
+     "price": 1100
+    }
+   ],
+   "launch_date": "2026-11-05",
+   "title": "「やよい軒」全国の店長が選んだ『すき焼き定食』のおいしさ調査"
+  },
+  "https://www.yayoiken.com/contents/news/261124_recommend.html": {
+   "date": "2026-11-24",
+   "items": [
+    {
+     "name": "チゲ定食",
+     "price": 990
+    },
+    {
+     "name": "【ニラチヂミ付】チゲ定食",
+     "price": 1210
+    },
+    {
+     "name": "辛旨チゲ定食",
+     "price": 1060
+    },
+    {
+     "name": "【ニラチヂミ付】辛旨チゲ定食",
+     "price": 1280
+    },
+    {
+     "name": "ニラチヂミ(単品)",
+     "price": 240
+    }
+   ],
+   "launch_date": "2026-11-17",
+   "title": "「やよい軒」全国の店長が選んだ『チゲ定食』のおいしさ調査"
+  },
+  "https://www.yayoiken.com/contents/news/261125_butterbeef.html": {
+   "date": "2026-11-25",
+   "items": [
+    {
+     "name": "コク旨バタービーフ定食",
+     "price": 1250
+    },
+    {
+     "name": "コク旨バタービーフと有頭エビフライの定食",
+     "price": 1490
+    },
+    {
+     "name": "有頭エビフライのミックスフライ定食",
+     "price": 1190
+    },
+    {
+     "name": "【から揚げ付】有頭エビフライのミックスフライ定食",
+     "price": 1390
+    }
+   ],
+   "launch_date": "2026-12-02",
+   "title": "「やよい軒」コク旨バタービーフ定食発売のお知らせ"
+  }
+ },
+ "checked_at": "2026-11-25",
+ "menu_count": 142
+}

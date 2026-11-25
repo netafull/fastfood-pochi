@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ファストフードポチ｜限定メニューのカロリー・価格アーカイブ</title>
-<meta name="description" content="マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキーの期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています">
+<meta name="description" content="マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキー・やよい軒の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています">
 <link rel="canonical" href="https://fastfood.netaful.jp/">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-464GWH2ZGQ"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-464GWH2ZGQ');</script>
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ファストフードポチ｜限定メニューのカロリー・価格アーカイブ">
-<meta property="og:description" content="マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキーの期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています">
+<meta property="og:description" content="マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキー・やよい軒の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています">
 <meta property="og:url" content="https://fastfood.netaful.jp/">
 <meta property="og:site_name" content="ファストフードポチ">
 <meta property="og:locale" content="ja_JP">
@@ -25,13 +25,13 @@
 :root {
   --bg: #fafaf7; --card: #ffffff; --text: #1a1a1a; --muted: #6b6b6b;
   --accent: #00897b; --line: #e5e2dc;
-  --mcdonalds: #da291c; --mos: #1b7f3b; --matsuya: #a34a00; --matsunoya: #7a1f5c; --yoshinoya: #1f5fad; --sukiya: #8a6a00; --katsuya: #455a64; --karayama: #c2185b; --marugame: #e65100; --burgerking: #512da8; --kourakuen: #5d4037; --hidakaya: #00838f; --zetteria: #33691e; --kfc: #212121;
+  --mcdonalds: #da291c; --mos: #1b7f3b; --matsuya: #a34a00; --matsunoya: #7a1f5c; --yoshinoya: #1f5fad; --sukiya: #8a6a00; --katsuya: #455a64; --karayama: #c2185b; --marugame: #e65100; --burgerking: #512da8; --kourakuen: #5d4037; --hidakaya: #00838f; --zetteria: #33691e; --kfc: #212121; --yayoiken: #1b2f63;
 }
 @media (prefers-color-scheme: dark) {
   :root { --bg: #14151a; --card: #1e2027; --text: #e8e8e6; --muted: #9a9a96;
     --line: #2c2e36; --accent: #26a69a;
     /* 暗い背景でも見出しの下線・バッジが沈まないよう、松屋・松のや・吉野家・すき家だけ少し明るくする */
-    --matsuya: #b85a00; --matsunoya: #a83a82; --yoshinoya: #3a7bd0; --sukiya: #b8921a; --katsuya: #6b8794; --karayama: #d6477f; --marugame: #ff8a3d; --burgerking: #7e57c2; --kourakuen: #a1887f; --hidakaya: #26a6b5; --zetteria: #9ccc65; --kfc: #9e9e9e; }
+    --matsuya: #b85a00; --matsunoya: #a83a82; --yoshinoya: #3a7bd0; --sukiya: #b8921a; --katsuya: #6b8794; --karayama: #d6477f; --marugame: #ff8a3d; --burgerking: #7e57c2; --kourakuen: #a1887f; --hidakaya: #26a6b5; --zetteria: #9ccc65; --kfc: #9e9e9e; --yayoiken: #93a5d8; }
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--bg); color: var(--text);
@@ -72,6 +72,7 @@ h2, h1.pt { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--ac
 .chain-group[data-chain="hidakaya"] h3 { border-color: var(--hidakaya); }
 .chain-group[data-chain="zetteria"] h3 { border-color: var(--zetteria); }
 .chain-group[data-chain="kfc"] h3 { border-color: var(--kfc); }
+.chain-group[data-chain="yayoiken"] h3 { border-color: var(--yayoiken); }
 .regular-menu h3 { font-size: 15px; margin: 18px 0 8px; padding-left: 8px; border-left: 4px solid var(--line); }
 .regular-menu .lead { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
 table.pricelog { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
@@ -106,6 +107,7 @@ table.pricelog td.down { color: #2e7d32; }
 .item[data-chain="hidakaya"] .badge { background: var(--hidakaya); }
 .item[data-chain="zetteria"] .badge { background: var(--zetteria); }
 .item[data-chain="kfc"] .badge { background: var(--kfc); }
+.item[data-chain="yayoiken"] .badge { background: var(--yayoiken); }
 .item .st { display: inline-block; font-size: 10px; border-radius: 4px; padding: 0 6px; margin-left: 6px;
   border: 1px solid var(--line); color: var(--muted); }
 .item .st-on { color: var(--accent); border-color: var(--accent); }
@@ -196,7 +198,7 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <body>
 <header>
 <h1><a data-google-vignette="false" href="/"><img src="/assets/logo.png" alt="" width="44" height="44">ファストフードポチ</a></h1>
-<p>マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキーの期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています ｜ 最終更新: 2026年11月25日 20:52</p>
+<p>マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキー・やよい軒の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています ｜ 最終更新: 2026年11月25日 21:11</p>
 </header>
 <div class="ad-slot">
 <ins class="adsbygoogle"
@@ -222,6 +224,7 @@ footer { max-width: 980px; margin: 0 auto; padding: 16px; color: var(--muted); f
 <a data-google-vignette="false" href="/chains/hidakaya/">日高屋</a>
 <a data-google-vignette="false" href="/chains/zetteria/">ゼッテリア</a>
 <a data-google-vignette="false" href="/chains/kfc/">ケンタッキー</a>
+<a data-google-vignette="false" href="/chains/yayoiken/">やよい軒</a>
 </div>
 <h2>メニュー名で検索</h2>
 <div class="searchbox"><input id="search-input" type="search"
@@ -301,12 +304,12 @@ placeholder="メニュー名で検索（例: 月見、てりやき、フォカ�
 </div>
 </a>
 </div>
-<h2>販売中の限定メニュー (247件)</h2>
+<h2>販売中の限定メニュー (267件)</h2>
 <div class="sort-bar">
 <label>並び替え: <select id="sort-select"><option value="date">開始日順</option>
 <option value="kcal">カロリー順</option></select></label>
 <label>販売状況: <select id="status-filter"><option value="on_sale" selected>販売中</option><option value="ended">終了</option><option value="all">すべて</option></select></label>
-<label>絞り込み: <select id="chain-filter"><option value="all">すべて</option><option value="mcdonalds">マクドナルド</option><option value="mos">モスバーガー</option><option value="matsuya">松屋</option><option value="matsunoya">松のや</option><option value="yoshinoya">吉野家</option><option value="sukiya">すき家</option><option value="katsuya">かつや</option><option value="karayama">からやま</option><option value="marugame">丸亀製麺</option><option value="burgerking">バーガーキング</option><option value="kourakuen">幸楽苑</option><option value="hidakaya">日高屋</option><option value="zetteria">ゼッテリア</option><option value="kfc">ケンタッキー</option></select></label>
+<label>絞り込み: <select id="chain-filter"><option value="all">すべて</option><option value="mcdonalds">マクドナルド</option><option value="mos">モスバーガー</option><option value="matsuya">松屋</option><option value="matsunoya">松のや</option><option value="yoshinoya">吉野家</option><option value="sukiya">すき家</option><option value="katsuya">かつや</option><option value="karayama">からやま</option><option value="marugame">丸亀製麺</option><option value="burgerking">バーガーキング</option><option value="kourakuen">幸楽苑</option><option value="hidakaya">日高屋</option><option value="zetteria">ゼッテリア</option><option value="kfc">ケンタッキー</option><option value="yayoiken">やよい軒</option></select></label>
 </div>
 <section class="chain-group" data-chain="mcdonalds">
 <h3>マクドナルド (<span class="cnt">34</span>件)</h3>
@@ -1182,7 +1185,7 @@ placeholder="メニュー名で検索（例: 月見、てりやき、フォカ�
 </div>
 </section>
 <section class="chain-group" data-chain="matsunoya">
-<h3>松のや (<span class="cnt">72</span>件)</h3>
+<h3>松のや (<span class="cnt">75</span>件)</h3>
 <div class="grid" data-sortable>
 <a data-google-vignette="false" class="item" href="/items/matsunoya-donburi-don_yumenodaichi_rosu_hp.html" data-kcal="1165.0"
    data-date="2026-11-25" data-chain="matsunoya" data-status="on_sale">
@@ -1324,6 +1327,24 @@ placeholder="メニュー名で検索（例: 月見、てりやき、フォカ�
   <div class="meta">2026-11-25（記録開始日）〜 販売中・おすすめ掲載</div>
   
 </div></a>
+<a data-google-vignette="false" class="item" href="/items/matsunoya-side_menu-side_chige_hp.html" data-kcal="535.0"
+   data-date="2026-11-25" data-chain="matsunoya" data-status="on_sale">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">単品 豚バラ野菜豆腐キムチチゲ</div>
+  <div class="price">590円（税込）<span class="kcal">535kcal</span></div>
+  <div class="meta">2026-11-25（記録開始日）〜 販売中・新規掲載</div>
+  
+</a>
+<a data-google-vignette="false" class="item" href="/items/matsunoya-souzai-souzai_yumenodaichi_ribu_rosu_hp.html" data-kcal="818.0"
+   data-date="2026-11-25" data-chain="matsunoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">単品“国産ゆめの大地”超厚切りリブロースかつ</div>
+  <div class="price">1090円（税込）<span class="kcal">818kcal</span></div>
+  <div class="meta">2026-11-25〜 販売中・新メニュー</div>
+  
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/matsunoya-souzai-souzai_yumenodaichi_rosu_hp.html" data-kcal="596.0"
    data-date="2026-11-25" data-chain="matsunoya" data-status="on_sale">
 <img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
@@ -1431,6 +1452,16 @@ placeholder="メニュー名で検索（例: 月見、てりやき、フォカ�
   <div class="badge">松のや</div><span class="st st-on">販売中</span>
   <div class="t">ロースかつ＆極厚“レア”ヒレかつ定食</div>
   <div class="price">1590円（税込）<span class="kcal">1412kcal</span></div>
+  <div class="meta">2026-11-18〜 販売中・新メニュー</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/matsunoya-souzai-souzai_rare_hire_hp.html" data-kcal="582.0"
+   data-date="2026-11-18" data-chain="matsunoya" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">松のや</div><span class="st st-on">販売中</span>
+  <div class="t">単品極厚“レア”ヒレかつ</div>
+  <div class="price">1190円（税込）<span class="kcal">582kcal</span></div>
   <div class="meta">2026-11-18〜 販売中・新メニュー</div>
   
 </div></a>
@@ -3428,8 +3459,18 @@ placeholder="メニュー名で検索（例: 月見、てりやき、フォカ�
 </div>
 </section>
 <section class="chain-group" data-chain="kfc">
-<h3>ケンタッキー (<span class="cnt">11</span>件)</h3>
+<h3>ケンタッキー (<span class="cnt">13</span>件)</h3>
 <div class="grid" data-sortable>
+<a data-google-vignette="false" class="item" href="/items/kfc-029151.html" data-kcal=""
+   data-date="2026-11-25" data-chain="kfc" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">ケンタッキー</div><span class="st st-on">販売中</span>
+  <div class="t">ビスケット</div>
+  <div class="price">290円（税込）</div>
+  <div class="meta">2026-11-25（記録開始日）〜 販売中・期間限定</div>
+  
+</div></a>
 <a data-google-vignette="false" class="item" href="/items/kfc-032114.html" data-kcal=""
    data-date="2026-11-25" data-chain="kfc" data-status="on_sale">
 <img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
@@ -3438,6 +3479,16 @@ placeholder="メニュー名で検索（例: 月見、てりやき、フォカ�
   <div class="t">とりの日パック</div>
   <div class="price">1290円（税込）</div>
   <div class="meta">2026-11-25（記録開始日）〜 販売中・新メニュー</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/kfc-032119.html" data-kcal=""
+   data-date="2026-11-25" data-chain="kfc" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">ケンタッキー</div><span class="st st-on">販売中</span>
+  <div class="t">ポテトＢＯＸ</div>
+  <div class="price">990円（税込）</div>
+  <div class="meta">2026-11-25（記録開始日）〜 販売中・期間限定</div>
   
 </div></a>
 <a data-google-vignette="false" class="item" href="/items/kfc-032743.html" data-kcal=""
@@ -3536,6 +3587,161 @@ placeholder="メニュー名で検索（例: 月見、てりやき、フォカ�
   <div class="t">マッケンチーズチキンバーガーよくばりセット</div>
   <div class="price">1360円（税込）</div>
   <div class="meta">2026-11-18〜 販売中・期間限定</div>
+  
+</div></a>
+</div>
+</section>
+<section class="chain-group" data-chain="yayoiken">
+<h3>やよい軒 (<span class="cnt">15</span>件)</h3>
+<div class="grid" data-sortable>
+<a data-google-vignette="false" class="item" href="/items/yayoiken-844.html" data-kcal=""
+   data-date="2026-11-25" data-chain="yayoiken" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">やよい軒</div><span class="st st-on">販売中</span>
+  <div class="t">かきフライ（単品）</div>
+  <div class="price">450円（税込）</div>
+  <div class="meta">2026-11-25（記録開始日）〜 販売中・期間限定</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/yayoiken-911.html" data-kcal=""
+   data-date="2026-11-25" data-chain="yayoiken" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">やよい軒</div><span class="st st-on">販売中</span>
+  <div class="t">大分とり天定食（4個）</div>
+  <div class="price">960円（税込）</div>
+  <div class="meta">2026-11-25（記録開始日）〜 販売中・新メニュー</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/yayoiken-912.html" data-kcal=""
+   data-date="2026-11-25" data-chain="yayoiken" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">やよい軒</div><span class="st st-on">販売中</span>
+  <div class="t">大分とり天定食（6個）</div>
+  <div class="price">1160円（税込）</div>
+  <div class="meta">2026-11-25（記録開始日）〜 販売中・新メニュー</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/yayoiken-913.html" data-kcal=""
+   data-date="2026-11-25" data-chain="yayoiken" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">やよい軒</div><span class="st st-on">販売中</span>
+  <div class="t">[テイクアウト]大分とり天（4個）</div>
+  <div class="price">960円（税込）</div>
+  <div class="meta">2026-11-25（記録開始日）〜 販売中・新メニュー</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/yayoiken-914.html" data-kcal=""
+   data-date="2026-11-25" data-chain="yayoiken" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">やよい軒</div><span class="st st-on">販売中</span>
+  <div class="t">[テイクアウト]大分とり天（4個）おかずのみ</div>
+  <div class="price">810円（税込）</div>
+  <div class="meta">2026-11-25（記録開始日）〜 販売中・新メニュー</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/yayoiken-918.html" data-kcal=""
+   data-date="2026-11-25" data-chain="yayoiken" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">やよい軒</div><span class="st st-on">販売中</span>
+  <div class="t">[テイクアウト]すき焼きおかずのみ</div>
+  <div class="price">1000円（税込）</div>
+  <div class="meta">2026-11-25（記録開始日）〜 販売中・新メニュー</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/yayoiken-919.html" data-kcal=""
+   data-date="2026-11-25" data-chain="yayoiken" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">やよい軒</div><span class="st st-on">販売中</span>
+  <div class="t">ロースとんかつとアジフライの定食</div>
+  <div class="price">1190円（税込）</div>
+  <div class="meta">2026-11-25（記録開始日）〜 販売中・新メニュー</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/yayoiken-906.html" data-kcal=""
+   data-date="2026-11-17" data-chain="yayoiken" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">やよい軒</div><span class="st st-on">販売中</span>
+  <div class="t">チゲ定食</div>
+  <div class="price">990円（税込）</div>
+  <div class="meta">2026-11-17〜 販売中・新メニュー</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/yayoiken-907.html" data-kcal=""
+   data-date="2026-11-17" data-chain="yayoiken" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">やよい軒</div><span class="st st-on">販売中</span>
+  <div class="t">【ニラチヂミ付】チゲ定食</div>
+  <div class="price">1210円（税込）</div>
+  <div class="meta">2026-11-17〜 販売中・新メニュー</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/yayoiken-908.html" data-kcal=""
+   data-date="2026-11-17" data-chain="yayoiken" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">やよい軒</div><span class="st st-on">販売中</span>
+  <div class="t">辛旨チゲ定食</div>
+  <div class="price">1060円（税込）</div>
+  <div class="meta">2026-11-17〜 販売中・新メニュー</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/yayoiken-909.html" data-kcal=""
+   data-date="2026-11-17" data-chain="yayoiken" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">やよい軒</div><span class="st st-on">販売中</span>
+  <div class="t">【ニラチヂミ付】辛旨チゲ定食</div>
+  <div class="price">1280円（税込）</div>
+  <div class="meta">2026-11-17〜 販売中・新メニュー</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/yayoiken-910.html" data-kcal=""
+   data-date="2026-11-17" data-chain="yayoiken" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/sozai.svg" width="32" height="32" alt="惣菜・揚げ物" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">やよい軒</div><span class="st st-on">販売中</span>
+  <div class="t">ニラチヂミ（単品）</div>
+  <div class="price">240円（税込）</div>
+  <div class="meta">2026-11-17〜 販売中・期間限定</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/yayoiken-915.html" data-kcal=""
+   data-date="2026-11-05" data-chain="yayoiken" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">やよい軒</div><span class="st st-on">販売中</span>
+  <div class="t">すき焼き定食</div>
+  <div class="price">1150円（税込）</div>
+  <div class="meta">2026-11-05〜 販売中・新メニュー</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/yayoiken-916.html" data-kcal=""
+   data-date="2026-11-05" data-chain="yayoiken" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/donburi.svg" width="32" height="32" alt="丼・定食" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">やよい軒</div><span class="st st-on">販売中</span>
+  <div class="t">【お肉2倍】すき焼き定食</div>
+  <div class="price">1650円（税込）</div>
+  <div class="meta">2026-11-05〜 販売中・新メニュー</div>
+  
+</div></a>
+<a data-google-vignette="false" class="item" href="/items/yayoiken-917.html" data-kcal=""
+   data-date="2026-11-05" data-chain="yayoiken" data-status="on_sale">
+<img class="cat-icon" src="/assets/icons/cat/bento.svg" width="32" height="32" alt="弁当・ごはん" loading="lazy" decoding="async">
+<div class="ib">
+  <div class="badge">やよい軒</div><span class="st st-on">販売中</span>
+  <div class="t">[テイクアウト]すき焼き ごはん・生たまご付</div>
+  <div class="price">1100円（税込）</div>
+  <div class="meta">2026-11-05〜 販売中・新メニュー</div>
   
 </div></a>
 </div>
@@ -3670,13 +3876,13 @@ function computeAdPlan(counts, every, max) {
 
 <p><a data-google-vignette="false" href="/archive/">終了した限定メニューのアーカイブ（101件）を見る →</a></p>
 <section class="about"><h2>ファストフードポチについて</h2>
-<p>マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキーの公式サイトを1日1回チェックして、期間限定メニューと新しく登場したメニューを記録しています。公式サイトは販売が終わったメニューのページを消してしまうので、「いつからいつまで売っていたか」「いくらだったか」を後から調べられるようにしています。限定メニューのほかに定番メニューも記録し、価格が変わった日を「価格改定の記録」に残しています。</p>
+<p>マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキー・やよい軒の公式サイトを1日1回チェックして、期間限定メニューと新しく登場したメニューを記録しています。公式サイトは販売が終わったメニューのページを消してしまうので、「いつからいつまで売っていたか」「いくらだったか」を後から調べられるようにしています。限定メニューのほかに定番メニューも記録し、価格が変わった日を「価格改定の記録」に残しています。</p>
 <p>ネタフルでは、コンビニやファストフードのごはんをまとめて「ファスト飯」と呼んでいます。</p>
 </section>
 </main>
 <footer>
 価格・販売期間・販売状況は取得時点のものです。最新の状況は各社公式サイトでご確認ください。
-当サイトはマクドナルド、モスバーガー、松屋、松のや、吉野家、すき家、かつや、からやま、丸亀製麺、バーガーキング、幸楽苑、日高屋、ゼッテリア、ケンタッキー各社とは関係のない非公式サイトです。
+当サイトはマクドナルド、モスバーガー、松屋、松のや、吉野家、すき家、かつや、からやま、丸亀製麺、バーガーキング、幸楽苑、日高屋、ゼッテリア、ケンタッキー、やよい軒各社とは関係のない非公式サイトです。
 当サイトはGoogle AdSenseを掲載し、Googleアナリティクスを使っています。いずれもCookieを使うことがあります。
 ｜ <a data-google-vignette="false" href="/archive/">終了した限定メニュー</a> ｜ <a data-google-vignette="false" href="/prices/">価格改定の記録</a>
 <nav class="sites"><span class="lbl">関連サイト</span>

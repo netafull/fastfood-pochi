@@ -103,5 +103,21 @@
   "osusume"
  ],
  "image": null,
- "current_slug": "donburi-don_kaki_hp_260916"
+ "current_slug": "donburi-don_kaki_hp_260916",
+ "price_variants_history": [
+  {
+   "date": "2026-10-11",
+   "variants": [
+    {
+     "label": "並盛",
+     "price": 930
+    },
+    {
+     "label": "大盛",
+     "price": 1010
+    }
+   ]
+  }
+ ],
+ "price_checked_at": "2026-11-25"
 }
