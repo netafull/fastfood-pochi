@@ -1,10 +1,60 @@
 {
  "article_checked": [
+  "https://www.yayoiken.com/contents/news/261030_okachimachi.html",
+  "https://www.yayoiken.com/contents/news/261104_chouhu.html",
+  "https://www.yayoiken.com/contents/news/261110_kamagayadaibutsu.html",
+  "https://www.yayoiken.com/contents/news/261111_yamaguchi.html",
   "https://www.yayoiken.com/contents/news/261112_sakaioonoshiba.html",
   "https://www.yayoiken.com/contents/news/261116_snscp.html",
   "https://www.yayoiken.com/contents/news/261124_nagahama.html"
  ],
  "articles": {
+  "https://www.yayoiken.com/contents/news/261110_chige.html": {
+   "date": "2026-11-10",
+   "items": [
+    {
+     "name": "チゲ定食",
+     "price": 990
+    },
+    {
+     "name": "【ニラチヂミ付】チゲ定食",
+     "price": 1210
+    },
+    {
+     "name": "辛旨チゲ定食",
+     "price": 1060
+    },
+    {
+     "name": "【ニラチヂミ付】辛旨チゲ定食",
+     "price": 1280
+    },
+    {
+     "name": "ニラチヂミ(単品)",
+     "price": 240
+    }
+   ],
+   "launch_date": "2026-11-17",
+   "title": "「やよい軒」世界共通NABE FAIR 第2弾 チゲ定食発売のお知らせ"
+  },
+  "https://www.yayoiken.com/contents/news/261111_toriten.html": {
+   "date": "2026-11-11",
+   "items": [
+    {
+     "name": "大分とり天定食(4個)",
+     "price": 960
+    },
+    {
+     "name": "大分とり天定食(6個)",
+     "price": 1160
+    },
+    {
+     "name": "[テイクアウト]大分とり天 (4個)",
+     "price": 960
+    }
+   ],
+   "launch_date": "2026-11-17",
+   "title": "「やよい軒」『～鶏むね肉の～大分とり天定食』発売のお知らせ"
+  },
   "https://www.yayoiken.com/contents/news/261112_recommend.html": {
    "date": "2026-11-12",
    "items": [
@@ -75,6 +125,6 @@
    "title": "「やよい軒」コク旨バタービーフ定食発売のお知らせ"
   }
  },
- "checked_at": "2026-11-25",
+ "checked_at": "2026-11-26",
  "menu_count": 142
 }

@@ -47,9 +47,9 @@
  "official_url": "https://www.matsuyafoods.co.jp/matsuya/menu/curry/kashmir_hb_hp_261006.html",
  "first_seen_at": "2026-10-11T12:09:31+09:00",
  "last_seen_at": "2026-10-28",
- "status": "on_sale",
- "ended_observed_at": null,
- "missed_runs": 1,
+ "status": "ended",
+ "ended_observed_at": "2026-11-26",
+ "missed_runs": 2,
  "price_history": [
   {
    "date": "2026-10-11",
@@ -62,5 +62,5 @@
  ],
  "image": null,
  "current_slug": "curry-kashmir_hb_hp_261006",
- "last_miss_date": "2026-11-25"
+ "last_miss_date": "2026-11-26"
 }

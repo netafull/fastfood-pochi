@@ -67,9 +67,9 @@
  "current_slug": "moriawase-mori_ribu_kara6_hp_261021",
  "first_seen_at": "2026-10-22T07:31:56+09:00",
  "last_seen_at": "2026-10-28",
- "status": "on_sale",
- "ended_observed_at": null,
- "missed_runs": 1,
+ "status": "ended",
+ "ended_observed_at": "2026-11-26",
+ "missed_runs": 2,
  "price_history": [
   {
    "date": "2026-10-22",
@@ -81,5 +81,5 @@
   "osusume"
  ],
  "image": null,
- "last_miss_date": "2026-11-25"
+ "last_miss_date": "2026-11-26"
 }

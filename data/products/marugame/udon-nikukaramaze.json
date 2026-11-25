@@ -111,9 +111,9 @@
  "official_url": "https://jp.marugame.com/menu/udon/nikukaramaze/",
  "first_seen_at": "2026-10-17T15:39:39+09:00",
  "last_seen_at": "2026-11-24",
- "status": "on_sale",
- "ended_observed_at": null,
- "missed_runs": 1,
+ "status": "ended",
+ "ended_observed_at": "2026-11-26",
+ "missed_runs": 2,
  "price_history": [
   {
    "date": "2026-10-17",
@@ -143,5 +143,5 @@
    ]
   }
  ],
- "last_miss_date": "2026-11-25"
+ "last_miss_date": "2026-11-26"
 }
