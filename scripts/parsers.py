@@ -2561,3 +2561,209 @@ def match_kfc_release(name: str, price: int | None, release: dict | None) -> boo
     if price is not None and text and n in _kfc_norm(text):
         return any(it.get("price") == price for it in release.get("items") or [])
     return False
+
+
+# ---------------------------------------------------------------------------
+# やよい軒 (www.yayoiken.com。2026-11-25追加、15チェーン目)
+# ---------------------------------------------------------------------------
+# 調査・方針(2026-11-25。実物で確認した事実):
+#  ・商品の正本は都道府県別メニュー一覧 /menu_list/index/{県ID}(東京=13)。1ページに全タブ
+#    (定食/丼・麺・お子様/朝食/サイド/おうち定食)の全商品がサーバーサイドHTMLで載る(東京142件)。
+#    カードは li.c-content-index-menu-list__item で、名前(.c-content-index-menu-list__title。
+#    肩書きは .c-content-index-menu-list__shoulder-top に分離)・価格(.c-content-index-menu-list__price。
+#    税込)・詳細URL /menu_list/view/{県ID}/{商品ID} がテキストで読める。バッジは NEW(c-label__new)のみ。
+#    都道府県差は実質なし(東京142件・北海道142件で共通137件。差分はアルコールの県別並行IDのみで、
+#    共通商品の価格差は0件)なので、代表は東京にする。
+#  ・「おすすめメニュー(期間限定)」はサイドタブ内の h2 セクション(2026-11-25実測2件)。h2 のセクション名は
+#    カテゴリにはせず、所属タブをカテゴリにする。期間限定の判定はこのセクションへの掲載だけに使う。
+#  ・発売日は自社サイトのニュース記事 /contents/news/{YYMMDD}_{slug}.html が正本。■商品概要 に
+#    商品名と価格が列挙され(肩書き「～…～」は別行で前置。[テイクアウト] の接頭辞が肩書きの前や
+#    独立行に付くこともある)、「・発売日」の次の行に 2026.11.17(火) の形で発売日が明記される。
+#    発表日と発売日は約1週間ずれるので、発表日での代用はしない。発売前の商品はメニュー一覧に
+#    載らないため、告知だけでは記録せず、一覧に現れたら state に残した記事情報で照合する。
+#    ■商品概要 の無い記事(出店情報など)は商品記事ではない。記事後半の既存商品の再掲
+#    (バリューメニュー紹介など)と照合しないよう、照合範囲は ■商品概要 から ・発売日 までに限る。
+#  ・robots.txt は404(ファイルなし)=制限なし。サイトポリシーに自動取得の禁止条文は無い
+#    (2026-11-25確認)。記録は事実情報のみで、画像は保存・表示しない。
+YAYOIKEN_BASE = "https://www.yayoiken.com"
+YAYOIKEN_MENU_PATH = "/menu_list/index/13"   # 東京を代表にする(都道府県差は実質なし)
+YAYOIKEN_NEWS_PATH = "/news"
+YAYOIKEN_TABS = ["定食", "丼・麺・お子様", "朝食", "サイド", "おうち定食"]
+YAYOIKEN_LIMITED_SECTION = "おすすめメニュー（期間限定）"
+
+
+def yayoiken_menu_url() -> str:
+    return YAYOIKEN_BASE + YAYOIKEN_MENU_PATH
+
+
+def yayoiken_news_url(page: int = 1) -> str:
+    return YAYOIKEN_BASE + YAYOIKEN_NEWS_PATH if page <= 1 else f"{YAYOIKEN_BASE}{YAYOIKEN_NEWS_PATH}?page={page}"
+
+
+_YAYOIKEN_ITEM_RE = re.compile(r'<li class="c-content-index-menu-list__item">')
+
+
+def parse_yayoiken_menu(page: str) -> list[dict]:
+    """東京のメニュー一覧(1ページ・全タブ)の商品。product_id(詳細URL末尾の数値ID)・name・
+    price(税込。取れなければ None)・category(所属タブ)・section(h2の見出し)・is_new(NEWバッジ)・
+    in_limited_section(「おすすめメニュー(期間限定)」セクションに載っているか)・official_url。
+    商品名は公式表記のまま(肩書きは含めない)。タブのパネルが見つからなければ空(構造変更)。"""
+    page = _strip_html_comments(page)
+    page = re.sub(r"<script\b.*?</script>|<style\b.*?</style>", "", page, flags=re.S)
+    box = page.find('id="box-category"')
+    if box < 0:
+        return []
+    panels = re.split(r'<li class="c-tab__cont-item[^"]*">', page[box:])[1:]
+    out: dict[str, dict] = {}
+    for tab, panel in zip(YAYOIKEN_TABS, panels):
+        sections = re.split(r"<h2[^>]*>(.*?)</h2>", panel, flags=re.S)
+        # sections は [前置き, 見出し, 本文, 見出し, 本文, ...]
+        for i in range(1, len(sections), 2):
+            section = re.sub(r"\s+", " ", clean_text(sections[i])).strip()
+            body = sections[i + 1] if i + 1 < len(sections) else ""
+            for chunk in _YAYOIKEN_ITEM_RE.split(body)[1:]:
+                a = re.search(r'href="https://www\.yayoiken\.com/menu_list/view/\d+/(\d+)"', chunk)
+                t = re.search(r'c-content-index-menu-list__title">(.*?)</p>', chunk, re.S)
+                if not a or not t:
+                    continue
+                pid = a.group(1)
+                if pid in out:
+                    continue
+                name = re.sub(r"\s+", " ", clean_text(t.group(1))).strip()
+                if not name:
+                    continue
+                pm = re.search(r'c-content-index-menu-list__price">([\d,]+)</span>', chunk)
+                out[pid] = {"product_id": pid, "name": name,
+                            "price": int(pm.group(1).replace(",", "")) if pm else None,
+                            "category": tab, "section": section,
+                            "is_new": "c-label__new" in chunk,
+                            "in_limited_section": section == YAYOIKEN_LIMITED_SECTION,
+                            "official_url": f"{YAYOIKEN_BASE}/menu_list/view/13/{pid}"}
+    return list(out.values())
+
+
+_YAYOIKEN_NEWS_A_RE = re.compile(
+    r'<a href="(https://www\.yayoiken\.com/contents/news/[^"]+\.html)"[^>]*>(.*?)</a>', re.S)
+
+
+def parse_yayoiken_news_list(page: str) -> list[dict]:
+    """ニュース一覧を、新しい順の [{date(ISO), title, url(絶対), category}] にする。重複は除く。"""
+    out, seen = [], set()
+    for m in _YAYOIKEN_NEWS_A_RE.finditer(_strip_html_comments(page)):
+        url, body = m.group(1), m.group(2)
+        if url in seen:
+            continue
+        d = re.search(r'data-datetime="(\d{4}-\d{1,2}-\d{1,2})"', body)
+        t = re.search(r'c-media-list__title">(.*?)</div>', body, re.S)
+        if not d or not t:
+            continue
+        seen.add(url)
+        c = re.search(r'<li data-category="[^"]*">\s*<span>(.*?)</span>', body, re.S)
+        date = "-".join(f"{int(x):0{w}d}" for x, w in zip(d.group(1).split("-"), (4, 2, 2)))
+        out.append({"date": date, "title": re.sub(r"\s+", " ", clean_text(t.group(1))).strip(),
+                    "url": url, "category": clean_text(c.group(1)) if c else ""})
+    out.sort(key=lambda x: x["date"], reverse=True)
+    return out
+
+
+def _yayoiken_detail_text(page: str) -> str:
+    """ニュース記事の本文テキスト(<br>とブロック要素の終わりは改行。空行は詰める)。"""
+    page = _strip_html_comments(page)
+    page = re.sub(r"<script\b.*?</script>|<style\b.*?</style>", "", page, flags=re.S)
+    page = re.sub(r"</(p|li|tr|div|h[1-6])>", "\n", page, flags=re.I)
+    txt = clean_text(page)
+    return "\n".join(ln.strip() for ln in txt.split("\n") if ln.strip())
+
+
+_YAYOIKEN_PRICE_LINE_RE = re.compile(r"^([\d,]+)円$")
+_YAYOIKEN_LAUNCH_RE = re.compile(r"・発売日\s*\n\s*(\d{4})\.(\d{1,2})\.(\d{1,2})")
+_YAYOIKEN_LAUNCH_JP_RE = re.compile(r"・発売日\s*\n?\s*(\d{4})年(\d{1,2})月(\d{1,2})日")
+
+
+def _yayoiken_article_item_name(line: str) -> tuple[str, bool]:
+    """■商品概要 の1行から、肩書き「～…～」を落とした商品名と、[テイクアウト] の接頭辞が
+    付いていたかを返す。肩書きだけの行・接頭辞だけの行は名前が空になる。
+    商品名は原文の表記のまま返す(照合側でNFKC正規化する)。"""
+    s = line.strip()
+    takeout = False
+    for prefix in ("[テイクアウト]", "［テイクアウト］"):
+        if s.startswith(prefix):
+            takeout = True
+            s = s[len(prefix):].strip()
+            break
+    s = re.sub(r"[～~][^～~]*[～~]", "", s).strip()
+    return s, takeout
+
+
+def parse_yayoiken_news_article(page: str) -> dict | None:
+    """ニュース記事の詳細。■商品概要 が無ければ None(商品記事ではない)。
+    戻り値: {"launch_date"(・発売日。ISO。読めなければ None), "items": [{"name", "price"}]}。
+    商品名と価格は ■商品概要 から ・発売日 までの範囲で読む(記事後半の既存商品の再掲は読まない)。
+    肩書き「～…～」は商品名から落とす。[テイクアウト] の接頭辞は、独立行・肩書きの前置の
+    どちらの形でも次の商品名に付ける。"""
+    text = _yayoiken_detail_text(page)
+    idx = text.find("■商品概要")
+    if idx < 0:
+        return None
+    tail = text[idx + len("■商品概要"):]
+    end = tail.find("・発売日")
+    scope = tail[:end] if end >= 0 else tail
+    items, seen = [], set()
+    pending_prefix = ""
+    pending_name: str | None = None
+    for line in scope.split("\n"):
+        if line.startswith("■"):
+            break   # 次の見出し(バリューメニュー紹介など)は ■商品概要 の範囲外
+        pm = _YAYOIKEN_PRICE_LINE_RE.match(line.strip())
+        if pm:
+            if pending_name:
+                key = (pending_name, int(pm.group(1).replace(",", "")))
+                if key not in seen:
+                    seen.add(key)
+                    items.append({"name": pending_name, "price": key[1]})
+            pending_name = None
+            continue
+        name, takeout = _yayoiken_article_item_name(line)
+        if takeout:
+            pending_prefix = "[テイクアウト]"
+        if not name:
+            continue   # 肩書きだけの行・接頭辞だけの行
+        pending_name = pending_prefix + name
+        pending_prefix = ""
+    if not items:
+        return None
+    launch = None
+    dm = _YAYOIKEN_LAUNCH_RE.search(text) or _YAYOIKEN_LAUNCH_JP_RE.search(text)
+    if dm:
+        launch = f"{int(dm.group(1)):04d}-{int(dm.group(2)):02d}-{int(dm.group(3)):02d}"
+    return {"launch_date": launch, "items": items}
+
+
+def yayoiken_excluded(entry: dict) -> str | None:
+    """記録しない商品なら理由を返す。名前が無い・価格が無いものだけ(テイクアウト・セット・アルコールも記録する)。"""
+    if not (entry.get("name") or "").strip():
+        return "no_name"
+    if entry.get("price") is None:
+        return "no_price"
+    return None
+
+
+def _yayoiken_norm(s: str | None) -> str:
+    return re.sub(r"\s+", "", unicodedata.normalize("NFKC", s or ""))
+
+
+def match_yayoiken_article(name: str, price: int | None, article: dict | None) -> bool:
+    """商品がこの記事の■商品概要の対象か。商品名(空白を除いてNFKC正規化し、完全一致か包含)と
+    価格の両方が一致したときだけ True(価格が読めない商品は名前だけでは照合しない)。"""
+    if not article or price is None:
+        return False
+    n = _yayoiken_norm(name)
+    if len(n) < 2:
+        return False
+    for it in article.get("items") or []:
+        if it.get("price") != price:
+            continue
+        inm = _yayoiken_norm(it.get("name"))
+        if inm == n or (len(n) >= 4 and (n in inm or inm in n)):
+            return True
+    return False

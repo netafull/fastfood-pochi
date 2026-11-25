@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキーの限定メニュー・新メニューを巡回し、
-data/products/{mcdonalds|mos|matsuya|matsunoya|yoshinoya|sukiya|katsuya|karayama|marugame|burgerking|kourakuen|hidakaya|zetteria|kfc}/{id}.json に1商品1ファイルで蓄積する。
+"""マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキー・やよい軒の限定メニュー・新メニューを巡回し、
+data/products/{mcdonalds|mos|matsuya|matsunoya|yoshinoya|sukiya|katsuya|karayama|marugame|burgerking|kourakuen|hidakaya|zetteria|kfc|yayoiken}/{id}.json に1商品1ファイルで蓄積する。
 
 このサイトの核は「販売状況の追跡」。公式サイトは販売が終わると商品を消すので、
 一覧に居た商品が消えたら終了とみなして記録を残す。
@@ -3192,6 +3192,332 @@ def crawl_kfc(getter, pending: dict, stats: dict, today: str | None = None) -> N
 
 
 # ---------------------------------------------------------------------------
+# やよい軒 (www.yayoiken.com。2026-11-25追加、15チェーン目。実物の構造は parsers.py の同名のコメントにまとめた)
+# ---------------------------------------------------------------------------
+# 方針:
+#  ・巡回は robots.txt + メニュー一覧(東京)1ページ + ニュース一覧2ページ + 未照合のニュース記事の詳細
+#    (1回の実行で最大 YAYOIKEN_ARTICLE_MAX_FETCHES 件まで)。商品詳細ページは第1段階では取らないので、
+#    商品レコードは一覧の情報だけで作る(定番の作成にも詳細取得は要らない)。
+#  ・商品の正本はメニュー一覧(東京。都道府県差は実質なし)。発売日は自社サイトのニュース記事の
+#    ■商品概要 が正本で、照合できたものは launch_date_source="news_article"(新設。KFCの press_release は
+#    法人サイトのニュースリリース専用の含意のため流用しない)。記事の解析結果は data/yayoiken_state.json に
+#    残し、後から現れた商品とも照合できるようにする(発売前の商品は一覧に載らないため、発表だけでは
+#    記録しない)。■商品概要 の無い記事(出店情報など)は照合済みとして記録し、二度と取得しない。
+#    発表日と発売日は約1週間ずれるので、発表日での代用はしない。照合できたが発売日が読めない場合は、
+#    launch_date は null のまま news_title / news_url / news_date(発表日)だけ残す。
+#  ・種別: 「おすすめメニュー(期間限定)」セクションに載った商品は 期間限定(badges にも付ける)。
+#    NEWバッジ、またはニュース記事と照合して発売日が付いた商品は 新メニュー。baseline に無い新規は
+#    新規掲載、それ以外は定番。フェア名(NABE FAIR等)は保存しない。テイクアウト・アルコールも記録する。
+#  ・説明文・栄養成分・アレルゲンは第1段階では対象外(すべて null)。
+#  ・一覧が空・取得失敗・前回の半分未満の回は、何も更新せず終了判定もしない。
+YAYOIKEN_MIN_RATIO = 0.5
+YAYOIKEN_ARTICLE_MAX_FETCHES = 6
+YAYOIKEN_ARTICLE_WINDOW_BEFORE_DAYS = 120
+YAYOIKEN_ARTICLE_WINDOW_AFTER_DAYS = 14
+YAYOIKEN_NEWS_PAGES = 2   # 照合範囲はニュース一覧2ページ(20件・約1か月分)
+
+
+def yayoiken_state_path() -> Path:
+    return DATA / "yayoiken_state.json"
+
+
+def yayoiken_price_note(entry: dict) -> str:
+    return "税込。公式サイトの一覧に表示された価格。"
+
+
+def _yayoiken_robots(getter, st: dict):
+    """robots.txt を読んで RobotFileParser を返す。ブロックされたら None(呼び出し側がその回を止める)。
+    404・その他の失敗は全許可として扱う(やよい軒の robots.txt は404=ファイルなし)。"""
+    st["list_requests"] += 1
+    try:
+        text = getter("yayoiken", parsers.YAYOIKEN_BASE + "/robots.txt")
+    except NotFoundError:
+        text = None
+    except BlockedError as e:
+        st["blocked"] = True
+        print(f"[blocked] yayoiken robots.txt: {e}", file=sys.stderr)
+        return None
+    except Exception as e:  # noqa: BLE001
+        print(f"[warn] yayoiken robots.txt 取得失敗(全許可として続行): {e}", file=sys.stderr)
+        text = None
+    rp = urllib.robotparser.RobotFileParser()
+    rp.parse((text or "User-agent: *\nAllow: /").splitlines())
+    return rp
+
+
+def yayoiken_article_infos(state: dict) -> list[dict]:
+    """state に残した商品記事の解析結果を、新しい順の [{url, date, title, launch_date, items}] で返す。"""
+    infos = [{"url": url, **info} for url, info in (state.get("articles") or {}).items()]
+    infos.sort(key=lambda x: x.get("date") or "", reverse=True)
+    return infos
+
+
+def yayoiken_find_article(name: str, price: int | None, infos: list[dict], ref: str) -> dict | None:
+    """商品名・価格で照合できるニュース記事を返す(ref の前120日〜後14日に発表されたもの)。"""
+    try:
+        c = datetime.date.fromisoformat(ref)
+    except (ValueError, TypeError):
+        return None
+    lo = (c - datetime.timedelta(days=YAYOIKEN_ARTICLE_WINDOW_BEFORE_DAYS)).isoformat()
+    hi = (c + datetime.timedelta(days=YAYOIKEN_ARTICLE_WINDOW_AFTER_DAYS)).isoformat()
+    for info in infos:
+        if not (lo <= (info.get("date") or "") <= hi):
+            continue
+        if parsers.match_yayoiken_article(name, price, info):
+            return info
+    return None
+
+
+def yayoiken_apply_article(product: dict, infos: list[dict]) -> bool:
+    """ニュース記事の発売日・お知らせ情報を反映する。変更があれば True。
+    定番と、記事で確定済み(launch_date_source="news_article")の商品は照合しない。
+    発売日が付いたら、新規掲載だった商品は新メニューに上げる。"""
+    if product.get("is_regular") or product.get("launch_date_source") == "news_article":
+        return False
+    ref = (product.get("first_seen_at") or "")[:10]
+    rel = product.get("relaunches") or []
+    if rel and rel[-1].get("reappeared_at"):
+        ref = rel[-1]["reappeared_at"]
+    if not ref:
+        return False
+    info = yayoiken_find_article(product.get("name") or "", product.get("price"), infos, ref)
+    if not info:
+        return False
+    before = (product.get("news_url"), product.get("launch_date"), product.get("launch_date_source"),
+              product.get("limited_kind"))
+    product["announced_at"] = info.get("date")
+    product["news_url"] = info["url"]
+    product["news_title"] = info.get("title")
+    product["news_date"] = info.get("date")
+    if info.get("launch_date"):
+        product["launch_date"] = info["launch_date"]
+        product["launch_date_source"] = "news_article"
+        if product.get("limited_kind") in (None, "新規掲載"):
+            product["limited_kind"] = "新メニュー"
+    after = (product.get("news_url"), product.get("launch_date"), product.get("launch_date_source"),
+             product.get("limited_kind"))
+    return before != after
+
+
+def build_yayoiken_product(entry: dict, kind: str, today: str, now: str) -> dict:
+    price = entry.get("price")
+    return {
+        "chain": "yayoiken",
+        "product_id": entry["product_id"],
+        "name": entry["name"],
+        "category": entry.get("category"),
+        "price": price,
+        "price_note": yayoiken_price_note(entry),
+        "price_variants": None,
+        "launch_date": None,
+        "launch_date_source": "not_found",
+        "announced_at": None,
+        "planned_end_text": None,
+        "news_url": None,
+        "news_title": None,
+        "news_date": None,
+        "description": None,
+        "description_full_len": 0,
+        "nutrition": None,
+        "nutrition_variants": None,
+        "nutrition_note": None,
+        "nutrition_pdf_url": None,
+        "nutrition_pdf_label": None,
+        "allergen_pdf_url": None,
+        "allergen_pdf_label": None,
+        "allergens": None,
+        "origin": None,
+        "limited_kind": kind,
+        "badges": ["期間限定"] if kind == "期間限定" else [],
+        "official_url": entry["official_url"],
+        "first_seen_at": now,
+        "last_seen_at": today,
+        "status": "on_sale",
+        "ended_observed_at": None,
+        "missed_runs": 0,
+        "price_history": [{"date": today, "price": price}] if price is not None else [],
+        "source_list": ["menu"],
+        "image": None,
+    }
+
+
+def crawl_yayoiken(getter, pending: dict, stats: dict, today: str | None = None) -> None:
+    chain = "yayoiken"
+    now = now_iso() if today is None else f"{today}T07:00:00+09:00"
+    today = today or today_jst()
+    pending.setdefault(chain, {})
+    stats.setdefault(chain, new_stats())
+    st = stats[chain]
+    base = parsers.YAYOIKEN_BASE
+
+    rp = _yayoiken_robots(getter, st)
+    if rp is None:
+        return
+
+    def allowed(url: str) -> bool:
+        return rp.can_fetch(UA, url)
+
+    # メニュー一覧(東京の1ページに全タブ・全商品)。取れない・0件の回は list_ok を立てない
+    menu_url = parsers.yayoiken_menu_url()
+    entries: dict[str, dict] = {}
+    if not allowed(menu_url):
+        print(f"[skip] robots.txtでDisallow: {menu_url}", file=sys.stderr)
+        return
+    try:
+        page = getter(chain, menu_url)
+        st["list_requests"] += 1
+    except BlockedError as e:
+        st["list_requests"] += 1
+        st["blocked"] = True
+        print(f"[blocked] yayoiken menu {menu_url}: {e}", file=sys.stderr)
+        return
+    except Exception as e:  # noqa: BLE001
+        st["list_requests"] += 1
+        print(f"[warn] yayoiken メニュー一覧 取得失敗 {menu_url}: {e}", file=sys.stderr)
+        return
+    for e in parsers.parse_yayoiken_menu(page):
+        entries.setdefault(e["product_id"], e)
+    if not entries:
+        print("[warn] yayoiken メニュー一覧: 商品が0件(構造変更の疑い)", file=sys.stderr)
+        return
+    # 記録しない商品(名前が無い・価格が無いもの)を除く。テイクアウト・セット・アルコールは記録する
+    entries = {pid: e for pid, e in entries.items() if not parsers.yayoiken_excluded(e)}
+    state = load_json(yayoiken_state_path(), {})
+    prev_count = state.get("menu_count")
+    if entries and prev_count and len(entries) < prev_count * YAYOIKEN_MIN_RATIO:
+        print(f"[warn] yayoiken メニュー一覧が極端に少ない({len(entries)}件。前回{prev_count}件)。"
+              "消えた商品の判定は行わない", file=sys.stderr)
+        return
+    st["list_ok"] = bool(entries)
+    if not st["list_ok"]:
+        return
+
+    # ニュース一覧(2ページ)。取れなくてもメニューの記録は続ける
+    news_list: list[dict] = []
+    seen_urls: set[str] = set()
+    for pno in range(1, YAYOIKEN_NEWS_PAGES + 1):
+        url = parsers.yayoiken_news_url(pno)
+        if not allowed(url):
+            print(f"[skip] robots.txtでDisallow: {url}", file=sys.stderr)
+            continue
+        try:
+            text = getter(chain, url)
+            st["detail_requests"] += 1
+        except BlockedError as e:
+            st["detail_requests"] += 1
+            st["blocked"] = True
+            print(f"[blocked] yayoiken news list: {e}", file=sys.stderr)
+            return
+        except Exception as e:  # noqa: BLE001
+            st["detail_requests"] += 1
+            print(f"[warn] yayoiken ニュース一覧 取得失敗 {url}: {e}", file=sys.stderr)
+            continue
+        for a in parsers.parse_yayoiken_news_list(text):
+            if a["url"] not in seen_urls:
+                seen_urls.add(a["url"])
+                news_list.append(a)
+    if not news_list:
+        print("[warn] yayoiken ニュース一覧: 0件(構造変更の疑い)", file=sys.stderr)
+
+    # 未照合の記事だけ詳細を取る(上限つき)。■商品概要 のあるものは解析結果を state に残し、
+    # 無いものは照合済みの印だけ残す。取得に失敗したものは照合済みにしない(次回取り直す)
+    stored = dict(state.get("articles") or {})
+    checked = set(state.get("article_checked") or [])
+    fetches = 0
+    for a in news_list:
+        url = a["url"]
+        if url in stored or url in checked:
+            continue
+        if fetches >= YAYOIKEN_ARTICLE_MAX_FETCHES:
+            break
+        if not allowed(url):
+            checked.add(url)
+            continue
+        fetches += 1
+        try:
+            html = getter(chain, url)
+            st["detail_requests"] += 1
+        except BlockedError as e:
+            st["detail_requests"] += 1
+            st["blocked"] = True
+            print(f"[blocked] yayoiken news article {url}: {e}", file=sys.stderr)
+            return
+        except Exception as e:  # noqa: BLE001
+            st["detail_requests"] += 1
+            print(f"[warn] yayoiken ニュース記事 取得失敗 {url}: {e}", file=sys.stderr)
+            continue
+        info = parsers.parse_yayoiken_news_article(html)
+        if info is None:
+            checked.add(url)   # 商品記事ではない(出店情報など)
+            continue
+        stored[url] = {"date": a["date"], "title": a["title"],
+                       "launch_date": info["launch_date"], "items": info["items"]}
+    infos = yayoiken_article_infos({"articles": stored})
+    st["limited_seen"] = sum(1 for e in entries.values() if e.get("in_limited_section") or e.get("is_new"))
+
+    baseline = baseline_for(chain)
+    entries = burst_filter(chain, entries, baseline, pending, stats, today)
+    regular_budget = RegularBudget(st)
+    for pid, e in entries.items():
+        existing = load_product(chain, pid)
+        if existing is not None:
+            touch_seen(existing, list_price_for_history(st, e.get("price")), today, now, st)
+            if e.get("name") and existing.get("name") != e["name"]:
+                existing["name"] = e["name"]
+            if e.get("in_limited_section") and existing.get("limited_kind") == REGULAR_KIND:
+                upgrade_regular(existing, "期間限定")   # 定番が期間限定セクションに載ったら格上げ
+                badges = list(existing.get("badges") or [])
+                if "期間限定" not in badges:
+                    badges.append("期間限定")
+                existing["badges"] = badges
+            save_product(chain, existing)
+            pending[chain].pop(pid, None)
+            continue
+        info = yayoiken_find_article(e["name"], e.get("price"), infos, today)
+        is_new_menu = baseline is not None and pid not in baseline
+        if e.get("in_limited_section"):
+            kind = "期間限定"   # 「おすすめメニュー(期間限定)」セクションに載った商品
+        elif e.get("is_new") or (info and info.get("launch_date")):
+            kind = "新メニュー"   # NEWバッジ、またはニュース記事で発売日が付いた商品
+        elif is_new_menu:
+            kind = "新規掲載"
+        else:
+            kind = REGULAR_KIND
+        is_regular = kind == REGULAR_KIND
+        if is_regular and not regular_budget.take():
+            continue   # 定番は1回の巡回で作る件数に上限がある。残りは翌日以降
+        product = build_yayoiken_product(e, kind, today, now)
+        if is_regular:
+            mark_regular(product)
+        else:
+            yayoiken_apply_article(product, infos)
+        save_product(chain, product)
+        st["regular_created" if is_regular else "new_products"] += 1
+        pending[chain].pop(pid, None)
+
+    if st["list_ok"]:
+        if baseline is None:
+            save_baseline(chain, set(entries))
+        apply_missing(chain, set(entries), today, st)
+        state["menu_count"] = len(entries)
+        state["checked_at"] = today
+        state["articles"] = stored
+        state["article_checked"] = sorted(checked)
+        save_json(yayoiken_state_path(), state, sort_keys=True)
+
+    # 発売日の確定(この回に処理した記事との照合)。終わって久しい商品は探し直さない
+    cutoff = (datetime.date.fromisoformat(today) - datetime.timedelta(days=14)).isoformat()
+    for p in load_chain_products(chain):
+        if p.get("status") == "ended" and (p.get("ended_observed_at") or "") < cutoff:
+            continue
+        if yayoiken_apply_article(p, infos):
+            save_product(chain, p)
+    recorded = [p for p in load_chain_products(chain) if not p.get("is_regular")]
+    st["news_matched"] = sum(1 for p in recorded if p.get("news_url"))
+    st["news_unmatched"] = sum(1 for p in recorded if not p.get("news_url"))
+
+
+# ---------------------------------------------------------------------------
 # 丸亀製麺 (jp.marugame.com)
 # ---------------------------------------------------------------------------
 # 調査・方針(2026-10-17。実物の構造は parsers.py の「丸亀製麺」のコメントにまとめた):
@@ -3942,7 +4268,7 @@ CRAWLERS = {"mcdonalds": crawl_mcdonalds, "mos": crawl_mos, "matsuya": crawl_mat
             "katsuya": crawl_katsuya, "karayama": crawl_karayama,
             "marugame": crawl_marugame, "burgerking": crawl_burgerking,
             "kourakuen": crawl_kourakuen, "hidakaya": crawl_hidakaya,
-            "zetteria": crawl_zetteria, "kfc": crawl_kfc}
+            "zetteria": crawl_zetteria, "kfc": crawl_kfc, "yayoiken": crawl_yayoiken}
 
 
 def main(argv: list[str] | None = None) -> int:

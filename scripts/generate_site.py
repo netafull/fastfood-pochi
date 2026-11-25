@@ -38,7 +38,7 @@ CHAIN_SOURCE = {"mcdonalds": "マクドナルド公式サイト", "mos": "モス
                 "matsunoya": "松のや公式サイト", "yoshinoya": "吉野家公式サイト", "sukiya": "すき家公式サイト",
                 "katsuya": "かつや公式サイト", "karayama": "からやま公式サイト", "marugame": "丸亀製麺公式サイト",
                 "burgerking": "バーガーキング公式サイト", "kourakuen": "幸楽苑公式サイト", "hidakaya": "日高屋公式サイト",
-                "zetteria": "ゼッテリア公式サイト", "kfc": "ケンタッキー公式サイト"}
+                "zetteria": "ゼッテリア公式サイト", "kfc": "ケンタッキー公式サイト", "yayoiken": "やよい軒公式サイト"}
 # 全チェーン名の並び(ページの説明文用): 「マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家」
 CHAIN_LIST_TEXT = "・".join(c["name"] for c in CHAINS)
 # 「終了日」の注意書き。公式発表の最終販売日ではなく、一覧から消えたことの観測日
@@ -202,7 +202,7 @@ def is_limited_listed(item: dict) -> bool:
         return False
     if is_matsuya_family(item.get("chain")):
         return False
-    if item.get("chain") in ("yoshinoya", "sukiya", "marugame", "burgerking", "zetteria", "kfc", *ARCLAND_FAMILY, *RAMEN_FAMILY):
+    if item.get("chain") in ("yoshinoya", "sukiya", "marugame", "burgerking", "zetteria", "kfc", "yayoiken", *ARCLAND_FAMILY, *RAMEN_FAMILY):
         return item.get("limited_kind") == "期間限定"
     return True
 
@@ -323,6 +323,8 @@ CATEGORY_ICONS = {
                  **_m("bento", "モーニング", "ランチ", "ディナー", "ディナーセット", "わくわくセット", "わくわくセット モーニング")},
     "kfc": {**_m("sozai", "チキン", "サイド"), **_m("burger", "バーガー"),
             **_m("bento", "セット", "キッズ"), **_m("drink", "ドリンク")},
+    "yayoiken": {**_m("donburi", "定食", "丼・麺・お子様"), **_m("bento", "朝食", "おうち定食"),
+                 **_m("sozai", "サイド")},
 }
 
 # 推定したアイコンの代替テキスト
@@ -418,13 +420,13 @@ CSS = """
 :root {
   --bg: #fafaf7; --card: #ffffff; --text: #1a1a1a; --muted: #6b6b6b;
   --accent: #00897b; --line: #e5e2dc;
-  --mcdonalds: #da291c; --mos: #1b7f3b; --matsuya: #a34a00; --matsunoya: #7a1f5c; --yoshinoya: #1f5fad; --sukiya: #8a6a00; --katsuya: #455a64; --karayama: #c2185b; --marugame: #e65100; --burgerking: #512da8; --kourakuen: #5d4037; --hidakaya: #00838f; --zetteria: #33691e; --kfc: #212121;
+  --mcdonalds: #da291c; --mos: #1b7f3b; --matsuya: #a34a00; --matsunoya: #7a1f5c; --yoshinoya: #1f5fad; --sukiya: #8a6a00; --katsuya: #455a64; --karayama: #c2185b; --marugame: #e65100; --burgerking: #512da8; --kourakuen: #5d4037; --hidakaya: #00838f; --zetteria: #33691e; --kfc: #212121; --yayoiken: #1b2f63;
 }
 @media (prefers-color-scheme: dark) {
   :root { --bg: #14151a; --card: #1e2027; --text: #e8e8e6; --muted: #9a9a96;
     --line: #2c2e36; --accent: #26a69a;
     /* 暗い背景でも見出しの下線・バッジが沈まないよう、松屋・松のや・吉野家・すき家だけ少し明るくする */
-    --matsuya: #b85a00; --matsunoya: #a83a82; --yoshinoya: #3a7bd0; --sukiya: #b8921a; --katsuya: #6b8794; --karayama: #d6477f; --marugame: #ff8a3d; --burgerking: #7e57c2; --kourakuen: #a1887f; --hidakaya: #26a6b5; --zetteria: #9ccc65; --kfc: #9e9e9e; }
+    --matsuya: #b85a00; --matsunoya: #a83a82; --yoshinoya: #3a7bd0; --sukiya: #b8921a; --katsuya: #6b8794; --karayama: #d6477f; --marugame: #ff8a3d; --burgerking: #7e57c2; --kourakuen: #a1887f; --hidakaya: #26a6b5; --zetteria: #9ccc65; --kfc: #9e9e9e; --yayoiken: #93a5d8; }
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--bg); color: var(--text);
@@ -465,6 +467,7 @@ h2, h1.pt { font-size: 18px; padding-left: 10px; border-left: 4px solid var(--ac
 .chain-group[data-chain="hidakaya"] h3 { border-color: var(--hidakaya); }
 .chain-group[data-chain="zetteria"] h3 { border-color: var(--zetteria); }
 .chain-group[data-chain="kfc"] h3 { border-color: var(--kfc); }
+.chain-group[data-chain="yayoiken"] h3 { border-color: var(--yayoiken); }
 .regular-menu h3 { font-size: 15px; margin: 18px 0 8px; padding-left: 8px; border-left: 4px solid var(--line); }
 .regular-menu .lead { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
 table.pricelog { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
@@ -499,6 +502,7 @@ table.pricelog td.down { color: #2e7d32; }
 .item[data-chain="hidakaya"] .badge { background: var(--hidakaya); }
 .item[data-chain="zetteria"] .badge { background: var(--zetteria); }
 .item[data-chain="kfc"] .badge { background: var(--kfc); }
+.item[data-chain="yayoiken"] .badge { background: var(--yayoiken); }
 .item .st { display: inline-block; font-size: 10px; border-radius: 4px; padding: 0 6px; margin-left: 6px;
   border: 1px solid var(--line); color: var(--muted); }
 .item .st-on { color: var(--accent); border-color: var(--accent); }
@@ -755,7 +759,7 @@ def page_shell(title: str, description: str, body: str, canonical: str, extra_he
 </main>
 <footer>
 価格・販売期間・販売状況は取得時点のものです。最新の状況は各社公式サイトでご確認ください。
-当サイトはマクドナルド、モスバーガー、松屋、松のや、吉野家、すき家、かつや、からやま、丸亀製麺、バーガーキング、幸楽苑、日高屋、ゼッテリア、ケンタッキー各社とは関係のない非公式サイトです。
+当サイトはマクドナルド、モスバーガー、松屋、松のや、吉野家、すき家、かつや、からやま、丸亀製麺、バーガーキング、幸楽苑、日高屋、ゼッテリア、ケンタッキー、やよい軒各社とは関係のない非公式サイトです。
 {disclosure_line}｜ <a href="/archive/">終了した限定メニュー</a> ｜ <a href="/prices/">価格改定の記録</a>
 {related_html}
 {SERIES_INDEX_HTML}
@@ -1862,6 +1866,37 @@ def render_kfc_notes(item: dict) -> str:
     return "".join(f"<p class='note'>{n}</p>" for n in notes)
 
 
+def render_yayoiken_notes(item: dict) -> str:
+    """やよい軒: 記録の理由、発売日の出どころ(公式サイトのニュース記事)、昨季の販売期間。"""
+    notes = []
+    kind = item.get("limited_kind")
+    if kind == "期間限定":
+        notes.append("公式サイトの「おすすめメニュー（期間限定）」に掲載されたメニューです。")
+    elif kind == "新メニュー":
+        notes.append("公式サイトで新メニューとして掲載されたメニューです。")
+    elif kind == "定番":
+        notes.append("定番メニューとして、価格の変遷を記録しています。")
+    else:
+        notes.append("記録を始めたあとにメニューへ加わったメニューです。")
+    if kind != "定番":
+        notes.append("終了日は公式サイトの一覧から消えたのを確認した日です。")
+    title = item.get("news_title")
+    if title:
+        link = item.get("news_url") or ""
+        when = esc(item.get("announced_at") or item.get("news_date") or "")
+        link_html = f'（<a href="{esc(link)}" target="_blank" rel="noopener">公式サイトのニュース</a>）' if link else ""
+        if item.get("launch_date_source") == "news_article" and item.get("launch_date"):
+            notes.append(f"発売日は公式サイトのニュース（{when}）の記載によります：{esc(title)}{link_html}")
+        elif item.get("launch_date"):
+            notes.append(f"発売日は公式サイトのニュース（{when}）によります：{esc(title)}{link_html}")
+        else:
+            notes.append(f"お知らせ日：{when}（発売日の記載が読み取れませんでした）：{esc(title)}{link_html}")
+    for s_ in item.get("seasons") or []:
+        start = s_.get("launch_date") or "開始日不明"
+        notes.append(f"昨季の販売：{esc(start)}〜{esc(s_.get('ended_observed_at') or '')}（終了日は{ENDED_NOTE}）")
+    return "".join(f"<p class='note'>{n}</p>" for n in notes)
+
+
 def render_burgerking_notes(item: dict) -> str:
     """バーガーキング: 記録の理由、告知日・終了日の出どころ(発売日は公式のデータに無い)、昨季の販売期間。"""
     notes = ["公式サイトの「期間限定」の印がついたメニューです（画像・説明文・栄養成分は掲載していません）。",
@@ -2036,6 +2071,8 @@ def render_item_page(item: dict, all_items: list[dict] | None = None) -> str:
         yoshinoya_note = render_zetteria_notes(item)
     if item.get("chain") == "kfc":
         yoshinoya_note = render_kfc_notes(item)
+    if item.get("chain") == "yayoiken":
+        yoshinoya_note = render_yayoiken_notes(item)
     if is_regular(item):
         # 定番は限定・新メニューの注記(発売日の出どころ・昨季の販売など)を使わない
         matsuya_note = mop_note = ""

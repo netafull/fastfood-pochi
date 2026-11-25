@@ -137,3 +137,10 @@ kfc/menu_kids.html
 kfc/releases.html
 kfc/release_potpie.html
 kfc/release_burger.html
+yayoiken/menu_tokyo.html
+yayoiken/news_1.html
+yayoiken/news_2.html
+yayoiken/article_chige.html
+yayoiken/article_toriten.html
+yayoiken/article_sukiyaki.html
+yayoiken/article_butterbeef.html
