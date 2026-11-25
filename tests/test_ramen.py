@@ -527,8 +527,8 @@ class TestSiteAndConfig(unittest.TestCase):
         self.assertEqual(g.CHAIN_NAME["kourakuen"], "幸楽苑")
         self.assertEqual(g.CHAIN_NAME["hidakaya"], "日高屋")
         self.assertEqual(g.CHAIN_SOURCE["hidakaya"], "日高屋公式サイト")
-        self.assertTrue(g.CHAIN_LIST_TEXT.endswith("・バーガーキング・幸楽苑・日高屋・ゼッテリア"))
-        self.assertEqual([c["slug"] for c in g.CHAINS][-3:], ["kourakuen", "hidakaya", "zetteria"])
+        self.assertTrue(g.CHAIN_LIST_TEXT.endswith("・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキー"))
+        self.assertEqual([c["slug"] for c in g.CHAINS][-4:], ["kourakuen", "hidakaya", "zetteria", "kfc"])
         for k in ("site_description", "site_tagline"):
             for n in ("幸楽苑", "日高屋"):
                 self.assertIn(n, g.CONFIG[k])
@@ -543,7 +543,7 @@ class TestSiteAndConfig(unittest.TestCase):
         h = g.page_shell("x", "d", "<p>b</p>", "https://fastfood.netaful.jp/")
         self.assertNotIn("https://www.kourakuen.co.jp/", h)
         self.assertNotIn("https://hidakaya.hiday.co.jp/", h)
-        self.assertIn("バーガーキング、幸楽苑、日高屋、ゼッテリア各社", h)
+        self.assertIn("バーガーキング、幸楽苑、日高屋、ゼッテリア、ケンタッキー各社", h)
 
     def test_config_limits_and_intervals(self):
         for c in ("kourakuen", "hidakaya"):

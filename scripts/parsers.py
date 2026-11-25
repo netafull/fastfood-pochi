@@ -2390,3 +2390,174 @@ def match_zetteria_press(name: str, price: int | None, press: dict | None) -> bo
     if price is not None and n in _zetteria_norm(press.get("text")):
         return any(it.get("price") == price for it in press.get("items") or [])
     return False
+
+
+# ---------------------------------------------------------------------------
+# ケンタッキー (www.kfc.co.jp / japan.kfc.co.jp。2026-11-25追加、14チェーン目)
+# ---------------------------------------------------------------------------
+# 調査・方針(2026-11-25。実物で確認した事実):
+#  ・消費者向け www.kfc.co.jp/menu は Next.js 製だが、サーバーサイドHTMLに全カテゴリ分の
+#    <section id="pc-category-<カテゴリ名>"> が入り、商品名・価格がテキストで読める。カードは
+#    「商品画像(img.olo.kfc.co.jp/menu/<6桁コード>/…webp) → 商品名 <p> → 価格(¥と数値が別スパン)」の並び。
+#    クラス名は Tailwind で変わりやすいので、パーサはクラス名ではなくこの並び順で掴む。
+#    6カテゴリのセクションは定番のみ(チキン11・セット20・バーガー9・サイド9・ドリンク6・キッズ2 の計57件。
+#    2026-11-25実測)。**期間限定の商品はカテゴリのセクションには載らず、「おすすめ」のセクションにだけ載る**
+#    (実測: おすすめ17件のうち定番の重複が5件、残り12件が期間限定。カテゴリ別URLで取得し比べても
+#    セクションの中身は同じで、変わるのは先頭のモバイル表示だけ)。そのため「おすすめ」も取得元にし、
+#    カテゴリのセクションに無い商品は category="おすすめ" で記録する。商品詳細ページは無い。
+#  ・www の robots.txt は /api/ などが Disallow。内部APIやメニューPDFのエンドポイントは使わず、
+#    表示用HTMLだけを解析する。
+#  ・発売日は法人サイト japan.kfc.co.jp のニュースリリースが正本。一覧 /news_release は最新10件
+#    (li.news-table__list__item。日付・種別・見出し)。商品リリースの詳細には【商品概要】が定型で入り、
+#    「■商品名」に商品名と価格(「名前」…490円 の列挙。セットは別商品として並び、内訳〔…〕が付く)、
+#    「■発売日」に完全な日付(2026年11月25日(水))、終了は「※数量限定、なくなり次第販売終了」が原則。
+#    【商品概要】の無いリリース(CM・新店など)は商品リリースではない。
+#  ・法人の robots.txt は全許可。利用規約に自動取得の禁止条項は無かった(2026-11-25に確認)。
+KFC_BASE = "https://www.kfc.co.jp"
+KFC_CORP_BASE = "https://japan.kfc.co.jp"
+KFC_RELEASE_LIST_PATH = "/news_release"
+KFC_CATEGORIES = ["チキン", "セット", "バーガー", "サイド", "ドリンク", "キッズ"]
+KFC_RECOMMENDED = "おすすめ"   # 期間限定の商品が載るセクション(カテゴリのセクションには載らない)
+
+
+def kfc_menu_url(category: str) -> str:
+    import urllib.parse
+    return f"{KFC_BASE}/menu?category={urllib.parse.quote(category)}"
+
+
+_KFC_CARD_IMG_RE = re.compile(r"olo\.kfc\.co\.jp/menu/(\d{6})/")
+
+
+def parse_kfc_menu(page: str, category: str | None = None) -> list[dict]:
+    """カテゴリ別メニューページの商品。product_id(画像URLの6桁コード)・name・price(税込)・
+    category・official_url(カテゴリ別メニューURL)。
+    ページ内の <section id="pc-category-<カテゴリ>"> だけを読む(モバイル表示と「おすすめ」の
+    セクションは読まない)。セクションが無ければ空(構造変更)。商品名は公式表記のまま。"""
+    page = _strip_html_comments(page)
+    page = re.sub(r"<script\b.*?</script>", "", page, flags=re.S)   # RSCペイロード内の複製を読まない
+    scope = page
+    if category:
+        m = re.search(r'<section id="pc-category-' + re.escape(category) + r'"[^>]*>(.*?)</section>', page, re.S)
+        if not m:
+            return []
+        scope = m.group(1)
+    out: dict[str, dict] = {}
+    imgs = list(_KFC_CARD_IMG_RE.finditer(scope))
+    for i, m in enumerate(imgs):
+        pid = m.group(1)
+        if pid in out:
+            continue
+        end = imgs[i + 1].start() if i + 1 < len(imgs) else len(scope)
+        seg = scope[m.end():end]
+        nm = re.search(r"<p[^>]*>(.*?)</p>", seg, re.S)
+        pm = re.search(r"¥\s*</span>\s*<span[^>]*>([\d,]+)</span>", seg)
+        if not nm or not pm:
+            continue
+        name = re.sub(r"\s+", " ", clean_text(nm.group(1))).strip()
+        if not name:
+            continue
+        out[pid] = {"product_id": pid, "name": name, "price": int(pm.group(1).replace(",", "")),
+                    "category": category,
+                    "official_url": kfc_menu_url(category) if category else KFC_BASE + "/menu"}
+    return list(out.values())
+
+
+def parse_kfc_release_list(page: str) -> list[dict]:
+    """法人サイトのリリース一覧(最新10件)を、新しい順の [{date(ISO), title, url(絶対), category}] にする
+    (parse_zetteria_news と同形式)。重複は除く。"""
+    out, seen = [], set()
+    for li in _strip_html_comments(page).split('<li class="news-table__list__item')[1:]:
+        a = re.search(r'href="(https://japan\.kfc\.co\.jp/news_release/\d+)"', li)
+        d = re.search(r'datatime="(\d{4})-(\d{1,2})-(\d{1,2})', li)
+        if not d:
+            d = re.search(r'c-item-data__title__date[^>]*>\s*(\d{4})/(\d{1,2})/(\d{1,2})', li)
+        c = re.search(r'c-item-data__title__cat[^>]*>\s*(.*?)\s*</p>', li, re.S)
+        t = re.search(r'<dd[^>]*data-js="truncate"[^>]*>(.*?)</dd>', li, re.S)
+        if not t:
+            t = re.search(r"<dd[^>]*>(.*?)</dd>", li, re.S)
+        if not a or not d or not t:
+            continue
+        url = a.group(1)
+        if url in seen:
+            continue
+        seen.add(url)
+        date = f"{int(d.group(1)):04d}-{int(d.group(2)):02d}-{int(d.group(3)):02d}"
+        title = re.sub(r"\s+", " ", clean_text(t.group(1))).strip()
+        out.append({"date": date, "title": title, "url": url,
+                    "category": clean_text(c.group(1)) if c else ""})
+    out.sort(key=lambda x: x["date"], reverse=True)
+    return out
+
+
+def _kfc_detail_text(page: str) -> str:
+    """リリース詳細の本文テキスト(<br>は改行。空行は詰める)。"""
+    page = _strip_html_comments(page)
+    page = re.sub(r"<script\b.*?</script>|<style\b.*?</style>", "", page, flags=re.S)
+    txt = clean_text(page)
+    return "\n".join(ln.strip() for ln in txt.split("\n") if ln.strip())
+
+
+_KFC_RELEASE_ITEM_RE = re.compile(r"「([^」]+)」\s*[…‥]+\s*([\d,]+)\s*円")
+_KFC_RELEASE_DATE_RE = re.compile(r"■発売日\s*\n?\s*(\d{4})年(\d{1,2})月(\d{1,2})日")
+_KFC_RELEASE_END_RE = re.compile(r"※[^\n。]*なくなり次第販売終了")
+
+
+def parse_kfc_release_detail(page: str) -> dict | None:
+    """商品リリースの詳細。【商品概要】が無ければ None(商品リリースではない)。
+    戻り値: {"launch_date"(■発売日。ISO), "planned_end_text", "limited"(数量限定・期間限定の記載があるか),
+             "items": [{"name", "price"}], "text"}。
+    商品名と価格は【商品概要】から■発売日までの範囲で読む(セット内訳〔…〕は商品として読まない)。"""
+    text = _kfc_detail_text(page)
+    idx = text.find("【商品概要】")
+    if idx < 0:
+        return None
+    tail = text[idx:]
+    end_idx = tail.find("■発売日")
+    scope = tail[:end_idx] if end_idx >= 0 else tail
+    items, seen = [], set()
+    for m in _KFC_RELEASE_ITEM_RE.finditer(scope):
+        name = m.group(1).strip()
+        if name and name not in seen:
+            seen.add(name)
+            items.append({"name": name, "price": int(m.group(2).replace(",", ""))})
+    if not items:
+        return None
+    launch = None
+    dm = _KFC_RELEASE_DATE_RE.search(text)
+    if dm:
+        launch = f"{int(dm.group(1)):04d}-{int(dm.group(2)):02d}-{int(dm.group(3)):02d}"
+    em = _KFC_RELEASE_END_RE.search(text)
+    return {"launch_date": launch, "planned_end_text": em.group(0) if em else None,
+            "limited": ("数量限定" in text or "期間限定" in text), "items": items, "text": text}
+
+
+def kfc_excluded(entry: dict) -> str | None:
+    """記録しない商品なら理由を返す。名前が無い・価格が無いものだけ(セット商品もそのまま記録する)。"""
+    if not (entry.get("name") or "").strip():
+        return "no_name"
+    if entry.get("price") is None:
+        return "no_price"
+    return None
+
+
+def _kfc_norm(s: str | None) -> str:
+    return re.sub(r"\s+", "", unicodedata.normalize("NFKC", s or ""))
+
+
+def match_kfc_release(name: str, price: int | None, release: dict | None) -> bool:
+    """商品がこのリリースの【商品概要】の対象か(match_zetteria_press と同じ考え方)。
+    【商品概要】の商品名(空白を除いて正規化し、完全一致か包含)で照合し、外れたら
+    「本文に商品名があり、価格も【商品概要】のどれかと一致する」複合条件でも照合する。"""
+    if not release:
+        return False
+    n = _kfc_norm(name)
+    if len(n) < 2:
+        return False
+    for it in release.get("items") or []:
+        inm = _kfc_norm(it.get("name"))
+        if inm == n or (len(n) >= 4 and (n in inm or inm in n)):
+            return True
+    text = release.get("text")
+    if price is not None and text and n in _kfc_norm(text):
+        return any(it.get("price") == price for it in release.get("items") or [])
+    return False

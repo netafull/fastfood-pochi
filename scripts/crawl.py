@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリアの限定メニュー・新メニューを巡回し、
-data/products/{mcdonalds|mos|matsuya|matsunoya|yoshinoya|sukiya|katsuya|karayama|marugame|burgerking|kourakuen|hidakaya|zetteria}/{id}.json に1商品1ファイルで蓄積する。
+"""マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキーの限定メニュー・新メニューを巡回し、
+data/products/{mcdonalds|mos|matsuya|matsunoya|yoshinoya|sukiya|katsuya|karayama|marugame|burgerking|kourakuen|hidakaya|zetteria|kfc}/{id}.json に1商品1ファイルで蓄積する。
 
 このサイトの核は「販売状況の追跡」。公式サイトは販売が終わると商品を消すので、
 一覧に居た商品が消えたら終了とみなして記録を残す。
@@ -2835,6 +2835,363 @@ def crawl_zetteria(getter, pending: dict, stats: dict, today: str | None = None)
 
 
 # ---------------------------------------------------------------------------
+# ケンタッキー (www.kfc.co.jp / japan.kfc.co.jp。2026-11-25追加、14チェーン目。実物の構造は parsers.py の同名のコメントにまとめた)
+# ---------------------------------------------------------------------------
+# 方針:
+#  ・巡回は robots.txt(消費者向け・法人の2ドメイン) + カテゴリ別メニュー6ページ + リリース一覧1ページ +
+#    未照合の商品リリースの詳細(1回の実行で最大 KFC_RELEASE_MAX_FETCHES 件まで)。商品詳細ページは無いので、
+#    商品レコードは一覧の情報だけで作る(定番の作成にも詳細取得は要らない)。
+#    期間限定の商品はカテゴリのセクションに載らず「おすすめ」のセクションにだけ載るため、そちらも取り込む
+#    (parsers.py の同名のコメントに実測の内訳)。
+#  ・商品の正本は消費者向けメニュー一覧。発売日は法人リリース(japan.kfc.co.jp)の【商品概要】が正本で、
+#    照合できたものは launch_date_source="press_release"(新設。ゼッテリアの press_pdf はPDF専用の含意のため
+#    流用しない)。リリースの解析結果は data/kfc_state.json に残し、後から現れた商品とも照合できるようにする。
+#    【商品概要】の無いリリース(CM・新店など)は照合済みとして記録し、二度と取得しない。
+#  ・リリースに「数量限定」「期間限定」の記載があり【商品概要】に名前がある商品は 期間限定(badges にも付ける)。
+#    リリースに載ったが限定の記載が無い商品は 新メニュー。baseline に無い新規は 新規掲載、それ以外は定番。
+#  ・セット商品も記録する(セットが独立したカテゴリで、セット自体が別商品としてメニューに載るため)。
+#    リリースのセット内訳〔…〕は保存しない。説明文・栄養・アレルゲンは第1段階では対象外(すべて null)。
+#  ・一覧が空・取得失敗・前回の半分未満の回は、何も更新せず終了判定もしない。
+KFC_MIN_RATIO = 0.5
+KFC_RELEASE_MAX_FETCHES = 8
+KFC_RELEASE_WINDOW_BEFORE_DAYS = 120
+KFC_RELEASE_WINDOW_AFTER_DAYS = 14
+
+
+def kfc_state_path() -> Path:
+    return DATA / "kfc_state.json"
+
+
+def kfc_price_note(entry: dict) -> str:
+    return "税込。公式サイトの一覧に表示された価格。"
+
+
+def _kfc_robots(getter, base: str, st: dict):
+    """robots.txt を読んで RobotFileParser を返す。ブロックされたら None(呼び出し側がその回を止める)。
+    404・その他の失敗は全許可として扱う(既存チェーンと同じ作法)。"""
+    st["list_requests"] += 1
+    try:
+        text = getter("kfc", base + "/robots.txt")
+    except NotFoundError:
+        text = None
+    except BlockedError as e:
+        st["blocked"] = True
+        print(f"[blocked] kfc robots.txt {base}: {e}", file=sys.stderr)
+        return None
+    except Exception as e:  # noqa: BLE001
+        print(f"[warn] kfc robots.txt 取得失敗(全許可として続行) {base}: {e}", file=sys.stderr)
+        text = None
+    rp = urllib.robotparser.RobotFileParser()
+    rp.parse((text or "User-agent: *\nAllow: /").splitlines())
+    return rp
+
+
+def kfc_release_infos(state: dict) -> list[dict]:
+    """state に残した商品リリースの解析結果を、新しい順の [{url, date, title, launch_date,
+    planned_end_text, limited, items}] で返す。"""
+    infos = [{"url": url, **info} for url, info in (state.get("releases") or {}).items()]
+    infos.sort(key=lambda x: x.get("date") or "", reverse=True)
+    return infos
+
+
+def kfc_find_release(name: str, price: int | None, infos: list[dict], ref: str) -> dict | None:
+    """商品名・価格で照合できる商品リリースを返す(ref の前120日〜後14日に発表されたもの)。"""
+    try:
+        c = datetime.date.fromisoformat(ref)
+    except (ValueError, TypeError):
+        return None
+    lo = (c - datetime.timedelta(days=KFC_RELEASE_WINDOW_BEFORE_DAYS)).isoformat()
+    hi = (c + datetime.timedelta(days=KFC_RELEASE_WINDOW_AFTER_DAYS)).isoformat()
+    for info in infos:
+        if not (lo <= (info.get("date") or "") <= hi):
+            continue
+        if parsers.match_kfc_release(name, price, info):
+            return info
+    return None
+
+
+def kfc_apply_release(product: dict, infos: list[dict]) -> bool:
+    """商品リリースの発売日・終了予定・限定種別を反映する。変更があれば True。
+    定番と、リリースで確定済み(launch_date_source="press_release")の商品は照合しない。"""
+    if product.get("is_regular") or product.get("launch_date_source") == "press_release":
+        return False
+    ref = (product.get("first_seen_at") or "")[:10]
+    rel = product.get("relaunches") or []
+    if rel and rel[-1].get("reappeared_at"):
+        ref = rel[-1]["reappeared_at"]
+    if not ref:
+        return False
+    info = kfc_find_release(product.get("name") or "", product.get("price"), infos, ref)
+    if not info:
+        return False
+    before = (product.get("news_url"), product.get("launch_date"), product.get("launch_date_source"),
+              product.get("planned_end_text"), product.get("limited_kind"), tuple(product.get("badges") or []))
+    product["announced_at"] = info.get("date")
+    product["news_url"] = info["url"]
+    product["news_title"] = info.get("title")
+    product["news_date"] = info.get("date")
+    if info.get("launch_date"):
+        product["launch_date"] = info["launch_date"]
+        product["launch_date_source"] = "press_release"
+    if info.get("planned_end_text"):
+        product["planned_end_text"] = info["planned_end_text"]
+    if info.get("limited"):
+        product["limited_kind"] = "期間限定"
+        badges = list(product.get("badges") or [])
+        if "期間限定" not in badges:
+            badges.append("期間限定")
+        product["badges"] = badges
+    elif product.get("limited_kind") in (None, "新規掲載"):
+        product["limited_kind"] = "新メニュー"
+    after = (product.get("news_url"), product.get("launch_date"), product.get("launch_date_source"),
+             product.get("planned_end_text"), product.get("limited_kind"), tuple(product.get("badges") or []))
+    return before != after
+
+
+def build_kfc_product(entry: dict, kind: str, today: str, now: str) -> dict:
+    price = entry.get("price")
+    return {
+        "chain": "kfc",
+        "product_id": entry["product_id"],
+        "name": entry["name"],
+        "category": entry.get("category"),
+        "price": price,
+        "price_note": kfc_price_note(entry),
+        "price_variants": None,
+        "launch_date": None,
+        "launch_date_source": "not_found",
+        "announced_at": None,
+        "planned_end_text": None,
+        "news_url": None,
+        "news_title": None,
+        "news_date": None,
+        "description": None,
+        "description_full_len": 0,
+        "nutrition": None,
+        "nutrition_variants": None,
+        "nutrition_note": None,
+        "nutrition_pdf_url": None,
+        "nutrition_pdf_label": None,
+        "allergen_pdf_url": None,
+        "allergen_pdf_label": None,
+        "allergens": None,
+        "origin": None,
+        "limited_kind": kind,
+        "badges": [],
+        "official_url": entry["official_url"],
+        "first_seen_at": now,
+        "last_seen_at": today,
+        "status": "on_sale",
+        "ended_observed_at": None,
+        "missed_runs": 0,
+        "price_history": [{"date": today, "price": price}] if price is not None else [],
+        "source_list": ["menu"],
+        "image": None,
+    }
+
+
+def crawl_kfc(getter, pending: dict, stats: dict, today: str | None = None) -> None:
+    chain = "kfc"
+    now = now_iso() if today is None else f"{today}T07:00:00+09:00"
+    today = today or today_jst()
+    pending.setdefault(chain, {})
+    stats.setdefault(chain, new_stats())
+    st = stats[chain]
+    base = parsers.KFC_BASE
+    corp = parsers.KFC_CORP_BASE
+
+    # robots.txt(2ドメイン)。www は /api/ 等が Disallow(使うのは /menu だけ)。法人は全許可
+    rp = _kfc_robots(getter, base, st)
+    if rp is None:
+        return
+    rp_corp = _kfc_robots(getter, corp, st)
+    if rp_corp is None:
+        return
+
+    def allowed(url: str) -> bool:
+        return rp.can_fetch(UA, url)
+
+    def corp_allowed(url: str) -> bool:
+        return rp_corp.can_fetch(UA, url)
+
+    # メニュー一覧(カテゴリ別6ページ)。1ページでも取れない・0件の回は list_ok を立てない(何も更新せず終了判定もしない)。
+    # 期間限定の商品はカテゴリのセクションに載らず「おすすめ」のセクションにだけ載るので、そちらも取り込む
+    # (カテゴリのセクションにある商品はそちらのカテゴリが正で、「おすすめ」側では上書きしない)
+    entries: dict[str, dict] = {}
+    all_ok = True
+    first_page: str | None = None
+    for category in parsers.KFC_CATEGORIES:
+        url = parsers.kfc_menu_url(category)
+        if not allowed(url):
+            print(f"[skip] robots.txtでDisallow: {url}", file=sys.stderr)
+            all_ok = False
+            continue
+        try:
+            page = getter(chain, url)
+            st["list_requests"] += 1
+        except BlockedError as e:
+            st["list_requests"] += 1
+            st["blocked"] = True
+            print(f"[blocked] kfc menu {url}: {e}", file=sys.stderr)
+            return
+        except Exception as e:  # noqa: BLE001
+            st["list_requests"] += 1
+            print(f"[warn] kfc メニュー一覧 取得失敗 {url}: {e}", file=sys.stderr)
+            all_ok = False
+            continue
+        if first_page is None:
+            first_page = page
+        got = parsers.parse_kfc_menu(page, category)
+        if not got:
+            print(f"[warn] kfc メニュー一覧 {url}: 商品が0件(構造変更の疑い)", file=sys.stderr)
+            all_ok = False
+            continue
+        for e in got:
+            entries.setdefault(e["product_id"], e)
+    if first_page is not None:
+        for e in parsers.parse_kfc_menu(first_page, parsers.KFC_RECOMMENDED):
+            entries.setdefault(e["product_id"], e)
+    # 記録しない商品(名前が無い・価格が無いもの)を除く。セット商品は記録する
+    entries = {pid: e for pid, e in entries.items() if not parsers.kfc_excluded(e)}
+    state = load_json(kfc_state_path(), {})
+    prev_count = state.get("menu_count")
+    if entries and prev_count and len(entries) < prev_count * KFC_MIN_RATIO:
+        print(f"[warn] kfc メニュー一覧が極端に少ない({len(entries)}件。前回{prev_count}件)。"
+              "消えた商品の判定は行わない", file=sys.stderr)
+        all_ok = False
+    st["list_ok"] = all_ok and bool(entries)
+    if not st["list_ok"]:
+        return   # 一覧が揃わない回は何も更新しない(終了判定もしない)
+
+    # リリース一覧(1リクエスト)。取れなくてもメニューの記録は続ける
+    releases_list: list[dict] = []
+    list_url = corp + parsers.KFC_RELEASE_LIST_PATH
+    if corp_allowed(list_url):
+        try:
+            text = getter(chain, list_url)
+            st["detail_requests"] += 1
+            releases_list = parsers.parse_kfc_release_list(text)
+            if not releases_list:
+                print("[warn] kfc リリース一覧: 0件(構造変更の疑い)", file=sys.stderr)
+        except BlockedError as e:
+            st["detail_requests"] += 1
+            st["blocked"] = True
+            print(f"[blocked] kfc release list: {e}", file=sys.stderr)
+            return
+        except Exception as e:  # noqa: BLE001
+            st["detail_requests"] += 1
+            print(f"[warn] kfc リリース一覧 取得失敗: {e}", file=sys.stderr)
+    else:
+        print(f"[skip] robots.txtでDisallow: {list_url}", file=sys.stderr)
+
+    # 未照合のリリースだけ詳細を取る(上限つき)。【商品概要】のあるものは解析結果を state に残し、
+    # 無いものは照合済みの印だけ残す。取得に失敗したものは照合済みにしない(次回取り直す)
+    stored = dict(state.get("releases") or {})
+    checked = set(state.get("release_checked") or [])
+    fetches = 0
+    for a in releases_list:
+        url = a["url"]
+        if url in stored or url in checked:
+            continue
+        if fetches >= KFC_RELEASE_MAX_FETCHES:
+            break
+        if not corp_allowed(url):
+            checked.add(url)
+            continue
+        fetches += 1
+        try:
+            html = getter(chain, url)
+            st["detail_requests"] += 1
+        except BlockedError as e:
+            st["detail_requests"] += 1
+            st["blocked"] = True
+            print(f"[blocked] kfc release detail {url}: {e}", file=sys.stderr)
+            return
+        except Exception as e:  # noqa: BLE001
+            st["detail_requests"] += 1
+            print(f"[warn] kfc リリース詳細 取得失敗 {url}: {e}", file=sys.stderr)
+            continue
+        info = parsers.parse_kfc_release_detail(html)
+        if info is None:
+            checked.add(url)   # 商品リリースではない(CM・新店など)
+            continue
+        stored[url] = {"date": a["date"], "title": a["title"], "launch_date": info["launch_date"],
+                       "planned_end_text": info["planned_end_text"], "limited": info["limited"],
+                       "items": info["items"]}
+    infos = kfc_release_infos({"releases": stored})
+    limited_seen = 0
+    for e in entries.values():
+        hit = kfc_find_release(e["name"], e.get("price"), infos, today)
+        if hit and hit.get("limited"):
+            limited_seen += 1
+    st["limited_seen"] = limited_seen
+
+    baseline = baseline_for(chain)
+    entries = burst_filter(chain, entries, baseline, pending, stats, today)
+    regular_budget = RegularBudget(st)
+    for pid, e in entries.items():
+        existing = load_product(chain, pid)
+        if existing is not None:
+            touch_seen(existing, list_price_for_history(st, e.get("price")), today, now, st)
+            if e.get("name") and existing.get("name") != e["name"]:
+                existing["name"] = e["name"]
+            save_product(chain, existing)
+            pending[chain].pop(pid, None)
+            continue
+        info = kfc_find_release(e["name"], e.get("price"), infos, today)
+        is_new_menu = baseline is not None and pid not in baseline
+        if info and info.get("limited"):
+            kind = "期間限定"   # リリースの【商品概要】に載り、数量限定・期間限定の記載がある
+        elif info:
+            kind = "新メニュー"
+        elif is_new_menu:
+            kind = "新規掲載"
+        else:
+            kind = REGULAR_KIND
+        is_regular = kind == REGULAR_KIND
+        if is_regular and not regular_budget.take():
+            continue   # 定番は1回の巡回で作る件数に上限がある。残りは翌日以降
+        product = build_kfc_product(e, kind, today, now)
+        if is_regular:
+            mark_regular(product)
+        else:
+            kfc_apply_release(product, infos)
+        save_product(chain, product)
+        st["regular_created" if is_regular else "new_products"] += 1
+        pending[chain].pop(pid, None)
+
+    if st["list_ok"]:
+        if baseline is None:
+            save_baseline(chain, set(entries))
+        apply_missing(chain, set(entries), today, st)
+        state["menu_count"] = len(entries)
+        state["checked_at"] = today
+        state["releases"] = stored
+        state["release_checked"] = sorted(checked)
+        save_json(kfc_state_path(), state, sort_keys=True)
+
+    # 発売日の確定(この回に処理したリリースとの照合)と、定番として記録済みの商品の限定への格上げ。
+    # 終わって久しい商品は探し直さない
+    cutoff = (datetime.date.fromisoformat(today) - datetime.timedelta(days=14)).isoformat()
+    for p in load_chain_products(chain):
+        if p.get("status") == "ended" and (p.get("ended_observed_at") or "") < cutoff:
+            continue
+        changed = False
+        if p.get("is_regular"):
+            info = kfc_find_release(p.get("name") or "", p.get("price"), infos, (p.get("first_seen_at") or today)[:10])
+            if info and info.get("limited"):
+                upgrade_regular(p, "期間限定")
+                changed = True
+        if kfc_apply_release(p, infos):
+            changed = True
+        if changed:
+            save_product(chain, p)
+    recorded = [p for p in load_chain_products(chain) if not p.get("is_regular")]
+    st["news_matched"] = sum(1 for p in recorded if p.get("news_url"))
+    st["news_unmatched"] = sum(1 for p in recorded if not p.get("news_url"))
+
+
+# ---------------------------------------------------------------------------
 # 丸亀製麺 (jp.marugame.com)
 # ---------------------------------------------------------------------------
 # 調査・方針(2026-10-17。実物の構造は parsers.py の「丸亀製麺」のコメントにまとめた):
@@ -3585,7 +3942,7 @@ CRAWLERS = {"mcdonalds": crawl_mcdonalds, "mos": crawl_mos, "matsuya": crawl_mat
             "katsuya": crawl_katsuya, "karayama": crawl_karayama,
             "marugame": crawl_marugame, "burgerking": crawl_burgerking,
             "kourakuen": crawl_kourakuen, "hidakaya": crawl_hidakaya,
-            "zetteria": crawl_zetteria}
+            "zetteria": crawl_zetteria, "kfc": crawl_kfc}
 
 
 def main(argv: list[str] | None = None) -> int:
