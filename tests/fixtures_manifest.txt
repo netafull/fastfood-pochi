@@ -115,3 +115,16 @@ hidakaya/list_7.html
 hidakaya/list_8.html
 hidakaya/detail_20261009.html
 hidakaya/news.json
+zetteria/fair.html
+zetteria/zeppin.html
+zetteria/burger.html
+zetteria/morning.html
+zetteria/lunch.html
+zetteria/dinner.html
+zetteria/side.html
+zetteria/sweets_drink.html
+zetteria/wakuwaku.html
+zetteria/news.html
+zetteria/detail_burger020097.html
+zetteria/detail_side24.html
+zetteria/press_wa_burger_202611.pdf

@@ -2150,3 +2150,243 @@ def match_ramen_launch(name: str, news: list[dict], ref: str, before: int = RAME
             launch = ramen_start_date(t, a["date"]) or ramen_start_date(a.get("body") or "", a["date"])
             return {"news": a, "launch_date": launch, "limited": "期間限定" in t}
     return None
+
+
+# ---------------------------------------------------------------------------
+# ゼッテリア (www.zetteria.jp。2026-11-25追加、13チェーン目)
+# ---------------------------------------------------------------------------
+# 調査・方針(2026-11-25。実物で確認した事実):
+#  ・運営は株式会社バーガー・ワン(ゼンショーグループ)。メニューは /menu/<カテゴリ>.html の静的HTMLで、
+#    商品ブロックは div.p-block > a.link(href=/menu/<商品コード>.html)。商品コードはカテゴリ接頭辞+数字
+#    (burger020097・zeppin010001・sweets050010・drink22・lunch10 など)。side24 だけは接頭辞が無く、
+#    fair.html の「フェア サイド」に載り、リンク先(/menu/side24.html)が詳細ページそのもの。
+#  ・一覧の価格は div.price-block の div.box(p.item=単品・S:・M: など、p.price=¥620・¥590~)。
+#    「~」は一部店舗で価格が異なる印。詳細ページは div.main-block の中に h3.name・価格・説明文(div.desc)が
+#    ある(発売日・販売期間の記載は無い)。
+#  ・カテゴリはページ内の見出し(h2.title)。fair.html は「フェア バーガー」など、sweets_drink.html は
+#    「フェア/デザート シェーキ/スイーツ/スープ/ドリンク」のように、1ページに複数の見出しがある。
+#    morning.html の見出しには「モーニング　〜10:30AM」のような時間の注記が付く。
+#  ・お知らせは /news/ の1ページに全件(li.news-item。日付は 2026.11.25 形式、種別は span.label)。
+#    タブごとに同じ記事が重複して出る。商品発売のプレスリリースは PDF への直接リンク(/news/press/*.pdf)で、
+#    発売日(「11月18日（水）から期間限定で」)・終了予定(「12月上旬まで販売予定です」)・【商品概要】
+#    (商品名・価格)は PDF 本文にしか無い。見出しには商品名ではなくフェア名しか出ないことが多い。
+#  ・プレスリリースPDFの商品名にはルビ(ふりがな)が付く。座標つき抽出(pdf_nutrition.extract_geometry)では
+#    ルビは行の高さが約5.5pt(本文は9pt以上)なので、行の高さで落とせる。
+#  ・robots.txt は 404(制限なしとして扱う。他チェーンと同じ作法)。利用規約に自動取得・スクレイピングを
+#    禁じる条項は無かった(2026-11-25に確認)。
+ZETTERIA_BASE = "https://www.zetteria.jp"
+ZETTERIA_NEWS_PATH = "/news/"
+# 巡回の起点にする一覧ページ(現行ナビにあるものだけ。旧ロッテリア時代の残存ページは辿らない)。(パス, 見出しが無いときのカテゴリ)
+ZETTERIA_MENU_PAGES = [("/menu/fair.html", "フェア"), ("/menu/zeppin.html", "絶品バーガー"),
+                       ("/menu/burger.html", "レギュラーバーガー"), ("/menu/morning.html", "モーニング"),
+                       ("/menu/lunch.html", "ランチ"), ("/menu/dinner.html", "ディナー"),
+                       ("/menu/side.html", "サイド"), ("/menu/sweets_drink.html", "スイーツ・ドリンク"),
+                       ("/menu/wakuwaku.html", "わくわくセット")]
+ZETTERIA_ALLERGEN_URL = "https://www.zetteria.jp/allergen/"
+ZETTERIA_NUTRITION_PDF_URL = "https://images.zensho.co.jp/materials/zetteria/allergen/nutrition.pdf"
+
+
+def _zetteria_clean_name(raw: str) -> str:
+    """商品名の <br> は除去してつなげる(「柚子香る<br>舞茸竜田チキンバーガー」→「柚子香る舞茸竜田チキンバーガー」)。"""
+    name = clean_text(raw).replace("\n", "")
+    return re.sub(r"\s+", " ", name).strip()
+
+
+def _zetteria_section_category(raw: str) -> str | None:
+    """一覧ページの見出しをカテゴリ名にする。「モーニング　〜10:30AM」のような時間の注記は落とす。"""
+    t = clean_text(raw)
+    t = re.sub(r"\s*〜.*$", "", t).strip()
+    return t or None
+
+
+def _zetteria_price_boxes(block: str) -> list[dict]:
+    """div.price-block 内の価格を、並び順の [{label, price, tilde}] で返す(label は「単品」「S:」など)。"""
+    out = []
+    for box in re.split(r'<div class="box">', block)[1:]:
+        it = re.search(r'<p class="item">(.*?)</p>', box, re.S)
+        pr = re.search(r'<p class="price">(.*?)</p>', box, re.S)
+        if not pr:
+            continue
+        txt = clean_text(pr.group(1))
+        price = _yen_int(txt)
+        if price is None:
+            continue
+        out.append({"label": clean_text(it.group(1)) if it else "", "price": price,
+                    "tilde": "~" in txt or "～" in txt})
+    return out
+
+
+def _zetteria_pick_price(boxes: list[dict]) -> tuple[int | None, list[dict] | None]:
+    """代表価格(「単品」の箱。無ければ先頭)と、サイズ別の内訳(2件以上のときだけ)を返す。"""
+    if not boxes:
+        return None, None
+    primary = next((b for b in boxes if b["label"] == "単品"), boxes[0])
+    variants = [{"label": b["label"], "price": b["price"]} for b in boxes] if len(boxes) >= 2 else None
+    return primary["price"], variants
+
+
+def parse_zetteria_menu(page: str, category: str | None = None) -> list[dict]:
+    """カテゴリ別一覧ページの商品。product_id・name・price(単品。無ければ先頭)・price_variants・price_tilde・
+    category(ページ内の見出し。見出しより前のブロックは引数のカテゴリ)・official_url。
+    同じ商品が1ページに複数回出ても1件にする。商品が取れなければ空。"""
+    page = _strip_html_comments(page)
+    out: dict[str, dict] = {}
+    cur_cat = category
+    for part in re.split(r'(<h2 class="title">.*?</h2>)', page, flags=re.S):
+        m = re.fullmatch(r'<h2 class="title">(.*?)</h2>', part, flags=re.S)
+        if m:
+            cur_cat = _zetteria_section_category(m.group(1)) or cur_cat
+            continue
+        for block in part.split('<div class="p-block">')[1:]:
+            a = re.search(r'href="/menu/([a-z0-9_]+)\.html"', block)
+            n = re.search(r'<h3 class="name">(.*?)</h3>', block, re.S)
+            if not a or not n:
+                continue
+            pid = a.group(1)
+            if pid in out:
+                continue
+            boxes = _zetteria_price_boxes(block)
+            price, variants = _zetteria_pick_price(boxes)
+            out[pid] = {"product_id": pid, "name": _zetteria_clean_name(n.group(1)), "price": price,
+                        "price_variants": variants, "price_tilde": any(b["tilde"] for b in boxes),
+                        "category": cur_cat, "official_url": f"{ZETTERIA_BASE}/menu/{pid}.html"}
+    return list(out.values())
+
+
+def parse_zetteria_detail(page: str) -> dict | None:
+    """詳細ページ(div.main-block の中)。name・price・price_variants・price_tilde・description(全文)。
+    名前か価格が取れなければ None(構造変更)。セットメニューの欄(別商品の名前・価格)は読まない。"""
+    page = _strip_html_comments(page)
+    m = re.search(r'<div class="main-block[^"]*">(.*?)<div class="btn-block">', page, re.S)
+    if not m:
+        m = re.search(r'<div class="main-block[^"]*">(.*?)<div class="set-menu">', page, re.S)
+    if not m:
+        return None
+    blk = m.group(1)
+    n = re.search(r'<h3 class="name">(.*?)</h3>', blk, re.S)
+    boxes = _zetteria_price_boxes(blk)
+    if not n or not boxes:
+        return None
+    price, variants = _zetteria_pick_price(boxes)
+    d = re.search(r'<div class="desc">\s*<p class="txt">(.*?)</p>', blk, re.S)
+    return {"name": _zetteria_clean_name(n.group(1)), "price": price, "price_variants": variants,
+            "price_tilde": any(b["tilde"] for b in boxes),
+            "description": clean_text(d.group(1)) if d else None}
+
+
+def parse_zetteria_news(page: str) -> list[dict]:
+    """/news/ を、新しい順の [{date(ISO), title, url(絶対), category}] にする( parse_kourakuen_news と同形式)。
+    タブごとに同じ記事が重複して出るので、重複は除く。"""
+    import urllib.parse
+    out, seen = [], set()
+    for li in _strip_html_comments(page).split('<li class="news-item">')[1:]:
+        a = re.search(r'<a[^>]+href="([^"]+)"', li)
+        d = re.search(r'class="date">\s*(\d{4})\.(\d{1,2})\.(\d{1,2})', li)
+        c = re.search(r'class="label[^"]*">(.*?)</span>', li, re.S)
+        t = re.search(r'class="news-title">(.*?)</p>', li, re.S)
+        if not d or not t:
+            continue
+        date = f"{int(d.group(1)):04d}-{int(d.group(2)):02d}-{int(d.group(3)):02d}"
+        url = urllib.parse.urljoin(ZETTERIA_BASE + ZETTERIA_NEWS_PATH, a.group(1).strip()) if a else ""
+        title = clean_text(t.group(1)).replace("\n", " ")
+        if (date, url, title) in seen:
+            continue
+        seen.add((date, url, title))
+        out.append({"date": date, "title": title, "url": url, "category": clean_text(c.group(1)) if c else ""})
+    out.sort(key=lambda x: x["date"], reverse=True)
+    return out
+
+
+def zetteria_excluded(entry: dict) -> str | None:
+    """記録しない商品なら理由を返す。セット商品は記録する(オーナー決定。モーニング・ランチ・ディナー・
+    わくわくセットはセットが中心のカテゴリで、外すと丸ごと空になる)。価格が無いものだけは記録しない。"""
+    if not (entry.get("name") or "").strip():
+        return "no_name"
+    if entry.get("price") is None:
+        return "no_price"
+    return None
+
+
+# プレスリリースPDF(座標つき抽出 → 発売日・終了予定・【商品概要】) -----------------
+
+ZETTERIA_RUBY_MAX_HEIGHT = 7.0   # 行の高さ(pt)がこれ以下ならルビ(ふりがな)とみなして落とす。本文は9pt以上
+
+
+def zetteria_press_text(pages: list[dict]) -> str:
+    """座標つき抽出(pdf_nutrition.extract_geometry の戻り値)を、ルビを落として1本の文字列にする。
+    行は y の近いものをまとめ、x の順につなげる。空白は全部除く(日本語は分かち書きしないので、
+    行の途中で割れた商品名も元に戻る)。"""
+    lines: list[str] = []
+    for page in pages or []:
+        rows: dict[int, list] = {}
+        for x0, y0, x1, y1, t in page.get("texts") or []:
+            if y1 - y0 <= ZETTERIA_RUBY_MAX_HEIGHT:
+                continue  # ルビ
+            rows.setdefault(round(y0 / 3), []).append((x0, t))
+        for k in sorted(rows, reverse=True):
+            lines.append("".join(t for _, t in sorted(rows[k])))
+    return re.sub(r"\s+", "", "".join(lines))
+
+
+_PRESS_PUBLISHED_RE = re.compile(r"(\d{4})年(\d{1,2})月(\d{1,2})日")
+_PRESS_LAUNCH_RES = [re.compile(r"(\d{1,2})月(\d{1,2})日（[月火水木金土日]）から"),
+                     re.compile(r"(\d{1,2})月(\d{1,2})日（[月火水木金土日]）より"),
+                     re.compile(r"発売日[:：]?(\d{1,2})月(\d{1,2})日")]
+_PRESS_END_RES = [re.compile(r"(\d{1,2})月(上旬|中旬|下旬)まで販売予定"),
+                  re.compile(r"(\d{1,2})月(\d{1,2})日まで販売予定")]
+
+
+def parse_zetteria_press(pages: list[dict], news_date: str | None = None) -> dict:
+    """プレスリリースPDF(座標つき抽出)から、発表日・発売日・終了予定・【商品概要】の商品名と価格を読む。
+    戻り値: {"published_date", "launch_date", "planned_end_text", "items": [{"name", "price"}], "text"}。
+    発売日の年は、PDFの冒頭の発表日(無ければ news_date)から補う。"""
+    text = zetteria_press_text(pages)
+    published = None
+    m = _PRESS_PUBLISHED_RE.search(text)
+    if m:
+        published = f"{int(m.group(1)):04d}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
+    ref = published or news_date
+    launch = None
+    for rx in _PRESS_LAUNCH_RES:
+        mm = rx.search(text)
+        if mm and ref:
+            launch = ramen_start_date(f"{mm.group(1)}月{mm.group(2)}日", ref)
+            if launch:
+                break
+    end_text = None
+    for rx in _PRESS_END_RES:
+        mm = rx.search(text)
+        if mm:
+            end_text = mm.group(0)
+            break
+    items = []
+    idx = text.find("【商品概要】")
+    tail = text[idx:] if idx >= 0 else ""
+    for mm in re.finditer(r"商品名[:：](.+?)価格[:：]([\d,]+)円", tail):
+        name = mm.group(1).strip("：:・")
+        if name:
+            items.append({"name": name, "price": int(mm.group(2).replace(",", ""))})
+    return {"published_date": published, "launch_date": launch, "planned_end_text": end_text,
+            "items": items, "text": text}
+
+
+def _zetteria_norm(s: str | None) -> str:
+    return re.sub(r"\s+", "", unicodedata.normalize("NFKC", s or ""))
+
+
+def match_zetteria_press(name: str, price: int | None, press: dict | None) -> bool:
+    """商品がこのプレスリリースの対象か。【商品概要】の商品名(空白を除いて正規化し、完全一致か包含)で照合し、
+    外れたら「本文に商品名があり、価格も【商品概要】のどれかと一致する」複合条件でも照合する
+    (PDFのテキストはルビや改行で商品名が割れることがあるため)。"""
+    if not press:
+        return False
+    n = _zetteria_norm(name)
+    if len(n) < 2:
+        return False
+    for it in press.get("items") or []:
+        inm = _zetteria_norm(it.get("name"))
+        if inm == n or (len(n) >= 4 and (n in inm or inm in n)):
+            return True
+    if price is not None and n in _zetteria_norm(press.get("text")):
+        return any(it.get("price") == price for it in press.get("items") or [])
+    return False
