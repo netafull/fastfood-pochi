@@ -128,3 +128,12 @@ zetteria/news.html
 zetteria/detail_burger020097.html
 zetteria/detail_side24.html
 zetteria/press_wa_burger_202611.pdf
+kfc/menu_chicken.html
+kfc/menu_set.html
+kfc/menu_burger.html
+kfc/menu_side.html
+kfc/menu_drink.html
+kfc/menu_kids.html
+kfc/releases.html
+kfc/release_potpie.html
+kfc/release_burger.html

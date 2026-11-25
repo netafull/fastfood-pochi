@@ -277,8 +277,8 @@ class ZetteriaSiteTests(unittest.TestCase):
     def test_chain_config(self):
         self.assertEqual(g.CHAIN_NAME[CHAIN], "ゼッテリア")
         self.assertEqual(g.CHAIN_SOURCE[CHAIN], "ゼッテリア公式サイト")
-        self.assertEqual(g.CHAINS[-1]["slug"], CHAIN)
-        self.assertTrue(g.CHAIN_LIST_TEXT.endswith("・幸楽苑・日高屋・ゼッテリア"))
+        self.assertEqual(g.CHAINS[12]["slug"], CHAIN)
+        self.assertTrue(g.CHAIN_LIST_TEXT.endswith("・幸楽苑・日高屋・ゼッテリア・ケンタッキー"))
         self.assertIn("--zetteria:", g.CSS)
         self.assertIn('data-chain="zetteria"', g.CSS)
         colors = {c["slug"]: c["color"].lower() for c in g.CHAINS}
