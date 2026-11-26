@@ -1,0 +1,53 @@
+{
+ "chain": "burgerking",
+ "product_id": "8000394",
+ "name": "ビッグバーレル ミックス",
+ "category": "サイド",
+ "category_cd": "X000000007",
+ "price": 1500,
+ "price_note": "税込。公式サイトのメニューに表示された価格。",
+ "price_variants": [
+  {
+   "label": "(マスタード)",
+   "price": 1500
+  },
+  {
+   "label": "(BBQ)",
+   "price": 1500
+  }
+ ],
+ "has_sets": true,
+ "detail_checked": true,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "official_end_date": null,
+ "official_end_title": null,
+ "official_end_url": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "期間限定",
+ "official_url": "https://www.burgerking.co.jp/menu/X000000007/8000394",
+ "first_seen_at": "2026-11-27T07:37:15+09:00",
+ "last_seen_at": "2026-11-27",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-27",
+   "price": 1500
+  }
+ ],
+ "source_list": [
+  "menu"
+ ],
+ "image": null
+}

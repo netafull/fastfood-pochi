@@ -1,14 +1,37 @@
 {
  "article_checked": [
+  "https://www.yayoiken.com/contents/news/261028_snscp.html",
+  "https://www.yayoiken.com/contents/news/261029_music.html",
+  "https://www.yayoiken.com/contents/news/261029_music_2.html",
   "https://www.yayoiken.com/contents/news/261030_okachimachi.html",
   "https://www.yayoiken.com/contents/news/261104_chouhu.html",
   "https://www.yayoiken.com/contents/news/261110_kamagayadaibutsu.html",
   "https://www.yayoiken.com/contents/news/261111_yamaguchi.html",
   "https://www.yayoiken.com/contents/news/261112_sakaioonoshiba.html",
   "https://www.yayoiken.com/contents/news/261116_snscp.html",
-  "https://www.yayoiken.com/contents/news/261124_nagahama.html"
+  "https://www.yayoiken.com/contents/news/261124_nagahama.html",
+  "https://www.yayoiken.com/contents/news/261126_playlist.html"
  ],
  "articles": {
+  "https://www.yayoiken.com/contents/news/261030_sukiyaki.html": {
+   "date": "2026-10-30",
+   "items": [
+    {
+     "name": "すき焼き定食",
+     "price": 1150
+    },
+    {
+     "name": "【お肉2倍】すき焼き定食",
+     "price": 1650
+    },
+    {
+     "name": "[テイクアウト]すき焼き ごはん・生たまご付",
+     "price": 1100
+    }
+   ],
+   "launch_date": "2026-11-05",
+   "title": "「やよい軒」世界共通NABE FAIR 第1弾 すき焼き定食発売のお知らせ"
+  },
   "https://www.yayoiken.com/contents/news/261110_chige.html": {
    "date": "2026-11-10",
    "items": [
@@ -123,8 +146,31 @@
    ],
    "launch_date": "2026-12-02",
    "title": "「やよい軒」コク旨バタービーフ定食発売のお知らせ"
+  },
+  "https://www.yayoiken.com/contents/news/261126_kobachi.html": {
+   "date": "2026-11-26",
+   "items": [
+    {
+     "name": "ウマだしねば",
+     "price": 150
+    },
+    {
+     "name": "牛しぐれ煮",
+     "price": 150
+    },
+    {
+     "name": "なめ茸",
+     "price": 150
+    },
+    {
+     "name": "角切山椒昆布",
+     "price": 150
+    }
+   ],
+   "launch_date": "2026-12-02",
+   "title": "「やよい軒」４種の小鉢発売のお知らせ"
   }
  },
- "checked_at": "2026-11-26",
+ "checked_at": "2026-11-27",
  "menu_count": 142
 }

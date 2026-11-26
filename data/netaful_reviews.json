@@ -10656,7 +10656,7 @@
   ]
  },
  "errors": [],
- "fetched_at": "2026-11-26T07:42:30+09:00",
+ "fetched_at": "2026-11-27T07:40:49+09:00",
  "matches": {
   "karayama-19096": [
    209971
@@ -10675,6 +10675,12 @@
   ],
   "katsuya-22452": [
    212163
+  ],
+  "katsuya-23780": [
+   213014
+  ],
+  "katsuya-23781": [
+   213014
   ],
   "matsuya-curry-kashmir_hp": [
    210463
@@ -10771,6 +10777,9 @@
   ],
   "yoshinoya-set-gyusuki-nabe-zen": [
    212572
+  ],
+  "yoshinoya-yoshinoyanodon-gyunikudofu-don": [
+   211730
   ]
  }
 }
