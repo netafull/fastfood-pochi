@@ -151,6 +151,10 @@ class TestNewsHeadings(unittest.TestCase):
         self.assertEqual(f("『牛たん・牛皿御膳』が6月18日（木）11時より販売開始", "2026-06-17"), "2026-06-18")
         self.assertEqual(f("『月見牛とじ御膳』『月見牛とじ丼』本日より販売開始", "2026-08-27"), "2026-08-27")
         self.assertEqual(f("『魯肉牛丼』を4月9日より販売開始", "2026-04-08"), "2026-04-09")
+        # 「明日より」はお知らせの日付の翌日(月末またぎも)
+        self.assertEqual(f("豆腐と牛肉を特製だれで味わう 「牛肉豆腐丼」明日より販売開始", "2026-10-28"), "2026-10-29")
+        self.assertEqual(f("「牛肉豆腐丼」明日より販売開始", "2026-10-31"), "2026-11-01")
+        self.assertIsNone(f("新TVCM明日より放映開始", "2026-10-28"))
         # 年は書かれていないのでお知らせの日付から補う(12月のお知らせの1月5日は翌年)
         self.assertEqual(f("「牛すき鍋膳」1月5日より販売開始", "2026-12-28"), "2027-01-05")
         # 販売・発売の語が無い(放映開始・開催)ものは発売日にしない
@@ -167,6 +171,20 @@ class TestNewsHeadings(unittest.TestCase):
         # 括弧の無い見出しだけ部分一致(4文字以上)
         self.assertTrue(P.yoshinoya_title_matches("ドラクエウォークセット", "ドラクエウォークセット第1弾 早期販売終了のお知らせ"))
         self.assertFalse(P.yoshinoya_title_matches("牛丼", "牛丼弁当2丁800円キャンペーン"))
+
+    def test_notice_prefix_is_ignored_when_matching(self):
+        title = "吉野家の冬鍋新作は「牛スンドゥブチゲ鍋膳」11月26日（木）より販売開始"
+        self.assertEqual(P.strip_yoshinoya_notice("【予告】牛スンドゥブチゲ鍋膳"), "牛スンドゥブチゲ鍋膳")
+        self.assertEqual(P.strip_yoshinoya_notice(" 【予告】 牛丼"), "牛丼")
+        self.assertEqual(P.strip_yoshinoya_notice("牛丼"), "牛丼")
+        self.assertTrue(P.yoshinoya_title_matches("【予告】牛スンドゥブチゲ鍋膳", title))
+        self.assertTrue(P.yoshinoya_title_matches("牛スンドゥブチゲ鍋膳", title))
+        # 単品は見出しに名前が無いので、予告つきでも一致させない
+        self.assertFalse(P.yoshinoya_title_matches("【予告】牛スンドゥブチゲ鍋（単品）", title))
+        news = [{"date": "2026-11-24", "title": title, "url": "u", "category": "プレスリリース"}]
+        m = P.match_yoshinoya_launch("【予告】牛スンドゥブチゲ鍋膳", news, "2026-11-24")
+        self.assertEqual(m["launch_date"], "2026-11-26")
+        self.assertIsNone(P.match_yoshinoya_launch("【予告】牛スンドゥブチゲ鍋（単品）", news, "2026-11-24"))
 
     def test_launch_match_against_real_headings(self):
         m = P.match_yoshinoya_launch("牛さんま定食", self.news, "2026-10-11")
@@ -487,6 +505,14 @@ class TestSite(unittest.TestCase):
         self.assertIn("公式のお知らせ（2026-10-07）の見出しによります", h)
         self.assertIn("テイクアウトはできません", h)
         self.assertNotIn("<blockquote", h)  # 説明文は載せない
+        self.assertIn("2026-10-08〜 販売中", h)
+
+    def test_item_page_manual_launch_date_note(self):
+        h = g.render_item_page(yoshi_item(
+            launch_date_source="manual", news_url=None, news_title=None, news_date=None,
+            launch_date_note="公式のお知らせの見出しには単品の名前が無いため、同時発売の「牛さんま定食」の発売日から手で補った。"))
+        self.assertIn("発売日：公式のお知らせの見出しには単品の名前が無いため", h)
+        self.assertNotIn("の見出しによります", h)
         self.assertIn("2026-10-08〜 販売中", h)
 
     def test_item_page_early_end_and_seasons(self):

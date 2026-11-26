@@ -1299,7 +1299,7 @@ def build_yoshinoya_product(entry: dict, detail: dict, sources: list[str], flags
     product = {
         "chain": "yoshinoya",
         "product_id": entry["product_id"],
-        "name": entry["name"] or detail["name"],
+        "name": parsers.strip_yoshinoya_notice(entry["name"] or detail["name"]),
         "category": category,
         "price": price,
         "price_note": note,
@@ -1467,6 +1467,8 @@ def crawl_yoshinoya(getter, pending: dict, stats: dict, today: str | None = None
                 if was_ended:
                     yoshinoya_start_new_season(existing, old_ended, today)
                     st["relaunched"] = st.get("relaunched", 0) + 1
+                if (existing.get("name") or "").lstrip().startswith("【予告】"):
+                    existing["name"] = parsers.strip_yoshinoya_notice(existing["name"])  # 発売されたので【予告】を外す
                 existing["source_list"] = sorted(set(existing.get("source_list") or []) | set(sources[pid]))
                 if limited_cat in sources[pid]:
                     existing["in_limited_list"] = True
@@ -1489,9 +1491,10 @@ def crawl_yoshinoya(getter, pending: dict, stats: dict, today: str | None = None
                 continue
             if existing_all is None:
                 existing_all = load_chain_products(chain)
-            norm = parsers.normalize_for_match(e["name"] or detail["name"])
+            norm = parsers.normalize_for_match(parsers.strip_yoshinoya_notice(e["name"] or detail["name"]))
             same = [p["product_id"] for p in existing_all
-                    if p["product_id"] != pid and parsers.normalize_for_match(p.get("name")) == norm]
+                    if p["product_id"] != pid
+                    and parsers.normalize_for_match(parsers.strip_yoshinoya_notice(p.get("name"))) == norm]
             product = build_yoshinoya_product(e, detail, sources[pid], flags[pid], same, labels, today, now)
             if is_regular:
                 mark_regular(product)
