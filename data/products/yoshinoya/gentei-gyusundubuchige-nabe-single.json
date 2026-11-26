@@ -1,7 +1,7 @@
 {
  "chain": "yoshinoya",
  "product_id": "gentei-gyusundubuchige-nabe-single",
- "name": "【予告】牛スンドゥブチゲ鍋（単品）",
+ "name": "牛スンドゥブチゲ鍋（単品）",
  "category": "定食",
  "price": 844,
  "price_note": "税込・店内の価格。テイクアウトは税率が違うため税込額が異なる場合があります（内訳は下の表）。店舗により価格・取り扱いが異なる場合があります。",
@@ -16,8 +16,8 @@
   }
  ],
  "takeout": true,
- "launch_date": null,
- "launch_date_source": "not_found",
+ "launch_date": "2026-11-26",
+ "launch_date_source": "manual",
  "planned_end_text": null,
  "news_url": null,
  "news_title": null,
@@ -66,5 +66,6 @@
     }
    ]
   }
- ]
+ ],
+ "launch_date_note": "公式のお知らせの見出しには単品の名前が無いため、同時発売の「牛スンドゥブチゲ鍋膳」の発売日から手で補った。"
 }

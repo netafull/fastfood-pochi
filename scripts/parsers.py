@@ -904,7 +904,7 @@ def parse_yoshinoya_news(page: str) -> list[dict]:
 
 
 _YOSHI_START_RE = re.compile(
-    r"(?:(本日)|(\d{1,2})月(\d{1,2})日)(?:[（(][^）)]{1,3}[）)])?(?:\s*\d{1,2}時(?:\d{1,2}分)?)?\s*(?:より|から)")
+    r"(?:(本日|明日)|(\d{1,2})月(\d{1,2})日)(?:[（(][^）)]{1,3}[）)])?(?:\s*\d{1,2}時(?:\d{1,2}分)?)?\s*(?:より|から)")
 # 「登場」「開始」だけでは TVCM の放映開始などに当たってしまうため、販売・発売の語を要求する
 _YOSHI_LAUNCH_WORDS = re.compile(r"販売|発売")
 # 公式通販ショップ(冷凍商品・ギフト)のお知らせは店舗のメニューではないので照合から外す
@@ -925,7 +925,7 @@ def yoshinoya_start_date(title: str, news_date: str) -> str | None:
     if not m:
         return None
     if m.group(1):
-        return nd.isoformat()
+        return (nd + datetime.timedelta(days=1 if m.group(1) == "明日" else 0)).isoformat()
     try:
         d = datetime.date(nd.year, int(m.group(2)), int(m.group(3)))
     except ValueError:
@@ -937,11 +937,18 @@ def yoshinoya_start_date(title: str, news_date: str) -> str | None:
     return d.isoformat()
 
 
+def strip_yoshinoya_notice(name: str | None) -> str | None:
+    """公式メニューが発売前に付ける先頭の【予告】を外す(例: 「【予告】牛スンドゥブチゲ鍋膳」)。"""
+    if not name:
+        return name
+    return re.sub(r"^\s*【予告】\s*", "", name)
+
+
 def yoshinoya_title_matches(name: str, title: str) -> bool:
     """商品名が見出しの商品として載っているか。見出しに「」『』があれば、その中身と
     完全一致するときだけ(「さんま定食」が「牛さんま定食」の見出しに部分一致する誤爆を避ける)。
     括弧が無い見出しだけ、正規化した部分一致(4文字以上)。"""
-    n = normalize_for_match(name)
+    n = normalize_for_match(strip_yoshinoya_notice(name))
     if len(n) < 3:
         return False
     quoted = [normalize_for_match(q) for q in re.findall(r"[「『](.*?)[」』]", title or "")]

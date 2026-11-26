@@ -1697,6 +1697,8 @@ def render_yoshinoya_notes(item: dict) -> str:
         title = esc(item["news_title"])
         title_html = (f'<a href="{esc(link)}" target="_blank" rel="noopener">{title}</a>' if link else title)
         notes.append(f"発売日は公式のお知らせ（{esc(item.get('news_date') or '')}）の見出しによります：{title_html}")
+    if item.get("launch_date_source") == "manual" and item.get("launch_date") and item.get("launch_date_note"):
+        notes.append(f"発売日：{esc(item['launch_date_note'])}")
     e = item.get("early_end_notice")
     if e:
         link = e.get("url") or ""
