@@ -9,6 +9,10 @@
 
 from __future__ import annotations
 
+import hashlib
+import re
+import unicodedata
+
 BASE = "https://www.hanamaruudon.com"
 ROBOTS_URL = BASE + "/robots.txt"
 MENU_URL = BASE + "/menu/"
@@ -170,7 +174,15 @@ def campaign_article_page() -> str:
             "</body></html>")
 
 
-ALL_PIDS = ["campaign_menu", "campaign_menu_02", "02_2", "02_5", "05_5", "06_1"]
+def _campaign_id(name: str) -> str:
+    """parsers.hanamaru_campaign_id と同じ作り (期間限定の商品IDは商品名から作る)。"""
+    norm = re.sub(r"\s+", "", unicodedata.normalize("NFKC", name))
+    return "campaign_" + hashlib.sha1(norm.encode("utf-8")).hexdigest()[:10]
+
+
+PID_MAIN = _campaign_id("合成かもねぎうどん")
+PID_SUB = _campaign_id("合成かもせいろ")
+ALL_PIDS = [PID_MAIN, PID_SUB, "02_2", "02_5", "05_5", "06_1"]
 
 
 def hanamaru_pages(menu: str | None = None) -> dict:

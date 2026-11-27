@@ -50,7 +50,7 @@ class HanamaruParserTests(unittest.TestCase):
         d = parsers.parse_hanamaru_menu(H.menu_page())
         items = {i["product_id"]: i for i in d["items"]}
         self.assertEqual(set(items), set(H.ALL_PIDS))
-        main = items["campaign_menu"]   # 期間限定の特集商品 (詳細ページなし)
+        main = items[H.PID_MAIN]   # 期間限定の特集商品 (詳細ページなし)
         self.assertEqual(main["name"], "合成かもねぎうどん")
         self.assertEqual(main["category"], "期間限定メニュー")
         self.assertTrue(main["is_limited"])
@@ -60,7 +60,7 @@ class HanamaruParserTests(unittest.TestCase):
                          [("小", 890), ("中", 1080), ("大", 1300)])
         self.assertEqual(main["official_url"], H.CAMPAIGN_URL)
         self.assertIsNone(main["detail_path"])
-        sub = items["campaign_menu_02"]
+        sub = items[H.PID_SUB]
         self.assertEqual(sub["name"], "合成かもせいろ")
         self.assertEqual(sub["price"], 790)
         kitsune = items["02_2"]
@@ -123,6 +123,20 @@ class HanamaruParserTests(unittest.TestCase):
         self.assertFalse(parsers.match_hanamaru_article("合成きつね", 580, info))
         self.assertFalse(parsers.match_hanamaru_article("合成かもねぎうどん", None, info))
 
+    def test_limited_id_comes_from_name_not_image(self):
+        # 画像ファイル名は枠ごとの使い回しなので、同じ画像名でも商品名が違えば別の ID になる
+        d1 = parsers.parse_hanamaru_menu(H.menu_page())
+        ids1 = {i["name"]: i["product_id"] for i in d1["items"]}
+        renamed = H.menu_page().replace("合成かもねぎうどん", "合成あたらしいうどん")
+        d2 = parsers.parse_hanamaru_menu(renamed)
+        ids2 = {i["name"]: i["product_id"] for i in d2["items"]}
+        self.assertNotEqual(ids2["合成あたらしいうどん"], ids1["合成かもねぎうどん"])
+        self.assertEqual(ids2["合成あたらしいうどん"],
+                         parsers.hanamaru_campaign_id("合成あたらしいうどん"))
+        # 名前が同じなら ID は安定する (次の季節に戻ってきたら同じ記録に付く)
+        self.assertEqual(ids1["合成かもせいろ"], parsers.hanamaru_campaign_id("合成かもせいろ"))
+        self.assertEqual(ids1["合成かもねぎうどん"], H.PID_MAIN)
+
     def test_excluded(self):
         self.assertEqual(parsers.hanamaru_excluded({"name": "", "price": 100}), "no_name")
         self.assertEqual(parsers.hanamaru_excluded({"name": "x", "price": None}), "no_price")
@@ -153,7 +167,7 @@ class HanamaruCrawlTests(unittest.TestCase):
         st = self.crawl_once()
         self.assertTrue(st["list_ok"])
         self.assertEqual(set(self.prods), set(H.ALL_PIDS))
-        p = self.prods["campaign_menu"]   # 期間限定。ニュース記事から発売日が付く
+        p = self.prods[H.PID_MAIN]   # 期間限定。ニュース記事から発売日が付く
         self.assertEqual(p["limited_kind"], "期間限定")
         self.assertEqual(p["badges"], ["期間限定"])
         self.assertEqual(p["launch_date"], "2026-10-22")
@@ -163,7 +177,7 @@ class HanamaruCrawlTests(unittest.TestCase):
         self.assertEqual([(v["label"], v["price"]) for v in p["price_variants"]],
                          [("小", 890), ("中", 1080), ("大", 1300)])
         self.assertIsNone(p["nutrition"])   # 期間限定は詳細ページが無いので kcal なし
-        sub = self.prods["campaign_menu_02"]
+        sub = self.prods[H.PID_SUB]
         self.assertEqual(sub["launch_date"], "2026-10-22")
         kitsune = self.prods["02_2"]   # 定番。詳細から全サイズと kcal が入る
         self.assertTrue(kitsune["is_regular"])
@@ -248,7 +262,7 @@ class HanamaruSiteTests(unittest.TestCase):
         pending: dict = {}
         with TempData(regular=True):
             crawl.crawl_hanamaru(FakeHanamaru(), pending, {}, "2026-11-27")
-            p = json.loads((crawl.PRODUCTS / CHAIN / "campaign_menu.json").read_text(encoding="utf-8"))
+            p = json.loads((crawl.PRODUCTS / CHAIN / f"{H.PID_MAIN}.json").read_text(encoding="utf-8"))
         h = g.render_item_page(p)
         self.assertIn("「期間限定メニュー」に掲載されたメニューです", h)
         self.assertIn("「販売期間」の記載によります", h)

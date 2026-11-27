@@ -8,6 +8,7 @@
 from __future__ import annotations
 
 import datetime
+import hashlib
 import html as html_lib
 import json
 import re
@@ -2906,8 +2907,11 @@ def cocoichi_excluded(entry: dict) -> str | None:
 #    だけは一覧に全サイズの価格が載る。全サイズの価格と kcal (サイズ別) は商品詳細
 #    ページ (NN_N.html) にあるので、初回記録のときだけ詳細を取る (丸亀方式)。
 #  ・商品IDは詳細ページのファイル名 (02_2 など)。期間限定の商品には詳細ページが
-#    無い (キャンペーンページが共通の飛び先) ので、メニュー画像のファイル名
-#    (img_campaign_menu → campaign_menu) を ID にする (セイコーマートの前例)。
+#    無い (キャンペーンページが共通の飛び先)。メニュー画像のファイル名は枠ごとの
+#    使い回し (次の季節の商品も img_campaign_menu を使う。コメント内の旧商品も
+#    同じ) なので ID には使わず、商品名から作る (campaign_ + 正規化した名前の
+#    sha1 先頭10文字。モルのレビュー指摘 2026-11-27)。同じ商品が次の季節に
+#    戻ってきたら同じ ID になり、再発売として同じ記録に付く。
 #  ・発売日は自社ニュース記事が正本 (やよい軒方式)。商品記事には「商品価格」
 #    セクション (商品名+サイズ別価格) と「販売期間」があり、販売期間の開始日を
 #    発売日とする。定期券のような販促記事には「商品価格」が無いので商品記事と
@@ -2932,6 +2936,13 @@ HANAMARU_SECTIONS = [
 ]
 
 
+def hanamaru_campaign_id(name: str) -> str:
+    """期間限定の商品ID。詳細ページが無い商品のために商品名から作る (画像ファイル名は
+    枠ごとの使い回しで季節が変わると別商品と衝突するため使わない)。"""
+    norm = _yayoiken_norm(name)
+    return "campaign_" + hashlib.sha1(norm.encode("utf-8")).hexdigest()[:10]
+
+
 def hanamaru_menu_url() -> str:
     return HANAMARU_BASE + HANAMARU_MENU_PATH
 
@@ -2952,7 +2963,6 @@ _HANAMARU_PRICE_NUM_RE = re.compile(r"<span>([\d,]+)</span>")
 _HANAMARU_LIMITED_PRICE_UL_RE = re.compile(r'menu-limited__price[^"]*">(.*?)</ul>', re.S)
 _HANAMARU_PRICE_LI_RE = re.compile(r"<li><i>([^<]+)</i><span>([\d,]+)")
 _HANAMARU_DETAIL_HREF_RE = re.compile(r'href="(?:/menu/)?(\d{2}_\d+)\.html"')
-_HANAMARU_IMG_RE = re.compile(r'src="/assets/img/menu/(img_campaign[^"?]*)\.png')
 _HANAMARU_MAIN_TITLE_RE = re.compile(r'menu-limited__udon__title__text">(.*?)</span>', re.S)
 _HANAMARU_SECTION_TITLE_RE = re.compile(r'menu-sectitle__text">.*?<em>([^<]+)</em>', re.S)
 _HANAMARU_LIMITED_TITLE_RE = re.compile(r'h2-title2__jp">(.*?)<i', re.S)
@@ -2993,14 +3003,12 @@ def _hanamaru_allstar_item(chunk: str, section_key: str, category: str | None) -
     if not prices:
         return None
     href = _HANAMARU_DETAIL_HREF_RE.search(chunk)
-    img = _HANAMARU_IMG_RE.search(chunk)
     if href:
         pid = href.group(1)
         official_url = hanamaru_detail_url(pid)
         detail_path = f"/menu/{pid}.html"
-    elif img:
-        pid = img.group(1)
-        pid = pid[len("img_"):] if pid.startswith("img_") else pid
+    elif section_key == HANAMARU_LIMITED_KEY:
+        pid = hanamaru_campaign_id(name)   # 期間限定は詳細ページが無いので名前から作る
         official_url = HANAMARU_BASE + HANAMARU_CAMPAIGN_PATH
         detail_path = None
     else:
@@ -3045,10 +3053,8 @@ def parse_hanamaru_menu(page: str) -> dict:
                 name = re.sub(r"\s+", " ", clean_text(mm.group(1))).strip()
                 ul = _HANAMARU_LIMITED_PRICE_UL_RE.search(chunk_all)
                 prices = _hanamaru_prices_from_ul(ul.group(1)) if ul else []
-                img = _HANAMARU_IMG_RE.search(chunk_all)
-                if name and prices and img:
-                    pid = img.group(1)
-                    pid = pid[len("img_"):] if pid.startswith("img_") else pid
+                if name and prices:
+                    pid = hanamaru_campaign_id(name)
                     if pid not in seen:
                         seen.add(pid)
                         items.append({
