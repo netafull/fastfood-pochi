@@ -3767,6 +3767,379 @@ def crawl_cocoichi(getter, pending: dict, stats: dict, today: str | None = None)
 
 
 # ---------------------------------------------------------------------------
+# はなまるうどん (www.hanamaruudon.com。2026-11-27追加、17チェーン目。実物の構造は parsers.py の同名のコメントにまとめた)
+# ---------------------------------------------------------------------------
+# 方針:
+#  ・巡回は robots.txt + メニュー1ページ + ニュース一覧1ページ + 未照合のニュース記事の詳細
+#    (1回の実行で最大 HANAMARU_ARTICLE_MAX_FETCHES 件まで) + 新しく記録する商品の詳細ページ。
+#  ・商品の正本はメニュー1ページ (セクション7つ)。価格はサイズ別 (小・中・大) で、代表価格は
+#    「小」。全サイズの価格とサイズ別 kcal は、初回記録のときだけ詳細ページから取る (丸亀方式)。
+#    期間限定の商品は一覧に全サイズの価格が載るので詳細は取らない (詳細ページ自体が無い)。
+#    2回目以降、定番のサイズ別価格は一覧に「小」しか出ないため更新できない (既知の制限)。
+#  ・発売日は自社ニュース記事の「商品価格」+「販売期間」が正本で、照合できたものは
+#    launch_date_source="news_article" (やよい軒と同じ)。記事の解析結果は
+#    data/hanamaru_state.json に残し、後から現れた商品とも照合できるようにする。
+#    発表日と発売日はずれるので、発表日での代用はしない。メニューページの期間限定
+#    セクションに出る開始日は発売日の出どころにしない (オーナー決定 2026-11-27)。
+#  ・種別: 期間限定セクションに載った商品は 期間限定 (badges にも付ける)。特集商品の
+#    「新」バッジ、またはニュース記事と照合して発売日が付いた商品は 新メニュー。
+#    baseline に無い新規は 新規掲載、それ以外は定番。テイクアウト専用も記録する。
+#  ・説明文・アレルゲンは第1段階では対象外。栄養は kcal のみ (詳細ページのサイズ別)。
+#  ・メニューが空・取得失敗・前回の半分未満の回は、何も更新せず終了判定もしない。
+HANAMARU_MIN_RATIO = 0.5
+HANAMARU_ARTICLE_MAX_FETCHES = 6
+HANAMARU_ARTICLE_WINDOW_BEFORE_DAYS = 120
+HANAMARU_ARTICLE_WINDOW_AFTER_DAYS = 14
+
+
+def hanamaru_state_path() -> Path:
+    return DATA / "hanamaru_state.json"
+
+
+def hanamaru_price_note(prices: list[dict]) -> str:
+    note = "税込。"
+    if len(prices) > 1:
+        note += "表示は「小」の価格。"
+    note += "店舗により販売メニューや価格が異なる場合があります。"
+    return note
+
+
+def _hanamaru_robots(getter, st: dict):
+    """robots.txt を読んで RobotFileParser を返す。ブロックされたら None (呼び出し側がその回を止める)。
+    404・その他の失敗は全許可として扱う。"""
+    st["list_requests"] += 1
+    try:
+        text = getter("hanamaru", parsers.HANAMARU_BASE + "/robots.txt")
+    except NotFoundError:
+        text = None
+    except BlockedError as e:
+        st["blocked"] = True
+        print(f"[blocked] hanamaru robots.txt: {e}", file=sys.stderr)
+        return None
+    except Exception as e:  # noqa: BLE001
+        print(f"[warn] hanamaru robots.txt 取得失敗(全許可として続行): {e}", file=sys.stderr)
+        text = None
+    rp = urllib.robotparser.RobotFileParser()
+    rp.parse((text or "User-agent: *\nAllow: /").splitlines())
+    return rp
+
+
+def hanamaru_article_infos(state: dict) -> list[dict]:
+    """state に残した商品記事の解析結果を、新しい順の [{url, date, title, launch_date,
+    planned_end_text, items}] で返す。"""
+    infos = [{"url": url, **info} for url, info in (state.get("articles") or {}).items()]
+    infos.sort(key=lambda x: x.get("date") or "", reverse=True)
+    return infos
+
+
+def hanamaru_find_article(name: str, price: int | None, infos: list[dict], ref: str) -> dict | None:
+    """商品名・価格で照合できるニュース記事を返す (ref の前120日〜後14日に発表されたもの)。"""
+    try:
+        c = datetime.date.fromisoformat(ref)
+    except (ValueError, TypeError):
+        return None
+    lo = (c - datetime.timedelta(days=HANAMARU_ARTICLE_WINDOW_BEFORE_DAYS)).isoformat()
+    hi = (c + datetime.timedelta(days=HANAMARU_ARTICLE_WINDOW_AFTER_DAYS)).isoformat()
+    for info in infos:
+        if not (lo <= (info.get("date") or "") <= hi):
+            continue
+        if parsers.match_hanamaru_article(name, price, info):
+            return info
+    return None
+
+
+def hanamaru_apply_article(product: dict, infos: list[dict]) -> bool:
+    """ニュース記事の発売日・お知らせ情報を反映する。変更があれば True。
+    定番と、記事で確定済み (launch_date_source="news_article") の商品は照合しない。
+    発売日が付いたら、新規掲載だった商品は新メニューに上げる。"""
+    if product.get("is_regular") or product.get("launch_date_source") == "news_article":
+        return False
+    ref = (product.get("first_seen_at") or "")[:10]
+    rel = product.get("relaunches") or []
+    if rel and rel[-1].get("reappeared_at"):
+        ref = rel[-1]["reappeared_at"]
+    if not ref:
+        return False
+    info = hanamaru_find_article(product.get("name") or "", product.get("price"), infos, ref)
+    if not info:
+        return False
+    before = (product.get("news_url"), product.get("launch_date"), product.get("launch_date_source"),
+              product.get("limited_kind"), product.get("planned_end_text"))
+    product["announced_at"] = info.get("date")
+    product["news_url"] = info["url"]
+    product["news_title"] = info.get("title")
+    product["news_date"] = info.get("date")
+    if info.get("planned_end_text") and not product.get("planned_end_text"):
+        product["planned_end_text"] = info["planned_end_text"]
+    if info.get("launch_date"):
+        product["launch_date"] = info["launch_date"]
+        product["launch_date_source"] = "news_article"
+        if product.get("limited_kind") in (None, "新規掲載"):
+            product["limited_kind"] = "新メニュー"
+    after = (product.get("news_url"), product.get("launch_date"), product.get("launch_date_source"),
+             product.get("limited_kind"), product.get("planned_end_text"))
+    return before != after
+
+
+def build_hanamaru_product(entry: dict, kind: str, detail: dict | None, today: str, now: str) -> dict:
+    price = entry.get("price")
+    sizes = (detail or {}).get("sizes") or []
+    if sizes:
+        prices = [{"label": s["label"], "price": s["price"]} for s in sizes]
+        nut_variants = []
+        for s in sizes:
+            if s.get("kcal") is None:
+                continue
+            nut = parsers.build_nutrition([("エネルギー", str(s["kcal"]))])
+            if nut is not None:
+                nut_variants.append({"label": s["label"], "nutrition": nut})
+    else:
+        prices = [{"label": p["label"], "price": p["price"]} for p in entry.get("prices") or []]
+        nut_variants = []
+    primary_nut = None
+    for v in nut_variants:
+        if v["label"] == "小":
+            primary_nut = v
+            break
+    if primary_nut is None and nut_variants:
+        primary_nut = nut_variants[0]
+    product = {
+        "chain": "hanamaru",
+        "product_id": entry["product_id"],
+        "name": entry["name"],
+        "category": entry.get("category"),
+        "price": price,
+        "price_note": hanamaru_price_note(prices),
+        "price_variants": prices if len(prices) > 1 else None,
+        "launch_date": None,
+        "launch_date_source": "not_found",
+        "announced_at": None,
+        "planned_end_text": None,
+        "news_url": None,
+        "news_title": None,
+        "news_date": None,
+        "description": None,
+        "description_full_len": 0,
+        "nutrition": primary_nut["nutrition"] if primary_nut else None,
+        "nutrition_variants": nut_variants if len(nut_variants) > 1 else None,
+        "nutrition_note": None,
+        "nutrition_pdf_url": None,
+        "nutrition_pdf_label": None,
+        "allergen_pdf_url": None,
+        "allergen_pdf_label": None,
+        "allergens": None,
+        "origin": None,
+        "limited_kind": kind,
+        "badges": ["期間限定"] if kind == "期間限定" else [],
+        "official_url": entry["official_url"],
+        "first_seen_at": now,
+        "last_seen_at": today,
+        "status": "on_sale",
+        "ended_observed_at": None,
+        "missed_runs": 0,
+        "price_history": [{"date": today, "price": price}] if price is not None else [],
+        "source_list": ["menu"],
+        "image": None,
+    }
+    seed_variants(product, today)
+    return product
+
+
+def crawl_hanamaru(getter, pending: dict, stats: dict, today: str | None = None) -> None:
+    chain = "hanamaru"
+    now = now_iso() if today is None else f"{today}T07:00:00+09:00"
+    today = today or today_jst()
+    pending.setdefault(chain, {})
+    stats.setdefault(chain, new_stats())
+    st = stats[chain]
+    base = parsers.HANAMARU_BASE
+
+    rp = _hanamaru_robots(getter, st)
+    if rp is None:
+        return
+
+    def allowed(url: str) -> bool:
+        return rp.can_fetch(UA, url)
+
+    # メニュー1ページ (セクション7つ・全商品)。取れない・0件の回は list_ok を立てない
+    menu_url = parsers.hanamaru_menu_url()
+    entries: dict[str, dict] = {}
+    if not allowed(menu_url):
+        print(f"[skip] robots.txtでDisallow: {menu_url}", file=sys.stderr)
+        return
+    try:
+        page = getter(chain, menu_url)
+        st["list_requests"] += 1
+    except BlockedError as e:
+        st["list_requests"] += 1
+        st["blocked"] = True
+        print(f"[blocked] hanamaru menu {menu_url}: {e}", file=sys.stderr)
+        return
+    except Exception as e:  # noqa: BLE001
+        st["list_requests"] += 1
+        print(f"[warn] hanamaru メニュー 取得失敗 {menu_url}: {e}", file=sys.stderr)
+        return
+    for e in parsers.parse_hanamaru_menu(page)["items"]:
+        entries.setdefault(e["product_id"], e)
+    if not entries:
+        print("[warn] hanamaru メニュー: 商品が0件(構造変更の疑い)", file=sys.stderr)
+        return
+    entries = {pid: e for pid, e in entries.items() if not parsers.hanamaru_excluded(e)}
+    state = load_json(hanamaru_state_path(), {})
+    prev_count = state.get("menu_count")
+    if prev_count and len(entries) < prev_count * HANAMARU_MIN_RATIO:
+        print(f"[warn] hanamaru メニューが極端に少ない({len(entries)}件。前回{prev_count}件)。"
+              "消えた商品の判定は行わない", file=sys.stderr)
+        return
+    st["list_ok"] = bool(entries)
+    if not st["list_ok"]:
+        return
+
+    # ニュース一覧 (1ページ)。取れなくてもメニューの記録は続ける
+    news_list: list[dict] = []
+    news_url = parsers.hanamaru_news_url()
+    if not allowed(news_url):
+        print(f"[skip] robots.txtでDisallow: {news_url}", file=sys.stderr)
+    else:
+        try:
+            text = getter(chain, news_url)
+            st["detail_requests"] += 1
+            news_list = parsers.parse_hanamaru_news_list(text)
+        except BlockedError as e:
+            st["detail_requests"] += 1
+            st["blocked"] = True
+            print(f"[blocked] hanamaru news list: {e}", file=sys.stderr)
+            return
+        except Exception as e:  # noqa: BLE001
+            st["detail_requests"] += 1
+            print(f"[warn] hanamaru ニュース一覧 取得失敗 {news_url}: {e}", file=sys.stderr)
+    if not news_list:
+        print("[warn] hanamaru ニュース一覧: 0件(構造変更の疑い)", file=sys.stderr)
+
+    # 未照合の記事だけ詳細を取る (上限つき)。「商品価格」のあるものは解析結果を state に残し、
+    # 無いものは照合済みの印だけ残す。取得に失敗したものは照合済みにしない (次回取り直す)
+    stored = dict(state.get("articles") or {})
+    checked = set(state.get("article_checked") or [])
+    fetches = 0
+    for a in news_list:
+        url = a["url"]
+        if url in stored or url in checked:
+            continue
+        if fetches >= HANAMARU_ARTICLE_MAX_FETCHES:
+            break
+        if not allowed(url):
+            checked.add(url)
+            continue
+        fetches += 1
+        try:
+            html = getter(chain, url)
+            st["detail_requests"] += 1
+        except BlockedError as e:
+            st["detail_requests"] += 1
+            st["blocked"] = True
+            print(f"[blocked] hanamaru news article {url}: {e}", file=sys.stderr)
+            return
+        except Exception as e:  # noqa: BLE001
+            st["detail_requests"] += 1
+            print(f"[warn] hanamaru ニュース記事 取得失敗 {url}: {e}", file=sys.stderr)
+            continue
+        info = parsers.parse_hanamaru_news_article(html)
+        if info is None:
+            checked.add(url)   # 商品記事ではない (キャンペーン・お知らせなど)
+            continue
+        stored[url] = {"date": a["date"], "title": a["title"],
+                       "launch_date": info["launch_date"],
+                       "planned_end_text": info["planned_end_text"], "items": info["items"]}
+    infos = hanamaru_article_infos({"articles": stored})
+    st["limited_seen"] = sum(1 for e in entries.values() if e.get("is_limited") or e.get("is_new"))
+
+    baseline = baseline_for(chain)
+    entries = burst_filter(chain, entries, baseline, pending, stats, today)
+    regular_budget = RegularBudget(st)
+    for pid, e in entries.items():
+        existing = load_product(chain, pid)
+        if existing is not None:
+            touch_seen(existing, list_price_for_history(st, e.get("price")), today, now, st)
+            # サイズ別価格が一覧に出る商品 (期間限定) は履歴も更新する。定番は「小」だけ
+            # なので record_variants 側で何も書かれない
+            if st["list_ok"]:
+                record_variants(existing, [{"label": p["label"], "price": p["price"]}
+                                           for p in e.get("prices") or []], today, st)
+            if e.get("name") and existing.get("name") != e["name"]:
+                existing["name"] = e["name"]
+            if e.get("is_limited") and existing.get("limited_kind") == REGULAR_KIND:
+                upgrade_regular(existing, "期間限定")   # 定番が期間限定セクションに載ったら格上げ
+                badges = list(existing.get("badges") or [])
+                if "期間限定" not in badges:
+                    badges.append("期間限定")
+                existing["badges"] = badges
+            hanamaru_apply_article(existing, infos)
+            save_product(chain, existing)
+            pending[chain].pop(pid, None)
+            continue
+        info = hanamaru_find_article(e["name"], e.get("price"), infos, today)
+        is_new_menu = baseline is not None and pid not in baseline
+        if e.get("is_limited"):
+            kind = "期間限定"   # 期間限定セクションに載った商品
+        elif e.get("is_new") or (info and info.get("launch_date")):
+            kind = "新メニュー"   # 「新」バッジ、またはニュース記事で発売日が付いた商品
+        elif is_new_menu:
+            kind = "新規掲載"
+        else:
+            kind = REGULAR_KIND
+        is_regular = kind == REGULAR_KIND
+        if is_regular and not regular_budget.take():
+            continue   # 定番は1回の巡回で作る件数に上限がある。残りは翌日以降
+        # 初回記録のときだけ詳細ページから全サイズの価格と kcal を取る (期間限定は詳細なし)
+        detail = None
+        if e.get("detail_path"):
+            durl = base + e["detail_path"]
+            if allowed(durl):
+                try:
+                    dhtml = getter(chain, durl)
+                    st["detail_requests"] += 1
+                    detail = parsers.parse_hanamaru_detail(dhtml)
+                except BlockedError as e2:
+                    st["detail_requests"] += 1
+                    st["blocked"] = True
+                    print(f"[blocked] hanamaru detail {durl}: {e2}", file=sys.stderr)
+                    return
+                except Exception as e2:  # noqa: BLE001
+                    st["detail_requests"] += 1
+                    print(f"[warn] hanamaru 詳細 取得失敗 {durl}: {e2}", file=sys.stderr)
+                    detail = None
+        product = build_hanamaru_product(e, kind, detail, today, now)
+        if is_regular:
+            mark_regular(product)
+        else:
+            hanamaru_apply_article(product, infos)
+        save_product(chain, product)
+        st["regular_created" if is_regular else "new_products"] += 1
+        pending[chain].pop(pid, None)
+
+    if st["list_ok"]:
+        if baseline is None:
+            save_baseline(chain, set(entries))
+        apply_missing(chain, set(entries), today, st)
+        state["menu_count"] = len(entries)
+        state["checked_at"] = today
+        state["articles"] = stored
+        state["article_checked"] = sorted(checked)
+        save_json(hanamaru_state_path(), state, sort_keys=True)
+
+    # 発売日の確定 (この回に処理した記事との照合)。終わって久しい商品は探し直さない
+    cutoff = (datetime.date.fromisoformat(today) - datetime.timedelta(days=14)).isoformat()
+    for p in load_chain_products(chain):
+        if p.get("status") == "ended" and (p.get("ended_observed_at") or "") < cutoff:
+            continue
+        if hanamaru_apply_article(p, infos):
+            save_product(chain, p)
+    recorded = [p for p in load_chain_products(chain) if not p.get("is_regular")]
+    st["news_matched"] = sum(1 for p in recorded if p.get("news_url"))
+    st["news_unmatched"] = sum(1 for p in recorded if not p.get("news_url"))
+
+
+# ---------------------------------------------------------------------------
 # 丸亀製麺 (jp.marugame.com)
 # ---------------------------------------------------------------------------
 # 調査・方針(2026-10-17。実物の構造は parsers.py の「丸亀製麺」のコメントにまとめた):
@@ -4518,7 +4891,7 @@ CRAWLERS = {"mcdonalds": crawl_mcdonalds, "mos": crawl_mos, "matsuya": crawl_mat
             "marugame": crawl_marugame, "burgerking": crawl_burgerking,
             "kourakuen": crawl_kourakuen, "hidakaya": crawl_hidakaya,
             "zetteria": crawl_zetteria, "kfc": crawl_kfc, "yayoiken": crawl_yayoiken,
-            "cocoichi": crawl_cocoichi}
+            "cocoichi": crawl_cocoichi, "hanamaru": crawl_hanamaru}
 
 
 def main(argv: list[str] | None = None) -> int:

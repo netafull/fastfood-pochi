@@ -8,6 +8,7 @@
 from __future__ import annotations
 
 import datetime
+import hashlib
 import html as html_lib
 import json
 import re
@@ -2888,3 +2889,342 @@ def cocoichi_excluded(entry: dict) -> str | None:
     if entry.get("price") is None:
         return "no_price"
     return None
+
+
+
+
+# ---------------------------------------------------------------------------
+# はなまるうどん (www.hanamaruudon.com。2026-11-27追加、17チェーン目)
+# ---------------------------------------------------------------------------
+# 調査・方針(2026-11-27。実物で確認した事実):
+#  ・商品の正本は公式メニュー1ページ /menu/ (セクション7つ・全43件)。名前・価格とも
+#    HTMLテキストで読める。セクションは id 属性 (limited / kakedashi / tsukedashi /
+#    okonomi / gohan / other / takeout) で区切られ、カテゴリー名は見出し
+#    (limited は h2、他は menu-sectitle の <em>) が正本。HTMLコメントには販売終了した
+#    旧商品が残っているので、解析前にコメントを除く (セイコーマートと同じ注意)。
+#  ・価格はサイズ別 (小・中・大)。一覧ではうどん系は「小」の価格だけ (「円～」表記)、
+#    サイド系は単品価格 (「1個」「各種」などの単位注記つき) が出る。期間限定セクション
+#    だけは一覧に全サイズの価格が載る。全サイズの価格と kcal (サイズ別) は商品詳細
+#    ページ (NN_N.html) にあるので、初回記録のときだけ詳細を取る (丸亀方式)。
+#  ・商品IDは詳細ページのファイル名 (02_2 など)。期間限定の商品には詳細ページが
+#    無い (キャンペーンページが共通の飛び先)。メニュー画像のファイル名は枠ごとの
+#    使い回し (次の季節の商品も img_campaign_menu を使う。コメント内の旧商品も
+#    同じ) なので ID には使わず、商品名から作る (campaign_ + 正規化した名前の
+#    sha1 先頭10文字。モルのレビュー指摘 2026-11-27)。同じ商品が次の季節に
+#    戻ってきたら同じ ID になり、再発売として同じ記録に付く。
+#  ・発売日は自社ニュース記事が正本 (やよい軒方式)。商品記事には「商品価格」
+#    セクション (商品名+サイズ別価格) と「販売期間」があり、販売期間の開始日を
+#    発売日とする。定期券のような販促記事には「商品価格」が無いので商品記事と
+#    みなさない。メニューページの期間限定セクションにも開始日が出るが、発売日の
+#    出どころはニュース記事に一本化する (オーナー決定 2026-11-27)。
+#  ・robots.txt は /test/ のみ Disallow。サイトに自動取得の禁止条文は無い
+#    (2026-11-27確認)。記録は事実情報のみで、画像は保存・表示しない。
+HANAMARU_BASE = "https://www.hanamaruudon.com"
+HANAMARU_MENU_PATH = "/menu/"
+HANAMARU_NEWS_PATH = "/news/"
+HANAMARU_CAMPAIGN_PATH = "/menu/campaign.html"
+HANAMARU_LIMITED_KEY = "limited"
+# (セクションの id, カテゴリー名の予備)。カテゴリー名はページの見出しから取る
+HANAMARU_SECTIONS = [
+    ("limited", "期間限定メニュー"),
+    ("kakedashi", "かけうどん系"),
+    ("tsukedashi", "ぶっかけ系"),
+    ("okonomi", "お好みのうどん"),
+    ("gohan", "ごはんもの"),
+    ("other", "天ぷら・おでん・その他"),
+    ("takeout", "テイクアウト専用"),
+]
+
+
+def hanamaru_campaign_id(name: str) -> str:
+    """期間限定の商品ID。詳細ページが無い商品のために商品名から作る (画像ファイル名は
+    枠ごとの使い回しで季節が変わると別商品と衝突するため使わない)。"""
+    norm = _yayoiken_norm(name)
+    return "campaign_" + hashlib.sha1(norm.encode("utf-8")).hexdigest()[:10]
+
+
+def hanamaru_menu_url() -> str:
+    return HANAMARU_BASE + HANAMARU_MENU_PATH
+
+
+def hanamaru_news_url() -> str:
+    return HANAMARU_BASE + HANAMARU_NEWS_PATH
+
+
+def hanamaru_detail_url(product_id: str) -> str:
+    return f"{HANAMARU_BASE}/menu/{product_id}.html"
+
+
+_HANAMARU_ITEM_SPLIT_RE = re.compile(r'<li class="menu-allstar__list__item">')
+_HANAMARU_NAME_RE = re.compile(r'menu-allstar__list__name">(.*?)</h3>', re.S)
+_HANAMARU_LIST_PRICE_RE = re.compile(r'menu-allstar__list__price">(.*?)</div>', re.S)
+_HANAMARU_PRICE_LABEL_RE = re.compile(r"<i>([^<]*)</i>")
+_HANAMARU_PRICE_NUM_RE = re.compile(r"<span>([\d,]+)</span>")
+_HANAMARU_LIMITED_PRICE_UL_RE = re.compile(r'menu-limited__price[^"]*">(.*?)</ul>', re.S)
+_HANAMARU_PRICE_LI_RE = re.compile(r"<li><i>([^<]+)</i><span>([\d,]+)")
+_HANAMARU_DETAIL_HREF_RE = re.compile(r'href="(?:/menu/)?(\d{2}_\d+)\.html"')
+_HANAMARU_MAIN_TITLE_RE = re.compile(r'menu-limited__udon__title__text">(.*?)</span>', re.S)
+_HANAMARU_SECTION_TITLE_RE = re.compile(r'menu-sectitle__text">.*?<em>([^<]+)</em>', re.S)
+_HANAMARU_LIMITED_TITLE_RE = re.compile(r'h2-title2__jp">(.*?)<i', re.S)
+
+
+def _hanamaru_prices_from_ul(ul_html: str) -> list[dict]:
+    return [{"label": m.group(1).strip(), "price": int(m.group(2).replace(",", ""))}
+            for m in _HANAMARU_PRICE_LI_RE.finditer(ul_html)]
+
+
+def _hanamaru_primary_price(prices: list[dict]) -> int | None:
+    """代表価格: 「小」→先頭 (一覧の表示価格が「小」基準のため)。"""
+    for p in prices:
+        if p["label"] == "小":
+            return p["price"]
+    return prices[0]["price"] if prices else None
+
+
+def _hanamaru_allstar_item(chunk: str, section_key: str, category: str | None) -> dict | None:
+    nm = _HANAMARU_NAME_RE.search(chunk)
+    if not nm:
+        return None
+    name = re.sub(r"\s+", " ", clean_text(nm.group(1))).strip()
+    if not name:
+        return None
+    prices: list[dict] = []
+    ul = _HANAMARU_LIMITED_PRICE_UL_RE.search(chunk)
+    if ul:
+        prices = _hanamaru_prices_from_ul(ul.group(1))
+    else:
+        pd = _HANAMARU_LIST_PRICE_RE.search(chunk)
+        if pd:
+            lm = _HANAMARU_PRICE_LABEL_RE.search(pd.group(1))
+            pm = _HANAMARU_PRICE_NUM_RE.search(pd.group(1))
+            if pm:
+                prices = [{"label": lm.group(1).strip() if lm else "",
+                           "price": int(pm.group(1).replace(",", ""))}]
+    if not prices:
+        return None
+    href = _HANAMARU_DETAIL_HREF_RE.search(chunk)
+    if href:
+        pid = href.group(1)
+        official_url = hanamaru_detail_url(pid)
+        detail_path = f"/menu/{pid}.html"
+    elif section_key == HANAMARU_LIMITED_KEY:
+        pid = hanamaru_campaign_id(name)   # 期間限定は詳細ページが無いので名前から作る
+        official_url = HANAMARU_BASE + HANAMARU_CAMPAIGN_PATH
+        detail_path = None
+    else:
+        return None
+    return {"product_id": pid, "name": name, "category": category,
+            "section": section_key, "price": _hanamaru_primary_price(prices),
+            "prices": prices, "is_limited": section_key == HANAMARU_LIMITED_KEY,
+            "is_new": False, "official_url": official_url, "detail_path": detail_path}
+
+
+def parse_hanamaru_menu(page: str) -> dict:
+    """メニュー1ページの解析。{"items": [{product_id, name, category, section,
+    price(代表=小), prices([{label, price}]), is_limited, is_new, official_url,
+    detail_path}]}。期間限定の特集商品 (menu-limited__udon) も含む。セクションの
+    見出しが取れないカテゴリーは予備の名前を使う。構造が変わって取れなければ
+    items は空。"""
+    page = _strip_html_comments(page)
+    page = re.sub(r"<script\b.*?</script>|<style\b.*?</style>", "", page, flags=re.S)
+    # セクションの開始位置 (id 属性) でページを切る
+    marks: list[tuple[int, str, str]] = []
+    for key, fallback in HANAMARU_SECTIONS:
+        m = re.search(rf'id="{key}"', page)
+        if m:
+            marks.append((m.start(), key, fallback))
+    marks.sort()
+    items: list[dict] = []
+    seen: set[str] = set()
+    for idx, (pos, key, fallback) in enumerate(marks):
+        end = marks[idx + 1][0] if idx + 1 < len(marks) else len(page)
+        chunk_all = page[pos:end]
+        if key == HANAMARU_LIMITED_KEY:
+            tm = _HANAMARU_LIMITED_TITLE_RE.search(chunk_all)
+            category = re.sub(r"\s+", " ", clean_text(tm.group(1))).strip() if tm else ""
+        else:
+            tm = _HANAMARU_SECTION_TITLE_RE.search(chunk_all)
+            category = tm.group(1).strip() if tm else ""
+        category = category or fallback
+        if key == HANAMARU_LIMITED_KEY:
+            # 特集商品 (詳細ページなし・全サイズ価格と開始日がこのセクションに出る)
+            mm = _HANAMARU_MAIN_TITLE_RE.search(chunk_all)
+            if mm:
+                name = re.sub(r"\s+", " ", clean_text(mm.group(1))).strip()
+                ul = _HANAMARU_LIMITED_PRICE_UL_RE.search(chunk_all)
+                prices = _hanamaru_prices_from_ul(ul.group(1)) if ul else []
+                if name and prices:
+                    pid = hanamaru_campaign_id(name)
+                    if pid not in seen:
+                        seen.add(pid)
+                        items.append({
+                            "product_id": pid, "name": name, "category": category,
+                            "section": key, "price": _hanamaru_primary_price(prices),
+                            "prices": prices, "is_limited": True,
+                            "is_new": "menu-limited__udon__title__new" in chunk_all,
+                            "official_url": HANAMARU_BASE + HANAMARU_CAMPAIGN_PATH,
+                            "detail_path": None})
+        for chunk in _HANAMARU_ITEM_SPLIT_RE.split(chunk_all)[1:]:
+            item = _hanamaru_allstar_item(chunk, key, category)
+            if item and item["product_id"] not in seen:
+                seen.add(item["product_id"])
+                items.append(item)
+    return {"items": items}
+
+
+_HANAMARU_DETAIL_NAME_RE = re.compile(r'menusingle-top__title">.*?<span>(.*?)</span>', re.S)
+_HANAMARU_SIZE_BLOCK_RE = re.compile(r'menusingle-top__info__size">(.*?)</div>', re.S)
+_HANAMARU_SIZE_LABEL_RE = re.compile(r'size-icon">([^<]*)</i>')
+_HANAMARU_SIZE_PRICE_RE = re.compile(r'size-text">(?:<small>[^<]*</small>)?\s*([\d,]+)\s*<small>円（税込）')
+_HANAMARU_SIZE_KCAL_RE = re.compile(r'/\s*([\d,.]+)\s*kcal')
+
+
+def parse_hanamaru_detail(page: str) -> dict:
+    """商品詳細ページ。{name, sizes: [{label, price, kcal}]}。サイズが無い商品は
+    ラベル空の1件。サイズブロックが読めなければ sizes は空。"""
+    page = _strip_html_comments(page)
+    page = re.sub(r"<script\b.*?</script>|<style\b.*?</style>", "", page, flags=re.S)
+    nm = _HANAMARU_DETAIL_NAME_RE.search(page)
+    name = re.sub(r"\s+", " ", clean_text(nm.group(1))).strip() if nm else None
+    sizes: list[dict] = []
+    for m in _HANAMARU_SIZE_BLOCK_RE.finditer(page):
+        block = m.group(1)
+        pm = _HANAMARU_SIZE_PRICE_RE.search(block)
+        if not pm:
+            continue
+        lm = _HANAMARU_SIZE_LABEL_RE.search(block)
+        km = _HANAMARU_SIZE_KCAL_RE.search(block)
+        kcal = None
+        if km:
+            try:
+                kcal = float(km.group(1).replace(",", ""))
+            except ValueError:
+                kcal = None
+        sizes.append({"label": lm.group(1).strip() if lm else "",
+                      "price": int(pm.group(1).replace(",", "")), "kcal": kcal})
+    return {"name": name, "sizes": sizes}
+
+
+_HANAMARU_NEWS_DATE_RE = re.compile(r'news-index__date">(\d{2})\.(\d{1,2})\.(\d{1,2})<')
+_HANAMARU_NEWS_CAT_RE = re.compile(r'news-index__category[^>]*>([^<]+)<')
+_HANAMARU_NEWS_A_RE = re.compile(
+    r'<a href="(https://www\.hanamaruudon\.com/news/\d{4}/[^"]+\.html)">(.*?)</a>', re.S)
+
+
+def parse_hanamaru_news_list(page: str) -> list[dict]:
+    """ニュース一覧を、新しい順の [{date(ISO), title, url, category}] にする。
+    PDFへのリンクなど記事以外のものは含めない。重複は除く。"""
+    page = _strip_html_comments(page)
+    out, seen = [], set()
+    for chunk in page.split('news-index__item"')[1:]:
+        dm = _HANAMARU_NEWS_DATE_RE.search(chunk)
+        am = _HANAMARU_NEWS_A_RE.search(chunk)
+        if not dm or not am:
+            continue
+        url = am.group(1)
+        if url in seen:
+            continue
+        seen.add(url)
+        date = f"20{int(dm.group(1)):02d}-{int(dm.group(2)):02d}-{int(dm.group(3)):02d}"
+        title = re.sub(r"<br\s*/?>", " ", am.group(2))
+        title = re.sub(r"\s+", " ", clean_text(title)).strip()
+        cm = _HANAMARU_NEWS_CAT_RE.search(chunk)
+        out.append({"date": date, "title": title, "url": url,
+                    "category": clean_text(cm.group(1)).strip() if cm else ""})
+    out.sort(key=lambda x: x["date"], reverse=True)
+    return out
+
+
+_HANAMARU_SIZE_PRICE_LINE_RE = re.compile(r"（小）([\d,]+)円\s*（中）([\d,]+)円\s*（大）([\d,]+)円")
+_HANAMARU_PERIOD_RE = re.compile(r"販売期間\s*(\d{4})年(\d{1,2})月(\d{1,2})日[^\n]*?～\s*(.+)")
+_HANAMARU_LAUNCH_FALLBACK_RE = re.compile(r"(\d{4})年(\d{1,2})月(\d{1,2})日（[^）]*）より")
+
+
+def _hanamaru_article_item_name(line: str) -> str:
+    """商品価格セクションの商品名行。末尾の（温）（つけだし：…）などの注記は落とす。"""
+    return re.sub(r"（[^）]*）$", "", line.strip()).strip()
+
+
+def parse_hanamaru_news_article(page: str) -> dict | None:
+    """ニュース記事の詳細。「商品価格」セクションが無ければ None (商品記事ではない。
+    定期券のような販促記事はここで落ちる)。戻り値: {"launch_date"(販売期間の開始日。
+    ISO。読めなければ None), "planned_end_text"(販売期間の終了側の表記。無ければ
+    None), "items": [{"name", "price"(小), "prices": [{label, price}]}]}。"""
+    text = _yayoiken_detail_text(page)
+    idx = text.find("商品価格")
+    if idx < 0:
+        return None
+    # 実物の商品概要は見出しと中身が同じ行にくっつく (「商品価格鴨ねぎうどん（温）」の形)
+    # ので、「商品価格」より後ろのテキストを行に分けて読む
+    lines = text[idx + len("商品価格"):].split("\n")
+    items, seen = [], set()
+    pending_name: str | None = None
+    for line in lines:
+        s = line.strip()
+        if s.startswith(("販売店舗", "販売期間")) or s.startswith("■"):
+            break
+        sm = _HANAMARU_SIZE_PRICE_LINE_RE.search(s)
+        if sm:
+            if pending_name:
+                prices = [{"label": lab, "price": int(sm.group(i).replace(",", ""))}
+                          for i, lab in enumerate(("小", "中", "大"), start=1)]
+                key = (pending_name, prices[0]["price"])
+                if key not in seen:
+                    seen.add(key)
+                    items.append({"name": pending_name, "price": prices[0]["price"],
+                                  "prices": prices})
+            pending_name = None
+            continue
+        pm = re.fullmatch(r"([\d,]+)円", s)
+        if pm:
+            if pending_name:
+                price = int(pm.group(1).replace(",", ""))
+                key = (pending_name, price)
+                if key not in seen:
+                    seen.add(key)
+                    items.append({"name": pending_name, "price": price,
+                                  "prices": [{"label": "", "price": price}]})
+            pending_name = None
+            continue
+        if not s or s.startswith("＊"):
+            continue
+        pending_name = _hanamaru_article_item_name(s)
+    if not items:
+        return None
+    launch = None
+    planned_end = None
+    pm = _HANAMARU_PERIOD_RE.search(text)
+    if pm:
+        launch = f"{int(pm.group(1)):04d}-{int(pm.group(2)):02d}-{int(pm.group(3)):02d}"
+        planned_end = pm.group(4).strip() or None
+    else:
+        fm = _HANAMARU_LAUNCH_FALLBACK_RE.search(text)
+        if fm:
+            launch = f"{int(fm.group(1)):04d}-{int(fm.group(2)):02d}-{int(fm.group(3)):02d}"
+    return {"launch_date": launch, "planned_end_text": planned_end, "items": items}
+
+
+def hanamaru_excluded(entry: dict) -> str | None:
+    """記録しない商品なら理由を返す。名前が無い・価格が無いものだけ。"""
+    if not (entry.get("name") or "").strip():
+        return "no_name"
+    if entry.get("price") is None:
+        return "no_price"
+    return None
+
+
+def match_hanamaru_article(name: str, price: int | None, article: dict | None) -> bool:
+    """商品がこの記事の「商品価格」の対象か。商品名 (空白を除いてNFKC正規化し、完全一致か
+    包含) と「小」の価格の両方が一致したときだけ True (やよい軒と同じ照合)。"""
+    if not article or price is None:
+        return False
+    n = _yayoiken_norm(name)
+    if len(n) < 2:
+        return False
+    for it in article.get("items") or []:
+        if it.get("price") != price:
+            continue
+        inm = _yayoiken_norm(it.get("name"))
+        if inm == n or (len(n) >= 4 and (n in inm or inm in n)):
+            return True
+    return False
