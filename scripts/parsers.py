@@ -2619,6 +2619,11 @@ def yayoiken_menu_url() -> str:
     return YAYOIKEN_BASE + YAYOIKEN_MENU_PATH
 
 
+def yayoiken_info_url() -> str:
+    """店舗情報ページ (栄養成分情報のタブに全商品の栄養成分表がある)。"""
+    return YAYOIKEN_BASE + "/menu_list/info/13"
+
+
 def yayoiken_news_url(page: int = 1) -> str:
     return YAYOIKEN_BASE + YAYOIKEN_NEWS_PATH if page <= 1 else f"{YAYOIKEN_BASE}{YAYOIKEN_NEWS_PATH}?page={page}"
 
@@ -2773,6 +2778,89 @@ def yayoiken_excluded(entry: dict) -> str | None:
 
 def _yayoiken_norm(s: str | None) -> str:
     return re.sub(r"\s+", "", unicodedata.normalize("NFKC", s or ""))
+
+
+def yayoiken_name_key(s: str | None) -> str:
+    """栄養成分表など、別ページの商品名と照合するときのキー (NFKC・空白除去)。"""
+    return _yayoiken_norm(s)
+
+
+_YAYOIKEN_NUTRIENT_KEYS = {
+    "熱量": "kcal", "蛋白質": "protein_g", "脂質": "fat_g", "炭水化物": "carbs_g",
+    "糖質": "sugar_g", "食物繊維": "fiber_g", "食塩相当量": "salt_g",
+}
+_YAYOIKEN_TABLE_RE = re.compile(r"<table[^>]*>(.*?)</table>", re.S)
+_YAYOIKEN_ROW_RE = re.compile(r"<tr>(.*?)</tr>", re.S)
+_YAYOIKEN_HEAD_CELL_RE = re.compile(r"<th([^>]*)>(.*?)</th>", re.S)
+_YAYOIKEN_CELL_RE = re.compile(r"<t[hd][^>]*>(.*?)</t[hd]>", re.S)
+
+
+def _yayoiken_cell_text(s: str) -> str:
+    return html_lib.unescape(re.sub(r"<[^>]+>", "", s)).strip()
+
+
+def _yayoiken_is_form_label(s: str) -> bool:
+    """栄養成分表の形態の名前か (白米・ごはん普通盛・もち麦ごはん大盛など、ごはんの形態だけ)。"""
+    n = unicodedata.normalize("NFKC", s or "")
+    return n == "白米" or "ごはん" in n
+
+
+def parse_yayoiken_nutrition(html: str) -> dict[str, list[dict]]:
+    """店舗情報ページの栄養成分表を {商品名: [{label, nutrition}]} にする (2026-11-27追加)。
+    表はカテゴリーごとに複数あり、見出しに「熱量」を含むものだけが栄養成分表。
+    定食などの表は商品名の見出しが colspan=2 で、行は「商品名・形態 (白米・もち麦ごはん等)・
+    数値…」と「形態・数値…」 (商品名は rowspan で省略) が混ざる。サイドなどの表は形態の列が
+    無く、1行が1商品 (形態は無印)。形態の列がある表にも形態なしの単独商品 (テイクアウトの
+    おかずのみ・みそ汁など) が混ざるので、続きの行は先頭セルが形態の名前 (白米・ごはん○○)
+    のときだけ前の商品の形態として扱い、それ以外は新しい単独商品として扱う。
+    栄養の辞書は列名で直接作る (蛋白質・糖質はこの表の表記)。
+    カリウム・リンなど主要項目以外は other に単位つきで入れる。"""
+    out: dict[str, list[dict]] = {}
+    for table in _YAYOIKEN_TABLE_RE.findall(html):
+        rows = _YAYOIKEN_ROW_RE.findall(table)
+        if not rows:
+            continue
+        head_cells = _YAYOIKEN_HEAD_CELL_RE.findall(rows[0])
+        if not head_cells:
+            continue
+        headers: list[tuple[str, str]] = []   # (項目名, 単位)
+        for _attrs, raw in head_cells:
+            text = _yayoiken_cell_text(raw)
+            m = re.match(r"^(.*?)[(（](.*?)[)）]$", text)
+            headers.append((m.group(1), m.group(2)) if m else (text, ""))
+        labels = [h[0] for h in headers]
+        if "熱量" not in labels:
+            continue   # アレルギー・原産国などの表は読まない
+        has_form = 'colspan="2"' in head_cells[0][0] or "colspan=2" in head_cells[0][0]
+        value_headers = headers[1:] if has_form else headers[1:]
+        current: str | None = None
+        for row in rows[1:]:
+            cells = [_yayoiken_cell_text(c) for c in _YAYOIKEN_CELL_RE.findall(row)]
+            if has_form and len(cells) == len(headers) + 1:
+                current, form, values = cells[0], cells[1], cells[2:]
+            elif has_form and len(cells) == len(headers) and current is not None \
+                    and _yayoiken_is_form_label(cells[0]):
+                form, values = cells[0], cells[1:]
+            elif has_form and len(cells) == len(headers):
+                current, form, values = cells[0], "", cells[1:]
+            elif not has_form and len(cells) == len(headers):
+                current, form, values = cells[0], "", cells[1:]
+            else:
+                continue
+            if not current or len(values) != len(value_headers):
+                continue
+            nut = {"kcal": None, "protein_g": None, "fat_g": None, "carbs_g": None,
+                   "sugar_g": None, "fiber_g": None, "salt_g": None, "other": {}}
+            for (label, unit), raw in zip(value_headers, values):
+                key = _YAYOIKEN_NUTRIENT_KEYS.get(label)
+                if key:
+                    nut[key] = to_number(raw)
+                elif raw not in ("", "-", "―"):
+                    nut["other"][label] = f"{raw} {unit}".strip()
+            if nut["kcal"] is None:
+                continue
+            out.setdefault(current, []).append({"label": form, "nutrition": nut})
+    return out
 
 
 def match_yayoiken_article(name: str, price: int | None, article: dict | None) -> bool:
