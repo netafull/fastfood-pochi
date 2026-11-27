@@ -3439,3 +3439,195 @@ def ootoya_excluded(entry: dict) -> str | None:
     if price < 30 or price > 100_000:
         return "price_out_of_range"
     return None
+
+
+# ---------------------------------------------------------------------------
+# フレッシュネスバーガー (www.freshnessburger.co.jp。2026-11-27追加、19チェーン目)
+# ---------------------------------------------------------------------------
+# 調査・方針(2026-11-27。実物で確認した事実):
+#  ・メニュー一覧はカテゴリページ (/menu/hamburger・/menu/sidemenu・/menu/beverage) が
+#    サーバーサイドHTMLで、セクション (div.menulist_body > h3.menulist_body_ttl) ごとに商品カード
+#    (a.menulist_list) が並ぶ。商品名は h4.menulist_list_text_mame (<br>を含む)、価格は
+#    span.price_num (税込・数値のみ)。商品IDは詳細URL末尾のスラッグ。カテゴリー名は公式の
+#    セクション見出しをそのまま使う (英語表記を含む。オーナー決定)。
+#  ・セット・モーニング・キッズ・フレバル・スイーツの各ページは、商品名・価格が画像の中だけ
+#    (スイーツはグループカードに「390円〜」のような開始価格のみ) なので記録しない (オーナー決定)。
+#    ハンバーガーの「店舗限定」セクション (球場・動物園・特定の店舗でのみ販売する16件) も記録しない。
+#  ・発売日はブランドニュース (/brandnews) のプレスリリースPDFが正本。一覧は全286件が1ページに
+#    載る (a.post_list_item に日付・カテゴリ・見出し)。商品のお知らせは /brandnews/<id>/ から
+#    PDFへリダイレクトされ、PDFには【販売期間】(開始〜終了) と商品ごとの「価格：○○○円（税込）」
+#    が明記される。お知らせ (障害情報など) はHTMLページ。launch_date_source は既存値 "press_pdf"
+#    (ゼッテリアと同じ)。
+#  ・robots.txt は存在しない (トップページのHTMLが返る)。サイトのご利用について (利用規約) に
+#    自動収集の禁止条項は無かった (2026-11-27に確認)。
+FRESHNESS_BASE = "https://www.freshnessburger.co.jp"
+FRESHNESS_MENU_PAGES = ("hamburger", "sidemenu", "beverage")
+FRESHNESS_STORE_ONLY_SECTION = "店舗限定"
+
+
+def freshness_menu_url(page: str) -> str:
+    return f"{FRESHNESS_BASE}/menu/{page}"
+
+
+def freshness_news_url() -> str:
+    return f"{FRESHNESS_BASE}/brandnews"
+
+
+_FRESHNESS_SECTION_RE = re.compile(r'<div class="menulist_body[^"]*">')
+_FRESHNESS_CARD_START_RE = re.compile(r"<(?:a|div) class=['\"]menulist_list(?: [^'\"]*)?['\"]")
+_FRESHNESS_HREF_RE = re.compile(r"href=['\"](/menu/[a-z]+/([a-z0-9_]+))['\"]")
+_FRESHNESS_THUMB_RE = re.compile(r"thumb/([a-z0-9_]+)\.jpg")
+_FRESHNESS_NAME_RE = re.compile(r"menulist_list_text_mame[^>]*>(.*?)</h4>", re.S)
+_FRESHNESS_PRICE_RE = re.compile(r"price_num\">([\d,]+)")
+_FRESHNESS_SIZE_RE = re.compile(r"price_detail\">([^<]*)<span class=\"price_num\">([\d,]+)")
+
+
+def _freshness_card_name(block: str) -> str | None:
+    m = _FRESHNESS_NAME_RE.search(block)
+    if not m:
+        return None
+    name = html_lib.unescape(re.sub(r"<[^>]+>", "", m.group(1))).strip()
+    return name or None
+
+
+def parse_freshness_menu(page: str, page_name: str = "") -> dict:
+    """カテゴリページ1枚 → {"items": [{product_id, name, price, prices, category, official_url}]}。
+    「店舗限定」セクションと、価格が1つに定まらないカード (グループカード) は除く。
+    価格はサイズ別 (price_detail のラベル付き) があれば全サイズを prices に入れ、代表価格は
+    先頭のサイズ。詳細ページへのリンクが無いカードは画像ファイル名を商品IDにし、
+    official_url はカテゴリページにする。"""
+    text = re.sub(r"<!--.*?-->", "", page or "", flags=re.S)
+    starts = [m.start() for m in _FRESHNESS_SECTION_RE.finditer(text)]
+    items: list[dict] = []
+    seen: set[str] = set()
+    for i, s in enumerate(starts):
+        seg = text[s:starts[i + 1] if i + 1 < len(starts) else len(text)]
+        tm = re.search(r"menulist_body_ttl\">([^<]*)</h3>", seg)
+        if not tm:
+            continue
+        title = re.sub(r"\s+", " ", html_lib.unescape(tm.group(1))).strip()
+        if title == FRESHNESS_STORE_ONLY_SECTION:
+            continue
+        card_starts = [m.start() for m in _FRESHNESS_CARD_START_RE.finditer(seg)]
+        for ci, cs in enumerate(card_starts):
+            block = seg[cs:card_starts[ci + 1] if ci + 1 < len(card_starts) else len(seg)]
+            hm = _FRESHNESS_HREF_RE.search(block)
+            if hm:
+                slug, official_url = hm.group(2), FRESHNESS_BASE + hm.group(1)
+            else:
+                # 詳細ページへのリンクが無いカード (ソフトドリンク等) は画像ファイル名をIDにする
+                im = _FRESHNESS_THUMB_RE.search(block)
+                if not im:
+                    continue
+                slug, official_url = im.group(1), FRESHNESS_BASE + "/menu/" + page_name
+            if slug in seen:
+                continue
+            name = _freshness_card_name(block)
+            sizes = [(lab.strip(), int(p.replace(",", "")))
+                     for lab, p in _FRESHNESS_SIZE_RE.findall(block)]
+            if sizes:
+                prices = [{"label": lab, "price": p} for lab, p in sizes]
+            else:
+                singles = {int(p.replace(",", "")) for p in _FRESHNESS_PRICE_RE.findall(block)}
+                if len(singles) != 1:
+                    continue   # 価格が1つに定まらないカード (グループカード) は記録しない
+                prices = [{"label": "", "price": singles.pop()}]
+            if name is None:
+                continue
+            seen.add(slug)
+            items.append({"product_id": slug, "name": name, "price": prices[0]["price"],
+                          "prices": prices, "category": title,
+                          "official_url": official_url})
+    return {"items": items}
+
+
+_FRESHNESS_NEWS_ITEM_RE = re.compile(
+    r'<a class="post_list_item" href="brandnews/(\d+)/">(.*?)</a>', re.S)
+
+
+def parse_freshness_news_list(page: str) -> list[dict]:
+    """ブランドニュース一覧 (全件1ページ) → 新しい順の [{id, url, date, category, title}]。"""
+    out: list[dict] = []
+    for m in _FRESHNESS_NEWS_ITEM_RE.finditer(page or ""):
+        aid, block = m.group(1), m.group(2)
+        dm = re.search(r"post_list_item_date\">(\d{4})\.(\d{1,2})\.(\d{1,2})</div>", block)
+        if not dm:
+            continue
+        tm = re.search(r"post_list_item_ttl\">(.*?)</h4>", block, flags=re.S)
+        title = ""
+        if tm:
+            title = re.sub(r"\s+", " ", html_lib.unescape(re.sub(r"<[^>]+>", "", tm.group(1)))).strip()
+        cm = re.search(r"post_list_item_cat[^>]*>([^<]*)</span>", block)
+        out.append({"id": aid, "url": f"{FRESHNESS_BASE}/brandnews/{aid}/",
+                    "date": f"{int(dm.group(1)):04d}-{int(dm.group(2)):02d}-{int(dm.group(3)):02d}",
+                    "category": cm.group(1).strip() if cm else "", "title": title})
+    return out
+
+
+_FRESHNESS_PERIOD_RE = re.compile(
+    r"販売期間】?[:：]?(\d{4})年(\d{1,2})月(\d{1,2})日（[月火水木金土日]）[～〜~]"
+    r"(\d{4})年(\d{1,2})月(\d{1,2})日（([月火水木金土日])）")
+_FRESHNESS_LAUNCH_RES = [
+    re.compile(r"(\d{4})年(\d{1,2})月(\d{1,2})日（[月火水木金土日]）(?:より|から)"),
+    re.compile(r"発売日[:：]?(\d{4})年(\d{1,2})月(\d{1,2})日"),
+]
+_FRESHNESS_PRESS_PRICE_RE = re.compile(r"価格[:：]([\d,]+)円")
+_FRESHNESS_QUOTED_RE = re.compile(r"「([^」]{2,40})」")
+
+
+def parse_freshness_press(pages: list[dict]) -> dict:
+    """プレスリリースPDF (座標つき抽出) から、発表日・販売期間・商品名と価格を読む。
+    戻り値: {"published_date", "launch_date", "planned_end_text", "items", "text"}。
+    商品名と価格の対応は、詳細欄で「価格：」の直前に来る商品名 (見出し等の「」付き商品名のうち、
+    直前のテキストの末尾に一致するもの) から取る。"""
+    text = zetteria_press_text(pages)
+    published = None
+    m = _PRESS_PUBLISHED_RE.search(text)
+    if m:
+        published = f"{int(m.group(1)):04d}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
+    launch = None
+    end_text = None
+    pm = _FRESHNESS_PERIOD_RE.search(text)
+    if pm:
+        launch = f"{int(pm.group(1)):04d}-{int(pm.group(2)):02d}-{int(pm.group(3)):02d}"
+        end_text = f"{int(pm.group(4))}年{int(pm.group(5))}月{int(pm.group(6))}日（{pm.group(7)}）"
+    if launch is None:
+        for rx in _FRESHNESS_LAUNCH_RES:
+            mm = rx.search(text)
+            if mm:
+                launch = f"{int(mm.group(1)):04d}-{int(mm.group(2)):02d}-{int(mm.group(3)):02d}"
+                break
+    quoted = [q.strip() for q in _FRESHNESS_QUOTED_RE.findall(text) if q.strip()]
+    items: list[dict] = []
+    for mm in _FRESHNESS_PRESS_PRICE_RE.finditer(text):
+        window = text[max(0, mm.start() - 80):mm.start()]
+        best = None
+        for q in quoted:
+            if window.endswith(q) and (best is None or len(q) > len(best)):
+                best = q
+        if best:
+            price = int(mm.group(1).replace(",", ""))
+            if not any(it["name"] == best and it["price"] == price for it in items):
+                items.append({"name": best, "price": price})
+    return {"published_date": published, "launch_date": launch,
+            "planned_end_text": end_text, "items": items, "text": text}
+
+
+def match_freshness_press(name: str, price: int | None, info: dict | None) -> bool:
+    """商品がこのプレスリリースの対象か。プレスリリースの商品名 (正規化して完全一致か包含) と
+    価格の両方が一致したら True。ゼッテリアのような「本文に名前があり価格がどれかと一致する」
+    複合照合はしない: ブランド名そのままの商品 (フレッシュネスバーガー) や、限定商品名の一部に
+    なる定番名 (チーズバーガー ⊂ 神戸牛チーズバーガー) が誤って一致するため (試行巡回で確認)。"""
+    if not info:
+        return False
+    n = _zetteria_norm(name)
+    if len(n) < 2:
+        return False
+    for it in info.get("items") or []:
+        inm = _zetteria_norm(it.get("name"))
+        if not inm:
+            continue
+        if inm == n or (len(n) >= 4 and len(inm) >= 4 and (n in inm or inm in n)):
+            if price is None or it.get("price") == price:
+                return True
+    return False

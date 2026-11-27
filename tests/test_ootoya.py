@@ -191,8 +191,8 @@ class OotoyaSiteTests(unittest.TestCase):
     def test_chain_config(self):
         self.assertEqual(g.CHAIN_NAME[CHAIN], "大戸屋")
         self.assertEqual(g.CHAIN_SOURCE[CHAIN], "大戸屋公式サイト")
-        self.assertEqual(g.CHAINS[-1]["slug"], CHAIN)
-        self.assertTrue(g.CHAIN_LIST_TEXT.endswith("・はなまるうどん・大戸屋"))
+        self.assertEqual(g.CHAINS[-2]["slug"], CHAIN)
+        self.assertTrue(g.CHAIN_LIST_TEXT.endswith("・はなまるうどん・大戸屋・フレッシュネスバーガー"))
         self.assertIn("--ootoya:", g.CSS)
         self.assertIn('data-chain="ootoya"', g.CSS)
         colors = {c["slug"]: c["color"].lower() for c in g.CHAINS}
