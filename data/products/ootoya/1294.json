@@ -24,8 +24,89 @@
  "news_date": null,
  "description": null,
  "description_full_len": 0,
- "nutrition": null,
- "nutrition_variants": null,
+ "nutrition": {
+  "kcal": 1019.0,
+  "protein_g": 59.8,
+  "fat_g": 45.4,
+  "carbs_g": null,
+  "sugar_g": null,
+  "fiber_g": 4.2,
+  "salt_g": 6.7,
+  "other": {
+   "糖質": "79.6 g",
+   "カルシウム": "73.8 mg",
+   "マグネシウム": "104.9 mg",
+   "ビタミンA": "135.6 μgRAE",
+   "ビタミンC": "52.2 mg",
+   "ビタミンD": "1.2 μg",
+   "ビタミンE": "2.7 mg"
+  }
+ },
+ "nutrition_variants": [
+  {
+   "label": "ご飯",
+   "nutrition": {
+    "kcal": 1019.0,
+    "protein_g": 59.8,
+    "fat_g": 45.4,
+    "carbs_g": null,
+    "sugar_g": null,
+    "fiber_g": 4.2,
+    "salt_g": 6.7,
+    "other": {
+     "糖質": "79.6 g",
+     "カルシウム": "73.8 mg",
+     "マグネシウム": "104.9 mg",
+     "ビタミンA": "135.6 μgRAE",
+     "ビタミンC": "52.2 mg",
+     "ビタミンD": "1.2 μg",
+     "ビタミンE": "2.7 mg"
+    }
+   }
+  },
+  {
+   "label": "五穀ご飯",
+   "nutrition": {
+    "kcal": 1002.0,
+    "protein_g": 61.0,
+    "fat_g": 46.5,
+    "carbs_g": null,
+    "sugar_g": null,
+    "fiber_g": 7.4,
+    "salt_g": 6.7,
+    "other": {
+     "糖質": "71.4 g",
+     "カルシウム": "90.2 mg",
+     "マグネシウム": "117.9 mg",
+     "ビタミンA": "135.7 μgRAE",
+     "ビタミンC": "52.2 mg",
+     "ビタミンD": "1.2 μg",
+     "ビタミンE": "2.8 mg"
+    }
+   }
+  },
+  {
+   "label": "単品",
+   "nutrition": {
+    "kcal": 689.0,
+    "protein_g": 53.8,
+    "fat_g": 44.3,
+    "carbs_g": null,
+    "sugar_g": null,
+    "fiber_g": 2.8,
+    "salt_g": 4.9,
+    "other": {
+     "糖質": "9.6 g",
+     "カルシウム": "52.9 mg",
+     "マグネシウム": "76.6 mg",
+     "ビタミンA": "130.5 μgRAE",
+     "ビタミンC": "51.3 mg",
+     "ビタミンD": "1.2 μg",
+     "ビタミンE": "2.6 mg"
+    }
+   }
+  }
+ ],
  "nutrition_note": null,
  "nutrition_pdf_url": null,
  "nutrition_pdf_label": null,
@@ -37,7 +118,7 @@
  "badges": [],
  "official_url": "https://www.ootoya.com/menu_list/view/27214/1294",
  "first_seen_at": "2026-11-27T19:52:12+09:00",
- "last_seen_at": "2026-11-27",
+ "last_seen_at": "2026-11-28",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,

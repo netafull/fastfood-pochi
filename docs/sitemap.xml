@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://fastfood.netaful.jp/</loc><lastmod>2026-11-27</lastmod></url>
-<url><loc>https://fastfood.netaful.jp/archive/</loc><lastmod>2026-11-26</lastmod></url>
-<url><loc>https://fastfood.netaful.jp/chains/</loc><lastmod>2026-11-27</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/</loc><lastmod>2026-11-28</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/archive/</loc><lastmod>2026-11-28</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/chains/</loc><lastmod>2026-11-28</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/chains/mcdonalds/</loc><lastmod>2026-11-26</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/chains/mos/</loc><lastmod>2026-11-12</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/chains/matsuya/</loc><lastmod>2026-11-27</lastmod></url>
@@ -14,20 +14,20 @@
 <url><loc>https://fastfood.netaful.jp/chains/marugame/</loc><lastmod>2026-11-26</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/chains/burgerking/</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/chains/kourakuen/</loc><lastmod>2026-11-27</lastmod></url>
-<url><loc>https://fastfood.netaful.jp/chains/hidakaya/</loc><lastmod>2026-11-27</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/chains/hidakaya/</loc><lastmod>2026-11-28</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/chains/zetteria/</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/chains/kfc/</loc><lastmod>2026-11-26</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/chains/yayoiken/</loc><lastmod>2026-11-27</lastmod></url>
-<url><loc>https://fastfood.netaful.jp/chains/cocoichi/</loc><lastmod>2026-11-27</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/chains/cocoichi/</loc><lastmod>2026-11-28</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/chains/hanamaru/</loc><lastmod>2026-11-27</lastmod></url>
-<url><loc>https://fastfood.netaful.jp/chains/ootoya/</loc><lastmod>2026-11-27</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/chains/ootoya/</loc><lastmod>2026-11-28</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/chains/freshness/</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/archive/2026-05/</loc><lastmod>2026-11-12</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/archive/2026-07/</loc><lastmod>2026-11-12</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/archive/2026-08/</loc><lastmod>2026-11-12</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/archive/2026-09/</loc><lastmod>2026-11-26</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/archive/2026-10/</loc><lastmod>2026-11-26</lastmod></url>
-<url><loc>https://fastfood.netaful.jp/archive/2026-11/</loc><lastmod>2026-11-26</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/archive/2026-11/</loc><lastmod>2026-11-28</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/prices/</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/prices/mcdonalds/</loc><lastmod>2026-11-18</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/prices/mos/</loc></url>
@@ -388,8 +388,8 @@
 <url><loc>https://fastfood.netaful.jp/items/kourakuen-17204.html</loc><lastmod>2026-11-19</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/kourakuen-17215.html</loc><lastmod>2026-11-19</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/hidakaya-20261009.html</loc><lastmod>2026-11-26</lastmod></url>
-<url><loc>https://fastfood.netaful.jp/items/hidakaya-20261127-1.html</loc><lastmod>2026-11-27</lastmod></url>
-<url><loc>https://fastfood.netaful.jp/items/hidakaya-20261127-2.html</loc><lastmod>2026-11-27</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/hidakaya-20261127-1.html</loc><lastmod>2026-11-28</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/hidakaya-20261127-2.html</loc><lastmod>2026-11-28</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/hidakaya-20261127.html</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/hidakaya-20261127_1.html</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/hidakaya-20261127_2.html</loc><lastmod>2026-11-27</lastmod></url>
@@ -1642,6 +1642,9 @@
 <url><loc>https://fastfood.netaful.jp/items/cocoichi-1846.html</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/cocoichi-1847.html</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/cocoichi-1848.html</loc><lastmod>2026-11-27</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/cocoichi-1910.html</loc><lastmod>2026-11-28</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/cocoichi-1911.html</loc><lastmod>2026-11-28</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/cocoichi-1912.html</loc><lastmod>2026-11-28</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/cocoichi-1913.html</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/cocoichi-1914.html</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/cocoichi-1925.html</loc><lastmod>2026-11-27</lastmod></url>
@@ -1660,6 +1663,7 @@
 <url><loc>https://fastfood.netaful.jp/items/cocoichi-1947.html</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/cocoichi-1948.html</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/cocoichi-1949.html</loc><lastmod>2026-11-27</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/cocoichi-1953.html</loc><lastmod>2026-11-28</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/cocoichi-1984.html</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/cocoichi-1985.html</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/cocoichi-1986.html</loc><lastmod>2026-11-27</lastmod></url>
@@ -1711,6 +1715,7 @@
 <url><loc>https://fastfood.netaful.jp/items/hanamaru-05_7.html</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/hanamaru-05_8.html</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/hanamaru-06_1.html</loc><lastmod>2026-11-27</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/ootoya-1247.html</loc><lastmod>2026-11-28</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/ootoya-1275.html</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/ootoya-1276.html</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/ootoya-1277.html</loc><lastmod>2026-11-27</lastmod></url>
@@ -1758,6 +1763,8 @@
 <url><loc>https://fastfood.netaful.jp/items/ootoya-1319.html</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/ootoya-1320.html</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/ootoya-1330.html</loc><lastmod>2026-11-27</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/ootoya-1424.html</loc><lastmod>2026-11-28</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/ootoya-1425.html</loc><lastmod>2026-11-28</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/ootoya-711.html</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/ootoya-712.html</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/ootoya-713.html</loc><lastmod>2026-11-27</lastmod></url>
@@ -1771,6 +1778,23 @@
 <url><loc>https://fastfood.netaful.jp/items/ootoya-721.html</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/ootoya-722.html</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/ootoya-723.html</loc><lastmod>2026-11-27</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/ootoya-724.html</loc><lastmod>2026-11-28</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/ootoya-725.html</loc><lastmod>2026-11-28</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/ootoya-726.html</loc><lastmod>2026-11-28</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/ootoya-728.html</loc><lastmod>2026-11-28</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/ootoya-729.html</loc><lastmod>2026-11-28</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/ootoya-730.html</loc><lastmod>2026-11-28</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/ootoya-731.html</loc><lastmod>2026-11-28</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/ootoya-732.html</loc><lastmod>2026-11-28</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/ootoya-733.html</loc><lastmod>2026-11-28</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/ootoya-734.html</loc><lastmod>2026-11-28</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/ootoya-735.html</loc><lastmod>2026-11-28</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/ootoya-736.html</loc><lastmod>2026-11-28</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/ootoya-737.html</loc><lastmod>2026-11-28</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/ootoya-739.html</loc><lastmod>2026-11-28</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/ootoya-740.html</loc><lastmod>2026-11-28</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/ootoya-741.html</loc><lastmod>2026-11-28</lastmod></url>
+<url><loc>https://fastfood.netaful.jp/items/ootoya-742.html</loc><lastmod>2026-11-28</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/freshness-cheese_burger.html</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/freshness-chicken_nugget.html</loc><lastmod>2026-11-27</lastmod></url>
 <url><loc>https://fastfood.netaful.jp/items/freshness-classic_avocado_burger.html</loc><lastmod>2026-11-27</lastmod></url>

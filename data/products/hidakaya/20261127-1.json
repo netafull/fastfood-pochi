@@ -43,9 +43,9 @@
  "official_url": "https://hidakaya.hiday.co.jp/hits/ja/menu/1/detail/20261127-1.html",
  "first_seen_at": "2026-11-27T07:37:47+09:00",
  "last_seen_at": "2026-11-27",
- "status": "on_sale",
- "ended_observed_at": null,
- "missed_runs": 1,
+ "status": "ended",
+ "ended_observed_at": "2026-11-28",
+ "missed_runs": 2,
  "price_history": [
   {
    "date": "2026-11-27",
@@ -56,5 +56,5 @@
   "menu"
  ],
  "image": null,
- "last_miss_date": "2026-11-27"
+ "last_miss_date": "2026-11-28"
 }
