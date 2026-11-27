@@ -249,8 +249,8 @@ class YayoikenSiteTests(unittest.TestCase):
     def test_chain_config(self):
         self.assertEqual(g.CHAIN_NAME[CHAIN], "やよい軒")
         self.assertEqual(g.CHAIN_SOURCE[CHAIN], "やよい軒公式サイト")
-        self.assertEqual(g.CHAINS[-1]["slug"], CHAIN)
-        self.assertTrue(g.CHAIN_LIST_TEXT.endswith("・ケンタッキー・やよい軒"))
+        self.assertEqual(g.CHAINS[-2]["slug"], CHAIN)
+        self.assertTrue(g.CHAIN_LIST_TEXT.endswith("・ケンタッキー・やよい軒・CoCo壱番屋"))
         self.assertIn("--yayoiken:", g.CSS)
         self.assertIn('data-chain="yayoiken"', g.CSS)
         colors = {c["slug"]: c["color"].lower() for c in g.CHAINS}

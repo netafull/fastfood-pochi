@@ -7,6 +7,7 @@
 
 from __future__ import annotations
 
+import datetime
 import html as html_lib
 import json
 import re
@@ -2774,3 +2775,116 @@ def match_yayoiken_article(name: str, price: int | None, article: dict | None) -
         if inm == n or (len(n) >= 4 and (n in inm or inm in n)):
             return True
     return False
+
+
+# ---------------------------------------------------------------------------
+# CoCo壱番屋 (www.ichibanya.co.jp。2026-11-27追加、16チェーン目)
+# ---------------------------------------------------------------------------
+# 調査・方針(2026-11-27。実物で確認した事実):
+#  ・商品の正本は公式メニューのカテゴリー別一覧 /menu/list.html?cid={ID}(16カテゴリー)。
+#    サーバーサイドHTMLで、商品ブロック a.lst-product__item の中に名前
+#    (h2.box-media__title)・価格 (p.box-media__price の「本体円（税込○円）」)・
+#    詳細URL /menu/detail.html?id={数値ID} がテキストで読める。全カテゴリー合計120件・
+#    カテゴリー間の重複なし(2026-11-27実測。ページ内の導線リンクに出るだけの商品は
+#    数えない)。カテゴリー名は各一覧の <title> 先頭
+#    (「肉類のカレー | …」)から取る。
+#  ・期間限定は cid=2「期間/数量限定メニュー」の一覧に載った商品(実測11件)。
+#  ・発売日は【予告】商品の詳細ページに「12月1日より販売開始！」の形で明記される
+#    (販売開始後は詳細ページから日付の記載が消える)。年は書かれていないので、
+#    巡回日を基準に決める (parse_cocoichi_detail_launch)。ニュース記事は使わない
+#    ので、市販のコラボ菓子・監修商品は混入しない(一覧は店舗メニューだけ)。
+#  ・商品名の【予告】は外して記録し、予告だったことは is_teaser で持つ。
+#  ・トッピング (topping.html) と店舗限定メニュー (shop_original.html) は一覧に
+#    含まれない別ページなので対象外。cid=6「地域限定メニュー」と cid=25
+#    「夜定食メニュー（20店舗限定）」は通常のカテゴリー一覧に含まれるため記録する。
+#  ・robots.txt は User-agent: * のみで制限なし。サイトポリシーに自動取得の
+#    禁止条文は無い (2026-11-27確認)。記録は事実情報のみで、画像は保存・表示しない。
+COCOICHI_BASE = "https://www.ichibanya.co.jp"
+COCOICHI_LIMITED_CID = 2
+COCOICHI_CATEGORY_CIDS = [1, 2, 3, 4, 5, 6, 7, 8, 12, 13, 14, 16, 22, 23, 24, 25]
+COCOICHI_TEASER_PREFIX = "【予告】"
+
+
+def cocoichi_list_url(cid: int) -> str:
+    return f"{COCOICHI_BASE}/menu/list.html?cid={cid}"
+
+
+def cocoichi_detail_url(product_id: str) -> str:
+    return f"{COCOICHI_BASE}/menu/detail.html?id={product_id}"
+
+
+_COCOICHI_ITEM_RE = re.compile(r'<a href="/menu/detail\.html\?id=(\d+)" class="lst-product__item')
+_COCOICHI_TITLE_RE = re.compile(r'box-media__title">(.*?)</h2>', re.S)
+_COCOICHI_PRICE_RE = re.compile(r'box-media__price"><span>[\d,]+</span>円（税込([\d,]+)円）')
+_COCOICHI_CATEGORY_RE = re.compile(r"<title>([^<|]+)\|")
+
+
+def parse_cocoichi_list(page: str) -> dict:
+    """カテゴリー別一覧1ページの解析。{"category": <title>先頭のカテゴリー名(取れなければ
+    None), "items": [{product_id, name, price(税込。取れなければ None), is_teaser,
+    official_url}]}。商品名は【予告】を外した公式表記。ブロックが見つからなければ
+    items は空(構造変更)。"""
+    page = _strip_html_comments(page)
+    page = re.sub(r"<script\b.*?</script>|<style\b.*?</style>", "", page, flags=re.S)
+    cm = _COCOICHI_CATEGORY_RE.search(page)
+    category = re.sub(r"\s+", " ", clean_text(cm.group(1))).strip() if cm else None
+    items: list[dict] = []
+    seen: set[str] = set()
+    chunks = _COCOICHI_ITEM_RE.split(page)
+    # chunks は [前置き, id, 本文, id, 本文, ...]
+    for i in range(1, len(chunks) - 1, 2):
+        pid, body = chunks[i], chunks[i + 1]
+        if pid in seen:
+            continue
+        tm = _COCOICHI_TITLE_RE.search(body)
+        if not tm:
+            continue
+        name = re.sub(r"\s+", " ", clean_text(tm.group(1))).strip()
+        if not name:
+            continue
+        seen.add(pid)
+        is_teaser = name.startswith(COCOICHI_TEASER_PREFIX)
+        if is_teaser:
+            name = name[len(COCOICHI_TEASER_PREFIX):].strip()
+        pm = _COCOICHI_PRICE_RE.search(body)
+        items.append({"product_id": pid, "name": name,
+                      "price": int(pm.group(1).replace(",", "")) if pm else None,
+                      "is_teaser": is_teaser,
+                      "official_url": cocoichi_detail_url(pid)})
+    return {"category": category, "items": items}
+
+
+_COCOICHI_LAUNCH_RE = re.compile(r"(\d{1,2})月(\d{1,2})日より販売開始")
+
+
+def parse_cocoichi_detail_launch(page: str, today) -> str | None:
+    """詳細ページの「○月○日より販売開始」から発売日(ISO)を返す。無ければ None。
+    呼ばれるのは【予告】商品だけなので、発売日は基本的に未来。年は書かれていない
+    ため巡回日 today (datetime.date) を基準に決める: 今年の日付が today より
+    3日以上前なら、来年の日付とする(年末に翌年分が予告される場合を捌く。
+    3日の猶予は巡回のタイミングのずれ用)。"""
+    page = _strip_html_comments(page)
+    page = re.sub(r"<script\b.*?</script>|<style\b.*?</style>", "", page, flags=re.S)
+    m = _COCOICHI_LAUNCH_RE.search(clean_text(page))
+    if not m:
+        return None
+    month, day = int(m.group(1)), int(m.group(2))
+    try:
+        d = datetime.date(today.year, month, day)
+    except ValueError:
+        return None
+    if (today - d).days > 3:
+        try:
+            d = datetime.date(today.year + 1, month, day)
+        except ValueError:
+            return None
+    return d.isoformat()
+
+
+def cocoichi_excluded(entry: dict) -> str | None:
+    """記録しない商品なら理由を返す。名前が無い・価格が無いものだけ。"""
+    if not (entry.get("name") or "").strip():
+        return "no_name"
+    if entry.get("price") is None:
+        return "no_price"
+    return None

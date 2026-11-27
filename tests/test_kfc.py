@@ -223,8 +223,8 @@ class KfcSiteTests(unittest.TestCase):
     def test_chain_config(self):
         self.assertEqual(g.CHAIN_NAME[CHAIN], "ケンタッキー")
         self.assertEqual(g.CHAIN_SOURCE[CHAIN], "ケンタッキー公式サイト")
-        self.assertEqual(g.CHAINS[-2]["slug"], CHAIN)   # 15チェーン目にやよい軒が入った
-        self.assertTrue(g.CHAIN_LIST_TEXT.endswith("・ゼッテリア・ケンタッキー・やよい軒"))
+        self.assertEqual(g.CHAINS[-3]["slug"], CHAIN)   # 後ろにやよい軒・CoCo壱番屋が入った
+        self.assertTrue(g.CHAIN_LIST_TEXT.endswith("・ゼッテリア・ケンタッキー・やよい軒・CoCo壱番屋"))
         self.assertIn("--kfc:", g.CSS)
         self.assertIn('data-chain="kfc"', g.CSS)
         colors = {c["slug"]: c["color"].lower() for c in g.CHAINS}
