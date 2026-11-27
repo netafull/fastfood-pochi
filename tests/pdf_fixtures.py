@@ -244,3 +244,40 @@ def freshness_page(rows, kind="food", updated="2026年11月9日", header=True, t
                 texts.append(box(c - 4 * len(s), y, c + 4, y + 9, s))
         y -= 13.0
     return {"texts": texts, "rules": [], "chars": []}
+
+
+# --- ゼッテリア: 栄養成分 -------------------------------------------------------
+
+ZB_COLS = [300, 351, 403, 454, 509]
+
+
+def zetteria_page(items, updated="2026/11/18"):
+    """items: [(名前|None, サイズ, [熱量, たんぱく質, 脂質, 炭水化物, 食塩相当量])]。
+    名前は、その商品の行の並びの中央の行に置く (実物の構造)。None は名前なしの行。"""
+    texts = [box(217, 773, 378, 786, "ゼッテリア　栄養成分一覧表"),
+             box(484, 772, 533, 777, f"更新日　{updated}")]
+    for lb, c in zip(["カロリー", "たんぱく質", "脂質", "炭水化物", "食塩相当量"], ZB_COLS):
+        texts.append(box(c - 14, 700, c + 14, 707, lb))
+        texts.append(box(c - 9, 681, c + 9, 688, "(kcal)" if lb == "カロリー" else "(g)"))
+    texts.append(box(67, 694, 100, 701, "カテゴリー"))
+    texts.append(box(155, 694, 182, 701, "メニュー"))
+    texts.append(box(238, 694, 258, 701, "サイズ"))
+    y = 673.0
+    # 名前は商品の行グループの中央の行に置く。items を商品ごとに分けて中央を決める
+    groups = []
+    for it in items:
+        if it[0] is not None or not groups:
+            groups.append([])
+        groups[-1].append(it)
+    for g in groups:
+        mid = len(g) // 2
+        for i, (_name, size, vals) in enumerate(g):
+            if i == mid and g[0][0] is not None:
+                texts.append(box(116, y, 116 + 7 * len(g[0][0]), y + 8, g[0][0]))
+            if size:
+                texts.append(box(223, y, 223 + 6 * len(size), y + 7, size))
+            for c, v in zip(ZB_COLS, vals):
+                s = str(v)
+                texts.append(box(c + 9 - 8 * len(s), y, c + 9, y + 7, s))
+            y -= 10.5
+    return {"texts": texts, "rules": [], "chars": []}

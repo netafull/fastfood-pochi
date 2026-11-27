@@ -612,6 +612,134 @@ def parse_freshness_nutrition(pages: list[dict]) -> dict:
 
 
 # ---------------------------------------------------------------------------
+# ゼッテリア: 栄養成分PDF (2026-11-27追加)
+# ---------------------------------------------------------------------------
+# 実物 (https://images.zensho.co.jp/materials/zetteria/allergen/nutrition.pdf、2026-11-27確認) の構造:
+#  ・全ページが1つの表 (カテゴリー・メニュー・サイズ・カロリー・たんぱく質・脂質・炭水化物・
+#    食塩相当量)。糖質・食物繊維の列は無い。カテゴリーは縦書きで文字がばらけるので読まない。
+#  ・商品名は、その商品のサイズ行の真ん中の高さにだけ書かれる (複数サイズある商品では
+#    名前が行の並びの中央に来る)。そのため行の振り分けは、名前の高さを中心にした範囲
+#    (隣の名前との中点まで) で行う。ページをまたぐ商品は、次ページの先頭の行を
+#    前ページの最後の商品に付ける。
+#  ・サイズは S・M・L・ハーフ・3尾・3個など。サイズの無い商品は1行だけ。
+
+_ZETTERIA_KEYS = ["kcal", "protein_g", "fat_g", "carbs_g", "salt_g"]
+_ZETTERIA_HEAD_LABELS = ["カロリー", "たんぱく質", "脂質", "炭水化物", "食塩相当量"]
+_ZETTERIA_NUM_RE = re.compile(r"[0-9]+(\.[0-9]+)?")
+
+
+def parse_zetteria_nutrition(pages: list[dict]) -> dict:
+    """-> {"updated", "rows", "pages_total", "pages_table", "problems"}"""
+    updated = None
+    pages_table = 0
+    problems: list[str] = []
+    rows: list[dict] = []
+    cols: list[float] | None = None
+    group_seq = 0
+    prev_last: dict | None = None   # 前ページの最後の商品 {name, sizes, block}
+    for pi, p in enumerate(pages):
+        T = p["texts"]
+        heads: dict[str, float] = {}
+        for t in T:
+            s = unicodedata.normalize("NFKC", t[4]).strip()
+            if s in _ZETTERIA_HEAD_LABELS:
+                heads[s] = cx(t)
+            if updated is None:
+                m = re.search(r"更新日\s*(\d{4})/(\d{1,2})/(\d{1,2})", unicodedata.normalize("NFKC", t[4]))
+                if m:
+                    updated = f"{int(m.group(1)):04d}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
+        if len(heads) == len(_ZETTERIA_HEAD_LABELS):
+            cols = [heads[k] for k in _ZETTERIA_HEAD_LABELS]
+            pages_table += 1
+        if cols is None:
+            continue
+        # 数値テキストを高さでまとめて行にする (行の中心を決める)
+        centers: list[tuple[float, list]] = []
+        for t in sorted((t for t in T if _ZETTERIA_NUM_RE.fullmatch(unicodedata.normalize("NFKC", t[4]).strip())),
+                        key=lambda t: -cy(t)):
+            if centers and abs(cy(t) - centers[-1][0]) <= 4:
+                centers[-1][1].append(t)
+            else:
+                centers.append((cy(t), [t]))
+        page_rows: list[dict] = []
+        for cyy, nts in centers:
+            vals: dict = {}
+            for t in nts:
+                ci = min(range(len(cols)), key=lambda i: abs(cx(t) - cols[i]))
+                if abs(cx(t) - cols[ci]) < 30:
+                    vals[_ZETTERIA_KEYS[ci]] = to_number(t[4])
+            if len(vals) != len(_ZETTERIA_KEYS):
+                continue
+            size = ""
+            for t in T:
+                if abs(cy(t) - cyy) <= 6 and 220 <= t[0] < 285:
+                    s = unicodedata.normalize("NFKC", t[4]).strip()
+                    if s and not _ZETTERIA_NUM_RE.fullmatch(s):
+                        size = s
+                        break
+            page_rows.append({"cy": cyy, "size": size, "values": vals})
+        # 商品名 (名前の高さが、その商品の範囲の中心になる)
+        names = []   # (cy, 名前) を上から順に
+        for t in T:
+            if not (105 <= t[0] < 220):
+                continue
+            s = unicodedata.normalize("NFKC", t[4]).strip()
+            if not s or _ZETTERIA_NUM_RE.fullmatch(s) or s in _ZETTERIA_HEAD_LABELS \
+                    or s in ("メニュー", "サイズ"):
+                continue
+            names.append((cy(t), s))
+        names.sort(key=lambda x: -x[0])
+        # 範囲の境目は隣り合う名前の高さの中点。ページ先頭の名前より上にある行は前ページの続き
+        groups: list[dict] = []   # {name, sizes, block, rows}
+        for j, r in enumerate(page_rows):
+            owner = None
+            for k, (ncy, nname) in enumerate(names):
+                lo = (ncy + names[k + 1][0]) / 2 if k + 1 < len(names) else None
+                hi = (ncy + names[k - 1][0]) / 2 if k > 0 else None
+                if (hi is None or r["cy"] < hi) and (lo is None or r["cy"] >= lo):
+                    owner = k
+                    break
+            if owner is None and names and r["cy"] >= names[0][0]:
+                owner = -1   # ページ先頭の名前より上 = 前ページの商品の続き
+            if owner is None:
+                problems.append(f"p{pi + 1}: 商品名に結びつかない行があります(サイズ={r['size']})")
+                continue
+            if owner == -1:
+                if prev_last is None or r["size"] in prev_last["sizes"]:
+                    problems.append(f"p{pi + 1}: ページをまたぐ行を前の商品に付けられません(サイズ={r['size']})")
+                    continue
+                prev_last["sizes"].add(r["size"])
+                rows.append(_zetteria_row(prev_last["name"], r, prev_last["block"]))
+                continue
+            nname = names[owner][1]
+            if not groups or groups[-1]["name"] != nname:
+                groups.append({"name": nname, "sizes": set(), "block": f"g{group_seq}", "rows": []})
+                group_seq += 1
+            g = groups[-1]
+            if r["size"] in g["sizes"]:
+                problems.append(f"p{pi + 1}: 商品「{nname}」でサイズ「{r['size']}」が重なりました")
+                rows.append(_zetteria_row(nname, r, g["block"], ambiguous=True))
+                continue
+            g["sizes"].add(r["size"])
+            rows.append(_zetteria_row(nname, r, g["block"]))
+        if groups:
+            prev_last = {"name": groups[-1]["name"], "sizes": groups[-1]["sizes"],
+                         "block": groups[-1]["block"]}
+    return {"updated": updated, "rows": rows, "pages_total": len(pages),
+            "pages_table": pages_table, "problems": problems}
+
+
+def _zetteria_row(name: str, r: dict, block: str, ambiguous: bool = False) -> dict:
+    v = r["values"]
+    row = {"name": name, "size": r["size"], "kcal": v["kcal"], "protein_g": v["protein_g"],
+           "fat_g": v["fat_g"], "carbs_g": v["carbs_g"], "sugar_g": None, "fiber_g": None,
+           "salt_g": v["salt_g"], "block": block, "ambiguous": ambiguous}
+    row["ok"] = energy_ok(row["kcal"], row["protein_g"], row["fat_g"], row["carbs_g"]) \
+        and row["salt_g"] is not None
+    return row
+
+
+# ---------------------------------------------------------------------------
 # 検証(誤った栄養値を出さないためのゲート)
 # ---------------------------------------------------------------------------
 
@@ -629,7 +757,7 @@ def validate_source(kind: str, parsed: dict, min_rows: int = 80, min_rate: float
     rows = parsed["rows"]
     if len(rows) < min_rows:
         return f"読み取れた行が少なすぎます({len(rows)}行 < {min_rows})"
-    if kind in ("sukiya_nutrition", "yoshinoya", "freshness_nutrition"):
+    if kind in ("sukiya_nutrition", "yoshinoya", "freshness_nutrition", "zetteria_nutrition"):
         rate = pass_rate(rows)
         if rate < min_rate:
             return f"エネルギー検算に通った行が少なすぎます({rate:.0%} < {min_rate:.0%})"
@@ -637,7 +765,7 @@ def validate_source(kind: str, parsed: dict, min_rows: int = 80, min_rate: float
         done = sum(1 for r in rows if r["complete"]) / len(rows)
         if done < min_rate or len(parsed["allergen_names"]) != 28:
             return f"アレルゲンの表を読み取れた割合が低すぎます({done:.0%}・品目{len(parsed['allergen_names'])})"
-    if kind in ("sukiya_nutrition", "freshness_nutrition") and not parsed.get("updated"):
+    if kind in ("sukiya_nutrition", "freshness_nutrition", "zetteria_nutrition") and not parsed.get("updated"):
         return "更新日が見つかりません"
     if kind == "yoshinoya" and (parsed.get("issue") is None or not parsed.get("date")):
         return "号数・日付が見つかりません"
