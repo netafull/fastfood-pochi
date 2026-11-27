@@ -140,8 +140,17 @@ class OotoyaCrawlTests(unittest.TestCase):
         self.assertEqual(p["news_url"], O.ARTICLE_URL)
         self.assertEqual([(v["label"], v["price"]) for v in p["price_variants"]],
                          [("定食", 1420), ("単品", 1330)])
-        self.assertIsNone(p["nutrition"])   # 第1段階では栄養成分は取らない
+        # 栄養成分は詳細ページの形態別の表から取る (代表は先頭の「ご飯」)
+        self.assertEqual(p["nutrition"]["kcal"], 711)
+        self.assertEqual([v["label"] for v in p["nutrition_variants"]], ["ご飯", "五穀ご飯", "単品"])
+        self.assertEqual(p["nutrition_variants"][2]["nutrition"]["kcal"], 381)
+        self.assertEqual(p["nutrition"]["other"]["糖質"], "99.1 g")
         self.assertEqual(self.prods["1002"]["launch_date"], "2026-10-02")
+        # 栄養の表が無い商品は nutrition_checked に残り、栄養は付かない
+        self.assertIsNone(self.prods["1002"]["nutrition"])
+        self.assertIn("1002", self.state["nutrition_checked"])
+        self.assertEqual(self.prods["2001"]["nutrition"]["kcal"], 850)
+        self.assertEqual(len(self.prods["2001"]["nutrition_variants"]), 2)
         teishoku = self.prods["2001"]   # 定番。単品価格はバリエーションに入る
         self.assertTrue(teishoku["is_regular"])
         self.assertEqual(teishoku["price"], 980)
@@ -157,6 +166,21 @@ class OotoyaCrawlTests(unittest.TestCase):
         self.assertNotIn(O.OLD_ARTICLE_URL, self.fake.urls)
         self.assertEqual(st["limited_seen"], 2)
         self.assertEqual(st["news_matched"], 2)
+
+    def test_detail_parse(self):
+        forms = parsers.parse_ootoya_detail(O.detail_page("1001"))
+        self.assertEqual([f["label"] for f in forms], ["ご飯", "五穀ご飯", "単品"])
+        self.assertEqual(forms[0]["nutrition"]["kcal"], 711)
+        self.assertEqual(forms[0]["nutrition"]["salt_g"], 3.9)
+        self.assertEqual(forms[0]["nutrition"]["other"]["糖質"], "99.1 g")
+        self.assertEqual(parsers.parse_ootoya_detail(O.detail_page("3001")), [])
+        self.assertEqual(parsers.parse_ootoya_detail("<html></html>"), [])
+
+    def test_nutrition_not_refetched(self):
+        self.crawl_once()
+        self.crawl_once(today="2026-11-28")
+        details = [u for u in self.fake.urls if "/menu_list/view/" in u]
+        self.assertEqual(details, [])   # 栄養が付いた商品と表が無い商品は取り直さない
 
     def test_ended_flow(self):
         self.crawl_once()

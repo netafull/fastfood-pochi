@@ -119,8 +119,42 @@ def campaign_article_page() -> str:
         "</body></html>")
 
 
+def _detail_page(forms: list[tuple[str, list[tuple[str, str]]]]) -> str:
+    buttons = "".join(
+        f'<button class="c-form-button-01__normal" type="button" role="tab">{label}</button>'
+        for label, _ in forms)
+    panels = ""
+    for i, (_label, rows) in enumerate(forms, start=1):
+        trs = "".join(f"<tr><th>{k}</th><td>{v}</td></tr>" for k, v in rows)
+        panels += (f'<div class="c-tab-01__content" id="tabpanel{i}" role="tabpanel">'
+                   f'<table class="c-table-01"><tbody>{trs}</tbody></table></div>')
+    return f"<html><body>{buttons}{panels}</body></html>"
+
+
+def detail_page(pid: str) -> str:
+    """商品詳細ページ。栄養成分は形態ごとのタブ表に載る (実物の構造)。
+    1001 は3形態、2001 は2形態、それ以外は栄養の表が無いページ。"""
+    if pid == "1001":
+        return _detail_page([
+            ("ご飯", [("エネルギー", "711 kcal"), ("たんぱく質", "16.5 g"), ("脂質", "25.7 g"),
+                      ("糖質", "99.1 g"), ("食物繊維", "4.6 g"), ("食塩相当量", "3.9 g")]),
+            ("五穀ご飯", [("エネルギー", "694 kcal"), ("たんぱく質", "17.7 g"), ("脂質", "26.8 g"),
+                         ("糖質", "90.9 g"), ("食物繊維", "7.8 g"), ("食塩相当量", "3.9 g")]),
+            ("単品", [("エネルギー", "381 kcal"), ("たんぱく質", "10.5 g"), ("脂質", "24.6 g"),
+                      ("糖質", "29.1 g"), ("食物繊維", "3.2 g"), ("食塩相当量", "2.1 g")]),
+        ])
+    if pid == "2001":
+        return _detail_page([
+            ("ご飯", [("エネルギー", "850 kcal"), ("たんぱく質", "30.0 g"), ("脂質", "40.0 g"),
+                      ("糖質", "80.0 g"), ("食物繊維", "3.0 g"), ("食塩相当量", "3.0 g")]),
+            ("単品", [("エネルギー", "520 kcal"), ("たんぱく質", "24.0 g"), ("脂質", "36.0 g"),
+                      ("糖質", "10.0 g"), ("食物繊維", "1.0 g"), ("食塩相当量", "2.0 g")]),
+        ])
+    return "<html><body><h1>合成メニュー</h1><p>栄養成分の掲載はありません。</p></body></html>"
+
+
 def ootoya_pages(menu: str | None = None) -> dict:
-    return {
+    pages = {
         MENU_URL: menu_page() if menu is None else menu,
         NEWS_URL: news_list_page(),
         ARTICLE_URL: article_page(),
@@ -128,3 +162,6 @@ def ootoya_pages(menu: str | None = None) -> dict:
         # OLD_ARTICLE_URL は入れない (古い記事は取得せずに照合済みにするため、
         # 取得しようとしたら FakeOotoya が落ちて気付ける)
     }
+    for pid in ALL_PIDS:
+        pages[detail_url(pid)] = detail_page(pid)
+    return pages
