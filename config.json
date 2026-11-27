@@ -940,5 +940,9 @@
   "zetteria_pdf": {
     "nutrition": "https://images.zensho.co.jp/materials/zetteria/allergen/nutrition.pdf",
     "nutrition_label": "栄養成分一覧表"
+  },
+  "cocoichi_pdf": {
+    "nutrition": "https://www.ichibanya.co.jp/menu/pdf/nutrition.pdf",
+    "nutrition_label": "栄養成分情報"
   }
 }

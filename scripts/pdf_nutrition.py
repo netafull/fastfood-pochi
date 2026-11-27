@@ -825,6 +825,94 @@ def _zetteria_row(name: str, r: dict, block: str, ambiguous: bool = False) -> di
 
 
 # ---------------------------------------------------------------------------
+# CoCo壱番屋: 栄養成分PDF (2026-11-27追加)
+# ---------------------------------------------------------------------------
+# 実物 (https://www.ichibanya.co.jp/menu/pdf/nutrition.pdf、2026-11-27確認) の構造:
+#  ・列は エネルギー・たんぱく質・脂質・炭水化物・食塩相当量 の5項目 (糖質・食物繊維の列は無い)。
+#    熱量は1,000以上だと「1,115」のようにカンマが入る。
+#  ・1商品1行。値の基準 (ポークソース、ライス量「普通(300g)」の場合 等) は商品名の下に
+#    「*」の注記行として書かれ、数値の行の中心は名前と注記を含めた中央に来る。そのため
+#    名前は数値の行の一番近くにあるもの (注記を除く) を結びつける。
+#  ・商品名の末尾に「(2026年12月1日販売開始)」のような発売日の注記が付くことがある。
+#    記録側の名前には無いので、照合用にこの注記だけを外す (ライス量などの括弧は外さない)。
+#  ・トッピングも同じ表に載る (記録対象ではないので一致しないだけ)。同じ名前が複数の値で
+#    載ることがある (トッピングの量違い等) ため、出現ごとに block を分け、値が食い違う
+#    同名は rows_for_name が曖昧として返さないようにする。
+
+_COCOICHI_KEYS = ["kcal", "protein_g", "fat_g", "carbs_g", "salt_g"]
+_COCOICHI_HEAD_LABELS = ["エネルギー", "たんぱく質", "脂質", "炭水化物", "食塩相当量"]
+_COCOICHI_NUM_RE = re.compile(r"[0-9][0-9,]*(\.[0-9]+)?")
+_COCOICHI_DATE_NOTE_RE = re.compile(r"\([^()]*販売開始[^()]*\)\s*$")
+
+
+def parse_cocoichi_nutrition(pages: list[dict]) -> dict:
+    """-> {"updated", "rows", "pages_total", "pages_table", "problems"}"""
+    updated = None
+    pages_table = 0
+    problems: list[str] = []
+    rows: list[dict] = []
+    cols: list[float] | None = None
+    seen: dict[str, int] = {}
+    for pi, p in enumerate(pages):
+        T = p["texts"]
+        heads: dict[str, float] = {}
+        for t in T:
+            s = unicodedata.normalize("NFKC", t[4]).strip()
+            if s in _COCOICHI_HEAD_LABELS:
+                heads[s] = cx(t)
+            if updated is None:
+                m = re.search(r"(\d{4})年(\d{1,2})月(\d{1,2})日現在", unicodedata.normalize("NFKC", t[4]))
+                if m:
+                    updated = f"{int(m.group(1)):04d}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
+        if len(heads) == len(_COCOICHI_HEAD_LABELS):
+            cols = [heads[k] for k in _COCOICHI_HEAD_LABELS]
+            pages_table += 1
+        if cols is None:
+            continue
+        centers: list[tuple[float, list]] = []
+        for t in sorted((t for t in T
+                         if _COCOICHI_NUM_RE.fullmatch(unicodedata.normalize("NFKC", t[4]).strip())),
+                        key=lambda t: -cy(t)):
+            if centers and abs(cy(t) - centers[-1][0]) <= 4:
+                centers[-1][1].append(t)
+            else:
+                centers.append((cy(t), [t]))
+        name_texts = []
+        for t in T:
+            s = unicodedata.normalize("NFKC", t[4]).strip()
+            if t[0] < 600 and s and not s.startswith("*") and s not in _COCOICHI_HEAD_LABELS \
+                    and not _COCOICHI_NUM_RE.fullmatch(s):
+                name_texts.append((cy(t), s))
+        for cyy, nts in centers:
+            vals: dict = {}
+            for t in nts:
+                ci = min(range(len(cols)), key=lambda i: abs(cx(t) - cols[i]))
+                if abs(cx(t) - cols[ci]) < 40:
+                    vals[_COCOICHI_KEYS[ci]] = to_number(t[4])
+            if len(vals) != len(_COCOICHI_KEYS):
+                continue
+            best = None
+            for ncy, s in name_texts:
+                d = abs(ncy - cyy)
+                if d <= 14 and (best is None or d < best[0]):
+                    best = (d, s)
+            if best is None:
+                problems.append(f"p{pi + 1}: 商品名に結びつかない行があります")
+                continue
+            name = _COCOICHI_DATE_NOTE_RE.sub("", best[1]).strip()
+            seen[name] = seen.get(name, 0) + 1
+            row = {"name": name, "size": "", "kcal": vals["kcal"], "protein_g": vals["protein_g"],
+                   "fat_g": vals["fat_g"], "carbs_g": vals["carbs_g"], "sugar_g": None,
+                   "fiber_g": None, "salt_g": vals["salt_g"],
+                   "block": f"{name}#{seen[name]}", "ambiguous": False}
+            row["ok"] = energy_ok(row["kcal"], row["protein_g"], row["fat_g"], row["carbs_g"]) \
+                and row["salt_g"] is not None
+            rows.append(row)
+    return {"updated": updated, "rows": rows, "pages_total": len(pages),
+            "pages_table": pages_table, "problems": problems}
+
+
+# ---------------------------------------------------------------------------
 # 検証(誤った栄養値を出さないためのゲート)
 # ---------------------------------------------------------------------------
 
@@ -842,7 +930,8 @@ def validate_source(kind: str, parsed: dict, min_rows: int = 80, min_rate: float
     rows = parsed["rows"]
     if len(rows) < min_rows:
         return f"読み取れた行が少なすぎます({len(rows)}行 < {min_rows})"
-    if kind in ("sukiya_nutrition", "yoshinoya", "freshness_nutrition", "zetteria_nutrition"):
+    if kind in ("sukiya_nutrition", "yoshinoya", "freshness_nutrition", "zetteria_nutrition",
+                "cocoichi_nutrition"):
         rate = pass_rate(rows)
         if rate < min_rate:
             return f"エネルギー検算に通った行が少なすぎます({rate:.0%} < {min_rate:.0%})"
@@ -850,7 +939,8 @@ def validate_source(kind: str, parsed: dict, min_rows: int = 80, min_rate: float
         done = sum(1 for r in rows if r["complete"]) / len(rows)
         if done < min_rate or len(parsed["allergen_names"]) != 28:
             return f"アレルゲンの表を読み取れた割合が低すぎます({done:.0%}・品目{len(parsed['allergen_names'])})"
-    if kind in ("sukiya_nutrition", "freshness_nutrition", "zetteria_nutrition") and not parsed.get("updated"):
+    if kind in ("sukiya_nutrition", "freshness_nutrition", "zetteria_nutrition",
+                "cocoichi_nutrition") and not parsed.get("updated"):
         return "更新日が見つかりません"
     if kind == "yoshinoya" and (parsed.get("issue") is None or not parsed.get("date")):
         return "号数・日付が見つかりません"

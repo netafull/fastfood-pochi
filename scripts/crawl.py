@@ -3708,7 +3708,10 @@ def crawl_yayoiken(getter, pending: dict, stats: dict, today: str | None = None)
 #    商品は発売日の記載がもう無いため、発売日は null のままにする (発表日等での
 #    代用はしない)。ニュース記事は使わない。
 #  ・商品名は【予告】を外して記録する (販売開始後に名前が変わって見えないように)。
-#  ・説明文・栄養成分・アレルゲンは第1段階では対象外 (すべて null)。
+#  ・説明文・アレルゲンは対象外。栄養成分は公式PDF (/menu/pdf/nutrition.pdf) から、巡回のあと
+#    run_pdf_step() が pdf_update.py 経由で、更新があったときだけ取得して取り込む
+#    (2026-11-27追加。吉野家・すき家方式)。値の基準 (ライス量「普通(300g)」等) は商品ごとに
+#    PDFの注記に書かれるが、商品データには共通の注記だけを入れる。
 #  ・一覧が全部取れない・0件・前回の半分未満の回は、何も更新せず終了判定もしない。
 #    一部のカテゴリーだけ失敗した回は、取れた分で記録を続けるが終了判定はしない。
 COCOICHI_MIN_RATIO = 0.5
@@ -5719,7 +5722,7 @@ def crawl_burgerking(getter, pending: dict, stats: dict, today: str | None = Non
 # ---------------------------------------------------------------------------
 
 def run_pdf_step(chain: str, getter, pending: dict, stats: dict) -> dict | None:
-    """吉野家・すき家・フレッシュネス・ゼッテリアの公式PDFから栄養・アレルゲンを取り込む(巡回のあとに1回)。
+    """吉野家・すき家・フレッシュネス・ゼッテリア・CoCo壱番屋の公式PDFから栄養・アレルゲンを取り込む(巡回のあとに1回)。
 
     PDFを読めない(pdfminer未導入・取得失敗・構造変更の疑い)ときも、警告とpending.jsonへの記録だけで
     クロール全体は止めない。取得器がPDF用のメソッドを持たないとき(テスト)・一覧の取得でブロックされた
@@ -5853,7 +5856,7 @@ def main(argv: list[str] | None = None) -> int:
             if err_chain:
                 stats.setdefault(err_chain, new_stats())["error"] = f"{type(e).__name__}: {e}"
         chain = {v: k for k, v in CRAWLERS.items()}.get(fn)
-        if chain in ("yoshinoya", "sukiya", "freshness", "zetteria"):
+        if chain in ("yoshinoya", "sukiya", "freshness", "zetteria", "cocoichi"):
             run_pdf_step(chain, getter, pending, stats)
 
     streaks = update_health(pending, stats, today_jst())
