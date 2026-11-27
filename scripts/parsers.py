@@ -3441,6 +3441,34 @@ def ootoya_excluded(entry: dict) -> str | None:
     return None
 
 
+_OOTOYA_TAB_LABEL_RE = re.compile(r'c-form-button-01__normal"[^>]*>([^<]+)</button>')
+_OOTOYA_PANEL_RE = re.compile(r'c-tab-01__content".*?<table[^>]*>(.*?)</table>', re.S)
+_OOTOYA_NUTRITION_ROW_RE = re.compile(r"<th[^>]*>([^<]+)</th>\s*<td[^>]*>([^<]+)</td>")
+
+
+def parse_ootoya_detail(html: str) -> list[dict]:
+    """大戸屋の商品詳細ページから、形態ごとの栄養成分を [{label, nutrition}] で返す (2026-11-27追加)。
+    栄養成分は形態 (ご飯・五穀ご飯・単品) ごとにタブで切り替わる表 (c-table-01) に載る。
+    タブとパネルは並び順で対応する。タブが無い商品は、エネルギー表を含む表を無印の1形態として拾う。
+    栄養の表が読めない商品は空リスト。糖質は build_nutrition の主要項目に無いので other に入る。"""
+    labels = [m.strip() for m in _OOTOYA_TAB_LABEL_RE.findall(html)]
+    forms: list[dict] = []
+    for i, panel in enumerate(_OOTOYA_PANEL_RE.findall(html)):
+        nut = build_nutrition(_OOTOYA_NUTRITION_ROW_RE.findall(panel))
+        if nut is None:
+            continue
+        forms.append({"label": labels[i] if i < len(labels) else "", "nutrition": nut})
+    if forms:
+        return forms
+    for table in re.findall(r"<table[^>]*>(.*?)</table>", html, re.S):
+        rows = _OOTOYA_NUTRITION_ROW_RE.findall(table)
+        if any("エネルギー" in r[0] for r in rows):
+            nut = build_nutrition(rows)
+            if nut is not None:
+                return [{"label": "", "nutrition": nut}]
+    return []
+
+
 # ---------------------------------------------------------------------------
 # フレッシュネスバーガー (www.freshnessburger.co.jp。2026-11-27追加、19チェーン目)
 # ---------------------------------------------------------------------------

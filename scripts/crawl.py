@@ -4145,8 +4145,12 @@ def crawl_hanamaru(getter, pending: dict, stats: dict, today: str | None = None)
 # 方針:
 #  ・巡回は robots.txt + 基準店舗 (新宿センタービル店) のメニュー1ページ + ニュース一覧1ページ +
 #    未照合の「商品情報」記事の詳細 (1回の実行で最大 OOTOYA_ARTICLE_MAX_FETCHES 件まで)。
-#    詳細ページは第1段階では取らない (栄養成分が白飯・五穀ご飯・単品と形ごとに分かれており、
-#    代表の決め方が要るため。オーナー決定 2026-11-27)。
+#  ・栄養成分は商品詳細ページの形態別 (ご飯・五穀ご飯・単品) の表から取る (2026-11-27夜に
+#    オーナーが取り込みを決定。第1段階では取らないという同日の決定を変更)。代表は先頭の形態
+#    (代表価格が定食価格なので「ご飯」) で、形態が複数あれば nutrition_variants に全形態を入れる。
+#    詳細の取得は新規商品と、栄養がまだ無い既存商品の補完で、1回の実行で最大
+#    OOTOYA_DETAIL_MAX_FETCHES 件まで。栄養の表が無い商品は state の nutrition_checked に
+#    残して再取得しない。取得済みの栄養は取り直さない (丸亀・はなまる方式)。
 #  ・商品の正本は基準店舗のメニュー (全カテゴリー・191件)。価格は定食価格が代表で、
 #    単品価格は価格バリエーションとして記録する。一覧に両方の価格が毎回出るので、
 #    バリエーションの履歴も毎回更新できる。
@@ -4157,10 +4161,11 @@ def crawl_hanamaru(getter, pending: dict, stats: dict, today: str | None = None)
 #    照合済みの印だけ付ける。「商品情報」以外の記事も取得しない。
 #  ・種別: 「限定メニュー」カテゴリーの商品は 期間限定 (badges にも付ける)。ニュース記事と
 #    照合して発売日が付いた商品は 新メニュー。baseline に無い新規は 新規掲載、それ以外は定番。
-#  ・説明文・栄養成分・アレルゲンは第1段階では対象外。
+#  ・説明文・アレルゲンは対象外。
 #  ・メニューが空・取得失敗・前回の半分未満の回は、何も更新せず終了判定もしない。
 OOTOYA_MIN_RATIO = 0.5
 OOTOYA_ARTICLE_MAX_FETCHES = 6
+OOTOYA_DETAIL_MAX_FETCHES = 12
 OOTOYA_ARTICLE_WINDOW_BEFORE_DAYS = 120
 OOTOYA_ARTICLE_WINDOW_AFTER_DAYS = 14
 OOTOYA_ARTICLE_OLDEST_DAYS = 150
@@ -4253,6 +4258,17 @@ def ootoya_apply_article(product: dict, infos: list[dict]) -> bool:
     after = (product.get("news_url"), product.get("launch_date"), product.get("launch_date_source"),
              product.get("limited_kind"), product.get("planned_end_text"))
     return before != after
+
+
+def ootoya_apply_nutrition(product: dict, forms: list[dict]) -> bool:
+    """詳細ページの形態別栄養を反映する。代表は先頭の形態 (定食価格が代表なので「ご飯」)。
+    形態が2つ以上なら nutrition_variants に全形態を入れる。変更があれば True。"""
+    if not forms:
+        return False
+    before = (product.get("nutrition"), product.get("nutrition_variants"))
+    product["nutrition"] = forms[0]["nutrition"]
+    product["nutrition_variants"] = forms if len(forms) > 1 else None
+    return before != (product.get("nutrition"), product.get("nutrition_variants"))
 
 
 def build_ootoya_product(entry: dict, kind: str, today: str, now: str) -> dict:
@@ -4412,6 +4428,34 @@ def crawl_ootoya(getter, pending: dict, stats: dict, today: str | None = None) -
     infos = ootoya_article_infos({"articles": stored})
     st["limited_seen"] = sum(1 for e in entries.values() if e.get("is_limited"))
 
+    # 栄養成分の補完 (商品詳細ページ)。上限に達したらこの回は打ち切る
+    nutrition_checked = set(state.get("nutrition_checked") or [])
+    detail_state = {"fetches": 0, "blocked": False}
+
+    def fetch_nutrition(pid: str) -> list[dict] | None:
+        """詳細ページから形態別栄養を取る。取得失敗は None (次回に回す)、
+        取れたが栄養の表が無ければ [] (nutrition_checked に残して再取得しない)。"""
+        if detail_state["fetches"] >= OOTOYA_DETAIL_MAX_FETCHES or detail_state["blocked"]:
+            return None
+        url = parsers.ootoya_detail_url(pid)
+        if not allowed(url):
+            return []
+        detail_state["fetches"] += 1
+        try:
+            html = getter(chain, url)
+            st["detail_requests"] += 1
+        except BlockedError as e:
+            st["detail_requests"] += 1
+            st["blocked"] = True
+            detail_state["blocked"] = True
+            print(f"[blocked] ootoya detail {url}: {e}", file=sys.stderr)
+            return None
+        except Exception as e:  # noqa: BLE001
+            st["detail_requests"] += 1
+            print(f"[warn] ootoya 詳細 取得失敗 {url}: {e}", file=sys.stderr)
+            return None
+        return parsers.parse_ootoya_detail(html)
+
     baseline = baseline_for(chain)
     entries = burst_filter(chain, entries, baseline, pending, stats, today)
     regular_budget = RegularBudget(st)
@@ -4432,6 +4476,13 @@ def crawl_ootoya(getter, pending: dict, stats: dict, today: str | None = None) -
                     badges.append("期間限定")
                 existing["badges"] = badges
             ootoya_apply_article(existing, infos)
+            if existing.get("nutrition") is None and pid not in nutrition_checked:
+                forms = fetch_nutrition(pid)
+                if forms is not None:
+                    if forms:
+                        ootoya_apply_nutrition(existing, forms)
+                    else:
+                        nutrition_checked.add(pid)
             save_product(chain, existing)
             pending[chain].pop(pid, None)
             continue
@@ -4453,6 +4504,12 @@ def crawl_ootoya(getter, pending: dict, stats: dict, today: str | None = None) -
             mark_regular(product)
         else:
             ootoya_apply_article(product, infos)
+        forms = fetch_nutrition(pid)
+        if forms is not None:
+            if forms:
+                ootoya_apply_nutrition(product, forms)
+            else:
+                nutrition_checked.add(pid)
         save_product(chain, product)
         st["regular_created" if is_regular else "new_products"] += 1
         pending[chain].pop(pid, None)
@@ -4465,6 +4522,7 @@ def crawl_ootoya(getter, pending: dict, stats: dict, today: str | None = None) -
         state["checked_at"] = today
         state["articles"] = stored
         state["article_checked"] = sorted(checked)
+        state["nutrition_checked"] = sorted(nutrition_checked)
         save_json(ootoya_state_path(), state, sort_keys=True)
 
     # 発売日の確定 (この回に処理した記事との照合)。終わって久しい商品は探し直さない
