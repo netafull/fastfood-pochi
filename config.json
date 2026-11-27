@@ -1,8 +1,8 @@
 {
   "top_title": "ファストフードポチ｜限定メニューのカロリー・価格アーカイブ",
   "site_title": "ファストフードポチ",
-  "site_tagline": "マクド・モス・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキー・やよい軒・CoCo壱番屋・はなまるうどん・大戸屋の限定メニューを記録して残す",
-  "site_description": "マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキー・やよい軒・CoCo壱番屋・はなまるうどん・大戸屋の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています",
+  "site_tagline": "マクド・モス・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキー・やよい軒・CoCo壱番屋・はなまるうどん・大戸屋・フレッシュネスバーガーの限定メニューを記録して残す",
+  "site_description": "マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキー・やよい軒・CoCo壱番屋・はなまるうどん・大戸屋・フレッシュネスバーガーの期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています",
   "site_url": "https://fastfood.netaful.jp/",
   "ga_measurement_id": "G-464GWH2ZGQ",
   "adsense_client_id": "ca-pub-2195959398357532",
@@ -115,6 +115,12 @@
       "name": "大戸屋",
       "base_url": "https://www.ootoya.com",
       "color": "#6D4C41"
+    },
+    {
+      "slug": "freshness",
+      "name": "フレッシュネスバーガー",
+      "base_url": "https://www.freshnessburger.co.jp",
+      "color": "#006B3F"
     }
   ],
   "request_interval_seconds": {
@@ -135,7 +141,8 @@
     "yayoiken": 3,
     "cocoichi": 3,
     "hanamaru": 3,
-    "ootoya": 3
+    "ootoya": 3,
+    "freshness": 3
   },
   "max_requests_per_run": {
     "mcdonalds": 60,
@@ -155,7 +162,8 @@
     "yayoiken": 20,
     "cocoichi": 30,
     "hanamaru": 40,
-    "ootoya": 30
+    "ootoya": 30,
+    "freshness": 40
   },
   "record_regular": true,
   "regular_backfill_per_run": 20,

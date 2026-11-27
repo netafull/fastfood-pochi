@@ -468,8 +468,8 @@ class TestSite(unittest.TestCase):
     def test_chain_config(self):
         self.assertEqual(g.CHAIN_NAME[CHAIN], "バーガーキング")
         self.assertEqual(g.CHAIN_SOURCE[CHAIN], "バーガーキング公式サイト")
-        self.assertTrue(g.CHAIN_LIST_TEXT.endswith("・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキー・やよい軒・CoCo壱番屋・はなまるうどん・大戸屋"))
-        self.assertEqual(len(g.CHAINS), 18)
+        self.assertTrue(g.CHAIN_LIST_TEXT.endswith("・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキー・やよい軒・CoCo壱番屋・はなまるうどん・大戸屋・フレッシュネスバーガー"))
+        self.assertEqual(len(g.CHAINS), 19)
         for k in ("site_description", "site_tagline"):
             self.assertIn("バーガーキング", g.CONFIG[k])
         about = g.CONFIG["about"]

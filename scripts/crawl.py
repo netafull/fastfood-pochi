@@ -4480,6 +4480,367 @@ def crawl_ootoya(getter, pending: dict, stats: dict, today: str | None = None) -
 
 
 # ---------------------------------------------------------------------------
+# フレッシュネスバーガー (www.freshnessburger.co.jp)
+# ---------------------------------------------------------------------------
+# 方針:
+#  ・巡回は robots.txt + メニュー一覧3ページ + ブランドニュース一覧1ページ + 未照合の
+#    プレスリリースPDF (1回の実行で最大 FRESHNESS_RELEASE_MAX_FETCHES 件まで)。
+#  ・商品の正本はメニュー一覧 (バーガー・サイドメニュー・ドリンク)。セット・モーニング・
+#    キッズ・フレバル・スイーツは名前・価格が画像の中だけなので記録せず、「店舗限定」
+#    セクションも記録しない (オーナー決定)。サイズ別の価格は全サイズを記録し、代表価格は
+#    先頭のサイズ (はなまるうどんの「小」と同じ)。
+#  ・発売日はブランドニュースのプレスリリースPDFから取る (launch_date_source="press_pdf")。
+#    販売期間の終わりは planned_end_text に入れる。販売期間のある商品は期間限定にし、
+#    定番として記録済みの商品でも、販売期間のあるリリースと照合できれば期間限定へ上げる。
+#  ・栄養成分・説明文は第1段階では取らない (公式の栄養成分PDFは別にある)。
+#  ・一覧が取れない・0件の回は終了判定をしない。一部のページだけ取れた回は記録するが、
+#    終了判定は全ページ取れた回だけ行う。
+FRESHNESS_MIN_RATIO = 0.5
+FRESHNESS_RELEASE_MAX_FETCHES = 4
+FRESHNESS_RELEASE_WINDOW_BEFORE_DAYS = 120
+FRESHNESS_RELEASE_WINDOW_AFTER_DAYS = 14
+FRESHNESS_RELEASE_OLDEST_DAYS = 150
+
+
+def freshness_state_path() -> Path:
+    return DATA / "freshness_state.json"
+
+
+def freshness_price_note(entry: dict) -> str:
+    prices = entry.get("prices") or []
+    note = "税込。"
+    if len(prices) > 1 and prices[0].get("label"):
+        note += f"表示は「{prices[0]['label']}」の価格。"
+    note += "店舗により販売メニューや価格が異なる場合があります。"
+    return note
+
+
+def _freshness_robots(getter, st: dict):
+    """robots.txt を読んで RobotFileParser を返す。ブロックされたら None (呼び出し側がその回を止める)。
+    フレッシュネスは robots.txt が無くトップページのHTMLが返るので、HTMLが返ったら全許可として扱う。"""
+    st["list_requests"] += 1
+    try:
+        text = getter("freshness", parsers.FRESHNESS_BASE + "/robots.txt")
+    except NotFoundError:
+        text = None
+    except BlockedError as e:
+        st["blocked"] = True
+        print(f"[blocked] freshness robots.txt: {e}", file=sys.stderr)
+        return None
+    except Exception as e:  # noqa: BLE001
+        print(f"[warn] freshness robots.txt 取得失敗(全許可として続行): {e}", file=sys.stderr)
+        text = None
+    if text and text.lstrip().startswith("<"):
+        text = None
+    rp = urllib.robotparser.RobotFileParser()
+    rp.parse((text or "User-agent: *\nAllow: /").splitlines())
+    return rp
+
+
+def freshness_release_infos(state: dict) -> list[dict]:
+    """state に残したプレスリリースの解析結果を、新しい順の [{url, date, title, launch_date,
+    planned_end_text, items, text}] で返す。"""
+    infos = [{"url": url, **info} for url, info in (state.get("releases") or {}).items()]
+    infos.sort(key=lambda x: x.get("date") or "", reverse=True)
+    return infos
+
+
+def freshness_find_release(name: str, price: int | None, infos: list[dict], ref: str) -> dict | None:
+    """商品名・価格で照合できるプレスリリースを返す (ref の前120日〜後14日に発表されたもの)。"""
+    try:
+        c = datetime.date.fromisoformat(ref)
+    except (ValueError, TypeError):
+        return None
+    lo = (c - datetime.timedelta(days=FRESHNESS_RELEASE_WINDOW_BEFORE_DAYS)).isoformat()
+    hi = (c + datetime.timedelta(days=FRESHNESS_RELEASE_WINDOW_AFTER_DAYS)).isoformat()
+    for info in infos:
+        if not (lo <= (info.get("date") or "") <= hi):
+            continue
+        if parsers.match_freshness_press(name, price, info):
+            return info
+    return None
+
+
+def freshness_apply_release(product: dict, infos: list[dict]) -> bool:
+    """プレスリリースの発売日・販売期間を反映する。変更があれば True。
+    PDFで確定済み (launch_date_source="press_pdf") の商品は照合しない。
+    販売期間のあるリリースと照合できたら、定番の商品も期間限定へ上げる。"""
+    if product.get("launch_date_source") == "press_pdf":
+        return False
+    ref = (product.get("first_seen_at") or "")[:10]
+    rel = product.get("relaunches") or []
+    if rel and rel[-1].get("reappeared_at"):
+        ref = rel[-1]["reappeared_at"]
+    if not ref:
+        return False
+    info = freshness_find_release(product.get("name") or "", product.get("price"), infos, ref)
+    if not info:
+        return False
+    before = (product.get("news_url"), product.get("launch_date"), product.get("launch_date_source"),
+              product.get("limited_kind"), product.get("planned_end_text"), product.get("is_regular"))
+    product["announced_at"] = info.get("date")
+    product["news_url"] = info["url"]
+    product["news_title"] = info.get("title")
+    product["news_date"] = info.get("date")
+    if info.get("launch_date"):
+        product["launch_date"] = info["launch_date"]
+        product["launch_date_source"] = "press_pdf"
+    if info.get("planned_end_text"):
+        if not product.get("planned_end_text"):
+            product["planned_end_text"] = info["planned_end_text"]
+        if product.get("is_regular"):
+            upgrade_regular(product, "期間限定")
+            badges = list(product.get("badges") or [])
+            if "期間限定" not in badges:
+                badges.append("期間限定")
+            product["badges"] = badges
+        elif product.get("limited_kind") in (None, "新規掲載"):
+            product["limited_kind"] = "期間限定"
+            badges = list(product.get("badges") or [])
+            if "期間限定" not in badges:
+                badges.append("期間限定")
+            product["badges"] = badges
+    elif info.get("launch_date") and product.get("limited_kind") in (None, "新規掲載"):
+        product["limited_kind"] = "新メニュー"
+    after = (product.get("news_url"), product.get("launch_date"), product.get("launch_date_source"),
+             product.get("limited_kind"), product.get("planned_end_text"), product.get("is_regular"))
+    return before != after
+
+
+def fetch_freshness_press(getter, url: str) -> dict | None:
+    """プレスリリースPDFを取得して解析する。pdfminer が無い環境と、PDFでないURL
+    (HTMLのお知らせ) では None。取得の失敗は例外として呼び出し側へ返す。"""
+    if not pdf_update.have_pdfminer():
+        return None
+    data = getter.pdf_get("freshness", url)
+    if not data.startswith(b"%PDF"):
+        return None
+    return parsers.parse_freshness_press(pdf_update.pn.extract_geometry(data))
+
+
+def build_freshness_product(entry: dict, kind: str, today: str, now: str) -> dict:
+    price = entry.get("price")
+    prices = [{"label": p["label"], "price": p["price"]} for p in entry.get("prices") or []]
+    product = {
+        "chain": "freshness",
+        "product_id": entry["product_id"],
+        "name": entry["name"],
+        "category": entry.get("category"),
+        "price": price,
+        "price_note": freshness_price_note(entry),
+        "price_variants": prices if len(prices) > 1 else None,
+        "launch_date": None,
+        "launch_date_source": "not_found",
+        "announced_at": None,
+        "planned_end_text": None,
+        "news_url": None,
+        "news_title": None,
+        "news_date": None,
+        "description": None,
+        "description_full_len": 0,
+        "nutrition": None,
+        "nutrition_variants": None,
+        "nutrition_note": None,
+        "nutrition_pdf_url": None,
+        "nutrition_pdf_label": None,
+        "allergen_pdf_url": None,
+        "allergen_pdf_label": None,
+        "allergens": None,
+        "origin": None,
+        "limited_kind": kind,
+        "badges": ["期間限定"] if kind == "期間限定" else [],
+        "official_url": entry["official_url"],
+        "first_seen_at": now,
+        "last_seen_at": today,
+        "status": "on_sale",
+        "ended_observed_at": None,
+        "missed_runs": 0,
+        "price_history": [{"date": today, "price": price}] if price is not None else [],
+        "source_list": ["menu"],
+        "image": None,
+    }
+    seed_variants(product, today)
+    return product
+
+
+def crawl_freshness(getter, pending: dict, stats: dict, today: str | None = None) -> None:
+    chain = "freshness"
+    now = now_iso() if today is None else f"{today}T07:00:00+09:00"
+    today = today or today_jst()
+    pending.setdefault(chain, {})
+    stats.setdefault(chain, new_stats())
+    st = stats[chain]
+
+    rp = _freshness_robots(getter, st)
+    if rp is None:
+        return
+
+    def allowed(url: str) -> bool:
+        return rp.can_fetch(UA, url)
+
+    # メニュー一覧3ページ (バーガー・サイドメニュー・ドリンク)。全ページ取れた回だけ終了判定する
+    entries: dict[str, dict] = {}
+    pages_ok = 0
+    for page_name in parsers.FRESHNESS_MENU_PAGES:
+        menu_url = parsers.freshness_menu_url(page_name)
+        if not allowed(menu_url):
+            print(f"[skip] robots.txtでDisallow: {menu_url}", file=sys.stderr)
+            continue
+        try:
+            page = getter(chain, menu_url)
+            st["list_requests"] += 1
+        except BlockedError as e:
+            st["list_requests"] += 1
+            st["blocked"] = True
+            print(f"[blocked] freshness menu {menu_url}: {e}", file=sys.stderr)
+            return
+        except Exception as e:  # noqa: BLE001
+            st["list_requests"] += 1
+            print(f"[warn] freshness メニュー 取得失敗 {menu_url}: {e}", file=sys.stderr)
+            continue
+        pages_ok += 1
+        for e in parsers.parse_freshness_menu(page, page_name)["items"]:
+            entries.setdefault(e["product_id"], e)
+    if not entries:
+        print("[warn] freshness メニュー: 商品が0件(構造変更の疑い)", file=sys.stderr)
+        return
+    state = load_json(freshness_state_path(), {})
+    prev_count = state.get("menu_count")
+    if prev_count and len(entries) < prev_count * FRESHNESS_MIN_RATIO:
+        print(f"[warn] freshness メニューが極端に少ない({len(entries)}件。前回{prev_count}件)。"
+              "消えた商品の判定は行わない", file=sys.stderr)
+        return
+    all_pages_ok = pages_ok == len(parsers.FRESHNESS_MENU_PAGES)
+    st["list_ok"] = all_pages_ok
+
+    # ブランドニュース一覧 (1ページ・全件)。取れなくてもメニューの記録は続ける
+    news_list: list[dict] = []
+    news_url = parsers.freshness_news_url()
+    if not allowed(news_url):
+        print(f"[skip] robots.txtでDisallow: {news_url}", file=sys.stderr)
+    else:
+        try:
+            text = getter(chain, news_url)
+            st["detail_requests"] += 1
+            news_list = parsers.parse_freshness_news_list(text)
+        except BlockedError as e:
+            st["detail_requests"] += 1
+            st["blocked"] = True
+            print(f"[blocked] freshness news list: {e}", file=sys.stderr)
+            return
+        except Exception as e:  # noqa: BLE001
+            st["detail_requests"] += 1
+            print(f"[warn] freshness ニュース一覧 取得失敗 {news_url}: {e}", file=sys.stderr)
+    if not news_list:
+        print("[warn] freshness ニュース一覧: 0件(構造変更の疑い)", file=sys.stderr)
+
+    # 未照合のプレスリリースPDFだけ取る (上限つき)。PDFでないお知らせ (HTML) と、発売日も
+    # 商品も読み取れないPDFは、照合済みの印だけ残す。150日より古いものは取得しない
+    stored = dict(state.get("releases") or {})
+    checked = set(state.get("release_checked") or [])
+    oldest = (datetime.date.fromisoformat(today)
+              - datetime.timedelta(days=FRESHNESS_RELEASE_OLDEST_DAYS)).isoformat()
+    fetches = 0
+    if news_list and pdf_update.have_pdfminer():
+        for a in news_list:
+            url = a["url"]
+            if url in stored or url in checked:
+                continue
+            if (a.get("date") or "") < oldest:
+                checked.add(url)
+                continue
+            if fetches >= FRESHNESS_RELEASE_MAX_FETCHES:
+                break
+            if not allowed(url):
+                checked.add(url)
+                continue
+            fetches += 1
+            try:
+                info = fetch_freshness_press(getter, url)
+                st["detail_requests"] += 1
+            except BlockedError as e:
+                st["detail_requests"] += 1
+                st["blocked"] = True
+                print(f"[blocked] freshness press PDF {url}: {e}", file=sys.stderr)
+                return
+            except Exception as e:  # noqa: BLE001
+                st["detail_requests"] += 1
+                print(f"[warn] freshness プレスリリース 取得・解析失敗 {url}: {e}", file=sys.stderr)
+                continue
+            if info is None:
+                checked.add(url)   # HTMLのお知らせ (障害情報など)
+                continue
+            if info.get("launch_date") or info.get("items"):
+                stored[url] = {"date": a["date"], "title": a["title"],
+                               "launch_date": info["launch_date"],
+                               "planned_end_text": info["planned_end_text"],
+                               "items": info["items"], "text": info["text"]}
+            else:
+                checked.add(url)
+    infos = freshness_release_infos({"releases": stored})
+
+    baseline = baseline_for(chain)
+    entries = burst_filter(chain, entries, baseline, pending, stats, today)
+    regular_budget = RegularBudget(st)
+    for pid, e in entries.items():
+        existing = load_product(chain, pid)
+        if existing is not None:
+            touch_seen(existing, list_price_for_history(st, e.get("price")), today, now, st)
+            # サイズ別の価格が一覧に毎回出るので、バリエーションの履歴も更新する
+            if st["list_ok"]:
+                record_variants(existing, [{"label": p["label"], "price": p["price"]}
+                                           for p in e.get("prices") or []], today, st)
+            if e.get("name") and existing.get("name") != e["name"]:
+                existing["name"] = e["name"]
+            freshness_apply_release(existing, infos)
+            save_product(chain, existing)
+            pending[chain].pop(pid, None)
+            continue
+        info = freshness_find_release(e["name"], e.get("price"), infos, today)
+        is_new_menu = baseline is not None and pid not in baseline
+        if info and info.get("planned_end_text"):
+            kind = "期間限定"   # 販売期間のあるプレスリリースで発表された商品
+        elif info and info.get("launch_date"):
+            kind = "新メニュー"   # プレスリリースで発売日が付いた商品
+        elif is_new_menu:
+            kind = "新規掲載"
+        else:
+            kind = REGULAR_KIND
+        is_regular = kind == REGULAR_KIND
+        if is_regular and not regular_budget.take():
+            continue   # 定番は1回の巡回で作る件数に上限がある。残りは翌日以降
+        product = build_freshness_product(e, kind, today, now)
+        if is_regular:
+            mark_regular(product)
+        else:
+            freshness_apply_release(product, infos)
+        save_product(chain, product)
+        st["regular_created" if is_regular else "new_products"] += 1
+        pending[chain].pop(pid, None)
+
+    if all_pages_ok and baseline is None:
+        save_baseline(chain, set(entries))
+    if all_pages_ok:
+        apply_missing(chain, set(entries), today, st)
+    state["menu_count"] = len(entries)
+    state["checked_at"] = today
+    state["releases"] = stored
+    state["release_checked"] = sorted(checked)
+    save_json(freshness_state_path(), state, sort_keys=True)
+
+    # 発売日の確定 (この回に処理したプレスリリースとの照合)。終わって久しい商品は探し直さない
+    cutoff = (datetime.date.fromisoformat(today) - datetime.timedelta(days=14)).isoformat()
+    for p in load_chain_products(chain):
+        if p.get("status") == "ended" and (p.get("ended_observed_at") or "") < cutoff:
+            continue
+        if freshness_apply_release(p, infos):
+            save_product(chain, p)
+    recorded = [p for p in load_chain_products(chain) if not p.get("is_regular")]
+    st["news_matched"] = sum(1 for p in recorded if p.get("news_url"))
+    st["news_unmatched"] = sum(1 for p in recorded if not p.get("news_url"))
+
+
+# ---------------------------------------------------------------------------
 # 丸亀製麺 (jp.marugame.com)
 # ---------------------------------------------------------------------------
 # 調査・方針(2026-10-17。実物の構造は parsers.py の「丸亀製麺」のコメントにまとめた):
@@ -5231,7 +5592,8 @@ CRAWLERS = {"mcdonalds": crawl_mcdonalds, "mos": crawl_mos, "matsuya": crawl_mat
             "marugame": crawl_marugame, "burgerking": crawl_burgerking,
             "kourakuen": crawl_kourakuen, "hidakaya": crawl_hidakaya,
             "zetteria": crawl_zetteria, "kfc": crawl_kfc, "yayoiken": crawl_yayoiken,
-            "cocoichi": crawl_cocoichi, "hanamaru": crawl_hanamaru, "ootoya": crawl_ootoya}
+            "cocoichi": crawl_cocoichi, "hanamaru": crawl_hanamaru, "ootoya": crawl_ootoya,
+            "freshness": crawl_freshness}
 
 
 def main(argv: list[str] | None = None) -> int:
