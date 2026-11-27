@@ -932,5 +932,9 @@
     "nutrition_label": "栄養成分一覧",
     "allergen": "https://images.zensho.co.jp/materials/sukiya/allergen/allergen.pdf",
     "allergen_label": "アレルゲン一覧"
+  },
+  "freshness_pdf": {
+    "nutrition": "https://www.freshnessburger.co.jp/pdf/seibun.pdf",
+    "nutrition_label": "栄養成分表"
   }
 }

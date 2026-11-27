@@ -208,3 +208,39 @@ def yoshinoya_intro_page(scale=1.0):
         box(107.2, 783.0, 579.2, 809.0, "『えび』が混ざる漁法で採取されています。）"),
         box(78.6, 734.2, 1762.8, 763.6, "5. 揚げ物は全て同じフライヤーで揚げています。"),
     ], "rules": [], "chars": []}
+
+
+# --- フレッシュネスバーガー: 栄養成分 -----------------------------------------
+
+FB_FOOD_COLS = [208, 261, 314, 361, 396, 438, 491]
+FB_DRINK_COLS = [224, 279, 334, 389, 443, 498]
+
+
+def freshness_page(rows, kind="food", updated="2026年11月9日", header=True, title=True):
+    """rows: [(名前, [数値, ...])]。数値は列の順 (フード: 熱量・たんぱく質・脂質・炭水化物・糖質・
+    食物繊維・食塩相当量 / ドリンク: 糖質なしの6列)。None のセルは置かない。"""
+    cols = FB_FOOD_COLS if kind == "food" else FB_DRINK_COLS
+    texts = []
+    if title:
+        texts.append(box(13, 799, 404, 814, "フレッシュネスバーガー商品　栄養成分表"))
+        texts.append(box(369, 784, 508, 793, f"更新日：{updated}"))
+    if header:
+        texts.append(box(112, 698, 134, 705, "商品名"))
+        labels = ["たんぱく質", "脂質", "炭水化物", "糖質", "食物繊維総量", "食塩相当量"] if kind == "food" \
+            else ["たんぱく質", "脂質", "炭水化物 食物繊維総量 食塩相当量"]
+        texts.append(box(185, 699, 231, 705, "1食あたりのカロリー"))
+        for lb in labels:
+            texts.append(box(247, 698, 275, 705, lb))
+        texts.append(box(197, 681, 220, 692, "kcal"))
+        for c in cols[1:]:
+            texts.append(box(c - 3, 681, c + 3, 692, "g"))
+    y = 660.0
+    for name, vals in rows:
+        if name is not None:
+            texts.append(box(65, y, 65 + 7 * len(name), y + 9, name))
+        for c, v in zip(cols, vals):
+            if v is not None:
+                s = str(v)
+                texts.append(box(c - 4 * len(s), y, c + 4, y + 9, s))
+        y -= 13.0
+    return {"texts": texts, "rules": [], "chars": []}
