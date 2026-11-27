@@ -108,6 +108,24 @@ class TestItemPage(unittest.TestCase):
         h = g.render_item_page(item(chain="mos", nutrition={"kcal": 520.0, "other": other}))
         self.assertIn("そのほかの栄養成分（10項目）", h)
 
+    def test_nutrition_multi_shows_other(self):
+        # 複数形態の表でも主要項目以外の値 (大戸屋の糖質など) を形態ごとに並べる
+        nut = {"kcal": 711.0, "protein_g": 16.5, "other": {"糖質": "99.1 g", "カルシウム": "133.5 mg"}}
+        nut2 = {"kcal": 381.0, "protein_g": 10.5, "other": {"糖質": "29.1 g"}}
+        variants = [{"label": "ご飯", "nutrition": nut}, {"label": "単品", "nutrition": nut2}]
+        h = g.render_nutrition(item(nutrition=nut, nutrition_variants=variants))
+        self.assertIn("class='multi'", h)
+        self.assertIn("<th>糖質</th><td>99.1 g</td><td>29.1 g</td>", h)
+        self.assertIn("<th>カルシウム</th><td>133.5 mg</td><td>－</td>", h)
+
+    def test_nutrition_fiber_indent(self):
+        # 炭水化物があるときは内訳として字下げし、無いときは字下げを落とす
+        with_carbs = g.render_nutrition(item(nutrition={"kcal": 100.0, "carbs_g": 20.0, "fiber_g": 2.0}))
+        self.assertIn("<th>　食物繊維</th>", with_carbs)
+        without = g.render_nutrition(item(nutrition={"kcal": 100.0, "fiber_g": 2.0}))
+        self.assertIn("<th>食物繊維</th>", without)
+        self.assertNotIn("　食物繊維", without)
+
     def test_no_nutrition_note(self):
         h = g.render_item_page(item(nutrition=None, allergens=None, origin=None))
         self.assertIn("栄養成分は公式サイトに掲載がありませんでした", h)

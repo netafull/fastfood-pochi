@@ -1280,10 +1280,13 @@ OTHER_INLINE_MAX = 3
 
 def _nutrition_rows(nut: dict) -> tuple[list[tuple[str, str]], dict]:
     rows = []
+    # 糖類・食物繊維は炭水化物の内訳として字下げする。炭水化物の行が無い栄養
+    # (大戸屋は糖質だけを載せる) では、字下げだけが残らないように落とす
+    has_carbs = nut.get("carbs_g") is not None
     for key, label, unit in NUTRITION_LABELS:
         v = nut.get(key)
         if v is not None:
-            rows.append((label, f"{v:g}{unit}"))
+            rows.append((label if has_carbs else label.lstrip("　"), f"{v:g}{unit}"))
     return rows, (nut.get("other") or {})
 
 
@@ -1365,29 +1368,34 @@ def render_nutrition(item: dict) -> str:
     variants = item.get("nutrition_variants") or []
     if len(variants) > 1:
         # 松屋: セットと単品、または小盛/並盛/大盛の値を列で並べる
-        parsed = [(v.get("label") or "", _nutrition_rows(v["nutrition"])[0]) for v in variants]
+        parsed = [(v.get("label") or "", _nutrition_rows(v["nutrition"])) for v in variants]
         row_labels = []
-        for _, rows in parsed:
+        other_labels = []
+        for _, (rows, other) in parsed:
             for lb, _v in rows:
                 if lb not in row_labels:
                     row_labels.append(lb)
+            for k in other:
+                if k not in other_labels:
+                    other_labels.append(k)
         head = "<tr><th></th>" + "".join(f"<th>{esc(lb or '標準')}</th>" for lb, _ in parsed) + "</tr>"
         body_rows = ""
         for rl in row_labels:
             cells = ""
-            for _, rows in parsed:
+            for _, (rows, _other) in parsed:
                 d = dict(rows)
                 cells += f"<td>{esc(d.get(rl, '－'))}</td>"
             body_rows += f"<tr><th>{esc(rl)}</th>{cells}</tr>"
+        # 主要項目以外の値 (大戸屋の糖質など) も形態ごとに並べる。無い形態は －
+        for ol in other_labels:
+            cells = ""
+            for _, (_rows, other) in parsed:
+                cells += f"<td>{esc(other.get(ol, '－'))}</td>"
+            body_rows += f"<tr><th>{esc(ol)}</th>{cells}</tr>"
         return (f"<h2>栄養成分</h2><div class='tablewrap'><table class='multi'>{head}{body_rows}</table></div>"
                 f"{nutrition_footnote(item)}")
-    trs = []
-    for key, label, unit in NUTRITION_LABELS:
-        v = nut.get(key)
-        if v is None:
-            continue
-        trs.append(f"<tr><th>{esc(label)}</th><td>{v:g}{unit}</td></tr>")
-    other = nut.get("other") or {}
+    main_rows, other = _nutrition_rows(nut)
+    trs = [f"<tr><th>{esc(label)}</th><td>{esc(val)}</td></tr>" for label, val in main_rows]
     inline_rows = ""
     details = ""
     if other:
