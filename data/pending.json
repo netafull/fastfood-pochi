@@ -1,16 +1,22 @@
 {
+ "_health": {
+  "freshness": {
+   "days": 1,
+   "last_date": "2026-11-27"
+  }
+ },
  "burgerking": {},
  "cocoichi": {},
  "freshness": {},
  "hanamaru": {},
  "hidakaya": {
   "375": {
-   "checked_at": "2026-11-27T19:49:29+09:00",
+   "checked_at": "2026-11-27T21:51:04+09:00",
    "reason": "empty_detail",
    "url": "https://hidakaya.hiday.co.jp/hits/ja/menu/1/detail/375.html"
   },
   "376": {
-   "checked_at": "2026-11-27T19:49:29+09:00",
+   "checked_at": "2026-11-27T21:51:04+09:00",
    "reason": "empty_detail",
    "url": "https://hidakaya.hiday.co.jp/hits/ja/menu/1/detail/376.html"
   }
@@ -27,22 +33,22 @@
  "ootoya": {},
  "sukiya": {
   "side-7004400": {
-   "checked_at": "2026-11-27T19:46:04+09:00",
+   "checked_at": "2026-11-27T21:48:03+09:00",
    "reason": "empty_detail",
    "url": "/menu/in/side/7004400/index.html"
   },
   "side-7004500": {
-   "checked_at": "2026-11-27T19:46:04+09:00",
+   "checked_at": "2026-11-27T21:48:03+09:00",
    "reason": "empty_detail",
    "url": "/menu/in/side/7004500/index.html"
   },
   "side-7004600": {
-   "checked_at": "2026-11-27T19:46:04+09:00",
+   "checked_at": "2026-11-27T21:48:03+09:00",
    "reason": "empty_detail",
    "url": "/menu/in/side/7004600/index.html"
   },
   "side-7004700": {
-   "checked_at": "2026-11-27T19:46:04+09:00",
+   "checked_at": "2026-11-27T21:48:03+09:00",
    "reason": "empty_detail",
    "url": "/menu/in/side/7004700/index.html"
   }
@@ -50,7 +56,7 @@
  "yayoiken": {},
  "yoshinoya": {
   "yoshinomi-gyu-yakinikusara": {
-   "checked_at": "2026-11-27T19:45:01+09:00",
+   "checked_at": "2026-11-27T21:47:00+09:00",
    "reason": "empty_detail",
    "url": "/menu/yoshinomi/gyu-yakinikusara/"
   }

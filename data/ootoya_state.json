@@ -22,16 +22,24 @@
   "https://www.ootoya.com/news/206.html",
   "https://www.ootoya.com/news/218.html",
   "https://www.ootoya.com/news/219.html",
+  "https://www.ootoya.com/news/220.html",
   "https://www.ootoya.com/news/226.html",
   "https://www.ootoya.com/news/227.html",
   "https://www.ootoya.com/news/228.html",
   "https://www.ootoya.com/news/229.html",
+  "https://www.ootoya.com/news/231.html",
   "https://www.ootoya.com/news/234.html",
   "https://www.ootoya.com/news/235.html",
+  "https://www.ootoya.com/news/236.html",
   "https://www.ootoya.com/news/239.html",
   "https://www.ootoya.com/news/240.html",
   "https://www.ootoya.com/news/241.html",
+  "https://www.ootoya.com/news/242.html",
+  "https://www.ootoya.com/news/245.html",
   "https://www.ootoya.com/news/248.html",
+  "https://www.ootoya.com/news/249.html",
+  "https://www.ootoya.com/news/250.html",
+  "https://www.ootoya.com/news/254.html",
   "https://www.ootoya.com/news/257.html",
   "https://www.ootoya.com/news/258.html",
   "https://www.ootoya.com/news/261.html",
@@ -50,7 +58,11 @@
   "https://www.ootoya.com/news/292.html",
   "https://www.ootoya.com/news/293.html",
   "https://www.ootoya.com/news/78.html",
-  "https://www.ootoya.com/news/88.html"
+  "https://www.ootoya.com/news/83.html",
+  "https://www.ootoya.com/news/85.html",
+  "https://www.ootoya.com/news/88.html",
+  "https://www.ootoya.com/news/92.html",
+  "https://www.ootoya.com/news/93.html"
  ],
  "articles": {
   "https://www.ootoya.com/news/288.html": {
@@ -71,5 +83,6 @@
   }
  },
  "checked_at": "2026-11-27",
- "menu_count": 191
+ "menu_count": 191,
+ "nutrition_checked": []
 }
