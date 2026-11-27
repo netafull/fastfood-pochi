@@ -3228,3 +3228,214 @@ def match_hanamaru_article(name: str, price: int | None, article: dict | None) -
         if inm == n or (len(n) >= 4 and (n in inm or inm in n)):
             return True
     return False
+
+
+# ---------------------------------------------------------------------------
+# 大戸屋 (www.ootoya.com。2026-11-27追加、18チェーン目)
+# ---------------------------------------------------------------------------
+# 実物の構造 (2026-11-27に実物で確認):
+#  ・消費者向け公式サイトは www.ootoya.com (旧 www.ootoya.co.jp は接続不可、ootoya.jp は
+#    コーポレートサイト)。robots.txt は空 (200・0バイト)。自動取得の禁止条文は無い。
+#  ・メニューは店舗ごとのページ (/menu_list/index/{店舗ID}) で、店舗により商品・価格が違う。
+#    基準店舗は新宿センタービル店 (27214、限定メニューあり・191件)。記録はこの店舗の
+#    メニューとして残す (やよい軒が東京の一覧を正本にしたのと同じ考え方)。
+#  ・商品カードは <a class="c-card-01" href=".../menu_list/view/{店舗ID}/{商品ID}">。
+#    商品IDは末尾の数字。名前は h3.c-card-01__title、価格は p.c-card-01__price (定食価格)、
+#    単品価格がある商品は dl.c-card-01__single (見出しは「単品」のみ) に入る。
+#    カテゴリーは直前の h3.c-heading-no2。タブごとに同じ見出しが繰り返されるため、
+#    商品IDで重複を除き、最初に出たカテゴリーを採用する。
+#  ・発売日は公式ニュース (新着情報) の「商品情報」記事が正本。リードに
+#    「YYYY年M月D日(曜)より、…「商品名」を販売いたします」、本文に商品名と定食価格・
+#    単品価格、「販売期間について」に開始日〜終了日が書いてある。記事本文は CMS の
+#    blob で、価格行は ● 付きで br 区切り。日付の「月」「日」は康熙部首 (⽉・⽇) で
+#    書かれることがあるため、記事の解析前に NFKC 正規化する。
+#  ・記事の商品名とメニューの商品名は表記がずれる (記事「大粒牡蠣フライ」→メニュー
+#    「大粒牡蠣フライ4個」、記事「＜2個増量＞大粒牡蠣フライ (6個)」→メニュー
+#    「大粒牡蠣フライ6個」)。照合は、正規化した名前 (先頭の＜＞〈〉注記と括弧記号を
+#    落とす) の一致・包含 + 定食価格の一致で行う。
+OOTOYA_BASE = "https://www.ootoya.com"
+OOTOYA_STORE_ID = "27214"   # 新宿センタービル店 (基準店舗)
+OOTOYA_LIMITED_CATEGORY = "限定メニュー"
+OOTOYA_PRODUCT_CATEGORY = "商品情報"
+
+
+def ootoya_menu_url() -> str:
+    return f"{OOTOYA_BASE}/menu_list/index/{OOTOYA_STORE_ID}"
+
+
+def ootoya_news_url() -> str:
+    return OOTOYA_BASE + "/news/"
+
+
+def ootoya_detail_url(product_id: str) -> str:
+    return f"{OOTOYA_BASE}/menu_list/view/{OOTOYA_STORE_ID}/{product_id}"
+
+
+_OOTOYA_HEADING_RE = re.compile(r'<h3 class="c-heading-no2">([^<]+)</h3>')
+_OOTOYA_CARD_RE = re.compile(
+    r'<a class="c-card-01" href="https://www\.ootoya\.com/menu_list/view/\d+/(\d+)">(.*?)</a>', re.S)
+_OOTOYA_CARD_NAME_RE = re.compile(r'<h3 class="c-card-01__title">([^<]+)</h3>')
+_OOTOYA_CARD_PRICE_RE = re.compile(r'<p class="c-card-01__price">([\d,]+)')
+_OOTOYA_CARD_SINGLE_RE = re.compile(
+    r'c-card-01__single-lead">([^<]+)</dt>\s*<dd class="c-card-01__single-price">([\d,]+)')
+_OOTOYA_NEWS_ITEM_RE = re.compile(
+    r'<a href="\./(\d+)\.html"[^>]*>\s*<div class="c-notice-01__post-info">\s*'
+    r'<time datetime="(\d{4}-\d{2}-\d{2})"[^>]*>[^<]*</time>'
+    r'<span class="[^"]*">([^<]+)</span>\s*</div>\s*'
+    r'<p class="c-notice-01__post-text">([^<]+)</p>', re.S)
+_OOTOYA_BADGE_RE = re.compile(r'c-badge-tag-\d+">([^<]+)</span>')
+_OOTOYA_TEISHOKU_PRICE_RE = re.compile(r"定食価格\s*([\d,]+)\s*円")
+_OOTOYA_PERIOD_RE = re.compile(
+    r"(\d{4})年(\d{1,2})月(\d{1,2})日\s*[(（][月火水木金土日][)）]\s*[～〜~]\s*"
+    r"(\d{4})年(\d{1,2})月(\d{1,2})日\s*[(（]([月火水木金土日])[)）]")
+_OOTOYA_LEAD_DATE_RE = re.compile(r"(\d{4})年(\d{1,2})月(\d{1,2})日\s*[(（][月火水木金土日][)）]\s*より")
+
+
+def _ootoya_price(s: str) -> int | None:
+    try:
+        return int(str(s).replace(",", ""))
+    except (TypeError, ValueError):
+        return None
+
+
+def parse_ootoya_menu(page: str) -> dict:
+    """基準店舗のメニュー1ページ → {"items": [...]}。"""
+    events: list[tuple[int, str, object]] = []
+    for m in _OOTOYA_HEADING_RE.finditer(page):
+        events.append((m.start(), "h", m.group(1).strip()))
+    for m in _OOTOYA_CARD_RE.finditer(page):
+        events.append((m.start(), "c", m))
+    events.sort(key=lambda x: x[0])
+    items: list[dict] = []
+    seen: set[str] = set()
+    category: str | None = None
+    for _, kind, payload in events:
+        if kind == "h":
+            category = payload  # type: ignore[assignment]
+            continue
+        m = payload  # type: ignore[assignment]
+        pid = m.group(1)
+        if pid in seen:
+            continue
+        body = m.group(2)
+        nm = _OOTOYA_CARD_NAME_RE.search(body)
+        pm = _OOTOYA_CARD_PRICE_RE.search(body)
+        if not nm or not pm:
+            continue
+        name = clean_text(nm.group(1))
+        price = _ootoya_price(pm.group(1))
+        if not name or price is None:
+            continue
+        seen.add(pid)
+        prices = [{"label": "", "price": price, "default": True}]
+        sm = _OOTOYA_CARD_SINGLE_RE.search(body)
+        if sm and sm.group(1).strip() == "単品":
+            single = _ootoya_price(sm.group(2))
+            if single is not None:
+                prices = [{"label": "定食", "price": price, "default": True},
+                          {"label": "単品", "price": single}]
+        items.append({
+            "product_id": pid, "name": name, "category": category, "price": price,
+            "prices": prices, "is_limited": category == OOTOYA_LIMITED_CATEGORY,
+            "is_new": False, "official_url": ootoya_detail_url(pid),
+        })
+    return {"items": items}
+
+
+def parse_ootoya_news_list(page: str) -> list[dict]:
+    """新着情報の一覧 → [{date, category, title, url}] (ページの並び順=新しい順)。"""
+    out: list[dict] = []
+    for m in _OOTOYA_NEWS_ITEM_RE.finditer(page):
+        out.append({"date": m.group(2), "category": m.group(3).strip(),
+                    "title": clean_text(m.group(4)),
+                    "url": f"{OOTOYA_BASE}/news/{m.group(1)}.html"})
+    return out
+
+
+def _ootoya_article_item_name(lines: list[str], price_idx: int) -> str | None:
+    """定食価格の行からさかのぼって、その商品の名前らしい行を探す。
+    見出し行の「」内か、文になっていない独立した名前行を拾う。"""
+    for j in range(price_idx - 1, max(-1, price_idx - 9), -1):
+        s = lines[j].strip()
+        if not s or s.startswith("●") or "価格" in s:
+            continue
+        quoted = re.findall(r"「([^」]+)」", s)
+        if quoted:
+            return quoted[-1]
+        if len(s) <= 40 and not s.endswith("。"):
+            return s
+    return None
+
+
+def parse_ootoya_news_article(page: str) -> dict | None:
+    """「商品情報」記事 → {"launch_date", "planned_end_text", "items": [{name, price}]}。
+    商品記事でない (バッジが商品情報でない・発売日が無い・定食価格の商品が無い) ものは None。"""
+    badge = _OOTOYA_BADGE_RE.search(page)
+    if badge and badge.group(1).strip() != OOTOYA_PRODUCT_CATEGORY:
+        return None
+    text = unicodedata.normalize("NFKC", _yayoiken_detail_text(page))
+    lines = text.split("\n")
+    launch_date: str | None = None
+    planned_end_text: str | None = None
+    pm = _OOTOYA_PERIOD_RE.search(text)
+    if pm:
+        launch_date = f"{pm.group(1)}-{int(pm.group(2)):02d}-{int(pm.group(3)):02d}"
+        planned_end_text = (f"{pm.group(4)}年{int(pm.group(5))}月{int(pm.group(6))}日"
+                            f"({pm.group(7)})").replace("(", "（").replace(")", "）")
+    if not launch_date:
+        lm = _OOTOYA_LEAD_DATE_RE.search(text)
+        if lm:
+            launch_date = f"{lm.group(1)}-{int(lm.group(2)):02d}-{int(lm.group(3)):02d}"
+    if not launch_date:
+        return None
+    items: list[dict] = []
+    seen: set[tuple[str, int]] = set()
+    for i, line in enumerate(lines):
+        m = _OOTOYA_TEISHOKU_PRICE_RE.search(line)
+        if not m:
+            continue
+        price = _ootoya_price(m.group(1))
+        name = _ootoya_article_item_name(lines, i)
+        if not name or price is None or (name, price) in seen:
+            continue
+        seen.add((name, price))
+        items.append({"name": name, "price": price})
+    if not items:
+        return None
+    return {"launch_date": launch_date, "planned_end_text": planned_end_text, "items": items}
+
+
+def _ootoya_norm_name(name: str | None) -> str:
+    """照合用の名前の正規化。NFKC + 先頭の＜＞〈〉注記を落とし、括弧記号と空白を除く。"""
+    n = unicodedata.normalize("NFKC", name or "")
+    n = re.sub(r"^[<〈《][^>〉》]*[>〉》]", "", n.strip())
+    n = n.replace("(", "").replace(")", "").replace("（", "").replace("）", "")
+    return re.sub(r"\s+", "", n)
+
+
+def match_ootoya_article(name: str, price: int | None, info: dict) -> bool:
+    """メニューの商品名・定食価格が、ニュース記事の商品 (名前・定食価格) と一致するか。"""
+    if price is None:
+        return False
+    target = _ootoya_norm_name(name)
+    if not target:
+        return False
+    for it in info.get("items") or []:
+        if it.get("price") != price:
+            continue
+        cand = _ootoya_norm_name(it.get("name"))
+        if cand and (cand == target or cand in target or target in cand):
+            return True
+    return False
+
+
+def ootoya_excluded(entry: dict) -> str | None:
+    name = (entry.get("name") or "").strip()
+    price = entry.get("price")
+    if not name:
+        return "no_name"
+    if price is None:
+        return "no_price"
+    if price < 30 or price > 100_000:
+        return "price_out_of_range"
+    return None

@@ -199,8 +199,8 @@ class CocoichiSiteTests(unittest.TestCase):
     def test_chain_config(self):
         self.assertEqual(g.CHAIN_NAME[CHAIN], "CoCo壱番屋")
         self.assertEqual(g.CHAIN_SOURCE[CHAIN], "CoCo壱番屋公式サイト")
-        self.assertEqual(g.CHAINS[-2]["slug"], CHAIN)
-        self.assertTrue(g.CHAIN_LIST_TEXT.endswith("・やよい軒・CoCo壱番屋・はなまるうどん"))
+        self.assertEqual(g.CHAINS[-3]["slug"], CHAIN)
+        self.assertTrue(g.CHAIN_LIST_TEXT.endswith("・やよい軒・CoCo壱番屋・はなまるうどん・大戸屋"))
         self.assertIn("--cocoichi:", g.CSS)
         self.assertIn('data-chain="cocoichi"', g.CSS)
         colors = {c["slug"]: c["color"].lower() for c in g.CHAINS}
