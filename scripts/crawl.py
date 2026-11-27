@@ -4140,6 +4140,346 @@ def crawl_hanamaru(getter, pending: dict, stats: dict, today: str | None = None)
 
 
 # ---------------------------------------------------------------------------
+# 大戸屋 (www.ootoya.com。2026-11-27追加、18チェーン目。実物の構造は parsers.py の同名のコメントにまとめた)
+# ---------------------------------------------------------------------------
+# 方針:
+#  ・巡回は robots.txt + 基準店舗 (新宿センタービル店) のメニュー1ページ + ニュース一覧1ページ +
+#    未照合の「商品情報」記事の詳細 (1回の実行で最大 OOTOYA_ARTICLE_MAX_FETCHES 件まで)。
+#    詳細ページは第1段階では取らない (栄養成分が白飯・五穀ご飯・単品と形ごとに分かれており、
+#    代表の決め方が要るため。オーナー決定 2026-11-27)。
+#  ・商品の正本は基準店舗のメニュー (全カテゴリー・191件)。価格は定食価格が代表で、
+#    単品価格は価格バリエーションとして記録する。一覧に両方の価格が毎回出るので、
+#    バリエーションの履歴も毎回更新できる。
+#  ・発売日は公式ニュースの「商品情報」記事が正本で、照合できたものは
+#    launch_date_source="news_article" (やよい軒・はなまるうどんと同じ)。記事の解析結果は
+#    data/ootoya_state.json に残す。販売期間の終了日は planned_end_text に入れる。
+#    ニュース一覧は過去数年分が1ページに載るため、古い記事 (150日より前) は取得せずに
+#    照合済みの印だけ付ける。「商品情報」以外の記事も取得しない。
+#  ・種別: 「限定メニュー」カテゴリーの商品は 期間限定 (badges にも付ける)。ニュース記事と
+#    照合して発売日が付いた商品は 新メニュー。baseline に無い新規は 新規掲載、それ以外は定番。
+#  ・説明文・栄養成分・アレルゲンは第1段階では対象外。
+#  ・メニューが空・取得失敗・前回の半分未満の回は、何も更新せず終了判定もしない。
+OOTOYA_MIN_RATIO = 0.5
+OOTOYA_ARTICLE_MAX_FETCHES = 6
+OOTOYA_ARTICLE_WINDOW_BEFORE_DAYS = 120
+OOTOYA_ARTICLE_WINDOW_AFTER_DAYS = 14
+OOTOYA_ARTICLE_OLDEST_DAYS = 150
+
+
+def ootoya_state_path() -> Path:
+    return DATA / "ootoya_state.json"
+
+
+def ootoya_price_note(prices: list[dict]) -> str:
+    note = "税込。"
+    if len(prices) > 1:
+        note += "表示は「定食」の価格。"
+    note += "新宿センタービル店のメニュー・価格です。店舗により販売メニューや価格が異なる場合があります。"
+    return note
+
+
+def _ootoya_robots(getter, st: dict):
+    """robots.txt を読んで RobotFileParser を返す。ブロックされたら None (呼び出し側がその回を止める)。
+    404・その他の失敗は全許可として扱う (実物は空ファイル)。"""
+    st["list_requests"] += 1
+    try:
+        text = getter("ootoya", parsers.OOTOYA_BASE + "/robots.txt")
+    except NotFoundError:
+        text = None
+    except BlockedError as e:
+        st["blocked"] = True
+        print(f"[blocked] ootoya robots.txt: {e}", file=sys.stderr)
+        return None
+    except Exception as e:  # noqa: BLE001
+        print(f"[warn] ootoya robots.txt 取得失敗(全許可として続行): {e}", file=sys.stderr)
+        text = None
+    rp = urllib.robotparser.RobotFileParser()
+    rp.parse((text or "User-agent: *\nAllow: /").splitlines())
+    return rp
+
+
+def ootoya_article_infos(state: dict) -> list[dict]:
+    """state に残した商品記事の解析結果を、新しい順の [{url, date, title, launch_date,
+    planned_end_text, items}] で返す。"""
+    infos = [{"url": url, **info} for url, info in (state.get("articles") or {}).items()]
+    infos.sort(key=lambda x: x.get("date") or "", reverse=True)
+    return infos
+
+
+def ootoya_find_article(name: str, price: int | None, infos: list[dict], ref: str) -> dict | None:
+    """商品名・価格で照合できるニュース記事を返す (ref の前120日〜後14日に発表されたもの)。"""
+    try:
+        c = datetime.date.fromisoformat(ref)
+    except (ValueError, TypeError):
+        return None
+    lo = (c - datetime.timedelta(days=OOTOYA_ARTICLE_WINDOW_BEFORE_DAYS)).isoformat()
+    hi = (c + datetime.timedelta(days=OOTOYA_ARTICLE_WINDOW_AFTER_DAYS)).isoformat()
+    for info in infos:
+        if not (lo <= (info.get("date") or "") <= hi):
+            continue
+        if parsers.match_ootoya_article(name, price, info):
+            return info
+    return None
+
+
+def ootoya_apply_article(product: dict, infos: list[dict]) -> bool:
+    """ニュース記事の発売日・お知らせ情報を反映する。変更があれば True。
+    定番と、記事で確定済み (launch_date_source="news_article") の商品は照合しない。
+    発売日が付いたら、新規掲載だった商品は新メニューに上げる。"""
+    if product.get("is_regular") or product.get("launch_date_source") == "news_article":
+        return False
+    ref = (product.get("first_seen_at") or "")[:10]
+    rel = product.get("relaunches") or []
+    if rel and rel[-1].get("reappeared_at"):
+        ref = rel[-1]["reappeared_at"]
+    if not ref:
+        return False
+    info = ootoya_find_article(product.get("name") or "", product.get("price"), infos, ref)
+    if not info:
+        return False
+    before = (product.get("news_url"), product.get("launch_date"), product.get("launch_date_source"),
+              product.get("limited_kind"), product.get("planned_end_text"))
+    product["announced_at"] = info.get("date")
+    product["news_url"] = info["url"]
+    product["news_title"] = info.get("title")
+    product["news_date"] = info.get("date")
+    if info.get("planned_end_text") and not product.get("planned_end_text"):
+        product["planned_end_text"] = info["planned_end_text"]
+    if info.get("launch_date"):
+        product["launch_date"] = info["launch_date"]
+        product["launch_date_source"] = "news_article"
+        if product.get("limited_kind") in (None, "新規掲載"):
+            product["limited_kind"] = "新メニュー"
+    after = (product.get("news_url"), product.get("launch_date"), product.get("launch_date_source"),
+             product.get("limited_kind"), product.get("planned_end_text"))
+    return before != after
+
+
+def build_ootoya_product(entry: dict, kind: str, today: str, now: str) -> dict:
+    price = entry.get("price")
+    prices = [{"label": p["label"], "price": p["price"]} for p in entry.get("prices") or []]
+    product = {
+        "chain": "ootoya",
+        "product_id": entry["product_id"],
+        "name": entry["name"],
+        "category": entry.get("category"),
+        "price": price,
+        "price_note": ootoya_price_note(prices),
+        "price_variants": prices if len(prices) > 1 else None,
+        "launch_date": None,
+        "launch_date_source": "not_found",
+        "announced_at": None,
+        "planned_end_text": None,
+        "news_url": None,
+        "news_title": None,
+        "news_date": None,
+        "description": None,
+        "description_full_len": 0,
+        "nutrition": None,
+        "nutrition_variants": None,
+        "nutrition_note": None,
+        "nutrition_pdf_url": None,
+        "nutrition_pdf_label": None,
+        "allergen_pdf_url": None,
+        "allergen_pdf_label": None,
+        "allergens": None,
+        "origin": None,
+        "limited_kind": kind,
+        "badges": ["期間限定"] if kind == "期間限定" else [],
+        "official_url": entry["official_url"],
+        "first_seen_at": now,
+        "last_seen_at": today,
+        "status": "on_sale",
+        "ended_observed_at": None,
+        "missed_runs": 0,
+        "price_history": [{"date": today, "price": price}] if price is not None else [],
+        "source_list": ["menu"],
+        "image": None,
+    }
+    seed_variants(product, today)
+    return product
+
+
+def crawl_ootoya(getter, pending: dict, stats: dict, today: str | None = None) -> None:
+    chain = "ootoya"
+    now = now_iso() if today is None else f"{today}T07:00:00+09:00"
+    today = today or today_jst()
+    pending.setdefault(chain, {})
+    stats.setdefault(chain, new_stats())
+    st = stats[chain]
+
+    rp = _ootoya_robots(getter, st)
+    if rp is None:
+        return
+
+    def allowed(url: str) -> bool:
+        return rp.can_fetch(UA, url)
+
+    # 基準店舗のメニュー1ページ (全カテゴリー)。取れない・0件の回は list_ok を立てない
+    menu_url = parsers.ootoya_menu_url()
+    entries: dict[str, dict] = {}
+    if not allowed(menu_url):
+        print(f"[skip] robots.txtでDisallow: {menu_url}", file=sys.stderr)
+        return
+    try:
+        page = getter(chain, menu_url)
+        st["list_requests"] += 1
+    except BlockedError as e:
+        st["list_requests"] += 1
+        st["blocked"] = True
+        print(f"[blocked] ootoya menu {menu_url}: {e}", file=sys.stderr)
+        return
+    except Exception as e:  # noqa: BLE001
+        st["list_requests"] += 1
+        print(f"[warn] ootoya メニュー 取得失敗 {menu_url}: {e}", file=sys.stderr)
+        return
+    for e in parsers.parse_ootoya_menu(page)["items"]:
+        entries.setdefault(e["product_id"], e)
+    if not entries:
+        print("[warn] ootoya メニュー: 商品が0件(構造変更の疑い)", file=sys.stderr)
+        return
+    entries = {pid: e for pid, e in entries.items() if not parsers.ootoya_excluded(e)}
+    state = load_json(ootoya_state_path(), {})
+    prev_count = state.get("menu_count")
+    if prev_count and len(entries) < prev_count * OOTOYA_MIN_RATIO:
+        print(f"[warn] ootoya メニューが極端に少ない({len(entries)}件。前回{prev_count}件)。"
+              "消えた商品の判定は行わない", file=sys.stderr)
+        return
+    st["list_ok"] = bool(entries)
+    if not st["list_ok"]:
+        return
+
+    # ニュース一覧 (1ページ・過去数年分)。取れなくてもメニューの記録は続ける
+    news_list: list[dict] = []
+    news_url = parsers.ootoya_news_url()
+    if not allowed(news_url):
+        print(f"[skip] robots.txtでDisallow: {news_url}", file=sys.stderr)
+    else:
+        try:
+            text = getter(chain, news_url)
+            st["detail_requests"] += 1
+            news_list = parsers.parse_ootoya_news_list(text)
+        except BlockedError as e:
+            st["detail_requests"] += 1
+            st["blocked"] = True
+            print(f"[blocked] ootoya news list: {e}", file=sys.stderr)
+            return
+        except Exception as e:  # noqa: BLE001
+            st["detail_requests"] += 1
+            print(f"[warn] ootoya ニュース一覧 取得失敗 {news_url}: {e}", file=sys.stderr)
+    if not news_list:
+        print("[warn] ootoya ニュース一覧: 0件(構造変更の疑い)", file=sys.stderr)
+
+    # 未照合の「商品情報」記事だけ詳細を取る (上限つき)。商品記事は解析結果を state に残し、
+    # 商品記事でないものは照合済みの印だけ残す。古い記事と「商品情報」以外は取得しない
+    stored = dict(state.get("articles") or {})
+    checked = set(state.get("article_checked") or [])
+    oldest = (datetime.date.fromisoformat(today)
+              - datetime.timedelta(days=OOTOYA_ARTICLE_OLDEST_DAYS)).isoformat()
+    fetches = 0
+    for a in news_list:
+        url = a["url"]
+        if url in stored or url in checked:
+            continue
+        if a.get("category") != parsers.OOTOYA_PRODUCT_CATEGORY or (a.get("date") or "") < oldest:
+            checked.add(url)
+            continue
+        if fetches >= OOTOYA_ARTICLE_MAX_FETCHES:
+            break
+        if not allowed(url):
+            checked.add(url)
+            continue
+        fetches += 1
+        try:
+            html = getter(chain, url)
+            st["detail_requests"] += 1
+        except BlockedError as e:
+            st["detail_requests"] += 1
+            st["blocked"] = True
+            print(f"[blocked] ootoya news article {url}: {e}", file=sys.stderr)
+            return
+        except Exception as e:  # noqa: BLE001
+            st["detail_requests"] += 1
+            print(f"[warn] ootoya ニュース記事 取得失敗 {url}: {e}", file=sys.stderr)
+            continue
+        info = parsers.parse_ootoya_news_article(html)
+        if info is None:
+            checked.add(url)   # 商品記事ではない (価格・発売日の読み取れない記事)
+            continue
+        stored[url] = {"date": a["date"], "title": a["title"],
+                       "launch_date": info["launch_date"],
+                       "planned_end_text": info["planned_end_text"], "items": info["items"]}
+    infos = ootoya_article_infos({"articles": stored})
+    st["limited_seen"] = sum(1 for e in entries.values() if e.get("is_limited"))
+
+    baseline = baseline_for(chain)
+    entries = burst_filter(chain, entries, baseline, pending, stats, today)
+    regular_budget = RegularBudget(st)
+    for pid, e in entries.items():
+        existing = load_product(chain, pid)
+        if existing is not None:
+            touch_seen(existing, list_price_for_history(st, e.get("price")), today, now, st)
+            # 一覧に定食・単品の両価格が毎回出るので、バリエーションの履歴も更新する
+            if st["list_ok"]:
+                record_variants(existing, [{"label": p["label"], "price": p["price"]}
+                                           for p in e.get("prices") or []], today, st)
+            if e.get("name") and existing.get("name") != e["name"]:
+                existing["name"] = e["name"]
+            if e.get("is_limited") and existing.get("limited_kind") == REGULAR_KIND:
+                upgrade_regular(existing, "期間限定")   # 定番が限定メニューに載ったら格上げ
+                badges = list(existing.get("badges") or [])
+                if "期間限定" not in badges:
+                    badges.append("期間限定")
+                existing["badges"] = badges
+            ootoya_apply_article(existing, infos)
+            save_product(chain, existing)
+            pending[chain].pop(pid, None)
+            continue
+        info = ootoya_find_article(e["name"], e.get("price"), infos, today)
+        is_new_menu = baseline is not None and pid not in baseline
+        if e.get("is_limited"):
+            kind = "期間限定"   # 「限定メニュー」カテゴリーに載った商品
+        elif info and info.get("launch_date"):
+            kind = "新メニュー"   # ニュース記事で発売日が付いた商品
+        elif is_new_menu:
+            kind = "新規掲載"
+        else:
+            kind = REGULAR_KIND
+        is_regular = kind == REGULAR_KIND
+        if is_regular and not regular_budget.take():
+            continue   # 定番は1回の巡回で作る件数に上限がある。残りは翌日以降
+        product = build_ootoya_product(e, kind, today, now)
+        if is_regular:
+            mark_regular(product)
+        else:
+            ootoya_apply_article(product, infos)
+        save_product(chain, product)
+        st["regular_created" if is_regular else "new_products"] += 1
+        pending[chain].pop(pid, None)
+
+    if st["list_ok"]:
+        if baseline is None:
+            save_baseline(chain, set(entries))
+        apply_missing(chain, set(entries), today, st)
+        state["menu_count"] = len(entries)
+        state["checked_at"] = today
+        state["articles"] = stored
+        state["article_checked"] = sorted(checked)
+        save_json(ootoya_state_path(), state, sort_keys=True)
+
+    # 発売日の確定 (この回に処理した記事との照合)。終わって久しい商品は探し直さない
+    cutoff = (datetime.date.fromisoformat(today) - datetime.timedelta(days=14)).isoformat()
+    for p in load_chain_products(chain):
+        if p.get("status") == "ended" and (p.get("ended_observed_at") or "") < cutoff:
+            continue
+        if ootoya_apply_article(p, infos):
+            save_product(chain, p)
+    recorded = [p for p in load_chain_products(chain) if not p.get("is_regular")]
+    st["news_matched"] = sum(1 for p in recorded if p.get("news_url"))
+    st["news_unmatched"] = sum(1 for p in recorded if not p.get("news_url"))
+
+
+# ---------------------------------------------------------------------------
 # 丸亀製麺 (jp.marugame.com)
 # ---------------------------------------------------------------------------
 # 調査・方針(2026-10-17。実物の構造は parsers.py の「丸亀製麺」のコメントにまとめた):
@@ -4891,7 +5231,7 @@ CRAWLERS = {"mcdonalds": crawl_mcdonalds, "mos": crawl_mos, "matsuya": crawl_mat
             "marugame": crawl_marugame, "burgerking": crawl_burgerking,
             "kourakuen": crawl_kourakuen, "hidakaya": crawl_hidakaya,
             "zetteria": crawl_zetteria, "kfc": crawl_kfc, "yayoiken": crawl_yayoiken,
-            "cocoichi": crawl_cocoichi, "hanamaru": crawl_hanamaru}
+            "cocoichi": crawl_cocoichi, "hanamaru": crawl_hanamaru, "ootoya": crawl_ootoya}
 
 
 def main(argv: list[str] | None = None) -> int:

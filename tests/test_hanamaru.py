@@ -237,8 +237,8 @@ class HanamaruSiteTests(unittest.TestCase):
     def test_chain_config(self):
         self.assertEqual(g.CHAIN_NAME[CHAIN], "はなまるうどん")
         self.assertEqual(g.CHAIN_SOURCE[CHAIN], "はなまるうどん公式サイト")
-        self.assertEqual(g.CHAINS[-1]["slug"], CHAIN)
-        self.assertTrue(g.CHAIN_LIST_TEXT.endswith("・CoCo壱番屋・はなまるうどん"))
+        self.assertEqual(g.CHAINS[-2]["slug"], CHAIN)
+        self.assertTrue(g.CHAIN_LIST_TEXT.endswith("・CoCo壱番屋・はなまるうどん・大戸屋"))
         self.assertIn("--hanamaru:", g.CSS)
         self.assertIn('data-chain="hanamaru"', g.CSS)
         colors = {c["slug"]: c["color"].lower() for c in g.CHAINS}
