@@ -1,0 +1,80 @@
+{
+ "chain": "hanamaru",
+ "product_id": "campaign_1ee4f900f3",
+ "name": "鴨ねぎうどん",
+ "category": "期間限定メニュー",
+ "price": 890,
+ "price_note": "税込。表示は「小」の価格。店舗により販売メニューや価格が異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "小",
+   "price": 890
+  },
+  {
+   "label": "中",
+   "price": 1080
+  },
+  {
+   "label": "大",
+   "price": 1300
+  }
+ ],
+ "launch_date": "2026-10-22",
+ "launch_date_source": "news_article",
+ "announced_at": "2026-10-21",
+ "planned_end_text": "12月初旬（予定）",
+ "news_url": "https://www.hanamaruudon.com/news/2026/1021-11569.html",
+ "news_title": "深まる秋の食欲を満たす“旨み濃香”な鴨だしが楽しめる はなまるうどん全国初登場の 「鴨ねぎうどん」「鴨せいろうどん」2種を 10月22日（木）より期間限定販売",
+ "news_date": "2026-10-21",
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "nutrition_variants": null,
+ "nutrition_note": null,
+ "nutrition_pdf_url": null,
+ "nutrition_pdf_label": null,
+ "allergen_pdf_url": null,
+ "allergen_pdf_label": null,
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "期間限定",
+ "badges": [
+  "期間限定"
+ ],
+ "official_url": "https://www.hanamaruudon.com/menu/campaign.html",
+ "first_seen_at": "2026-11-27T15:58:34+09:00",
+ "last_seen_at": "2026-11-27",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-27",
+   "price": 890
+  }
+ ],
+ "source_list": [
+  "menu"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-27",
+ "price_variants_history": [
+  {
+   "date": "2026-11-27",
+   "variants": [
+    {
+     "label": "小",
+     "price": 890
+    },
+    {
+     "label": "中",
+     "price": 1080
+    },
+    {
+     "label": "大",
+     "price": 1300
+    }
+   ]
+  }
+ ]
+}

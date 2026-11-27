@@ -1,0 +1,57 @@
+{
+ "article_checked": [
+  "https://www.hanamaruudon.com/news/2026/0831-11199.html",
+  "https://www.hanamaruudon.com/news/2026/0910-11288.html",
+  "https://www.hanamaruudon.com/news/2026/0918-11363.html",
+  "https://www.hanamaruudon.com/news/2026/0924-11369.html",
+  "https://www.hanamaruudon.com/news/2026/1113-11683.html"
+ ],
+ "articles": {
+  "https://www.hanamaruudon.com/news/2026/1021-11569.html": {
+   "date": "2026-10-21",
+   "items": [
+    {
+     "name": "鴨ねぎうどん",
+     "price": 890,
+     "prices": [
+      {
+       "label": "小",
+       "price": 890
+      },
+      {
+       "label": "中",
+       "price": 1080
+      },
+      {
+       "label": "大",
+       "price": 1300
+      }
+     ]
+    },
+    {
+     "name": "鴨せいろうどん",
+     "price": 790,
+     "prices": [
+      {
+       "label": "小",
+       "price": 790
+      },
+      {
+       "label": "中",
+       "price": 980
+      },
+      {
+       "label": "大",
+       "price": 1200
+      }
+     ]
+    }
+   ],
+   "launch_date": "2026-10-22",
+   "planned_end_text": "12月初旬（予定）",
+   "title": "深まる秋の食欲を満たす“旨み濃香”な鴨だしが楽しめる はなまるうどん全国初登場の 「鴨ねぎうどん」「鴨せいろうどん」2種を 10月22日（木）より期間限定販売"
+  }
+ },
+ "checked_at": "2026-11-27",
+ "menu_count": 43
+}
