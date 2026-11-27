@@ -1,0 +1,46 @@
+{
+ "chain": "yayoiken",
+ "product_id": "886",
+ "name": "［テイクアウト］W肉野菜炒め おかずのみ",
+ "category": "おうち定食",
+ "price": 1160,
+ "price_note": "税込。公式サイトの一覧に表示された価格。",
+ "price_variants": null,
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "nutrition_variants": null,
+ "nutrition_note": null,
+ "nutrition_pdf_url": null,
+ "nutrition_pdf_label": null,
+ "allergen_pdf_url": null,
+ "allergen_pdf_label": null,
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "定番",
+ "badges": [],
+ "official_url": "https://www.yayoiken.com/menu_list/view/13/886",
+ "first_seen_at": "2026-11-27T18:45:22+09:00",
+ "last_seen_at": "2026-11-27",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-27",
+   "price": 1160
+  }
+ ],
+ "source_list": [
+  "menu"
+ ],
+ "image": null,
+ "is_regular": true
+}

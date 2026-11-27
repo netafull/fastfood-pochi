@@ -1,0 +1,32 @@
+{
+ "article_checked": [
+  "https://www.ootoya.com/news/277.html",
+  "https://www.ootoya.com/news/278.html",
+  "https://www.ootoya.com/news/280.html",
+  "https://www.ootoya.com/news/282.html",
+  "https://www.ootoya.com/news/284.html",
+  "https://www.ootoya.com/news/286.html",
+  "https://www.ootoya.com/news/292.html",
+  "https://www.ootoya.com/news/293.html"
+ ],
+ "articles": {
+  "https://www.ootoya.com/news/288.html": {
+   "date": "2026-10-02",
+   "items": [
+    {
+     "name": "大粒牡蠣フライ",
+     "price": 1420
+    },
+    {
+     "name": "<2個増量>大粒牡蠣フライ (6個)",
+     "price": 1720
+    }
+   ],
+   "launch_date": "2026-10-02",
+   "planned_end_text": "2027年2月28日（日）",
+   "title": "旨みと香り広がる「大粒牡蠣フライ」10月2日 (金)～"
+  }
+ },
+ "checked_at": "2026-11-27",
+ "menu_count": 191
+}

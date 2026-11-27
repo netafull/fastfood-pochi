@@ -1,0 +1,72 @@
+{
+ "chain": "ootoya",
+ "product_id": "1648",
+ "name": "大粒牡蠣フライ4個",
+ "category": "限定メニュー",
+ "price": 1420,
+ "price_note": "税込。表示は「定食」の価格。新宿センタービル店のメニュー・価格です。店舗により販売メニューや価格が異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "定食",
+   "price": 1420
+  },
+  {
+   "label": "単品",
+   "price": 1330
+  }
+ ],
+ "launch_date": "2026-10-02",
+ "launch_date_source": "news_article",
+ "announced_at": "2026-10-02",
+ "planned_end_text": "2027年2月28日（日）",
+ "news_url": "https://www.ootoya.com/news/288.html",
+ "news_title": "旨みと香り広がる「大粒牡蠣フライ」10月2日 (金)～",
+ "news_date": "2026-10-02",
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "nutrition_variants": null,
+ "nutrition_note": null,
+ "nutrition_pdf_url": null,
+ "nutrition_pdf_label": null,
+ "allergen_pdf_url": null,
+ "allergen_pdf_label": null,
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "期間限定",
+ "badges": [
+  "期間限定"
+ ],
+ "official_url": "https://www.ootoya.com/menu_list/view/27214/1648",
+ "first_seen_at": "2026-11-27T18:47:36+09:00",
+ "last_seen_at": "2026-11-27",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-27",
+   "price": 1420
+  }
+ ],
+ "source_list": [
+  "menu"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-27",
+ "price_variants_history": [
+  {
+   "date": "2026-11-27",
+   "variants": [
+    {
+     "label": "定食",
+     "price": 1420
+    },
+    {
+     "label": "単品",
+     "price": 1330
+    }
+   ]
+  }
+ ]
+}

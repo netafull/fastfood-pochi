@@ -4,12 +4,12 @@
  "hanamaru": {},
  "hidakaya": {
   "375": {
-   "checked_at": "2026-11-27T15:56:01+09:00",
+   "checked_at": "2026-11-27T18:43:47+09:00",
    "reason": "empty_detail",
    "url": "https://hidakaya.hiday.co.jp/hits/ja/menu/1/detail/375.html"
   },
   "376": {
-   "checked_at": "2026-11-27T15:56:01+09:00",
+   "checked_at": "2026-11-27T18:43:47+09:00",
    "reason": "empty_detail",
    "url": "https://hidakaya.hiday.co.jp/hits/ja/menu/1/detail/376.html"
   }
@@ -23,24 +23,25 @@
  "matsuya": {},
  "mcdonalds": {},
  "mos": {},
+ "ootoya": {},
  "sukiya": {
   "side-7004400": {
-   "checked_at": "2026-11-27T15:52:35+09:00",
+   "checked_at": "2026-11-27T18:40:22+09:00",
    "reason": "empty_detail",
    "url": "/menu/in/side/7004400/index.html"
   },
   "side-7004500": {
-   "checked_at": "2026-11-27T15:52:35+09:00",
+   "checked_at": "2026-11-27T18:40:22+09:00",
    "reason": "empty_detail",
    "url": "/menu/in/side/7004500/index.html"
   },
   "side-7004600": {
-   "checked_at": "2026-11-27T15:52:35+09:00",
+   "checked_at": "2026-11-27T18:40:22+09:00",
    "reason": "empty_detail",
    "url": "/menu/in/side/7004600/index.html"
   },
   "side-7004700": {
-   "checked_at": "2026-11-27T15:52:35+09:00",
+   "checked_at": "2026-11-27T18:40:22+09:00",
    "reason": "empty_detail",
    "url": "/menu/in/side/7004700/index.html"
   }
@@ -48,7 +49,7 @@
  "yayoiken": {},
  "yoshinoya": {
   "yoshinomi-gyu-yakinikusara": {
-   "checked_at": "2026-11-27T15:51:32+09:00",
+   "checked_at": "2026-11-27T18:39:19+09:00",
    "reason": "empty_detail",
    "url": "/menu/yoshinomi/gyu-yakinikusara/"
   }

@@ -1,5 +1,7 @@
 {
  "article_checked": [
+  "https://www.hanamaruudon.com/news/2026/0716-10958.html",
+  "https://www.hanamaruudon.com/news/2026/0806-10940.html",
   "https://www.hanamaruudon.com/news/2026/0831-11199.html",
   "https://www.hanamaruudon.com/news/2026/0910-11288.html",
   "https://www.hanamaruudon.com/news/2026/0918-11363.html",
@@ -7,6 +9,122 @@
   "https://www.hanamaruudon.com/news/2026/1113-11683.html"
  ],
  "articles": {
+  "https://www.hanamaruudon.com/news/2026/0723-11000.html": {
+   "date": "2026-07-23",
+   "items": [
+    {
+     "name": "柚子豚鬼おろしぶっかけ",
+     "price": 840,
+     "prices": [
+      {
+       "label": "小",
+       "price": 840
+      },
+      {
+       "label": "中",
+       "price": 1030
+      },
+      {
+       "label": "大",
+       "price": 1250
+      }
+     ]
+    },
+    {
+     "name": "柴漬豚鬼おろしぶっかけ",
+     "price": 840,
+     "prices": [
+      {
+       "label": "小",
+       "price": 840
+      },
+      {
+       "label": "中",
+       "price": 1030
+      },
+      {
+       "label": "大",
+       "price": 1250
+      }
+     ]
+    },
+    {
+     "name": "わさび豚鬼おろしぶっかけ",
+     "price": 840,
+     "prices": [
+      {
+       "label": "小",
+       "price": 840
+      },
+      {
+       "label": "中",
+       "price": 1030
+      },
+      {
+       "label": "大",
+       "price": 1250
+      }
+     ]
+    },
+    {
+     "name": "柚子鬼おろしぶっかけ",
+     "price": 640,
+     "prices": [
+      {
+       "label": "小",
+       "price": 640
+      },
+      {
+       "label": "中",
+       "price": 830
+      },
+      {
+       "label": "大",
+       "price": 1050
+      }
+     ]
+    },
+    {
+     "name": "柴漬鬼おろしぶっかけ",
+     "price": 640,
+     "prices": [
+      {
+       "label": "小",
+       "price": 640
+      },
+      {
+       "label": "中",
+       "price": 830
+      },
+      {
+       "label": "大",
+       "price": 1050
+      }
+     ]
+    },
+    {
+     "name": "わさび鬼おろしぶっかけ",
+     "price": 640,
+     "prices": [
+      {
+       "label": "小",
+       "price": 640
+      },
+      {
+       "label": "中",
+       "price": 830
+      },
+      {
+       "label": "大",
+       "price": 1050
+      }
+     ]
+    }
+   ],
+   "launch_date": "2026-07-23",
+   "planned_end_text": "9月初旬（予定）",
+   "title": "はなまるの「爽快、夏うどん」！ 山盛りザクザク鬼おろし×旨みたっぷり豚肉の最強タッグ めかぶ入りわさびや食感豊かな柴漬など、 個性派薬味を楽しむ「鬼おろしぶっかけ」 7月23日（木）から、期間限定新発売"
+  },
   "https://www.hanamaruudon.com/news/2026/1021-11569.html": {
    "date": "2026-10-21",
    "items": [
