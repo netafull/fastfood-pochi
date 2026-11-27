@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキー・やよい軒の限定メニュー・新メニューを巡回し、
-data/products/{mcdonalds|mos|matsuya|matsunoya|yoshinoya|sukiya|katsuya|karayama|marugame|burgerking|kourakuen|hidakaya|zetteria|kfc|yayoiken}/{id}.json に1商品1ファイルで蓄積する。
+"""マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキー・やよい軒・CoCo壱番屋の限定メニュー・新メニューを巡回し、
+data/products/{mcdonalds|mos|matsuya|matsunoya|yoshinoya|sukiya|katsuya|karayama|marugame|burgerking|kourakuen|hidakaya|zetteria|kfc|yayoiken|cocoichi}/{id}.json に1商品1ファイルで蓄積する。
 
 このサイトの核は「販売状況の追跡」。公式サイトは販売が終わると商品を消すので、
 一覧に居た商品が消えたら終了とみなして記録を残す。
@@ -3521,6 +3521,252 @@ def crawl_yayoiken(getter, pending: dict, stats: dict, today: str | None = None)
 
 
 # ---------------------------------------------------------------------------
+# CoCo壱番屋 (www.ichibanya.co.jp。2026-11-27追加、16チェーン目。実物の構造は parsers.py の同名のコメントにまとめた)
+# ---------------------------------------------------------------------------
+# 方針:
+#  ・巡回は robots.txt + カテゴリー別一覧16ページ + 【予告】商品の詳細ページ
+#    (1回の実行で最大 COCOICHI_DETAIL_MAX_FETCHES 件まで。発売日が取れた商品は
+#    state に残して二度取らない)。
+#  ・商品の正本はカテゴリー別一覧。期間限定は「期間/数量限定メニュー」(cid=2)の
+#    一覧に載った商品。発売日は【予告】商品の詳細ページの「○月○日より販売開始」が
+#    正本で、launch_date_source は新値 "menu_detail"。販売開始後に初めて現れた
+#    商品は発売日の記載がもう無いため、発売日は null のままにする (発表日等での
+#    代用はしない)。ニュース記事は使わない。
+#  ・商品名は【予告】を外して記録する (販売開始後に名前が変わって見えないように)。
+#  ・説明文・栄養成分・アレルゲンは第1段階では対象外 (すべて null)。
+#  ・一覧が全部取れない・0件・前回の半分未満の回は、何も更新せず終了判定もしない。
+#    一部のカテゴリーだけ失敗した回は、取れた分で記録を続けるが終了判定はしない。
+COCOICHI_MIN_RATIO = 0.5
+COCOICHI_DETAIL_MAX_FETCHES = 12
+
+
+def cocoichi_state_path() -> Path:
+    return DATA / "cocoichi_state.json"
+
+
+def cocoichi_price_note(entry: dict) -> str:
+    return "税込。公式サイトの一覧に表示された価格。"
+
+
+def _cocoichi_robots(getter, st: dict):
+    """robots.txt を読んで RobotFileParser を返す。ブロックされたら None (呼び出し側がその回を止める)。
+    404・その他の失敗は全許可として扱う。"""
+    st["list_requests"] += 1
+    try:
+        text = getter("cocoichi", parsers.COCOICHI_BASE + "/robots.txt")
+    except NotFoundError:
+        text = None
+    except BlockedError as e:
+        st["blocked"] = True
+        print(f"[blocked] cocoichi robots.txt: {e}", file=sys.stderr)
+        return None
+    except Exception as e:  # noqa: BLE001
+        print(f"[warn] cocoichi robots.txt 取得失敗(全許可として続行): {e}", file=sys.stderr)
+        text = None
+    rp = urllib.robotparser.RobotFileParser()
+    rp.parse((text or "User-agent: *\nAllow: /").splitlines())
+    return rp
+
+
+def cocoichi_apply_launch(product: dict, teaser_launch: dict) -> bool:
+    """state に残した【予告】詳細ページの発売日を反映する。変更があれば True。
+    発売日が付いたら、新規掲載だった商品は新メニューに上げる。"""
+    if product.get("launch_date"):
+        return False
+    info = teaser_launch.get(product.get("product_id") or "")
+    if not info:
+        return False
+    product["launch_date"] = info
+    product["launch_date_source"] = "menu_detail"
+    if product.get("limited_kind") in (None, "新規掲載"):
+        product["limited_kind"] = "新メニュー"
+    return True
+
+
+def build_cocoichi_product(entry: dict, kind: str, today: str, now: str) -> dict:
+    price = entry.get("price")
+    return {
+        "chain": "cocoichi",
+        "product_id": entry["product_id"],
+        "name": entry["name"],
+        "category": entry.get("category"),
+        "price": price,
+        "price_note": cocoichi_price_note(entry),
+        "price_variants": None,
+        "launch_date": None,
+        "launch_date_source": "not_found",
+        "announced_at": None,
+        "planned_end_text": None,
+        "news_url": None,
+        "news_title": None,
+        "news_date": None,
+        "description": None,
+        "description_full_len": 0,
+        "nutrition": None,
+        "nutrition_variants": None,
+        "nutrition_note": None,
+        "nutrition_pdf_url": None,
+        "nutrition_pdf_label": None,
+        "allergen_pdf_url": None,
+        "allergen_pdf_label": None,
+        "allergens": None,
+        "origin": None,
+        "limited_kind": kind,
+        "badges": ["期間限定"] if kind == "期間限定" else [],
+        "official_url": entry["official_url"],
+        "first_seen_at": now,
+        "last_seen_at": today,
+        "status": "on_sale",
+        "ended_observed_at": None,
+        "missed_runs": 0,
+        "price_history": [{"date": today, "price": price}] if price is not None else [],
+        "source_list": ["menu"],
+        "image": None,
+    }
+
+
+def crawl_cocoichi(getter, pending: dict, stats: dict, today: str | None = None) -> None:
+    chain = "cocoichi"
+    now = now_iso() if today is None else f"{today}T07:00:00+09:00"
+    today = today or today_jst()
+    pending.setdefault(chain, {})
+    stats.setdefault(chain, new_stats())
+    st = stats[chain]
+
+    rp = _cocoichi_robots(getter, st)
+    if rp is None:
+        return
+
+    def allowed(url: str) -> bool:
+        return rp.can_fetch(UA, url)
+
+    # カテゴリー別一覧 (16ページ)。全部取れない・0件の回は list_ok を立てない。
+    # 一部だけ失敗した回は記録を続けるが、終了判定はしない (partial フラグ)。
+    entries: dict[str, dict] = {}
+    partial = False
+    for cid in parsers.COCOICHI_CATEGORY_CIDS:
+        url = parsers.cocoichi_list_url(cid)
+        if not allowed(url):
+            print(f"[skip] robots.txtでDisallow: {url}", file=sys.stderr)
+            partial = True
+            continue
+        try:
+            page = getter(chain, url)
+            st["list_requests"] += 1
+        except BlockedError as e:
+            st["list_requests"] += 1
+            st["blocked"] = True
+            print(f"[blocked] cocoichi list {url}: {e}", file=sys.stderr)
+            return
+        except Exception as e:  # noqa: BLE001
+            st["list_requests"] += 1
+            partial = True
+            print(f"[warn] cocoichi 一覧 取得失敗 {url}: {e}", file=sys.stderr)
+            continue
+        parsed = parsers.parse_cocoichi_list(page)
+        for item in parsed["items"]:
+            if item["product_id"] in entries:
+                continue
+            entries[item["product_id"]] = {
+                **item,
+                "category": parsed["category"],
+                "is_limited": cid == parsers.COCOICHI_LIMITED_CID,
+            }
+    if not entries:
+        print("[warn] cocoichi 一覧: 商品が0件(構造変更の疑い)", file=sys.stderr)
+        return
+    entries = {pid: e for pid, e in entries.items() if not parsers.cocoichi_excluded(e)}
+    state = load_json(cocoichi_state_path(), {})
+    prev_count = state.get("menu_count")
+    if prev_count and len(entries) < prev_count * COCOICHI_MIN_RATIO:
+        print(f"[warn] cocoichi 一覧が極端に少ない({len(entries)}件。前回{prev_count}件)。"
+              "消えた商品の判定は行わない", file=sys.stderr)
+        return
+    st["list_ok"] = not partial
+
+    # 【予告】商品の詳細ページから発売日を取る (上限つき)。取れた日付は state に残し、
+    # 販売開始後に一覧へ現れた商品にも付けられるようにする。失敗したものは次回取り直す。
+    teaser_launch = dict(state.get("teaser_launch") or {})
+    today_date = datetime.date.fromisoformat(today)
+    fetches = 0
+    for pid, e in entries.items():
+        if not e.get("is_teaser") or pid in teaser_launch:
+            continue
+        if fetches >= COCOICHI_DETAIL_MAX_FETCHES:
+            break
+        url = parsers.cocoichi_detail_url(pid)
+        if not allowed(url):
+            continue
+        fetches += 1
+        try:
+            html = getter(chain, url)
+            st["detail_requests"] += 1
+        except BlockedError as e2:
+            st["detail_requests"] += 1
+            st["blocked"] = True
+            print(f"[blocked] cocoichi detail {url}: {e2}", file=sys.stderr)
+            return
+        except Exception as e2:  # noqa: BLE001
+            st["detail_requests"] += 1
+            print(f"[warn] cocoichi 詳細 取得失敗 {url}: {e2}", file=sys.stderr)
+            continue
+        launch = parsers.parse_cocoichi_detail_launch(html, today_date)
+        if launch:
+            teaser_launch[pid] = launch
+    st["limited_seen"] = sum(1 for e in entries.values() if e.get("is_limited") or e.get("is_teaser"))
+
+    baseline = baseline_for(chain)
+    entries = burst_filter(chain, entries, baseline, pending, stats, today)
+    regular_budget = RegularBudget(st)
+    for pid, e in entries.items():
+        existing = load_product(chain, pid)
+        if existing is not None:
+            touch_seen(existing, list_price_for_history(st, e.get("price")), today, now, st)
+            if e.get("name") and existing.get("name") != e["name"]:
+                existing["name"] = e["name"]
+            if e.get("is_limited") and existing.get("limited_kind") == REGULAR_KIND:
+                upgrade_regular(existing, "期間限定")   # 定番が期間限定一覧に載ったら格上げ
+                badges = list(existing.get("badges") or [])
+                if "期間限定" not in badges:
+                    badges.append("期間限定")
+                existing["badges"] = badges
+            cocoichi_apply_launch(existing, teaser_launch)
+            save_product(chain, existing)
+            pending[chain].pop(pid, None)
+            continue
+        is_new_menu = baseline is not None and pid not in baseline
+        if e.get("is_limited"):
+            kind = "期間限定"   # 「期間/数量限定メニュー」一覧に載った商品
+        elif e.get("is_teaser") or pid in teaser_launch:
+            kind = "新メニュー"   # 【予告】で載った商品、または予告時に発売日が取れた商品
+        elif is_new_menu:
+            kind = "新規掲載"
+        else:
+            kind = REGULAR_KIND
+        is_regular = kind == REGULAR_KIND
+        if is_regular and not regular_budget.take():
+            continue   # 定番は1回の巡回で作る件数に上限がある。残りは翌日以降
+        product = build_cocoichi_product(e, kind, today, now)
+        if is_regular:
+            mark_regular(product)
+        else:
+            cocoichi_apply_launch(product, teaser_launch)
+        save_product(chain, product)
+        st["regular_created" if is_regular else "new_products"] += 1
+        pending[chain].pop(pid, None)
+
+    if st["list_ok"]:
+        if baseline is None:
+            save_baseline(chain, set(entries))
+        apply_missing(chain, set(entries), today, st)
+    if not partial:
+        state["menu_count"] = len(entries)
+    state["checked_at"] = today
+    state["teaser_launch"] = teaser_launch
+    save_json(cocoichi_state_path(), state, sort_keys=True)
+
+
+# ---------------------------------------------------------------------------
 # 丸亀製麺 (jp.marugame.com)
 # ---------------------------------------------------------------------------
 # 調査・方針(2026-10-17。実物の構造は parsers.py の「丸亀製麺」のコメントにまとめた):
@@ -4271,7 +4517,8 @@ CRAWLERS = {"mcdonalds": crawl_mcdonalds, "mos": crawl_mos, "matsuya": crawl_mat
             "katsuya": crawl_katsuya, "karayama": crawl_karayama,
             "marugame": crawl_marugame, "burgerking": crawl_burgerking,
             "kourakuen": crawl_kourakuen, "hidakaya": crawl_hidakaya,
-            "zetteria": crawl_zetteria, "kfc": crawl_kfc, "yayoiken": crawl_yayoiken}
+            "zetteria": crawl_zetteria, "kfc": crawl_kfc, "yayoiken": crawl_yayoiken,
+            "cocoichi": crawl_cocoichi}
 
 
 def main(argv: list[str] | None = None) -> int:

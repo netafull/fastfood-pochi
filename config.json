@@ -1,8 +1,8 @@
 {
   "top_title": "ファストフードポチ｜限定メニューのカロリー・価格アーカイブ",
   "site_title": "ファストフードポチ",
-  "site_tagline": "マクド・モス・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキー・やよい軒の限定メニューを記録して残す",
-  "site_description": "マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキー・やよい軒の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています",
+  "site_tagline": "マクド・モス・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキー・やよい軒・CoCo壱番屋の限定メニューを記録して残す",
+  "site_description": "マクドナルド・モスバーガー・松屋・松のや・吉野家・すき家・かつや・からやま・丸亀製麺・バーガーキング・幸楽苑・日高屋・ゼッテリア・ケンタッキー・やよい軒・CoCo壱番屋の期間限定・新登場メニューを毎日記録し、販売が終わって公式サイトから消えても、価格・栄養成分・販売期間を後から引けるアーカイブにしています",
   "site_url": "https://fastfood.netaful.jp/",
   "ga_measurement_id": "G-464GWH2ZGQ",
   "adsense_client_id": "ca-pub-2195959398357532",
@@ -97,6 +97,12 @@
       "name": "やよい軒",
       "base_url": "https://www.yayoiken.com",
       "color": "#1B2F63"
+    },
+    {
+      "slug": "cocoichi",
+      "name": "CoCo壱番屋",
+      "base_url": "https://www.ichibanya.co.jp",
+      "color": "#E64A19"
     }
   ],
   "request_interval_seconds": {
@@ -114,7 +120,8 @@
     "hidakaya": 3,
     "zetteria": 3,
     "kfc": 3,
-    "yayoiken": 3
+    "yayoiken": 3,
+    "cocoichi": 3
   },
   "max_requests_per_run": {
     "mcdonalds": 60,
@@ -131,7 +138,8 @@
     "hidakaya": 35,
     "zetteria": 40,
     "kfc": 20,
-    "yayoiken": 20
+    "yayoiken": 20,
+    "cocoichi": 30
   },
   "record_regular": true,
   "regular_backfill_per_run": 20,
