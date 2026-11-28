@@ -47,6 +47,23 @@ class ZetteriaParseTests(unittest.TestCase):
         self.assertIsNone(burger[0]["sugar_g"])   # この表には糖質の列が無い
         self.assertTrue(burger[0]["ok"])
 
+    def test_offset_name_does_not_steal_row(self):
+        # 実物で起きた取り違えの再現 (2026-11-28のレビュー指摘): 次の商品の名前の
+        # 印字位置が下にずれていると、中点で割る方式では先頭の行 (S) を前の商品が
+        # 取ってしまう。行の並びで区切る方式では取り違えない。
+        parsed = pn.parse_zetteria_nutrition([fx.zetteria_page([
+            ("ハッシュポテト", "", [178, 2.0, 8.0, 24.0, 0.8]),
+            ("フレンチフライポテト", "S", [255, 2.9, 12.0, 34.0, 1.1]),
+            (None, "M", [357, 4.1, 17.0, 48.0, 1.4]),
+            (None, "L", [459, 5.3, 22.0, 61.0, 1.8]),
+        ], name_dy={"フレンチフライポテト": -5})])
+        self.assertEqual(parsed["problems"], [])
+        hashed = pn.rows_for_name(parsed["rows"], "ハッシュポテト")
+        self.assertEqual([(r["size"], r["kcal"]) for r in hashed], [("", 178)])
+        fry = pn.rows_for_name(parsed["rows"], "フレンチフライポテト")
+        self.assertEqual([(r["size"], r["kcal"]) for r in fry],
+                         [("S", 255), ("M", 357), ("L", 459)])
+
     def test_validate(self):
         parsed = pn.parse_zetteria_nutrition(pages())
         self.assertIsNone(pn.validate_source("zetteria_nutrition", parsed, min_rows=3))

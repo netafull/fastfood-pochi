@@ -618,9 +618,10 @@ def parse_freshness_nutrition(pages: list[dict]) -> dict:
 #  ・全ページが1つの表 (カテゴリー・メニュー・サイズ・カロリー・たんぱく質・脂質・炭水化物・
 #    食塩相当量)。糖質・食物繊維の列は無い。カテゴリーは縦書きで文字がばらけるので読まない。
 #  ・商品名は、その商品のサイズ行の真ん中の高さにだけ書かれる (複数サイズある商品では
-#    名前が行の並びの中央に来る)。そのため行の振り分けは、名前の高さを中心にした範囲
-#    (隣の名前との中点まで) で行う。ページをまたぐ商品は、次ページの先頭の行を
-#    前ページの最後の商品に付ける。
+#    名前が行の並びの中央に来る)。行の振り分けは、行の並びを名前の数だけの連続した
+#    区間に切り、各区間の中心が名前の高さに一番近くなる切り方を選ぶ (詳細は
+#    _zetteria_assign_page)。ページをまたぐ商品は、次ページの先頭の行を前ページの
+#    最後の商品に付ける。
 #  ・サイズは S・M・L・ハーフ・3尾・3個など。サイズの無い商品は1行だけ。
 
 _ZETTERIA_KEYS = ["kcal", "protein_g", "fat_g", "carbs_g", "salt_g"]
@@ -689,44 +690,121 @@ def parse_zetteria_nutrition(pages: list[dict]) -> dict:
                 continue
             names.append((cy(t), s))
         names.sort(key=lambda x: -x[0])
-        # 範囲の境目は隣り合う名前の高さの中点。ページ先頭の名前より上にある行は前ページの続き
-        groups: list[dict] = []   # {name, sizes, block, rows}
-        for j, r in enumerate(page_rows):
-            owner = None
-            for k, (ncy, nname) in enumerate(names):
-                lo = (ncy + names[k + 1][0]) / 2 if k + 1 < len(names) else None
-                hi = (ncy + names[k - 1][0]) / 2 if k > 0 else None
-                if (hi is None or r["cy"] < hi) and (lo is None or r["cy"] >= lo):
-                    owner = k
-                    break
-            if owner is None and names and r["cy"] >= names[0][0]:
-                owner = -1   # ページ先頭の名前より上 = 前ページの商品の続き
-            if owner is None:
-                problems.append(f"p{pi + 1}: 商品名に結びつかない行があります(サイズ={r['size']})")
-                continue
-            if owner == -1:
-                if prev_last is None or r["size"] in prev_last["sizes"]:
-                    problems.append(f"p{pi + 1}: ページをまたぐ行を前の商品に付けられません(サイズ={r['size']})")
-                    continue
-                prev_last["sizes"].add(r["size"])
-                rows.append(_zetteria_row(prev_last["name"], r, prev_last["block"]))
-                continue
-            nname = names[owner][1]
-            if not groups or groups[-1]["name"] != nname:
-                groups.append({"name": nname, "sizes": set(), "block": f"g{group_seq}", "rows": []})
-                group_seq += 1
-            g = groups[-1]
-            if r["size"] in g["sizes"]:
-                problems.append(f"p{pi + 1}: 商品「{nname}」でサイズ「{r['size']}」が重なりました")
-                rows.append(_zetteria_row(nname, r, g["block"], ambiguous=True))
-                continue
-            g["sizes"].add(r["size"])
-            rows.append(_zetteria_row(nname, r, g["block"]))
-        if groups:
-            prev_last = {"name": groups[-1]["name"], "sizes": groups[-1]["sizes"],
-                         "block": groups[-1]["block"]}
+        prev_last, group_seq = _zetteria_assign_page(
+            page_rows, names, prev_last, group_seq, pi + 1, rows, problems)
     return {"updated": updated, "rows": rows, "pages_total": len(pages),
             "pages_table": pages_table, "problems": problems}
+
+
+_ZETTERIA_SKIP_COST = 25.0   # 名前候補に商品でないテキスト (表題など) が混ざるので、行を持たない名前を許す
+
+
+def _zetteria_partition(R: list[dict], names: list, unique: bool):
+    """行の並び R を、名前の順に連続した区間へ振り分ける。
+    区間の中心 (先頭行と末尾行の高さの平均) が名前の高さに一番近くなる振り分けを選び、
+    (総コスト, [(名前の添字, 開始, 終了), ...]) を返す。名前候補には表題など商品でない
+    テキストも混ざるため、行を持たない名前も許す (コスト _ZETTERIA_SKIP_COST)。
+    unique のときは区間内でサイズが重なる振り分けを許さない。"""
+    mm, kk = len(R), len(names)
+    if kk == 0:
+        return None
+    INF = float("inf")
+    f = [[INF] * (mm + 1) for _ in range(kk + 1)]
+    back = [[-1] * (mm + 1) for _ in range(kk + 1)]   # 区間の開始行。-2 は「行を持たない」
+    f[0][0] = 0.0
+    for i in range(1, kk + 1):
+        ncy = names[i - 1][0]
+        for j in range(0, mm + 1):
+            if f[i - 1][j] != INF and f[i - 1][j] + _ZETTERIA_SKIP_COST < f[i][j]:
+                f[i][j] = f[i - 1][j] + _ZETTERIA_SKIP_COST
+                back[i][j] = -2
+            seen: set = set()
+            for t in range(j - 1, -1, -1):
+                if unique:
+                    if R[t]["size"] in seen:
+                        break   # これ以上広げても重なりは消えない
+                    seen.add(R[t]["size"])
+                if f[i - 1][t] == INF:
+                    continue
+                c = f[i - 1][t] + abs((R[t]["cy"] + R[j - 1]["cy"]) / 2 - ncy)
+                if c < f[i][j]:
+                    f[i][j] = c
+                    back[i][j] = t
+    if f[kk][mm] == INF:
+        return None
+    bounds = []
+    i, j = kk, mm
+    while i > 0:
+        t = back[i][j]
+        if t == -2:
+            i -= 1
+            continue
+        if t < 0:
+            return None
+        bounds.append((i - 1, t, j))
+        j = t
+        i -= 1
+    return f[kk][mm], bounds[::-1]
+
+
+def _zetteria_assign_page(page_rows, names, prev_last, group_seq, page_no, rows, problems):
+    """1ページ分の行を商品に振り分けて rows に足す。戻り値は (最後の商品, 次の block 連番)。
+
+    商品名はその商品の行の並びの真ん中の高さに書かれる。以前は隣り合う名前との中点で
+    範囲を割っていたが、名前の位置がわずかにずれただけで隣の商品の行を取り違えた
+    (実物でハッシュポテトにフレンチフライポテトのSが付いた)。行の並びを区間に切って
+    区間の中心と名前の高さの合い具合で選ぶ方式に変えた。
+    ページ先頭の名前より上にある行は前ページの商品の続きとして、サイズが重ならない
+    範囲で前の商品に付ける。"""
+    if not names:
+        for r in page_rows:
+            problems.append(f"p{page_no}: 商品名に結びつかない行があります(サイズ={r['size']})")
+        return prev_last, group_seq
+    best = None   # ((サイズ重なりなし優先, 総コスト, 続きの行数), 続きの行数, 区間, 重なりを許したか)
+    for s in range(0, len(page_rows) + 1):
+        if s > 0:
+            if prev_last is None:
+                break
+            seg = page_rows[:s]
+            if any(r["cy"] < names[0][0] for r in seg):
+                break   # 先頭の名前より下の行は続きにはならない
+            sizes = [r["size"] for r in seg]
+            if len(set(sizes)) != len(sizes) or any(z in prev_last["sizes"] for z in sizes):
+                break   # サイズが重なる続きはあり得ない
+        R = page_rows[s:]
+        for unique in (True, False):
+            got = _zetteria_partition(R, names, unique)
+            if got is None:
+                continue
+            cost, bounds = got
+            key = (0 if unique else 1, cost, s)
+            if best is None or key < best[0]:
+                best = (key, s, bounds, unique)
+    if best is None:
+        for r in page_rows:
+            problems.append(f"p{page_no}: 商品名に結びつかない行があります(サイズ={r['size']})")
+        return prev_last, group_seq
+    _key, s, bounds, _unique = best
+    if s > 0:
+        for r in page_rows[:s]:
+            prev_last["sizes"].add(r["size"])
+            rows.append(_zetteria_row(prev_last["name"], r, prev_last["block"]))
+    R = page_rows[s:]
+    last = prev_last
+    for ni, a, b in bounds:
+        nname = names[ni][1]
+        block = f"g{group_seq}"
+        group_seq += 1
+        seen: set = set()
+        for r in R[a:b]:
+            amb = False
+            if r["size"] in seen:
+                amb = True
+                problems.append(f"p{page_no}: 商品「{nname}」でサイズ「{r['size']}」が重なりました")
+            seen.add(r["size"])
+            rows.append(_zetteria_row(nname, r, block, ambiguous=amb))
+        last = {"name": nname, "sizes": seen, "block": block}
+    return last, group_seq
 
 
 def _zetteria_row(name: str, r: dict, block: str, ambiguous: bool = False) -> dict:

@@ -251,9 +251,10 @@ def freshness_page(rows, kind="food", updated="2026年11月9日", header=True, t
 ZB_COLS = [300, 351, 403, 454, 509]
 
 
-def zetteria_page(items, updated="2026/11/18"):
+def zetteria_page(items, updated="2026/11/18", name_dy=None):
     """items: [(名前|None, サイズ, [熱量, たんぱく質, 脂質, 炭水化物, 食塩相当量])]。
-    名前は、その商品の行の並びの中央の行に置く (実物の構造)。None は名前なしの行。"""
+    名前は、その商品の行の並びの中央の行に置く (実物の構造)。None は名前なしの行。
+    name_dy は {商品名: ずらし量} で、名前の印字位置が中央からずれた実物の再現用。"""
     texts = [box(217, 773, 378, 786, "ゼッテリア　栄養成分一覧表"),
              box(484, 772, 533, 777, f"更新日　{updated}")]
     for lb, c in zip(["カロリー", "たんぱく質", "脂質", "炭水化物", "食塩相当量"], ZB_COLS):
@@ -273,7 +274,8 @@ def zetteria_page(items, updated="2026/11/18"):
         mid = len(g) // 2
         for i, (_name, size, vals) in enumerate(g):
             if i == mid and g[0][0] is not None:
-                texts.append(box(116, y, 116 + 7 * len(g[0][0]), y + 8, g[0][0]))
+                dy = (name_dy or {}).get(g[0][0], 0)
+                texts.append(box(116, y + dy, 116 + 7 * len(g[0][0]), y + dy + 8, g[0][0]))
             if size:
                 texts.append(box(223, y, 223 + 6 * len(size), y + 7, size))
             for c, v in zip(ZB_COLS, vals):
