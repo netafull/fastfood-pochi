@@ -144,9 +144,9 @@ class Getter:
         self._tick(chain)
         return fetch_binary(url, UA, method="HEAD")[1]
 
-    def pdf_get(self, chain: str, url: str) -> bytes:
+    def pdf_get(self, chain: str, url: str, allow_html: bool = False) -> bytes:
         self._tick(chain)
-        return fetch_binary(url, UA)[0]
+        return fetch_binary(url, UA, allow_html=allow_html)[0]
 
 
 # ---------------------------------------------------------------------------
@@ -4846,10 +4846,16 @@ def freshness_apply_release(product: dict, infos: list[dict]) -> bool:
 
 def fetch_freshness_press(getter, url: str) -> dict | None:
     """プレスリリースPDFを取得して解析する。pdfminer が無い環境と、PDFでないURL
-    (HTMLのお知らせ) では None。取得の失敗は例外として呼び出し側へ返す。"""
+    (HTMLのお知らせ) では None。取得の失敗は例外として呼び出し側へ返す。
+
+    お知らせは brandnews の一覧に PDF (商品発表) と HTML (通常のお知らせ) が混ざる。
+    HTML は正常な応答なので、allow_html でブロック扱いにせず受け取り、%PDF でない
+    ことを見て None にする (呼び出し側が「照合済み」の印を付ける)。チャレンジの
+    兆候がある応答は allow_html でも BlockedError になる (fetch_binary 側)。
+    """
     if not pdf_update.have_pdfminer():
         return None
-    data = getter.pdf_get("freshness", url)
+    data = getter.pdf_get("freshness", url, allow_html=True)
     if not data.startswith(b"%PDF"):
         return None
     return parsers.parse_freshness_press(pdf_update.pn.extract_geometry(data))

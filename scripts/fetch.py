@@ -94,10 +94,14 @@ def fetch_post(url: str, form: dict, user_agent: str, retries: int = 1) -> str:
     raise last_err or RuntimeError(f"fetch failed: {url}")
 
 
-def fetch_binary(url: str, user_agent: str, method: str = "GET", retries: int = 1) -> tuple[bytes, dict]:
+def fetch_binary(url: str, user_agent: str, method: str = "GET", retries: int = 1,
+                 allow_html: bool = False) -> tuple[bytes, dict]:
     """PDFなどバイナリの取得(method="HEAD" なら本文なしで応答ヘッダーだけ)。-> (本文, 小文字キーのヘッダー辞書)
 
     403・429・チャレンジページ(PDFのはずがHTML)はリトライせず BlockedError。UA偽装などの回避はしない。
+    allow_html=True のときだけ、チャレンジの兆候が無い通常のHTMLはそのまま返す
+    (フレッシュネスのお知らせのように、PDFとHTMLが同じ一覧に混ざる取得のため。
+    チャレンジの兆候があるHTMLは allow_html でも BlockedError のまま)。
     """
     req = urllib.request.Request(url, headers={"User-Agent": user_agent}, method=method)
     last_err: Exception | None = None
@@ -107,7 +111,9 @@ def fetch_binary(url: str, user_agent: str, method: str = "GET", retries: int = 
                 headers = {k.lower(): v for k, v in res.headers.items()}
                 body = b"" if method == "HEAD" else res.read()
                 if method != "HEAD" and not body.startswith(b"%PDF"):
-                    if _looks_like_challenge(body) or body[:200].lstrip().lower().startswith((b"<!doctype", b"<html")):
+                    if _looks_like_challenge(body):
+                        raise BlockedError(f"チャレンジページ: {url}")
+                    if not allow_html and body[:200].lstrip().lower().startswith((b"<!doctype", b"<html")):
                         raise BlockedError(f"PDFではない応答(チャレンジページの疑い): {url}")
                 return body, headers
         except urllib.error.HTTPError as e:
