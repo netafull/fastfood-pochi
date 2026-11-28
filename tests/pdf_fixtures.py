@@ -279,7 +279,7 @@ def zetteria_page(items, updated="2026/11/18", name_dy=None):
             if size:
                 texts.append(box(223, y, 223 + 6 * len(size), y + 7, size))
             for c, v in zip(ZB_COLS, vals):
-                s = str(v)
+                s = f"{v:,}" if isinstance(v, (int, float)) and v >= 1000 else str(v)
                 texts.append(box(c + 9 - 8 * len(s), y, c + 9, y + 7, s))
             y -= 10.5
     return {"texts": texts, "rules": [], "chars": []}

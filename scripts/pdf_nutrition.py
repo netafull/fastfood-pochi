@@ -626,7 +626,7 @@ def parse_freshness_nutrition(pages: list[dict]) -> dict:
 
 _ZETTERIA_KEYS = ["kcal", "protein_g", "fat_g", "carbs_g", "salt_g"]
 _ZETTERIA_HEAD_LABELS = ["カロリー", "たんぱく質", "脂質", "炭水化物", "食塩相当量"]
-_ZETTERIA_NUM_RE = re.compile(r"[0-9]+(\.[0-9]+)?")
+_ZETTERIA_NUM_RE = re.compile(r"[0-9][0-9,]*(\.[0-9]+)?")   # 1,000以上は「1,020」のようにカンマが入る
 
 
 def parse_zetteria_nutrition(pages: list[dict]) -> dict:
@@ -789,6 +789,13 @@ def _zetteria_assign_page(page_rows, names, prev_last, group_seq, page_no, rows,
         for r in page_rows[:s]:
             prev_last["sizes"].add(r["size"])
             rows.append(_zetteria_row(prev_last["name"], r, prev_last["block"]))
+    # 行を持たなかった名前のうち、表の中ほどにあるものは「数値の行が読めていない」
+    # 可能性があるので problems に出す (表題など表の上にあるものは除く)
+    owned = {ni for ni, _a, _b in bounds}
+    if page_rows:
+        for ni, (ncy, nname) in enumerate(names):
+            if ni not in owned and page_rows[-1]["cy"] <= ncy <= page_rows[0]["cy"]:
+                problems.append(f"p{page_no}: 行を持たない名前があります({nname})")
     R = page_rows[s:]
     last = prev_last
     for ni, a, b in bounds:

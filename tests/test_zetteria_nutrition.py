@@ -64,6 +64,25 @@ class ZetteriaParseTests(unittest.TestCase):
         self.assertEqual([(r["size"], r["kcal"]) for r in fry],
                          [("S", 255), ("M", 357), ("L", 459)])
 
+    def test_comma_number_row_is_read(self):
+        # 実物で起きた読み落とし (2026-11-28の再レビュー指摘): 1,000kcal超の値は
+        # 「1,020」とカンマ付きで書かれる。その行が読めないと、行を持たない名前が
+        # 隣の商品の行を取りにいく (バケツポテトに隣のサイズが付いた)
+        parsed = pn.parse_zetteria_nutrition([fx.zetteria_page([
+            ("ポップコーンシュリンプ", "3尾", [170, 8.0, 9.0, 14.0, 0.7]),
+            (None, "5尾", [285, 13.0, 15.0, 24.0, 1.2]),
+            ("バケツポテト", "", [1020, 30.0, 55.0, 100.0, 4.0]),
+            ("チキンからあげっと", "3個", [212, 12.0, 12.0, 13.0, 0.9]),
+            (None, "6個", [424, 24.0, 24.0, 26.0, 1.8]),
+        ])])
+        self.assertEqual(parsed["problems"], [])
+        shrimp = pn.rows_for_name(parsed["rows"], "ポップコーンシュリンプ")
+        self.assertEqual([(r["size"], r["kcal"]) for r in shrimp], [("3尾", 170), ("5尾", 285)])
+        bucket = pn.rows_for_name(parsed["rows"], "バケツポテト")
+        self.assertEqual([(r["size"], r["kcal"]) for r in bucket], [("", 1020)])
+        chicken = pn.rows_for_name(parsed["rows"], "チキンからあげっと")
+        self.assertEqual([(r["size"], r["kcal"]) for r in chicken], [("3個", 212), ("6個", 424)])
+
     def test_validate(self):
         parsed = pn.parse_zetteria_nutrition(pages())
         self.assertIsNone(pn.validate_source("zetteria_nutrition", parsed, min_rows=3))
