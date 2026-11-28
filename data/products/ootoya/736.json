@@ -15,7 +15,24 @@
  "news_date": null,
  "description": null,
  "description_full_len": 0,
- "nutrition": null,
+ "nutrition": {
+  "kcal": 173.0,
+  "protein_g": 2.9,
+  "fat_g": 7.6,
+  "carbs_g": null,
+  "sugar_g": null,
+  "fiber_g": 6.9,
+  "salt_g": 0.8,
+  "other": {
+   "糖質": "20.0 g",
+   "カルシウム": "33.6 mg",
+   "マグネシウム": "28.4 mg",
+   "ビタミンA": "207.1 μgRAE",
+   "ビタミンC": "30.2 mg",
+   "ビタミンD": "0.0 μg",
+   "ビタミンE": "1.4 mg"
+  }
+ },
  "nutrition_variants": null,
  "nutrition_note": null,
  "nutrition_pdf_url": null,

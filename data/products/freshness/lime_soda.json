@@ -24,9 +24,45 @@
  "news_date": null,
  "description": null,
  "description_full_len": 0,
- "nutrition": null,
- "nutrition_variants": null,
- "nutrition_note": null,
+ "nutrition": {
+  "kcal": 49.0,
+  "protein_g": 0.2,
+  "fat_g": 0.1,
+  "carbs_g": 13.3,
+  "sugar_g": null,
+  "fiber_g": 0.0,
+  "salt_g": 0.0,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "T",
+   "nutrition": {
+    "kcal": 49.0,
+    "protein_g": 0.2,
+    "fat_g": 0.1,
+    "carbs_g": 13.3,
+    "sugar_g": null,
+    "fiber_g": 0.0,
+    "salt_g": 0.0,
+    "other": {}
+   }
+  },
+  {
+   "label": "G",
+   "nutrition": {
+    "kcal": 57.0,
+    "protein_g": 0.2,
+    "fat_g": 0.1,
+    "carbs_g": 15.2,
+    "sugar_g": null,
+    "fiber_g": 0.0,
+    "salt_g": 0.0,
+    "other": {}
+   }
+  }
+ ],
+ "nutrition_note": "栄養成分値は検査機関で分析した数値をもとに算出した値です。",
  "nutrition_pdf_url": null,
  "nutrition_pdf_label": null,
  "allergen_pdf_url": null,
@@ -67,5 +103,13 @@
    ]
   }
  ],
- "is_regular": true
+ "is_regular": true,
+ "nutrition_source": {
+  "url": "https://www.freshnessburger.co.jp/pdf/seibun.pdf",
+  "label": "栄養成分表",
+  "version": "2026-11-09|2026-10-21",
+  "version_text": "2026年11月9日更新",
+  "fetched_at": "2026-11-28T18:48:29+09:00"
+ },
+ "pdf_tried": "2026-11-09|2026-10-21"
 }

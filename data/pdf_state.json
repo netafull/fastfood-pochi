@@ -9,15 +9,15 @@
  },
  "cocoichi": {
   "nutrition": {
-   "fetched_at": "2026-11-28T14:24:20+09:00",
+   "fetched_at": "2026-11-28T18:47:08+09:00",
    "last_get": "2026-11-28",
-   "signature": "\"33078-6614f0c906d0d\"|Sat, 28 Nov 2026 05:00:01 GMT|209016",
+   "signature": "\"33078-6615266f15a64\"|Sat, 28 Nov 2026 09:00:02 GMT|209016",
    "version": "2026-11-27"
   }
  },
  "freshness": {
   "nutrition": {
-   "fetched_at": "2026-11-28T14:25:42+09:00",
+   "fetched_at": "2026-11-28T18:48:29+09:00",
    "last_get": "2026-11-28",
    "signature": "\"9a8fb-65fce215556b2;66125df7891f9|Mon, 09 Nov 2026 01:46:27 GMT|633083",
    "version": "2026-11-09|2026-10-21"
