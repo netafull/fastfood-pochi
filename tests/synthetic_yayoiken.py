@@ -19,6 +19,7 @@ from __future__ import annotations
 BASE = "https://www.yayoiken.com"
 ROBOTS_URL = BASE + "/robots.txt"
 MENU_URL = BASE + "/menu_list/index/13"
+INFO_URL = BASE + "/menu_list/info/13"
 NEWS_URL = BASE + "/news"
 NEWS2_URL = BASE + "/news?page=2"
 ART_CHIGE = BASE + "/contents/news/261111_chige.html"
@@ -166,9 +167,40 @@ def yayoiken_article_shop() -> str:
             "</div></body></html>")
 
 
+_NUTRIENT_HEADS = ["熱量<br>（kcal）", "蛋白質<br>（g）", "脂質<br>（g）", "炭水化物<br>（g）",
+                   "糖質<br>（g）", "食物繊維<br>（g）", "食塩相当量<br>（g）", "カリウム<br>（mg）",
+                   "リン<br>（mg）"]
+
+
+def _nut_row(cells: list) -> str:
+    return "<tr>" + "".join(f"<td>{c}</td>" for c in cells) + "</tr>"
+
+
+def yayoiken_info_page() -> str:
+    """店舗情報ページの栄養成分表 (実物の構造: 形態の列がある表と無い表、アレルギー表は対象外)。"""
+    heads = "".join(f"<th>{h}</th>" for h in _NUTRIENT_HEADS)
+    form_table = (
+        '<table><thead><tr><th colspan=2 class="cross">商品名</th>' + heads + "</tr></thead><tbody>"
+        + _nut_row(["合成チゲ定食", "白米", 747, "33.4", "30.0", "88.2", "81.8", "6.4", "5.5", 894, 421])
+        + _nut_row(["もち麦ごはん普通盛", 763, "33.9", "30.0", "92.3", "84.7", "7.6", "5.5", 921, 436])
+        + _nut_row(["もち麦ごはん大盛", 901, "36.4", "30.3", "124.7", "115.0", "9.7", "5.5", 952, 464])
+        + _nut_row(["合成定食", "白米", 650, "25.0", "20.0", "90.0", "83.0", "7.0", "3.0", 500, 300])
+        + _nut_row(["合成みそ汁", 24, "1.8", "0.6", "3.2", "2.3", "0.9", "1.8", 100, 24])
+        + "</tbody></table>")
+    side_table = (
+        '<table><thead><tr><th>商品名</th>' + heads + "</tr></thead><tbody>"
+        + _nut_row(["合成サラダ", 84, "3.0", "5.0", "7.0", "5.0", "2.0", "0.5", 228, 102])
+        + _nut_row(["合成かきフライ（単品）", 283, "5.9", "20.0", "20.8", "18.8", "2.0", "1.5", 175, 69])
+        + "</tbody></table>")
+    allergy_table = ('<table><thead><tr><th>商品名</th><th>卵</th><th>乳</th></tr></thead><tbody>'
+                     + _nut_row(["合成チゲ定食", "●", "-"]) + "</tbody></table>")
+    return f"<html><body>{form_table}{side_table}{allergy_table}</body></html>"
+
+
 def yayoiken_pages(menu: str | None = None) -> dict:
     """URL → ページ の対応(robots.txt は含まない。実物どおり404として扱う)。"""
     return {MENU_URL: yayoiken_menu_page() if menu is None else menu,
+            INFO_URL: yayoiken_info_page(),
             NEWS_URL: yayoiken_news_page1(), NEWS2_URL: yayoiken_news_page2(),
             ART_CHIGE: yayoiken_article_chige(), ART_KAKI: yayoiken_article_kaki(),
             ART_SHOP: yayoiken_article_shop(), ART_FUTURE: yayoiken_article_future()}

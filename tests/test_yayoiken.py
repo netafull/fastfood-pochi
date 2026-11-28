@@ -169,6 +169,34 @@ class YayoikenCrawlTests(unittest.TestCase):
         self.assertEqual(st["news_matched"], 3)
         self.assertEqual(st["news_unmatched"], 1)                  # 402は記事が無い
 
+    def test_nutrition_from_info_page(self):
+        self.crawl_once()
+        p = self.prods["101"]                                      # 合成チゲ定食: 3形態
+        self.assertEqual(p["nutrition"]["kcal"], 747)
+        self.assertEqual(p["nutrition"]["protein_g"], 33.4)
+        self.assertIsNone(p["nutrition"]["sugar_g"])   # 表の「糖質」は糖類ではないので other に入る
+        self.assertEqual(p["nutrition"]["other"]["糖質"], "81.8 g")
+        self.assertEqual(p["nutrition"]["other"]["カリウム"], "894 mg")
+        self.assertEqual([v["label"] for v in p["nutrition_variants"]],
+                         ["白米", "もち麦ごはん普通盛", "もち麦ごはん大盛"])
+        self.assertEqual(p["nutrition_variants"][2]["nutrition"]["kcal"], 901)
+        s = self.prods["403"]                                      # 合成サラダ: 形態なしの1形態
+        self.assertEqual(s["nutrition"]["kcal"], 84)
+        self.assertIsNone(s["nutrition_variants"])
+        self.assertIsNone(self.prods["404"]["nutrition"])          # 生ビールは表に無い
+        self.assertEqual(self.state["nutrition_count"], 5)
+
+    def test_nutrition_parse(self):
+        m = parsers.parse_yayoiken_nutrition(Y.yayoiken_info_page())
+        self.assertEqual(set(m), {"合成チゲ定食", "合成定食", "合成サラダ", "合成かきフライ（単品）",
+                                  "合成みそ汁"})
+        self.assertEqual(len(m["合成チゲ定食"]), 3)
+        self.assertEqual(m["合成定食"][0]["label"], "白米")
+        self.assertEqual(len(m["合成定食"]), 1)                    # みそ汁は定食の形態にしない
+        self.assertEqual(m["合成みそ汁"][0]["label"], "")
+        self.assertEqual(m["合成サラダ"][0]["label"], "")
+        self.assertEqual(parsers.parse_yayoiken_nutrition("<html></html>"), {})
+
     def test_article_details_fetched_once(self):
         self.crawl_once()
         fake2 = FakeYayoiken()

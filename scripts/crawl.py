@@ -3338,7 +3338,10 @@ def crawl_kfc(getter, pending: dict, stats: dict, today: str | None = None) -> N
 #  ・種別: 「おすすめメニュー(期間限定)」セクションに載った商品は 期間限定(badges にも付ける)。
 #    NEWバッジ、またはニュース記事と照合して発売日が付いた商品は 新メニュー。baseline に無い新規は
 #    新規掲載、それ以外は定番。フェア名(NABE FAIR等)は保存しない。テイクアウト・アルコールも記録する。
-#  ・説明文・栄養成分・アレルゲンは第1段階では対象外(すべて null)。
+#  ・説明文・アレルゲンは対象外。栄養成分は店舗情報ページ (/menu_list/info/13) の栄養成分表から
+#    取る (2026-11-27追加)。表は形態別 (白米・もち麦ごはん等) で、代表は先頭の形態。
+#    巡回のたびに1リクエストで取り直し、値が変わった商品だけ更新する。表の商品数が前回の
+#    半分未満の回は反映しない。
 #  ・一覧が空・取得失敗・前回の半分未満の回は、何も更新せず終了判定もしない。
 YAYOIKEN_MIN_RATIO = 0.5
 YAYOIKEN_ARTICLE_MAX_FETCHES = 6
@@ -3427,6 +3430,17 @@ def yayoiken_apply_article(product: dict, infos: list[dict]) -> bool:
     after = (product.get("news_url"), product.get("launch_date"), product.get("launch_date_source"),
              product.get("limited_kind"))
     return before != after
+
+
+def yayoiken_apply_nutrition(product: dict, forms: list[dict]) -> bool:
+    """店舗情報ページの栄養成分表の形態別栄養を反映する。代表は先頭の形態 (白米)。
+    形態が2つ以上なら nutrition_variants に全形態を入れる。変更があれば True。"""
+    if not forms:
+        return False
+    before = (product.get("nutrition"), product.get("nutrition_variants"))
+    product["nutrition"] = forms[0]["nutrition"]
+    product["nutrition_variants"] = forms if len(forms) > 1 else None
+    return before != (product.get("nutrition"), product.get("nutrition_variants"))
 
 
 def build_yayoiken_product(entry: dict, kind: str, today: str, now: str) -> dict:
@@ -3624,6 +3638,39 @@ def crawl_yayoiken(getter, pending: dict, stats: dict, today: str | None = None)
         save_product(chain, product)
         st["regular_created" if is_regular else "new_products"] += 1
         pending[chain].pop(pid, None)
+
+    # 栄養成分 (店舗情報ページの栄養成分表。2026-11-27追加。1回の実行で1リクエスト)。
+    # 表が取れない・商品数が前回の半分未満の回は反映しない (既存の値はそのまま)
+    if st["list_ok"]:
+        info_url = parsers.yayoiken_info_url()
+        nutrition_map = None
+        if not allowed(info_url):
+            print(f"[skip] robots.txtでDisallow: {info_url}", file=sys.stderr)
+        else:
+            try:
+                info_html = getter(chain, info_url)
+                st["detail_requests"] += 1
+                nutrition_map = parsers.parse_yayoiken_nutrition(info_html)
+            except BlockedError as e:
+                st["detail_requests"] += 1
+                st["blocked"] = True
+                print(f"[blocked] yayoiken info {info_url}: {e}", file=sys.stderr)
+                return
+            except Exception as e:  # noqa: BLE001
+                st["detail_requests"] += 1
+                print(f"[warn] yayoiken 店舗情報ページ 取得失敗 {info_url}: {e}", file=sys.stderr)
+        if nutrition_map is not None:
+            prev_n = state.get("nutrition_count")
+            if prev_n and len(nutrition_map) < prev_n * YAYOIKEN_MIN_RATIO:
+                print(f"[warn] yayoiken 栄養成分表が極端に少ない({len(nutrition_map)}件。前回{prev_n}件)。"
+                      "栄養成分の反映は行わない", file=sys.stderr)
+            else:
+                state["nutrition_count"] = len(nutrition_map)
+                by_norm = {parsers.yayoiken_name_key(k): v for k, v in nutrition_map.items()}
+                for p in load_chain_products(chain):
+                    forms = by_norm.get(parsers.yayoiken_name_key(p.get("name") or ""))
+                    if forms and yayoiken_apply_nutrition(p, forms):
+                        save_product(chain, p)
 
     if st["list_ok"]:
         if baseline is None:
