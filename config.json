@@ -944,5 +944,9 @@
   "cocoichi_pdf": {
     "nutrition": "https://www.ichibanya.co.jp/menu/pdf/nutrition.pdf",
     "nutrition_label": "栄養成分情報"
+  },
+  "burgerking_pdf": {
+    "nutrition": "https://www.burgerking.co.jp/images/org/pdf/2026/11/05/b0d5622d-f50c-409e-8721-01563da67cb6.pdf",
+    "nutrition_label": "栄養成分及びアレルゲン情報"
   }
 }

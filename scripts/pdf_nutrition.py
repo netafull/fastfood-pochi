@@ -921,6 +921,111 @@ def parse_cocoichi_nutrition(pages: list[dict]) -> dict:
 
 
 # ---------------------------------------------------------------------------
+# バーガーキング: 公式PDF「商品の栄養成分及びアレルゲン情報」
+# ---------------------------------------------------------------------------
+# 横向きA4に複数の表(バーガーメニュー・サイドメニュー等)が並ぶ。数値の列は
+# 製品重量・エネルギー・たんぱく質・脂質・炭水化物・食塩相当量・ナトリウムの7列で、
+# その右にアレルゲンの記号(●・×・△)が28列並ぶ。取り込むのは栄養の数値だけ
+# (オーナー決定 2026-11-28。アレルゲン・説明文・画像は持ち込まない)。
+# 見出しは「製品重量 エネルギー たんぱく質」のように1つの文字列にまとまっていて
+# 列の位置を決めにくいので、列は数値そのものの x の集まりから決める。
+# 商品名は x が 100〜280 の範囲。x<100 は表の題名・節の見出しで、block の区切りに使う。
+# PDFのURLは版ごとに変わる(日付入りのパス+UUID)。config の URL を指し続ける形で、
+# 版は本文の「最終更新日」(2026.11.06 のような表記)から取る。
+
+_BK_NUM_RE = re.compile(r"[0-9][0-9,]*(\.[0-9]+)?")
+_BK_DATE_RE = re.compile(r"(\d{4})\.(\d{1,2})\.(\d{1,2})")
+_BK_NAME_X = (100, 280)
+_BK_NUM_X_MIN = 280
+_BK_NUM_X_MAX = 448  # アレルゲン記号の列(中心 x≒452〜)を含めないための上限
+
+_BK_ALIASES = [("Big Mouth", "ビッグマウス"), ("Special", "スペシャル"),
+               ("Mushroom", "マッシュルーム"), ("Garlic", "ガーリック"),
+               ("Jr.", "ジュニア"), ("American", "アメリカン")]
+
+
+def burgerking_alias_name(name: str) -> str:
+    """記録名(公式メニューAPIの表記)から、PDFの表記にした名前を返す。
+
+    記録名には「Big Mouth」「Special」のように英語のままの部分が混ざるが、
+    PDFはカタカナで統一されている。個数も「4pc」と「4ピース」が混在する
+    (記録側の表記ゆれ)。どちらも、PDF側の表記に寄せた別名で照合するための変換。
+    """
+    out = name
+    for en, ja in _BK_ALIASES:
+        out = out.replace(en, ja)
+    return re.sub(r"(\d+)pc\b", r"\1ピース", out)
+
+
+def parse_burgerking_nutrition(pages: list[dict]) -> dict:
+    """-> {"updated", "rows", "pages_total", "pages_table", "problems"}"""
+    updated = None
+    pages_table = 0
+    problems: list[str] = []
+    rows: list[dict] = []
+    for pi, p in enumerate(pages):
+        texts: list = []
+        seen_texts: set = set()
+        for t in p["texts"]:
+            # 同じ文字列・同じ座標の重複(太字の重ね描き)を落とす
+            key = (t[4], round(t[0]), round(t[1]))
+            if key not in seen_texts:
+                seen_texts.add(key)
+                texts.append(t)
+        if any("製品重量" in t[4] for t in texts):
+            pages_table += 1
+        if updated is None:
+            for t in texts:
+                m = _BK_DATE_RE.fullmatch(unicodedata.normalize("NFKC", t[4]).strip())
+                if m:
+                    updated = f"{int(m.group(1)):04d}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
+        markers = sorted((t for t in texts if t[0] < 100 and t[4].strip()), key=lambda t: -cy(t))
+
+        def block_at(y: float) -> str:
+            name = ""
+            for mk in markers:
+                if cy(mk) > y:
+                    name = unicodedata.normalize("NFKC", mk[4]).strip()
+                else:
+                    break
+            return f"p{pi}:{name}"
+
+        centers: list[tuple[float, list]] = []
+        for t in sorted((t for t in texts
+                         if _BK_NUM_RE.fullmatch(unicodedata.normalize("NFKC", t[4]).strip())
+                         and t[0] >= _BK_NUM_X_MIN and cx(t) < _BK_NUM_X_MAX),
+                        key=lambda t: -cy(t)):
+            if centers and abs(cy(t) - centers[-1][0]) <= 3.5:
+                centers[-1][1].append(t)
+            else:
+                centers.append((cy(t), [t]))
+        for cyy, nts in centers:
+            cols: list[list] = []
+            for t in sorted(nts, key=cx):
+                if cols and cx(t) - cx(cols[-1][-1]) <= 8:
+                    cols[-1].append(t)
+                else:
+                    cols.append([t])
+            if len(cols) != 7:
+                continue  # 7列そろわない行は表の行ではない(見出し付近の数字など)
+            weight, kcal, protein, fat, carbs, salt, sodium = (to_number(c[0][4]) for c in cols)
+            names = [t for t in texts if _BK_NAME_X[0] <= t[0] < _BK_NAME_X[1]
+                     and abs(cy(t) - cyy) <= 5 and t[4].strip()]
+            if not names:
+                problems.append(f"p{pi + 1}: 商品名に結びつかない行があります")
+                continue
+            name = "".join(t[4] for t in sorted(names, key=lambda t: t[0])).strip()
+            row = {"name": name, "size": "", "kcal": kcal, "protein_g": protein,
+                   "fat_g": fat, "carbs_g": carbs, "sugar_g": None, "fiber_g": None,
+                   "salt_g": salt, "weight_other": weight, "sodium_other": sodium,
+                   "block": block_at(cyy), "ambiguous": False}
+            row["ok"] = energy_ok(kcal, protein, fat, carbs) and salt is not None
+            rows.append(row)
+    return {"updated": updated, "rows": rows, "pages_total": len(pages),
+            "pages_table": pages_table, "problems": problems}
+
+
+# ---------------------------------------------------------------------------
 # 検証(誤った栄養値を出さないためのゲート)
 # ---------------------------------------------------------------------------
 
@@ -939,7 +1044,7 @@ def validate_source(kind: str, parsed: dict, min_rows: int = 80, min_rate: float
     if len(rows) < min_rows:
         return f"読み取れた行が少なすぎます({len(rows)}行 < {min_rows})"
     if kind in ("sukiya_nutrition", "yoshinoya", "freshness_nutrition", "zetteria_nutrition",
-                "cocoichi_nutrition"):
+                "cocoichi_nutrition", "burgerking_nutrition"):
         rate = pass_rate(rows)
         if rate < min_rate:
             return f"エネルギー検算に通った行が少なすぎます({rate:.0%} < {min_rate:.0%})"
@@ -948,7 +1053,7 @@ def validate_source(kind: str, parsed: dict, min_rows: int = 80, min_rate: float
         if done < min_rate or len(parsed["allergen_names"]) != 28:
             return f"アレルゲンの表を読み取れた割合が低すぎます({done:.0%}・品目{len(parsed['allergen_names'])})"
     if kind in ("sukiya_nutrition", "freshness_nutrition", "zetteria_nutrition",
-                "cocoichi_nutrition") and not parsed.get("updated"):
+                "cocoichi_nutrition", "burgerking_nutrition") and not parsed.get("updated"):
         return "更新日が見つかりません"
     if kind == "yoshinoya" and (parsed.get("issue") is None or not parsed.get("date")):
         return "号数・日付が見つかりません"
@@ -996,6 +1101,12 @@ def build_nutrition(rows: list[dict]) -> tuple[dict | None, list[dict] | None, i
         if r.get("sugar_other") is not None:
             # 表の「糖質」は糖類 (sugar_g) とは別物なので、表記どおり other に入れる (大戸屋と同じ)
             other["糖質"] = f"{r['sugar_other']:g}g"
+        if r.get("weight_other") is not None:
+            # バーガーキング: 表の「製品重量」
+            other["製品重量"] = f"{r['weight_other']:g}g"
+        if r.get("sodium_other") is not None:
+            # バーガーキング: 表の「ナトリウム」(食塩相当量とは別の列)
+            other["ナトリウム"] = f"{r['sodium_other']:g}mg"
         return {"kcal": r["kcal"], "protein_g": r["protein_g"], "fat_g": r["fat_g"], "carbs_g": r["carbs_g"],
                 "sugar_g": r.get("sugar_g"), "fiber_g": r.get("fiber_g"), "salt_g": r["salt_g"], "other": other}
 

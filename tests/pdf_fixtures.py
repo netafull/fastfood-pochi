@@ -311,3 +311,31 @@ def cocoichi_page(items, date="2026年11月27日現在", note_dy=0):
             texts.append(box(c + 20 - 8 * len(s), y - 5, c + 20, y + 6, s))
         y -= 55.0
     return {"texts": texts, "rules": [], "chars": []}
+
+
+# --- バーガーキング: 栄養成分及びアレルゲン情報 ---------------------------------
+
+BK_COLS = [300, 324, 345, 367, 395, 419, 438]  # 製品重量・エネルギー・たんぱく質・脂質・炭水化物・食塩相当量・ナトリウムの中心
+
+
+def burgerking_page(items, updated="2026.11.06", section="バーガーメニュー"):
+    """items: [(名前, [製品重量, エネルギー, たんぱく質, 脂質, 炭水化物, 食塩相当量, ナトリウム])]。
+
+    実物と同じく、見出しは「製品重量 エネルギー たんぱく質」のような1つの文字列で、
+    数値の右にアレルゲンの記号 (読み取り対象外) が並ぶ。版は「最終更新日 2026.11.06」。
+    """
+    texts = [box(53, 402, 100, 409, "最終更新日"), box(119, 402, 166, 409, updated),
+             box(286, 396, 372, 402, "製品重量 エネルギー たんぱく質"),
+             box(357, 396, 369, 402, "脂質"),
+             box(378, 396, 470, 402, "炭水化物 食塩相当量 ナトリウム"),
+             box(53, 350, 53 + 8 * len(section), 358, section)]
+    y = 340.0
+    for name, vals in items:
+        texts.append(box(119, y - 3, 119 + 8 * len(name), y + 3, name))
+        for c, v in zip(BK_COLS, vals):
+            s = f"{v:,}" if isinstance(v, (int, float)) and v >= 1000 else str(v)
+            texts.append(box(c - 6, y - 3, c + 4, y + 3, s))
+        texts.append(box(450, y - 3, 454, y + 3, "●"))
+        texts.append(box(461, y - 3, 465, y + 3, "×"))
+        y -= 16.0
+    return {"texts": texts, "rules": [], "chars": []}
