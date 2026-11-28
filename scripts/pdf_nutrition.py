@@ -508,6 +508,110 @@ def parse_yoshinoya(pages: list[dict]) -> dict:
 
 
 # ---------------------------------------------------------------------------
+# フレッシュネスバーガー: 栄養成分PDF (2026-11-27追加)
+# ---------------------------------------------------------------------------
+# 実物 (https://www.freshnessburger.co.jp/pdf/seibun.pdf、2026-11-27確認) の構造:
+#  ・日本語の表が2つ (≪フード≫ と ≪ドリンク≫) で、それぞれ見出しページ+継続ページの2ページ。
+#    後ろに英語版の同じ表が付くので、日本語のページだけを読む (見出し「商品名」または
+#    タイトルに「栄養成分表」を含むページが日本語)。
+#  ・列は見出しの下の単位 (kcal・g) の並びから決める。フードは7列 (熱量・たんぱく質・脂質・
+#    炭水化物・糖質・食物繊維総量・食塩相当量)、ドリンクは6列 (糖質が無い)。
+#  ・「糖質」は糖類とは別物 (サイトでは sugar_g が「糖類」と表示される) なので、sugar_g には
+#    入れず、行に sugar_other として持たせて build_nutrition で other の「糖質」に入れる。
+#  ・行は名前と数値が同じ高さに並ぶ。サイズは独立した列が無く、名前の末尾に付く
+#    (フレンチフライS・R・L)。同じ名前の末尾違いが2行以上あるときだけサイズとして分ける。
+#  ・フードとドリンクで更新日が別にある (版は両方の日付で見る)。
+
+_FRESHNESS_FOOD_KEYS = ["kcal", "protein_g", "fat_g", "carbs_g", "sugar_other", "fiber_g", "salt_g"]
+_FRESHNESS_DRINK_KEYS = ["kcal", "protein_g", "fat_g", "carbs_g", "fiber_g", "salt_g"]
+_FRESHNESS_SIZE_RE = re.compile(r"^(.+?)(S|R|L)$")
+
+
+def parse_freshness_nutrition(pages: list[dict]) -> dict:
+    """-> {"updated", "drink_updated", "rows", "pages_total", "pages_table", "problems"}"""
+    updated = None
+    drink_updated = None
+    rows: list[dict] = []
+    pages_table = 0
+    problems: list[str] = []
+    cols: list[float] | None = None
+    keys: list[str] | None = None
+    kind = None
+    for pi, p in enumerate(pages):
+        T = p["texts"]
+        is_ja = any("栄養成分表" in t[4] for t in T)
+        has_head = any(unicodedata.normalize("NFKC", t[4]).strip() == "商品名" for t in T)
+        if has_head:
+            units = sorted((t for t in T
+                            if unicodedata.normalize("NFKC", t[4]).strip() in ("kcal", "g")),
+                           key=lambda t: cx(t))
+            if len(units) == 7:
+                cols, keys, kind = [cx(t) for t in units], _FRESHNESS_FOOD_KEYS, "food"
+            elif len(units) == 6:
+                cols, keys, kind = [cx(t) for t in units], _FRESHNESS_DRINK_KEYS, "drink"
+            else:
+                problems.append(f"p{pi + 1}: 単位の列が想定と違います({len(units)}列)")
+                continue
+            pages_table += 1
+        elif not is_ja or cols is None:
+            continue  # 英語版のページ、または見出しより前のページは読まない
+        else:
+            pages_table += 1
+        for t in T:
+            m = re.search(r"更新日\s*:\s*" + _DATE_JP.pattern, unicodedata.normalize("NFKC", t[4]))
+            if m:
+                if kind == "food" and updated is None:
+                    updated = _iso(m)
+                elif kind == "drink" and drink_updated is None:
+                    drink_updated = _iso(m)
+        # 行 = 同じ高さ (cy の差が4以内) に並ぶテキストのまとまり
+        clusters: list[tuple[float, list]] = []
+        for t in sorted(T, key=lambda t: -cy(t)):
+            if clusters and abs(cy(t) - clusters[-1][0]) <= 4:
+                clusters[-1][1].append(t)
+            else:
+                clusters.append((cy(t), [t]))
+        for _cy, ts in clusters:
+            name_ts = [t for t in ts if cx(t) < cols[0] - 40]
+            num_ts = [t for t in ts if to_number(t[4]) is not None
+                      and re.fullmatch(r"[0-9.,]+", unicodedata.normalize("NFKC", t[4]).strip())]
+            if not name_ts or not num_ts:
+                continue
+            name = unicodedata.normalize(
+                "NFKC", "".join(t[4] for t in sorted(name_ts, key=lambda t: t[0]))).strip()
+            if not name or name.startswith("【") or name.startswith("・") or "栄養成分表" in name:
+                continue
+            vals: dict = {}
+            for t in num_ts:
+                ci = min(range(len(cols)), key=lambda i: abs(cx(t) - cols[i]))
+                if abs(cx(t) - cols[ci]) < 30:
+                    vals[keys[ci]] = to_number(t[4])
+            if any(vals.get(k) is None for k in ("kcal", "protein_g", "fat_g", "carbs_g", "salt_g")):
+                continue
+            row = {"name": name, "size": "",
+                   "kcal": vals.get("kcal"), "protein_g": vals.get("protein_g"),
+                   "fat_g": vals.get("fat_g"), "carbs_g": vals.get("carbs_g"),
+                   "sugar_g": None, "sugar_other": vals.get("sugar_other"),
+                   "fiber_g": vals.get("fiber_g"),
+                   "salt_g": vals.get("salt_g"), "block": kind, "ambiguous": False}
+            row["ok"] = energy_ok(row["kcal"], row["protein_g"], row["fat_g"], row["carbs_g"]) \
+                and row["salt_g"] is not None
+            rows.append(row)
+    # サイズ分け: 末尾の S・R・L を、同じ名前の末尾違いが2行以上あるときだけサイズとして分ける
+    bases: dict = {}
+    for r in rows:
+        m = _FRESHNESS_SIZE_RE.match(r["name"])
+        if m:
+            bases[m.group(1)] = bases.get(m.group(1), 0) + 1
+    for r in rows:
+        m = _FRESHNESS_SIZE_RE.match(r["name"])
+        if m and bases.get(m.group(1), 0) >= 2:
+            r["name"], r["size"] = m.group(1), m.group(2)
+    return {"updated": updated, "drink_updated": drink_updated, "rows": rows,
+            "pages_total": len(pages), "pages_table": pages_table, "problems": problems}
+
+
+# ---------------------------------------------------------------------------
 # 検証(誤った栄養値を出さないためのゲート)
 # ---------------------------------------------------------------------------
 
@@ -525,7 +629,7 @@ def validate_source(kind: str, parsed: dict, min_rows: int = 80, min_rate: float
     rows = parsed["rows"]
     if len(rows) < min_rows:
         return f"読み取れた行が少なすぎます({len(rows)}行 < {min_rows})"
-    if kind in ("sukiya_nutrition", "yoshinoya"):
+    if kind in ("sukiya_nutrition", "yoshinoya", "freshness_nutrition"):
         rate = pass_rate(rows)
         if rate < min_rate:
             return f"エネルギー検算に通った行が少なすぎます({rate:.0%} < {min_rate:.0%})"
@@ -533,7 +637,7 @@ def validate_source(kind: str, parsed: dict, min_rows: int = 80, min_rate: float
         done = sum(1 for r in rows if r["complete"]) / len(rows)
         if done < min_rate or len(parsed["allergen_names"]) != 28:
             return f"アレルゲンの表を読み取れた割合が低すぎます({done:.0%}・品目{len(parsed['allergen_names'])})"
-    if kind == "sukiya_nutrition" and not parsed.get("updated"):
+    if kind in ("sukiya_nutrition", "freshness_nutrition") and not parsed.get("updated"):
         return "更新日が見つかりません"
     if kind == "yoshinoya" and (parsed.get("issue") is None or not parsed.get("date")):
         return "号数・日付が見つかりません"
@@ -577,8 +681,12 @@ def build_nutrition(rows: list[dict]) -> tuple[dict | None, list[dict] | None, i
     ordered = [rep] + [r for r in good if r is not rep]
 
     def nut(r: dict) -> dict:
+        other: dict = {}
+        if r.get("sugar_other") is not None:
+            # 表の「糖質」は糖類 (sugar_g) とは別物なので、表記どおり other に入れる (大戸屋と同じ)
+            other["糖質"] = f"{r['sugar_other']:g}g"
         return {"kcal": r["kcal"], "protein_g": r["protein_g"], "fat_g": r["fat_g"], "carbs_g": r["carbs_g"],
-                "sugar_g": None, "fiber_g": None, "salt_g": r["salt_g"], "other": {}}
+                "sugar_g": r.get("sugar_g"), "fiber_g": r.get("fiber_g"), "salt_g": r["salt_g"], "other": other}
 
     variants = [{"label": r["size"] or "", "nutrition": nut(r)} for r in ordered] if len(ordered) > 1 else None
     return nut(rep), variants, dropped
