@@ -361,5 +361,30 @@ class TestExtractGeometryIncrementalUpdate(unittest.TestCase):
             pn.extract_geometry(data)
 
 
+def _row(name, size, kcal, block="b"):
+    return {"name": name, "size": size, "kcal": kcal, "protein_g": 1.0, "fat_g": 1.0, "carbs_g": 1.0,
+            "salt_g": 0.1, "ok": True, "ambiguous": False, "block": block}
+
+
+class TestRowsForNameSameSize(unittest.TestCase):
+    """同じ名前・同じサイズ表記の行が2つ以上あるまとまりは曖昧として付けない (監査#1の共通の安全策)。"""
+
+    def test_duplicate_size_in_one_block_is_ambiguous(self):
+        rows = [_row("ラテ", "S", 69), _row("ラテ", "S", 68)]
+        self.assertIsNone(pn.rows_for_name(rows, "ラテ"))
+
+    def test_duplicate_empty_size_is_ambiguous(self):
+        rows = [_row("ラテ", "", 69), _row("ラテ", "", 68)]
+        self.assertIsNone(pn.rows_for_name(rows, "ラテ"))
+
+    def test_distinct_sizes_still_match(self):
+        rows = [_row("ラテ", "S", 69), _row("ラテ", "T", 96)]
+        self.assertEqual([r["size"] for r in pn.rows_for_name(rows, "ラテ")], ["S", "T"])
+
+    def test_same_values_in_two_blocks_still_match(self):
+        rows = [_row("ラテ", "S", 69, "a"), _row("ラテ", "S", 69, "b")]
+        self.assertEqual(len(pn.rows_for_name(rows, "ラテ")), 1)
+
+
 if __name__ == "__main__":
     unittest.main()

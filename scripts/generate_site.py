@@ -2063,7 +2063,9 @@ def render_ootoya_notes(item: dict) -> str:
 
 def render_burgerking_notes(item: dict) -> str:
     """バーガーキング: 記録の理由、告知日・終了日の出どころ(発売日は公式のデータに無い)、昨季の販売期間。"""
-    notes = ["公式サイトの「期間限定」の印がついたメニューです（画像・説明文・栄養成分は掲載していません）。",
+    # 栄養成分は公式PDFから数値だけ取り込んだ商品がある (取り込めた商品では「掲載していません」と言わない)
+    not_shown = "画像・説明文" if item.get("nutrition") else "画像・説明文・栄養成分"
+    notes = [f"公式サイトの「期間限定」の印がついたメニューです（{not_shown}は掲載していません）。",
              "公式のデータに発売日は載っていないため、一覧で初めて見つけた日（記録開始日）から表示しています。発売日ではありません。"]
     title = item.get("news_title")
     if title:

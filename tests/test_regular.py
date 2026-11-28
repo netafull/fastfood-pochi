@@ -241,6 +241,7 @@ class TestVariantHistory(unittest.TestCase):
                                  and u.count("/") > 5), 0)
 
 
+@helpers.needs_fixtures   # モスの限定カテゴリ(26)の公式JSONスナップショットを使う
 class TestMos(unittest.TestCase):
     def test_mos_creates_all_regulars_at_once_from_the_list(self):
         def cat(items):
@@ -268,6 +269,7 @@ class TestMos(unittest.TestCase):
             self.assertEqual([h["price"] for h in crawl.load_product("mos", "900001")["price_history"]], [400, 430])
 
 
+@helpers.needs_fixtures   # 松屋・すき家の公式ページのスナップショットを使う
 class TestMatsuyaAndSukiya(unittest.TestCase):
     def test_matsuya_regular_backfill_excludes_topping_and_skips_news(self):
         with TempData(regular=True, regular_per_run=5):

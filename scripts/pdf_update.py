@@ -147,19 +147,21 @@ def _source_meta(spec: dict, version: str, version_text: str, now: str) -> dict:
 
 
 def _apply_nutrition(products: list[dict], rows: list[dict], meta: dict, note: str, changed: dict,
-                     report: dict, allergen_spec: dict | None, aliases=None) -> None:
+                     report: dict, allergen_spec: dict | None, aliases=None, section_of=None) -> None:
     """名前が完全一致した商品だけに栄養(と、同じPDFにアレルゲンがあれば併せて)を入れる。ゲートつき。
 
     aliases は「記録名 -> PDF側の表記にした名前」の変換(バーガーキング用)。
     変換した名前でも完全一致したときだけ当てる(部分一致はしない)。
+    section_of は「商品 -> PDFの節 (ホット/コールド等) または None」(フレッシュネス用)。
     """
     matched = []  # (product, rows)
     for p in products:
-        rs = pn.rows_for_name(rows, p["name"])
+        sec = section_of(p) if section_of else None
+        rs = pn.rows_for_name(rows, p["name"], sec)
         if rs is None and aliases is not None:
             alt = aliases(p["name"])
             if alt != p["name"]:
-                rs = pn.rows_for_name(rows, alt)
+                rs = pn.rows_for_name(rows, alt, sec)
         if rs is None:
             continue
         matched.append((p, rs))
@@ -348,7 +350,8 @@ def update_chain(chain: str, products: list[dict], fetcher, state: dict, pending
             ver = f"{parsed['updated']}|{parsed.get('drink_updated') or ''}"
             y, m, d = parsed["updated"].split("-")
             meta = _source_meta(spec, ver, f"{y}年{int(m)}月{int(d)}日更新", now)
-            _apply_nutrition(products, parsed["rows"], meta, FRESHNESS_NOTE, changed, report, None)
+            _apply_nutrition(products, parsed["rows"], meta, FRESHNESS_NOTE, changed, report, None,
+                             section_of=pn.freshness_section)
             if report["aborted"]:
                 _record_error(pending, chain, spec["key"], spec["url"], f"validation: {report['aborted']}", now)
                 _source_entry(state, chain, spec["key"])["failed_signature"] = sig

@@ -453,6 +453,19 @@ class TestSite(unittest.TestCase):
         self.assertIsNone(re.search(r'<img(?![^>]*class="cat-icon")(?![^>]*src="https://netaful\.jp/)', h.split("<main>")[1]))
         self.assertIn("「期間限定」の一覧から消えたのを確認した日", h)  # 公式が終了日を載せない旨
 
+    def test_notes_do_not_contradict_nutrition_table(self):
+        # 監査#2: 栄養が付いた商品で「栄養成分は掲載していません」と栄養の表が同時に出ていた
+        p = self.make()
+        self.assertIn("画像・説明文・栄養成分は掲載していません", g.render_burgerking_notes(p))
+        p["nutrition"] = {"kcal": 900.0, "protein_g": 40.0, "fat_g": 60.0, "carbs_g": 45.0,
+                          "sugar_g": None, "fiber_g": None, "salt_g": 3.0, "other": {}}
+        notes = g.render_burgerking_notes(p)
+        self.assertIn("（画像・説明文は掲載していません）", notes)
+        self.assertNotIn("栄養成分は掲載していません", notes)
+        h = g.render_item_page(p)
+        self.assertNotIn("栄養成分は掲載していません", h)
+        self.assertNotIn("栄養成分・アレルギー情報は当サイトでは掲載していません", h)
+
     def test_ended_with_official_end_date(self):
         p = self.make("8000399", status="ended", ended_observed_at=D3)
         self.assertEqual(g.period_text(p), "2026-11-08（記録開始日）〜2026-10-22")

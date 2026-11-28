@@ -87,6 +87,77 @@ class FreshnessParseTests(unittest.TestCase):
         self.assertIsNotNone(pn.validate_source("freshness_nutrition", bad, min_rows=3))
 
 
+def hot_cold_drink_rows():
+    """実物 (2026-11-28確認) の構造: ホットとコールドの節に同じ名前・同じサイズ (S・T・G) の行が別の値で出る。"""
+    return [
+        ("【ホットドリンク】", []),
+        ("カフェラテS", [69, 3.7, 4.3, 5.4, 0.0, 0.1]),
+        ("カフェラテT", [96, 5.2, 6.0, 7.6, 0.0, 0.2]),
+        ("カフェラテG", [125, 6.8, 7.8, 9.9, 0.0, 0.2]),
+        ("ロイヤルミルクティーT", [206, 8.3, 9.3, 23.8, 0.0, 0.2]),
+        ("ロイヤルミルクティーG", [251, 10.2, 11.5, 28.8, 0.0, 0.3]),
+        ("【コールドドリンク】", []),
+        ("カフェラテS", [68, 3.7, 4.2, 5.4, 0.0, 0.1]),
+        ("カフェラテT", [74, 4.0, 4.6, 5.9, 0.0, 0.1]),
+        ("カフェラテG", [93, 5.0, 5.8, 7.4, 0.0, 0.2]),
+        ("ライムソーダT", [49, 0.2, 0.1, 13.3, 0.0, 0.0]),
+        ("ライムソーダG", [57, 0.2, 0.1, 15.2, 0.0, 0.0]),
+    ]
+
+
+def hot_cold_pages():
+    return [fx.freshness_page(hot_cold_drink_rows(), kind="drink", updated="2026年10月21日")] + \
+        [fx.freshness_page([("ひだまりバーガー", [431, 20.0, 19.0, 45.0, 37.0, 2.0, 2.0])],
+                           kind="food", updated="2026年11月9日")]
+
+
+class FreshnessHotColdTests(unittest.TestCase):
+    """監査#1: ホットとコールドの同名・同サイズの行が1商品に混ざって付いていた。"""
+
+    def test_sections_and_sizes_tgs(self):
+        parsed = pn.parse_freshness_nutrition(hot_cold_pages())
+        latte = [(r["section"], r["size"], r["kcal"]) for r in parsed["rows"] if r["name"] == "カフェラテ"]
+        self.assertEqual(latte, [("hot", "S", 69), ("hot", "T", 96), ("hot", "G", 125),
+                                 ("cold", "S", 68), ("cold", "T", 74), ("cold", "G", 93)])
+        tea = [(r["size"], r["kcal"]) for r in parsed["rows"] if r["name"] == "ロイヤルミルクティー"]
+        self.assertEqual(tea, [("T", 206), ("G", 251)])   # T・G だけの商品もサイズとして分ける
+
+    def test_section_picks_the_right_rows(self):
+        rows = pn.parse_freshness_nutrition(hot_cold_pages())["rows"]
+        hot = pn.rows_for_name(rows, "カフェラテ", "hot")
+        cold = pn.rows_for_name(rows, "カフェラテ", "cold")
+        self.assertEqual([r["kcal"] for r in hot], [69, 96, 125])
+        self.assertEqual([r["kcal"] for r in cold], [68, 74, 93])
+
+    def test_unscoped_name_with_different_values_is_ambiguous(self):
+        rows = pn.parse_freshness_nutrition(hot_cold_pages())["rows"]
+        self.assertIsNone(pn.rows_for_name(rows, "カフェラテ"))      # hot_/ice_ でない商品には当てない
+        self.assertEqual(len(pn.rows_for_name(rows, "ライムソーダ")), 2)   # 片方の節だけなら当たる
+
+    def test_freshness_section_from_product_id(self):
+        self.assertEqual(pn.freshness_section({"product_id": "hot_caffe_latte"}), "hot")
+        self.assertEqual(pn.freshness_section({"product_id": "ice_caffe_latte"}), "cold")
+        self.assertIsNone(pn.freshness_section({"product_id": "coca_cola"}))
+
+    def test_update_attaches_matching_section_only(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fetcher = FakePdfFetcher({URLS["nutrition"]: hot_cold_pages()})
+            prods = [product("カフェラテ", product_id="hot_caffe_latte"),
+                     product("カフェラテ", product_id="ice_caffe_latte"),
+                     product("カフェラテ", product_id="other_latte")]
+
+            def extract(data, with_chars=False):
+                return fetcher.pages[data.decode()]
+            pu.update_chain("freshness", prods, fetcher, {}, {}, URLS, LABELS, "2026-11-28", NOW,
+                            extract=extract, cache_dir=Path(tmp), min_rows=3)
+        hot, ice, other = prods
+        self.assertEqual([(v["label"], v["nutrition"]["kcal"]) for v in hot["nutrition_variants"]],
+                         [("S", 69), ("T", 96), ("G", 125)])
+        self.assertEqual([(v["label"], v["nutrition"]["kcal"]) for v in ice["nutrition_variants"]],
+                         [("S", 68), ("T", 74), ("G", 93)])
+        self.assertIsNone(other["nutrition"])
+
+
 class FakePdfFetcher:
     def __init__(self, pages_by_url, sig="v1"):
         self.pages = dict(pages_by_url)

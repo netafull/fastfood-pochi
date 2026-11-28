@@ -2614,11 +2614,19 @@ def zetteria_price_note(entry: dict) -> str:
 
 
 def fetch_zetteria_press(getter, url: str) -> dict | None:
-    """プレスリリースPDFを取得して解析する。pdfminer が入っていない環境では None
-    (呼び出し側はお知らせの発表日で代用する)。取得の失敗は例外として呼び出し側へ返す。"""
+    """プレスリリースPDFを取得して解析する。pdfminer が入っていない環境と、PDFでないURL
+    (.pdf のURLが通常のHTMLを返したとき) では None (呼び出し側はお知らせの発表日で代用する)。
+    取得の失敗は例外として呼び出し側へ返す。
+
+    HTML は正常な応答なので allow_html でブロック扱いにせず受け取り、%PDF でないことを見て
+    None にする (フレッシュネスの fetch_freshness_press と同じ)。チャレンジの兆候がある
+    応答は allow_html でも BlockedError になる (fetch_binary 側)。
+    """
     if not pdf_update.have_pdfminer():
         return None
-    data = getter.pdf_get("zetteria", url)
+    data = getter.pdf_get("zetteria", url, allow_html=True)
+    if not data.startswith(b"%PDF"):
+        return None
     pages = pdf_update.pn.extract_geometry(data)
     return parsers.parse_zetteria_press(pages)
 

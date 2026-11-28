@@ -521,10 +521,15 @@ def parse_yoshinoya(pages: list[dict]) -> dict:
 #  ・行は名前と数値が同じ高さに並ぶ。サイズは独立した列が無く、名前の末尾に付く
 #    (フレンチフライS・R・L)。同じ名前の末尾違いが2行以上あるときだけサイズとして分ける。
 #  ・フードとドリンクで更新日が別にある (版は両方の日付で見る)。
+#  ・ドリンクの表は 【ホットドリンク】 【コールドドリンク】 【アルコール】 【季節商品】 の節に分かれ、
+#    カフェラテ・カプチーノ・ブレンドコーヒー等は ホットとコールドで同じ名前・同じサイズ (S・T・G) の
+#    行が別の値で出る (2026-11-28確認)。節を section に持たせ、商品側の hot_ / ice_ (商品IDの先頭)
+#    で ホット / コールド のどちらの節の行かを選ぶ (rows_for_name の section)。
+#  ・サイズの表記は S・T・G (ドリンク) と S・R・L (フライポテト)。全角の Ｔ・Ｇ は NFKC で半角になる。
 
 _FRESHNESS_FOOD_KEYS = ["kcal", "protein_g", "fat_g", "carbs_g", "sugar_other", "fiber_g", "salt_g"]
 _FRESHNESS_DRINK_KEYS = ["kcal", "protein_g", "fat_g", "carbs_g", "fiber_g", "salt_g"]
-_FRESHNESS_SIZE_RE = re.compile(r"^(.+?)(S|R|L)$")
+_FRESHNESS_SIZE_RE = re.compile(r"^(.+?)(S|T|G|R|L)$")
 
 
 def parse_freshness_nutrition(pages: list[dict]) -> dict:
@@ -537,6 +542,7 @@ def parse_freshness_nutrition(pages: list[dict]) -> dict:
     cols: list[float] | None = None
     keys: list[str] | None = None
     kind = None
+    section: str | None = None   # ドリンクの節: "hot" / "cold" / "other" (アルコール・季節商品など)
     for pi, p in enumerate(pages):
         T = p["texts"]
         is_ja = any("栄養成分表" in t[4] for t in T)
@@ -553,6 +559,7 @@ def parse_freshness_nutrition(pages: list[dict]) -> dict:
                 problems.append(f"p{pi + 1}: 単位の列が想定と違います({len(units)}列)")
                 continue
             pages_table += 1
+            section = None
         elif not is_ja or cols is None:
             continue  # 英語版のページ、または見出しより前のページは読まない
         else:
@@ -575,6 +582,12 @@ def parse_freshness_nutrition(pages: list[dict]) -> dict:
             name_ts = [t for t in ts if cx(t) < cols[0] - 40]
             num_ts = [t for t in ts if to_number(t[4]) is not None
                       and re.fullmatch(r"[0-9.,]+", unicodedata.normalize("NFKC", t[4]).strip())]
+            if name_ts and not num_ts and kind == "drink":
+                head = unicodedata.normalize(
+                    "NFKC", "".join(t[4] for t in sorted(name_ts, key=lambda t: t[0]))).strip()
+                if head.startswith("【"):
+                    section = "hot" if "ホット" in head else "cold" if "コールド" in head else "other"
+                continue
             if not name_ts or not num_ts:
                 continue
             name = unicodedata.normalize(
@@ -593,19 +606,23 @@ def parse_freshness_nutrition(pages: list[dict]) -> dict:
                    "fat_g": vals.get("fat_g"), "carbs_g": vals.get("carbs_g"),
                    "sugar_g": None, "sugar_other": vals.get("sugar_other"),
                    "fiber_g": vals.get("fiber_g"),
-                   "salt_g": vals.get("salt_g"), "block": kind, "ambiguous": False}
+                   "salt_g": vals.get("salt_g"),
+                   "block": f"{kind}:{section}" if section else kind,
+                   "section": section, "ambiguous": False}
             row["ok"] = energy_ok(row["kcal"], row["protein_g"], row["fat_g"], row["carbs_g"]) \
                 and row["salt_g"] is not None
             rows.append(row)
-    # サイズ分け: 末尾の S・R・L を、同じ名前の末尾違いが2行以上あるときだけサイズとして分ける
+    # サイズ分け: 末尾の S・T・G・R・L を、同じ節の中で同じ名前の末尾違いが2行以上あるときだけ
+    # サイズとして分ける (ホットとコールドで同じ名前が1行ずつあっても、サイズとは見なさない)
     bases: dict = {}
     for r in rows:
         m = _FRESHNESS_SIZE_RE.match(r["name"])
         if m:
-            bases[m.group(1)] = bases.get(m.group(1), 0) + 1
+            k = (r["block"], m.group(1))
+            bases[k] = bases.get(k, 0) + 1
     for r in rows:
         m = _FRESHNESS_SIZE_RE.match(r["name"])
-        if m and bases.get(m.group(1), 0) >= 2:
+        if m and bases.get((r["block"], m.group(1)), 0) >= 2:
             r["name"], r["size"] = m.group(1), m.group(2)
     return {"updated": updated, "drink_updated": drink_updated, "rows": rows,
             "pages_total": len(pages), "pages_table": pages_table, "problems": problems}
@@ -1067,13 +1084,38 @@ def validate_source(kind: str, parsed: dict, min_rows: int = 80, min_rate: float
 REPRESENTATIVE_SIZE = "並盛"
 
 
-def rows_for_name(rows: list[dict], name: str) -> list[dict] | None:
+def freshness_section(product: dict) -> str | None:
+    """フレッシュネスの商品IDの先頭 (hot_ / ice_) から、PDFのドリンクの節 (hot / cold) を決める。"""
+    pid = product.get("product_id") or ""
+    if pid.startswith("hot_"):
+        return "hot"
+    if pid.startswith("ice_"):
+        return "cold"
+    return None
+
+
+def rows_for_name(rows: list[dict], name: str, section: str | None = None) -> list[dict] | None:
     """商品名と完全一致(NFKC・空白除去)する行のまとまりを返す。曖昧(同名が別の値で複数ある)なら None。
-    曖昧な部分一致はしない(別商品に当てないため)。"""
+    曖昧な部分一致はしない(別商品に当てないため)。
+    section を渡すと、節 (row["section"]) が付いている行はその節のものだけを候補にする
+    (節の無い行は対象のまま)。選んだまとまりの中に同じサイズ表記の行が2つ以上あるときも曖昧として
+    None を返す (別の値の行が混ざっている疑い。同じサイズ名の栄養を並べて出さない)。"""
     key = normalize_name(name)
     hit = [r for r in rows if not r.get("ambiguous") and normalize_name(r["name"]) == key]
+    if section is not None:
+        hit = [r for r in hit if r.get("section") in (None, section)]
     if not hit:
         return None
+    chosen = _rows_one_block(hit)
+    if chosen is None:
+        return None
+    sizes = [r["size"] or "" for r in chosen]
+    if len(sizes) != len(set(sizes)):
+        return None
+    return chosen
+
+
+def _rows_one_block(hit: list[dict]) -> list[dict] | None:
     blocks: dict = {}
     for r in hit:
         blocks.setdefault(r.get("block"), []).append(r)
