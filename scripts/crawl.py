@@ -2140,8 +2140,17 @@ def crawl_arcland_family(chain: str, getter, pending: dict, stats: dict, today: 
 #    (b) baseline(初回巡回の全メニュー)に無く後から現れた商品、(c) 日高屋の8桁の日付形式ID(限定品ごとの別ページ)、
 #    (d) 定番(それ以外。詳細を取るので1回の巡回で regular_backfill_per_run 件まで)。
 #  ・セット・トッピング・アルコールなどは記録しない(parsers の *_excluded)。説明文・画像は保存も表示もしない。
-#  ・日付形式のIDが公式の更新で付け替わる可能性は未確認。付け替わっても、新規が1〜2件増えて古い方が終了になるだけで済む
-#    (一度に閾値を超える新規候補が出たら burst_filter が止める)。
+#  ・日高屋の日付形式のID(8桁、または 20261127-1 のように末尾に -数字・_数字 の付くもの)は、ID の日付がそのまま発売日
+#    (実測: 20261009=2026-10-09、20261127=2026-11-27)。お知らせから発売日が取れなかった商品に限り、ID の日付を
+#    launch_date_source="dated_id" として使う。ただし初めて見た日の前120日〜後30日に収まらない日付は使わない(取り違えの保険)。
+#    手で入れた日付(manual)・お知らせの日付は上書きしない。お知らせの日付は発売日の代用にしない(オーナー決定 2026-11-28)。
+#  ・日高屋は公式がIDを付け替える(2026-11-27: 20261127-1 → 20261127_1、20261127-2 → 20261127_2。単品→おつまみへのカテゴリ移動も同時)。
+#    放っておくと新IDが新規として二重に記録され、旧IDが誤って「終了」になる。そこで一覧が全部読めた回だけ
+#    hidakaya_resolve_reassigned_ids が、今日の一覧に新しく現れたID(未記録・baseline外)を、一覧から消えた記録済み商品
+#    (販売中、または終了から14日以内)に、名前と価格が同じで1対1のときに限って付け替える(曖昧なら何もしない)。
+#    記録のキー(product_id)は変えず、official_url・official_id・カテゴリを今日の一覧に合わせ、見たものとして扱う
+#    (終了判定に数えない。終了から14日以内なら販売中に戻すだけで relaunches には積まない)。
+#    付け替えた後の official_id は記録に残り、翌日以降は名前・価格が変わっても同じ対応で見つける。
 #  ・一覧が空・取得失敗・前回の半分未満の回は、何も更新せず終了判定もしない。
 RAMEN_CHAINS = ("kourakuen", "hidakaya")
 RAMEN_MIN_RATIO = 0.5
@@ -2195,6 +2204,111 @@ def ramen_apply_news(product: dict, news: list[dict]) -> bool:
     elif product.get("limited_kind") in (None, "新規掲載"):
         product["limited_kind"] = "新メニュー"
     return changed
+
+
+HIDAKAYA_DATED_ID_BEFORE_DAYS = 120   # ID の日付が初めて見た日より何日前まで発売日として認めるか
+HIDAKAYA_DATED_ID_AFTER_DAYS = 30     # 同じく何日後まで
+HIDAKAYA_REASSIGN_RECENT_DAYS = 14    # 終了から何日以内の商品なら、付け替え先として販売中に戻すか
+
+
+def hidakaya_apply_dated_id(product: dict) -> bool:
+    """日付形式のIDの商品に dated_id の印を付け、お知らせから発売日が取れていなければ ID の日付を発売日にする。
+    変更があれば True。定番・発売日が既にある商品(manual・お知らせ・取得済みの dated_id)の発売日は書き換えない。
+    ID の日付が初めて見た日の前後の範囲(120日前〜30日後)に収まらなければ使わない。"""
+    if product.get("chain") != "hidakaya":
+        return False
+    dated = next((x for x in (product.get("product_id"), product.get("official_id")) if parsers.hidakaya_is_dated_id(x)), None)
+    if dated is None:
+        return False
+    changed = False
+    if not product.get("dated_id"):
+        product["dated_id"] = True
+        changed = True
+    if product.get("launch_date") is not None or product.get("is_regular"):
+        return changed
+    iso = parsers.hidakaya_dated_id_date(dated)
+    first = (product.get("first_seen_at") or "")[:10]
+    if not iso or not first:
+        return changed
+    d, f = datetime.date.fromisoformat(iso), datetime.date.fromisoformat(first)
+    if not (f - datetime.timedelta(days=HIDAKAYA_DATED_ID_BEFORE_DAYS) <= d <= f + datetime.timedelta(days=HIDAKAYA_DATED_ID_AFTER_DAYS)):
+        return changed
+    product["launch_date"] = iso
+    product["launch_date_source"] = "dated_id"
+    return True
+
+
+def hidakaya_resolve_reassigned_ids(entries: dict, recorded: list[dict], baseline: set[str] | None, today: str):
+    """公式が商品IDを付け替えたとき(2026-11-27: 20261127-1 → 20261127_1)に、新規と終了の二重記録を防ぐ。純粋関数。
+    一覧が全部読めた回にだけ呼ぶこと(読めないページに旧IDが隠れていると、別商品を付け替えと取り違えるため)。
+
+    entries: {今日の一覧の商品ID: 項目}。recorded: 記録済みの商品。baseline: 基準線のID集合(None可。書き換えない)。
+    ①記録済みの official_id に当たる今日のIDは、その商品の続きとする(前回までに付け替えた分。名前・価格が変わっても追える)。
+    ②今日の一覧に新しく現れた(記録済みでも official_id でも基準線でもない)IDを、今日の一覧に無い記録済み商品
+      (販売中、または終了から14日以内)に、名前と価格が同じで1対1のときだけ付け替える。複数に当たる・当たらないときは何もしない。
+    戻り値: (キーを記録済みの商品IDに付け替え official_id に今日のIDを入れた entries, {今日のID: 記録済みID})。"""
+    baseline = baseline or set()
+    by_pid = {p["product_id"]: p for p in recorded}
+    cutoff = (datetime.date.fromisoformat(today) - datetime.timedelta(days=HIDAKAYA_REASSIGN_RECENT_DAYS)).isoformat()
+    renames: dict[str, str] = {}
+    claimed: set[str] = set()
+    for p in recorded:
+        oid, pid = p.get("official_id"), p["product_id"]
+        if oid and oid != pid and oid in entries and oid not in by_pid and pid not in entries and pid not in claimed:
+            renames[oid] = pid
+            claimed.add(pid)
+
+    def key(name, price):
+        return (name, price) if name and price is not None else None
+
+    fresh: dict[tuple, list[str]] = {}
+    for pid, e in entries.items():
+        if pid in by_pid or pid in baseline or pid in renames:
+            continue
+        k = key(e.get("name"), e.get("price"))
+        if k:
+            fresh.setdefault(k, []).append(pid)
+    gone: dict[tuple, list[str]] = {}
+    for p in recorded:
+        pid = p["product_id"]
+        if pid in entries or pid in claimed:
+            continue
+        recent_end = p.get("status") == "ended" and (p.get("ended_observed_at") or "") >= cutoff
+        if p.get("status") != "on_sale" and not recent_end:
+            continue
+        k = key(p.get("name"), p.get("price"))
+        if k:
+            gone.setdefault(k, []).append(pid)
+    for k, news in fresh.items():
+        if len(news) == 1 and len(gone.get(k, [])) == 1:
+            renames[news[0]] = gone[k][0]
+    out = {}
+    for pid, e in entries.items():
+        if pid in renames:
+            out[renames[pid]] = dict(e, product_id=renames[pid], official_id=pid)
+        else:
+            out[pid] = e
+    return out, renames
+
+
+def hidakaya_apply_reassign(existing: dict, e: dict, today: str) -> bool:
+    """付け替えとみなした記録済み商品に、今日の一覧の公式ID・URL・カテゴリを反映する(記録のキーは変えない)。
+    終了から14日以内なら販売中に戻す(再登場ではなく付け替えなので relaunches には積まない)。変えたら True。"""
+    new_id = e.get("official_id")
+    if not new_id:
+        return False
+    if existing.get("status") == "ended":
+        cutoff = (datetime.date.fromisoformat(today) - datetime.timedelta(days=HIDAKAYA_REASSIGN_RECENT_DAYS)).isoformat()
+        if (existing.get("ended_observed_at") or "") >= cutoff:
+            existing["status"] = "on_sale"
+            existing["ended_observed_at"] = None
+            existing["missed_runs"] = 0
+            existing.pop("last_miss_date", None)
+    existing["official_id"] = new_id
+    existing["official_url"] = e["official_url"]
+    if e.get("category"):
+        existing["category"] = e["category"]
+    return True
 
 
 def build_ramen_product(chain: str, entry: dict, detail: dict, kind: str, today: str, now: str) -> dict:
@@ -2359,12 +2473,20 @@ def crawl_ramen_chain(chain: str, getter, pending: dict, stats: dict, today: str
         print(f"[skip] robots.txtでDisallow: {news_url}", file=sys.stderr)
 
     baseline = baseline_for(chain)
+    # 日高屋: 公式がIDを付け替えた商品を、新規+終了の二重記録にしない。一覧が全部読めた回だけ(burst_filter の前に行い、
+    # 付け替え分を新規候補に数えない)。基準線のファイルは書き換えない
+    if not kou and st["list_ok"]:
+        entries, moves = hidakaya_resolve_reassigned_ids(entries, load_chain_products(chain), baseline, today)
+        for new_pid, old_pid in moves.items():
+            print(f"[info] {chain} IDの付け替えとみなす: {old_pid} -> {new_pid}", file=sys.stderr)
     entries = burst_filter(chain, entries, baseline, pending, stats, today)
     regular_budget = RegularBudget(st)
     limited_seen = 0
     for pid, e in entries.items():
         existing = load_product(chain, pid)
         if existing is not None:
+            if not kou:
+                hidakaya_apply_reassign(existing, e, today)  # 付け替えの反映は touch_seen の前(終了→販売中に戻すため)
             touch_seen(existing, e.get("price") if kou else list_price_for_history(st, e.get("price")), today, now, st)
             if e.get("period_limited"):  # 後から【期間限定】が付いたら上げる。外れても定番には戻さない
                 if existing.get("limited_kind") == REGULAR_KIND:
@@ -2426,6 +2548,8 @@ def crawl_ramen_chain(chain: str, getter, pending: dict, stats: dict, today: str
             mark_regular(product)
         else:
             ramen_apply_news(product, news)
+        if not kou:
+            hidakaya_apply_dated_id(product)  # お知らせから発売日が取れなかった日付形式IDの商品は、ID の日付を使う
         save_product(chain, product)
         st["regular_created" if is_regular else "new_products"] += 1
         pending[chain].pop(pid, None)
@@ -2443,7 +2567,10 @@ def crawl_ramen_chain(chain: str, getter, pending: dict, stats: dict, today: str
     for p in load_chain_products(chain):
         if p.get("status") == "ended" and (p.get("ended_observed_at") or "") < cutoff:
             continue  # 終わって久しい商品は探し直さない
-        if news and ramen_apply_news(p, news):
+        changed = bool(news and ramen_apply_news(p, news))
+        if not kou and hidakaya_apply_dated_id(p):  # お知らせの照合のあと(お知らせの日付を優先)。既存の記録にも反映する
+            changed = True
+        if changed:
             save_product(chain, p)
     recorded = [p for p in load_chain_products(chain) if not p.get("is_regular")]
     st["news_matched"] = sum(1 for p in recorded if p.get("news_url"))
