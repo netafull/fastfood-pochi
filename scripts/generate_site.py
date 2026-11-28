@@ -1827,10 +1827,15 @@ def render_ramen_notes(item: dict) -> str:
         link = item.get("news_url") or ""
         when = esc(item.get("announced_at") or item.get("news_date") or "")
         link_html = f'（<a href="{esc(link)}" target="_blank" rel="noopener">公式お知らせ</a>）' if link else ""
-        if item.get("launch_date"):
+        # 発売日が商品ページのID(dated_id)や手入力(manual)のときは、お知らせから読めた日付ではない
+        if item.get("launch_date") and item.get("launch_date_source") not in ("dated_id", "manual"):
             notes.append(f"発売日は公式のお知らせ（{when}）によります：{esc(title)}{link_html}")
         else:
             notes.append(f"お知らせ日：{when}（発売日の記載が読み取れませんでした）：{esc(title)}{link_html}")
+    if item.get("launch_date_source") == "dated_id" and item.get("launch_date"):
+        notes.append("発売日は公式サイトの商品ページのID（日付の形式）によります。")
+    if item.get("launch_date_source") == "manual" and item.get("launch_date") and item.get("launch_date_note"):
+        notes.append(f"発売日：{esc(item['launch_date_note'])}")
     for n in item.get("sale_notes") or []:
         notes.append(f"公式の注記：{esc(n.rstrip('。'))}。")
     if item.get("allergen_pdf_url"):

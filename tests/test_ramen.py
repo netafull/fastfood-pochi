@@ -138,6 +138,20 @@ class TestHidakayaParsers(unittest.TestCase):
         for pid in ("1", "9_196", "808-1", "299_001", "162_01"):
             self.assertFalse(P.hidakaya_is_dated_id(pid))
 
+    def test_dated_id_with_suffix(self):
+        # 2026-11-27 に出た 20261127-1 / 20261127_1 のような枝番付きも日付形式IDとして扱う
+        for pid in ("20261127-1", "20261127_1", "20261127_12"):
+            self.assertTrue(P.hidakaya_is_dated_id(pid), pid)
+        for pid in ("20261127-", "20261127_a", "20261127-1-2", "202611271", "2026112", "30261127", "", None):
+            self.assertFalse(P.hidakaya_is_dated_id(pid), pid)
+
+    def test_dated_id_date(self):
+        self.assertEqual(P.hidakaya_dated_id_date("20261009"), "2026-10-09")
+        self.assertEqual(P.hidakaya_dated_id_date("20261127_2"), "2026-11-27")
+        self.assertEqual(P.hidakaya_dated_id_date("20261127-1"), "2026-11-27")
+        for pid in ("20261340", "20260230", "20261300_1", "808-1", "1", "", None):
+            self.assertIsNone(P.hidakaya_dated_id_date(pid), pid)
+
     def test_detail_with_note(self):
         d = P.parse_hidakaya_detail(S.hid_detail(kcal="896", salt="7.3"))
         self.assertEqual((d["nutrition"]["kcal"], d["nutrition"]["salt_g"]), (896.0, 7.3))
@@ -433,7 +447,7 @@ class TestCrawlHidakaya(unittest.TestCase):
         with TempData():
             _, st = run("hidakaya", hid(news="[]"), D1)
             self.assertEqual(prod("hidakaya", "20261009")["limited_kind"], "新規掲載")  # お知らせが消えた後でも落とさない
-            self.assertIsNone(prod("hidakaya", "20261009")["launch_date"])
+            self.assertEqual(prod("hidakaya", "20261009")["launch_date"], "2026-10-09")  # 2026-11-28〜: IDの日付を使う
             self.assertEqual(st["new_products"], 1)
 
     def test_regular_items_use_list_price(self):
@@ -459,19 +473,120 @@ class TestCrawlHidakaya(unittest.TestCase):
             run("hidakaya", hid(pages=changed), D3)
             self.assertEqual(prod("hidakaya", "1")["price_history"][-1], {"date": D3, "price": 450})
 
-    def test_renumbered_dated_id_does_not_spread(self):
+    def test_renumbered_dated_id_is_mapped_to_the_recorded_product(self):
+        # 2026-11-28 以降: 同名・同価格で1対1なら、付け替えられたIDは新規にせず記録済みの商品の続きとする
         with TempData(regular=True):
             run("hidakaya", hid(), D1)
             before = {p["product_id"] for p in crawl.load_chain_products("hidakaya")}
             renamed = S.hid_pages(dated="20261201")
-            run("hidakaya", hid(pages=renamed), D2)
-            self.assertEqual(prod("hidakaya", "20261201")["limited_kind"], "期間限定")  # 同名商品がお知らせにも合う
-            self.assertEqual(prod("hidakaya", "20261009")["status"], "on_sale")  # まだ1回目の欠け
-            _, st = run("hidakaya", hid(pages=renamed), D3)
-            self.assertEqual(prod("hidakaya", "20261009")["status"], "ended")
-            self.assertEqual(st["ended"], 1)  # 巻き込まれて終わった商品は他に無い
-            self.assertEqual({p["product_id"] for p in crawl.load_chain_products("hidakaya")}, before | {"20261201"})
-            self.assertTrue(all(prod("hidakaya", pid)["status"] == "on_sale" for pid in before - {"20261009"}))
+            _, st = run("hidakaya", hid(pages=renamed), D2)
+            self.assertIsNone(prod("hidakaya", "20261201"))  # 二重に記録しない
+            p = prod("hidakaya", "20261009")
+            self.assertEqual((p["status"], p["missed_runs"], p["last_seen_at"]), ("on_sale", 0, D2))
+            self.assertEqual(p["official_id"], "20261201")
+            self.assertEqual(p["official_url"], S.HID + "/hits/ja/menu/1/detail/20261201.html")
+            self.assertEqual(st["new_products"], 0)
+            run("hidakaya", hid(pages=renamed), D3)
+            _, st = run("hidakaya", hid(pages=renamed), D4)
+            self.assertEqual(prod("hidakaya", "20261009")["status"], "on_sale")  # 翌日以降も official_id で追い続ける
+            self.assertEqual(st["ended"], 0)
+            self.assertEqual({p["product_id"] for p in crawl.load_chain_products("hidakaya")}, before)
+
+    def test_renumbered_id_restores_a_recently_ended_product(self):
+        # 付け替えの前後の巡回の間に、旧IDが2回続けて消えて「終了」にされた商品(2026-11-27の20261127-1)を販売中に戻す
+        with TempData(regular=True):
+            run("hidakaya", hid(), D1)
+            p = prod("hidakaya", "20261009")
+            p.update(status="ended", ended_observed_at=D1, missed_runs=2, last_miss_date=D1)
+            crawl.save_product("hidakaya", p)
+            run("hidakaya", hid(pages=S.hid_pages(dated="20261201")), D2)
+            p = prod("hidakaya", "20261009")
+            self.assertEqual((p["status"], p["ended_observed_at"], p["missed_runs"]), ("on_sale", None, 0))
+            self.assertFalse(p.get("last_miss_date"))
+            self.assertNotIn("relaunches", p)  # 再登場ではなく付け替えなので積まない
+            self.assertIsNone(prod("hidakaya", "20261201"))
+
+    def test_renumbered_id_not_mapped_when_partial_fetch_or_different_price(self):
+        with TempData(regular=True):
+            run("hidakaya", hid(), D1)
+            renamed = S.hid_pages(dated="20261201")
+            g2 = hid(pages=renamed, fail={S.HID + "/hits/ja/menu/1/list/5.html"})
+            _, st = run("hidakaya", g2, D2)
+            self.assertFalse(st["list_ok"])  # 一覧が全部読めない回は付け替えない
+            self.assertNotIn("official_id", prod("hidakaya", "20261009"))
+            self.assertIsNotNone(prod("hidakaya", "20261201"))
+        with TempData(regular=True):
+            run("hidakaya", hid(), D1)
+            other = {k: v.replace(">690<", ">700<") for k, v in S.hid_pages(dated="20261201").items()}  # 価格が違えば別商品
+            run("hidakaya", hid(pages=other), D2)
+            self.assertNotIn("official_id", prod("hidakaya", "20261009"))
+            self.assertIsNotNone(prod("hidakaya", "20261201"))
+
+    def test_dated_id_gives_launch_date_when_news_has_none(self):
+        with TempData():
+            _, st = run("hidakaya", hid(news="[]"), D1)
+            p = prod("hidakaya", "20261009")
+            self.assertEqual((p["launch_date"], p["launch_date_source"], p["dated_id"]), ("2026-10-09", "dated_id", True))
+            self.assertIsNone(p["news_url"])
+
+    def test_dated_id_with_suffix_is_recorded_and_dated(self):
+        with TempData():
+            run("hidakaya", hid(), D1)
+            extra = S.hid_pages(extra={4: [S.hid_item("20261118-1", "合成もつ煮（小）", 350)]})
+            g = hid(pages=extra, details={S.HID + "/hits/ja/menu/1/detail/20261118-1.html": S.hid_detail(name="合成もつ煮（小）")})
+            run("hidakaya", g, D2)
+            p = prod("hidakaya", "20261118-1")
+            self.assertEqual((p["limited_kind"], p["launch_date"], p["launch_date_source"], p["dated_id"]),
+                             ("新規掲載", "2026-11-18", "dated_id", True))
+
+    def test_implausible_dated_id_leaves_launch_date_null(self):
+        for pid in ("20260101", "20270101"):  # 初めて見た日(2026-11-18)の120日前より前 / 30日後より後
+            with TempData():
+                g = hid(pages=S.hid_pages(dated=pid), news="[]",
+                        details={f"{S.HID}/hits/ja/menu/1/detail/{pid}.html": S.hid_detail()})
+                run("hidakaya", g, D1)
+                p = prod("hidakaya", pid)
+                self.assertIsNone(p["launch_date"], pid)
+                self.assertEqual(p["launch_date_source"], "not_found")
+                self.assertTrue(p["dated_id"])
+        with TempData():
+            g = hid(pages=S.hid_pages(dated="20261340"), news="[]",
+                    details={f"{S.HID}/hits/ja/menu/1/detail/20261340.html": S.hid_detail()})
+            run("hidakaya", g, D1)
+            self.assertIsNone(prod("hidakaya", "20261340")["launch_date"])  # 暦に無い日付
+
+    def test_dated_id_never_overwrites_existing_launch_date(self):
+        with TempData():
+            run("hidakaya", hid(), D1)  # お知らせの見出しから 2026-10-09
+            self.assertEqual(prod("hidakaya", "20261009")["launch_date_source"], "news_headline")
+            p = prod("hidakaya", "20261009")
+            p.update(launch_date="2026-10-10", launch_date_source="manual")
+            crawl.save_product("hidakaya", p)
+            run("hidakaya", hid(news="[]"), D2)
+            p = prod("hidakaya", "20261009")
+            self.assertEqual((p["launch_date"], p["launch_date_source"]), ("2026-10-10", "manual"))
+            self.assertEqual(prod("hidakaya", "20261009")["dated_id"], True)
+
+    def test_existing_record_gets_dated_id_launch_date_on_next_run(self):
+        with TempData():
+            run("hidakaya", hid(news="[]"), D1)
+            p = prod("hidakaya", "20261009")
+            p.update(launch_date=None, launch_date_source="not_found")
+            p.pop("dated_id")
+            crawl.save_product("hidakaya", p)
+            run("hidakaya", hid(news="[]"), D2)
+            p = prod("hidakaya", "20261009")
+            self.assertEqual((p["launch_date"], p["launch_date_source"], p["dated_id"]), ("2026-10-09", "dated_id", True))
+
+    def test_news_without_date_falls_back_to_dated_id_but_keeps_news_fields(self):
+        with TempData():
+            news = S.hid_news()
+            news = news.replace("10月９日(金)より", "").replace("【期間限定】合成濃厚豚骨ラーメン発売開始しました", "【期間限定】合成濃厚豚骨ラーメン発売開始しました")
+            news = json.dumps([dict(a, news_body="期間限定で発売開始します。") for a in json.loads(news)], ensure_ascii=False)
+            run("hidakaya", hid(news=news), D1)
+            p = prod("hidakaya", "20261009")
+            self.assertEqual(p["news_title"], "【期間限定】合成濃厚豚骨ラーメン発売開始しました")
+            self.assertEqual((p["launch_date"], p["launch_date_source"]), ("2026-10-09", "dated_id"))
 
     def test_burst_filter_stops_mass_renumbering(self):
         with TempData(regular=True):
@@ -510,6 +625,66 @@ class TestCrawlHidakaya(unittest.TestCase):
             _, st = run("hidakaya", hid(pages=empty), D3)
             self.assertFalse(st["list_ok"])
             self.assertEqual(prod("hidakaya", "20261009")["missed_runs"], 0)
+
+
+class TestHidakayaResolveReassignedIds(unittest.TestCase):
+    """hidakaya_resolve_reassigned_ids(純粋関数): 付け替えとみなす条件。"""
+
+    @staticmethod
+    def rec(pid, name="もつ煮（小）", price=350, status="on_sale", ended=None, **kw):
+        return dict({"product_id": pid, "name": name, "price": price, "status": status, "ended_observed_at": ended}, **kw)
+
+    @staticmethod
+    def ent(pid, name="もつ煮（小）", price=350):
+        return {"product_id": pid, "name": name, "price": price, "category": "おつまみ",
+                "official_url": f"{S.HID}/hits/ja/menu/1/detail/{pid}.html"}
+
+    def resolve(self, entries, recorded, baseline=None, today="2026-11-28"):
+        return crawl.hidakaya_resolve_reassigned_ids({e["product_id"]: e for e in entries}, recorded, baseline, today)
+
+    def test_one_to_one_same_name_and_price(self):
+        out, moves = self.resolve([self.ent("20261127_1")], [self.rec("20261127-1")])
+        self.assertEqual(moves, {"20261127_1": "20261127-1"})
+        self.assertEqual(list(out), ["20261127-1"])
+        self.assertEqual((out["20261127-1"]["product_id"], out["20261127-1"]["official_id"]), ("20261127-1", "20261127_1"))
+
+    def test_recently_ended_is_a_candidate_but_long_ended_is_not(self):
+        _, moves = self.resolve([self.ent("20261127_1")], [self.rec("20261127-1", status="ended", ended="2026-11-28")])
+        self.assertEqual(moves, {"20261127_1": "20261127-1"})
+        _, moves = self.resolve([self.ent("20261127_1")], [self.rec("20261127-1", status="ended", ended="2026-11-01")])
+        self.assertEqual(moves, {})
+
+    def test_ambiguous_is_not_mapped(self):
+        # 同名・同価格の候補が複数(旧側2件)、または新側が複数
+        _, moves = self.resolve([self.ent("A_1")], [self.rec("A-1"), self.rec("B-1")])
+        self.assertEqual(moves, {})
+        _, moves = self.resolve([self.ent("A_1"), self.ent("A_2")], [self.rec("A-1")])
+        self.assertEqual(moves, {})
+
+    def test_different_name_or_price_or_recorded_or_baseline_is_not_mapped(self):
+        self.assertEqual(self.resolve([self.ent("N_1", price=380)], [self.rec("N-1")])[1], {})
+        self.assertEqual(self.resolve([self.ent("N_1", name="もつ煮")], [self.rec("N-1")])[1], {})
+        self.assertEqual(self.resolve([self.ent("N_1")], [self.rec("N-1")], baseline={"N_1"})[1], {})  # 基準線にあるID
+        # 旧IDがまだ一覧にある(別商品)
+        self.assertEqual(self.resolve([self.ent("N_1"), self.ent("N-1")], [self.rec("N-1")])[1], {})
+        # 新IDが既に記録済み
+        self.assertEqual(self.resolve([self.ent("N_1")], [self.rec("N-1"), self.rec("N_1")])[1], {})
+        self.assertEqual(self.resolve([self.ent("N_1", price=None)], [self.rec("N-1", price=None)])[1], {})
+
+    def test_known_official_id_is_followed_even_if_price_changed(self):
+        out, moves = self.resolve([self.ent("20261127_1", price=400)], [self.rec("20261127-1", official_id="20261127_1")])
+        self.assertEqual(moves, {"20261127_1": "20261127-1"})
+        self.assertEqual(out["20261127-1"]["price"], 400)
+
+    def test_apply_reassign_updates_record_and_restores(self):
+        p = self.rec("20261127-1", status="ended", ended="2026-11-28", missed_runs=2, last_miss_date="2026-11-28",
+                     category="単品", official_url="old")
+        self.assertTrue(crawl.hidakaya_apply_reassign(p, dict(self.ent("20261127_1"), official_id="20261127_1"), "2026-11-28"))
+        self.assertEqual((p["status"], p["ended_observed_at"], p["missed_runs"], p["category"], p["official_id"]),
+                         ("on_sale", None, 0, "おつまみ", "20261127_1"))
+        self.assertNotIn("last_miss_date", p)
+        self.assertTrue(p["official_url"].endswith("/20261127_1.html"))
+        self.assertFalse(crawl.hidakaya_apply_reassign(p, self.ent("x"), "2026-11-28"))  # official_id が無ければ何もしない
 
 
 class TestSiteAndConfig(unittest.TestCase):
@@ -582,6 +757,21 @@ class TestSiteAndConfig(unittest.TestCase):
         self.assertIn("店舗により価格・取り扱いが異なる場合があります", h)
         self.assertIn("hits/menu/allergy.html", h)
         self.assertIn("大豆、卵、鶏肉、小麦粉", h)
+
+    def test_hidakaya_dated_id_note(self):
+        h = g.render_item_page(self.make("hidakaya", "20261009", launch_date="2026-10-09", launch_date_source="dated_id"))
+        self.assertIn("発売日は公式サイトの商品ページのID（日付の形式）によります。", h)
+        self.assertNotIn("発売日は公式のお知らせ（", h)  # お知らせ由来ではない
+        h = g.render_item_page(self.make("hidakaya", "20261009"))
+        self.assertNotIn("商品ページのID", h)  # お知らせの日付のときは出さない
+
+    def test_hidakaya_manual_launch_date_note(self):
+        h = g.render_item_page(self.make("hidakaya", "20261009", launch_date="2026-11-27", launch_date_source="manual",
+                                         launch_date_note="公式のお知らせには日付が無いため、PR TIMESで確認して手で補った。"))
+        self.assertIn("発売日：公式のお知らせには日付が無いため、PR TIMESで確認して手で補った。", h)
+        self.assertNotIn("発売日は公式のお知らせ（", h)
+        h = g.render_item_page(self.make("hidakaya", "20261009", launch_date="2026-11-27", launch_date_source="manual"))
+        self.assertNotIn("発売日：", h)  # 注記が無ければ出さない
 
     def test_regular_item_page_and_card(self):
         p = self.make("hidakaya", "808-1", regular=True)

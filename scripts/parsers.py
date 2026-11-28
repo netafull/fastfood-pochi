@@ -1995,8 +1995,22 @@ def hidakaya_excluded(entry: dict) -> str | None:
 
 
 def hidakaya_is_dated_id(pid: str) -> bool:
-    """detail/20261009 のような8桁の日付形式のID(期間限定の商品ごとに別ページ。2026-11-18時点で1件だけ)。"""
-    return bool(re.fullmatch(r"20\d{6}", pid or ""))
+    """detail/20261009 のような8桁の日付形式のID(期間限定の商品ごとに別ページ)。
+    2026-11-27 に 20261127-1 / 20261127_1 のように末尾に「-数字」「_数字」の付いたIDが出たので、それも日付形式として扱う
+    (同日にサイズ違い・定食違いを分けるための枝番と見ている。推測)。"""
+    return bool(re.fullmatch(r"20\d{6}(?:[-_]\d+)?", pid or ""))
+
+
+def hidakaya_dated_id_date(pid: str) -> str | None:
+    """日付形式のIDの先頭8桁を ISO 日付にする。日付形式でない・暦に無い日付(20261340など)は None。
+    実測では ID の日付は発売日と一致している(20261009=2026-10-09、20261127=2026-11-27)。"""
+    import datetime
+    if not hidakaya_is_dated_id(pid):
+        return None
+    try:
+        return datetime.date(int(pid[:4]), int(pid[4:6]), int(pid[6:8])).isoformat()
+    except ValueError:
+        return None
 
 
 _HIDAKAYA_TAG_RE = re.compile(r"[【\[［]\s*(期間限定|店舗限定)\s*[】\]］]")
