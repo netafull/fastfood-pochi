@@ -936,5 +936,9 @@
   "freshness_pdf": {
     "nutrition": "https://www.freshnessburger.co.jp/pdf/seibun.pdf",
     "nutrition_label": "栄養成分表"
+  },
+  "zetteria_pdf": {
+    "nutrition": "https://images.zensho.co.jp/materials/zetteria/allergen/nutrition.pdf",
+    "nutrition_label": "栄養成分一覧表"
   }
 }

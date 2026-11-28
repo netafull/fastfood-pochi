@@ -2591,8 +2591,9 @@ def crawl_ramen_chain(chain: str, getter, pending: dict, stats: dict, today: str
 #    日付があれば "news_headline"、無ければ発表日で代用して "news_date_fallback" とし、PDFの値と区別する。
 #  ・セット商品も記録する(オーナー決定。モーニング・ランチ・ディナー・わくわくセットはセットが中心の
 #    カテゴリで、外すと丸ごと空になる。ラーメン型の「セット除外」はゼッテリアには適用しない)。
-#  ・説明文は詳細ページの冒頭の1文だけ保存する(他チェーンと同じ短縮)。栄養・アレルゲンの値そのものは
-#    取り込まず、全商品分の公式ページへのリンクだけを持つ(第1段階)。
+#  ・説明文は詳細ページの冒頭の1文だけ保存する(他チェーンと同じ短縮)。アレルゲンは取り込まない。
+#    栄養成分は公式PDF (images.zensho.co.jp の nutrition.pdf) から、巡回のあと run_pdf_step() が
+#    pdf_update.py 経由で、更新があったときだけ取得して取り込む (2026-11-27追加。吉野家・すき家方式)。
 #  ・一覧が空・取得失敗・前回の半分未満の回は、何も更新せず終了判定もしない。
 ZETTERIA_MIN_RATIO = 0.5
 ZETTERIA_PRESS_MAX_FETCHES = 5
@@ -5718,7 +5719,7 @@ def crawl_burgerking(getter, pending: dict, stats: dict, today: str | None = Non
 # ---------------------------------------------------------------------------
 
 def run_pdf_step(chain: str, getter, pending: dict, stats: dict) -> dict | None:
-    """吉野家・すき家・フレッシュネスの公式PDFから栄養・アレルゲンを取り込む(巡回のあとに1回)。
+    """吉野家・すき家・フレッシュネス・ゼッテリアの公式PDFから栄養・アレルゲンを取り込む(巡回のあとに1回)。
 
     PDFを読めない(pdfminer未導入・取得失敗・構造変更の疑い)ときも、警告とpending.jsonへの記録だけで
     クロール全体は止めない。取得器がPDF用のメソッドを持たないとき(テスト)・一覧の取得でブロックされた
@@ -5852,7 +5853,7 @@ def main(argv: list[str] | None = None) -> int:
             if err_chain:
                 stats.setdefault(err_chain, new_stats())["error"] = f"{type(e).__name__}: {e}"
         chain = {v: k for k, v in CRAWLERS.items()}.get(fn)
-        if chain in ("yoshinoya", "sukiya", "freshness"):
+        if chain in ("yoshinoya", "sukiya", "freshness", "zetteria"):
             run_pdf_step(chain, getter, pending, stats)
 
     streaks = update_health(pending, stats, today_jst())
