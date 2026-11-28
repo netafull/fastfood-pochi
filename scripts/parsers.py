@@ -2787,7 +2787,7 @@ def yayoiken_name_key(s: str | None) -> str:
 
 _YAYOIKEN_NUTRIENT_KEYS = {
     "熱量": "kcal", "蛋白質": "protein_g", "脂質": "fat_g", "炭水化物": "carbs_g",
-    "糖質": "sugar_g", "食物繊維": "fiber_g", "食塩相当量": "salt_g",
+    "食物繊維": "fiber_g", "食塩相当量": "salt_g",
 }
 _YAYOIKEN_TABLE_RE = re.compile(r"<table[^>]*>(.*?)</table>", re.S)
 _YAYOIKEN_ROW_RE = re.compile(r"<tr>(.*?)</tr>", re.S)
@@ -2813,8 +2813,9 @@ def parse_yayoiken_nutrition(html: str) -> dict[str, list[dict]]:
     無く、1行が1商品 (形態は無印)。形態の列がある表にも形態なしの単独商品 (テイクアウトの
     おかずのみ・みそ汁など) が混ざるので、続きの行は先頭セルが形態の名前 (白米・ごはん○○)
     のときだけ前の商品の形態として扱い、それ以外は新しい単独商品として扱う。
-    栄養の辞書は列名で直接作る (蛋白質・糖質はこの表の表記)。
-    カリウム・リンなど主要項目以外は other に単位つきで入れる。"""
+    栄養の辞書は列名で直接作る (蛋白質はこの表の表記)。
+    糖質は糖類 (sugar_g) とは別物なのでキーにせず、カリウム・リンなどと一緒に
+    other に表記どおり単位つきで入れる。"""
     out: dict[str, list[dict]] = {}
     for table in _YAYOIKEN_TABLE_RE.findall(html):
         rows = _YAYOIKEN_ROW_RE.findall(table)

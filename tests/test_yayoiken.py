@@ -174,7 +174,8 @@ class YayoikenCrawlTests(unittest.TestCase):
         p = self.prods["101"]                                      # 合成チゲ定食: 3形態
         self.assertEqual(p["nutrition"]["kcal"], 747)
         self.assertEqual(p["nutrition"]["protein_g"], 33.4)
-        self.assertEqual(p["nutrition"]["sugar_g"], 81.8)
+        self.assertIsNone(p["nutrition"]["sugar_g"])   # 表の「糖質」は糖類ではないので other に入る
+        self.assertEqual(p["nutrition"]["other"]["糖質"], "81.8 g")
         self.assertEqual(p["nutrition"]["other"]["カリウム"], "894 mg")
         self.assertEqual([v["label"] for v in p["nutrition_variants"]],
                          ["白米", "もち麦ごはん普通盛", "もち麦ごはん大盛"])
