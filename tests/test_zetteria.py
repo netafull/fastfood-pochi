@@ -37,6 +37,15 @@ class FakeZetteria:
         self.details = dict(details or {})
         self.robots = robots
         self.urls = []
+        self.pdf_bodies = {}   # PDFのURL -> 本文 (bytes)。pdf_get_calls に呼び出しを記録する
+        self.pdf_get_calls = []
+
+    def pdf_get(self, chain, url, allow_html=False):
+        self.pdf_get_calls.append((url, allow_html))
+        body = self.pdf_bodies[url]
+        if body.startswith(b"<") and not allow_html:
+            raise crawl.BlockedError("HTML (allow_html なし)")
+        return body
 
     def __call__(self, chain, url):
         self.urls.append(url)
@@ -140,6 +149,58 @@ class ZetteriaParseTests(unittest.TestCase):
         self.assertFalse(P.match_zetteria_press("合成柚子竜田バーガー", 620, None))
 
 
+class _FakeResponse:
+    def __init__(self, body: bytes):
+        self._body = body
+        self.headers = {"content-type": "text/html" if body.startswith(b"<") else "application/pdf"}
+
+    def read(self) -> bytes:
+        return self._body
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        return False
+
+
+class ZetteriaPressFetchTests(unittest.TestCase):
+    """fetch_zetteria_press: .pdf のURLがHTMLを返してもチェーン全体をブロック扱いにしない (監査#3)。"""
+
+    URL = PRESS
+    NOTICE = "<!DOCTYPE html><html><head><title>お知らせ</title></head><body>story</body></html>".encode("utf-8")
+    CHALLENGE = b"<html><head><title>Just a moment...</title></head><body>checking</body></html>"
+
+    def _getter(self):
+        g_ = crawl.Getter()
+        g_.throttle = mock.Mock()   # テストでは待たない
+        return g_
+
+    def _fetch(self, body: bytes):
+        with mock.patch("urllib.request.urlopen", return_value=_FakeResponse(body)), \
+                mock.patch.object(crawl.pdf_update, "have_pdfminer", return_value=True):
+            return crawl.fetch_zetteria_press(self._getter(), self.URL)
+
+    def test_html_instead_of_pdf_returns_none(self):
+        self.assertIsNone(self._fetch(self.NOTICE))
+
+    def test_challenge_page_is_still_blocked(self):
+        with self.assertRaises(crawl.BlockedError):
+            self._fetch(self.CHALLENGE)
+
+    def test_real_pdf_is_parsed(self):
+        with mock.patch.object(crawl.pdf_update.pn, "extract_geometry", return_value=Z.zet_press_pages()):
+            info = self._fetch(b"%PDF-1.7 fake")
+        self.assertEqual(info["launch_date"], Z.zet_press_dict()["launch_date"])
+
+    def test_requests_pdf_with_allow_html(self):
+        getter = mock.Mock()
+        getter.pdf_get.return_value = self.NOTICE
+        with mock.patch.object(crawl.pdf_update, "have_pdfminer", return_value=True):
+            self.assertIsNone(crawl.fetch_zetteria_press(getter, self.URL))
+        getter.pdf_get.assert_called_once_with("zetteria", self.URL, allow_html=True)
+
+
 class ZetteriaCrawlTests(unittest.TestCase):
     def crawl_once(self, today=D0, regular=False, pages=None, press="default", fake=None):
         if not hasattr(self, "_td"):   # 同じテストの中の複数回の巡回は同じデータ置き場で続ける
@@ -149,7 +210,10 @@ class ZetteriaCrawlTests(unittest.TestCase):
             self.pending = {}
         self.fake = fake or FakeZetteria(pages=pages)
         press_map = {PRESS: Z.zet_press_dict()} if press == "default" else (press or {})
-        with mock.patch.object(crawl, "fetch_zetteria_press", lambda getter, url: press_map.get(url)):
+        # press == "real": fetch_zetteria_press を差し替えず、偽の取得器の pdf_get を通す
+        patch = mock.patch.object(crawl.pdf_update, "have_pdfminer", return_value=True) if press == "real" \
+            else mock.patch.object(crawl, "fetch_zetteria_press", lambda getter, url: press_map.get(url))
+        with patch:
             stats = {}
             crawl.crawl_zetteria(self.fake, self.pending, stats, today)
         self.stats = stats[CHAIN]
@@ -203,6 +267,20 @@ class ZetteriaCrawlTests(unittest.TestCase):
         p = self.products()["burger020901"]
         self.assertEqual(p["launch_date"], "2026-11-11")                   # 発表日で代用
         self.assertEqual(p["launch_date_source"], "news_date_fallback")
+
+    def test_press_url_returning_html_is_not_a_block(self):
+        """監査#3: .pdf のURLが通常のHTMLを返しても、チェーンをブロック扱いにせず発表日で代用しない
+        (PDFとして照合できないだけ)。pdf_get は allow_html つきで呼ばれる。"""
+        fake = FakeZetteria()
+        fake.pdf_bodies[PRESS] = "<!DOCTYPE html><html><head><title>お知らせ</title></head><body>x</body></html>".encode("utf-8")
+        fake.pdf_bodies[BASE + "/news/press/gosei_old_202610.pdf"] = fake.pdf_bodies[PRESS]
+        st = self.crawl_once(press="real", fake=fake)
+        self.assertTrue(fake.pdf_get_calls)
+        self.assertTrue(all(allow for _url, allow in fake.pdf_get_calls))
+        self.assertFalse(st.get("blocked"))
+        p = self.products()["burger020901"]
+        self.assertNotEqual(p["launch_date_source"], "press_pdf")
+        self.assertIn(p["launch_date_source"], ("not_found", "news_headline", "news_date_fallback"))
 
     def test_launch_from_headline_when_no_pdf(self):
         pages = Z.zet_pages()
