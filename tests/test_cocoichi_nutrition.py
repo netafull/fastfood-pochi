@@ -40,6 +40,21 @@ class CocoichiParseTests(unittest.TestCase):
         wakaba = pn.rows_for_name(parsed["rows"], "わかばカレー")
         self.assertEqual(wakaba[0]["kcal"], 761)   # (…販売開始) の注記は外して照合する
 
+    def test_date_note_line_is_not_a_name(self):
+        # 実物の焼きカレーでは、販売開始の注記が名前とは別の行にあり、数値の行に
+        # 名前より近い。注記の行を名前の候補にすると商品名が空になって照合できない
+        parsed = pn.parse_cocoichi_nutrition([fx.cocoichi_page([
+            ("たっぷりチーズのビーフ焼きカレー（ライス150g）", [925, 30.0, 40.0, 110.0, 5.0],
+             "（2026年12月1日販売開始）"),
+            ("たっぷりチーズのビーフ焼きカレー（ライス250g）", [1125, 35.0, 48.0, 135.0, 6.0],
+             "（2026年12月1日販売開始）"),
+        ], note_dy=3)])
+        self.assertEqual(parsed["problems"], [])
+        small = pn.rows_for_name(parsed["rows"], "たっぷりチーズのビーフ焼きカレー（ライス150g）")
+        self.assertEqual(small[0]["kcal"], 925)
+        large = pn.rows_for_name(parsed["rows"], "たっぷりチーズのビーフ焼きカレー（ライス250g）")
+        self.assertEqual(large[0]["kcal"], 1125)
+
     def test_ambiguous_duplicate_is_not_matched(self):
         parsed = pn.parse_cocoichi_nutrition(pages())
         self.assertIsNone(pn.rows_for_name(parsed["rows"], "つきのわポテト"))

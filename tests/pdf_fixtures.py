@@ -290,9 +290,10 @@ def zetteria_page(items, updated="2026/11/18", name_dy=None):
 CB_COLS = [644, 734, 823, 913, 1002]
 
 
-def cocoichi_page(items, date="2026年11月27日現在"):
+def cocoichi_page(items, date="2026年11月27日現在", note_dy=0):
     """items: [(名前, [熱量, たんぱく質, 脂質, 炭水化物, 食塩相当量], 注記|None)]。
-    注記がある商品は、名前を数値の行より少し上に置き、注記行を数値の下に置く (実物の構造)。"""
+    注記がある商品は、名前を数値の行より少し上に置き、注記行を数値の下に置く (実物の構造)。
+    note_dy は注記行の位置のずらし (実物では注記が数値の行に名前より近いことがある)。"""
     texts = [box(154, 1630, 442, 1656, "ココイチ　栄養成分情報"),
              box(932, 1612, 1063, 1624, date)]
     for lb, c in zip(["エネルギー", "たんぱく質", "脂質", "炭水化物", "食塩相当量"], CB_COLS):
@@ -302,7 +303,7 @@ def cocoichi_page(items, date="2026年11月27日現在"):
     for name, vals, note in items:
         if note:
             texts.append(box(151, y + 5, 151 + 9 * len(name), y + 17, name))
-            texts.append(box(151, y - 16, 151 + 9 * len(note), y - 7, note))
+            texts.append(box(151, y - 16 + note_dy, 151 + 9 * len(note), y - 7 + note_dy, note))
         else:
             texts.append(box(151, y - 6, 151 + 9 * len(name), y + 6, name))
         for c, v in zip(CB_COLS, vals):
