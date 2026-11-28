@@ -29,9 +29,9 @@
  "description": null,
  "description_full_len": 0,
  "nutrition": {
-  "kcal": 69.0,
+  "kcal": 68.0,
   "protein_g": 3.7,
-  "fat_g": 4.3,
+  "fat_g": 4.2,
   "carbs_g": 5.4,
   "sugar_g": null,
   "fiber_g": 0.0,
@@ -42,9 +42,9 @@
   {
    "label": "S",
    "nutrition": {
-    "kcal": 69.0,
+    "kcal": 68.0,
     "protein_g": 3.7,
-    "fat_g": 4.3,
+    "fat_g": 4.2,
     "carbs_g": 5.4,
     "sugar_g": null,
     "fiber_g": 0.0,
@@ -53,15 +53,28 @@
    }
   },
   {
-   "label": "S",
+   "label": "T",
    "nutrition": {
-    "kcal": 68.0,
-    "protein_g": 3.7,
-    "fat_g": 4.2,
-    "carbs_g": 5.4,
+    "kcal": 74.0,
+    "protein_g": 4.0,
+    "fat_g": 4.6,
+    "carbs_g": 5.9,
     "sugar_g": null,
     "fiber_g": 0.0,
     "salt_g": 0.1,
+    "other": {}
+   }
+  },
+  {
+   "label": "G",
+   "nutrition": {
+    "kcal": 93.0,
+    "protein_g": 5.0,
+    "fat_g": 5.8,
+    "carbs_g": 7.4,
+    "sugar_g": null,
+    "fiber_g": 0.0,
+    "salt_g": 0.2,
     "other": {}
    }
   }
