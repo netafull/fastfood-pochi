@@ -21,7 +21,19 @@
  "news_date": null,
  "description": null,
  "description_full_len": 0,
- "nutrition": null,
+ "nutrition": {
+  "kcal": 332.0,
+  "protein_g": 3.5,
+  "fat_g": 20.6,
+  "carbs_g": 33.1,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 1.6,
+  "other": {
+   "製品重量": "100g",
+   "ナトリウム": "614mg"
+  }
+ },
  "allergens": null,
  "origin": null,
  "limited_kind": "期間限定",
@@ -40,5 +52,15 @@
  "source_list": [
   "menu"
  ],
- "image": null
+ "image": null,
+ "nutrition_variants": null,
+ "nutrition_source": {
+  "url": "https://www.burgerking.co.jp/images/org/pdf/2026/11/05/b0d5622d-f50c-409e-8721-01563da67cb6.pdf",
+  "label": "栄養成分及びアレルゲン情報",
+  "version": "2026-11-06",
+  "version_text": "2026年11月6日更新",
+  "fetched_at": "2026-11-28T14:20:55+09:00"
+ },
+ "nutrition_note": "栄養成分表の数値は配合に基づいた標準値です。",
+ "pdf_tried": "2026-11-06"
 }

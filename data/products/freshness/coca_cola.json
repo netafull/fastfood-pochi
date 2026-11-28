@@ -1,0 +1,80 @@
+{
+ "chain": "freshness",
+ "product_id": "coca_cola",
+ "name": "コカ・コーラ",
+ "category": "Soft Drink",
+ "price": 260,
+ "price_note": "税込。表示は「S」の価格。店舗により販売メニューや価格が異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "S",
+   "price": 260
+  },
+  {
+   "label": "T",
+   "price": 330
+  },
+  {
+   "label": "G",
+   "price": 400
+  }
+ ],
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": null,
+ "nutrition_variants": null,
+ "nutrition_note": null,
+ "nutrition_pdf_url": null,
+ "nutrition_pdf_label": null,
+ "allergen_pdf_url": null,
+ "allergen_pdf_label": null,
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "定番",
+ "badges": [],
+ "official_url": "https://www.freshnessburger.co.jp/menu/beverage",
+ "first_seen_at": "2026-11-28T14:25:17+09:00",
+ "last_seen_at": "2026-11-28",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-28",
+   "price": 260
+  }
+ ],
+ "source_list": [
+  "menu"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-28",
+ "price_variants_history": [
+  {
+   "date": "2026-11-28",
+   "variants": [
+    {
+     "label": "S",
+     "price": 260
+    },
+    {
+     "label": "T",
+     "price": 330
+    },
+    {
+     "label": "G",
+     "price": 400
+    }
+   ]
+  }
+ ],
+ "is_regular": true,
+ "pdf_tried": "2026-11-09|2026-10-21"
+}
