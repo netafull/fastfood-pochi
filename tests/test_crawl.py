@@ -22,8 +22,26 @@ def card(code, name, price, limited=False, started=None):
     )
 
 
+# 公式ページのスナップショット(tests/fixtures/)が無いときに、SynthMcd が代わりに返す合成ページ。
+# robots.txt は実物と同じ向き(/mop/・/order/・/coupon* などを Disallow)。詳細ページは h1 と価格だけ
+SYNTH_MCD_ROBOTS = "User-agent: *\nDisallow: /mop/\nDisallow: /order/\nDisallow: /coupon-\nDisallow: /private/\n"
+SYNTH_MCD_DETAIL = (
+    "<html><body><h1>合成バーガー</h1><p>合成の説明文です。</p>"
+    "<span class='pdp__product-info-quantity'>単品</span>"
+    "<span class='product-section-price-primary-val'>460</span></body></html>"
+)
+
+
+def _fx_or(path: str, synthetic: str) -> str:
+    try:
+        return fx(path)
+    except unittest.SkipTest:
+        return synthetic
+
+
 class SynthMcd:
-    """全ページが同じ商品カード一覧を返す、マクドナルドの偽サイト。"""
+    """全ページが同じ商品カード一覧を返す、マクドナルドの偽サイト。
+    スナップショットが無い環境では、robots.txt と詳細ページを合成したもので代わりにする。"""
 
     def __init__(self, cards, detail="mcdonalds/p_6900.html"):
         self.cards = cards  # list[str]
@@ -40,11 +58,11 @@ class SynthMcd:
         if path in self.fail:
             raise OSError("boom")
         if path == "/robots.txt":
-            return fx("mcdonalds/robots.txt")
+            return _fx_or("mcdonalds/robots.txt", SYNTH_MCD_ROBOTS)
         if path.startswith("/menu/"):
             return "<html>" + "".join(self.cards) + "</html>"
         if path.startswith("/products/"):
-            return fx(self.detail)
+            return _fx_or(self.detail, SYNTH_MCD_DETAIL)
         raise OSError(path)
 
 
