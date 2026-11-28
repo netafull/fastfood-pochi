@@ -5474,7 +5474,9 @@ def crawl_marugame(getter, pending: dict, stats: dict, today: str | None = None)
 #    robots.txt には実体が無い(SPAのトップが返る)ので取らない。新しく記録した「セットのある」商品だけ、詳細(BKJ0510)を
 #    1回の巡回あたり BK_DETAIL_PER_RUN 件まで足す(セット価格の内訳のため。残りは翌日以降)。
 #  ・記録するのは「期間限定」で絞り込んだ一覧に居る商品だけ(定番は記録しない。NEWの印は全商品で空なので使わない)。
-#    説明文・画像・栄養は扱わない(規約が複製・転載を禁じている)。
+#    説明文・画像は扱わない(規約が複製・転載を禁じている)。栄養は数値だけ、巡回のあと run_pdf_step() が
+#    公式PDF「商品の栄養成分及びアレルゲン情報」から pdf_update.py 経由で取り込む(オーナー決定 2026-11-28。
+#    アレルゲンは取り込まない。PDFのURLは版ごとに変わるので config の burgerking_pdf を指す)。
 #  ・発売日は公式のAPIに無い(ニュースのPDFの画像の中)ので launch_date は null。ニュースの公開日を告知日 announced_at に入れる。
 #  ・終了日: イベントの dtEnd が商品名と確実にひも付く(parsers.find_bk_event_end)ときだけ official_end_date に入れる。
 #    それ以外は他と同じ「別の日に連続2回、一覧から消えた」で ended にする。
@@ -5722,7 +5724,7 @@ def crawl_burgerking(getter, pending: dict, stats: dict, today: str | None = Non
 # ---------------------------------------------------------------------------
 
 def run_pdf_step(chain: str, getter, pending: dict, stats: dict) -> dict | None:
-    """吉野家・すき家・フレッシュネス・ゼッテリア・CoCo壱番屋の公式PDFから栄養・アレルゲンを取り込む(巡回のあとに1回)。
+    """吉野家・すき家・フレッシュネス・ゼッテリア・CoCo壱番屋・バーガーキングの公式PDFから栄養・アレルゲンを取り込む(巡回のあとに1回)。
 
     PDFを読めない(pdfminer未導入・取得失敗・構造変更の疑い)ときも、警告とpending.jsonへの記録だけで
     クロール全体は止めない。取得器がPDF用のメソッドを持たないとき(テスト)・一覧の取得でブロックされた
@@ -5856,7 +5858,7 @@ def main(argv: list[str] | None = None) -> int:
             if err_chain:
                 stats.setdefault(err_chain, new_stats())["error"] = f"{type(e).__name__}: {e}"
         chain = {v: k for k, v in CRAWLERS.items()}.get(fn)
-        if chain in ("yoshinoya", "sukiya", "freshness", "zetteria", "cocoichi"):
+        if chain in ("yoshinoya", "sukiya", "freshness", "zetteria", "cocoichi", "burgerking"):
             run_pdf_step(chain, getter, pending, stats)
 
     streaks = update_health(pending, stats, today_jst())

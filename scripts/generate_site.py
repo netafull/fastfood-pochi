@@ -1353,7 +1353,7 @@ def render_nutrition(item: dict) -> str:
                 f"<p><a href=\"{esc(item['nutrition_pdf_url'])}\" target=\"_blank\" rel=\"noopener\">"
                 f"{esc(label)}（公式PDF）</a>{origin}</p>")
     if not nut and item.get("chain") == "burgerking":
-        # バーガーキング: 栄養成分・アレルギー情報はAPIにほぼ無く(アレルゲンは全商品まとめのPDF1本)、当サイトでは扱わない
+        # バーガーキング: 栄養の数値だけ公式PDFから取り込む(アレルゲンは扱わない)。これはPDFに無い・名前が一致しない商品の案内
         link = (f" <a href=\"{esc(item['official_url'])}\" target=\"_blank\" rel=\"noopener\">公式の商品ページ</a>"
                 if item.get("official_url") else "")
         return ("<h2>栄養成分・アレルギー情報</h2><p class='note'>栄養成分・アレルギー情報は当サイトでは掲載していません。"
