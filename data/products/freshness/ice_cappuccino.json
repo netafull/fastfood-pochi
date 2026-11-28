@@ -1,0 +1,123 @@
+{
+ "chain": "freshness",
+ "product_id": "ice_cappuccino",
+ "name": "カプチーノ",
+ "category": "Coffee & Espresso / Tea & Milk Foam",
+ "price": 400,
+ "price_note": "税込。表示は「S」の価格。店舗により販売メニューや価格が異なる場合があります。",
+ "price_variants": [
+  {
+   "label": "S",
+   "price": 400
+  },
+  {
+   "label": "T",
+   "price": 470
+  },
+  {
+   "label": "G",
+   "price": 540
+  }
+ ],
+ "launch_date": null,
+ "launch_date_source": "not_found",
+ "announced_at": null,
+ "planned_end_text": null,
+ "news_url": null,
+ "news_title": null,
+ "news_date": null,
+ "description": null,
+ "description_full_len": 0,
+ "nutrition": {
+  "kcal": 57.0,
+  "protein_g": 3.1,
+  "fat_g": 3.5,
+  "carbs_g": 4.5,
+  "sugar_g": null,
+  "fiber_g": 0.0,
+  "salt_g": 0.1,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "S",
+   "nutrition": {
+    "kcal": 57.0,
+    "protein_g": 3.1,
+    "fat_g": 3.5,
+    "carbs_g": 4.5,
+    "sugar_g": null,
+    "fiber_g": 0.0,
+    "salt_g": 0.1,
+    "other": {}
+   }
+  },
+  {
+   "label": "S",
+   "nutrition": {
+    "kcal": 57.0,
+    "protein_g": 3.1,
+    "fat_g": 3.5,
+    "carbs_g": 4.5,
+    "sugar_g": null,
+    "fiber_g": 0.0,
+    "salt_g": 0.1,
+    "other": {}
+   }
+  }
+ ],
+ "nutrition_note": "栄養成分値は検査機関で分析した数値をもとに算出した値です。",
+ "nutrition_pdf_url": null,
+ "nutrition_pdf_label": null,
+ "allergen_pdf_url": null,
+ "allergen_pdf_label": null,
+ "allergens": null,
+ "origin": null,
+ "limited_kind": "定番",
+ "badges": [],
+ "official_url": "https://www.freshnessburger.co.jp/menu/beverage/ice_cappuccino",
+ "first_seen_at": "2026-11-28T13:29:41+09:00",
+ "last_seen_at": "2026-11-28",
+ "status": "on_sale",
+ "ended_observed_at": null,
+ "missed_runs": 0,
+ "price_history": [
+  {
+   "date": "2026-11-28",
+   "price": 400
+  }
+ ],
+ "source_list": [
+  "menu"
+ ],
+ "image": null,
+ "price_checked_at": "2026-11-28",
+ "price_variants_history": [
+  {
+   "date": "2026-11-28",
+   "variants": [
+    {
+     "label": "S",
+     "price": 400
+    },
+    {
+     "label": "T",
+     "price": 470
+    },
+    {
+     "label": "G",
+     "price": 540
+    }
+   ]
+  }
+ ],
+ "is_regular": true,
+ "nutrition_source": {
+  "url": "https://www.freshnessburger.co.jp/pdf/seibun.pdf",
+  "label": "栄養成分表",
+  "version": "2026-11-09|2026-10-21",
+  "version_text": "2026年11月9日更新",
+  "fetched_at": "2026-11-28T13:30:06+09:00"
+ },
+ "pdf_tried": "2026-11-09|2026-10-21"
+}

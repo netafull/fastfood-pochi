@@ -28,7 +28,7 @@
  "badges": [],
  "official_url": "https://www.freshnessburger.co.jp/menu/sidemenu/chicken_nugget",
  "first_seen_at": "2026-11-27T19:52:36+09:00",
- "last_seen_at": "2026-11-27",
+ "last_seen_at": "2026-11-28",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -43,5 +43,6 @@
  ],
  "image": null,
  "price_checked_at": "2026-11-27",
- "is_regular": true
+ "is_regular": true,
+ "pdf_tried": "2026-11-09|2026-10-21"
 }

@@ -15,9 +15,20 @@
  "news_date": null,
  "description": null,
  "description_full_len": 0,
- "nutrition": null,
+ "nutrition": {
+  "kcal": 512.0,
+  "protein_g": 26.3,
+  "fat_g": 24.9,
+  "carbs_g": 39.6,
+  "sugar_g": null,
+  "fiber_g": 2.0,
+  "salt_g": 2.9,
+  "other": {
+   "糖質": "37.6g"
+  }
+ },
  "nutrition_variants": null,
- "nutrition_note": null,
+ "nutrition_note": "栄養成分値は検査機関で分析した数値をもとに算出した値です。",
  "nutrition_pdf_url": null,
  "nutrition_pdf_label": null,
  "allergen_pdf_url": null,
@@ -28,7 +39,7 @@
  "badges": [],
  "official_url": "https://www.freshnessburger.co.jp/menu/hamburger/classic_cheese_burger",
  "first_seen_at": "2026-11-27T19:52:36+09:00",
- "last_seen_at": "2026-11-27",
+ "last_seen_at": "2026-11-28",
  "status": "on_sale",
  "ended_observed_at": null,
  "missed_runs": 0,
@@ -43,5 +54,13 @@
  ],
  "image": null,
  "price_checked_at": "2026-11-27",
- "is_regular": true
+ "is_regular": true,
+ "nutrition_source": {
+  "url": "https://www.freshnessburger.co.jp/pdf/seibun.pdf",
+  "label": "栄養成分表",
+  "version": "2026-11-09|2026-10-21",
+  "version_text": "2026年11月9日更新",
+  "fetched_at": "2026-11-28T13:30:06+09:00"
+ },
+ "pdf_tried": "2026-11-09|2026-10-21"
 }
