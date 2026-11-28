@@ -63,7 +63,8 @@ class FreshnessParseTests(unittest.TestCase):
         self.assertNotIn("【サイドメニュー】", names)
         burger = next(r for r in parsed["rows"] if r["name"] == "ひだまりバーガー")
         self.assertEqual(burger["kcal"], 431)
-        self.assertEqual(burger["sugar_g"], 37.0)
+        self.assertIsNone(burger["sugar_g"])   # 表の「糖質」は糖類ではないので sugar_g に入れない
+        self.assertEqual(burger["sugar_other"], 37.0)
         self.assertEqual(burger["fiber_g"], 2.0)
         self.assertTrue(burger["ok"])
         lemonade = next(r for r in parsed["rows"] if r["name"] == "ゆずレモネード")
@@ -132,7 +133,8 @@ class FreshnessUpdateTests(unittest.TestCase):
         report = self.run_update(prods, fetcher)
         burger = prods[0]
         self.assertEqual(burger["nutrition"]["kcal"], 431)
-        self.assertEqual(burger["nutrition"]["sugar_g"], 37.0)
+        self.assertIsNone(burger["nutrition"]["sugar_g"])
+        self.assertEqual(burger["nutrition"]["other"], {"糖質": "37g"})
         self.assertEqual(burger["nutrition_source"]["version"], "2026-11-09|2026-10-21")
         self.assertIn("検査機関", burger["nutrition_note"])
         fry = prods[1]

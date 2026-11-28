@@ -516,11 +516,13 @@ def parse_yoshinoya(pages: list[dict]) -> dict:
 #    タイトルに「栄養成分表」を含むページが日本語)。
 #  ・列は見出しの下の単位 (kcal・g) の並びから決める。フードは7列 (熱量・たんぱく質・脂質・
 #    炭水化物・糖質・食物繊維総量・食塩相当量)、ドリンクは6列 (糖質が無い)。
+#  ・「糖質」は糖類とは別物 (サイトでは sugar_g が「糖類」と表示される) なので、sugar_g には
+#    入れず、行に sugar_other として持たせて build_nutrition で other の「糖質」に入れる。
 #  ・行は名前と数値が同じ高さに並ぶ。サイズは独立した列が無く、名前の末尾に付く
 #    (フレンチフライS・R・L)。同じ名前の末尾違いが2行以上あるときだけサイズとして分ける。
 #  ・フードとドリンクで更新日が別にある (版は両方の日付で見る)。
 
-_FRESHNESS_FOOD_KEYS = ["kcal", "protein_g", "fat_g", "carbs_g", "sugar_g", "fiber_g", "salt_g"]
+_FRESHNESS_FOOD_KEYS = ["kcal", "protein_g", "fat_g", "carbs_g", "sugar_other", "fiber_g", "salt_g"]
 _FRESHNESS_DRINK_KEYS = ["kcal", "protein_g", "fat_g", "carbs_g", "fiber_g", "salt_g"]
 _FRESHNESS_SIZE_RE = re.compile(r"^(.+?)(S|R|L)$")
 
@@ -589,7 +591,8 @@ def parse_freshness_nutrition(pages: list[dict]) -> dict:
             row = {"name": name, "size": "",
                    "kcal": vals.get("kcal"), "protein_g": vals.get("protein_g"),
                    "fat_g": vals.get("fat_g"), "carbs_g": vals.get("carbs_g"),
-                   "sugar_g": vals.get("sugar_g"), "fiber_g": vals.get("fiber_g"),
+                   "sugar_g": None, "sugar_other": vals.get("sugar_other"),
+                   "fiber_g": vals.get("fiber_g"),
                    "salt_g": vals.get("salt_g"), "block": kind, "ambiguous": False}
             row["ok"] = energy_ok(row["kcal"], row["protein_g"], row["fat_g"], row["carbs_g"]) \
                 and row["salt_g"] is not None
@@ -678,8 +681,12 @@ def build_nutrition(rows: list[dict]) -> tuple[dict | None, list[dict] | None, i
     ordered = [rep] + [r for r in good if r is not rep]
 
     def nut(r: dict) -> dict:
+        other: dict = {}
+        if r.get("sugar_other") is not None:
+            # 表の「糖質」は糖類 (sugar_g) とは別物なので、表記どおり other に入れる (大戸屋と同じ)
+            other["糖質"] = f"{r['sugar_other']:g}g"
         return {"kcal": r["kcal"], "protein_g": r["protein_g"], "fat_g": r["fat_g"], "carbs_g": r["carbs_g"],
-                "sugar_g": r.get("sugar_g"), "fiber_g": r.get("fiber_g"), "salt_g": r["salt_g"], "other": {}}
+                "sugar_g": r.get("sugar_g"), "fiber_g": r.get("fiber_g"), "salt_g": r["salt_g"], "other": other}
 
     variants = [{"label": r["size"] or "", "nutrition": nut(r)} for r in ordered] if len(ordered) > 1 else None
     return nut(rep), variants, dropped
