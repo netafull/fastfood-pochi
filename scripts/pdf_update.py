@@ -40,6 +40,7 @@ NO_SIGNATURE_RECHECK_DAYS = 7
 YOSHINOYA_NOTE = "栄養成分の数値は配合に基づく推定値で、お好みでお使いいただく調味料類は含まれていません。"
 FRESHNESS_NOTE = "栄養成分値は検査機関で分析した数値をもとに算出した値です。"
 ZETTERIA_NOTE = "検査機関で分析した数値および「日本食品標準成分表」に基づき算出しております。"
+COCOICHI_NOTE = "栄養成分値は配合に基づいた標準値です。目安値としてお考えください。"
 
 
 def have_pdfminer() -> bool:
@@ -219,6 +220,9 @@ def _specs(chain: str, urls: dict, labels: dict) -> list[dict]:
     if chain == "zetteria":
         return [{"key": "nutrition", "kind": "zetteria_nutrition", "url": urls["nutrition"],
                  "label": labels["nutrition"], "parse": pn.parse_zetteria_nutrition, "with_chars": False}]
+    if chain == "cocoichi":
+        return [{"key": "nutrition", "kind": "cocoichi_nutrition", "url": urls["nutrition"],
+                 "label": labels["nutrition"], "parse": pn.parse_cocoichi_nutrition, "with_chars": False}]
     raise ValueError(chain)
 
 
@@ -286,7 +290,20 @@ def update_chain(chain: str, products: list[dict], fetcher, state: dict, pending
 
     # 3) 商品に反映する
     changed: dict = {}
-    if chain == "zetteria":
+    if chain == "cocoichi":
+        if "nutrition" in parsed_by:
+            spec, sig, parsed = parsed_by["nutrition"]
+            ver = parsed["updated"]
+            y, m, d = ver.split("-")
+            meta = _source_meta(spec, ver, f"{y}年{int(m)}月{int(d)}日現在", now)
+            _apply_nutrition(products, parsed["rows"], meta, COCOICHI_NOTE, changed, report, None)
+            if report["aborted"]:
+                _record_error(pending, chain, spec["key"], spec["url"], f"validation: {report['aborted']}", now)
+                _source_entry(state, chain, spec["key"])["failed_signature"] = sig
+                parsed_by.pop("nutrition")
+            else:
+                _source_entry(state, chain, spec["key"]).update(signature=sig, version=ver, fetched_at=now)
+    elif chain == "zetteria":
         if "nutrition" in parsed_by:
             spec, sig, parsed = parsed_by["nutrition"]
             ver = parsed["updated"]
