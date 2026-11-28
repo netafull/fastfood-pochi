@@ -835,6 +835,8 @@ def _zetteria_row(name: str, r: dict, block: str, ambiguous: bool = False) -> di
 #    名前は数値の行の一番近くにあるもの (注記を除く) を結びつける。
 #  ・商品名の末尾に「(2026年12月1日販売開始)」のような発売日の注記が付くことがある。
 #    記録側の名前には無いので、照合用にこの注記だけを外す (ライス量などの括弧は外さない)。
+#    焼きカレーなどでは注記が名前とは別の行になり、数値の行に名前より近いことがある。
+#    注記だけのテキストは名前の候補にしない。
 #  ・トッピングも同じ表に載る (記録対象ではないので一致しないだけ)。同じ名前が複数の値で
 #    載ることがある (トッピングの量違い等) ため、出現ごとに block を分け、値が食い違う
 #    同名は rows_for_name が曖昧として返さないようにする。
@@ -882,7 +884,13 @@ def parse_cocoichi_nutrition(pages: list[dict]) -> dict:
             s = unicodedata.normalize("NFKC", t[4]).strip()
             if t[0] < 600 and s and not s.startswith("*") and s not in _COCOICHI_HEAD_LABELS \
                     and not _COCOICHI_NUM_RE.fullmatch(s):
-                name_texts.append((cy(t), s))
+                # 販売開始の注記は、名前の末尾に付く場合と、名前とは別の行になる場合がある。
+                # 別の行の注記は数値の行に名前より近いことがあり (実物の焼きカレー)、
+                # 候補に入れると商品名が空になって照合できないので、注記を外して
+                # 空になるテキストは候補にしない
+                s = _COCOICHI_DATE_NOTE_RE.sub("", s).strip()
+                if s:
+                    name_texts.append((cy(t), s))
         for cyy, nts in centers:
             vals: dict = {}
             for t in nts:
@@ -899,7 +907,7 @@ def parse_cocoichi_nutrition(pages: list[dict]) -> dict:
             if best is None:
                 problems.append(f"p{pi + 1}: 商品名に結びつかない行があります")
                 continue
-            name = _COCOICHI_DATE_NOTE_RE.sub("", best[1]).strip()
+            name = best[1]   # 販売開始の注記は候補を作るときに外してある
             seen[name] = seen.get(name, 0) + 1
             row = {"name": name, "size": "", "kcal": vals["kcal"], "protein_g": vals["protein_g"],
                    "fat_g": vals["fat_g"], "carbs_g": vals["carbs_g"], "sugar_g": None,
