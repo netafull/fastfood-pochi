@@ -24,8 +24,89 @@
  "news_date": null,
  "description": null,
  "description_full_len": 0,
- "nutrition": null,
- "nutrition_variants": null,
+ "nutrition": {
+  "kcal": 1332.0,
+  "protein_g": 49.7,
+  "fat_g": 65.2,
+  "carbs_g": null,
+  "sugar_g": null,
+  "fiber_g": 4.9,
+  "salt_g": 5.6,
+  "other": {
+   "糖質": "124.3 g",
+   "カルシウム": "140.5 mg",
+   "マグネシウム": "112.7 mg",
+   "ビタミンA": "119.3 μgRAE",
+   "ビタミンC": "38.1 mg",
+   "ビタミンD": "0.8 μg",
+   "ビタミンE": "5.8 mg"
+  }
+ },
+ "nutrition_variants": [
+  {
+   "label": "ご飯",
+   "nutrition": {
+    "kcal": 1332.0,
+    "protein_g": 49.7,
+    "fat_g": 65.2,
+    "carbs_g": null,
+    "sugar_g": null,
+    "fiber_g": 4.9,
+    "salt_g": 5.6,
+    "other": {
+     "糖質": "124.3 g",
+     "カルシウム": "140.5 mg",
+     "マグネシウム": "112.7 mg",
+     "ビタミンA": "119.3 μgRAE",
+     "ビタミンC": "38.1 mg",
+     "ビタミンD": "0.8 μg",
+     "ビタミンE": "5.8 mg"
+    }
+   }
+  },
+  {
+   "label": "五穀ご飯",
+   "nutrition": {
+    "kcal": 1315.0,
+    "protein_g": 50.9,
+    "fat_g": 66.3,
+    "carbs_g": null,
+    "sugar_g": null,
+    "fiber_g": 8.1,
+    "salt_g": 5.6,
+    "other": {
+     "糖質": "116.1 g",
+     "カルシウム": "156.9 mg",
+     "マグネシウム": "125.7 mg",
+     "ビタミンA": "119.4 μgRAE",
+     "ビタミンC": "38.1 mg",
+     "ビタミンD": "0.8 μg",
+     "ビタミンE": "5.9 mg"
+    }
+   }
+  },
+  {
+   "label": "単品",
+   "nutrition": {
+    "kcal": 1002.0,
+    "protein_g": 43.7,
+    "fat_g": 64.1,
+    "carbs_g": null,
+    "sugar_g": null,
+    "fiber_g": 3.5,
+    "salt_g": 3.8,
+    "other": {
+     "糖質": "54.3 g",
+     "カルシウム": "119.6 mg",
+     "マグネシウム": "84.4 mg",
+     "ビタミンA": "114.2 μgRAE",
+     "ビタミンC": "37.2 mg",
+     "ビタミンD": "0.8 μg",
+     "ビタミンE": "5.7 mg"
+    }
+   }
+  }
+ ],
  "nutrition_note": null,
  "nutrition_pdf_url": null,
  "nutrition_pdf_label": null,
