@@ -15,8 +15,124 @@
  "news_date": null,
  "description": null,
  "description_full_len": 0,
- "nutrition": null,
- "nutrition_variants": null,
+ "nutrition": {
+  "kcal": 1033.0,
+  "protein_g": 23.0,
+  "fat_g": 56.5,
+  "carbs_g": 111.3,
+  "sugar_g": null,
+  "fiber_g": 8.2,
+  "salt_g": 6.0,
+  "other": {
+   "糖質": "103.1 g",
+   "カリウム": "554 mg",
+   "リン": "257 mg"
+  }
+ },
+ "nutrition_variants": [
+  {
+   "label": "ごはん普通盛",
+   "nutrition": {
+    "kcal": 1033.0,
+    "protein_g": 23.0,
+    "fat_g": 56.5,
+    "carbs_g": 111.3,
+    "sugar_g": null,
+    "fiber_g": 8.2,
+    "salt_g": 6.0,
+    "other": {
+     "糖質": "103.1 g",
+     "カリウム": "554 mg",
+     "リン": "257 mg"
+    }
+   }
+  },
+  {
+   "label": "ごはん大盛",
+   "nutrition": {
+    "kcal": 1178.0,
+    "protein_g": 25.5,
+    "fat_g": 56.8,
+    "carbs_g": 145.2,
+    "sugar_g": null,
+    "fiber_g": 9.8,
+    "salt_g": 6.0,
+    "other": {
+     "糖質": "135.4 g",
+     "カリウム": "572 mg",
+     "リン": "279 mg"
+    }
+   }
+  },
+  {
+   "label": "ごはん超特盛",
+   "nutrition": {
+    "kcal": 1468.0,
+    "protein_g": 30.5,
+    "fat_g": 57.4,
+    "carbs_g": 213.0,
+    "sugar_g": null,
+    "fiber_g": 13.0,
+    "salt_g": 6.0,
+    "other": {
+     "糖質": "200.0 g",
+     "カリウム": "608 mg",
+     "リン": "323 mg"
+    }
+   }
+  },
+  {
+   "label": "もち⻨ごはん普通盛",
+   "nutrition": {
+    "kcal": 1049.0,
+    "protein_g": 23.5,
+    "fat_g": 56.5,
+    "carbs_g": 115.4,
+    "sugar_g": null,
+    "fiber_g": 9.4,
+    "salt_g": 6.0,
+    "other": {
+     "糖質": "106.0 g",
+     "カリウム": "581 mg",
+     "リン": "272 mg"
+    }
+   }
+  },
+  {
+   "label": "もち⻨ごはん大盛",
+   "nutrition": {
+    "kcal": 1187.0,
+    "protein_g": 26.0,
+    "fat_g": 56.8,
+    "carbs_g": 147.8,
+    "sugar_g": null,
+    "fiber_g": 11.5,
+    "salt_g": 6.0,
+    "other": {
+     "糖質": "136.3 g",
+     "カリウム": "612 mg",
+     "リン": "300 mg"
+    }
+   }
+  },
+  {
+   "label": "もち⻨ごはん超特盛",
+   "nutrition": {
+    "kcal": 1463.0,
+    "protein_g": 31.0,
+    "fat_g": 57.4,
+    "carbs_g": 212.6,
+    "sugar_g": null,
+    "fiber_g": 15.7,
+    "salt_g": 6.0,
+    "other": {
+     "糖質": "196.9 g",
+     "カリウム": "674 mg",
+     "リン": "356 mg"
+    }
+   }
+  }
+ ],
  "nutrition_note": null,
  "nutrition_pdf_url": null,
  "nutrition_pdf_label": null,

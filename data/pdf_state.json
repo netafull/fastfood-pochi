@@ -1,4 +1,12 @@
 {
+ "cocoichi": {
+  "nutrition": {
+   "fetched_at": "2026-11-28T12:37:13+09:00",
+   "last_get": "2026-11-28",
+   "signature": "\"33078-6614d5f75eb81\"|Sat, 28 Nov 2026 03:00:02 GMT|209016",
+   "version": "2026-11-27"
+  }
+ },
  "sukiya": {
   "allergen": {
    "fetched_at": "2026-11-25T17:19:56+09:00",
@@ -19,6 +27,14 @@
    "last_get": "2026-11-22",
    "signature": null,
    "version": "264|2026-10-29"
+  }
+ },
+ "zetteria": {
+  "nutrition": {
+   "fetched_at": "2026-11-28T12:35:44+09:00",
+   "last_get": "2026-11-28",
+   "signature": "\"99e96afdf6a3c0f5e57b197766e1047d\"|Tue, 17 Nov 2026 23:00:04 GMT|706282",
+   "version": "2026-11-18"
   }
  }
 }

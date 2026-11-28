@@ -15,8 +15,73 @@
  "news_date": "2026-11-24",
  "description": null,
  "description_full_len": 0,
- "nutrition": null,
- "nutrition_variants": null,
+ "nutrition": {
+  "kcal": 960.0,
+  "protein_g": 38.3,
+  "fat_g": 41.6,
+  "carbs_g": 111.2,
+  "sugar_g": null,
+  "fiber_g": 7.9,
+  "salt_g": 7.0,
+  "other": {
+   "糖質": "103.3 g",
+   "カリウム": "1040 mg",
+   "リン": "494 mg"
+  }
+ },
+ "nutrition_variants": [
+  {
+   "label": "白米",
+   "nutrition": {
+    "kcal": 960.0,
+    "protein_g": 38.3,
+    "fat_g": 41.6,
+    "carbs_g": 111.2,
+    "sugar_g": null,
+    "fiber_g": 7.9,
+    "salt_g": 7.0,
+    "other": {
+     "糖質": "103.3 g",
+     "カリウム": "1040 mg",
+     "リン": "494 mg"
+    }
+   }
+  },
+  {
+   "label": "もち⻨ごはん普通盛",
+   "nutrition": {
+    "kcal": 976.0,
+    "protein_g": 38.8,
+    "fat_g": 41.6,
+    "carbs_g": 115.3,
+    "sugar_g": null,
+    "fiber_g": 9.1,
+    "salt_g": 7.0,
+    "other": {
+     "糖質": "106.2 g",
+     "カリウム": "1067 mg",
+     "リン": "509 mg"
+    }
+   }
+  },
+  {
+   "label": "もち⻨ごはん大盛",
+   "nutrition": {
+    "kcal": 1114.0,
+    "protein_g": 41.3,
+    "fat_g": 41.9,
+    "carbs_g": 147.7,
+    "sugar_g": null,
+    "fiber_g": 11.2,
+    "salt_g": 7.0,
+    "other": {
+     "糖質": "136.5 g",
+     "カリウム": "1098 mg",
+     "リン": "537 mg"
+    }
+   }
+  }
+ ],
  "nutrition_note": null,
  "nutrition_pdf_url": null,
  "nutrition_pdf_label": null,

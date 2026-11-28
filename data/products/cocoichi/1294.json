@@ -15,9 +15,18 @@
  "news_date": null,
  "description": null,
  "description_full_len": 0,
- "nutrition": null,
+ "nutrition": {
+  "kcal": 681.0,
+  "protein_g": 10.8,
+  "fat_g": 17.0,
+  "carbs_g": 124.7,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 2.5,
+  "other": {}
+ },
  "nutrition_variants": null,
- "nutrition_note": null,
+ "nutrition_note": "栄養成分値は配合に基づいた標準値です。目安値としてお考えください。",
  "nutrition_pdf_url": null,
  "nutrition_pdf_label": null,
  "allergen_pdf_url": null,
@@ -42,5 +51,13 @@
   "menu"
  ],
  "image": null,
- "is_regular": true
+ "is_regular": true,
+ "nutrition_source": {
+  "url": "https://www.ichibanya.co.jp/menu/pdf/nutrition.pdf",
+  "label": "栄養成分情報",
+  "version": "2026-11-27",
+  "version_text": "2026年11月27日現在",
+  "fetched_at": "2026-11-28T12:37:13+09:00"
+ },
+ "pdf_tried": "2026-11-27"
 }

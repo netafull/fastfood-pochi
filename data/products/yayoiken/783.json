@@ -15,8 +15,56 @@
  "news_date": null,
  "description": null,
  "description_full_len": 0,
- "nutrition": null,
- "nutrition_variants": null,
+ "nutrition": {
+  "kcal": 520.0,
+  "protein_g": 30.4,
+  "fat_g": 3.3,
+  "carbs_g": 94.5,
+  "sugar_g": null,
+  "fiber_g": 5.6,
+  "salt_g": 4.9,
+  "other": {
+   "糖質": "88.9 g",
+   "カリウム": "616 mg",
+   "リン": "356 mg"
+  }
+ },
+ "nutrition_variants": [
+  {
+   "label": "ごはん普通盛",
+   "nutrition": {
+    "kcal": 520.0,
+    "protein_g": 30.4,
+    "fat_g": 3.3,
+    "carbs_g": 94.5,
+    "sugar_g": null,
+    "fiber_g": 5.6,
+    "salt_g": 4.9,
+    "other": {
+     "糖質": "88.9 g",
+     "カリウム": "616 mg",
+     "リン": "356 mg"
+    }
+   }
+  },
+  {
+   "label": "ごはん大盛",
+   "nutrition": {
+    "kcal": 695.0,
+    "protein_g": 33.3,
+    "fat_g": 3.5,
+    "carbs_g": 136.1,
+    "sugar_g": null,
+    "fiber_g": 8.0,
+    "salt_g": 4.9,
+    "other": {
+     "糖質": "128.1 g",
+     "カリウム": "652 mg",
+     "リン": "398 mg"
+    }
+   }
+  }
+ ],
  "nutrition_note": null,
  "nutrition_pdf_url": null,
  "nutrition_pdf_label": null,

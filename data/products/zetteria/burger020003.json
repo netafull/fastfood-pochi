@@ -15,9 +15,18 @@
  "news_date": null,
  "description": "たれに漬け込んだチキンひとつひとつをお店で粉付けしお店して揚げたパリッとジューシーなチキンパティに、さっぱりでコク旨のタルタルソースで仕上げた人気商品です。",
  "description_full_len": 78,
- "nutrition": null,
+ "nutrition": {
+  "kcal": 565.0,
+  "protein_g": 18.2,
+  "fat_g": 35.9,
+  "carbs_g": 41.8,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 2.0,
+  "other": {}
+ },
  "nutrition_variants": null,
- "nutrition_note": null,
+ "nutrition_note": "検査機関で分析した数値および「日本食品標準成分表」に基づき算出しております。",
  "nutrition_pdf_url": "https://images.zensho.co.jp/materials/zetteria/allergen/nutrition.pdf",
  "nutrition_pdf_label": "栄養成分一覧表",
  "allergen_pdf_url": null,
@@ -44,5 +53,13 @@
  ],
  "image": null,
  "price_checked_at": "2026-11-25",
- "is_regular": true
+ "is_regular": true,
+ "nutrition_source": {
+  "url": "https://images.zensho.co.jp/materials/zetteria/allergen/nutrition.pdf",
+  "label": "栄養成分一覧表",
+  "version": "2026-11-18",
+  "version_text": "2026年11月18日更新",
+  "fetched_at": "2026-11-28T12:35:44+09:00"
+ },
+ "pdf_tried": "2026-11-18"
 }

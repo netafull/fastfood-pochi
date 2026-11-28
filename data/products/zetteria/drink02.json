@@ -24,9 +24,45 @@
  "news_date": null,
  "description": "じっくりと深煎りにローストし、ほのかな甘みとやさしい苦み、なめらかな口当たりが特長のフェアトレードアイスコーヒーとコクのある牛乳をスチームで温めた、まろやかな甘みを感じるホットカフェオレです。",
  "description_full_len": 96,
- "nutrition": null,
- "nutrition_variants": null,
- "nutrition_note": null,
+ "nutrition": {
+  "kcal": 78.0,
+  "protein_g": 3.9,
+  "fat_g": 4.5,
+  "carbs_g": 5.4,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 0.1,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "S",
+   "nutrition": {
+    "kcal": 78.0,
+    "protein_g": 3.9,
+    "fat_g": 4.5,
+    "carbs_g": 5.4,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 0.1,
+    "other": {}
+   }
+  },
+  {
+   "label": "M",
+   "nutrition": {
+    "kcal": 131.0,
+    "protein_g": 6.6,
+    "fat_g": 7.5,
+    "carbs_g": 9.1,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 0.2,
+    "other": {}
+   }
+  }
+ ],
+ "nutrition_note": "検査機関で分析した数値および「日本食品標準成分表」に基づき算出しております。",
  "nutrition_pdf_url": "https://images.zensho.co.jp/materials/zetteria/allergen/nutrition.pdf",
  "nutrition_pdf_label": "栄養成分一覧表",
  "allergen_pdf_url": null,
@@ -68,5 +104,13 @@
    ]
   }
  ],
- "is_regular": true
+ "is_regular": true,
+ "nutrition_source": {
+  "url": "https://images.zensho.co.jp/materials/zetteria/allergen/nutrition.pdf",
+  "label": "栄養成分一覧表",
+  "version": "2026-11-18",
+  "version_text": "2026年11月18日更新",
+  "fetched_at": "2026-11-28T12:35:44+09:00"
+ },
+ "pdf_tried": "2026-11-18"
 }

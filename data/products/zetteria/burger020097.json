@@ -15,9 +15,18 @@
  "news_date": "2026-11-11",
  "description": "一つひとつ店内で粉付けして揚げたジューシーな竜田チキンを、2種の醤油と青森県産黒にんにく、国産りんごを合わせた特製てりやきソースにしっかりと絡め、香り豊かで旨みのある舞茸やシャキシャキ食感の翡翠ねぎ…",
  "description_full_len": 137,
- "nutrition": null,
+ "nutrition": {
+  "kcal": 606.0,
+  "protein_g": 18.8,
+  "fat_g": 36.1,
+  "carbs_g": 50.3,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 2.1,
+  "other": {}
+ },
  "nutrition_variants": null,
- "nutrition_note": null,
+ "nutrition_note": "検査機関で分析した数値および「日本食品標準成分表」に基づき算出しております。",
  "nutrition_pdf_url": "https://images.zensho.co.jp/materials/zetteria/allergen/nutrition.pdf",
  "nutrition_pdf_label": "栄養成分一覧表",
  "allergen_pdf_url": null,
@@ -44,5 +53,13 @@
  ],
  "image": null,
  "in_fair": true,
- "price_checked_at": "2026-11-25"
+ "price_checked_at": "2026-11-25",
+ "nutrition_source": {
+  "url": "https://images.zensho.co.jp/materials/zetteria/allergen/nutrition.pdf",
+  "label": "栄養成分一覧表",
+  "version": "2026-11-18",
+  "version_text": "2026年11月18日更新",
+  "fetched_at": "2026-11-28T12:35:44+09:00"
+ },
+ "pdf_tried": "2026-11-18"
 }

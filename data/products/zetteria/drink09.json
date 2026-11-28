@@ -28,9 +28,58 @@
  "news_date": null,
  "description": null,
  "description_full_len": 0,
- "nutrition": null,
- "nutrition_variants": null,
- "nutrition_note": null,
+ "nutrition": {
+  "kcal": 72.0,
+  "protein_g": 0.0,
+  "fat_g": 0.0,
+  "carbs_g": 18.1,
+  "sugar_g": null,
+  "fiber_g": null,
+  "salt_g": 0.0,
+  "other": {}
+ },
+ "nutrition_variants": [
+  {
+   "label": "S",
+   "nutrition": {
+    "kcal": 72.0,
+    "protein_g": 0.0,
+    "fat_g": 0.0,
+    "carbs_g": 18.1,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 0.0,
+    "other": {}
+   }
+  },
+  {
+   "label": "M",
+   "nutrition": {
+    "kcal": 114.0,
+    "protein_g": 0.0,
+    "fat_g": 0.0,
+    "carbs_g": 28.6,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 0.0,
+    "other": {}
+   }
+  },
+  {
+   "label": "L",
+   "nutrition": {
+    "kcal": 133.0,
+    "protein_g": 0.0,
+    "fat_g": 0.0,
+    "carbs_g": 33.3,
+    "sugar_g": null,
+    "fiber_g": null,
+    "salt_g": 0.0,
+    "other": {}
+   }
+  }
+ ],
+ "nutrition_note": "検査機関で分析した数値および「日本食品標準成分表」に基づき算出しております。",
  "nutrition_pdf_url": "https://images.zensho.co.jp/materials/zetteria/allergen/nutrition.pdf",
  "nutrition_pdf_label": "栄養成分一覧表",
  "allergen_pdf_url": null,
@@ -76,5 +125,13 @@
    ]
   }
  ],
- "is_regular": true
+ "is_regular": true,
+ "nutrition_source": {
+  "url": "https://images.zensho.co.jp/materials/zetteria/allergen/nutrition.pdf",
+  "label": "栄養成分一覧表",
+  "version": "2026-11-18",
+  "version_text": "2026年11月18日更新",
+  "fetched_at": "2026-11-28T12:35:44+09:00"
+ },
+ "pdf_tried": "2026-11-18"
 }

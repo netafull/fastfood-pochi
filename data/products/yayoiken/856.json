@@ -15,7 +15,20 @@
  "news_date": null,
  "description": null,
  "description_full_len": 0,
- "nutrition": null,
+ "nutrition": {
+  "kcal": 596.0,
+  "protein_g": 12.2,
+  "fat_g": 42.5,
+  "carbs_g": 42.5,
+  "sugar_g": null,
+  "fiber_g": 4.0,
+  "salt_g": 3.7,
+  "other": {
+   "糖質": "38.5 g",
+   "カリウム": "363 mg",
+   "リン": "145 mg"
+  }
+ },
  "nutrition_variants": null,
  "nutrition_note": null,
  "nutrition_pdf_url": null,

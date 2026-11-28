@@ -15,7 +15,20 @@
  "news_date": "2026-11-24",
  "description": null,
  "description_full_len": 0,
- "nutrition": null,
+ "nutrition": {
+  "kcal": 190.0,
+  "protein_g": 3.8,
+  "fat_g": 11.1,
+  "carbs_g": 19.4,
+  "sugar_g": null,
+  "fiber_g": 1.5,
+  "salt_g": 1.2,
+  "other": {
+   "糖質": "17.9 g",
+   "カリウム": "139 mg",
+   "リン": "53 mg"
+  }
+ },
  "nutrition_variants": null,
  "nutrition_note": null,
  "nutrition_pdf_url": null,
